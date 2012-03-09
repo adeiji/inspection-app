@@ -1,0 +1,446 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8BC58453150ABD87000AC695 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BC58452150ABD87000AC695 /* UIKit.framework */; };
+		8BC58455150ABD87000AC695 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BC58454150ABD87000AC695 /* Foundation.framework */; };
+		8BC58457150ABD87000AC695 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BC58456150ABD87000AC695 /* CoreGraphics.framework */; };
+		8BC5845D150ABD87000AC695 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8BC5845B150ABD87000AC695 /* InfoPlist.strings */; };
+		8BC5845F150ABD87000AC695 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BC5845E150ABD87000AC695 /* main.m */; };
+		8BC58463150ABD87000AC695 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BC58462150ABD87000AC695 /* AppDelegate.m */; };
+		8BC58466150ABD87000AC695 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BC58465150ABD87000AC695 /* ViewController.m */; };
+		8BC58469150ABD87000AC695 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BC58467150ABD87000AC695 /* ViewController.xib */; };
+		8BC58471150ABD88000AC695 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BC58470150ABD88000AC695 /* SenTestingKit.framework */; };
+		8BC58472150ABD88000AC695 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BC58452150ABD87000AC695 /* UIKit.framework */; };
+		8BC58473150ABD88000AC695 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BC58454150ABD87000AC695 /* Foundation.framework */; };
+		8BC5847B150ABD88000AC695 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8BC58479150ABD88000AC695 /* InfoPlist.strings */; };
+		8BC5847E150ABD88000AC695 /* Inspection_Form_AppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BC5847D150ABD88000AC695 /* Inspection_Form_AppTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		8BC58474150ABD88000AC695 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8BC58445150ABD87000AC695 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8BC5844D150ABD87000AC695;
+			remoteInfo = "Inspection Form App";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		8BC5844E150ABD87000AC695 /* Inspection Form App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Inspection Form App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8BC58452150ABD87000AC695 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		8BC58454150ABD87000AC695 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		8BC58456150ABD87000AC695 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		8BC5845A150ABD87000AC695 /* Inspection Form App-Info.plist */ = {isa = PBXFileReference; path = "Inspection Form App-Info.plist"; sourceTree = "<group>"; };
+		8BC5845C150ABD87000AC695 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		8BC5845E150ABD87000AC695 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		8BC58460150ABD87000AC695 /* Inspection Form App-Prefix.pch */ = {isa = PBXFileReference; path = "Inspection Form App-Prefix.pch"; sourceTree = "<group>"; };
+		8BC58461150ABD87000AC695 /* AppDelegate.h */ = {isa = PBXFileReference; path = AppDelegate.h; sourceTree = "<group>"; };
+		8BC58462150ABD87000AC695 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		8BC58464150ABD87000AC695 /* ViewController.h */ = {isa = PBXFileReference; path = ViewController.h; sourceTree = "<group>"; };
+		8BC58465150ABD87000AC695 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		8BC58468150ABD87000AC695 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController.xib; sourceTree = "<group>"; };
+		8BC5846F150ABD88000AC695 /* Inspection Form AppTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Inspection Form AppTests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8BC58470150ABD88000AC695 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		8BC58478150ABD88000AC695 /* Inspection Form AppTests-Info.plist */ = {isa = PBXFileReference; path = "Inspection Form AppTests-Info.plist"; sourceTree = "<group>"; };
+		8BC5847A150ABD88000AC695 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		8BC5847C150ABD88000AC695 /* Inspection_Form_AppTests.h */ = {isa = PBXFileReference; path = Inspection_Form_AppTests.h; sourceTree = "<group>"; };
+		8BC5847D150ABD88000AC695 /* Inspection_Form_AppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Inspection_Form_AppTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8BC5844B150ABD87000AC695 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8BC58453150ABD87000AC695 /* UIKit.framework in Frameworks */,
+				8BC58455150ABD87000AC695 /* Foundation.framework in Frameworks */,
+				8BC58457150ABD87000AC695 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8BC5846B150ABD88000AC695 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8BC58471150ABD88000AC695 /* SenTestingKit.framework in Frameworks */,
+				8BC58472150ABD88000AC695 /* UIKit.framework in Frameworks */,
+				8BC58473150ABD88000AC695 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		8BC58443150ABD87000AC695 = {
+			isa = PBXGroup;
+			children = (
+				8BC58458150ABD87000AC695 /* Inspection Form App */,
+				8BC58476150ABD88000AC695 /* Inspection Form AppTests */,
+				8BC58451150ABD87000AC695 /* Frameworks */,
+				8BC5844F150ABD87000AC695 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		8BC5844F150ABD87000AC695 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8BC5844E150ABD87000AC695 /* Inspection Form App.app */,
+				8BC5846F150ABD88000AC695 /* Inspection Form AppTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8BC58451150ABD87000AC695 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8BC58452150ABD87000AC695 /* UIKit.framework */,
+				8BC58454150ABD87000AC695 /* Foundation.framework */,
+				8BC58456150ABD87000AC695 /* CoreGraphics.framework */,
+				8BC58470150ABD88000AC695 /* SenTestingKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8BC58458150ABD87000AC695 /* Inspection Form App */ = {
+			isa = PBXGroup;
+			children = (
+				8BC58461150ABD87000AC695 /* AppDelegate.h */,
+				8BC58462150ABD87000AC695 /* AppDelegate.m */,
+				8BC58464150ABD87000AC695 /* ViewController.h */,
+				8BC58465150ABD87000AC695 /* ViewController.m */,
+				8BC58467150ABD87000AC695 /* ViewController.xib */,
+				8BC58459150ABD87000AC695 /* Supporting Files */,
+			);
+			path = "Inspection Form App";
+			sourceTree = "<group>";
+		};
+		8BC58459150ABD87000AC695 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				8BC5845A150ABD87000AC695 /* Inspection Form App-Info.plist */,
+				8BC5845B150ABD87000AC695 /* InfoPlist.strings */,
+				8BC5845E150ABD87000AC695 /* main.m */,
+				8BC58460150ABD87000AC695 /* Inspection Form App-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		8BC58476150ABD88000AC695 /* Inspection Form AppTests */ = {
+			isa = PBXGroup;
+			children = (
+				8BC5847C150ABD88000AC695 /* Inspection_Form_AppTests.h */,
+				8BC5847D150ABD88000AC695 /* Inspection_Form_AppTests.m */,
+				8BC58477150ABD88000AC695 /* Supporting Files */,
+			);
+			path = "Inspection Form AppTests";
+			sourceTree = "<group>";
+		};
+		8BC58477150ABD88000AC695 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				8BC58478150ABD88000AC695 /* Inspection Form AppTests-Info.plist */,
+				8BC58479150ABD88000AC695 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8BC5844D150ABD87000AC695 /* Inspection Form App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8BC58481150ABD88000AC695 /* Build configuration list for PBXNativeTarget "Inspection Form App" */;
+			buildPhases = (
+				8BC5844A150ABD87000AC695 /* Sources */,
+				8BC5844B150ABD87000AC695 /* Frameworks */,
+				8BC5844C150ABD87000AC695 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Inspection Form App";
+			productName = "Inspection Form App";
+			productReference = 8BC5844E150ABD87000AC695 /* Inspection Form App.app */;
+			productType = "com.apple.product-type.application";
+		};
+		8BC5846E150ABD88000AC695 /* Inspection Form AppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8BC58484150ABD88000AC695 /* Build configuration list for PBXNativeTarget "Inspection Form AppTests" */;
+			buildPhases = (
+				8BC5846A150ABD88000AC695 /* Sources */,
+				8BC5846B150ABD88000AC695 /* Frameworks */,
+				8BC5846C150ABD88000AC695 /* Resources */,
+				8BC5846D150ABD88000AC695 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8BC58475150ABD88000AC695 /* PBXTargetDependency */,
+			);
+			name = "Inspection Form AppTests";
+			productName = "Inspection Form AppTests";
+			productReference = 8BC5846F150ABD88000AC695 /* Inspection Form AppTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8BC58445150ABD87000AC695 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0430;
+			};
+			buildConfigurationList = 8BC58448150ABD87000AC695 /* Build configuration list for PBXProject "Inspection Form App" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 8BC58443150ABD87000AC695;
+			productRefGroup = 8BC5844F150ABD87000AC695 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8BC5844D150ABD87000AC695 /* Inspection Form App */,
+				8BC5846E150ABD88000AC695 /* Inspection Form AppTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8BC5844C150ABD87000AC695 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8BC5845D150ABD87000AC695 /* InfoPlist.strings in Resources */,
+				8BC58469150ABD87000AC695 /* ViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8BC5846C150ABD88000AC695 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8BC5847B150ABD88000AC695 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		8BC5846D150ABD88000AC695 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8BC5844A150ABD87000AC695 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8BC5845F150ABD87000AC695 /* main.m in Sources */,
+				8BC58463150ABD87000AC695 /* AppDelegate.m in Sources */,
+				8BC58466150ABD87000AC695 /* ViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8BC5846A150ABD88000AC695 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8BC5847E150ABD88000AC695 /* Inspection_Form_AppTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		8BC58475150ABD88000AC695 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8BC5844D150ABD87000AC695 /* Inspection Form App */;
+			targetProxy = 8BC58474150ABD88000AC695 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		8BC5845B150ABD87000AC695 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8BC5845C150ABD87000AC695 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		8BC58467150ABD87000AC695 /* ViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8BC58468150ABD87000AC695 /* en */,
+			);
+			name = ViewController.xib;
+			sourceTree = "<group>";
+		};
+		8BC58479150ABD88000AC695 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8BC5847A150ABD88000AC695 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		8BC5847F150ABD88000AC695 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Debug;
+		};
+		8BC58480150ABD88000AC695 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		8BC58482150ABD88000AC695 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Inspection Form App/Inspection Form App-Prefix.pch";
+				INFOPLIST_FILE = "Inspection Form App/Inspection Form App-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		8BC58483150ABD88000AC695 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Inspection Form App/Inspection Form App-Prefix.pch";
+				INFOPLIST_FILE = "Inspection Form App/Inspection Form App-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		8BC58485150ABD88000AC695 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Inspection Form App.app/Inspection Form App";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Inspection Form App/Inspection Form App-Prefix.pch";
+				INFOPLIST_FILE = "Inspection Form AppTests/Inspection Form AppTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		8BC58486150ABD88000AC695 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Inspection Form App.app/Inspection Form App";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Inspection Form App/Inspection Form App-Prefix.pch";
+				INFOPLIST_FILE = "Inspection Form AppTests/Inspection Form AppTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8BC58448150ABD87000AC695 /* Build configuration list for PBXProject "Inspection Form App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8BC5847F150ABD88000AC695 /* Debug */,
+				8BC58480150ABD88000AC695 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8BC58481150ABD88000AC695 /* Build configuration list for PBXNativeTarget "Inspection Form App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8BC58482150ABD88000AC695 /* Debug */,
+				8BC58483150ABD88000AC695 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		8BC58484150ABD88000AC695 /* Build configuration list for PBXNativeTarget "Inspection Form AppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8BC58485150ABD88000AC695 /* Debug */,
+				8BC58486150ABD88000AC695 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 8BC58445150ABD87000AC695 /* Project object */;
+}
