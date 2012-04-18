@@ -23,8 +23,8 @@
 {
     DBSession* dbSession =
     [[DBSession alloc]
-      initWithAppKey:@"i47re10kwh9zkfq"
-      appSecret:@"274egx49omtae5c"
+      initWithAppKey:@"j5xr0te52zxjkpl"
+      appSecret:@"7u0gojnru7ypz0b"
       root:kDBRootAppFolder]; // either kDBRootAppFolder or kDBRootDropbox
     [DBSession setSharedSession:dbSession];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];

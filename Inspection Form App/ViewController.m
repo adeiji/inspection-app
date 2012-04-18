@@ -286,7 +286,7 @@
     //create NSString object, that holds our exact path to the documents directory
     //NSString *documentsDirectory = [NSString stringWithFormat:@"%@/", [paths objectAtIndex:0]];
     //NSString *localPath = [[NSBundle mainBundle] pathForResource:@"JonnyCranes" ofType:@"csv"];
-    NSString *filename = @"JonnyCranes.csv";
+    NSString *filename = @"CarlCranes.csv";
     NSString *destDir = @"/";
     //makes sure that when the file is uploaded to the Dropbox server the existing file is overwritten, in order to make it so that the file is not overriden the code should look like this
     /*
@@ -512,7 +512,7 @@ loadMetadataFailedWithError:(NSError *)error {
     NSString *documentsDirectory = [paths objectAtIndex:0];
     NSLog(@"Document Dir: %@",documentsDirectory);
     
-    NSString *fullPath = [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"JonnyCranes.csv"]]; //add our file to the path
+    NSString *fullPath = [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"CarlCranes.csv"]]; //add our file to the path
     [fileManager createFileAtPath:fullPath contents:[csvString dataUsingEncoding:NSUTF8StringEncoding] attributes:nil]; //finally save the path (file)
     [self UploadCSVFileToDropbox:fullPath];
 }
@@ -688,8 +688,8 @@ loadMetadataFailedWithError:(NSError *)error {
             }
             if (orderExist == NO)
             {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"NO JOB" message:@"No JOB by this JOB NUMBER was found" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK"    , nil];
-                [alert show];
+                //UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"NO JOB" message:@"No INSPECTION by this JOB NUMBER was found" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK"    , nil];
+                //[alert show];
             }
             else {
                 optionLocation = 0;
@@ -1409,6 +1409,19 @@ loadMetadataFailedWithError:(NSError *)error {
 {
     sqlite3_stmt *statement;
     const char *dbPath = [databasePath UTF8String];
+    
+    //Delete job with this job number from the table
+    NSString *removeSQL = [NSString stringWithFormat:@"DELETE FROM JOBS WHERE HOISTSRL=\"%@\"", txtHoistSrl.text];
+    const char *remove_stmt = [removeSQL UTF8String];
+    
+    if (sqlite3_prepare_v2(contactDB, remove_stmt, -1, &statement, NULL)==SQLITE_OK)
+    {
+        //sqlite3_bind_text(statement, 1, [txtJobNumber.text UTF8String], -1, NULL);
+    }
+    if (sqlite3_step(statement) == SQLITE_DONE)
+    {
+        NSLog(@"removed succesfully");
+    }
     
     NSString *insertSQL = [NSString stringWithFormat:@"INSERT INTO JOBS (HOISTSRL, CUSTOMERNAME, CONTACT, JOBNUMBER, DATE, ADDRESS, EMAIL, EQUIPNUM, CRANEMFG, HOISTMFG, HOISTMDL, CRANEDESCRIPTION, CAP, CRANESRL) VALUES(\"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\");",
                            txtHoistSrl.text,
