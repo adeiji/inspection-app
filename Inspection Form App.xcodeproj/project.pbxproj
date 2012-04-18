@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8B0787C415113448006857A8 /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B0787C315113448006857A8 /* TableViewController.m */; };
+		8B0787C715113796006857A8 /* Parts.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B0787C615113796006857A8 /* Parts.m */; };
+		8B0B226E1535046500351A72 /* ipadAppLogo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8B0B226D1535046500351A72 /* ipadAppLogo.jpg */; };
+		8B27BE53153B422000E12BE2 /* DropboxSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B5C4F79153A548900B7C5DA /* DropboxSDK.framework */; };
+		8B544612150F0C3E007E1CA9 /* GradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B544611150F0C3E007E1CA9 /* GradientView.m */; };
 		8BC58453150ABD87000AC695 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BC58452150ABD87000AC695 /* UIKit.framework */; };
 		8BC58455150ABD87000AC695 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BC58454150ABD87000AC695 /* Foundation.framework */; };
 		8BC58457150ABD87000AC695 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BC58456150ABD87000AC695 /* CoreGraphics.framework */; };
@@ -20,6 +25,25 @@
 		8BC58473150ABD88000AC695 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BC58454150ABD87000AC695 /* Foundation.framework */; };
 		8BC5847B150ABD88000AC695 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8BC58479150ABD88000AC695 /* InfoPlist.strings */; };
 		8BC5847E150ABD88000AC695 /* Inspection_Form_AppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BC5847D150ABD88000AC695 /* Inspection_Form_AppTests.m */; };
+		8BC7D9D31522ACE000D1A863 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BC7D9D21522ACE000D1A863 /* QuartzCore.framework */; };
+		8BDFB24E153DFD240094B023 /* logo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8BDFB24D153DFD240094B023 /* logo.jpg */; };
+		8BDFB250153E2BB00094B023 /* titlePageLogo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8BDFB24F153E2BB00094B023 /* titlePageLogo.jpg */; };
+		8BE08B22150D0AFE005B5E4C /* Customer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE08B21150D0AFE005B5E4C /* Customer.m */; };
+		8BE4CD191515925600D75629 /* autograph_x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BE4CD141515925600D75629 /* autograph_x.png */; };
+		8BE4CD1A1515925600D75629 /* t1_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BE4CD151515925600D75629 /* t1_logo.png */; };
+		8BE4CD1B1515925600D75629 /* libT1Autograph.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BE4CD161515925600D75629 /* libT1Autograph.a */; };
+		8BE4CD1F151594DA00D75629 /* AutographViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE4CD1E151594DA00D75629 /* AutographViewController.m */; };
+		8BE4CD221515957000D75629 /* T1AutographAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE4CD211515957000D75629 /* T1AutographAppDelegate.m */; };
+		8BE881F81513F82400360C63 /* ItemListConditionStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE881F71513F82400360C63 /* ItemListConditionStorage.m */; };
+		8BE881FC1513FA4200360C63 /* Condition.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE881FB1513FA4200360C63 /* Condition.m */; };
+		8BE8C6FB151538B700D5C7F2 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BE8C6FA151538B700D5C7F2 /* libsqlite3.dylib */; };
+		8BE954E3151E8FED00299308 /* SwitchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE954E1151E8FED00299308 /* SwitchViewController.m */; };
+		8BE954E4151E8FED00299308 /* SwitchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BE954E2151E8FED00299308 /* SwitchViewController.xib */; };
+		8BECD3BC150E920500616735 /* Options.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BECD3BB150E920500616735 /* Options.m */; };
+		8BECD3BF150E934900616735 /* OptionList.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BECD3BE150E934900616735 /* OptionList.m */; };
+		8BF09E74153A53E200E1BCB3 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BF09E73153A53E200E1BCB3 /* Security.framework */; };
+		8BF10A9C152FB93D00DC5F05 /* TextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BF10A9B152FB93D00DC5F05 /* TextField.m */; };
+		8BF3877015239E1200C3F368 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BF3876F15239E1200C3F368 /* MessageUI.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,25 +57,64 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8B0787C215113448006857A8 /* TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewController.h; sourceTree = "<group>"; };
+		8B0787C315113448006857A8 /* TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewController.m; sourceTree = "<group>"; };
+		8B0787C515113796006857A8 /* Parts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Parts.h; sourceTree = "<group>"; };
+		8B0787C615113796006857A8 /* Parts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Parts.m; sourceTree = "<group>"; };
+		8B0B226D1535046500351A72 /* ipadAppLogo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = ipadAppLogo.jpg; path = ../../../Downloads/ipadAppLogo.jpg; sourceTree = "<group>"; };
+		8B544610150F0C3E007E1CA9 /* GradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientView.h; sourceTree = "<group>"; };
+		8B544611150F0C3E007E1CA9 /* GradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradientView.m; sourceTree = "<group>"; };
+		8B5C4F79153A548900B7C5DA /* DropboxSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DropboxSDK.framework; path = "../../Downloads/dropbox-ios-sdk-1.2.1/DropboxSDK.framework"; sourceTree = "<group>"; };
 		8BC5844E150ABD87000AC695 /* Inspection Form App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Inspection Form App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BC58452150ABD87000AC695 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		8BC58454150ABD87000AC695 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		8BC58456150ABD87000AC695 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		8BC5845A150ABD87000AC695 /* Inspection Form App-Info.plist */ = {isa = PBXFileReference; path = "Inspection Form App-Info.plist"; sourceTree = "<group>"; };
+		8BC5845A150ABD87000AC695 /* Inspection Form App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Inspection Form App-Info.plist"; sourceTree = "<group>"; };
 		8BC5845C150ABD87000AC695 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		8BC5845E150ABD87000AC695 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		8BC58460150ABD87000AC695 /* Inspection Form App-Prefix.pch */ = {isa = PBXFileReference; path = "Inspection Form App-Prefix.pch"; sourceTree = "<group>"; };
-		8BC58461150ABD87000AC695 /* AppDelegate.h */ = {isa = PBXFileReference; path = AppDelegate.h; sourceTree = "<group>"; };
+		8BC58460150ABD87000AC695 /* Inspection Form App-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Inspection Form App-Prefix.pch"; sourceTree = "<group>"; };
+		8BC58461150ABD87000AC695 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		8BC58462150ABD87000AC695 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		8BC58464150ABD87000AC695 /* ViewController.h */ = {isa = PBXFileReference; path = ViewController.h; sourceTree = "<group>"; };
+		8BC58464150ABD87000AC695 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		8BC58465150ABD87000AC695 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		8BC58468150ABD87000AC695 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController.xib; sourceTree = "<group>"; };
 		8BC5846F150ABD88000AC695 /* Inspection Form AppTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Inspection Form AppTests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BC58470150ABD88000AC695 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
-		8BC58478150ABD88000AC695 /* Inspection Form AppTests-Info.plist */ = {isa = PBXFileReference; path = "Inspection Form AppTests-Info.plist"; sourceTree = "<group>"; };
+		8BC58478150ABD88000AC695 /* Inspection Form AppTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Inspection Form AppTests-Info.plist"; sourceTree = "<group>"; };
 		8BC5847A150ABD88000AC695 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		8BC5847C150ABD88000AC695 /* Inspection_Form_AppTests.h */ = {isa = PBXFileReference; path = Inspection_Form_AppTests.h; sourceTree = "<group>"; };
+		8BC5847C150ABD88000AC695 /* Inspection_Form_AppTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Inspection_Form_AppTests.h; sourceTree = "<group>"; };
 		8BC5847D150ABD88000AC695 /* Inspection_Form_AppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Inspection_Form_AppTests.m; sourceTree = "<group>"; };
+		8BC7D9D21522ACE000D1A863 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		8BDF998C150C1A090069C35B /* Customer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Customer.h; sourceTree = "<group>"; };
+		8BDF9998150C209A0069C35B /* UICustomSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UICustomSwitch.h; path = ../../../Downloads/UICustomSwitch/UICustomSwitch.h; sourceTree = "<group>"; };
+		8BDFB24D153DFD240094B023 /* logo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = logo.jpg; path = ../../../Downloads/logo.jpg; sourceTree = "<group>"; };
+		8BDFB24F153E2BB00094B023 /* titlePageLogo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = titlePageLogo.jpg; path = ../../../Downloads/titlePageLogo.jpg; sourceTree = "<group>"; };
+		8BE08B21150D0AFE005B5E4C /* Customer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Customer.m; sourceTree = "<group>"; };
+		8BE4CD141515925600D75629 /* autograph_x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = autograph_x.png; sourceTree = "<group>"; };
+		8BE4CD151515925600D75629 /* t1_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = t1_logo.png; sourceTree = "<group>"; };
+		8BE4CD161515925600D75629 /* libT1Autograph.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libT1Autograph.a; sourceTree = "<group>"; };
+		8BE4CD171515925600D75629 /* T1Autograph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = T1Autograph.h; sourceTree = "<group>"; };
+		8BE4CD181515925600D75629 /* T1Signature.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = T1Signature.h; sourceTree = "<group>"; };
+		8BE4CD1D151594DA00D75629 /* AutographViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutographViewController.h; sourceTree = "<group>"; };
+		8BE4CD1E151594DA00D75629 /* AutographViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutographViewController.m; sourceTree = "<group>"; };
+		8BE4CD201515957000D75629 /* T1AutographAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = T1AutographAppDelegate.h; sourceTree = "<group>"; };
+		8BE4CD211515957000D75629 /* T1AutographAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = T1AutographAppDelegate.m; sourceTree = "<group>"; };
+		8BE881F61513F82400360C63 /* ItemListConditionStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemListConditionStorage.h; sourceTree = "<group>"; };
+		8BE881F71513F82400360C63 /* ItemListConditionStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemListConditionStorage.m; sourceTree = "<group>"; };
+		8BE881FA1513FA4200360C63 /* Condition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Condition.h; sourceTree = "<group>"; };
+		8BE881FB1513FA4200360C63 /* Condition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Condition.m; sourceTree = "<group>"; };
+		8BE8C6FA151538B700D5C7F2 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		8BE954E0151E8FED00299308 /* SwitchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwitchViewController.h; sourceTree = "<group>"; };
+		8BE954E1151E8FED00299308 /* SwitchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwitchViewController.m; sourceTree = "<group>"; };
+		8BE954E2151E8FED00299308 /* SwitchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SwitchViewController.xib; sourceTree = "<group>"; };
+		8BECD3B9150E914800616735 /* Options.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Options.h; sourceTree = "<group>"; };
+		8BECD3BB150E920500616735 /* Options.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Options.m; sourceTree = "<group>"; };
+		8BECD3BD150E934900616735 /* OptionList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionList.h; sourceTree = "<group>"; };
+		8BECD3BE150E934900616735 /* OptionList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionList.m; sourceTree = "<group>"; };
+		8BF09E73153A53E200E1BCB3 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		8BF10A9A152FB93D00DC5F05 /* TextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextField.h; sourceTree = "<group>"; };
+		8BF10A9B152FB93D00DC5F05 /* TextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextField.m; sourceTree = "<group>"; };
+		8BF3876F15239E1200C3F368 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,9 +122,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B27BE53153B422000E12BE2 /* DropboxSDK.framework in Frameworks */,
+				8BF09E74153A53E200E1BCB3 /* Security.framework in Frameworks */,
+				8BF3877015239E1200C3F368 /* MessageUI.framework in Frameworks */,
+				8BC7D9D31522ACE000D1A863 /* QuartzCore.framework in Frameworks */,
+				8BE8C6FB151538B700D5C7F2 /* libsqlite3.dylib in Frameworks */,
 				8BC58453150ABD87000AC695 /* UIKit.framework in Frameworks */,
 				8BC58455150ABD87000AC695 /* Foundation.framework in Frameworks */,
 				8BC58457150ABD87000AC695 /* CoreGraphics.framework in Frameworks */,
+				8BE4CD1B1515925600D75629 /* libT1Autograph.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,6 +150,10 @@
 		8BC58443150ABD87000AC695 = {
 			isa = PBXGroup;
 			children = (
+				8B5C4F79153A548900B7C5DA /* DropboxSDK.framework */,
+				8BF09E73153A53E200E1BCB3 /* Security.framework */,
+				8BF3876F15239E1200C3F368 /* MessageUI.framework */,
+				8BE8C6FA151538B700D5C7F2 /* libsqlite3.dylib */,
 				8BC58458150ABD87000AC695 /* Inspection Form App */,
 				8BC58476150ABD88000AC695 /* Inspection Form AppTests */,
 				8BC58451150ABD87000AC695 /* Frameworks */,
@@ -111,11 +184,42 @@
 		8BC58458150ABD87000AC695 /* Inspection Form App */ = {
 			isa = PBXGroup;
 			children = (
+				8BDFB24F153E2BB00094B023 /* titlePageLogo.jpg */,
+				8BDFB24D153DFD240094B023 /* logo.jpg */,
+				8BC7D9D21522ACE000D1A863 /* QuartzCore.framework */,
+				8BE4CD121515925600D75629 /* T1Autograph */,
+				8BDF9998150C209A0069C35B /* UICustomSwitch.h */,
 				8BC58461150ABD87000AC695 /* AppDelegate.h */,
+				8BF10A9A152FB93D00DC5F05 /* TextField.h */,
+				8BF10A9B152FB93D00DC5F05 /* TextField.m */,
 				8BC58462150ABD87000AC695 /* AppDelegate.m */,
+				8B0787C215113448006857A8 /* TableViewController.h */,
+				8B0787C315113448006857A8 /* TableViewController.m */,
 				8BC58464150ABD87000AC695 /* ViewController.h */,
 				8BC58465150ABD87000AC695 /* ViewController.m */,
 				8BC58467150ABD87000AC695 /* ViewController.xib */,
+				8B0B226D1535046500351A72 /* ipadAppLogo.jpg */,
+				8BE954E0151E8FED00299308 /* SwitchViewController.h */,
+				8BE954E1151E8FED00299308 /* SwitchViewController.m */,
+				8BE954E2151E8FED00299308 /* SwitchViewController.xib */,
+				8BE4CD1D151594DA00D75629 /* AutographViewController.h */,
+				8BE4CD1E151594DA00D75629 /* AutographViewController.m */,
+				8BE4CD201515957000D75629 /* T1AutographAppDelegate.h */,
+				8BE4CD211515957000D75629 /* T1AutographAppDelegate.m */,
+				8B0787C515113796006857A8 /* Parts.h */,
+				8B0787C615113796006857A8 /* Parts.m */,
+				8BE881F61513F82400360C63 /* ItemListConditionStorage.h */,
+				8BE881F71513F82400360C63 /* ItemListConditionStorage.m */,
+				8BE881FA1513FA4200360C63 /* Condition.h */,
+				8BE881FB1513FA4200360C63 /* Condition.m */,
+				8B544610150F0C3E007E1CA9 /* GradientView.h */,
+				8B544611150F0C3E007E1CA9 /* GradientView.m */,
+				8BDF998C150C1A090069C35B /* Customer.h */,
+				8BE08B21150D0AFE005B5E4C /* Customer.m */,
+				8BECD3B9150E914800616735 /* Options.h */,
+				8BECD3BB150E920500616735 /* Options.m */,
+				8BECD3BD150E934900616735 /* OptionList.h */,
+				8BECD3BE150E934900616735 /* OptionList.m */,
 				8BC58459150ABD87000AC695 /* Supporting Files */,
 			);
 			path = "Inspection Form App";
@@ -149,6 +253,27 @@
 				8BC58479150ABD88000AC695 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		8BE4CD121515925600D75629 /* T1Autograph */ = {
+			isa = PBXGroup;
+			children = (
+				8BE4CD131515925600D75629 /* Images */,
+				8BE4CD161515925600D75629 /* libT1Autograph.a */,
+				8BE4CD171515925600D75629 /* T1Autograph.h */,
+				8BE4CD181515925600D75629 /* T1Signature.h */,
+			);
+			name = T1Autograph;
+			path = ../../../Downloads/T1Autograph;
+			sourceTree = "<group>";
+		};
+		8BE4CD131515925600D75629 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				8BE4CD141515925600D75629 /* autograph_x.png */,
+				8BE4CD151515925600D75629 /* t1_logo.png */,
+			);
+			path = Images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -223,6 +348,12 @@
 			files = (
 				8BC5845D150ABD87000AC695 /* InfoPlist.strings in Resources */,
 				8BC58469150ABD87000AC695 /* ViewController.xib in Resources */,
+				8BE4CD191515925600D75629 /* autograph_x.png in Resources */,
+				8BE4CD1A1515925600D75629 /* t1_logo.png in Resources */,
+				8BE954E4151E8FED00299308 /* SwitchViewController.xib in Resources */,
+				8B0B226E1535046500351A72 /* ipadAppLogo.jpg in Resources */,
+				8BDFB24E153DFD240094B023 /* logo.jpg in Resources */,
+				8BDFB250153E2BB00094B023 /* titlePageLogo.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -260,6 +391,18 @@
 				8BC5845F150ABD87000AC695 /* main.m in Sources */,
 				8BC58463150ABD87000AC695 /* AppDelegate.m in Sources */,
 				8BC58466150ABD87000AC695 /* ViewController.m in Sources */,
+				8BE08B22150D0AFE005B5E4C /* Customer.m in Sources */,
+				8BECD3BC150E920500616735 /* Options.m in Sources */,
+				8BECD3BF150E934900616735 /* OptionList.m in Sources */,
+				8B544612150F0C3E007E1CA9 /* GradientView.m in Sources */,
+				8B0787C415113448006857A8 /* TableViewController.m in Sources */,
+				8B0787C715113796006857A8 /* Parts.m in Sources */,
+				8BE881F81513F82400360C63 /* ItemListConditionStorage.m in Sources */,
+				8BE881FC1513FA4200360C63 /* Condition.m in Sources */,
+				8BE4CD1F151594DA00D75629 /* AutographViewController.m in Sources */,
+				8BE4CD221515957000D75629 /* T1AutographAppDelegate.m in Sources */,
+				8BE954E3151E8FED00299308 /* SwitchViewController.m in Sources */,
+				8BF10A9C152FB93D00DC5F05 /* TextField.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -359,10 +502,23 @@
 		8BC58482150ABD88000AC695 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Inspection Form App/dropbox-ios-sdk-1.2.1\"",
+					"\"$(SRCROOT)/../../Downloads/dropbox-ios-sdk-1.2.1\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Inspection Form App/Inspection Form App-Prefix.pch";
 				INFOPLIST_FILE = "Inspection Form App/Inspection Form App-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../Downloads/T1Autograph\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -370,10 +526,21 @@
 		8BC58483150ABD88000AC695 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Inspection Form App/dropbox-ios-sdk-1.2.1\"",
+					"\"$(SRCROOT)/../../Downloads/dropbox-ios-sdk-1.2.1\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Inspection Form App/Inspection Form App-Prefix.pch";
 				INFOPLIST_FILE = "Inspection Form App/Inspection Form App-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../Downloads/T1Autograph\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -431,6 +598,7 @@
 				8BC58483150ABD88000AC695 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8BC58484150ABD88000AC695 /* Build configuration list for PBXNativeTarget "Inspection Form AppTests" */ = {
 			isa = XCConfigurationList;
@@ -439,6 +607,7 @@
 				8BC58486150ABD88000AC695 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
