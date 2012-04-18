@@ -286,7 +286,7 @@
     //create NSString object, that holds our exact path to the documents directory
     //NSString *documentsDirectory = [NSString stringWithFormat:@"%@/", [paths objectAtIndex:0]];
     //NSString *localPath = [[NSBundle mainBundle] pathForResource:@"JonnyCranes" ofType:@"csv"];
-    NSString *filename = @"CarlCranes.csv";
+    NSString *filename = @"ChuckCranes.csv";
     NSString *destDir = @"/";
     //makes sure that when the file is uploaded to the Dropbox server the existing file is overwritten, in order to make it so that the file is not overriden the code should look like this
     /*
@@ -512,7 +512,7 @@ loadMetadataFailedWithError:(NSError *)error {
     NSString *documentsDirectory = [paths objectAtIndex:0];
     NSLog(@"Document Dir: %@",documentsDirectory);
     
-    NSString *fullPath = [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"CarlCranes.csv"]]; //add our file to the path
+    NSString *fullPath = [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"ChuckCranes.csv"]]; //add our file to the path
     [fileManager createFileAtPath:fullPath contents:[csvString dataUsingEncoding:NSUTF8StringEncoding] attributes:nil]; //finally save the path (file)
     [self UploadCSVFileToDropbox:fullPath];
 }
