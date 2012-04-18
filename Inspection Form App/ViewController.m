@@ -180,19 +180,28 @@
     // Release any retained subviews of the main view.
 }
 
+#pragma mark TextField Methods
+
+//When you begin editing any text field this method is called in order to tell the compiler which text field is currently in focus
+//so that it is known where the screen needs to scroll to, to show the text box when it is being edited
 - (void) textFieldDidBeginEditing:(UITextField *)textField
 {
     activeField = textField;
 }
+//memmory management
 - (void) textFieldDidEndEditing:(UITextField *)textField {
     activeField = nil;
 }
 
+#pragma mark Database Methods
+//create the database by first creating a directory for the database to be stored to, with a name of contacts.db
 - (void) createDatabase
 {
+    //get the path where to hold the database
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDir = [paths objectAtIndex:0];
     documentsDir = [paths objectAtIndex:0];
+    //full file location string
     databasePath = [[NSString alloc] initWithString:[documentsDir stringByAppendingPathComponent:@"contacts.db"]];
 
     //databasePath = @"/Users/Developer/Documents/contacts.db";
@@ -207,7 +216,8 @@
             sqlite3_close(contactDB);
             
         } else {
-            txtDate.text = @"Failed to open/create database";
+            NSLog(@"Failed to create the database");
+            //txtDate.text = @"Failed to open/create database";
         }
     }
     [self createTable];
@@ -215,7 +225,7 @@
 
 - (void) createTable {
     
-    NSString *querySql = [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS ALLORDERS (ID INTEGER PRIMARY KEY AUTOINCREMENT, JOBNUMBER TEXT, PART TEXT, DEFICIENT TEXT, DEFICIENTPART TEXT, NOTES TEXT, PICKERSELECTION TEXT)"];
+    NSString *querySql = [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS ALLORDERS (ID INTEGER PRIMARY KEY AUTOINCREMENT, HOISTSRL TEXT, JOBNUMBER TEXT, PART TEXT, DEFICIENT TEXT, DEFICIENTPART TEXT, NOTES TEXT, PICKERSELECTION TEXT, APPLICABLE TEXT)"];
     const char *sql_stmt = [querySql UTF8String];
     char *errMess;
     
@@ -227,6 +237,7 @@
         {
             NSLog(@"ALL ORDERS TABLE CREATED");
         }
+        //query to create the JOBS table
         querySql = [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS JOBS (ID INTEGER PRIMARY KEY AUTOINCREMENT, HOISTSRL TEXT, CUSTOMERNAME TEXT, CONTACT TEXT, JOBNUMBER TEXT, DATE TEXT, ADDRESS TEXT, EMAIL TEXT, EQUIPNUM TEXT, CRANEMFG TEXT, HOISTMFG TEXT, HOISTMDL TEXT, CRANEDESCRIPTION TEXT, CAP TEXT, CRANESRL TEXT)"];
         sql_stmt = [querySql UTF8String];
         
@@ -234,6 +245,7 @@
         {
             NSLog(@"JOBS Table Created");
         }
+        //query to create the CRANES_DONE table
         querySql = [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS CRANES_DONE (HOISTSRL TEXT, CUSTOMERNAME TEXT, DATE TEXT)"];
         sql_stmt = [querySql UTF8String];
         
@@ -268,13 +280,20 @@
 
 - (void) UploadCSVFileToDropbox: (NSString *) fullPath
 {
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    //gets the location of the CSV file
+    //NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     
     //create NSString object, that holds our exact path to the documents directory
-    NSString *documentsDirectory = [NSString stringWithFormat:@"%@/", [paths objectAtIndex:0]];
+    //NSString *documentsDirectory = [NSString stringWithFormat:@"%@/", [paths objectAtIndex:0]];
     //NSString *localPath = [[NSBundle mainBundle] pathForResource:@"JonnyCranes" ofType:@"csv"];
     NSString *filename = @"JonnyCranes.csv";
     NSString *destDir = @"/";
+    //makes sure that when the file is uploaded to the Dropbox server the existing file is overwritten, in order to make it so that the file is not overriden the code should look like this
+    /*
+     [[self restClient] uploadFile:filename toPath:destDir
+     parentRev:nil fromPath:fullPath];
+     */
+    
     [[self restClient] uploadFile:filename toPath:destDir
                     fromPath:fullPath];
     
@@ -295,22 +314,25 @@ loadMetadataFailedWithError:(NSError *)error {
     
     NSLog(@"Error loading metadata: %@", error);
 }
-
+//Loads the entire inspection and the customer information from the JobNumber
 - (IBAction)GetOrderFromJobNumber:(id)sender
 {
-    [self OpenOrderFromJobNumber];
+    //get inspection from job number
+    //[self OpenOrderFromJobNumber];
+    //opens the customer information from the job number
     [self GetCustomerFromJobNumber];
     
 }
+//this method gets all customer information and crane information from the JOBS table with the specified jobnumber and displays the information on the home page
 - (void) GetCustomerFromJobNumber
-{
+{/*
     sqlite3_stmt *statement;
     const char *dbPath = [databasePath UTF8String];
     bool orderExist = NO;
     
     if (sqlite3_open(dbPath, &contactDB)==SQLITE_OK)
     { 
-        NSString *selectSQL = [NSString stringWithFormat:@"SELECT HOISTSRL, CUSTOMERNAME, CONTACT, DATE, ADDRESS, EMAIL, EQUIPNUM, CRANEMFG, HOISTMFG, HOISTMDL, CRANEDESCRIPTION, CAP, CRANESRL FROM JOBS WHERE JOBNUMBER=\"%@\"", txtJobNumber.text];
+        NSString *selectSQL = [NSString stringWithFormat:@"SELECT JOBNUMBER, CUSTOMERNAME, CONTACT, DATE, ADDRESS, EMAIL, EQUIPNUM, CRANEMFG, HOISTMFG, HOISTMDL, CRANEDESCRIPTION, CAP, CRANESRL FROM JOBS WHERE HOISTSRL=\"%@\"", txtHoistSrl.text];
         const char *select_stmt = [selectSQL UTF8String];
         if (sqlite3_prepare_v2(contactDB, select_stmt, -1, &statement, NULL)==SQLITE_OK)
         {
@@ -359,13 +381,13 @@ loadMetadataFailedWithError:(NSError *)error {
             NSLog(@"Failed to find jobnumber in table");
         }
     }
-
+*/
 }
-
+//Create a CSV file from the CRANES_DONE table and then uploads file to Dropbox
 - (IBAction)UpdateButtonPressed:(id)sender {
     [self SendTablesToServer];
 }
-
+//gets customer information and crane information from the JOBS table with the specified equip # and then displays this information on the home page
 - (IBAction)LoadEquipNumPressed:(id)sender
 {
     sqlite3_stmt *statement;
@@ -382,11 +404,11 @@ loadMetadataFailedWithError:(NSError *)error {
                 {
                     craneExist = YES;
                     const char *hoistSrl = (char*) sqlite3_column_text(statement, 0);
-                    const char *custName = (char*) sqlite3_column_text(statement, 1);
-                    const char *contact = (char*) sqlite3_column_text(statement, 2);
+                    //const char *custName = (char*) sqlite3_column_text(statement, 1);
+                    //const char *contact = (char*) sqlite3_column_text(statement, 2);
                     const char *date = (char*) sqlite3_column_text(statement, 3);
-                    const char *address = (char*) sqlite3_column_text(statement, 4);
-                    const char *email = (char*) sqlite3_column_text(statement, 5);
+                    //const char *address = (char*) sqlite3_column_text(statement, 4);
+                    //const char *email = (char*) sqlite3_column_text(statement, 5);
                     const char *equipNum = (char*) sqlite3_column_text(statement, 6);
                     const char *craneMfg = (char*) sqlite3_column_text(statement, 7);
                     const char *hoistMfg = (char*) sqlite3_column_text(statement, 8);
@@ -411,17 +433,19 @@ loadMetadataFailedWithError:(NSError *)error {
                     txtCraneDescription.text = [NSString stringWithUTF8String:craneDescription];
                     txtCap.text = [NSString stringWithUTF8String:cap];
                     txtCraneSrl.text = [NSString stringWithUTF8String:craneSrl];
+                    txtJobNumber.text = [NSString stringWithUTF8String:chJobNumber];
                     lblCraneDesc.text = [NSString stringWithUTF8String:craneDescription];
                     
                     NSLog(@"Retrieved condition from the table");
                 }
+                //if this crane actually exist then create an empty inspection from scratch
                 if (craneExist ==YES)
                 {
                     myItemListStore = [[ItemListConditionStorage alloc] init:myPartsArray];
                     optionLocation=0;
                     [self changeLayout:optionLocation];
                 }
-                else 
+                else  //if the crane does not exist then display that it does not exist and then make no changes
                 {
                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"NO CRANE" message:@"No CRANE by this EQUIPMENT NUMBER was found" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
                     [alert show];
@@ -434,7 +458,7 @@ loadMetadataFailedWithError:(NSError *)error {
     }
 }
 
-
+//creates a csv file and then uploadas that csv file to the server
 - (void) SendTablesToServer
 {
     sqlite3_stmt *statement;
@@ -493,7 +517,8 @@ loadMetadataFailedWithError:(NSError *)error {
     [self UploadCSVFileToDropbox:fullPath];
 }
 
-
+//Grab the crane information from the WATERDISTRICTCRANES table with the HoistSrl as the identifier and then insert the results onto the home page
+//Automatically insert the customerName, customerContact, Address and Email
 - (IBAction)LoadHoistSrlPressed:(id)sender {
     sqlite3_stmt *statement;
     const char *dbPath = [databasePath UTF8String];
@@ -502,6 +527,7 @@ loadMetadataFailedWithError:(NSError *)error {
     {
         if (sqlite3_open(dbPath, &contactDB)==SQLITE_OK)
         { 
+            //grab only the crane information from the WATERDISTRICTCRANES table, which simply contains the water district cranes
             NSString *selectSQL = [NSString stringWithFormat:@"SELECT TYPE, CAPACITY, MDL_HOIST, SRL_CRANE_MFG, MANUFACTURER FROM WATERDISTRICTCRANES WHERE SRL_HOIST=\"%@\"", [txtHoistSrl.text uppercaseString]];   
             const char *select_stmt = [selectSQL UTF8String];
             if (sqlite3_prepare_v2(contactDB, select_stmt, -1, &statement, NULL)==SQLITE_OK)
@@ -509,41 +535,35 @@ loadMetadataFailedWithError:(NSError *)error {
                 while (sqlite3_step(statement) == SQLITE_ROW)
                 {
                     craneExist = YES;
-                    const char *type = (char*) sqlite3_column_text(statement, 0);
-                    const char *capacity = (char*) sqlite3_column_text(statement, 1);
-                    const char *mdlHoist = (char*) sqlite3_column_text(statement, 2);
-                    const char *srlCraneMfg = (char*) sqlite3_column_text(statement, 3);
-                    const char *manufacturer = (char*) sqlite3_column_text(statement, 4);
+                    const char *type = (char*) sqlite3_column_text(statement, 0);           //information at first column
+                    const char *capacity = (char*) sqlite3_column_text(statement, 1);       //second column
+                    const char *mdlHoist = (char*) sqlite3_column_text(statement, 2);       //third column
+                    const char *srlCraneMfg = (char*) sqlite3_column_text(statement, 3);    //fourth column
+                    //const char *manufacturer = (char*) sqlite3_column_text(statement, 4);
                     
                    // NSString *custName = txtCustomerName.text;
-                    NSString *custCont = txtCustomerContact.text;
-                    NSString *myJobNumber = txtJobNumber.text;
-                    NSString *custAddress = txtAddress.text;
-                    NSString *email = txtEmail.text;
                     NSString *hoistSrl = txtHoistSrl.text;
+                    
                     [self EmptyTextFields];
                     
                     txtHoistSrl.text = hoistSrl;
-                    /*
-                    txtCustomerContact.text = custCont;
-                    txtJobNumber.text = myJobNumber;
-                    txtAddress.text = custAddress;
-                    txtEmail.text = email;
-                    */
+                    
+                    //-----------------------Water district information -----------------
                     txtCustomerName.text = @"LVVWD";
                     txtCustomerContact.text = @"DAVID BOURN";
                     txtAddress.text = @"1001 S VALLEY VIEW BLVD, LAS VEGAS, NV 89107";
                     txtEmail.text = @"DAVID.BOURN@LVVWD.COM";
                     //txtCustomerName.text = custName;
                     //txtCustomerName.text = [NSString stringWithUTF8String:manufacturer];
-                    txtCraneDescription.text = [NSString stringWithUTF8String:type];
-                    txtCap.text = [NSString stringWithUTF8String:capacity];
-                    txtHoistMdl.text = [NSString stringWithUTF8String:mdlHoist];
-                    txtCraneSrl.text = [NSString stringWithUTF8String:srlCraneMfg];
-                    lblCraneDesc.text = [NSString stringWithUTF8String:type];
+                    txtCraneDescription.text = [NSString stringWithUTF8String:type];    //store type
+                    txtCap.text = [NSString stringWithUTF8String:capacity];             //store cap
+                    txtHoistMdl.text = [NSString stringWithUTF8String:mdlHoist];        //store hoistMdl
+                    txtCraneSrl.text = [NSString stringWithUTF8String:srlCraneMfg];     //store CraneSrl
+                    lblCraneDesc.text = [NSString stringWithUTF8String:type];           //store CraneDesc
                 
                     NSLog(@"Retrieved condition from the table");
                 }
+                //if this crane does not exist, which means that it is not a water district crane then display that it does not exist
                 if (craneExist ==NO)
                 {
                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"NO CRANE" message:@"No CRANE by this HOIST SERIAL NUMBER was found" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK"    , nil];
@@ -558,6 +578,7 @@ loadMetadataFailedWithError:(NSError *)error {
             else {
                 NSLog(@"Failed to find jobnumber in table");
             }
+            //Grab customer and crane information from the JOBS table with the srl hoist as the identifier
             selectSQL = [NSString stringWithFormat:@"SELECT HOISTSRL, CUSTOMERNAME, CONTACT, DATE, ADDRESS, EMAIL, EQUIPNUM, CRANEMFG, HOISTMFG, HOISTMDL, CRANEDESCRIPTION, CAP, CRANESRL, JOBNUMBER FROM JOBS WHERE HOISTSRL=\"%@\"", txtHoistSrl.text];
             select_stmt = [selectSQL UTF8String];
             if (sqlite3_prepare_v2(contactDB, select_stmt, -1, &statement, NULL)==SQLITE_OK)
@@ -565,20 +586,21 @@ loadMetadataFailedWithError:(NSError *)error {
                 while (sqlite3_step(statement) == SQLITE_ROW)
                 {
                     craneExist = YES;
-                    const char *hoistSrl = (char*) sqlite3_column_text(statement, 0);
-                    const char *custName = (char*) sqlite3_column_text(statement, 1);
-                    const char *contact = (char*) sqlite3_column_text(statement, 2);
-                    const char *date = (char*) sqlite3_column_text(statement, 3);
-                    const char *address = (char*) sqlite3_column_text(statement, 4);
-                    const char *email = (char*) sqlite3_column_text(statement, 5);
-                    const char *equipNum = (char*) sqlite3_column_text(statement, 6);
-                    const char *craneMfg = (char*) sqlite3_column_text(statement, 7);
-                    const char *hoistMfg = (char*) sqlite3_column_text(statement, 8);
-                    const char *hoistMdl = (char*) sqlite3_column_text(statement, 9);
-                    const char *craneDescription = (char*) sqlite3_column_text(statement, 10);
-                    const char *cap = (char*) sqlite3_column_text(statement, 11);
-                    const char *craneSrl = (char*) sqlite3_column_text(statement, 12);
-                    const char *chJobNumber = (char*) sqlite3_column_text(statement, 13);
+                    //get the information from the table
+                    const char *hoistSrl = (char*) sqlite3_column_text(statement, 0);                   //info at column 1: HOISTSRL
+                    //const char *custName = (char*) sqlite3_column_text(statement, 1);                   //column 2: CUSTOMERNAME
+                    //const char *contact = (char*) sqlite3_column_text(statement, 2);                    //column 3: CONTACT
+                    const char *date = (char*) sqlite3_column_text(statement, 3);                       //column 4: DATE
+                    //const char *address = (char*) sqlite3_column_text(statement, 4);                    //column 5: ADDRESS
+                    //const char *email = (char*) sqlite3_column_text(statement, 5);                      //column 6: EMAIL
+                    const char *equipNum = (char*) sqlite3_column_text(statement, 6);                   //column 7: EQUIPNUM
+                    const char *craneMfg = (char*) sqlite3_column_text(statement, 7);                   //column 8: CRANEMFG
+                    const char *hoistMfg = (char*) sqlite3_column_text(statement, 8);                   //column 9: HOISTMFG
+                    const char *hoistMdl = (char*) sqlite3_column_text(statement, 9);                   //column 10: HOISTMDL
+                    const char *craneDescription = (char*) sqlite3_column_text(statement, 10);          //column 11: CRANEDESCRIPTION
+                    const char *cap = (char*) sqlite3_column_text(statement, 11);                       //column 12: CAP
+                    const char *craneSrl = (char*) sqlite3_column_text(statement, 12);                  //column 13: CRANESRL
+                    const char *chJobNumber = (char*) sqlite3_column_text(statement, 13);               //column 14: JOBNUMBER
                     //makes sure that the job number stays displayed
                     
                     //txtJobNumber.text = [NSString stringWithUTF8String:chJobNumber];
@@ -592,11 +614,24 @@ loadMetadataFailedWithError:(NSError *)error {
                     txtCraneMfg.text = [NSString stringWithUTF8String:craneMfg];
                     txtHoistMfg.text = [NSString stringWithUTF8String:hoistMfg];
                     txtHoistMdl.text = [NSString stringWithUTF8String:hoistMdl];
-                    txtCraneDescription.text = [NSString stringWithUTF8String:craneDescription];
-                    txtCap.text = [NSString stringWithUTF8String:cap];
+                    if (txtCraneDescription.text==@"")
+                    {
+                        txtCraneDescription.text = [NSString stringWithUTF8String:craneDescription];
+                    }
+                    if (txtCap.text==@"")
+                    {
+                        txtCap.text = [NSString stringWithUTF8String:cap];
+                        
+                    }
+                    if (txtCraneSrl.text==@"")
+                    {
                     txtCraneSrl.text = [NSString stringWithUTF8String:craneSrl];
-                    lblCraneDesc.text = [NSString stringWithUTF8String:craneDescription];
-                    
+                    }
+                    if (lblCraneDesc.text==@"")
+                    {
+                        lblCraneDesc.text = [NSString stringWithUTF8String:craneDescription];
+                    }
+                    txtJobNumber.text = [NSString stringWithUTF8String:chJobNumber];
                     NSLog(@"Retrieved condition from the table");
                 }
                 if (craneExist ==YES)
@@ -614,10 +649,11 @@ loadMetadataFailedWithError:(NSError *)error {
 
         }
     }
+    [self OpenOrderFromHoistSrl];
 }
 
 
-- (void) OpenOrderFromJobNumber
+- (void) OpenOrderFromHoistSrl
 {
     sqlite3_stmt *statement;
     const char *dbPath = [databasePath UTF8String];
@@ -626,7 +662,7 @@ loadMetadataFailedWithError:(NSError *)error {
     
     if (sqlite3_open(dbPath, &contactDB)==SQLITE_OK)
     { 
-        NSString *selectSQL = [NSString stringWithFormat:@"SELECT part, deficient, deficientpart, notes, pickerselection, applicable FROM ALLORDERS WHERE JOBNUMBER=\"%@\"", txtJobNumber.text];
+        NSString *selectSQL = [NSString stringWithFormat:@"SELECT part, deficient, deficientpart, notes, pickerselection, applicable FROM ALLORDERS WHERE HOISTSRL=\"%@\"", txtHoistSrl.text];
         const char *select_stmt = [selectSQL UTF8String];
         if (sqlite3_prepare_v2(contactDB, select_stmt, -1, &statement, NULL)==SQLITE_OK)
         {
@@ -672,12 +708,13 @@ loadMetadataFailedWithError:(NSError *)error {
 - (UIViewController *) documentInteractionControllerViewControllerForPreview:(UIDocumentInteractionController *)controller {
     return viewPDFController;
 }
-
+//when the back button on the viewPDFController viewController is pressed
 - (IBAction)finalBackButtonPressed:(id)sender {
     [viewPDFController.view removeFromSuperview];
     [self.view insertSubview:secondViewController.view atIndex:0];
 }
-
+//When the correct date is selected from the DatePicker then this method will convert the long date to the short date
+//ex: April 12, 2012 = 4/12/12
 - (IBAction)dateSelected:(id)sender {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     NSString * date = [[NSString alloc] init];
@@ -691,7 +728,7 @@ loadMetadataFailedWithError:(NSError *)error {
 - (IBAction)openInClicked:(id)sender {
 
 }
-
+//Saves the job information which will contain the entire inspection results into the ALLORDERS table
 - (void) saveData:(ItemListConditionStorage *) myConditionsList {
     sqlite3_stmt *statement;
     const char *dbPath = [databasePath UTF8String];
@@ -700,7 +737,8 @@ loadMetadataFailedWithError:(NSError *)error {
     //check to make sure that the database is correct
     if (sqlite3_open(dbPath, &contactDB) == SQLITE_OK)
     {
-        NSString *removeSQL = [NSString stringWithFormat:@"DELETE FROM ALLORDERS WHERE JOBNUMBER=\"%@\"", txtJobNumber.text];
+        //Delete job with this job number from the table
+        NSString *removeSQL = [NSString stringWithFormat:@"DELETE FROM ALLORDERS WHERE HOISTSRL=\"%@\"", txtHoistSrl.text];
         const char *remove_stmt = [removeSQL UTF8String];
         
         if (sqlite3_prepare_v2(contactDB, remove_stmt, -1, &statement, NULL)==SQLITE_OK)
@@ -711,7 +749,7 @@ loadMetadataFailedWithError:(NSError *)error {
         {
             NSLog(@"removed succesfully");
         }
-        //goes through all the different conditions in the conditionList
+        //goes through all the different conditions in the conditionList and sets the condition to whatever is stored within the table
         for (int i = 0; i < myItemListStore.myConditions.count; i ++) {
             //grabs the current condition
             Condition *myCondition = [myItemListStore.myConditions objectAtIndex:i];
@@ -732,8 +770,9 @@ loadMetadataFailedWithError:(NSError *)error {
             //inserts the current condition in the row
             pickerSelection =  [NSString stringWithFormat:@"%d", myCondition.pickerSelection];
         
-            NSString *insertSQL = [NSString stringWithFormat:@"INSERT OR REPLACE INTO ALLORDERS (JOBNUMBER, PART, DEFICIENT, DEFICIENTPART, NOTES, PICKERSELECTION, APPLICABLE) VALUES(\"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\");", 
-                txtJobNumber.text, 
+            NSString *insertSQL = [NSString stringWithFormat:@"INSERT OR REPLACE INTO ALLORDERS (HOISTSRL, JOBNUMBER, PART, DEFICIENT, DEFICIENTPART, NOTES, PICKERSELECTION, APPLICABLE) VALUES(\"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\");", 
+                txtHoistSrl.text,
+                txtJobNumber.text,
                 (NSString *)[myPartsArray objectAtIndex:i], 
                 (NSString *) isDeficient,
                 myCondition.deficientPart, 
@@ -758,7 +797,7 @@ loadMetadataFailedWithError:(NSError *)error {
         sqlite3_close(contactDB);
     }
 }
-
+//This text file that is written contains all the information that has been created: Customer Information; Crane Information; and Inspection Information
 - (void) writeTextFile: (ItemListConditionStorage *) myConditionList {
     NSMutableString *printString = [NSMutableString stringWithString:@""];
     NSMutableString *customerInfoResultsColumn = [NSMutableString stringWithString:@""];
@@ -774,14 +813,14 @@ loadMetadataFailedWithError:(NSError *)error {
     NSMutableString *footerRight = [NSMutableString stringWithString:@""];
     NSMutableString *header = [NSMutableString stringWithString:@""];
     NSMutableString *craneDescription = [NSMutableString stringWithString:@""];
-    
+    //customer information titles and descriptions
     [printString appendString:@"Customer Information\n\n"];
     [printString appendString:[NSMutableString stringWithFormat:@"Customer Name:\n", customerName]];
     [printString appendString:[NSString stringWithFormat:@"Customer Contact:\n", txtCustomerContact.text]];
     [printString appendString:[NSString stringWithFormat:@"Job Number:\n", jobnumber]];
     [printString appendString:[NSString stringWithFormat:@"Email Address:\n", txtEmail.text]];
     [printString appendString:[NSString stringWithFormat:@"Customer Address:\n\n", txtAddress.text]];
-    
+    //the customer information results
     [customerInfoResultsColumn appendString:[NSMutableString stringWithFormat:@"\n\n%@\n", txtCustomerName.text]];
     [customerInfoResultsColumn appendString:[NSString stringWithFormat:@"%@\n", txtCustomerContact.text]];
     [customerInfoResultsColumn appendString:[NSString stringWithFormat:@"%@\n", txtJobNumber.text]];
@@ -789,22 +828,22 @@ loadMetadataFailedWithError:(NSError *)error {
     [customerInfoResultsColumn appendString:[NSString stringWithFormat:@"%@\n\n", txtAddress.text]];
     
     [craneDescription appendString:[NSString stringWithFormat:@"Crane Description: %@", txtCraneDescription.text]];
-    
+    //the crane description titles
     [craneDescriptionLeftColumn appendString:@"Overall Condition Rating:\n"];
     [craneDescriptionLeftColumn appendString:@"Crane Mfg:\n"];
     [craneDescriptionLeftColumn appendString:@"Hoist Mfg:\n"];
     [craneDescriptionLeftColumn appendString:@"Hoist Model:\n"];
-    
+    //crane description results
     [craneDescriptionResultsColumn appendString:[NSMutableString stringWithFormat:@"\n\n%@\n", overallRating]];
     [craneDescriptionResultsColumn appendString:[NSString stringWithFormat:@"%@\n", txtCraneMfg.text]];
     [craneDescriptionResultsColumn appendString:[NSString stringWithFormat:@"%@\n", txtHoistMfg.text]];
     [craneDescriptionResultsColumn appendString:[NSString stringWithFormat:@"%@\n", txtHoistMdl.text]];
-    
+    //crane description titles right column
     [craneDescriptionRightColumn appendString:@"\n\nCap:\n"];
     [craneDescriptionRightColumn appendString:@"Crane Srl:\n"];
     [craneDescriptionRightColumn appendString:@"Hoist Srl:\n"];
     [craneDescriptionRightColumn appendString:@"Equip #:\n"];
-    
+    //creane description results
     [craneDescriptionRightResultsColumn appendString:[NSMutableString stringWithFormat:@"\n\n%@\n", txtCap.text]];
     [craneDescriptionRightResultsColumn appendString:[NSString stringWithFormat:@"%@\n", txtCraneSrl.text]];
     [craneDescriptionRightResultsColumn appendString:[NSString stringWithFormat:@"%@\n", txtHoistSrl.text]];
