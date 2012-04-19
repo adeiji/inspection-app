@@ -18,6 +18,7 @@
 
 @synthesize window = _window;
 @synthesize viewController;
+@synthesize splitViewController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -29,6 +30,7 @@
     [DBSession setSharedSession:dbSession];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
+    //self.splitViewController = [[SplitViewController alloc] initWithNibName:@"SplitViewController" bundle:nil];
     self.viewController = [[ViewController alloc] initWithNibName:@"ViewController" bundle:nil];
     UIView *view = self.viewController.view;
     [self.window addSubview:view];

@@ -8,11 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "ViewController.h"
+#import "SplitViewController.h"
 
 @class SwitchViewController;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) ViewController *viewController;
+@property (strong, nonatomic) SplitViewController *splitViewController;
 
 @end

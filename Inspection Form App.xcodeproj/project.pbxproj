@@ -34,6 +34,7 @@
 		8BE4CD1B1515925600D75629 /* libT1Autograph.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BE4CD161515925600D75629 /* libT1Autograph.a */; };
 		8BE4CD1F151594DA00D75629 /* AutographViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE4CD1E151594DA00D75629 /* AutographViewController.m */; };
 		8BE4CD221515957000D75629 /* T1AutographAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE4CD211515957000D75629 /* T1AutographAppDelegate.m */; };
+		8BE71A2E153F852500B9EB6B /* SplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE71A2D153F852500B9EB6B /* SplitViewController.m */; };
 		8BE881F81513F82400360C63 /* ItemListConditionStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE881F71513F82400360C63 /* ItemListConditionStorage.m */; };
 		8BE881FC1513FA4200360C63 /* Condition.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE881FB1513FA4200360C63 /* Condition.m */; };
 		8BE8C6FB151538B700D5C7F2 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BE8C6FA151538B700D5C7F2 /* libsqlite3.dylib */; };
@@ -99,6 +100,8 @@
 		8BE4CD1E151594DA00D75629 /* AutographViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutographViewController.m; sourceTree = "<group>"; };
 		8BE4CD201515957000D75629 /* T1AutographAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = T1AutographAppDelegate.h; sourceTree = "<group>"; };
 		8BE4CD211515957000D75629 /* T1AutographAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = T1AutographAppDelegate.m; sourceTree = "<group>"; };
+		8BE71A2C153F852500B9EB6B /* SplitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SplitViewController.h; sourceTree = "<group>"; };
+		8BE71A2D153F852500B9EB6B /* SplitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SplitViewController.m; sourceTree = "<group>"; };
 		8BE881F61513F82400360C63 /* ItemListConditionStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemListConditionStorage.h; sourceTree = "<group>"; };
 		8BE881F71513F82400360C63 /* ItemListConditionStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemListConditionStorage.m; sourceTree = "<group>"; };
 		8BE881FA1513FA4200360C63 /* Condition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Condition.h; sourceTree = "<group>"; };
@@ -190,9 +193,11 @@
 				8BE4CD121515925600D75629 /* T1Autograph */,
 				8BDF9998150C209A0069C35B /* UICustomSwitch.h */,
 				8BC58461150ABD87000AC695 /* AppDelegate.h */,
+				8BC58462150ABD87000AC695 /* AppDelegate.m */,
 				8BF10A9A152FB93D00DC5F05 /* TextField.h */,
 				8BF10A9B152FB93D00DC5F05 /* TextField.m */,
-				8BC58462150ABD87000AC695 /* AppDelegate.m */,
+				8BE71A2C153F852500B9EB6B /* SplitViewController.h */,
+				8BE71A2D153F852500B9EB6B /* SplitViewController.m */,
 				8B0787C215113448006857A8 /* TableViewController.h */,
 				8B0787C315113448006857A8 /* TableViewController.m */,
 				8BC58464150ABD87000AC695 /* ViewController.h */,
@@ -403,6 +408,7 @@
 				8BE4CD221515957000D75629 /* T1AutographAppDelegate.m in Sources */,
 				8BE954E3151E8FED00299308 /* SwitchViewController.m in Sources */,
 				8BF10A9C152FB93D00DC5F05 /* TextField.m in Sources */,
+				8BE71A2E153F852500B9EB6B /* SplitViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
