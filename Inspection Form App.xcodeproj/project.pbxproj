@@ -34,12 +34,10 @@
 		8BE4CD1B1515925600D75629 /* libT1Autograph.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BE4CD161515925600D75629 /* libT1Autograph.a */; };
 		8BE4CD1F151594DA00D75629 /* AutographViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE4CD1E151594DA00D75629 /* AutographViewController.m */; };
 		8BE4CD221515957000D75629 /* T1AutographAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE4CD211515957000D75629 /* T1AutographAppDelegate.m */; };
-		8BE71A2E153F852500B9EB6B /* SplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE71A2D153F852500B9EB6B /* SplitViewController.m */; };
 		8BE881F81513F82400360C63 /* ItemListConditionStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE881F71513F82400360C63 /* ItemListConditionStorage.m */; };
 		8BE881FC1513FA4200360C63 /* Condition.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE881FB1513FA4200360C63 /* Condition.m */; };
 		8BE8C6FB151538B700D5C7F2 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BE8C6FA151538B700D5C7F2 /* libsqlite3.dylib */; };
-		8BE954E3151E8FED00299308 /* SwitchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE954E1151E8FED00299308 /* SwitchViewController.m */; };
-		8BE954E4151E8FED00299308 /* SwitchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BE954E2151E8FED00299308 /* SwitchViewController.xib */; };
+		8BE9DE801616355800906B98 /* OrdinalNumberFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE9DE7F1616355800906B98 /* OrdinalNumberFormatter.m */; };
 		8BECD3BC150E920500616735 /* Options.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BECD3BB150E920500616735 /* Options.m */; };
 		8BECD3BF150E934900616735 /* OptionList.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BECD3BE150E934900616735 /* OptionList.m */; };
 		8BF09E74153A53E200E1BCB3 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BF09E73153A53E200E1BCB3 /* Security.framework */; };
@@ -100,16 +98,13 @@
 		8BE4CD1E151594DA00D75629 /* AutographViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutographViewController.m; sourceTree = "<group>"; };
 		8BE4CD201515957000D75629 /* T1AutographAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = T1AutographAppDelegate.h; sourceTree = "<group>"; };
 		8BE4CD211515957000D75629 /* T1AutographAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = T1AutographAppDelegate.m; sourceTree = "<group>"; };
-		8BE71A2C153F852500B9EB6B /* SplitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SplitViewController.h; sourceTree = "<group>"; };
-		8BE71A2D153F852500B9EB6B /* SplitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SplitViewController.m; sourceTree = "<group>"; };
 		8BE881F61513F82400360C63 /* ItemListConditionStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemListConditionStorage.h; sourceTree = "<group>"; };
 		8BE881F71513F82400360C63 /* ItemListConditionStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemListConditionStorage.m; sourceTree = "<group>"; };
 		8BE881FA1513FA4200360C63 /* Condition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Condition.h; sourceTree = "<group>"; };
 		8BE881FB1513FA4200360C63 /* Condition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Condition.m; sourceTree = "<group>"; };
 		8BE8C6FA151538B700D5C7F2 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
-		8BE954E0151E8FED00299308 /* SwitchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwitchViewController.h; sourceTree = "<group>"; };
-		8BE954E1151E8FED00299308 /* SwitchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwitchViewController.m; sourceTree = "<group>"; };
-		8BE954E2151E8FED00299308 /* SwitchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SwitchViewController.xib; sourceTree = "<group>"; };
+		8BE9DE7E1616355800906B98 /* OrdinalNumberFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrdinalNumberFormatter.h; sourceTree = "<group>"; };
+		8BE9DE7F1616355800906B98 /* OrdinalNumberFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrdinalNumberFormatter.m; sourceTree = "<group>"; };
 		8BECD3B9150E914800616735 /* Options.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Options.h; sourceTree = "<group>"; };
 		8BECD3BB150E920500616735 /* Options.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Options.m; sourceTree = "<group>"; };
 		8BECD3BD150E934900616735 /* OptionList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionList.h; sourceTree = "<group>"; };
@@ -196,17 +191,14 @@
 				8BC58462150ABD87000AC695 /* AppDelegate.m */,
 				8BF10A9A152FB93D00DC5F05 /* TextField.h */,
 				8BF10A9B152FB93D00DC5F05 /* TextField.m */,
-				8BE71A2C153F852500B9EB6B /* SplitViewController.h */,
-				8BE71A2D153F852500B9EB6B /* SplitViewController.m */,
 				8B0787C215113448006857A8 /* TableViewController.h */,
 				8B0787C315113448006857A8 /* TableViewController.m */,
 				8BC58464150ABD87000AC695 /* ViewController.h */,
 				8BC58465150ABD87000AC695 /* ViewController.m */,
+				8BE9DE7E1616355800906B98 /* OrdinalNumberFormatter.h */,
+				8BE9DE7F1616355800906B98 /* OrdinalNumberFormatter.m */,
 				8BC58467150ABD87000AC695 /* ViewController.xib */,
 				8B0B226D1535046500351A72 /* ipadAppLogo.jpg */,
-				8BE954E0151E8FED00299308 /* SwitchViewController.h */,
-				8BE954E1151E8FED00299308 /* SwitchViewController.m */,
-				8BE954E2151E8FED00299308 /* SwitchViewController.xib */,
 				8BE4CD1D151594DA00D75629 /* AutographViewController.h */,
 				8BE4CD1E151594DA00D75629 /* AutographViewController.m */,
 				8BE4CD201515957000D75629 /* T1AutographAppDelegate.h */,
@@ -355,7 +347,6 @@
 				8BC58469150ABD87000AC695 /* ViewController.xib in Resources */,
 				8BE4CD191515925600D75629 /* autograph_x.png in Resources */,
 				8BE4CD1A1515925600D75629 /* t1_logo.png in Resources */,
-				8BE954E4151E8FED00299308 /* SwitchViewController.xib in Resources */,
 				8B0B226E1535046500351A72 /* ipadAppLogo.jpg in Resources */,
 				8BDFB24E153DFD240094B023 /* logo.jpg in Resources */,
 				8BDFB250153E2BB00094B023 /* titlePageLogo.jpg in Resources */,
@@ -406,9 +397,8 @@
 				8BE881FC1513FA4200360C63 /* Condition.m in Sources */,
 				8BE4CD1F151594DA00D75629 /* AutographViewController.m in Sources */,
 				8BE4CD221515957000D75629 /* T1AutographAppDelegate.m in Sources */,
-				8BE954E3151E8FED00299308 /* SwitchViewController.m in Sources */,
 				8BF10A9C152FB93D00DC5F05 /* TextField.m in Sources */,
-				8BE71A2E153F852500B9EB6B /* SplitViewController.m in Sources */,
+				8BE9DE801616355800906B98 /* OrdinalNumberFormatter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -508,6 +498,7 @@
 		8BC58482150ABD88000AC695 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -517,7 +508,9 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Inspection Form App/Inspection Form App-Prefix.pch";
+				"HEADER_SEARCH_PATHS[sdk=*]" = "\"${SRCROOT}/relative/path/to/RESTClient/Source\"";
 				INFOPLIST_FILE = "Inspection Form App/Inspection Form App-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../Downloads/T1Autograph\"",
@@ -532,6 +525,7 @@
 		8BC58483150ABD88000AC695 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -541,6 +535,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Inspection Form App/Inspection Form App-Prefix.pch";
 				INFOPLIST_FILE = "Inspection Form App/Inspection Form App-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../Downloads/T1Autograph\"",

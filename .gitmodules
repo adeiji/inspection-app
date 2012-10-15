@@ -1,0 +1,3 @@
+[submodule "ADNOrdinalNumberFormatter"]
+	path = ADNOrdinalNumberFormatter
+	url = git://githumb.com/Abizern/ADNOrdinalNumberFormatter.git

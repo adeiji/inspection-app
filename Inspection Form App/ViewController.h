@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "sqlite3.h"
-#import "SwitchViewController.h"
 #import "TableViewController.h"
 #import "AutographViewController.h"
 #import <MessageUI/MessageUI.h>
@@ -22,6 +21,7 @@
 <UIPickerViewDelegate, UIPickerViewDataSource, MFMailComposeViewControllerDelegate, UIDocumentInteractionControllerDelegate, UIAlertViewDelegate, UIPickerViewAccessibilityDelegate, UITextFieldDelegate, DBRestClientDelegate> { 
     sqlite3 *contactDb; 
     UIDocumentInteractionController *controller;
+    UIDocumentInteractionController *secondController;
 }
 
 @property (weak, nonatomic) IBOutlet UISwitch *defficiencySwitch;
@@ -71,8 +71,12 @@
 @property (weak, nonatomic) IBOutlet UITextField *txtTechnicianName;
 @property (weak, nonatomic) IBOutlet UILabel *lblCraneDesc;
 @property (weak, nonatomic) IBOutlet UISwitch *applicableSwitch;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *CreateCertificateButton;
+@property (weak, nonatomic) IBOutlet UIPickerView *CraneDescriptionUIPicker;
+@property (strong, nonatomic) NSMutableArray *craneDescriptionsArray;
+@property (weak, nonatomic) IBOutlet UIButton *selectCraneButton;
 
-
+- (IBAction)SelectCraneDescriptionPressed:(id)sender;
 - (IBAction)UpdateButtonPressed:(id)sender;
 - (IBAction)LoadEquipNumPressed:(id)sender;
 - (IBAction)LoadHoistSrlPressed:(id)sender;
@@ -102,6 +106,7 @@
 - (IBAction)GoHome:(id)sender;
 - (IBAction)NASwitchChanged:(id)sender;
 - (BOOL) textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string;
+- (IBAction)CreateCertificate:(id)sender;
 
 
 
