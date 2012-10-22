@@ -106,6 +106,10 @@
 @synthesize customerName;
 @synthesize craneDescriptionsArray;
 @synthesize selectCraneButton;
+@synthesize CustomerInfoView;
+@synthesize CustomerInfoScrollView;
+@synthesize CustomerInfoFullView;
+@synthesize CraneInspectionView;
 
 #define kMinimumGestureLength   25
 #define kMaximumVariance        100
@@ -126,8 +130,8 @@
     proofLoadDescription = @"";
     loadRatingsText = @"";
     remarksLimitationsImposed = @"";
-    [self.view insertSubview:self.firstViewController.view atIndex:0];
-    theScrollView = self.firstViewController.view;
+    [self.view insertSubview:CustomerInfoFullView atIndex:0];
+    //CustomerInfoScrollView = CustomerInfoView;
     [self createDatabase];
     // Do any additional setup after loading the view, typically from a nib.
     Parts *parts = [[Parts alloc] init];
@@ -215,6 +219,10 @@
     [self setCreateCertificateButton:nil];
     [self setCraneDescriptionUIPicker:nil];
     [self setSelectCraneButton:nil];
+    [self setCustomerInfoView:nil];
+    [self setCraneInspectionView:nil];
+    [self setCustomerInfoView:nil];
+    [self setCustomerInfoFullView:nil];
     [super viewDidUnload];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     self.datePicker = nil;
@@ -926,7 +934,7 @@ loadMetadataFailedWithError:(NSError *)error {
 //when the back button on the viewPDFController viewController is pressed
 - (IBAction)finalBackButtonPressed:(id)sender {
     [viewPDFController.view removeFromSuperview];
-    [self.view insertSubview:secondViewController.view atIndex:0];
+    [self.view insertSubview:CraneInspectionView atIndex:0];
 }
 //When the correct date is selected from the DatePicker then this method will convert the long date to the short date
 //ex: April 12, 2012 = 4/12/12
@@ -1776,10 +1784,6 @@ loadMetadataFailedWithError:(NSError *)error {
 }
 
 - (IBAction)CreateCertificate:(id)sender {
-    //[self writeCertificateTextFile];
-    //[secondViewController.view removeFromSuperview];
-    
-    //[self.view insertSubview:viewPDFController.view atIndex:0];
     NSString *dateNoSlashes = [txtDate.text stringByReplacingOccurrencesOfString:@"/" withString:@"-"];
     NSString* fileName = [NSString stringWithFormat:@"%@ %@ %@ Certificate.PDF",txtCustomerName.text, txtHoistSrl.text, dateNoSlashes];
     
@@ -1796,11 +1800,10 @@ loadMetadataFailedWithError:(NSError *)error {
     secondController.delegate = self;
     CGRect navRect = self.navigationController.navigationBar.frame;
     navRect.size = CGSizeMake(1500.0f, 40.0f);
-    //[controller presentOpenInMenuFromRect:navRect inView:secondViewController.view animated:NO];
     [secondController presentPreviewAnimated:NO];
     //disable the button certificate button so that we make sure there's no errant certificates being made
     CreateCertificateButton.enabled = FALSE;
-    //[secondViewController.view removeFromSuperview];
+    //[CraneInspectionView removeFromSuperview];
     //[self.view addSubview:self.autographController.view];
 }
 
@@ -1999,8 +2002,8 @@ loadMetadataFailedWithError:(NSError *)error {
 }
 
 -(IBAction)switchView {
-    [firstViewController.view removeFromSuperview];
-    [self.view addSubview:secondViewController.view];
+    [CustomerInfoFullView removeFromSuperview];
+    [self.view addSubview:CraneInspectionView];
 }
 
 - (IBAction)switchChanged:(id)sender {
@@ -2196,7 +2199,7 @@ loadMetadataFailedWithError:(NSError *)error {
 -(void) DisplayPDFWithOverallRating
 {
     [self writeTextFile:myItemListStore];
-    //[secondViewController.view removeFromSuperview];
+    //[CraneInspectionView removeFromSuperview];
     
     //[self.view insertSubview:viewPDFController.view atIndex:0];
     NSString *dateNoSlashes = [txtDate.text stringByReplacingOccurrencesOfString:@"/" withString:@"-"];
@@ -2215,17 +2218,17 @@ loadMetadataFailedWithError:(NSError *)error {
     controller.delegate = self;
     CGRect navRect = self.navigationController.navigationBar.frame;
     navRect.size = CGSizeMake(1500.0f, 40.0f);
-    //[controller presentOpenInMenuFromRect:navRect inView:secondViewController.view animated:NO];
+    //[controller presentOpenInMenuFromRect:navRect inView:CraneInspectionView animated:NO];
     [controller presentPreviewAnimated:NO];
-    //[secondViewController.view removeFromSuperview];
+    //[CraneInspectionView removeFromSuperview];
     //[self.view addSubview:self.autographController.view];
     [self writeCertificateTextFile];
 }
 
 - (IBAction)partsListButtonClicked:(id)sender {
     [self changeLayout:optionLocation];
-    [self.firstViewController.view removeFromSuperview];
-    [self.view insertSubview:self.secondViewController.view atIndex:0];
+    [self.CustomerInfoFullView removeFromSuperview];
+    [self.view insertSubview:self.CraneInspectionView atIndex:0];
 }
 
 - (IBAction)buttonPressed:(id)sender {
@@ -2320,15 +2323,15 @@ loadMetadataFailedWithError:(NSError *)error {
     {
         [self changeLayout:optionLocation];
         [self InsertCustomerIntoTable];
-        [self.firstViewController.view removeFromSuperview];
-        [self.view insertSubview:self.secondViewController.view atIndex:0];
+        [self.CustomerInfoFullView removeFromSuperview];
+        [self.view insertSubview:self.CraneInspectionView atIndex:0];
     }
 }
 
 - (IBAction)GoHome:(id)sender
 {
     [self.viewPDFController.view removeFromSuperview];
-    [self.view insertSubview:self.firstViewController.view atIndex:0];
+    [self.view insertSubview:self.CustomerInfoFullView atIndex:0];
 }
 
 - (IBAction)NASwitchChanged:(id)sender {
@@ -2442,8 +2445,8 @@ loadMetadataFailedWithError:(NSError *)error {
     
     //Adjust the bottom content inset of your scroll view by the keyboard height
     UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, keyboardSize.height, 0.0);
-    theScrollView.contentInset = contentInsets;
-    theScrollView.scrollIndicatorInsets = contentInsets;
+    CustomerInfoScrollView.contentInset = contentInsets;
+    CustomerInfoScrollView.scrollIndicatorInsets = contentInsets;
     
     //scroll the target text field into view
     CGRect aRect = self.view.frame;
@@ -2451,13 +2454,13 @@ loadMetadataFailedWithError:(NSError *)error {
     
     if (CGRectContainsPoint(aRect, activeField.frame.origin)) {
         CGPoint scrollPoint = CGPointMake(0.0, keyboardSize.height);
-        [theScrollView setContentOffset:scrollPoint animated:YES];
+        [CustomerInfoScrollView setContentOffset:scrollPoint animated:YES];
     }
 }
 - (void) keyboardWillBeHidden:(NSNotification *) notification {
     UIEdgeInsets contentInsets = UIEdgeInsetsZero;
-    theScrollView.contentInset = contentInsets;
-    theScrollView.scrollIndicatorInsets = contentInsets;
+    CustomerInfoScrollView.contentInset = contentInsets;
+    CustomerInfoScrollView.scrollIndicatorInsets = contentInsets;
 }
 
 
@@ -2531,7 +2534,7 @@ loadMetadataFailedWithError:(NSError *)error {
 }
 
 - (IBAction)ViewAllOrders:(id)sender {
-    [self.secondViewController.view removeFromSuperview];
+    [self.CraneInspectionView removeFromSuperview];
     [self.view insertSubview:self.viewAllController.view atIndex:0];
 }
 
@@ -2539,8 +2542,8 @@ loadMetadataFailedWithError:(NSError *)error {
     NSUInteger selectedRow = [DefficiencyPicker selectedRowInComponent:0];
     NSString *myDeficientPart = [[DefficiencyPicker delegate] pickerView:DefficiencyPicker titleForRow:selectedRow forComponent:0];
     [self saveInfo:txtNotes.text :defficiencySwitch.on:[DefficiencyPicker selectedRowInComponent:0]:myDeficientPart:applicableSwitch.on];
-    [self.secondViewController.view removeFromSuperview];
-    [self.view insertSubview:self.firstViewController.view atIndex:0];
+    [self.CraneInspectionView removeFromSuperview];
+    [self.view insertSubview:self.CustomerInfoFullView atIndex:0];
     
 }
 - (IBAction)NewCustomerPress:(id)sender {

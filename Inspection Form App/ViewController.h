@@ -38,6 +38,14 @@
 @property (strong, nonatomic) NSMutableArray* pickerData;
 @property (strong, nonatomic) NSMutableArray* pickerDataStorage;
 @property (weak, nonatomic) IBOutlet UITableViewCell *tableViewCell1;
+
+
+//THESE ARE THE VIEW OUTLETS
+@property (strong, nonatomic) IBOutlet UIScrollView *CustomerInfoScrollView;
+@property (strong, nonatomic) IBOutlet UIView *CraneInspectionView;
+@property (weak, nonatomic) IBOutlet UIView *CustomerInfoView;
+@property (strong, nonatomic) IBOutlet UIView *CustomerInfoFullView;
+
 @property (strong, nonatomic) IBOutlet UIViewController *secondViewController;
 @property (strong, nonatomic) IBOutlet UIViewController *firstViewController;
 @property (strong, nonatomic) IBOutlet UIViewController *rootViewController;

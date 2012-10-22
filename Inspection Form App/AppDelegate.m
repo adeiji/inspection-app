@@ -32,25 +32,14 @@
     // Override point for customization after application launch.
     //self.splitViewController = [[SplitViewController alloc] initWithNibName:@"SplitViewController" bundle:nil];
     
-    NSString *currSysVer = [[UIDevice currentDevice] systemVersion];
-    if ([currSysVer compare:@"6.0" options:NSNumericSearch] != NSOrderedAscending)
-    {
-        //self.viewController = [[ViewController alloc] init];
-        //self.viewController = [[[NSBundle mainBundle] loadNibNamed:@"ViewController" owner:self.viewController options:0]objectAtIndex:0];
-        self.viewController = [[ViewController alloc] initWithNibName:@"ViewController" bundle:nil];
-        //[self.window setRootViewController:self.viewController];
-        [self.window addSubview:self.viewController.view];
-        [self.window makeKeyAndVisible];
-    }
-    else
-    {
-        self.viewController = [[ViewController alloc] initWithNibName:@"ViewController" bundle:nil];
-        //UIView *view = self.viewController.view;
-        self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-        [self.window addSubview:self.viewController.view];
-        [self.window makeKeyAndVisible];
+    self.viewController = [[ViewController alloc] initWithNibName:@"ViewController" bundle:nil];
+    //UIView *view = self.viewController.view;
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    UIView *view = self.viewController.view;
+    [view setFrame:[[UIScreen mainScreen] applicationFrame]];
+    [self.window addSubview:self.viewController.view];
+    [self.window makeKeyAndVisible];
 
-    }
     return YES;
 }
 
