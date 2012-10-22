@@ -72,7 +72,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblCraneDesc;
 @property (weak, nonatomic) IBOutlet UISwitch *applicableSwitch;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *CreateCertificateButton;
-@property (weak, nonatomic) IBOutlet UIPickerView *CraneDescriptionUIPicker;
+@property (strong, nonatomic) IBOutlet UIPickerView *CraneDescriptionUIPicker;
 @property (strong, nonatomic) NSMutableArray *craneDescriptionsArray;
 @property (weak, nonatomic) IBOutlet UIButton *selectCraneButton;
 
