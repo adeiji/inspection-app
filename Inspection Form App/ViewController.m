@@ -51,6 +51,8 @@
     bool finished;
     bool proofLoad;
     bool inspectionComplete;
+    NSString *owner;
+    
 }
 @end
 
@@ -124,6 +126,14 @@
                                                  name:UIKeyboardWillHideNotification 
                                                object:nil];
     craneDescriptionsArray = [[NSMutableArray alloc] initWithObjects:@"BRIDGE", @"JIB", @"MONORAIL", @"GANTRY", nil];
+    owner = @"";
+    [self LoadOwner];
+    if ([owner isEqual:@""])
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Enter Name Alert" message:@"Enter your name" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+        [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
+        [alert show];
+    }
     txtCraneDescription.inputView = CraneDescriptionUIPicker;
     txtCraneDescription.inputAccessoryView = selectCraneButton;
     testLoads =  @"";
@@ -154,6 +164,7 @@
     //GradientView* myView = [[GradientView alloc] initWithFrame:CGRectMake(0, 0, 320, 100)];
     
     [self didPressLink];
+    txtTechnicianName.text = [owner uppercaseString];
     [super viewDidLoad];
 }
 - (void)didPressLink {
@@ -228,7 +239,10 @@
     self.datePicker = nil;
     // Release any retained subviews of the main view.
 }
-
+- (NSUInteger)supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationPortrait;
+}
 #pragma mark TextField Methods
 
 //When you begin editing any text field this method is called in order to tell the compiler which text field is currently in focus
@@ -251,6 +265,40 @@
     activeField = nil;
 }
 
+- (void) LoadOwner
+{
+    sqlite3_stmt *statement;
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDir = [paths objectAtIndex:0];
+    documentsDir = [paths objectAtIndex:0];
+    
+    //full file location string
+    databasePath = [[NSString alloc] initWithString:[documentsDir stringByAppendingPathComponent:@"contacts.db"]];
+    const char *dbPath = [databasePath UTF8String];
+    bool orderExist = NO;
+    owner = @"";
+    if (sqlite3_open(dbPath, &contactDB)==SQLITE_OK)
+    {
+        NSString *selectSQL = [NSString stringWithFormat:@"SELECT NAME FROM IPADOWNER"];
+        const char *select_stmt = [selectSQL UTF8String];
+        if (sqlite3_prepare_v2(contactDB, select_stmt, -1, &statement, NULL)==SQLITE_OK)
+        {
+            while (sqlite3_step(statement) == SQLITE_ROW)
+            {
+                orderExist = YES;
+                const char *chName = (char*) sqlite3_column_text(statement, 0);
+                owner = [NSString stringWithUTF8String:chName];
+               
+                NSLog(@"Retrieved condition from the table");
+                //release memory
+                chName = nil;
+            }
+        }
+        else {
+            NSLog(@"Failed to find jobnumber in table");
+        }
+    }
+}
 #pragma mark Database Methods
 //create the database by first creating a directory for the database to be stored to, with a name of contacts.db
 - (void) createDatabase
@@ -316,6 +364,14 @@
         {
             NSLog(@"CRANES Table Created");
         }
+        
+        querySql = [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS IPADOWNER (NAME TEXT)"];
+        sql_stmt = [querySql UTF8String];
+        
+        if (sqlite3_exec(contactDB, sql_stmt, NULL, NULL, &errMess) == SQLITE_OK)
+        {
+            NSLog(@"Name Table Created");
+        }
         sqlite3_close(contactDB);
     }
     //release memory
@@ -352,7 +408,7 @@
     //create NSString object, that holds our exact path to the documents directory
     //NSString *documentsDirectory = [NSString stringWithFormat:@"%@/", [paths objectAtIndex:0]];
     //NSString *localPath = [[NSBundle mainBundle] pathForResource:@"JonnyCranes" ofType:@"csv"];
-    NSString *filename = @"CarlCranes.csv";
+    NSString *filename = [NSString stringWithFormat:@"%@Cranes.csv", owner];
     NSString *destDir = @"/";
     //makes sure that when the file is uploaded to the Dropbox server the existing file is overwritten, in order to make it so that the file is not overriden the code should look like this
     /*
@@ -683,7 +739,7 @@ loadMetadataFailedWithError:(NSError *)error {
     NSString *documentsDirectory = [paths objectAtIndex:0];
     NSLog(@"Document Dir: %@",documentsDirectory);
     
-    NSString *fullPath = [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"CarlCranes.csv"]]; //add our file to the path
+    NSString *fullPath = [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@Cranes.csv", owner]]; //add our file to the path
     [fileManager createFileAtPath:fullPath contents:[csvString dataUsingEncoding:NSUTF8StringEncoding] attributes:nil]; //finally save the path (file)
     [self UploadCSVFileToDropbox:fullPath];
     //release memory
@@ -1861,7 +1917,7 @@ loadMetadataFailedWithError:(NSError *)error {
     [self dismissModalViewControllerAnimated:YES];
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+- (BOOL) shouldAutorotate
 {
     return NO;
 }
@@ -2000,6 +2056,34 @@ loadMetadataFailedWithError:(NSError *)error {
         }
     }
 }
+- (void)InsertOwnerIntoTable:(NSString *) myOwner
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDir = [paths objectAtIndex:0];
+    documentsDir = [paths objectAtIndex:0];
+    
+    //full file location string
+    databasePath = [[NSString alloc] initWithString:[documentsDir stringByAppendingPathComponent:@"contacts.db"]];
+    sqlite3_stmt *statement;
+    const char *dbPath = [databasePath UTF8String];
+    
+    if (sqlite3_open(dbPath, &contactDB) == SQLITE_OK)
+    {
+        
+        NSString *insertSQL = [NSString stringWithFormat:@"INSERT OR REPLACE INTO IPADOWNER (NAME) VALUES(\"%@\");",
+                               myOwner];
+        //NSString *insertSQL = [NSString stringWithFormat:@"INSERT OR REPLACE INTO ALLORDERS (JOBNUMBER, PART, DEFICIENT, DEFICIENTPART, NOTES, PICKERSELECTION) VALUES (?,?,?,?,?,?)"];
+        
+        const char *insert_stmt = [insertSQL UTF8String];
+        
+        sqlite3_prepare_v2(contactDB, insert_stmt, -1, &statement, nil);
+        
+        if (sqlite3_step(statement) != SQLITE_DONE)
+        {
+            NSAssert(0, @"Error updating table: IPADOWNER");
+        }
+    }
+}
 
 -(IBAction)switchView {
     [CustomerInfoFullView removeFromSuperview];
@@ -2048,7 +2132,32 @@ loadMetadataFailedWithError:(NSError *)error {
 #pragma mark - Alert View Methods
 //this method handles all alert view finishes
 - (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{   
+{
+    if (buttonIndex==0)
+    {
+        if ([owner isEqual:@""])
+        {
+            for (UIView* view in alertView.subviews)
+            {
+                if ([view isKindOfClass:[UITextField class]])
+                {
+                    UITextField *textField = (UITextField *) view;
+                    if ([textField.text isEqual:@""])
+                    {
+                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Enter Name Alert" message:@"Enter your name" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+                        [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
+                        [alert show];
+                    }
+                    else
+                    {
+                        owner = textField.text;
+                        txtTechnicianName.text = [owner uppercaseString];
+                        [self InsertOwnerIntoTable:owner];
+                    }
+                }
+            }
+    }
+    }
     if ((buttonIndex!=0 || loadRatings == YES || remarksLimitations == YES || finished == YES || proofLoad == YES) || (buttonIndex == 1 && testLoad == YES))
     {
         for (UIView* view in alertView.subviews)
