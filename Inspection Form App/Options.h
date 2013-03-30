@@ -19,9 +19,9 @@
     
 }
 
-- (id) init;
+- (id) init : (NSString*) typeOfCrane;
 - (NSMutableArray*) myOptionsArray;
-- (void) addMyOptions;
+- (void) addMyOptions : (NSString*) typeOfCrane;
 - (void) setMyOptionsArray: (NSMutableArray*) input;
 
 @end

@@ -11,12 +11,12 @@
 @implementation Parts
 @synthesize myParts;
 
-- (id) init {
+- (id) init : (NSString*) typeOfCrane {
     if (self = [super init])
     {
         myParts = [NSMutableArray array];
     }
-    [self fillParts];
+    [self fillParts : typeOfCrane];
     return self;
 }
 
@@ -28,49 +28,60 @@
     myParts = input;
 }
 
-- (void) fillParts {
-    //Part 1
-    [myParts addObject:@"Bridge Girder(s), Catwalk, Platform"];
-    //Part 2
-    [myParts addObject:@"Bridge End Trucks (Wield Bolts)"];
-    //Part 3
-    [myParts addObject:@"Bridge Wheel (Treads, Flanges, Axels)"];
-    //Part 4
-    [myParts addObject:@"Bridge Wheel Bearings"];
-    //Part 5
-    [myParts addObject:@"Bridge Wheel Gears, Pinions"];
-    //Part 6
-    [myParts addObject:@"Bridge Motor(Brushes Ect)"];
-    //Part 7
-    [myParts addObject:@"Bridge Motor Brake"];
-    //Part 8
-    [myParts addObject:@"Bridge Line Shaft, Couplings, Beaerings"];
-    //Part 9
-    [myParts addObject:@"Bridge Controls, Panel"];
-    //Part 12
-    [myParts addObject:@"Bridge Resistor/Soft Start"];
-    //Part 13
-    [myParts addObject:@"Trolley Frame"];
-    //Part 14
-    [myParts addObject:@"Trolley Wheels"];
-    //Part 15
-    [myParts addObject:@"Trolley Wheel Bearings, Gears and Pinions"];
-    //Part 16
-    [myParts addObject:@"Trolley Bumpers Drop Lugs and Stops"];
-    //Part 17
-    [myParts addObject:@"Trolley Motor"];
-    //Part 18
-    [myParts addObject:@"Trolley Motor Brake"];
-    //Part 19
-    [myParts addObject:@"Trolley Center Drive Shaft"];
-    //Part 20
-    [myParts addObject:@"Trolley Reducer"];
-    //Part 21
-    [myParts addObject:@"Trolley Panel/Controls"];
-    //Part 22
-    [myParts addObject:@"Trolley VFD/Soft/Start/Resistor"];
-    //Part 23
-    [myParts addObject:@"Load Hook"];
+- (void) fillParts : (NSString*) typeOfCrane {
+    if ([typeOfCrane isEqualToString:@"BRIDGE"]) {
+        //Part 1
+        [myParts addObject:@"Bridge Girder(s), Catwalk, Platform"];
+        //Part 2
+        [myParts addObject:@"Bridge End Trucks (Wield Bolts)"];
+    }
+    if ([typeOfCrane isEqualToString:@"JIB"]) {
+        //Part 3
+        [myParts addObject:@"Bridge Wheel (Treads, Flanges, Axels)"];
+        //Part 4
+        [myParts addObject:@"Bridge Wheel Bearings"];
+        //Part 5
+        [myParts addObject:@"Bridge Wheel Gears, Pinions"];
+        //Part 6
+        [myParts addObject:@"Bridge Motor(Brushes Ect)"];
+        //Part 7
+        [myParts addObject:@"Bridge Motor Brake"];
+        //Part 8
+        [myParts addObject:@"Bridge Line Shaft, Couplings, Beaerings"];
+        //Part 9
+        [myParts addObject:@"Bridge Controls, Panel"];
+    }
+    if ([typeOfCrane isEqualToString:@"GANTRY"]) {
+        //Part 12
+        [myParts addObject:@"Bridge Resistor/Soft Start"];
+        //Part 13
+        [myParts addObject:@"Trolley Frame"];
+        //Part 14
+        [myParts addObject:@"Trolley Wheels"];
+        //Part 15
+        [myParts addObject:@"Trolley Wheel Bearings, Gears and Pinions"];
+        //Part 16
+        [myParts addObject:@"Trolley Bumpers Drop Lugs and Stops"];
+        //Part 17
+        [myParts addObject:@"Trolley Motor"];
+        //Part 18
+        [myParts addObject:@"Trolley Motor Brake"];
+    }
+    if ([typeOfCrane isEqualToString:@"MONORAIL"]) {
+        //Part 19
+        [myParts addObject:@"Trolley Center Drive Shaft"];
+        //Part 20
+        [myParts addObject:@"Trolley Reducer"];
+        //Part 21
+        [myParts addObject:@"Trolley Panel/Controls"];
+        //Part 22
+        [myParts addObject:@"Trolley VFD/Soft/Start/Resistor"];
+        //Part 23
+        [myParts addObject:@"Load Hook"];
+    }
+
+   
+    
     //Part 24
     [myParts addObject:@"Hook Block, Sheaves, Bearings"];
     //Part 25

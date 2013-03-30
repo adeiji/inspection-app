@@ -12,7 +12,7 @@
 
 @property (strong, nonatomic) NSMutableArray *myParts;
 
-- (id) init;
-- (void) fillParts;
+- (id) init : (NSString*) typeOfCrane;
+- (void) fillParts : (NSString*) typeOfCrane;
 
 @end

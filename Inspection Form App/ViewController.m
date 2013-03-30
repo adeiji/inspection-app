@@ -117,6 +117,8 @@
 #define kMaximumVariance        100
 
 - (void)viewDidLoad {
+    [self InitiateParts];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self 
                                              selector:@selector(keyboardWasShown:) 
                                                  name:UIKeyboardDidShowNotification 
@@ -144,11 +146,8 @@
     //CustomerInfoScrollView = CustomerInfoView;
     [self createDatabase];
     // Do any additional setup after loading the view, typically from a nib.
-    Parts *parts = [[Parts alloc] init];
-    myItemListStore = [[ItemListConditionStorage alloc] init:parts.myParts];
-    [lblPart awakeFromNib];
-    myPartsArray = [parts myParts];
-    [self fillOptionArrays];
+
+    
     NSDate *now = [NSDate date];
     myDatePicker = [[UIDatePicker alloc] initWithFrame:CGRectZero];
     [myDatePicker setDate:now animated:NO];
@@ -311,6 +310,7 @@
     //full file location string
     databasePath = [[NSString alloc] initWithString:[documentsDir stringByAppendingPathComponent:@"contacts.db"]];
 
+    //make sure that this is uncommented-----------------------------****************________------------
     //databasePath = @"/Users/Developer/Documents/contacts.db";
     NSFileManager *fileMgr = [NSFileManager defaultManager];
     
@@ -765,6 +765,7 @@ loadMetadataFailedWithError:(NSError *)error {
             const char *select_stmt = [selectSQL UTF8String];
             if (sqlite3_prepare_v2(contactDB, select_stmt, -1, &statement, NULL)==SQLITE_OK)
             {
+                
                 while (sqlite3_step(statement) == SQLITE_ROW)
                 {
                     craneExist = YES;
@@ -936,6 +937,8 @@ loadMetadataFailedWithError:(NSError *)error {
         }
         if (sqlite3_prepare_v2(contactDB, select_stmt, -1, &statement, NULL)==SQLITE_OK)
         {
+            @try
+            {
             while (sqlite3_step(statement) == SQLITE_ROW)
             {
                 orderExist = YES;
@@ -964,6 +967,11 @@ loadMetadataFailedWithError:(NSError *)error {
                 myDeficientPart = nil;
                 myNotes = nil;
                 myPickerSelection = nil;
+            }
+            }
+            @catch (NSException *exception)
+            {
+                NSLog(@"Loaded more values than exist for crane.");
             }
             if (orderExist == NO)
             {
@@ -1041,6 +1049,9 @@ loadMetadataFailedWithError:(NSError *)error {
         {
             NSLog(@"removed succesfully");
         }
+        
+        sqlite3_finalize(statement);
+        
         //goes through all the different conditions in the conditionList and sets the condition to whatever is stored within the table
         for (int i = 0; i < myItemListStore.myConditions.count; i ++) {
             //grabs the current condition
@@ -1066,7 +1077,7 @@ loadMetadataFailedWithError:(NSError *)error {
                 txtHoistSrl.text,
                 txtJobNumber.text,
                 txtEquipNum.text,
-                (NSString *)[myPartsArray objectAtIndex:i], 
+                (NSString *)[myPartsArray objectAtIndex:i],
                 (NSString *) isDeficient,
                 myCondition.deficientPart, 
                 [myCondition.notes stringByReplacingOccurrencesOfString:@"\"" withString:@"\\"],
@@ -1936,7 +1947,7 @@ loadMetadataFailedWithError:(NSError *)error {
 }
 
 - (void) fillOptionArrays {
-    Options* myOptions = [[Options alloc] init];
+    Options* myOptions = [[Options alloc] init:txtCraneDescription.text];
     
     pickerDataStorage = myOptions.myOptionsArray;
     [self changePickerArray:pickerDataStorage];
@@ -1952,6 +1963,7 @@ loadMetadataFailedWithError:(NSError *)error {
     btnSelectDate.hidden = NO;
 }
 
+//On the deficiency information pages, when you press the submit button
 - (IBAction)submitPressed:(id)sender {
     //First we check to see if any of the fields in the customerInfo page and if there are any empty fields then the user is not allowed to submit the information and a UIAlertView pops
     //up telling you that there are fields where nothing was inserted into the fields
@@ -2005,9 +2017,6 @@ loadMetadataFailedWithError:(NSError *)error {
         [alert show];
         pageSubmitAlertView = YES;
         
-        //###################################################################################################################################################
-        //################################################# DON"T FORGET TO CHANGE THIS BACK ################################################################
-        //###################################################################################################################################################
         [self saveInfo:txtNotes.text :defficiencySwitch.on:[DefficiencyPicker selectedRowInComponent:0]:myDeficientPart:applicableSwitch.on];
         [self saveData:myItemListStore];    //save the current condition so that if the user goes to the next part and back, the correct information will be displayed
         [self InsertCustomerIntoTable];     //save the customer to the table
@@ -2076,12 +2085,12 @@ loadMetadataFailedWithError:(NSError *)error {
         
         const char *insert_stmt = [insertSQL UTF8String];
         
-        sqlite3_prepare_v2(contactDB, insert_stmt, -1, &statement, nil);
+      //  sqlite3_prepare_v2(contactDB, insert_stmt, -1, &statement, nil);
         
-        if (sqlite3_step(statement) != SQLITE_DONE)
-        {
-            NSAssert(0, @"Error updating table: IPADOWNER");
-        }
+      //  if (sqlite3_step(statement) != SQLITE_DONE)
+       // {
+        //    NSAssert(0, @"Error updating table: IPADOWNER");
+       // }
     }
 }
 
@@ -2098,14 +2107,14 @@ loadMetadataFailedWithError:(NSError *)error {
         DefficiencyPicker.alpha = 1;
         DefficiencyPicker.showsSelectionIndicator = YES;
         DefficiencyPicker.userInteractionEnabled = YES;
-        if (optionLocation==34)
+        if ([deficientPart isEqualToString:@"Hoist Control Panel"])
         {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Additional Information" message:@"Is this a pendant or radio, and what is the manufacturer and model" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Ok", nil];
             [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
             [alert show];
             pageSubmitAlertView = NO;
         }
-        else if (optionLocation==22)
+        else if ([deficientPart isEqualToString:@"Trolley VFD/Soft/Start/Resistor"])
         {
             timesShown=0;
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Length, size, fittings" message:@"Enter the Length:" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Ok", nil];
@@ -2113,7 +2122,7 @@ loadMetadataFailedWithError:(NSError *)error {
             [alert show];
             pageSubmitAlertView = NO;
         }
-        else if (optionLocation==28)
+        else if ([deficientPart isEqualToString:@"Hoist Upper Tackle"])
         {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Type" message:@"What is the type?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Ok", nil];
             [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
@@ -2325,8 +2334,10 @@ loadMetadataFailedWithError:(NSError *)error {
     controller = [UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:pdfFileName]];
     //[controller setUTI:@"PDF"];
     controller.delegate = self;
-    CGRect navRect = self.navigationController.navigationBar.frame;
-    navRect.size = CGSizeMake(1500.0f, 40.0f);
+  
+    //  CGRect navRect = self.navigationController.navigationBar.frame;
+  //  navRect.size = CGSizeMake(1500.0f, 40.0f);
+    
     //[controller presentOpenInMenuFromRect:navRect inView:CraneInspectionView animated:NO];
     [controller presentPreviewAnimated:NO];
     //[CraneInspectionView removeFromSuperview];
@@ -2334,11 +2345,18 @@ loadMetadataFailedWithError:(NSError *)error {
     [self writeCertificateTextFile];
 }
 
-- (IBAction)partsListButtonClicked:(id)sender {
+- (IBAction)partsListButtonClicked:(id)sender{
+    Parts *parts = [[Parts alloc] init : txtCraneDescription.text];
+    myItemListStore = [[ItemListConditionStorage alloc] init:parts.myParts];
+    [lblPart awakeFromNib];
+    myPartsArray = [parts myParts];
+    [self fillOptionArrays];
     [self changeLayout:optionLocation];
     [self.CustomerInfoFullView removeFromSuperview];
     [self.view insertSubview:self.CraneInspectionView atIndex:0];
 }
+
+
 
 - (IBAction)buttonPressed:(id)sender {
 }
@@ -2384,7 +2402,7 @@ loadMetadataFailedWithError:(NSError *)error {
         txtNotes.alpha = .5;
     }
 }
-
+//On the customer page, submits the information into the database on the iPad
 - (IBAction)CustomerSubmitPressed:(id)sender {
     if ([txtHoistSrl.text isEqualToString:@""] || 
         [txtTechnicianName.text isEqualToString:@""] || 
@@ -2425,7 +2443,6 @@ loadMetadataFailedWithError:(NSError *)error {
     {
         UIAlertView *error = [[UIAlertView alloc] initWithTitle:@"Customer Error" message:@"Can not enter character ' \" ' into any field!" 
                                                        delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        
         [error show];
     }
     else 
@@ -2655,15 +2672,23 @@ loadMetadataFailedWithError:(NSError *)error {
     [self.view insertSubview:self.CustomerInfoFullView atIndex:0];
     
 }
-- (IBAction)NewCustomerPress:(id)sender {
-    [self EmptyTextFields];
-    
-    Parts *parts = [[Parts alloc] init];
+//Create the objects necessary to view the parts list
+- (void) InitiateParts
+{
+    Parts *parts = [[Parts alloc] init:@"Bridge"];
+    myPartsArray = [parts myParts];
     myItemListStore = [[ItemListConditionStorage alloc] init:parts.myParts];
     optionLocation = 0;
     [self changeLayout:optionLocation];
     [self changePickerArray:pickerDataStorage];
     inspectionComplete = NO;
+
+}
+
+- (IBAction)NewCustomerPress:(id)sender {
+    [self EmptyTextFields];
+    
+    [self InitiateParts];
 }
 - (void) EmptyTextFields
 {

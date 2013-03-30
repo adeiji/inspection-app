@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "T1Autograph.h"
+#import <T1Autograph.h>
 
 @interface AutographViewController : UIViewController <T1AutographDelegate> {
     T1Autograph *autograph;

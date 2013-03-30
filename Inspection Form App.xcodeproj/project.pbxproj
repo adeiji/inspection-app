@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		8B0787C415113448006857A8 /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B0787C315113448006857A8 /* TableViewController.m */; };
 		8B0787C715113796006857A8 /* Parts.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B0787C615113796006857A8 /* Parts.m */; };
-		8B0B226E1535046500351A72 /* ipadAppLogo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8B0B226D1535046500351A72 /* ipadAppLogo.jpg */; };
 		8B27BE53153B422000E12BE2 /* DropboxSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B5C4F79153A548900B7C5DA /* DropboxSDK.framework */; };
 		8B544612150F0C3E007E1CA9 /* GradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B544611150F0C3E007E1CA9 /* GradientView.m */; };
 		8BC58453150ABD87000AC695 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BC58452150ABD87000AC695 /* UIKit.framework */; };
@@ -26,13 +25,7 @@
 		8BC5847B150ABD88000AC695 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8BC58479150ABD88000AC695 /* InfoPlist.strings */; };
 		8BC5847E150ABD88000AC695 /* Inspection_Form_AppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BC5847D150ABD88000AC695 /* Inspection_Form_AppTests.m */; };
 		8BC7D9D31522ACE000D1A863 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BC7D9D21522ACE000D1A863 /* QuartzCore.framework */; };
-		8BDFB24E153DFD240094B023 /* logo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8BDFB24D153DFD240094B023 /* logo.jpg */; };
-		8BDFB250153E2BB00094B023 /* titlePageLogo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8BDFB24F153E2BB00094B023 /* titlePageLogo.jpg */; };
 		8BE08B22150D0AFE005B5E4C /* Customer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE08B21150D0AFE005B5E4C /* Customer.m */; };
-		8BE4CD191515925600D75629 /* autograph_x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BE4CD141515925600D75629 /* autograph_x.png */; };
-		8BE4CD1A1515925600D75629 /* t1_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BE4CD151515925600D75629 /* t1_logo.png */; };
-		8BE4CD1B1515925600D75629 /* libT1Autograph.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BE4CD161515925600D75629 /* libT1Autograph.a */; };
-		8BE4CD1F151594DA00D75629 /* AutographViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE4CD1E151594DA00D75629 /* AutographViewController.m */; };
 		8BE4CD221515957000D75629 /* T1AutographAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE4CD211515957000D75629 /* T1AutographAppDelegate.m */; };
 		8BE881F81513F82400360C63 /* ItemListConditionStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE881F71513F82400360C63 /* ItemListConditionStorage.m */; };
 		8BE881FC1513FA4200360C63 /* Condition.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE881FB1513FA4200360C63 /* Condition.m */; };
@@ -43,6 +36,13 @@
 		8BF09E74153A53E200E1BCB3 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BF09E73153A53E200E1BCB3 /* Security.framework */; };
 		8BF10A9C152FB93D00DC5F05 /* TextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BF10A9B152FB93D00DC5F05 /* TextField.m */; };
 		8BF3877015239E1200C3F368 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BF3876F15239E1200C3F368 /* MessageUI.framework */; };
+		8BF97C141706685500E6D242 /* AutographViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BF97C131706685500E6D242 /* AutographViewController.m */; };
+		8BF97C1D170669A100E6D242 /* autograph_x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BF97C18170669A100E6D242 /* autograph_x.png */; };
+		8BF97C1E170669A100E6D242 /* t1_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BF97C19170669A100E6D242 /* t1_logo.png */; };
+		8BF97C1F170669A100E6D242 /* libT1Autograph.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BF97C1A170669A100E6D242 /* libT1Autograph.a */; };
+		8BF97C21170669DB00E6D242 /* ipadAppLogo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8BF97C20170669DB00E6D242 /* ipadAppLogo.jpg */; };
+		8BF97C2317066A1600E6D242 /* titlePageLogo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8BF97C2217066A1600E6D242 /* titlePageLogo.jpg */; };
+		8BF97C2517066A3000E6D242 /* logo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8BF97C2417066A3000E6D242 /* logo.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,7 +60,6 @@
 		8B0787C315113448006857A8 /* TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewController.m; sourceTree = "<group>"; };
 		8B0787C515113796006857A8 /* Parts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Parts.h; sourceTree = "<group>"; };
 		8B0787C615113796006857A8 /* Parts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Parts.m; sourceTree = "<group>"; };
-		8B0B226D1535046500351A72 /* ipadAppLogo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = ipadAppLogo.jpg; path = ../../../Downloads/ipadAppLogo.jpg; sourceTree = "<group>"; };
 		8B544610150F0C3E007E1CA9 /* GradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientView.h; sourceTree = "<group>"; };
 		8B544611150F0C3E007E1CA9 /* GradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradientView.m; sourceTree = "<group>"; };
 		8B5C4F79153A548900B7C5DA /* DropboxSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DropboxSDK.framework; path = "../../Downloads/dropbox-ios-sdk-1.2.1/DropboxSDK.framework"; sourceTree = "<group>"; };
@@ -86,16 +85,7 @@
 		8BC7D9D21522ACE000D1A863 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		8BDF998C150C1A090069C35B /* Customer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Customer.h; sourceTree = "<group>"; };
 		8BDF9998150C209A0069C35B /* UICustomSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UICustomSwitch.h; path = ../../../Downloads/UICustomSwitch/UICustomSwitch.h; sourceTree = "<group>"; };
-		8BDFB24D153DFD240094B023 /* logo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = logo.jpg; path = ../../../Downloads/logo.jpg; sourceTree = "<group>"; };
-		8BDFB24F153E2BB00094B023 /* titlePageLogo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = titlePageLogo.jpg; path = ../../../Downloads/titlePageLogo.jpg; sourceTree = "<group>"; };
 		8BE08B21150D0AFE005B5E4C /* Customer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Customer.m; sourceTree = "<group>"; };
-		8BE4CD141515925600D75629 /* autograph_x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = autograph_x.png; sourceTree = "<group>"; };
-		8BE4CD151515925600D75629 /* t1_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = t1_logo.png; sourceTree = "<group>"; };
-		8BE4CD161515925600D75629 /* libT1Autograph.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libT1Autograph.a; sourceTree = "<group>"; };
-		8BE4CD171515925600D75629 /* T1Autograph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = T1Autograph.h; sourceTree = "<group>"; };
-		8BE4CD181515925600D75629 /* T1Signature.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = T1Signature.h; sourceTree = "<group>"; };
-		8BE4CD1D151594DA00D75629 /* AutographViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutographViewController.h; sourceTree = "<group>"; };
-		8BE4CD1E151594DA00D75629 /* AutographViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutographViewController.m; sourceTree = "<group>"; };
 		8BE4CD201515957000D75629 /* T1AutographAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = T1AutographAppDelegate.h; sourceTree = "<group>"; };
 		8BE4CD211515957000D75629 /* T1AutographAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = T1AutographAppDelegate.m; sourceTree = "<group>"; };
 		8BE881F61513F82400360C63 /* ItemListConditionStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemListConditionStorage.h; sourceTree = "<group>"; };
@@ -113,6 +103,16 @@
 		8BF10A9A152FB93D00DC5F05 /* TextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextField.h; sourceTree = "<group>"; };
 		8BF10A9B152FB93D00DC5F05 /* TextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextField.m; sourceTree = "<group>"; };
 		8BF3876F15239E1200C3F368 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		8BF97C121706683000E6D242 /* AutographViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutographViewController.h; sourceTree = "<group>"; };
+		8BF97C131706685500E6D242 /* AutographViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutographViewController.m; sourceTree = "<group>"; };
+		8BF97C18170669A100E6D242 /* autograph_x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = autograph_x.png; sourceTree = "<group>"; };
+		8BF97C19170669A100E6D242 /* t1_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = t1_logo.png; sourceTree = "<group>"; };
+		8BF97C1A170669A100E6D242 /* libT1Autograph.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libT1Autograph.a; sourceTree = "<group>"; };
+		8BF97C1B170669A100E6D242 /* T1Autograph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = T1Autograph.h; sourceTree = "<group>"; };
+		8BF97C1C170669A100E6D242 /* T1Signature.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = T1Signature.h; sourceTree = "<group>"; };
+		8BF97C20170669DB00E6D242 /* ipadAppLogo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = ipadAppLogo.jpg; path = ../../../../Downloads/ipadAppLogo.jpg; sourceTree = "<group>"; };
+		8BF97C2217066A1600E6D242 /* titlePageLogo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = titlePageLogo.jpg; path = ../../../../Downloads/titlePageLogo.jpg; sourceTree = "<group>"; };
+		8BF97C2417066A3000E6D242 /* logo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = logo.jpg; path = ../../../../Downloads/logo.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,7 +128,7 @@
 				8BC58453150ABD87000AC695 /* UIKit.framework in Frameworks */,
 				8BC58455150ABD87000AC695 /* Foundation.framework in Frameworks */,
 				8BC58457150ABD87000AC695 /* CoreGraphics.framework in Frameworks */,
-				8BE4CD1B1515925600D75629 /* libT1Autograph.a in Frameworks */,
+				8BF97C1F170669A100E6D242 /* libT1Autograph.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -182,10 +182,9 @@
 		8BC58458150ABD87000AC695 /* Inspection Form App */ = {
 			isa = PBXGroup;
 			children = (
-				8BDFB24F153E2BB00094B023 /* titlePageLogo.jpg */,
-				8BDFB24D153DFD240094B023 /* logo.jpg */,
+				8BF97C2217066A1600E6D242 /* titlePageLogo.jpg */,
+				8BF97C2417066A3000E6D242 /* logo.jpg */,
 				8BC7D9D21522ACE000D1A863 /* QuartzCore.framework */,
-				8BE4CD121515925600D75629 /* T1Autograph */,
 				8BDF9998150C209A0069C35B /* UICustomSwitch.h */,
 				8BC58461150ABD87000AC695 /* AppDelegate.h */,
 				8BC58462150ABD87000AC695 /* AppDelegate.m */,
@@ -193,14 +192,15 @@
 				8BF10A9B152FB93D00DC5F05 /* TextField.m */,
 				8B0787C215113448006857A8 /* TableViewController.h */,
 				8B0787C315113448006857A8 /* TableViewController.m */,
+				8BF97C16170669A100E6D242 /* T1Autograph */,
+				8BF97C121706683000E6D242 /* AutographViewController.h */,
+				8BF97C131706685500E6D242 /* AutographViewController.m */,
 				8BC58464150ABD87000AC695 /* ViewController.h */,
 				8BC58465150ABD87000AC695 /* ViewController.m */,
 				8BE9DE7E1616355800906B98 /* OrdinalNumberFormatter.h */,
 				8BE9DE7F1616355800906B98 /* OrdinalNumberFormatter.m */,
 				8BC58467150ABD87000AC695 /* ViewController.xib */,
-				8B0B226D1535046500351A72 /* ipadAppLogo.jpg */,
-				8BE4CD1D151594DA00D75629 /* AutographViewController.h */,
-				8BE4CD1E151594DA00D75629 /* AutographViewController.m */,
+				8BF97C20170669DB00E6D242 /* ipadAppLogo.jpg */,
 				8BE4CD201515957000D75629 /* T1AutographAppDelegate.h */,
 				8BE4CD211515957000D75629 /* T1AutographAppDelegate.m */,
 				8B0787C515113796006857A8 /* Parts.h */,
@@ -252,23 +252,23 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		8BE4CD121515925600D75629 /* T1Autograph */ = {
+		8BF97C16170669A100E6D242 /* T1Autograph */ = {
 			isa = PBXGroup;
 			children = (
-				8BE4CD131515925600D75629 /* Images */,
-				8BE4CD161515925600D75629 /* libT1Autograph.a */,
-				8BE4CD171515925600D75629 /* T1Autograph.h */,
-				8BE4CD181515925600D75629 /* T1Signature.h */,
+				8BF97C17170669A100E6D242 /* Images */,
+				8BF97C1A170669A100E6D242 /* libT1Autograph.a */,
+				8BF97C1B170669A100E6D242 /* T1Autograph.h */,
+				8BF97C1C170669A100E6D242 /* T1Signature.h */,
 			);
 			name = T1Autograph;
-			path = ../../../Downloads/T1Autograph;
+			path = ../../T1Autograph;
 			sourceTree = "<group>";
 		};
-		8BE4CD131515925600D75629 /* Images */ = {
+		8BF97C17170669A100E6D242 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				8BE4CD141515925600D75629 /* autograph_x.png */,
-				8BE4CD151515925600D75629 /* t1_logo.png */,
+				8BF97C18170669A100E6D242 /* autograph_x.png */,
+				8BF97C19170669A100E6D242 /* t1_logo.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -345,11 +345,11 @@
 			files = (
 				8BC5845D150ABD87000AC695 /* InfoPlist.strings in Resources */,
 				8BC58469150ABD87000AC695 /* ViewController.xib in Resources */,
-				8BE4CD191515925600D75629 /* autograph_x.png in Resources */,
-				8BE4CD1A1515925600D75629 /* t1_logo.png in Resources */,
-				8B0B226E1535046500351A72 /* ipadAppLogo.jpg in Resources */,
-				8BDFB24E153DFD240094B023 /* logo.jpg in Resources */,
-				8BDFB250153E2BB00094B023 /* titlePageLogo.jpg in Resources */,
+				8BF97C1D170669A100E6D242 /* autograph_x.png in Resources */,
+				8BF97C1E170669A100E6D242 /* t1_logo.png in Resources */,
+				8BF97C21170669DB00E6D242 /* ipadAppLogo.jpg in Resources */,
+				8BF97C2317066A1600E6D242 /* titlePageLogo.jpg in Resources */,
+				8BF97C2517066A3000E6D242 /* logo.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -395,10 +395,10 @@
 				8B0787C715113796006857A8 /* Parts.m in Sources */,
 				8BE881F81513F82400360C63 /* ItemListConditionStorage.m in Sources */,
 				8BE881FC1513FA4200360C63 /* Condition.m in Sources */,
-				8BE4CD1F151594DA00D75629 /* AutographViewController.m in Sources */,
 				8BE4CD221515957000D75629 /* T1AutographAppDelegate.m in Sources */,
 				8BF10A9C152FB93D00DC5F05 /* TextField.m in Sources */,
 				8BE9DE801616355800906B98 /* OrdinalNumberFormatter.m in Sources */,
+				8BF97C141706685500E6D242 /* AutographViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -454,6 +454,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -468,7 +469,8 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
@@ -480,6 +482,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -487,8 +490,9 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;
@@ -500,7 +504,6 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Inspection Form App/dropbox-ios-sdk-1.2.1\"",
@@ -514,10 +517,10 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../Downloads/T1Autograph\"",
+					"\"$(SRCROOT)/../T1Autograph\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
 			};
@@ -540,6 +543,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../Downloads/T1Autograph\"",
+					"\"$(SRCROOT)/../T1Autograph\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
