@@ -26,161 +26,430 @@
 - (void) addMyOptions : (NSString*) typeOfCrane{
     OptionList* myOptionList = [[OptionList alloc] init];
  
-    if ([typeOfCrane isEqualToString:@"BRIDGE"]) {
-        //Part 1
-        [myOptionList addOption:@"Cracked Wields"];
-        [myOptionList addOption:@"Bent/Ripped Handrail"];
-        [myOptionList addOption:@"Conduit and Panel Fasteners Loose"];
-        [myOptionList addOption:@"Hard Rail Attachment Loose/cracked"];
-        [myOptionList addOption:@"Hardrail out of alignment"];
-        [myOptionList addOption:@"Bent or Twisted Structure(evidence of overload or side load)"];
-        [myOptionList addOption:@"Housekeeping on catwalks"];
+    if ([typeOfCrane isEqualToString:@"MONORAIL"]) {
+        //Rail
+        [myOptionList addOption:@"Worn or bent lower flange"];
+        [myOptionList addOption:@"Rail out of level"];
+        [myOptionList addOption:@"Evidence of surface stress"];
+        [myOptionList addOption:@"Evidence of over heating"];
+        [myOptionList addOption:@"Misaligned rail sections"];
+        [myOptionList addOption:@"Worn or missing splice plates"];
+        [myOptionList addOption:@"Insufficient thread engagement of splice plate fasteners"];
+        [myOptionList addOption:@"Surface rust/corrosion"];
         [myOptionList addOption:@"Other"];
         [myOptionsArray addObject:myOptionList.theOptionList];
-        //Part 2
+        
+        //Rail Connection
         myOptionList = [[OptionList alloc] init];
-        [myOptionList addOption:@"Fasteners to Girder Loose or Missing"];
-        [myOptionList addOption:@"Rail Sweeps bent or missing"];
-        [myOptionList addOption:@"Bumpers ripped/dried out or generally deteriorated"];
-        [myOptionList addOption:@"Bridge motor attatchment"];
-        [myOptionList addOption:@"Bridge gear reducer motor attatchment"];
-        [myOptionList addOption:@"Ripped or torn seal on gear reducer"];
-        [myOptionList addOption:@"End Truck Structure(stressed, overloaded, or heat damage)"];
-        [myOptionList addOption:@"Bent drop lugs"];
+        [myOptionList addOption:@"Cracked welds"];
+        [myOptionList addOption:@"Evidence of stress"];
+        [myOptionList addOption:@"Insufficient thread engagement of fasteners"];
+        [myOptionList addOption:@"Bent connection plates"];
+        [myOptionList addOption:@"Rust or corrosion"];
+        [myOptionList addOption:@"Other"];
+        [myOptionsArray addObject:myOptionList.theOptionList];
+        //Column Supports
+        myOptionList = [[OptionList alloc] init];
+        [myOptionList addOption:@"Bent or stressed member"];
+        [myOptionList addOption:@"Cracked welds"];
+        [myOptionList addOption:@"Rust or corrosion"];
+        [myOptionList addOption:@"Travel Area; recommend protection from fork truck travel"];
+        [myOptionList addOption:@"Other"];
+        [myOptionsArray addObject:myOptionList.theOptionList];
+        //Base Plates
+        myOptionList = [[OptionList alloc] init];
+        [myOptionList addOption:@"Cracked welds"];
+        [myOptionList addOption:@"Insufficient thread projection on anchor bolts"];
+        [myOptionList addOption:@"Insufficient grouting"];
+        [myOptionList addOption:@"Missing fasteners"];
+        [myOptionList addOption:@"Rust or corrosion"];
+        [myOptionList addOption:@"Other"];
+        [myOptionsArray addObject:myOptionList.theOptionList];
+        //Ceiling mount hangers
+        myOptionList = [[OptionList alloc] init];
+        [myOptionList addOption:@"Cracked welds"];
+        [myOptionList addOption:@"Hanger over stressed"];
+        [myOptionList addOption:@"Bent hanger bracket"];
+        [myOptionList addOption:@"Missing fasteners"];
+        [myOptionList addOption:@"Insufficient thread projection"];
+        [myOptionList addOption:@"Other"];
+        [myOptionsArray addObject:myOptionList.theOptionList];
+        //Support Kickers
+        myOptionList = [[OptionList alloc] init];
+        [myOptionList addOption:@"Cracked welds"];
+        [myOptionList addOption:@"Evidence of over stressing in either tension or compression"];
+        [myOptionList addOption:@"Missing fasteners"];
+        [myOptionList addOption:@"Insufficient thread projection"];
+        [myOptionList addOption:@"Rust or corrosion"];
+        [myOptionList addOption:@"Other"];
+        [myOptionsArray addObject:myOptionList.theOptionList];
+        //End stops
+        myOptionList = [[OptionList alloc] init];
+        [myOptionList addOption:@"Bent flange"];
+        [myOptionList addOption:@"Misaligned end stops to trolley span"];
+        [myOptionList addOption:@"Missing fasteners"];
+        [myOptionList addOption:@"Other"];
+        [myOptionsArray addObject:myOptionList.theOptionList];
+        //Festoon System
+        myOptionList = [[OptionList alloc] init];
+        [myOptionList addOption:@"Cracked welds on festoon support brackets"];
+        [myOptionList addOption:@"Bent festoon support brackets"];
+        [myOptionList addOption:@"Bent festoon track"];
+        [myOptionList addOption:@"Broken trolley"];
+        [myOptionList addOption:@"Ripped festoon cable"];
+        [myOptionList addOption:@"Other"];
+        [myOptionsArray addObject:myOptionList.theOptionList];
+        //Electrical Disconnect
+        myOptionList = [[OptionList alloc] init];
+        [myOptionList addOption:@"Exposed feed"];
+        [myOptionList addOption:@"Knife switch in/op"];
+        [myOptionList addOption:@"Missing fuse"];
+        [myOptionList addOption:@"Fuse wired around"];
+        [myOptionList addOption:@"Other"];
+        [myOptionsArray addObject:myOptionList.theOptionList];
+        //Other
+        myOptionList = [[OptionList alloc] init];
         [myOptionList addOption:@"Other"];
         [myOptionsArray addObject:myOptionList.theOptionList];
     }
     else if ([typeOfCrane isEqualToString:@"JIB"]) {
-        //Part 3
+        //Mast
         myOptionList = [[OptionList alloc] init];
-        [myOptionList addOption:@"Worn Wheel Flange"];
-        [myOptionList addOption:@"Worn Thread"];
-        [myOptionList addOption:@"Axel Gearing Engagement(Gear Lash)"];
-        [myOptionList addOption:@"Wheel Alignment"];
+        [myOptionList addOption:@"Cracked welds"];
+        [myOptionList addOption:@"Damaged column"];
+        [myOptionList addOption:@"Rotations stops bent or in/op"];
+        [myOptionList addOption:@"Evidence of over stressed column"];
+        [myOptionList addOption:@"Rust/corrosion"];
+        [myOptionList addOption:@"Jib out of level"];
         [myOptionList addOption:@"Other"];
         [myOptionsArray addObject:myOptionList.theOptionList];
-        //Part 4
+        //Bonnet
         myOptionList = [[OptionList alloc] init];
-        [myOptionList addOption:@"Flat Bearing"];
-        [myOptionList addOption:@"Missing Race"];
-        [myOptionList addOption:@"Loss of interial ball or needle bearings"];
+        [myOptionList addOption:@"Cracked welds"];
+        [myOptionList addOption:@"Damaged rollers"];
+        [myOptionList addOption:@"Damaged top bearing"];
+        [myOptionList addOption:@"Missing fasteners"];
+        [myOptionList addOption:@"Insufficient thread projection"];
+        [myOptionsArray addObject:myOptionList.theOptionList];
+        
+        //Rail
+        myOptionList = [[OptionList alloc] init];
+        [myOptionList addOption:@"Worn or bent lower flange"];
+        [myOptionList addOption:@"Rail out of level"];
+        [myOptionList addOption:@"Evidence of surface stress"];
+        [myOptionList addOption:@"Evidence of over heating"];
+        [myOptionList addOption:@"Misaligned rail sections"];
+        [myOptionList addOption:@"Worn or missing splice plates"];
+        [myOptionList addOption:@"Insufficient thread engagement of splice plate fasteners"];
+        [myOptionList addOption:@"Surface rust/corrosion"];
         [myOptionList addOption:@"Other"];
         [myOptionsArray addObject:myOptionList.theOptionList];
-        //Part 5
+        //Base Plate
         myOptionList = [[OptionList alloc] init];
-        [myOptionList addOption:@"Gearing engagement(Gear Lash)"];
-        [myOptionList addOption:@"Needs lubrication"];
-        [myOptionList addOption:@"Worn teeth"];
-        [myOptionList addOption:@"Cracked or deformed gears"];
+        [myOptionList addOption:@"Cracked welds"];
+        [myOptionList addOption:@"Rust or corrosion"];
+        [myOptionList addOption:@"Insufficient thread projection"];
+        [myOptionList addOption:@"Insuficcient grouting"];
         [myOptionList addOption:@"Other"];
         [myOptionsArray addObject:myOptionList.theOptionList];
-        //Part 6
+        
+        //Wall Mount
         myOptionList = [[OptionList alloc] init];
-        [myOptionList addOption:@"Phase Loss(single phase)"];
-        [myOptionList addOption:@"Worn brushes"];
-        [myOptionList addOption:@"Worn Laminate"];
-        [myOptionList addOption:@"Worn Insulation"];
-        [myOptionList addOption:@"Missing Wire Connectors"];
-        [myOptionList addOption:@"Deteriorated weather protection"];
+        [myOptionList addOption:@"Damaged adjustments brackets"];
+        [myOptionList addOption:@"Bent mounting brackets"];
+        [myOptionList addOption:@"Missing fasteners on wall brackets"];
+        [myOptionList addOption:@"Damaged thrust bearings"];
+        [myOptionList addOption:@"Damaged cantilever arm"];
+        [myOptionList addOption:@"Rust/corrosion"];
         [myOptionList addOption:@"Other"];
         [myOptionsArray addObject:myOptionList.theOptionList];
-        //Part 7
+        //Tie Rod Mount
         myOptionList = [[OptionList alloc] init];
-        [myOptionList addOption:@"Disc's wear has regectable criteria"];
-        [myOptionList addOption:@"Coil short"];
-        [myOptionList addOption:@"Armature worn or out of alignment"];
-        [myOptionList addOption:@"Mechanical connections missing or damaged"];
+        [myOptionList addOption:@"Damaged adjustment brackets"];
+        [myOptionList addOption:@"Bent mounting brackets"];
+        [myOptionList addOption:@"Missing fasteners on wall brackets"];
+        [myOptionList addOption:@"Damaged threads on tie rod"];
+        [myOptionList addOption:@"Missing jam nut"];
+        [myOptionList addOption:@"Rust/corrosion"];
         [myOptionList addOption:@"Other"];
         [myOptionsArray addObject:myOptionList.theOptionList];
-        //Part 8
+        //End Stops
         myOptionList = [[OptionList alloc] init];
-        [myOptionList addOption:@"Shaft twisted or bent"];
-        [myOptionList addOption:@"Couplings worn or bent"];
-        [myOptionList addOption:@"Fasteners or welds on couplings are cracked, damaged or missing"];
-        [myOptionList addOption:@"Pillow block bearings worn out"];
-        [myOptionList addOption:@"Pillow block bearings need lube"];
-        [myOptionList addOption:@"Line shaft gear engament in wheel is worn"];
-        [myOptionList addOption:@"Line shaft gear engagement in wheel needs lube"];
+        [myOptionList addOption:@"Bent flange"];
+        [myOptionList addOption:@"Misaligned end stops to trolley span"];
+        [myOptionList addOption:@"Missing fasteners"];
         [myOptionList addOption:@"Other"];
         [myOptionsArray addObject:myOptionList.theOptionList];
-        //Part 9
+        //Festoon System
         myOptionList = [[OptionList alloc] init];
-        [myOptionList addOption:@"Loose attachment to structure"];
-        [myOptionList addOption:@"Panels been bent and affects door operations"];
-        [myOptionList addOption:@"Loose back plate"];
-        [myOptionList addOption:@"Electrical components are loose"];
-        [myOptionList addOption:@"Loose or exposed wires in the panel"];
-        [myOptionList addOption:@"Contact tips are worn"];
-        [myOptionList addOption:@"Mainline disconnect on bridge is in/op"];
-        [myOptionList addOption:@"Loose conduit attaching to the panel"];
+        [myOptionList addOption:@"Cracked welds on festoon support brackets"];
+        [myOptionList addOption:@"Bent festoon support brackets"];
+        [myOptionList addOption:@"Bent festoon track"];
+        [myOptionList addOption:@"Broken trolley"];
+        [myOptionList addOption:@"Ripped festoon cable"];
+        [myOptionList addOption:@"Other"];
+        [myOptionsArray addObject:myOptionList.theOptionList];
+        //Electrical Disconnect
+        myOptionList = [[OptionList alloc] init];
+        [myOptionList addOption:@"Exposed feed"];
+        [myOptionList addOption:@"Knife switch in/op"];
+        [myOptionList addOption:@"Missing fuse"];
+        [myOptionList addOption:@"Fuse wired around"];
+        [myOptionList addOption:@"Other"];
+        [myOptionsArray addObject:myOptionList.theOptionList];
+        //Other
+        myOptionList = [[OptionList alloc] init];
         [myOptionList addOption:@"Other"];
         [myOptionsArray addObject:myOptionList.theOptionList];
     }
     else if ([typeOfCrane isEqualToString:@"GANTRY"]) {
-        //Part 12
+        //Rail
         myOptionList = [[OptionList alloc] init];
-        [myOptionList addOption:@"Resistors broken or cracked"];
-        [myOptionList addOption:@"Resistor panel damaged"];
-        [myOptionList addOption:@"Loose conduit attaching to the panel"];
-        [myOptionList addOption:@"Soft Start in/op"];
-        [myOptionList addOption:@"Loose wires to resistors, VFD or soft start"];
+        [myOptionList addOption:@"Worn or bent lower flange"];
+        [myOptionList addOption:@"Rail out of level"];
+        [myOptionList addOption:@"Evidence of surface stress"];
+        [myOptionList addOption:@"Evidence of over heating"];
+        [myOptionList addOption:@"Misaligned rail sections"];
+        [myOptionList addOption:@"Worn or missing splice plates"];
+        [myOptionList addOption:@"Insufficient thread engagement of splice plate fasteners"];
+        [myOptionList addOption:@"Surface rust/corrosion"];
         [myOptionList addOption:@"Other"];
         [myOptionsArray addObject:myOptionList.theOptionList];
-        //Part 13
+    
+        //Rail Connection
         myOptionList = [[OptionList alloc] init];
-        [myOptionList addOption:@"Structural dents, gouges, evidence of heat damage"];
-        [myOptionList addOption:@"Cracked wields"];
-        [myOptionList addOption:@"Missing or damaged fasteners"];
+        [myOptionList addOption:@"Cracked welds"];
+        [myOptionList addOption:@"Evidence of stress"];
+        [myOptionList addOption:@"Insufficient thread engagement of fasteners"];
+        [myOptionList addOption:@"Bent connection plates"];
+        [myOptionList addOption:@"Rust or corrosion"];
         [myOptionList addOption:@"Other"];
         [myOptionsArray addObject:myOptionList.theOptionList];
-        //Part 14
+        
+        //Masts
         myOptionList = [[OptionList alloc] init];
-        [myOptionList addOption:@"Worn wheel flange"];
-        [myOptionList addOption:@"Worn tread"];
-        [myOptionList addOption:@"Axel gearing engagement(Gear Lash)"];
-        [myOptionList addOption:@"Wheel alignment"];
+        [myOptionList addOption:@"Bent or stressed member"];
+        [myOptionList addOption:@"Cracked welds"];
+        [myOptionList addOption:@"Rust or corrosion"];
         [myOptionList addOption:@"Other"];
         [myOptionsArray addObject:myOptionList.theOptionList];
-        //Part 15
+    
+        //Bracing system
         myOptionList = [[OptionList alloc] init];
-        [myOptionList addOption:@"Flat bearing"];
-        [myOptionList addOption:@"Missing race"];
-        [myOptionList addOption:@"Loss of interior ball or needle bearings"];
-        [myOptionList addOption:@"Gearing engagement(Gear Lash)"];
-        [myOptionList addOption:@"Needs lubrication"];
-        [myOptionList addOption:@"Worn teeth"];
-        [myOptionList addOption:@"Cracked or deformed gears"];
-        [myOptionList addOption:@"Other"];
-        [myOptionsArray addObject:myOptionList.theOptionList];
-        //Part 16
-        myOptionList = [[OptionList alloc] init];
-        [myOptionList addOption:@"Bent sweeps"];
-        [myOptionList addOption:@"Deteriorated/ripped bumpers"];
+        [myOptionList addOption:@"Fatigued bracing member"];
         [myOptionList addOption:@"Missing fasteners"];
-        [myOptionList addOption:@"Bent drop lugs"];
+        [myOptionList addOption:@"Insufficient thread projection"];
+        [myOptionList addOption:@"Rust or corrosion"];
         [myOptionList addOption:@"Other"];
         [myOptionsArray addObject:myOptionList.theOptionList];
-        //Part 17
+    
+        //Adjustment Mechanism
         myOptionList = [[OptionList alloc] init];
-        [myOptionList addOption:@"Phase loss(single phase)"];
-        [myOptionList addOption:@"Worn brushes"];
-        [myOptionList addOption:@"Worn laminate"];
-        [myOptionList addOption:@"Worn insulation"];
-        [myOptionList addOption:@"Missing wire connectors"];
-        [myOptionList addOption:@"Deteriorated weather protection"];
+        [myOptionList addOption:@"Missing locking pins"];
+        [myOptionList addOption:@"Worn holes"];
+        [myOptionList addOption:@"Misaligned locking holes"];
         [myOptionList addOption:@"Other"];
         [myOptionsArray addObject:myOptionList.theOptionList];
-        //Part 18
+        
+        //Casters
         myOptionList = [[OptionList alloc] init];
-        [myOptionList addOption:@"Disc's wear has rejectable criteria"];
-        [myOptionList addOption:@"Coil short"];
-        [myOptionList addOption:@"Armature worn or out of alignment"];
-        [myOptionList addOption:@"Mechanical connections missing or damaged"];
+        [myOptionList addOption:@"Worn tread"];
+        [myOptionList addOption:@"Bent caster"];
+        [myOptionList addOption:@"Wheel bearings"];
+        [myOptionList addOption:@"Worn wheel flange"];
+        [myOptionList addOption:@"Gear lash in axel/wheel engagement"];
+        [myOptionList addOption:@"Gantry motor in/op"];
+        [myOptionList addOption:@"Gantry motor break in/op"];
+        [myOptionList addOption:@"Other"];
+        [myOptionsArray addObject:myOptionList.theOptionList];
+        
+        //End Stops
+        myOptionList = [[OptionList alloc] init];
+        [myOptionList addOption:@"Bent flange"];
+        [myOptionList addOption:@"Misaligned end stops to trolley span"];
+        [myOptionList addOption:@"Missing fasteners"];
+        [myOptionList addOption:@"Other"];
+        [myOptionsArray addObject:myOptionList.theOptionList];
+        
+        //Festoon System
+        myOptionList = [[OptionList alloc] init];
+        [myOptionList addOption:@"Cracked welds on festoon support brackets"];
+        [myOptionList addOption:@"Bent festoon support brackets"];
+        [myOptionList addOption:@"Bent festoon track"];
+        [myOptionList addOption:@"Broken trolley"];
+        [myOptionList addOption:@"Ripped festoon cable"];
+        [myOptionList addOption:@"Other"];
+        [myOptionsArray addObject:myOptionList.theOptionList];
+    
+        //Electrical Disconnect
+        myOptionList = [[OptionList alloc] init];
+        [myOptionList addOption:@"Exposed feed"];
+        [myOptionList addOption:@"Knife switch in/op"];
+        [myOptionList addOption:@"Missing fuse"];
+        [myOptionList addOption:@"Fuse wired around"];
+        [myOptionList addOption:@"Other"];
+        [myOptionsArray addObject:myOptionList.theOptionList];
+    
+        //Other
+        myOptionList = [[OptionList alloc] init];
         [myOptionList addOption:@"Other"];
         [myOptionsArray addObject:myOptionList.theOptionList];
     }
-    else if ([typeOfCrane isEqualToString:@"MONORAIL"]) {
-        //Part 19
+    else {
+        //Part 1
+        myOptionList = [[OptionList alloc] init];
+        [myOptionList addOption:@"Cracked welds"];
+        [myOptionList addOption:@"Bent/Ripped Handrail"];
+        [myOptionList addOption:@"Conduit and Panel Fasteners Loose"];
+        [myOptionList addOption:@"Hard Rail Attachment Loose/cracked"];
+        [myOptionList addOption:@"Hard Rail out of alignment"];
+        [myOptionList addOption:@"Bent or Twisted Strcuture (evidence of overload or side load"];
+        [myOptionList addOption:@"Housekeeping on catwalks"];
+        [myOptionList addOption:@"Other"];
+        [myOptionsArray addObject:myOptionList.theOptionList];
+    
+        //Part 2
+        myOptionList = [[OptionList alloc] init];
+        [myOptionList addOption:@"Fasteners to girder loose or missing"];
+        [myOptionList addOption:@"Rail sweeps bent or missing"];
+        [myOptionList addOption:@"Bumpers ripped/dried out or generally deteriorated"];
+        [myOptionList addOption:@"Bridge motor attachment"];
+        [myOptionList addOption:@"Bridge gear reducer motor attachment"];
+        [myOptionList addOption:@"Ripped or torn seal on gear reducer"];
+        [myOptionList addOption:@"End Truck Structure (stressed, overloaded, or heat damage)"];
+        [myOptionList addOption:@"Other"];
+        [myOptionsArray addObject:myOptionList.theOptionList];
+        
+        //Part 3
+        myOptionList = [[OptionList alloc] init];
+        [myOptionList addOption:@"Worn wheel flange"];
+        [myOptionList addOption:@"Worn tread"];
+        [myOptionList addOption:@"Axel gearing engagement (Gear Lash)"];
+        [myOptionList addOption:@"Wheel alignment"];
+        [myOptionList addOption:@"Other"];
+        [myOptionsArray addObject:myOptionList.theOptionList];
+        
+        //Part 4
+    myOptionList = [[OptionList alloc] init];
+    [myOptionList addOption:@"Flat Bearing"];
+    [myOptionList addOption:@"Missing Race"];
+    [myOptionList addOption:@"Loss of interial ball or needle bearings"];
+    [myOptionList addOption:@"Other"];
+    [myOptionsArray addObject:myOptionList.theOptionList];
+    //Part 5
+    myOptionList = [[OptionList alloc] init];
+    [myOptionList addOption:@"Gearing engagement(Gear Lash)"];
+    [myOptionList addOption:@"Needs lubrication"];
+    [myOptionList addOption:@"Worn teeth"];
+    [myOptionList addOption:@"Cracked or deformed gears"];
+    [myOptionList addOption:@"Other"];
+    [myOptionsArray addObject:myOptionList.theOptionList];
+    //Part 6
+    myOptionList = [[OptionList alloc] init];
+    [myOptionList addOption:@"Phase Loss(single phase)"];
+    [myOptionList addOption:@"Worn brushes"];
+    [myOptionList addOption:@"Worn Laminate"];
+    [myOptionList addOption:@"Worn Insulation"];
+    [myOptionList addOption:@"Missing Wire Connectors"];
+    [myOptionList addOption:@"Deteriorated weather protection"];
+    [myOptionList addOption:@"Other"];
+    [myOptionsArray addObject:myOptionList.theOptionList];
+    //Part 7
+    myOptionList = [[OptionList alloc] init];
+    [myOptionList addOption:@"Disc's wear has regectable criteria"];
+    [myOptionList addOption:@"Coil short"];
+    [myOptionList addOption:@"Armature worn or out of alignment"];
+    [myOptionList addOption:@"Mechanical connections missing or damaged"];
+    [myOptionList addOption:@"Other"];
+    [myOptionsArray addObject:myOptionList.theOptionList];
+    //Part 8
+    myOptionList = [[OptionList alloc] init];
+    [myOptionList addOption:@"Shaft twisted or bent"];
+    [myOptionList addOption:@"Couplings worn or bent"];
+    [myOptionList addOption:@"Fasteners or welds on couplings are cracked, damaged or missing"];
+    [myOptionList addOption:@"Pillow block bearings worn out"];
+    [myOptionList addOption:@"Pillow block bearings need lube"];
+    [myOptionList addOption:@"Line shaft gear engament in wheel is worn"];
+    [myOptionList addOption:@"Line shaft gear engagement in wheel needs lube"];
+    [myOptionList addOption:@"Other"];
+    [myOptionsArray addObject:myOptionList.theOptionList];
+    //Part 9
+    myOptionList = [[OptionList alloc] init];
+    [myOptionList addOption:@"Loose attachment to structure"];
+    [myOptionList addOption:@"Panels been bent and affects door operations"];
+    [myOptionList addOption:@"Loose back plate"];
+    [myOptionList addOption:@"Electrical components are loose"];
+    [myOptionList addOption:@"Loose or exposed wires in the panel"];
+    [myOptionList addOption:@"Contact tips are worn"];
+    [myOptionList addOption:@"Mainline disconnect on bridge is in/op"];
+    [myOptionList addOption:@"Loose conduit attaching to the panel"];
+    [myOptionList addOption:@"Other"];
+    [myOptionsArray addObject:myOptionList.theOptionList];
+    
+    //Part 12
+    myOptionList = [[OptionList alloc] init];
+    [myOptionList addOption:@"Resistors broken or cracked"];
+    [myOptionList addOption:@"Resistor panel damaged"];
+    [myOptionList addOption:@"Loose conduit attaching to the panel"];
+    [myOptionList addOption:@"Soft Start in/op"];
+    [myOptionList addOption:@"Loose wires to resistors, VFD or soft start"];
+    [myOptionList addOption:@"Other"];
+    [myOptionsArray addObject:myOptionList.theOptionList];
+    }
+    //Part 13
+    myOptionList = [[OptionList alloc] init];
+    [myOptionList addOption:@"Structural dents, gouges, evidence of heat damage"];
+    [myOptionList addOption:@"Cracked wields"];
+    [myOptionList addOption:@"Missing or damaged fasteners"];
+    [myOptionList addOption:@"Other"];
+    [myOptionsArray addObject:myOptionList.theOptionList];
+    //Part 14
+    myOptionList = [[OptionList alloc] init];
+    [myOptionList addOption:@"Worn wheel flange"];
+    [myOptionList addOption:@"Worn tread"];
+    [myOptionList addOption:@"Axel gearing engagement(Gear Lash)"];
+    [myOptionList addOption:@"Wheel alignment"];
+    [myOptionList addOption:@"Other"];
+    [myOptionsArray addObject:myOptionList.theOptionList];
+    //Part 15
+    myOptionList = [[OptionList alloc] init];
+    [myOptionList addOption:@"Flat bearing"];
+    [myOptionList addOption:@"Missing race"];
+    [myOptionList addOption:@"Loss of interior ball or needle bearings"];
+    [myOptionList addOption:@"Gearing engagement(Gear Lash)"];
+    [myOptionList addOption:@"Needs lubrication"];
+    [myOptionList addOption:@"Worn teeth"];
+    [myOptionList addOption:@"Cracked or deformed gears"];
+    [myOptionList addOption:@"Other"];
+    [myOptionsArray addObject:myOptionList.theOptionList];
+    //Part 16
+    myOptionList = [[OptionList alloc] init];
+    [myOptionList addOption:@"Bent sweeps"];
+    [myOptionList addOption:@"Deteriorated/ripped bumpers"];
+    [myOptionList addOption:@"Missing fasteners"];
+    [myOptionList addOption:@"Bent drop lugs"];
+    [myOptionList addOption:@"Other"];
+    [myOptionsArray addObject:myOptionList.theOptionList];
+    //Part 17
+    myOptionList = [[OptionList alloc] init];
+    [myOptionList addOption:@"Phase loss(single phase)"];
+    [myOptionList addOption:@"Worn brushes"];
+    [myOptionList addOption:@"Worn laminate"];
+    [myOptionList addOption:@"Worn insulation"];
+    [myOptionList addOption:@"Missing wire connectors"];
+    [myOptionList addOption:@"Deteriorated weather protection"];
+    [myOptionList addOption:@"Other"];
+    [myOptionsArray addObject:myOptionList.theOptionList];
+    //Part 18
+    myOptionList = [[OptionList alloc] init];
+    [myOptionList addOption:@"Disc's wear has rejectable criteria"];
+    [myOptionList addOption:@"Coil short"];
+    [myOptionList addOption:@"Armature worn or out of alignment"];
+    [myOptionList addOption:@"Mechanical connections missing or damaged"];
+    [myOptionList addOption:@"Other"];
+    [myOptionsArray addObject:myOptionList.theOptionList];
+    
+    //Part 19
         myOptionList = [[OptionList alloc] init];
         [myOptionList addOption:@"Shaft twisted or bent"];
         [myOptionList addOption:@"Couplings worn or bent"];
@@ -233,7 +502,6 @@
         [myOptionList addOption:@"Other"];
         [myOptionsArray addObject:myOptionList.theOptionList];
 
-    }
     
     
         //Part 24

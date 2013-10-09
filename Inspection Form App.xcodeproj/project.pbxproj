@@ -9,8 +9,11 @@
 /* Begin PBXBuildFile section */
 		8B0787C415113448006857A8 /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B0787C315113448006857A8 /* TableViewController.m */; };
 		8B0787C715113796006857A8 /* Parts.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B0787C615113796006857A8 /* Parts.m */; };
-		8B27BE53153B422000E12BE2 /* DropboxSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B5C4F79153A548900B7C5DA /* DropboxSDK.framework */; };
 		8B544612150F0C3E007E1CA9 /* GradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B544611150F0C3E007E1CA9 /* GradientView.m */; };
+		8B6BA17B1708BDAF00E08D9D /* DropboxSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B6BA17A1708BDAF00E08D9D /* DropboxSDK.framework */; };
+		8B6BA1831708BF1B00E08D9D /* autograph_x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B6BA17E1708BF1B00E08D9D /* autograph_x.png */; };
+		8B6BA1841708BF1B00E08D9D /* t1_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B6BA17F1708BF1B00E08D9D /* t1_logo.png */; };
+		8B6BA1851708BF1B00E08D9D /* libT1Autograph.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B6BA1801708BF1B00E08D9D /* libT1Autograph.a */; };
 		8BC58453150ABD87000AC695 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BC58452150ABD87000AC695 /* UIKit.framework */; };
 		8BC58455150ABD87000AC695 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BC58454150ABD87000AC695 /* Foundation.framework */; };
 		8BC58457150ABD87000AC695 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BC58456150ABD87000AC695 /* CoreGraphics.framework */; };
@@ -40,9 +43,10 @@
 		8BF97C1D170669A100E6D242 /* autograph_x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BF97C18170669A100E6D242 /* autograph_x.png */; };
 		8BF97C1E170669A100E6D242 /* t1_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BF97C19170669A100E6D242 /* t1_logo.png */; };
 		8BF97C1F170669A100E6D242 /* libT1Autograph.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BF97C1A170669A100E6D242 /* libT1Autograph.a */; };
-		8BF97C21170669DB00E6D242 /* ipadAppLogo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8BF97C20170669DB00E6D242 /* ipadAppLogo.jpg */; };
-		8BF97C2317066A1600E6D242 /* titlePageLogo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8BF97C2217066A1600E6D242 /* titlePageLogo.jpg */; };
-		8BF97C2517066A3000E6D242 /* logo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8BF97C2417066A3000E6D242 /* logo.jpg */; };
+		CE3992751805FD08003AE30B /* iPadMainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE3992741805FD08003AE30B /* iPadMainStoryboard.storyboard */; };
+		CE9775D91718C2660037967E /* logo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE9775D81718C2660037967E /* logo.jpg */; };
+		CE9A27381716A63200FE3D32 /* ipadAppLogo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE9A27371716A63200FE3D32 /* ipadAppLogo.jpg */; };
+		CE9A273C1716A70E00FE3D32 /* titlePageLogo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE9A273B1716A70E00FE3D32 /* titlePageLogo.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,7 +66,12 @@
 		8B0787C615113796006857A8 /* Parts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Parts.m; sourceTree = "<group>"; };
 		8B544610150F0C3E007E1CA9 /* GradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientView.h; sourceTree = "<group>"; };
 		8B544611150F0C3E007E1CA9 /* GradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradientView.m; sourceTree = "<group>"; };
-		8B5C4F79153A548900B7C5DA /* DropboxSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DropboxSDK.framework; path = "../../Downloads/dropbox-ios-sdk-1.2.1/DropboxSDK.framework"; sourceTree = "<group>"; };
+		8B6BA17A1708BDAF00E08D9D /* DropboxSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DropboxSDK.framework; sourceTree = "<group>"; };
+		8B6BA17E1708BF1B00E08D9D /* autograph_x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = autograph_x.png; sourceTree = "<group>"; };
+		8B6BA17F1708BF1B00E08D9D /* t1_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = t1_logo.png; sourceTree = "<group>"; };
+		8B6BA1801708BF1B00E08D9D /* libT1Autograph.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libT1Autograph.a; sourceTree = "<group>"; };
+		8B6BA1811708BF1B00E08D9D /* T1Autograph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = T1Autograph.h; sourceTree = "<group>"; };
+		8B6BA1821708BF1B00E08D9D /* T1Signature.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = T1Signature.h; sourceTree = "<group>"; };
 		8BC5844E150ABD87000AC695 /* Inspection Form App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Inspection Form App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BC58452150ABD87000AC695 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		8BC58454150ABD87000AC695 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -110,9 +119,10 @@
 		8BF97C1A170669A100E6D242 /* libT1Autograph.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libT1Autograph.a; sourceTree = "<group>"; };
 		8BF97C1B170669A100E6D242 /* T1Autograph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = T1Autograph.h; sourceTree = "<group>"; };
 		8BF97C1C170669A100E6D242 /* T1Signature.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = T1Signature.h; sourceTree = "<group>"; };
-		8BF97C20170669DB00E6D242 /* ipadAppLogo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = ipadAppLogo.jpg; path = ../../../../Downloads/ipadAppLogo.jpg; sourceTree = "<group>"; };
-		8BF97C2217066A1600E6D242 /* titlePageLogo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = titlePageLogo.jpg; path = ../../../../Downloads/titlePageLogo.jpg; sourceTree = "<group>"; };
-		8BF97C2417066A3000E6D242 /* logo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = logo.jpg; path = ../../../../Downloads/logo.jpg; sourceTree = "<group>"; };
+		CE3992741805FD08003AE30B /* iPadMainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = iPadMainStoryboard.storyboard; sourceTree = "<group>"; };
+		CE9775D81718C2660037967E /* logo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = logo.jpg; sourceTree = "<group>"; };
+		CE9A27371716A63200FE3D32 /* ipadAppLogo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ipadAppLogo.jpg; sourceTree = "<group>"; };
+		CE9A273B1716A70E00FE3D32 /* titlePageLogo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = titlePageLogo.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,7 +130,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8B27BE53153B422000E12BE2 /* DropboxSDK.framework in Frameworks */,
 				8BF09E74153A53E200E1BCB3 /* Security.framework in Frameworks */,
 				8BF3877015239E1200C3F368 /* MessageUI.framework in Frameworks */,
 				8BC7D9D31522ACE000D1A863 /* QuartzCore.framework in Frameworks */,
@@ -129,6 +138,8 @@
 				8BC58455150ABD87000AC695 /* Foundation.framework in Frameworks */,
 				8BC58457150ABD87000AC695 /* CoreGraphics.framework in Frameworks */,
 				8BF97C1F170669A100E6D242 /* libT1Autograph.a in Frameworks */,
+				8B6BA17B1708BDAF00E08D9D /* DropboxSDK.framework in Frameworks */,
+				8B6BA1851708BF1B00E08D9D /* libT1Autograph.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -145,10 +156,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8B6BA17C1708BF1B00E08D9D /* T1Autograph */ = {
+			isa = PBXGroup;
+			children = (
+				8B6BA17D1708BF1B00E08D9D /* Images */,
+				8B6BA1801708BF1B00E08D9D /* libT1Autograph.a */,
+				8B6BA1811708BF1B00E08D9D /* T1Autograph.h */,
+				8B6BA1821708BF1B00E08D9D /* T1Signature.h */,
+			);
+			path = T1Autograph;
+			sourceTree = "<group>";
+		};
+		8B6BA17D1708BF1B00E08D9D /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				8B6BA17E1708BF1B00E08D9D /* autograph_x.png */,
+				8B6BA17F1708BF1B00E08D9D /* t1_logo.png */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
 		8BC58443150ABD87000AC695 = {
 			isa = PBXGroup;
 			children = (
-				8B5C4F79153A548900B7C5DA /* DropboxSDK.framework */,
+				8B6BA17C1708BF1B00E08D9D /* T1Autograph */,
+				8B6BA17A1708BDAF00E08D9D /* DropboxSDK.framework */,
 				8BF09E73153A53E200E1BCB3 /* Security.framework */,
 				8BF3876F15239E1200C3F368 /* MessageUI.framework */,
 				8BE8C6FA151538B700D5C7F2 /* libsqlite3.dylib */,
@@ -182,8 +214,8 @@
 		8BC58458150ABD87000AC695 /* Inspection Form App */ = {
 			isa = PBXGroup;
 			children = (
-				8BF97C2217066A1600E6D242 /* titlePageLogo.jpg */,
-				8BF97C2417066A3000E6D242 /* logo.jpg */,
+				CE9A273B1716A70E00FE3D32 /* titlePageLogo.jpg */,
+				CE9775D81718C2660037967E /* logo.jpg */,
 				8BC7D9D21522ACE000D1A863 /* QuartzCore.framework */,
 				8BDF9998150C209A0069C35B /* UICustomSwitch.h */,
 				8BC58461150ABD87000AC695 /* AppDelegate.h */,
@@ -196,11 +228,12 @@
 				8BF97C121706683000E6D242 /* AutographViewController.h */,
 				8BF97C131706685500E6D242 /* AutographViewController.m */,
 				8BC58464150ABD87000AC695 /* ViewController.h */,
+				CE3992741805FD08003AE30B /* iPadMainStoryboard.storyboard */,
 				8BC58465150ABD87000AC695 /* ViewController.m */,
 				8BE9DE7E1616355800906B98 /* OrdinalNumberFormatter.h */,
 				8BE9DE7F1616355800906B98 /* OrdinalNumberFormatter.m */,
 				8BC58467150ABD87000AC695 /* ViewController.xib */,
-				8BF97C20170669DB00E6D242 /* ipadAppLogo.jpg */,
+				CE9A27371716A63200FE3D32 /* ipadAppLogo.jpg */,
 				8BE4CD201515957000D75629 /* T1AutographAppDelegate.h */,
 				8BE4CD211515957000D75629 /* T1AutographAppDelegate.m */,
 				8B0787C515113796006857A8 /* Parts.h */,
@@ -347,9 +380,12 @@
 				8BC58469150ABD87000AC695 /* ViewController.xib in Resources */,
 				8BF97C1D170669A100E6D242 /* autograph_x.png in Resources */,
 				8BF97C1E170669A100E6D242 /* t1_logo.png in Resources */,
-				8BF97C21170669DB00E6D242 /* ipadAppLogo.jpg in Resources */,
-				8BF97C2317066A1600E6D242 /* titlePageLogo.jpg in Resources */,
-				8BF97C2517066A3000E6D242 /* logo.jpg in Resources */,
+				CE3992751805FD08003AE30B /* iPadMainStoryboard.storyboard in Resources */,
+				8B6BA1831708BF1B00E08D9D /* autograph_x.png in Resources */,
+				8B6BA1841708BF1B00E08D9D /* t1_logo.png in Resources */,
+				CE9A27381716A63200FE3D32 /* ipadAppLogo.jpg in Resources */,
+				CE9A273C1716A70E00FE3D32 /* titlePageLogo.jpg in Resources */,
+				CE9775D91718C2660037967E /* logo.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -508,6 +544,8 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/Inspection Form App/dropbox-ios-sdk-1.2.1\"",
 					"\"$(SRCROOT)/../../Downloads/dropbox-ios-sdk-1.2.1\"",
+					"\"$(SRCROOT)/../dropbox-ios-sdk-1.2.2\"",
+					"\"$(SRCROOT)\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Inspection Form App/Inspection Form App-Prefix.pch";
@@ -516,8 +554,14 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/../../Downloads/T1Autograph\"",
-					"\"$(SRCROOT)/../T1Autograph\"",
+					"\"$(SRCROOT)/T1Autograph\"",
+				);
+				"LIBRARY_SEARCH_PATHS[arch=*]" = (
+					"$(inherited)",
+					"\"$(SRCROOT)/T1Autograph\"",
+					"$(inherited)",
+					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/SDKs/MacOSX10.7.sdk/usr/lib\"",
+					"\"$(SRCROOT)\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -535,6 +579,8 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/Inspection Form App/dropbox-ios-sdk-1.2.1\"",
 					"\"$(SRCROOT)/../../Downloads/dropbox-ios-sdk-1.2.1\"",
+					"\"$(SRCROOT)/../dropbox-ios-sdk-1.2.2\"",
+					"\"$(SRCROOT)\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Inspection Form App/Inspection Form App-Prefix.pch";
@@ -542,8 +588,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/../../Downloads/T1Autograph\"",
-					"\"$(SRCROOT)/../T1Autograph\"",
+					"\"$(SRCROOT)/T1Autograph\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

@@ -52,7 +52,8 @@
     bool proofLoad;
     bool inspectionComplete;
     NSString *owner;
-    
+    bool changeLayoutNeeded;
+    NSString* iosVersion;
 }
 @end
 
@@ -118,8 +119,11 @@
 
 - (void)viewDidLoad {
     [self InitiateParts];
+    changeLayoutNeeded = NO;
+    iosVersion = [[UIDevice currentDevice] systemVersion];
+   // CustomerInfoView.frame = CGRectMake(0, 0, 768, 1005);
     
-    [[NSNotificationCenter defaultCenter] addObserver:self 
+    [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWasShown:) 
                                                  name:UIKeyboardDidShowNotification 
                                                object:nil];
@@ -146,8 +150,6 @@
     //CustomerInfoScrollView = CustomerInfoView;
     [self createDatabase];
     // Do any additional setup after loading the view, typically from a nib.
-
-    
     NSDate *now = [NSDate date];
     myDatePicker = [[UIDatePicker alloc] initWithFrame:CGRectZero];
     [myDatePicker setDate:now animated:NO];
@@ -519,6 +521,10 @@ loadMetadataFailedWithError:(NSError *)error {
     [self textFieldDidEndEditing:activeField];
     [CraneDescriptionUIPicker removeFromSuperview];
     [txtCraneDescription resignFirstResponder];
+    Parts *parts = [[Parts alloc] init : txtCraneDescription.text];
+    myPartsArray = [parts myParts];
+    myItemListStore = [[ItemListConditionStorage alloc] init:myPartsArray];
+    lblCraneDesc.text = txtCraneDescription.text;
     [self keyboardWillBeHidden:UIKeyboardWillHideNotification];
 }
 
@@ -848,21 +854,24 @@ loadMetadataFailedWithError:(NSError *)error {
                         txtCustomerContact.text = @"DAVID BOURN";
                         txtAddress.text = @"1001 S VALLEY VIEW BLVD, LAS VEGAS, NV 89107";
                         txtEmail.text = @"DAVID.BOURN@LVVWD.COM";
+                        
                     }
                     else {
                         txtCustomerName.text = [NSString stringWithUTF8String:custName];
                         txtCustomerContact.text = [NSString stringWithUTF8String:contact];
                         txtAddress.text = [NSString stringWithUTF8String:address];
                         txtEmail.text = [NSString stringWithUTF8String:email];
+                        //if ([txtCraneDescription.text isEqualToString:@""])
+                        //{
+                        txtCraneDescription.text = [NSString stringWithUTF8String:craneDescription];
+                        lblCraneDesc.text = txtCraneDescription.text;
+                        //}
                     }
                     txtEquipNum.text = [NSString stringWithUTF8String:equipNum];
                     txtCraneMfg.text = [NSString stringWithUTF8String:craneMfg];
                     txtHoistMfg.text = [NSString stringWithUTF8String:hoistMfg];
                     txtHoistMdl.text = [NSString stringWithUTF8String:hoistMdl];
-                    if ([txtCraneDescription.text isEqualToString:@""])
-                    {
-                        txtCraneDescription.text = [NSString stringWithUTF8String:craneDescription];
-                    }
+                   
                     if ([txtCap.text isEqualToString:@""])
                     {
                         txtCap.text = [NSString stringWithUTF8String:cap];
@@ -893,6 +902,8 @@ loadMetadataFailedWithError:(NSError *)error {
                     cap = nil;
                     craneSrl = nil;
                     chJobNumber = nil;
+                    
+                    sqlite3_finalize(statement);
                 }
             }
             else {
@@ -907,10 +918,12 @@ loadMetadataFailedWithError:(NSError *)error {
             else {
                 myItemListStore = [[ItemListConditionStorage alloc] init:myPartsArray];
                 optionLocation = 0;
-                [self changeLayout:optionLocation];
+                //[self changeLayout:optionLocation];
             }
         }
     }
+    sqlite3_close(contactDB);
+    //Open the actual test results from the last examination
     [self OpenOrderFromField:txtHoistSrl];
 }
 
@@ -939,6 +952,7 @@ loadMetadataFailedWithError:(NSError *)error {
         {
             @try
             {
+                //Get the actual test results from the database
             while (sqlite3_step(statement) == SQLITE_ROW)
             {
                 orderExist = YES;
@@ -989,6 +1003,8 @@ loadMetadataFailedWithError:(NSError *)error {
             NSLog(@"Failed to find jobnumber in table");
         }
     }
+    sqlite3_finalize(statement);
+    sqlite3_close(contactDB);
 
 }
 
@@ -1017,41 +1033,37 @@ loadMetadataFailedWithError:(NSError *)error {
 - (IBAction)openInClicked:(id)sender {
 
 }
+//Remove the test results from the database
+-(void) RemoveOrder
+{
+    sqlite3_stmt *statement;
+    const char *dbPath = [databasePath UTF8String];
+    
+    NSString *removeSQL = [NSString stringWithFormat:@"DELETE FROM ALLORDERS WHERE HOISTSRL=\"%@\"", txtHoistSrl.text];
+    const char *remove_stmt = [removeSQL UTF8String];
+    
+    if (sqlite3_prepare_v2(contactDB, remove_stmt, -1, &statement, NULL)==SQLITE_OK)
+    {
+        //sqlite3_bind_text(statement, 1, [txtJobNumber.text UTF8String], -1, NULL);
+    }
+    if (sqlite3_step(statement) == SQLITE_DONE)
+    {
+        NSLog(@"removed succesfully");
+    }
+}
+
 //Saves the job information which will contain the entire inspection results into the ALLORDERS table
 - (void) saveData:(ItemListConditionStorage *) myConditionsList {
     sqlite3_stmt *statement;
     const char *dbPath = [databasePath UTF8String];
     NSString *isDeficient = [[NSString alloc] init];
     NSString *isApplicable = [[NSString alloc] init];
+    
     //check to make sure that the database is correct
     if (sqlite3_open(dbPath, &contactDB) == SQLITE_OK)
     {
-        //Delete job with this job number from the table
-        NSString *removeSQL = [NSString stringWithFormat:@"DELETE FROM ALLORDERS WHERE HOISTSRL=\"%@\"", txtHoistSrl.text];
-        const char *remove_stmt = [removeSQL UTF8String];
-        
-        if (sqlite3_prepare_v2(contactDB, remove_stmt, -1, &statement, NULL)==SQLITE_OK)
-        {
-            //sqlite3_bind_text(statement, 1, [txtJobNumber.text UTF8String], -1, NULL);
-        }
-        if (sqlite3_step(statement) == SQLITE_DONE)
-        {
-            NSLog(@"removed succesfully");
-        }
-        removeSQL = [NSString stringWithFormat:@"DELETE FROM ALLORDERS WHERE EQUIPNUM=\"%@\"", txtEquipNum.text];
-        remove_stmt = [removeSQL UTF8String];
-        
-        if (sqlite3_prepare_v2(contactDB, remove_stmt, -1, &statement, NULL)==SQLITE_OK)
-        {
-            //sqlite3_bind_text(statement, 1, [txtJobNumber.text UTF8String], -1, NULL);
-        }
-        if (sqlite3_step(statement) == SQLITE_DONE)
-        {
-            NSLog(@"removed succesfully");
-        }
-        
-        sqlite3_finalize(statement);
-        
+        //Remove the test results with this HoistSrl from the database
+        [self RemoveOrder];
         //goes through all the different conditions in the conditionList and sets the condition to whatever is stored within the table
         for (int i = 0; i < myItemListStore.myConditions.count; i ++) {
             //grabs the current condition
@@ -1096,8 +1108,8 @@ loadMetadataFailedWithError:(NSError *)error {
             else {
                 NSLog(@"Inserted successfully");
             }
+            sqlite3_finalize(statement);
         }
-        sqlite3_finalize(statement);
         sqlite3_close(contactDB);
         
         dbPath = nil;
@@ -2107,14 +2119,8 @@ loadMetadataFailedWithError:(NSError *)error {
         DefficiencyPicker.alpha = 1;
         DefficiencyPicker.showsSelectionIndicator = YES;
         DefficiencyPicker.userInteractionEnabled = YES;
-        if ([deficientPart isEqualToString:@"Hoist Control Panel"])
-        {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Additional Information" message:@"Is this a pendant or radio, and what is the manufacturer and model" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Ok", nil];
-            [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
-            [alert show];
-            pageSubmitAlertView = NO;
-        }
-        else if ([deficientPart isEqualToString:@"Trolley VFD/Soft/Start/Resistor"])
+
+        if ([lblPart.text isEqualToString:@"Wire Rope, Load Chain, Fittings"])
         {
             timesShown=0;
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Length, size, fittings" message:@"Enter the Length:" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Ok", nil];
@@ -2122,7 +2128,7 @@ loadMetadataFailedWithError:(NSError *)error {
             [alert show];
             pageSubmitAlertView = NO;
         }
-        else if ([deficientPart isEqualToString:@"Hoist Upper Tackle"])
+        else if ([lblPart.text isEqualToString:@"Hoist Load Brake"])
         {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Type" message:@"What is the type?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Ok", nil];
             [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
@@ -2177,7 +2183,11 @@ loadMetadataFailedWithError:(NSError *)error {
                 //if this is not the alert box that opens when you submit the final page
                 if (pageSubmitAlertView==NO)
                 {
-                    if (timesShown==0&&optionLocation==22)
+                    if ([lblPart.text isEqualToString:@"Control Station Markings"])
+                    {
+                        txtNotes.text = [NSString stringWithFormat:@"%@ %@", txtNotes.text, textField.text];
+                    }
+                    else if (timesShown==0&&optionLocation==22)
                     {
                         timesShown++;
                         txtNotes.text = [NSString stringWithFormat:@"Length: %@ - %@",textField.text, txtNotes.text]; 
@@ -2314,10 +2324,28 @@ loadMetadataFailedWithError:(NSError *)error {
     }
 }
 
+-(void) viewWillAppear:(BOOL)animated
+{
+    CGRect arect=[[UIScreen mainScreen]applicationFrame];
+    
+    CGRect anotherrect=[[UIApplication sharedApplication]statusBarFrame];
+    
+    if (changeLayoutNeeded == YES && ![iosVersion isEqualToString: @"5.1.1"])
+    {
+        changeLayoutNeeded = NO;
+        CustomerInfoScrollView.center=CGPointMake(CustomerInfoScrollView.center.x, CustomerInfoScrollView.center.y+anotherrect.size.height); // fix silliness in IB that makes view start 20 pixels higher than it should on iPhone
+        CustomerInfoScrollView.frame = CGRectMake(0, 20, 768, 1004);
+        CraneInspectionView.center=CGPointMake(CraneInspectionView.center.x, CraneInspectionView.center.y+anotherrect.size.height); // fix silliness in IB that makes view start 20 pixels higher than it should on iPhone
+        CraneInspectionView.frame = CGRectMake(0, 20, 768, 1004);
+    }
+}
+
 -(void) DisplayPDFWithOverallRating
 {
     [self writeTextFile:myItemListStore];
     //[CraneInspectionView removeFromSuperview];
+    
+    changeLayoutNeeded = YES;
     
     //[self.view insertSubview:viewPDFController.view atIndex:0];
     NSString *dateNoSlashes = [txtDate.text stringByReplacingOccurrencesOfString:@"/" withString:@"-"];
@@ -2335,19 +2363,17 @@ loadMetadataFailedWithError:(NSError *)error {
     //[controller setUTI:@"PDF"];
     controller.delegate = self;
   
-    //  CGRect navRect = self.navigationController.navigationBar.frame;
-  //  navRect.size = CGSizeMake(1500.0f, 40.0f);
-    
-    //[controller presentOpenInMenuFromRect:navRect inView:CraneInspectionView animated:NO];
     [controller presentPreviewAnimated:NO];
+    
     //[CraneInspectionView removeFromSuperview];
     //[self.view addSubview:self.autographController.view];
     [self writeCertificateTextFile];
 }
 
 - (IBAction)partsListButtonClicked:(id)sender{
+    optionLocation = 0;
     Parts *parts = [[Parts alloc] init : txtCraneDescription.text];
-    myItemListStore = [[ItemListConditionStorage alloc] init:parts.myParts];
+    //myItemListStore = [[ItemListConditionStorage alloc] init:parts.myParts];
     [lblPart awakeFromNib];
     myPartsArray = [parts myParts];
     [self fillOptionArrays];
@@ -2356,7 +2382,10 @@ loadMetadataFailedWithError:(NSError *)error {
     [self.view insertSubview:self.CraneInspectionView atIndex:0];
 }
 
-
+-(void) didReceiveMemoryWarning
+{
+    NSLog(@"Memory warning received, but ignored due to fact that this program does not consume that much memory.");
+}
 
 - (IBAction)buttonPressed:(id)sender {
 }
@@ -2379,6 +2408,14 @@ loadMetadataFailedWithError:(NSError *)error {
     [DefficiencyPicker selectRow:myCondition.pickerSelection inComponent:0 animated:YES];
     [defficiencySwitch setOn:myCondition.deficient];
     [applicableSwitch setOn:myCondition.applicable];
+    
+    if ([lblPart.text isEqualToString:@"Control Station Markings"])
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Additional Information" message:@"Is this a pendant or radio, and what is the manufacturer and model" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Ok", nil];
+        [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
+        [alert show];
+        pageSubmitAlertView = NO;
+    }
     
     if (defficiencySwitch.isOn==YES) {
         DefficiencyPicker.userInteractionEnabled = YES;
@@ -2447,6 +2484,11 @@ loadMetadataFailedWithError:(NSError *)error {
     }
     else 
     {
+        Parts *parts = [[Parts alloc] init : txtCraneDescription.text];
+        //myItemListStore = [[ItemListConditionStorage alloc] init:parts.myParts];
+        [lblPart awakeFromNib];
+        myPartsArray = [parts myParts];
+        [self fillOptionArrays];
         [self changeLayout:optionLocation];
         [self InsertCustomerIntoTable];
         [self.CustomerInfoFullView removeFromSuperview];
@@ -2578,7 +2620,10 @@ loadMetadataFailedWithError:(NSError *)error {
     CGRect aRect = self.view.frame;
     aRect.size.height -=keyboardSize.height;
     
-    if (CGRectContainsPoint(aRect, activeField.frame.origin)) {
+    if ([activeField isEqual:txtCap]||[activeField isEqual:txtCraneDescription]||[activeField isEqual:txtCraneMfg]||[activeField isEqual:txtCraneSrl]||
+        [activeField isEqual:txtEquipNum]||[activeField isEqual:txtEquipDesc]||[activeField isEqual:txtHoistMdl])
+    {
+    //if (CGRectContainsPoint(aRect, activeField.frame.origin)) {
         CGPoint scrollPoint = CGPointMake(0.0, keyboardSize.height);
         [CustomerInfoScrollView setContentOffset:scrollPoint animated:YES];
     }
