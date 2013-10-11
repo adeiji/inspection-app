@@ -16,9 +16,7 @@
 
 @implementation AppDelegate
 
-@synthesize window = _window;
-@synthesize viewController;
-@synthesize splitViewController;
+@synthesize window = __window;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -28,18 +26,15 @@
       appSecret:@"7u0gojnru7ypz0b"
       root:kDBRootAppFolder]; // either kDBRootAppFolder or kDBRootDropbox
     [DBSession setSharedSession:dbSession];
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
-    //self.splitViewController = [[SplitViewController alloc] initWithNibName:@"SplitViewController" bundle:nil];
     
-    self.viewController = [[ViewController alloc] initWithNibName:@"ViewController" bundle:nil];
-    //UIView *view = self.viewController.view;
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    UIView *view = self.viewController.view;
-    [view setFrame:[[UIScreen mainScreen] applicationFrame]];
-    [self.window addSubview:self.viewController.view];
-    [self.window makeKeyAndVisible];
-
+    
+    
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
+        UINavigationController *navigationController = [splitViewController.viewControllers lastObject];
+        splitViewController.delegate = (id)navigationController.topViewController;
+    }
+    
     return YES;
 }
 

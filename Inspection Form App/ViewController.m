@@ -113,6 +113,7 @@
 @synthesize CustomerInfoScrollView;
 @synthesize CustomerInfoFullView;
 @synthesize CraneInspectionView;
+@synthesize scrollView;
 
 #define kMinimumGestureLength   25
 #define kMaximumVariance        100
@@ -172,6 +173,11 @@
     if (![[DBSession sharedSession] isLinked]) {
         [[DBSession sharedSession] link];
     }
+}
+
+- (void) willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    NSLog(NSStringFromCGRect(self.scrollView.frame));
 }
 
 - (void)viewDidUnload
@@ -440,78 +446,8 @@ loadMetadataFailedWithError:(NSError *)error {
     
     NSLog(@"Error loading metadata: %@", error);
 }
-//Loads the entire inspection and the customer information from the JobNumber
-- (IBAction)GetOrderFromJobNumber:(id)sender
-{
-    //get inspection from job number
-    //[self OpenOrderFromJobNumber];
-    //opens the customer information from the job number
-    [self GetCustomerFromJobNumber];
-    
-}
-//this method gets all customer information and crane information from the JOBS table with the specified jobnumber and displays the information on the home page
-- (void) GetCustomerFromJobNumber
-{/*
-    sqlite3_stmt *statement;
-    const char *dbPath = [databasePath UTF8String];
-    bool orderExist = NO;
-    
-    if (sqlite3_open(dbPath, &contactDB)==SQLITE_OK)
-    { 
-        NSString *selectSQL = [NSString stringWithFormat:@"SELECT JOBNUMBER, CUSTOMERNAME, CONTACT, DATE, ADDRESS, EMAIL, EQUIPNUM, CRANEMFG, HOISTMFG, HOISTMDL, CRANEDESCRIPTION, CAP, CRANESRL FROM JOBS WHERE HOISTSRL=\"%@\"", txtHoistSrl.text];
-        const char *select_stmt = [selectSQL UTF8String];
-        if (sqlite3_prepare_v2(contactDB, select_stmt, -1, &statement, NULL)==SQLITE_OK)
-        {
-            while (sqlite3_step(statement) == SQLITE_ROW)
-            {
-                orderExist = YES;
-                const char *hoistSrl = (char*) sqlite3_column_text(statement, 0);
-                const char *custName = (char*) sqlite3_column_text(statement, 1);
-                const char *contact = (char*) sqlite3_column_text(statement, 2);
-                const char *date = (char*) sqlite3_column_text(statement, 3);
-                const char *address = (char*) sqlite3_column_text(statement, 4);
-                const char *email = (char*) sqlite3_column_text(statement, 5);
-                const char *equipNum = (char*) sqlite3_column_text(statement, 6);
-                const char *craneMfg = (char*) sqlite3_column_text(statement, 7);
-                const char *hoistMfg = (char*) sqlite3_column_text(statement, 8);
-                const char *hoistMdl = (char*) sqlite3_column_text(statement, 9);
-                const char *craneDescription = (char*) sqlite3_column_text(statement, 10);
-                const char *cap = (char*) sqlite3_column_text(statement, 11);
-                const char *craneSrl = (char*) sqlite3_column_text(statement, 12);
-                //makes sure that the job number stays displayed
-                NSString *jobNumber = txtJobNumber.text;
-                [self EmptyTextFields];
-                txtJobNumber.text = jobNumber;
-                
-                txtHoistSrl.text = [NSString stringWithUTF8String:hoistSrl];
-                txtCustomerName.text = [NSString stringWithUTF8String:custName];
-                txtCustomerContact.text = [NSString stringWithUTF8String:contact];
-                txtDate.text = [NSString stringWithUTF8String:date];
-                txtAddress.text = [NSString stringWithUTF8String:address];
-                txtEmail.text = [NSString stringWithUTF8String:email];
-                txtEquipNum.text = [NSString stringWithUTF8String:equipNum];
-                txtCraneMfg.text = [NSString stringWithUTF8String:craneMfg];
-                txtHoistMfg.text = [NSString stringWithUTF8String:hoistMfg];
-                txtHoistMdl.text = [NSString stringWithUTF8String:hoistMdl];
-                txtCraneDescription.text = [NSString stringWithUTF8String:craneDescription];
-                txtCap.text = [NSString stringWithUTF8String:cap];
-                txtCraneSrl.text = [NSString stringWithUTF8String:craneSrl];
-                lblCraneDesc.text = [NSString stringWithUTF8String:craneDescription];
-                
-                NSLog(@"Retrieved condition from the table");
-            }
-               //UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Did retrieve succesfully" delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:@"ok", nil];
-               //[alert show];
-        }
-        else {
-            NSLog(@"Failed to find jobnumber in table");
-        }
-    }
-*/
-}
+
 //Create a CSV file from the CRANES_DONE table and then uploads file to Dropbox
-
-
 - (IBAction)SelectCraneDescriptionPressed:(id)sender {
     NSUInteger selectedRow = [CraneDescriptionUIPicker selectedRowInComponent:0];
     NSString *myCraneDescription = [[CraneDescriptionUIPicker delegate] pickerView:CraneDescriptionUIPicker titleForRow:selectedRow forComponent:0];

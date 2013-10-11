@@ -115,6 +115,7 @@
 - (IBAction)NASwitchChanged:(id)sender;
 - (BOOL) textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string;
 - (IBAction)CreateCertificate:(id)sender;
+@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 
 
 

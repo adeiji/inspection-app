@@ -40,9 +40,6 @@
 		8BF10A9C152FB93D00DC5F05 /* TextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BF10A9B152FB93D00DC5F05 /* TextField.m */; };
 		8BF3877015239E1200C3F368 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BF3876F15239E1200C3F368 /* MessageUI.framework */; };
 		8BF97C141706685500E6D242 /* AutographViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BF97C131706685500E6D242 /* AutographViewController.m */; };
-		8BF97C1D170669A100E6D242 /* autograph_x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BF97C18170669A100E6D242 /* autograph_x.png */; };
-		8BF97C1E170669A100E6D242 /* t1_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BF97C19170669A100E6D242 /* t1_logo.png */; };
-		8BF97C1F170669A100E6D242 /* libT1Autograph.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BF97C1A170669A100E6D242 /* libT1Autograph.a */; };
 		CE3992751805FD08003AE30B /* iPadMainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE3992741805FD08003AE30B /* iPadMainStoryboard.storyboard */; };
 		CE9775D91718C2660037967E /* logo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE9775D81718C2660037967E /* logo.jpg */; };
 		CE9A27381716A63200FE3D32 /* ipadAppLogo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE9A27371716A63200FE3D32 /* ipadAppLogo.jpg */; };
@@ -114,11 +111,6 @@
 		8BF3876F15239E1200C3F368 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		8BF97C121706683000E6D242 /* AutographViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutographViewController.h; sourceTree = "<group>"; };
 		8BF97C131706685500E6D242 /* AutographViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutographViewController.m; sourceTree = "<group>"; };
-		8BF97C18170669A100E6D242 /* autograph_x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = autograph_x.png; sourceTree = "<group>"; };
-		8BF97C19170669A100E6D242 /* t1_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = t1_logo.png; sourceTree = "<group>"; };
-		8BF97C1A170669A100E6D242 /* libT1Autograph.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libT1Autograph.a; sourceTree = "<group>"; };
-		8BF97C1B170669A100E6D242 /* T1Autograph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = T1Autograph.h; sourceTree = "<group>"; };
-		8BF97C1C170669A100E6D242 /* T1Signature.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = T1Signature.h; sourceTree = "<group>"; };
 		CE3992741805FD08003AE30B /* iPadMainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = iPadMainStoryboard.storyboard; sourceTree = "<group>"; };
 		CE9775D81718C2660037967E /* logo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = logo.jpg; sourceTree = "<group>"; };
 		CE9A27371716A63200FE3D32 /* ipadAppLogo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ipadAppLogo.jpg; sourceTree = "<group>"; };
@@ -137,7 +129,6 @@
 				8BC58453150ABD87000AC695 /* UIKit.framework in Frameworks */,
 				8BC58455150ABD87000AC695 /* Foundation.framework in Frameworks */,
 				8BC58457150ABD87000AC695 /* CoreGraphics.framework in Frameworks */,
-				8BF97C1F170669A100E6D242 /* libT1Autograph.a in Frameworks */,
 				8B6BA17B1708BDAF00E08D9D /* DropboxSDK.framework in Frameworks */,
 				8B6BA1851708BF1B00E08D9D /* libT1Autograph.a in Frameworks */,
 			);
@@ -224,7 +215,6 @@
 				8BF10A9B152FB93D00DC5F05 /* TextField.m */,
 				8B0787C215113448006857A8 /* TableViewController.h */,
 				8B0787C315113448006857A8 /* TableViewController.m */,
-				8BF97C16170669A100E6D242 /* T1Autograph */,
 				8BF97C121706683000E6D242 /* AutographViewController.h */,
 				8BF97C131706685500E6D242 /* AutographViewController.m */,
 				8BC58464150ABD87000AC695 /* ViewController.h */,
@@ -283,27 +273,6 @@
 				8BC58479150ABD88000AC695 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		8BF97C16170669A100E6D242 /* T1Autograph */ = {
-			isa = PBXGroup;
-			children = (
-				8BF97C17170669A100E6D242 /* Images */,
-				8BF97C1A170669A100E6D242 /* libT1Autograph.a */,
-				8BF97C1B170669A100E6D242 /* T1Autograph.h */,
-				8BF97C1C170669A100E6D242 /* T1Signature.h */,
-			);
-			name = T1Autograph;
-			path = ../../T1Autograph;
-			sourceTree = "<group>";
-		};
-		8BF97C17170669A100E6D242 /* Images */ = {
-			isa = PBXGroup;
-			children = (
-				8BF97C18170669A100E6D242 /* autograph_x.png */,
-				8BF97C19170669A100E6D242 /* t1_logo.png */,
-			);
-			path = Images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -378,8 +347,6 @@
 			files = (
 				8BC5845D150ABD87000AC695 /* InfoPlist.strings in Resources */,
 				8BC58469150ABD87000AC695 /* ViewController.xib in Resources */,
-				8BF97C1D170669A100E6D242 /* autograph_x.png in Resources */,
-				8BF97C1E170669A100E6D242 /* t1_logo.png in Resources */,
 				CE3992751805FD08003AE30B /* iPadMainStoryboard.storyboard in Resources */,
 				8B6BA1831708BF1B00E08D9D /* autograph_x.png in Resources */,
 				8B6BA1841708BF1B00E08D9D /* t1_logo.png in Resources */,
@@ -551,7 +518,7 @@
 				GCC_PREFIX_HEADER = "Inspection Form App/Inspection Form App-Prefix.pch";
 				"HEADER_SEARCH_PATHS[sdk=*]" = "\"${SRCROOT}/relative/path/to/RESTClient/Source\"";
 				INFOPLIST_FILE = "Inspection Form App/Inspection Form App-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/T1Autograph\"",
@@ -585,7 +552,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Inspection Form App/Inspection Form App-Prefix.pch";
 				INFOPLIST_FILE = "Inspection Form App/Inspection Form App-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/T1Autograph\"",
