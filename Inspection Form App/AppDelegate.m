@@ -7,10 +7,10 @@
 //
 
 #import "AppDelegate.h"
-#import <DropboxSDK/DropboxSDK.h>
 #import "ViewController.h"
+#import <Dropbox/Dropbox.h>
 
-@interface AppDelegate () <DBSessionDelegate>
+@interface AppDelegate ()
 
 @end
 
@@ -20,33 +20,27 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    DBSession* dbSession =
-    [[DBSession alloc]
-      initWithAppKey:@"j5xr0te52zxjkpl"
-      appSecret:@"7u0gojnru7ypz0b"
-      root:kDBRootAppFolder]; // either kDBRootAppFolder or kDBRootDropbox
-    [DBSession setSharedSession:dbSession];
-    
-    
+    DBAccountManager* accountMgr =[[DBAccountManager alloc] initWithAppKey:@"878n3v7pfduyrrr" secret:@"0745q3julqjk9mb"];
+    [DBAccountManager setSharedManager:accountMgr];
     
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
         UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
         UINavigationController *navigationController = [splitViewController.viewControllers lastObject];
         splitViewController.delegate = (id)navigationController.topViewController;
+        
+
     }
     
     return YES;
 }
 
-- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
-    if ([[DBSession sharedSession] handleOpenURL:url]) {
-        if ([[DBSession sharedSession] isLinked]) {
-            NSLog(@"App linked successfully!");
-            // At this point you can start making API calls
-        }
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url
+  sourceApplication:(NSString *)source annotation:(id)annotation {
+    DBAccount *account = [[DBAccountManager sharedManager] handleOpenURL:url];
+    if (account) {
+        NSLog(@"App linked successfully!");
         return YES;
     }
-    // Add whatever other url handling code your app requires here
     return NO;
 }
 

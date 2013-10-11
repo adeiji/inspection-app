@@ -19,9 +19,10 @@
 #import "TableViewController.h"
 #import "QuartzCore/QuartzCore.h"
 #import "UIKit/UIkit.h"
-#import "DropboxSDK/DropboxSDK.h"
+#import <Dropbox/Dropbox.h>
 #import "OrdinalNumberFormatter.h"
 #import "Foundation/NSDateFormatter.h"
+#import "DataLayer.h"
 
 @interface ViewController () {
     ItemListConditionStorage *myItemListStore; 
@@ -169,16 +170,35 @@
     txtTechnicianName.text = [owner uppercaseString];
     [super viewDidLoad];
 }
-- (void)didPressLink {
-    if (![[DBSession sharedSession] isLinked]) {
-        [[DBSession sharedSession] link];
+
+#pragma mark - Dropbox Datastore Methods
+
+- (void) didPressLink
+{
+    DBAccount *account = [[DBAccountManager sharedManager] linkedAccount];
+    
+    if (account) {
+        NSLog(@"App already linked");
+    } else {
+        [[DBAccountManager sharedManager] linkFromController:self];
     }
 }
-
-- (void) willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+//If there is not a Dropbox Datastore Table already created, we create it, as well as the data store.
+- (void) createDatastoreTable
 {
-    NSLog(NSStringFromCGRect(self.scrollView.frame));
+    DBAccount *account = [[DBAccountManager sharedManager] linkedAccount];
+    DBDatastore *inspectionDataStore = [DBDatastore openDefaultStoreForAccount:account error:nil];
+    
+    DBTable *inspectionsTable = [inspectionDataStore getTable:@"inspections"];
+    
 }
+
+- (void) insertInspectionToDatastoreTable : (DBAccount *) account
+                                DataStore : (DBDatastore *) inspectionDataStore
+                            DatabaseTable : (DBTable *) inspectionsTable
+{
+}
+
 
 - (void)viewDidUnload
 {
@@ -274,37 +294,7 @@
 
 - (void) LoadOwner
 {
-    sqlite3_stmt *statement;
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDir = [paths objectAtIndex:0];
-    documentsDir = [paths objectAtIndex:0];
-    
-    //full file location string
-    databasePath = [[NSString alloc] initWithString:[documentsDir stringByAppendingPathComponent:@"contacts.db"]];
-    const char *dbPath = [databasePath UTF8String];
-    bool orderExist = NO;
-    owner = @"";
-    if (sqlite3_open(dbPath, &contactDB)==SQLITE_OK)
-    {
-        NSString *selectSQL = [NSString stringWithFormat:@"SELECT NAME FROM IPADOWNER"];
-        const char *select_stmt = [selectSQL UTF8String];
-        if (sqlite3_prepare_v2(contactDB, select_stmt, -1, &statement, NULL)==SQLITE_OK)
-        {
-            while (sqlite3_step(statement) == SQLITE_ROW)
-            {
-                orderExist = YES;
-                const char *chName = (char*) sqlite3_column_text(statement, 0);
-                owner = [NSString stringWithUTF8String:chName];
-               
-                NSLog(@"Retrieved condition from the table");
-                //release memory
-                chName = nil;
-            }
-        }
-        else {
-            NSLog(@"Failed to find jobnumber in table");
-        }
-    }
+    owner = [DataLayer LoadOwner:databasePath contactDb:contactDB];
 }
 #pragma mark Database Methods
 //create the database by first creating a directory for the database to be stored to, with a name of contacts.db
@@ -343,267 +333,18 @@
 }
 //create three SQL_LITE tables, ALLORDERS, JOBS, and CRANES_DONE
 - (void) createTable {
-    
-    NSString *querySql = [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS ALLORDERS (ID INTEGER PRIMARY KEY AUTOINCREMENT, HOISTSRL TEXT, JOBNUMBER TEXT, EQUIPNUM TEXT, PART TEXT, DEFICIENT TEXT, DEFICIENTPART TEXT, NOTES TEXT, PICKERSELECTION TEXT, APPLICABLE TEXT)"];
-    const char *sql_stmt = [querySql UTF8String];
-    char *errMess;
-    
-    //open the database
-    if (sqlite3_open([databasePath UTF8String], &contactDB) == SQLITE_OK)
-    {
-        //creates the table using the querySql NSString
-        if (sqlite3_exec(contactDB, sql_stmt, NULL, NULL, &errMess) == SQLITE_OK) 
-        {
-            NSLog(@"ALL ORDERS TABLE CREATED");
-        }
-        //query to create the JOBS table
-        querySql = [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS JOBS (ID INTEGER PRIMARY KEY AUTOINCREMENT, HOISTSRL TEXT, CUSTOMERNAME TEXT, CONTACT TEXT, JOBNUMBER TEXT, DATE TEXT, ADDRESS TEXT, EMAIL TEXT, EQUIPNUM TEXT, CRANEMFG TEXT, HOISTMFG TEXT, HOISTMDL TEXT, CRANEDESCRIPTION TEXT, CAP TEXT, CRANESRL TEXT)"];
-        sql_stmt = [querySql UTF8String];
-        
-        if (sqlite3_exec(contactDB, sql_stmt, NULL, NULL, &errMess) == SQLITE_OK) 
-        {
-            NSLog(@"JOBS Table Created");
-        }
-        //query to create the CRANES_DONE table
-        querySql = [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS CRANES_DONE (HOISTSRL TEXT, CUSTOMERNAME TEXT, DATE TEXT)"];
-        sql_stmt = [querySql UTF8String];
-        
-        if (sqlite3_exec(contactDB, sql_stmt, NULL, NULL, &errMess) == SQLITE_OK) 
-        {
-            NSLog(@"CRANES Table Created");
-        }
-        
-        querySql = [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS IPADOWNER (NAME TEXT)"];
-        sql_stmt = [querySql UTF8String];
-        
-        if (sqlite3_exec(contactDB, sql_stmt, NULL, NULL, &errMess) == SQLITE_OK)
-        {
-            NSLog(@"Name Table Created");
-        }
-        sqlite3_close(contactDB);
-    }
-    //release memory
-    querySql = nil;
-    sql_stmt = nil;
-    errMess = nil;
+
+    [DataLayer createTable:databasePath contactDb:contactDB];
+
 }
 
-#pragma mark Dropbox Methods
-
-- (void)restClient:(DBRestClient*)client uploadedFile:(NSString*)destPath
-              from:(NSString*)srcPath metadata:(DBMetadata*)metadata {
-    
-    NSLog(@"File uploaded successfully to path: %@", metadata.path);
-}
-
-- (void)restClient:(DBRestClient*)client uploadFileFailedWithError:(NSError*)error {
-    NSLog(@"File upload failed with error - %@", error);
-}
-
-- (DBRestClient *) restClient {
-    if (!restClient) {
-        restClient = [[DBRestClient alloc] initWithSession:[DBSession sharedSession]];
-        restClient.delegate = self;
-    }
-    return restClient;
-}
-
-- (void) UploadCSVFileToDropbox: (NSString *) fullPath
-{
-    //gets the location of the CSV file
-    //NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    
-    //create NSString object, that holds our exact path to the documents directory
-    //NSString *documentsDirectory = [NSString stringWithFormat:@"%@/", [paths objectAtIndex:0]];
-    //NSString *localPath = [[NSBundle mainBundle] pathForResource:@"JonnyCranes" ofType:@"csv"];
-    NSString *filename = [NSString stringWithFormat:@"%@Cranes.csv", owner];
-    NSString *destDir = @"/";
-    //makes sure that when the file is uploaded to the Dropbox server the existing file is overwritten, in order to make it so that the file is not overriden the code should look like this
-    /*
-     [[self restClient] uploadFile:filename toPath:destDir
-     parentRev:nil fromPath:fullPath];
-     */
-    
-    [[self restClient] uploadFile:filename toPath:destDir
-                    fromPath:fullPath];
-    
-    //[[self restClient] loadMetadata:@"/"];
-    filename = nil;
-    destDir = nil;
-}
-
-- (void)restClient:(DBRestClient *)client loadedMetadata:(DBMetadata *)metadata {
-    if (metadata.isDirectory) {
-        NSLog(@"Folder '%@' contains:", metadata.path);
-        for (DBMetadata *file in metadata.contents) {
-            NSLog(@"\t%@", file.filename);
-        }
-    }
-}
-
-- (void)restClient:(DBRestClient *)client
-loadMetadataFailedWithError:(NSError *)error {
-    
-    NSLog(@"Error loading metadata: %@", error);
-}
-
-//Create a CSV file from the CRANES_DONE table and then uploads file to Dropbox
-- (IBAction)SelectCraneDescriptionPressed:(id)sender {
-    NSUInteger selectedRow = [CraneDescriptionUIPicker selectedRowInComponent:0];
-    NSString *myCraneDescription = [[CraneDescriptionUIPicker delegate] pickerView:CraneDescriptionUIPicker titleForRow:selectedRow forComponent:0];
-
-    txtCraneDescription.text = myCraneDescription;
-    selectCraneButton.hidden = TRUE;
-    [self textFieldDidEndEditing:activeField];
-    [CraneDescriptionUIPicker removeFromSuperview];
-    [txtCraneDescription resignFirstResponder];
-    Parts *parts = [[Parts alloc] init : txtCraneDescription.text];
-    myPartsArray = [parts myParts];
-    myItemListStore = [[ItemListConditionStorage alloc] init:myPartsArray];
-    lblCraneDesc.text = txtCraneDescription.text;
-    [self keyboardWillBeHidden:UIKeyboardWillHideNotification];
-}
-
-- (IBAction)UpdateButtonPressed:(id)sender {
-    [self SendTablesToServer];
-}
 //gets customer information and crane information from the JOBS table with the specified equip # and then displays this information on the home page
-- (IBAction)LoadEquipNumPressed:(id)sender
-{
-    sqlite3_stmt *statement;
-    const char *dbPath = [databasePath UTF8String];
-    bool craneExist=NO;
-    
-        if (sqlite3_open(dbPath, &contactDB)==SQLITE_OK)
-        { 
-            //grab only the crane information from the WATERDISTRICTCRANES table, which simply contains the water district cranes
-            NSString *selectSQL = [NSString stringWithFormat:@"SELECT TYPE, CAPACITY, MDL_HOIST, SRL_CRANE_MFG, MANUFACTURER, SRL_HOIST FROM WATERDISTRICTCRANES WHERE UNIT_ID=\"%@\"",txtEquipNum.text];   
-            const char *select_stmt = [selectSQL UTF8String];
-            if (sqlite3_prepare_v2(contactDB, select_stmt, -1, &statement, NULL)==SQLITE_OK)
-            {
-                while (sqlite3_step(statement) == SQLITE_ROW)
-                {
-                    craneExist = YES;
-                    const char *type = (char*) sqlite3_column_text(statement, 0);           //information at first column
-                    const char *capacity = (char*) sqlite3_column_text(statement, 1);       //second column
-                    const char *mdlHoist = (char*) sqlite3_column_text(statement, 2);       //third column
-                    const char *srlCraneMfg = (char*) sqlite3_column_text(statement, 3);    //fourth column
-                    const char *hoistSrl = (char*) sqlite3_column_text(statement, 5);
-                    //const char *manufacturer = (char*) sqlite3_column_text(statement, 4);
-                    
-                    NSString *equipNum = txtEquipNum.text;
-                    
-                    [self EmptyTextFields];
-                    
-                    txtHoistSrl.text = [NSString stringWithUTF8String:hoistSrl];
-                    txtEquipNum.text = equipNum;
-                    
-                    //-----------------------Water district information -----------------
-                    txtCustomerName.text = @"LVVWD";
-                    txtCustomerContact.text = @"DAVID BOURN";
-                    txtAddress.text = @"1001 S VALLEY VIEW BLVD, LAS VEGAS, NV 89107";
-                    txtEmail.text = @"DAVID.BOURN@LVVWD.COM";
-                    //txtCustomerName.text = custName;
-                    //txtCustomerName.text = [NSString stringWithUTF8String:manufacturer];
-                    
-                    txtCraneDescription.text = [NSString stringWithUTF8String:type];    //store type
-                    txtCap.text = [NSString stringWithUTF8String:capacity];             //store cap
-                    txtHoistMdl.text = [NSString stringWithUTF8String:mdlHoist];        //store hoistMdl
-                    txtCraneSrl.text = [NSString stringWithUTF8String:srlCraneMfg];     //store CraneSrl
-                    lblCraneDesc.text = [NSString stringWithUTF8String:type];           //store CraneDesc
-                    txtHoistSrl.text = [NSString stringWithUTF8String:hoistSrl];
-                    
-                    NSLog(@"Retrieved condition from the table");
-                    //release memory
-                    type = nil;
-                    capacity = nil;
-                    mdlHoist = nil;
-                    srlCraneMfg = nil;
-                    hoistSrl = nil;
-                    equipNum= nil;
-                }
 
-            }
-            else {
-                NSLog(@"Failed to find jobnumber in table");
-            }
-            selectSQL = [NSString stringWithFormat:@"SELECT HOISTSRL, CUSTOMERNAME, CONTACT, DATE, ADDRESS, EMAIL, EQUIPNUM, CRANEMFG, HOISTMFG, HOISTMDL, CRANEDESCRIPTION, CAP, CRANESRL, JOBNUMBER FROM JOBS WHERE EQUIPNUM=\"%@\"", txtEquipNum.text];
-            select_stmt = [selectSQL UTF8String];
-            if (sqlite3_prepare_v2(contactDB, select_stmt, -1, &statement, NULL)==SQLITE_OK)
-            {
-                while (sqlite3_step(statement) == SQLITE_ROW)
-                {
-                    craneExist = YES;
-                    const char *hoistSrl = (char*) sqlite3_column_text(statement, 0);
-                    const char *custName = (char*) sqlite3_column_text(statement, 1);
-                    const char *contact = (char*) sqlite3_column_text(statement, 2);
-                    const char *date = (char*) sqlite3_column_text(statement, 3);
-                    const char *address = (char*) sqlite3_column_text(statement, 4);
-                    const char *email = (char*) sqlite3_column_text(statement, 5);
-                    //const char *equipNum = (char*) sqlite3_column_text(statement, 6);
-                    const char *craneMfg = (char*) sqlite3_column_text(statement, 7);
-                    const char *hoistMfg = (char*) sqlite3_column_text(statement, 8);
-                    const char *hoistMdl = (char*) sqlite3_column_text(statement, 9);
-                    const char *craneDescription = (char*) sqlite3_column_text(statement, 10);
-                    const char *cap = (char*) sqlite3_column_text(statement, 11);
-                    const char *craneSrl = (char*) sqlite3_column_text(statement, 12);
-                    const char *chJobNumber = (char*) sqlite3_column_text(statement, 13);
-                    
-                    //-------------------------Customer Information-------------------------
-                    //These methods call the CheckForExistingRecord method which will check to see if there is any strings within these text fields
-                    //If there are none that means that the crane did not exist within the WATERCRANESDONE table, so you will then check to see if there are any cranes
-                    //inside of the job table with this information, if yes, then insert that information into the tables
-                    txtHoistSrl.text = [self CheckForExistingRecord:txtHoistSrl.text :hoistSrl];
-                    txtCustomerName.text= [self CheckForExistingRecord:txtCustomerName.text :custName];
-                    txtCustomerContact.text = [self CheckForExistingRecord:txtCustomerContact.text :contact];
-                    txtDate.text = [self CheckForExistingRecord:txtDate.text :date];
-                    txtAddress.text = [self CheckForExistingRecord:txtAddress.text :address];
-                    txtEmail.text = [self CheckForExistingRecord:txtEmail.text :email];
-                    //-----------------------Crane Information-----------------------------
-                    txtCraneMfg.text = [self CheckForExistingRecord:txtCraneMfg.text :craneMfg];
-                    txtHoistMfg.text = [self CheckForExistingRecord:txtHoistMfg.text :hoistMfg];
-                    txtHoistMdl.text = [self CheckForExistingRecord:txtHoistMdl.text :hoistMdl];
-                    txtCraneDescription.text = [self CheckForExistingRecord:txtCraneDescription.text :craneDescription];
-                    txtCap.text = [self CheckForExistingRecord:txtCap.text :cap];
-                    txtCraneSrl.text = [self CheckForExistingRecord:txtCraneSrl.text :craneSrl];
-                    txtJobNumber.text = [self CheckForExistingRecord:txtJobNumber.text :chJobNumber];
-                    lblCraneDesc.text = [self CheckForExistingRecord:txtCraneDescription.text :craneDescription];
-                    
-                    NSLog(@"Retrieved condition from the table");
-                    //release memory
-                    hoistSrl = nil;
-                    custName = nil;
-                    contact = nil;
-                    date = nil;
-                    address = nil;
-                    email = nil;
-                    craneMfg = nil;
-                    hoistMfg = nil;
-                    hoistMdl = nil;
-                    craneDescription = nil;
-                    cap = nil;
-                    craneSrl = nil;
-                    chJobNumber = nil;
-                }
-            }
-            else {
-                NSLog(@"Failed to find jobnumber in table");
-            }
-            //if this crane does not exist, which means that it is not a water district crane then display that it does not exist
-            if (craneExist ==NO)
-            {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"NO CRANE" message:@"No CRANE by this EQUIPMENT NUMBER was found" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK"    , nil];
-                [alert show];
-            }
-            else {
-                myItemListStore = [[ItemListConditionStorage alloc] init:myPartsArray];
-                optionLocation = 0;
-                [self changeLayout:optionLocation];
-            }
-            
-    }
-[self OpenOrderFromField:txtEquipNum];
+- (void) LoadEquipNumPressed:(id)sender
+{
+    [self EmptyTextFields];
 }
+
 //Gets a text field and checks to see whether or not it is empty, if it is empty then it returns a string which contains the correct information from the database
 //if it is not empty then it keeps the string as is
 - (NSString *) CheckForExistingRecord:(NSString *) textField: (const char *) input
@@ -618,77 +359,6 @@ loadMetadataFailedWithError:(NSError *)error {
         return textField;
     }
     return nil;
-}
-
-//creates a csv file and then uploadas that csv file to the server
-- (void) SendTablesToServer
-{
-    sqlite3_stmt *statement;
-    const char *dbPath = [databasePath UTF8String];
-    bool orderExist = NO;
-    NSMutableString *myCSVString = [[NSMutableString alloc] init];
-    
-    if (sqlite3_open(dbPath, &contactDB)==SQLITE_OK)
-    { 
-        NSString *selectSQL = [NSString stringWithFormat:@"SELECT HOISTSRL, CUSTOMERNAME, DATE FROM CRANES_DONE"];
-        const char *select_stmt = [selectSQL UTF8String];
-        if (sqlite3_prepare_v2(contactDB, select_stmt, -1, &statement, NULL)==SQLITE_OK)
-        {
-            while (sqlite3_step(statement) == SQLITE_ROW)
-            {
-                orderExist = YES;
-                const char *chHoistSrl = (char*) sqlite3_column_text(statement, 0);
-                const char *chCustName = (char*) sqlite3_column_text(statement, 1);
-                const char *chDate = (char*) sqlite3_column_text(statement, 2);
-                
-                NSString *hoistSrl = [NSString stringWithUTF8String:chHoistSrl];
-                NSString *custName = [NSString stringWithUTF8String:chCustName];
-                NSString *date = [NSString stringWithUTF8String:chDate];
-                
-                [myCSVString appendString:[NSString stringWithFormat:@"%@,%@,%@,\n", hoistSrl, custName, date]];
-                
-                NSLog(@"Retrieved condition from the table");
-                //release memory
-                chHoistSrl = nil;
-                chCustName = nil;
-                chDate = nil;
-            }
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Updated Succesfully" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
-            [alert show];
-        }
-        else {
-            NSLog(@"Failed to find jobnumber in table");
-        }
-    }
-    [self WriteCSVFile:myCSVString];
-    //release memory
-    dbPath = nil;
-    myCSVString = nil;
-}
-- (void) WriteCSVFile:(NSString *) csvString
-{
-    NSLog(@"csvString:%@",csvString);
-    
-    // Create .csv file and save in Documents Directory.
-    
-    //create instance of NSFileManager
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    
-    //create an array and store result of our search for the documents directory in it
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    
-    //create NSString object, that holds our exact path to the documents directory
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSLog(@"Document Dir: %@",documentsDirectory);
-    
-    NSString *fullPath = [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@Cranes.csv", owner]]; //add our file to the path
-    [fileManager createFileAtPath:fullPath contents:[csvString dataUsingEncoding:NSUTF8StringEncoding] attributes:nil]; //finally save the path (file)
-    [self UploadCSVFileToDropbox:fullPath];
-    //release memory
-    fileManager = nil;
-    paths = nil;
-    documentsDirectory = nil;
-    fullPath = nil;
 }
 
 //Grab the crane information from the WATERDISTRICTCRANES table with the HoistSrl as the identifier and then insert the results onto the home page

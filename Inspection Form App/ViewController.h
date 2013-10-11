@@ -13,12 +13,11 @@
 #import <MessageUI/MessageUI.h>
 #import <MessageUI/MFMailComposeViewController.h>
 #import "TextField.h"
-#import <DropboxSDK/DropboxSDK.h>
 
 @class DBRestClient;
 
 @interface ViewController : UIViewController
-<UIPickerViewDelegate, UIPickerViewDataSource, MFMailComposeViewControllerDelegate, UIDocumentInteractionControllerDelegate, UIAlertViewDelegate, UIPickerViewAccessibilityDelegate, UITextFieldDelegate, DBRestClientDelegate> { 
+<UIPickerViewDelegate, UIPickerViewDataSource, MFMailComposeViewControllerDelegate, UIDocumentInteractionControllerDelegate, UIAlertViewDelegate, UIPickerViewAccessibilityDelegate, UITextFieldDelegate> { 
     sqlite3 *contactDb; 
     UIDocumentInteractionController *controller;
     UIDocumentInteractionController *secondController;

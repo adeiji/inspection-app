@@ -10,7 +10,6 @@
 		8B0787C415113448006857A8 /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B0787C315113448006857A8 /* TableViewController.m */; };
 		8B0787C715113796006857A8 /* Parts.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B0787C615113796006857A8 /* Parts.m */; };
 		8B544612150F0C3E007E1CA9 /* GradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B544611150F0C3E007E1CA9 /* GradientView.m */; };
-		8B6BA17B1708BDAF00E08D9D /* DropboxSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B6BA17A1708BDAF00E08D9D /* DropboxSDK.framework */; };
 		8B6BA1831708BF1B00E08D9D /* autograph_x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B6BA17E1708BF1B00E08D9D /* autograph_x.png */; };
 		8B6BA1841708BF1B00E08D9D /* t1_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B6BA17F1708BF1B00E08D9D /* t1_logo.png */; };
 		8B6BA1851708BF1B00E08D9D /* libT1Autograph.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B6BA1801708BF1B00E08D9D /* libT1Autograph.a */; };
@@ -41,6 +40,12 @@
 		8BF3877015239E1200C3F368 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BF3876F15239E1200C3F368 /* MessageUI.framework */; };
 		8BF97C141706685500E6D242 /* AutographViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BF97C131706685500E6D242 /* AutographViewController.m */; };
 		CE3992751805FD08003AE30B /* iPadMainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE3992741805FD08003AE30B /* iPadMainStoryboard.storyboard */; };
+		CE40D38B18087BC20080E9BD /* DataLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = CE40D38A18087BC20080E9BD /* DataLayer.m */; };
+		CE40D38E18087F290080E9BD /* Dropbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE40D38D18087F290080E9BD /* Dropbox.framework */; };
+		CE40D39018087F670080E9BD /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE40D38F18087F670080E9BD /* CFNetwork.framework */; };
+		CE40D39218087F810080E9BD /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE40D39118087F810080E9BD /* SystemConfiguration.framework */; };
+		CE40D39418087F970080E9BD /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE40D39318087F970080E9BD /* libc++.dylib */; };
+		CE40D39718088E340080E9BD /* Crane.m in Sources */ = {isa = PBXBuildFile; fileRef = CE40D39618088E340080E9BD /* Crane.m */; };
 		CE9775D91718C2660037967E /* logo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE9775D81718C2660037967E /* logo.jpg */; };
 		CE9A27381716A63200FE3D32 /* ipadAppLogo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE9A27371716A63200FE3D32 /* ipadAppLogo.jpg */; };
 		CE9A273C1716A70E00FE3D32 /* titlePageLogo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE9A273B1716A70E00FE3D32 /* titlePageLogo.jpg */; };
@@ -63,7 +68,6 @@
 		8B0787C615113796006857A8 /* Parts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Parts.m; sourceTree = "<group>"; };
 		8B544610150F0C3E007E1CA9 /* GradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientView.h; sourceTree = "<group>"; };
 		8B544611150F0C3E007E1CA9 /* GradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradientView.m; sourceTree = "<group>"; };
-		8B6BA17A1708BDAF00E08D9D /* DropboxSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DropboxSDK.framework; sourceTree = "<group>"; };
 		8B6BA17E1708BF1B00E08D9D /* autograph_x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = autograph_x.png; sourceTree = "<group>"; };
 		8B6BA17F1708BF1B00E08D9D /* t1_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = t1_logo.png; sourceTree = "<group>"; };
 		8B6BA1801708BF1B00E08D9D /* libT1Autograph.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libT1Autograph.a; sourceTree = "<group>"; };
@@ -112,6 +116,14 @@
 		8BF97C121706683000E6D242 /* AutographViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutographViewController.h; sourceTree = "<group>"; };
 		8BF97C131706685500E6D242 /* AutographViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutographViewController.m; sourceTree = "<group>"; };
 		CE3992741805FD08003AE30B /* iPadMainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = iPadMainStoryboard.storyboard; sourceTree = "<group>"; };
+		CE40D38918087BC20080E9BD /* DataLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataLayer.h; sourceTree = "<group>"; };
+		CE40D38A18087BC20080E9BD /* DataLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataLayer.m; sourceTree = "<group>"; };
+		CE40D38D18087F290080E9BD /* Dropbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Dropbox.framework; sourceTree = "<group>"; };
+		CE40D38F18087F670080E9BD /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		CE40D39118087F810080E9BD /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		CE40D39318087F970080E9BD /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
+		CE40D39518088E340080E9BD /* Crane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Crane.h; sourceTree = "<group>"; };
+		CE40D39618088E340080E9BD /* Crane.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Crane.m; sourceTree = "<group>"; };
 		CE9775D81718C2660037967E /* logo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = logo.jpg; sourceTree = "<group>"; };
 		CE9A27371716A63200FE3D32 /* ipadAppLogo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ipadAppLogo.jpg; sourceTree = "<group>"; };
 		CE9A273B1716A70E00FE3D32 /* titlePageLogo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = titlePageLogo.jpg; sourceTree = "<group>"; };
@@ -122,14 +134,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE40D39418087F970080E9BD /* libc++.dylib in Frameworks */,
+				CE40D39218087F810080E9BD /* SystemConfiguration.framework in Frameworks */,
 				8BF09E74153A53E200E1BCB3 /* Security.framework in Frameworks */,
+				CE40D39018087F670080E9BD /* CFNetwork.framework in Frameworks */,
 				8BF3877015239E1200C3F368 /* MessageUI.framework in Frameworks */,
 				8BC7D9D31522ACE000D1A863 /* QuartzCore.framework in Frameworks */,
 				8BE8C6FB151538B700D5C7F2 /* libsqlite3.dylib in Frameworks */,
 				8BC58453150ABD87000AC695 /* UIKit.framework in Frameworks */,
 				8BC58455150ABD87000AC695 /* Foundation.framework in Frameworks */,
 				8BC58457150ABD87000AC695 /* CoreGraphics.framework in Frameworks */,
-				8B6BA17B1708BDAF00E08D9D /* DropboxSDK.framework in Frameworks */,
+				CE40D38E18087F290080E9BD /* Dropbox.framework in Frameworks */,
 				8B6BA1851708BF1B00E08D9D /* libT1Autograph.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -170,8 +185,8 @@
 		8BC58443150ABD87000AC695 = {
 			isa = PBXGroup;
 			children = (
+				CE40D38D18087F290080E9BD /* Dropbox.framework */,
 				8B6BA17C1708BF1B00E08D9D /* T1Autograph */,
-				8B6BA17A1708BDAF00E08D9D /* DropboxSDK.framework */,
 				8BF09E73153A53E200E1BCB3 /* Security.framework */,
 				8BF3876F15239E1200C3F368 /* MessageUI.framework */,
 				8BE8C6FA151538B700D5C7F2 /* libsqlite3.dylib */,
@@ -194,6 +209,9 @@
 		8BC58451150ABD87000AC695 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CE40D39318087F970080E9BD /* libc++.dylib */,
+				CE40D39118087F810080E9BD /* SystemConfiguration.framework */,
+				CE40D38F18087F670080E9BD /* CFNetwork.framework */,
 				8BC58452150ABD87000AC695 /* UIKit.framework */,
 				8BC58454150ABD87000AC695 /* Foundation.framework */,
 				8BC58456150ABD87000AC695 /* CoreGraphics.framework */,
@@ -214,11 +232,14 @@
 				8BF10A9A152FB93D00DC5F05 /* TextField.h */,
 				8BF10A9B152FB93D00DC5F05 /* TextField.m */,
 				8B0787C215113448006857A8 /* TableViewController.h */,
+				CE40D39518088E340080E9BD /* Crane.h */,
+				CE40D39618088E340080E9BD /* Crane.m */,
 				8B0787C315113448006857A8 /* TableViewController.m */,
 				8BF97C121706683000E6D242 /* AutographViewController.h */,
 				8BF97C131706685500E6D242 /* AutographViewController.m */,
 				8BC58464150ABD87000AC695 /* ViewController.h */,
 				CE3992741805FD08003AE30B /* iPadMainStoryboard.storyboard */,
+				CE40D38C18087BCA0080E9BD /* Data Layer */,
 				8BC58465150ABD87000AC695 /* ViewController.m */,
 				8BE9DE7E1616355800906B98 /* OrdinalNumberFormatter.h */,
 				8BE9DE7F1616355800906B98 /* OrdinalNumberFormatter.m */,
@@ -273,6 +294,15 @@
 				8BC58479150ABD88000AC695 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CE40D38C18087BCA0080E9BD /* Data Layer */ = {
+			isa = PBXGroup;
+			children = (
+				CE40D38918087BC20080E9BD /* DataLayer.h */,
+				CE40D38A18087BC20080E9BD /* DataLayer.m */,
+			);
+			name = "Data Layer";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -400,6 +430,8 @@
 				8BE881FC1513FA4200360C63 /* Condition.m in Sources */,
 				8BE4CD221515957000D75629 /* T1AutographAppDelegate.m in Sources */,
 				8BF10A9C152FB93D00DC5F05 /* TextField.m in Sources */,
+				CE40D38B18087BC20080E9BD /* DataLayer.m in Sources */,
+				CE40D39718088E340080E9BD /* Crane.m in Sources */,
 				8BE9DE801616355800906B98 /* OrdinalNumberFormatter.m in Sources */,
 				8BF97C141706685500E6D242 /* AutographViewController.m in Sources */,
 			);
@@ -509,10 +541,11 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/Inspection Form App/dropbox-ios-sdk-1.2.1\"",
-					"\"$(SRCROOT)/../../Downloads/dropbox-ios-sdk-1.2.1\"",
-					"\"$(SRCROOT)/../dropbox-ios-sdk-1.2.2\"",
-					"\"$(SRCROOT)\"",
+					"\\\"$(SRCROOT)/Inspection\\ Form\\ App/dropbox-ios-sdk-1.2.1\\\"",
+					"\\\"$(SRCROOT)/../../Downloads/dropbox-ios-sdk-1.2.1\\\"",
+					"\\\"$(SRCROOT)/../dropbox-ios-sdk-1.2.2\\\"",
+					"$(SRCROOT)",
+					"/Users/user/Documents/XCode\\ Projects/Inspection\\ Form\\ App",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Inspection Form App/Inspection Form App-Prefix.pch";
@@ -544,10 +577,11 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/Inspection Form App/dropbox-ios-sdk-1.2.1\"",
-					"\"$(SRCROOT)/../../Downloads/dropbox-ios-sdk-1.2.1\"",
-					"\"$(SRCROOT)/../dropbox-ios-sdk-1.2.2\"",
-					"\"$(SRCROOT)\"",
+					"\\\"$(SRCROOT)/Inspection\\ Form\\ App/dropbox-ios-sdk-1.2.1\\\"",
+					"\\\"$(SRCROOT)/../../Downloads/dropbox-ios-sdk-1.2.1\\\"",
+					"\\\"$(SRCROOT)/../dropbox-ios-sdk-1.2.2\\\"",
+					"$(SRCROOT)",
+					"/Users/user/Documents/XCode\\ Projects/Inspection\\ Form\\ App",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Inspection Form App/Inspection Form App-Prefix.pch";

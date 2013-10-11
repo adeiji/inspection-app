@@ -13,18 +13,23 @@
 
 #import <UIKit/UIKit.h>
 
-@interface Customer : NSObject {
+@interface Customer : NSObject
 
-    NSString* name;
-    NSString* contact;
-    NSString* address;
-    NSDate* date;
-    NSInteger *jobNumber;
-    NSString* equipDescription;
-    NSString* craneMfg;
-    NSString* hoistMfg;
-    NSString* hoistMdl;
-}
+@property (strong, nonatomic) NSString* name;
+@property (strong, nonatomic) NSString* contact;
+@property (strong, nonatomic) NSString* address;
+@property (strong, nonatomic) NSDate* date;
+@property NSInteger *jobNumber;
+@property (strong, nonatomic) NSString* equipDescription;
+@property (strong, nonatomic) NSString* craneMfg;
+@property (strong, nonatomic) NSString* hoistMfg;
+@property (strong, nonatomic) NSString* hoistMdl;
+@property (strong, nonatomic) NSString* hoistSrl;
+@property (strong, nonatomic) NSString* equipmentNumber;
+@property (strong, nonatomic) NSString* email;
+@property (strong, nonatomic) NSString* description;
+
+
 + (Customer*) customer;
 
 - (NSString *) name;
