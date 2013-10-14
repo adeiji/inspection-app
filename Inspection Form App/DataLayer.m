@@ -14,6 +14,56 @@
 
 @implementation DataLayer
 
+@synthesize account;
+@synthesize inspectionDataStore;
+@synthesize inspectionsTable;
+
+- (DataLayer*) init
+{
+    if (self = [super init])
+    {
+        account = [[DBAccountManager sharedManager] linkedAccount];
+        inspectionDataStore = [DBDatastore openDefaultStoreForAccount:account error:nil];
+        inspectionsTable = [inspectionDataStore getTable:@"inspections"];
+    }
+    return self;
+}
+
+//Adds the record to the database.  Adds the record with the corresponding date, that way we can pull previous orders by date.
++ (void) insertToDatastoreTable : (NSArray*) myConditions
+              DictionaryToStore : (NSDictionary*) dictionaryToStore
+                      TableName : (NSString*) tableName
+                      DBAccount : (DBAccount *) account
+                    DBDatastore : (DBDatastore *) dataStore
+                        DBTable : (DBTable *) table
+{
+    //Creates a record with all the information from the current condition and then adds this information to the Datastore
+    DBRecord *conditionRecord = [table insert: dictionaryToStore];
+}
+
+//Syncs the record to the DataStore API
+//Add error reading capabilities later
++ (void) sync : (DBDatastore*) dataStore
+{
+    [dataStore sync:nil];
+}
+
++ (void) removeFromDatastoreTable : (NSDictionary*) dictionaryQuery
+                        DBAccount : (DBAccount *) account
+                      DBDatastore : (DBDatastore *) dataStore
+                          DBTable : (DBTable *) table
+{
+    
+    //Get all the records with this hoistSrl and this specific date
+    NSArray *results = [table query:dictionaryQuery error:nil];
+    //Remove all the previous inspections with this HoistSrl
+    for (id item in results)
+    {
+        DBRecord *record = item;
+        [record deleteRecord];
+    }
+}
+
 
 + (NSString*) LoadOwner : (NSString*) databasePath
          contactDb : (sqlite3*) contactDB

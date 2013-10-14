@@ -12,8 +12,12 @@
 
 @property (strong, nonatomic) NSString* type;
 @property (strong, nonatomic) NSString* capacity;
-@property (strong, nonatomic) NSString* mdlHoist;
-@property (strong, nonatomic) NSString* srlCraneMfg;
+@property (strong, nonatomic) NSString* hoistMdl;
+@property (strong, nonatomic) NSString* craneSrl;
 @property (strong, nonatomic) NSString* hoistSrl;
+@property (strong, nonatomic) NSString* description;
+@property (strong, nonatomic) NSString* mfg;
+@property (strong, nonatomic) NSString *hoistMfg;
+@property (strong, nonatomic) NSString *equipmentNumber;
 
 @end

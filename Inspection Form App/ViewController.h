@@ -13,6 +13,7 @@
 #import <MessageUI/MessageUI.h>
 #import <MessageUI/MFMailComposeViewController.h>
 #import "TextField.h"
+#import <Dropbox/Dropbox.h>
 
 @class DBRestClient;
 
@@ -22,6 +23,12 @@
     UIDocumentInteractionController *controller;
     UIDocumentInteractionController *secondController;
 }
+
+
+@property (strong, nonatomic) DBAccount *account;
+@property (strong, nonatomic) DBDatastore *dataStore;
+@property (strong, nonatomic) DBTable *table;
+
 
 @property (weak, nonatomic) IBOutlet UISwitch *defficiencySwitch;
 @property (strong, nonatomic) IBOutlet UIPickerView *DefficiencyPicker;

@@ -115,6 +115,9 @@
 @synthesize CustomerInfoFullView;
 @synthesize CraneInspectionView;
 @synthesize scrollView;
+@synthesize dataStore;
+@synthesize table;
+@synthesize account;
 
 #define kMinimumGestureLength   25
 #define kMaximumVariance        100
@@ -175,7 +178,7 @@
 
 - (void) didPressLink
 {
-    DBAccount *account = [[DBAccountManager sharedManager] linkedAccount];
+    account = [[DBAccountManager sharedManager] linkedAccount];
     
     if (account) {
         NSLog(@"App already linked");
@@ -183,20 +186,63 @@
         [[DBAccountManager sharedManager] linkFromController:self];
     }
 }
+
+
 //If there is not a Dropbox Datastore Table already created, we create it, as well as the data store.
 - (void) createDatastoreTable
 {
-    DBAccount *account = [[DBAccountManager sharedManager] linkedAccount];
-    DBDatastore *inspectionDataStore = [DBDatastore openDefaultStoreForAccount:account error:nil];
-    
-    DBTable *inspectionsTable = [inspectionDataStore getTable:@"inspections"];
-    
+    account = [[DBAccountManager sharedManager] linkedAccount];
+    dataStore = [DBDatastore openDefaultStoreForAccount:account error:nil];
+    table = [dataStore getTable:@"inspections"];
 }
 
-- (void) insertInspectionToDatastoreTable : (DBAccount *) account
-                                DataStore : (DBDatastore *) inspectionDataStore
-                            DatabaseTable : (DBTable *) inspectionsTable
+
+//Adds the record to the database.  Adds the record with the corresponding date, that way we can pull previous orders by date.
+- (void) insertInspectionToDatastoreTable
 {
+    //Get all the records with this hoistSrl and this specific date
+    NSDictionary *query = @{ @"hoistSrl" : txtHoistSrl.text, @"date" : txtDate.text };
+    
+    //Remove the records that match the specified query fromt he database
+    [DataLayer removeFromDatastoreTable:query DBAccount:account DBDatastore:dataStore DBTable:table];
+    
+    //Go through each condition in the current inspection and then write this information to the Datastore
+    for (Condition *condition in myItemListStore.myConditions)
+    {
+        static int i = 0;
+        NSString *isDeficient = @"NO";
+        NSString *isApplicable = @"NO";
+        
+        if (condition.deficient == YES)
+        {
+            isDeficient = @"YES";
+        }
+        if (condition.applicable == YES)
+        {
+            isApplicable = @"YES";
+        }
+        
+        //inserts the current condition in the row
+        pickerSelection =  [NSString stringWithFormat:@"%d", condition.pickerSelection];
+        //Create the dictionary that contains all the information for this record.
+        NSDictionary *conditionDictionary = [[NSDictionary alloc] initWithObjectsAndKeys
+                                             :txtHoistSrl.text, @"hoistsrl",
+                                             txtJobNumber.text, @"jobnumber",
+                                             txtEquipNum.text, @"equipmentnumber",
+                                             (NSString *)[myPartsArray objectAtIndex:i], @"part",
+                                             (NSString *) isDeficient, @"deficient",
+                                             condition.deficientPart, @"deficientpart",
+                                             [condition.notes stringByReplacingOccurrencesOfString:@"\"" withString:@"\\"], @"notes",
+                                             pickerSelection, @"pickerselection",
+                                             isApplicable, @"isapplicable",
+                                             nil];
+        
+        //Add this condition to the datastore
+        [DataLayer insertInspectionToDatastoreTable:myItemListStore.myConditions DictionaryToStore:conditionDictionary];
+        i++;
+    }
+    //Sync the local database with the Datastore API
+    [DataLayer sync : dataStore];
 }
 
 
@@ -297,46 +343,7 @@
     owner = [DataLayer LoadOwner:databasePath contactDb:contactDB];
 }
 #pragma mark Database Methods
-//create the database by first creating a directory for the database to be stored to, with a name of contacts.db
-- (void) createDatabase
-{
-    //get the path where to hold the database
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDir = [paths objectAtIndex:0];
-    documentsDir = [paths objectAtIndex:0];
 
-    //full file location string
-    databasePath = [[NSString alloc] initWithString:[documentsDir stringByAppendingPathComponent:@"contacts.db"]];
-
-    //make sure that this is uncommented-----------------------------****************________------------
-    //databasePath = @"/Users/Developer/Documents/contacts.db";
-    NSFileManager *fileMgr = [NSFileManager defaultManager];
-    
-    if ([fileMgr fileExistsAtPath: databasePath ] == NO)
-    {
-        const char *dbpath = [databasePath UTF8String];
-        
-        if (sqlite3_open(dbpath, &contactDB) == SQLITE_OK)
-        {
-            sqlite3_close(contactDB);
-            
-        } else {
-            NSLog(@"Failed to create the database");
-            //txtDate.text = @"Failed to open/create database";
-        }
-    }
-    [self createTable];
-    //release memory
-    paths = nil;
-    documentsDir = nil;
-    fileMgr = nil;
-}
-//create three SQL_LITE tables, ALLORDERS, JOBS, and CRANES_DONE
-- (void) createTable {
-
-    [DataLayer createTable:databasePath contactDb:contactDB];
-
-}
 
 //gets customer information and crane information from the JOBS table with the specified equip # and then displays this information on the home page
 
@@ -345,273 +352,17 @@
     [self EmptyTextFields];
 }
 
-//Gets a text field and checks to see whether or not it is empty, if it is empty then it returns a string which contains the correct information from the database
-//if it is not empty then it keeps the string as is
-- (NSString *) CheckForExistingRecord:(NSString *) textField: (const char *) input
-{
-    NSString *string = [NSString stringWithUTF8String:input];
-    
-    if ([textField isEqualToString:@""])
-    {
-        return string;
-    }
-    else {
-        return textField;
-    }
-    return nil;
-}
-
 //Grab the crane information from the WATERDISTRICTCRANES table with the HoistSrl as the identifier and then insert the results onto the home page
 //Automatically insert the customerName, customerContact, Address and Email
 - (IBAction)LoadHoistSrlPressed:(id)sender {
-    sqlite3_stmt *statement;
-    bool waterDistrictCrane = NO;
-    const char *dbPath = [databasePath UTF8String];
-    bool craneExist=NO;
-    if (![txtHoistSrl.text isEqualToString:@""])
-    {
-        if (sqlite3_open(dbPath, &contactDB)==SQLITE_OK)
-        { 
-            //grab only the crane information from the WATERDISTRICTCRANES table, which simply contains the water district cranes
-            NSString *selectSQL = [NSString stringWithFormat:@"SELECT TYPE, CAPACITY, MDL_HOIST, SRL_CRANE_MFG, MANUFACTURER, UNIT_ID FROM WATERDISTRICTCRANES WHERE SRL_HOIST=\"%@\"", txtHoistSrl.text];   
-            const char *select_stmt = [selectSQL UTF8String];
-            if (sqlite3_prepare_v2(contactDB, select_stmt, -1, &statement, NULL)==SQLITE_OK)
-            {
-                
-                while (sqlite3_step(statement) == SQLITE_ROW)
-                {
-                    craneExist = YES;
-                    const char *type = (char*) sqlite3_column_text(statement, 0);           //information at first column
-                    const char *capacity = (char*) sqlite3_column_text(statement, 1);       //second column
-                    const char *mdlHoist = (char*) sqlite3_column_text(statement, 2);       //third column
-                    const char *srlCraneMfg = (char*) sqlite3_column_text(statement, 3);    //fourth column
-                    const char *myManufacturer = (char*) sqlite3_column_text(statement, 4);
-                    const char *equipNum = (char*) sqlite3_column_text(statement, 5);
-                    //const char *manufacturer = (char*) sqlite3_column_text(statement, 4);
-                    
-                   // NSString *custName = txtCustomerName.text;
-                    NSString *hoistSrl = txtHoistSrl.text;
-                    
-                    [self EmptyTextFields];
-                    
-                    txtHoistSrl.text = hoistSrl;
-                    
-                    //-----------------------Water district information -----------------
-                    txtCustomerName.text = @"LVVWD";
-                    txtCustomerContact.text = @"DAVID BOURN";
-                    txtAddress.text = @"1001 S VALLEY VIEW BLVD, LAS VEGAS, NV 89107";
-                    txtEmail.text = @"DAVID.BOURN@LVVWD.COM";
-                    //txtCustomerName.text = custName;
-                    //txtCustomerName.text = [NSString stringWithUTF8String:manufacturer];
-                    txtCraneDescription.text = [NSString stringWithUTF8String:type];    //store type
-                    txtCap.text = [NSString stringWithUTF8String:capacity];             //store cap
-                    txtHoistMdl.text = [NSString stringWithUTF8String:mdlHoist];        //store hoistMdl
-                    txtCraneSrl.text = [NSString stringWithUTF8String:srlCraneMfg];     //store CraneSrl
-                    lblCraneDesc.text = [NSString stringWithUTF8String:type];           //store CraneDesc
-                    txtEquipNum.text = [NSString stringWithUTF8String:equipNum];
-                    manufacturer = [NSString stringWithUTF8String:myManufacturer];
-                    
-                    NSLog(@"Retrieved condition from the table");
-                    //release memory
-                    type = nil;
-                    capacity = nil;
-                    mdlHoist = nil;
-                    srlCraneMfg = nil;
-                    equipNum = nil;
-                    hoistSrl = nil;
-                    waterDistrictCrane = YES;
-                }
-            }
-            else {
-                NSLog(@"Failed to find jobnumber in table");
-            }
-            //Grab customer and crane information from the JOBS table with the srl hoist as the identifier
-            selectSQL = [NSString stringWithFormat:@"SELECT HOISTSRL, CUSTOMERNAME, CONTACT, DATE, ADDRESS, EMAIL, EQUIPNUM, CRANEMFG, HOISTMFG, HOISTMDL, CRANEDESCRIPTION, CAP, CRANESRL, JOBNUMBER FROM JOBS WHERE HOISTSRL=\"%@\"", txtHoistSrl.text];
-            select_stmt = [selectSQL UTF8String];
-            if (sqlite3_prepare_v2(contactDB, select_stmt, -1, &statement, NULL)==SQLITE_OK)
-            {
-                while (sqlite3_step(statement) == SQLITE_ROW)
-                {
-                    waterDistrictCrane = NO;
-                    craneExist = YES;
-                    //get the information from the table
-                    const char *hoistSrl = (char*) sqlite3_column_text(statement, 0);                   //info at column 1: HOISTSRL
-                    const char *custName = (char*) sqlite3_column_text(statement, 1);                   //column 2: CUSTOMERNAME
-                    const char *contact = (char*) sqlite3_column_text(statement, 2);                    //column 3: CONTACT
-                    const char *date = (char*) sqlite3_column_text(statement, 3);                       //column 4: DATE
-                    const char *address = (char*) sqlite3_column_text(statement, 4);                    //column 5: ADDRESS
-                    const char *email = (char*) sqlite3_column_text(statement, 5);                      //column 6: EMAIL
-                    const char *equipNum = (char*) sqlite3_column_text(statement, 6);                   //column 7: EQUIPNUM
-                    const char *craneMfg = (char*) sqlite3_column_text(statement, 7);                   //column 8: CRANEMFG
-                    const char *hoistMfg = (char*) sqlite3_column_text(statement, 8);                   //column 9: HOISTMFG
-                    const char *hoistMdl = (char*) sqlite3_column_text(statement, 9);                   //column 10: HOISTMDL
-                    const char *craneDescription = (char*) sqlite3_column_text(statement, 10);          //column 11: CRANEDESCRIPTION
-                    const char *cap = (char*) sqlite3_column_text(statement, 11);                       //column 12: CAP
-                    const char *craneSrl = (char*) sqlite3_column_text(statement, 12);                  //column 13: CRANESRL
-                    const char *chJobNumber = (char*) sqlite3_column_text(statement, 13);               //column 14: JOBNUMBER
-                    //makes sure that the job number stays displayed
-                    
-                    //txtJobNumber.text = [NSString stringWithUTF8String:chJobNumber];
-                    txtHoistSrl.text = [NSString stringWithUTF8String:hoistSrl];
-                    txtDate.text = [NSString stringWithUTF8String:date];
-                    if (waterDistrictCrane == YES)
-                    {
-                        txtCustomerName.text = @"LVVWD";
-                        txtCustomerContact.text = @"DAVID BOURN";
-                        txtAddress.text = @"1001 S VALLEY VIEW BLVD, LAS VEGAS, NV 89107";
-                        txtEmail.text = @"DAVID.BOURN@LVVWD.COM";
-                        
-                    }
-                    else {
-                        txtCustomerName.text = [NSString stringWithUTF8String:custName];
-                        txtCustomerContact.text = [NSString stringWithUTF8String:contact];
-                        txtAddress.text = [NSString stringWithUTF8String:address];
-                        txtEmail.text = [NSString stringWithUTF8String:email];
-                        //if ([txtCraneDescription.text isEqualToString:@""])
-                        //{
-                        txtCraneDescription.text = [NSString stringWithUTF8String:craneDescription];
-                        lblCraneDesc.text = txtCraneDescription.text;
-                        //}
-                    }
-                    txtEquipNum.text = [NSString stringWithUTF8String:equipNum];
-                    txtCraneMfg.text = [NSString stringWithUTF8String:craneMfg];
-                    txtHoistMfg.text = [NSString stringWithUTF8String:hoistMfg];
-                    txtHoistMdl.text = [NSString stringWithUTF8String:hoistMdl];
-                   
-                    if ([txtCap.text isEqualToString:@""])
-                    {
-                        txtCap.text = [NSString stringWithUTF8String:cap];
-                        
-                    }
-                    if ([txtCraneSrl.text isEqualToString:@""])
-                    {
-                        txtCraneSrl.text = [NSString stringWithUTF8String:craneSrl];
-                    }
-                    if ([txtEquipNum.text isEqualToString:@""])
-                    {
-                        txtEquipNum.text = [NSString stringWithUTF8String:equipNum];
-                    }
-                    if ([lblCraneDesc.text isEqualToString:@""])
-                    {
-                        lblCraneDesc.text = [NSString stringWithUTF8String:craneDescription];
-                    }
-                    txtJobNumber.text = [NSString stringWithUTF8String:chJobNumber];
-                    NSLog(@"Retrieved condition from the table");
-                    //release memory
-                    hoistSrl = nil;
-                    date = nil;
-                    equipNum = nil;
-                    craneMfg = nil;
-                    hoistMfg = nil;
-                    hoistMdl = nil;
-                    craneDescription = nil;
-                    cap = nil;
-                    craneSrl = nil;
-                    chJobNumber = nil;
-                    
-                    sqlite3_finalize(statement);
-                }
-            }
-            else {
-                NSLog(@"Failed to find jobnumber in table");
-            }
-            //if this crane does not exist, which means that it is not a water district crane then display that it does not exist
-            if (craneExist ==NO)
-            {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"NO CRANE" message:@"No CRANE by this HOIST SERIAL NUMBER was found" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK"    , nil];
-                [alert show];
-            }
-            else {
-                myItemListStore = [[ItemListConditionStorage alloc] init:myPartsArray];
-                optionLocation = 0;
-                //[self changeLayout:optionLocation];
-            }
-        }
-    }
-    sqlite3_close(contactDB);
-    //Open the actual test results from the last examination
+
     [self OpenOrderFromField:txtHoistSrl];
 }
 
 //this method will need to open the order by getting both the hoist srl number or equip number and the job number so that they can get any hoist srl at any time
 - (void) OpenOrderFromField: (UITextField *) input;
 {
-    sqlite3_stmt *statement;
-    const char *dbPath = [databasePath UTF8String];
-    int counter=0;
-    bool orderExist = NO;
-    NSString *selectSQL = [[NSString alloc] init];
-    const char *select_stmt;
     
-    if (sqlite3_open(dbPath, &contactDB)==SQLITE_OK)
-    { 
-        if ([input.text isEqualToString:txtHoistSrl.text])
-        {
-            selectSQL = [NSString stringWithFormat:@"SELECT part, deficient, deficientpart, notes, pickerselection, applicable FROM ALLORDERS WHERE HOISTSRL=\"%@\"", txtHoistSrl.text];
-            select_stmt = [selectSQL UTF8String];
-        }
-        else {
-            selectSQL = [NSString stringWithFormat:@"SELECT part, deficient, deficientpart, notes, pickerselection, applicable FROM ALLORDERS WHERE EQUIPNUM=\"%@\"", txtEquipNum.text];
-            select_stmt = [selectSQL UTF8String];
-        }
-        if (sqlite3_prepare_v2(contactDB, select_stmt, -1, &statement, NULL)==SQLITE_OK)
-        {
-            @try
-            {
-                //Get the actual test results from the database
-            while (sqlite3_step(statement) == SQLITE_ROW)
-            {
-                orderExist = YES;
-                const char *chDeficient = (char*) sqlite3_column_text(statement, 1);
-                const char *chDeficientPart = (char*) sqlite3_column_text(statement, 2);
-                const char *chNotes = (char*) sqlite3_column_text(statement, 3);
-                const char *chPickerSelection = (char*) sqlite3_column_text(statement, 4);
-                const char *chApplicable = (char*) sqlite3_column_text(statement, 5);
-        
-                BOOL myDeficient = [[NSString stringWithUTF8String:chDeficient] boolValue];
-                BOOL myApplicable = [[NSString stringWithUTF8String:chApplicable] boolValue];
-                NSString *myDeficientPart = [NSString stringWithUTF8String:chDeficientPart];
-                NSString *myNotes = [NSString stringWithUTF8String:chNotes];
-                NSUInteger *myPickerSelection = (NSUInteger *) [[NSString stringWithUTF8String:chPickerSelection] integerValue];
-            
-                Condition *myCondition = [[Condition alloc] initWithParameters:myNotes:myDeficient:myPickerSelection:myDeficientPart:myApplicable];
-                [myItemListStore setCondition:counter:myCondition];
-                counter++;
-                NSLog(@"Retrieved condition from the table");
-                //release memory
-                chDeficient = nil;
-                chDeficientPart = nil;
-                chNotes = nil;
-                chPickerSelection = nil;
-                chApplicable = nil;
-                myDeficientPart = nil;
-                myNotes = nil;
-                myPickerSelection = nil;
-            }
-            }
-            @catch (NSException *exception)
-            {
-                NSLog(@"Loaded more values than exist for crane.");
-            }
-            if (orderExist == NO)
-            {
-                //UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"NO JOB" message:@"No INSPECTION by this JOB NUMBER was found" delegate:self cancelButtonTitle:nilotherButtonTitles:@"OK"    , nil]
-                    //[alert show];
-            }
-            else {
-                optionLocation = 0;
-                [self changeLayout:optionLocation];
-            }
-            //   UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Did retrieve succesfully" delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:@"ok", nil];
-            //  [alert show];
-        }
-        else {
-            NSLog(@"Failed to find jobnumber in table");
-        }
-    }
-    sqlite3_finalize(statement);
-    sqlite3_close(contactDB);
-
 }
 
 - (UIViewController *) documentInteractionControllerViewControllerForPreview:(UIDocumentInteractionController *)controller {
@@ -636,817 +387,8 @@
     dateFormatter= nil;
 }
 
-- (IBAction)openInClicked:(id)sender {
 
-}
-//Remove the test results from the database
--(void) RemoveOrder
-{
-    sqlite3_stmt *statement;
-    const char *dbPath = [databasePath UTF8String];
-    
-    NSString *removeSQL = [NSString stringWithFormat:@"DELETE FROM ALLORDERS WHERE HOISTSRL=\"%@\"", txtHoistSrl.text];
-    const char *remove_stmt = [removeSQL UTF8String];
-    
-    if (sqlite3_prepare_v2(contactDB, remove_stmt, -1, &statement, NULL)==SQLITE_OK)
-    {
-        //sqlite3_bind_text(statement, 1, [txtJobNumber.text UTF8String], -1, NULL);
-    }
-    if (sqlite3_step(statement) == SQLITE_DONE)
-    {
-        NSLog(@"removed succesfully");
-    }
-}
-
-//Saves the job information which will contain the entire inspection results into the ALLORDERS table
-- (void) saveData:(ItemListConditionStorage *) myConditionsList {
-    sqlite3_stmt *statement;
-    const char *dbPath = [databasePath UTF8String];
-    NSString *isDeficient = [[NSString alloc] init];
-    NSString *isApplicable = [[NSString alloc] init];
-    
-    //check to make sure that the database is correct
-    if (sqlite3_open(dbPath, &contactDB) == SQLITE_OK)
-    {
-        //Remove the test results with this HoistSrl from the database
-        [self RemoveOrder];
-        //goes through all the different conditions in the conditionList and sets the condition to whatever is stored within the table
-        for (int i = 0; i < myItemListStore.myConditions.count; i ++) {
-            //grabs the current condition
-            Condition *myCondition = [myItemListStore.myConditions objectAtIndex:i];
-            if (myCondition.deficient == YES)
-            {
-                isDeficient = @"YES";
-            }
-            else {
-                isDeficient = @"NO";
-            }
-            if (myCondition.applicable==YES)
-            {
-                isApplicable = @"YES";
-            }
-            else {
-                isApplicable=@"NO";
-            }
-            //inserts the current condition in the row
-            pickerSelection =  [NSString stringWithFormat:@"%d", myCondition.pickerSelection];
-        
-            NSString *insertSQL = [NSString stringWithFormat:@"INSERT OR REPLACE INTO ALLORDERS (HOISTSRL, JOBNUMBER, EQUIPNUM, PART, DEFICIENT, DEFICIENTPART, NOTES, PICKERSELECTION, APPLICABLE) VALUES(\"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\");", 
-                txtHoistSrl.text,
-                txtJobNumber.text,
-                txtEquipNum.text,
-                (NSString *)[myPartsArray objectAtIndex:i],
-                (NSString *) isDeficient,
-                myCondition.deficientPart, 
-                [myCondition.notes stringByReplacingOccurrencesOfString:@"\"" withString:@"\\"],
-                pickerSelection,
-                (NSString *) isApplicable];
-            //NSString *insertSQL = [NSString stringWithFormat:@"INSERT OR REPLACE INTO ALLORDERS (JOBNUMBER, PART, DEFICIENT, DEFICIENTPART, NOTES, PICKERSELECTION) VALUES (?,?,?,?,?,?)"];
-            
-            const char *insert_stmt = [insertSQL UTF8String];
-        
-            sqlite3_prepare_v2(contactDB, insert_stmt, -1, &statement, nil);
-
-            if (sqlite3_step(statement) != SQLITE_DONE)
-            {
-                NSAssert(0, @"Error updating table: ALLORDERS");
-            }
-            else {
-                NSLog(@"Inserted successfully");
-            }
-            sqlite3_finalize(statement);
-        }
-        sqlite3_close(contactDB);
-        
-        dbPath = nil;
-        isDeficient = nil;
-        isApplicable = nil;
-    }
-}
-
-- (void) writeCertificateTextFile
-{
-    if (![testLoads isEqual:NULL])
-    {
-    NSMutableString *headerString = [NSMutableString stringWithString:@""];
-    NSMutableString *ownerString = [NSMutableString stringWithString:@""];
-    NSMutableString *ownerAddressString = [NSMutableString stringWithString:@""];
-    NSMutableString *device = [NSMutableString stringWithString:@""];
-    NSMutableString *location = [NSMutableString stringWithString:@""];
-    NSMutableString *description = [NSMutableString stringWithString:@""];
-    NSMutableString *ratedCapacity = [NSMutableString stringWithString:@""];
-    NSMutableString *craneManafacturer = [NSMutableString stringWithString:@""];
-    NSMutableString *modelCrane = [NSMutableString stringWithString:@""];
-    NSMutableString *serialNoCrane = [NSMutableString stringWithString:@""];
-    NSMutableString *hoistManufacturer = [NSMutableString stringWithString:@""];
-    NSMutableString *modelHoist = [NSMutableString stringWithString:@""];
-    NSMutableString *serialNoHoist = [NSMutableString stringWithString:@""];
-    NSMutableString *ownerID = [NSMutableString stringWithString:@""];
-    NSMutableString *lifting = [NSMutableString stringWithString:@""];
-    NSMutableString *other = [NSMutableString stringWithString:@""];
-    NSMutableString *testLoadsString = [NSMutableString stringWithString:@""];
-    NSMutableString *proofLoadString = [NSMutableString stringWithString:@""];
-    NSMutableString *loadRatingsString = [NSMutableString stringWithString:@""];
-    NSMutableString *remarksLimitationsString = [NSMutableString stringWithString:@""];
-    NSMutableString *footer = [NSMutableString stringWithString:@""];
-    NSMutableString *nameAddress = [NSMutableString stringWithString:@""];
-    NSMutableString *expirationDate = [NSMutableString stringWithString:@""];
-    NSMutableString *signature = [NSMutableString stringWithString:@""];
-    NSMutableString *title = [NSMutableString stringWithString:@""];
-    NSMutableString *inspectorName = [NSMutableString stringWithString:@""];
-    NSMutableString *certificateNum = [NSMutableString stringWithString:@""];
-    NSMutableString *date = [NSMutableString stringWithString:@""];
-    NSMutableString *address = [NSMutableString stringWithString:@""];
-    NSMutableString *headerTitle = [NSMutableString stringWithString:@""];
-    NSMutableString *titleAddress = [NSMutableString stringWithString:@""];
-    
-    [headerString appendString:@"ANNUAL OVERHEAD BRIDGE INSPECTION: \n"];
-    [headerString appendString:[NSString stringWithFormat:@"%@", @"BRIDGE, MONORAIL, JIB"]];
-    
-    if ([txtCustomerName.text isEqualToString:@"LVVWD"]) 
-    {
-        [ownerString appendString:[NSString stringWithFormat:@"1.  Owner      %@", @"Las Vegas Valley Water District"]];
-    }
-    else {
-        [ownerString appendString:[NSString stringWithFormat:@"1.  Owner     %@", txtCustomerName.text]];
-    }
-    
-    [titleAddress appendString:[NSString stringWithFormat:@"Silver State Wire Rope & Rigging\n8740 S. Jones Blvd Las Vegas, NV 89139\n(702) 597-2010 fax (702)896-1977"]];
-    [headerTitle appendString:[NSString stringWithFormat:@"Annual Overhead Crane Inspection:\n%@", txtCraneDescription.text]];
-    [ownerAddressString appendString:[NSString stringWithFormat:@"2.  Owner's Address      %@", txtAddress.text]];
-    [location appendString:[NSString stringWithFormat:@"3.  Location      %@", txtEquipNum.text]];
-    [description appendString:[NSString stringWithFormat:@"4.  Description    %@ CRANE", txtCraneDescription.text]];
-    [ratedCapacity appendString:[NSString stringWithFormat:@"    Rated Capacity      %@", txtCap.text]];
-    [craneManafacturer appendString:[NSString stringWithFormat:@"5.  Crane Manufacturer"]];
-    [modelCrane appendString:[NSString stringWithFormat:@"Model"]];
-    [serialNoCrane appendString:[NSString stringWithFormat:@"Serial No."]];
-    [hoistManufacturer appendString:[NSString stringWithFormat:@"6.  Hoist Manafacture"]];
-    [modelHoist appendString:[NSString stringWithFormat:@"Model"]];
-    [serialNoHoist appendString:[NSString stringWithFormat:@"Serial No."]];
-    [ownerID appendString:[NSString stringWithFormat:@"7.  Owner's Identification (if any)      %@", txtEquipNum.text]];
-    [testLoadsString appendString:[NSString stringWithFormat:@"8. Test loads applied (only if examination conducted):   %@", testLoads]];
-    [proofLoadString appendString:[NSString stringWithFormat:@"9. Description of proof load:   %@", proofLoadDescription]];
-    [loadRatingsString appendString:[NSString stringWithFormat:@"10. Basis for assigned load ratings:   %@", loadRatingsText]];
-    [remarksLimitationsString appendString:[NSString stringWithFormat:@"11. Remarks and/or limitations imposed:   %@", remarksLimitationsImposed]];
-    //convert the date of the inspection to the Long Date format
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    
-    [dateFormatter setDateFormat:@"MM/dd/yyyy"];
-    NSDate *dateFromString = [[NSDate alloc] init];
-    dateFromString = [dateFormatter dateFromString:txtDate.text];
-    
-    NSDateComponents *components = [[NSCalendar currentCalendar] components:NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit fromDate:dateFromString];
-    
-    NSInteger day = [components day];
-    //convert day to an NSNumber so that it can be sent to OrdinalNumberFormatter which will turn the NSNumber into an ORdinal Number
-    NSNumber *myNumDay = [NSNumber numberWithInt:day];
-    NSInteger month = [components month];
-    NSInteger year = [components year];
-    NSString *monthName = [[dateFormatter monthSymbols] objectAtIndex:(month - 1)];  
-    OrdinalNumberFormatter *formatter = [[OrdinalNumberFormatter alloc] init];
-    
-    NSString *myDay = [formatter stringForObjectValue:myNumDay];
-    
-    [footer appendString:[NSString stringWithFormat:@"I certify that on the %@ day of %@ %d the above described device was tested and \n examined by the undersigned; that said test and/or examination met with the requirements \n of the Division of Occupational Safety and Health Administration and ANSI B30 series or \nANSI/SIA A92.2 as applicable. ", myDay, monthName, year]];
-    [nameAddress appendString:[NSString stringWithFormat:@"Name and address of authorized certificating agent: "]]; 
-    [address appendString:[NSString stringWithFormat:@"SILVER STATE WIRE ROPE AND RIGGING\n8740 S. JONES BLVD.\nLAS VEGAS, NV 89139", txtCraneDescription.text]];
-    [expirationDate appendString:[NSString stringWithFormat:@"Expiration Date:  %d/%d/%d", month, day, year + 1]];
-    [signature appendString:[NSString stringWithFormat:@"Signature: "]];
-    [title appendString:[NSString stringWithFormat:@"Title: Crane Surveyor"]];
-    [inspectorName appendString:[NSString stringWithFormat:@"Name: %@", txtTechnicianName.text]];
-    [certificateNum appendString:[NSString stringWithFormat:@"Certificate #LVVWD- %@", txtEquipNum.text]];
-    [date appendString:[NSString stringWithFormat:@"Date:   %@", txtDate.text]];
-    
-    //Create the file
-    
-    NSError *error;
-    
-    //create file manager
-    
-    NSString *dateNoSlashes = [txtDate.text stringByReplacingOccurrencesOfString:@"/" withString:@"-"];
-    NSString* fileName = [NSString stringWithFormat:@"%@ %@ %@ Certificate.PDF",txtCustomerName.text, txtHoistSrl.text, dateNoSlashes];
-    
-    NSArray *arrayPaths =
-    NSSearchPathForDirectoriesInDomains(
-                                        NSDocumentDirectory,
-                                        NSUserDomainMask,
-                                        YES);
-    NSString *path = [arrayPaths objectAtIndex:0];
-    NSString* pdfFileName = [path stringByAppendingPathComponent:fileName];
-    
-    //NSString *documentsDirectory = @"/Users/Developer/Documents";
-    NSString *filePath = pdfFileName;
-    //NSString *afilePath = [documentsDirectory stringByAppendingPathComponent:@"jobInfoArray.txt"];
-    
-   // NSLog(@"string to write:%@", printString);
-    
-    //[printString writeToFile:filePath atomically:YES encoding:NSUTF8StringEncoding error:&error];
-    
-    [self createCertificate:titleAddress
-                           :headerTitle
-                           :headerString
-                           :ownerString
-                           :ownerAddressString
-                           :device
-                           :location
-                           :description
-                           :ratedCapacity
-                           :craneManafacturer
-                           :modelCrane
-                           :serialNoCrane
-                           :hoistManufacturer
-                           :modelHoist
-                           :serialNoHoist
-                           :ownerID
-                           :lifting
-                           :other
-                           :testLoadsString
-                           :proofLoadString
-                           :loadRatingsString
-                           :remarksLimitationsString
-                           :footer
-                           :nameAddress
-                           :address
-                           :expirationDate
-                           :signature
-                           :title
-                           :inspectorName
-                           :certificateNum
-                           :date
-                           :filePath];
-        
-    }
-    else {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"You must first fill out an application" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
-        [alert show];
-    }
-}
-
-- (void) createCertificate:(NSString *) titleAddress
-                          :(NSString *) headerTitle
-                          :(NSString *) headerString
-                          :(NSString *) ownerString
-                          :(NSString *) ownerAddressString
-                          :(NSString *) device
-                          :(NSString *) location
-                          :(NSString *) description
-                          :(NSString *) ratedCapacity
-                          :(NSString *) craneManafacturer
-                          :(NSString *) modelCrane
-                          :(NSString *) serialNoCrane
-                          :(NSString *) hoistManufacturer
-                          :(NSString *) modelHoist
-                          :(NSString *) serialNoHoist
-                          :(NSString *) ownerID
-                          :(NSString *) lifting
-                          :(NSString *) other
-                          :(NSString *) testLoadsString
-                          :(NSString *) proofLoadString
-                          :(NSString *) loadRatingsString
-                          :(NSString *) remarksLimitationsString
-                          :(NSString *) footer
-                          :(NSString *) nameAddress
-                          :(NSString *) address
-                          :(NSString *) expirationDate
-                          :(NSString *) signature
-                          :(NSString *) title
-                          :(NSString *) inspectorName
-                          :(NSString *) certificateNum
-                          :(NSString *) date
-                          :(NSString *) filePath
-{
-    // Create URL for PDF file
-    
-    NSURL *fileURL = [NSURL fileURLWithPath:filePath];
-    CGContextRef pdfContext = CGPDFContextCreateWithURL((__bridge CFURLRef)fileURL, NULL, NULL);
-    CGPDFContextBeginPage(pdfContext, NULL);
-    UIGraphicsPushContext(pdfContext);
-    UIImage *myImage = [UIImage imageNamed:@"logo.jpg"];
-    // Flip coordinate system
-    CGRect bounds = CGContextGetClipBoundingBox(pdfContext);
-    CGContextScaleCTM(pdfContext, 1.0, -1.0);
-    CGContextTranslateCTM(pdfContext, 0.0, -bounds.size.height);
-    // Drawing commands
-    //CGRectMake(<#CGFloat x#>, <#CGFloat y#>, <#CGFloat width#>, <#CGFloat height#>)
-    //[printString drawAtPoint:CGPointMake(100, 100) withFont:[UIFont boldSystemFontOfSize:12.0f]];
-    [myImage drawInRect:CGRectMake(-110, -30, 250, 250)];
-    [myImage drawInRect:CGRectMake(50, 150, 500, 500) blendMode:kCGBlendModeLighten alpha:.15f];
-    
-    //Border lines
-    //left vertical line
-    CGContextBeginPath(pdfContext);
-    CGContextMoveToPoint(pdfContext, 13, 231);
-    CGContextAddLineToPoint(pdfContext, 13, 780);
-    
-    CGContextClosePath(pdfContext);
-    CGContextDrawPath(pdfContext, kCGPathFillStroke);
-    //right vertical lines
-    CGContextBeginPath(pdfContext);
-    CGContextMoveToPoint(pdfContext, 600, 13);
-    CGContextAddLineToPoint(pdfContext, 600, 780);
-    
-    CGContextClosePath(pdfContext);
-    CGContextDrawPath(pdfContext, kCGPathFillStroke);
-    //top line
-    CGContextBeginPath(pdfContext);
-    CGContextMoveToPoint(pdfContext, 29, 13);
-    CGContextAddLineToPoint(pdfContext, 600, 13);
-    
-    CGContextClosePath(pdfContext);
-    CGContextDrawPath(pdfContext, kCGPathFillStroke);
-    //bottom line
-    CGContextBeginPath(pdfContext);
-    CGContextMoveToPoint(pdfContext, 13, 780);
-    CGContextAddLineToPoint(pdfContext, 600, 780);
-    
-    CGContextClosePath(pdfContext);
-    CGContextDrawPath(pdfContext, kCGPathFillStroke);
-    [titleAddress drawInRect:CGRectMake(95, 35, 270, 45) withFont:[UIFont systemFontOfSize:12.0]];
-    [headerTitle drawInRect:CGRectMake(355, 35, 300, 50) withFont:[UIFont systemFontOfSize:12.0f]];
-    
-    //LINE 1
-    [ownerString drawInRect:CGRectMake(50, 160, 500, 20) withFont:[UIFont systemFontOfSize:12.0f] lineBreakMode:UILineBreakModeWordWrap alignment:UITextAlignmentLeft];
-    CGContextSetLineWidth(pdfContext, 1);
-    
-    CGContextSetStrokeColorWithColor(pdfContext, [UIColor blackColor].CGColor);
-    
-    CGContextBeginPath(pdfContext);
-    CGContextMoveToPoint(pdfContext, 110, 175);
-    CGContextAddLineToPoint(pdfContext, 550, 175);
-    
-    CGContextClosePath(pdfContext);
-    CGContextDrawPath(pdfContext, kCGPathFillStroke);
-    
-    //LINE 2
-    [ownerAddressString drawInRect:CGRectMake(50, 190, 500 , 20) withFont:[UIFont systemFontOfSize:12.0f] lineBreakMode:UILineBreakModeCharacterWrap alignment:UITextAlignmentLeft];
-    
-    CGContextBeginPath(pdfContext);
-    CGContextMoveToPoint(pdfContext, 170, 205);
-    CGContextAddLineToPoint(pdfContext, 550, 205);
-    
-    CGContextClosePath(pdfContext);
-    CGContextDrawPath(pdfContext, kCGPathFillStroke);
-    
-    //LINE 3
-    [location drawInRect:CGRectMake(50, 220, 500, 20) withFont:[UIFont systemFontOfSize:12.0f]];
-    
-    CGContextBeginPath(pdfContext);
-    CGContextMoveToPoint(pdfContext, 120, 235);
-    CGContextAddLineToPoint(pdfContext, 550, 235);
-    
-    CGContextClosePath(pdfContext);
-    CGContextDrawPath(pdfContext, kCGPathFillStroke);
-    
-    //LINE 4
-    [description drawInRect:CGRectMake(50, 250, 230, 20) withFont:[UIFont systemFontOfSize:12.0f]];
-    
-    CGContextBeginPath(pdfContext);
-    CGContextMoveToPoint(pdfContext, 130, 265);
-    CGContextAddLineToPoint(pdfContext, 260, 265);
-    
-    CGContextClosePath(pdfContext);
-    CGContextDrawPath(pdfContext, kCGPathFillStroke);
-    //LINE 4 PART 2
-    [ratedCapacity drawInRect:CGRectMake(255, 250, 230, 20) withFont:[UIFont systemFontOfSize:12.0f]];
-
-    CGContextBeginPath(pdfContext);
-    CGContextMoveToPoint(pdfContext, 355, 265);
-    CGContextAddLineToPoint(pdfContext, 550, 265);
-    
-    CGContextClosePath(pdfContext);
-    CGContextDrawPath(pdfContext, kCGPathFillStroke);
-    
-    //LINE 5
-    [craneManafacturer drawInRect:CGRectMake(50, 280, 230, 20) withFont:[UIFont systemFontOfSize:12.0f]];
-    
-    CGContextBeginPath(pdfContext);
-    CGContextMoveToPoint(pdfContext, 180, 295);
-    CGContextAddLineToPoint(pdfContext, 265, 295);
-    
-    CGContextClosePath(pdfContext);
-    CGContextDrawPath(pdfContext, kCGPathFillStroke);
-
-    [txtCraneMfg.text drawInRect:CGRectMake(180, 280, 230, 20) withFont:[UIFont systemFontOfSize:10.0f]];
-    
-    //LINE 6 Part 2
-    /*
-    [modelCrane drawInRect:CGRectMake(270, 280, 230, 20) withFont:[UIFont systemFontOfSize:12.0f]];
-    
-    CGContextBeginPath(pdfContext);
-    CGContextMoveToPoint(pdfContext, 310, 295);
-    CGContextAddLineToPoint(pdfContext, 400, 295);
-    
-    CGContextClosePath(pdfContext);
-    CGContextDrawPath(pdfContext, kCGPathFillStroke);
-    
-    [txtHoistMdl.text drawInRect:CGRectMake(310, 280, 230, 20) withFont:[UIFont systemFontOfSize:8.0f]];
-    */
-    
-    //LINE 6 Part 3 
-    [serialNoCrane drawInRect:CGRectMake(410, 280, 230, 20) withFont:[UIFont systemFontOfSize:12.0f]];
-    
-    CGContextBeginPath(pdfContext);
-    CGContextMoveToPoint(pdfContext, 470, 295);
-    CGContextAddLineToPoint(pdfContext, 550, 295);
-    
-    CGContextClosePath(pdfContext);
-    CGContextDrawPath(pdfContext, kCGPathFillStroke);
-    
-    [txtCraneSrl.text drawInRect:CGRectMake(470, 280, 230, 20) withFont:[UIFont systemFontOfSize:8.0f]];
-    
-    CGContextClosePath(pdfContext);
-    CGContextDrawPath(pdfContext, kCGPathFillStroke);
-    
-    //LINE 7
-    [hoistManufacturer drawInRect:CGRectMake(50, 310, 230, 20) withFont:[UIFont systemFontOfSize:12.0f]];
-    
-    CGContextBeginPath(pdfContext);
-    CGContextMoveToPoint(pdfContext, 170, 325);
-    CGContextAddLineToPoint(pdfContext, 265, 325);
-    
-    CGContextClosePath(pdfContext);
-    CGContextDrawPath(pdfContext, kCGPathFillStroke);
-    
-    [txtHoistMfg.text drawInRect:CGRectMake(170, 310, 230, 20) withFont:[UIFont systemFontOfSize:10.0f]];
-    
-    //LINE 7 Part 2
-    [modelHoist drawInRect:CGRectMake(270, 310, 230, 20) withFont:[UIFont systemFontOfSize:12.0f]];
-    
-    CGContextBeginPath(pdfContext);
-    CGContextMoveToPoint(pdfContext, 310, 325);
-    CGContextAddLineToPoint(pdfContext, 400, 325);
-    
-    CGContextClosePath(pdfContext);
-    CGContextDrawPath(pdfContext, kCGPathFillStroke);
-    
-    [txtHoistMdl.text drawInRect:CGRectMake(310, 310, 230, 20) withFont:[UIFont systemFontOfSize:8.0f]];
-    
-    //LINE 7 Part 3 
-    [serialNoHoist drawInRect:CGRectMake(410, 310, 230, 20) withFont:[UIFont systemFontOfSize:12.0f]];
-    
-    CGContextBeginPath(pdfContext);
-    CGContextMoveToPoint(pdfContext, 470, 325);
-    CGContextAddLineToPoint(pdfContext, 550, 325);
-    
-    CGContextClosePath(pdfContext);
-    CGContextDrawPath(pdfContext, kCGPathFillStroke);
-    
-    [txtHoistSrl.text drawInRect:CGRectMake(470, 310, 230, 20) withFont:[UIFont systemFontOfSize:8.0f]];
-    CGContextBeginPath(pdfContext);
-    CGContextMoveToPoint(pdfContext, 470, 325);
-    CGContextAddLineToPoint(pdfContext, 550, 325);
-    
-    CGContextClosePath(pdfContext);
-    CGContextDrawPath(pdfContext, kCGPathFillStroke);
-    
-    //LINE 8
-    [ownerID drawInRect:CGRectMake(50, 340, 500, 20) withFont:[UIFont systemFontOfSize:12.0f]];
-    
-    CGContextBeginPath(pdfContext);
-    CGContextMoveToPoint(pdfContext, 230, 355);
-    CGContextAddLineToPoint(pdfContext, 550, 355);
-    
-    CGContextClosePath(pdfContext);
-    CGContextDrawPath(pdfContext, kCGPathFillStroke);
-    
-    //LINE 9
-    [testLoadsString drawInRect:CGRectMake(50, 370, 500, 20) withFont:[UIFont systemFontOfSize:12.0f]];
-    
-    CGContextBeginPath(pdfContext);
-    CGContextMoveToPoint(pdfContext, 340, 385);
-    CGContextAddLineToPoint(pdfContext, 550, 385);
-    
-    CGContextClosePath(pdfContext);
-    CGContextDrawPath(pdfContext, kCGPathFillStroke);
-    
-    //LINE 10
-    [proofLoadString drawInRect:CGRectMake(50, 400, 500, 20) withFont:[UIFont systemFontOfSize:12.0f]];
-    
-    CGContextBeginPath(pdfContext);
-    CGContextMoveToPoint(pdfContext, 210, 415);
-    CGContextAddLineToPoint(pdfContext, 550, 415);
-    
-    CGContextClosePath(pdfContext);
-    CGContextDrawPath(pdfContext, kCGPathFillStroke);
-    //LINE 11
-    [loadRatingsString drawInRect:CGRectMake(50, 430, 500, 20) withFont:[UIFont systemFontOfSize:12.0f]];
-    
-    CGContextBeginPath(pdfContext);
-    CGContextMoveToPoint(pdfContext, 240, 445);
-    CGContextAddLineToPoint(pdfContext, 550, 445);
-    
-    CGContextClosePath(pdfContext);
-    CGContextDrawPath(pdfContext, kCGPathFillStroke);
-    //LINE 12
-    [remarksLimitationsString drawInRect:CGRectMake(50, 460, 500, 20) withFont:[UIFont systemFontOfSize:12.0f]];
-    
-    CGContextBeginPath(pdfContext);
-    CGContextMoveToPoint(pdfContext, 270, 475);
-    CGContextAddLineToPoint(pdfContext, 550, 475);
-    
-    CGContextClosePath(pdfContext);
-    CGContextDrawPath(pdfContext, kCGPathFillStroke);
-    
-    //LINE 14
-    [footer drawInRect:CGRectMake(50, 495, 500, 120) withFont:[UIFont systemFontOfSize:12.0f] lineBreakMode:UILineBreakModeCharacterWrap alignment:UITextAlignmentCenter];
-    
-    //LINE 15
-    [nameAddress drawInRect:CGRectMake(50, 565, 500, 120) withFont:[UIFont systemFontOfSize:12.0f]];
-    
-    //LINE 16
-    [address drawInRect:CGRectMake(330, 565, 500, 120) withFont:[UIFont systemFontOfSize:11.0f]];
-    
-    CGContextBeginPath(pdfContext);
-    CGContextMoveToPoint(pdfContext, 330, 577);
-    CGContextAddLineToPoint(pdfContext, 550, 577);
-    
-    CGContextClosePath(pdfContext);
-    CGContextDrawPath(pdfContext, kCGPathFillStroke);
-    
-    CGContextBeginPath(pdfContext);
-    CGContextMoveToPoint(pdfContext, 330, 590);
-    CGContextAddLineToPoint(pdfContext, 445, 590);
-    
-    CGContextClosePath(pdfContext);
-    CGContextDrawPath(pdfContext, kCGPathFillStroke);
-    
-    CGContextBeginPath(pdfContext);
-    CGContextMoveToPoint(pdfContext, 330, 605);
-    CGContextAddLineToPoint(pdfContext, 450, 605);
-    
-    CGContextClosePath(pdfContext);
-    CGContextDrawPath(pdfContext, kCGPathFillStroke);
-    
-    //LINE 17
-    [expirationDate drawInRect:CGRectMake(50, 630, 500, 120) withFont:[UIFont systemFontOfSize:12.0f]];
-    
-    CGContextBeginPath(pdfContext);
-    CGContextMoveToPoint(pdfContext, 140, 645);
-    CGContextAddLineToPoint(pdfContext, 300, 645);
-    
-    CGContextClosePath(pdfContext);
-    CGContextDrawPath(pdfContext, kCGPathFillStroke);
-    
-    //LINE 17 PART 2
-    [signature drawInRect:CGRectMake(330, 630, 500, 120) withFont:[UIFont systemFontOfSize:12.0f]];
-    
-    CGContextBeginPath(pdfContext);
-    CGContextMoveToPoint(pdfContext, 390, 645);
-    CGContextAddLineToPoint(pdfContext, 550, 645);
-    
-    CGContextClosePath(pdfContext);
-    CGContextDrawPath(pdfContext, kCGPathFillStroke);
-    
-    //LINE 18
-    [title drawInRect:CGRectMake(50, 670, 500, 120) withFont:[UIFont systemFontOfSize:12.0f]];
-    
-    CGContextBeginPath(pdfContext);
-    CGContextMoveToPoint(pdfContext, 80, 685);
-    CGContextAddLineToPoint(pdfContext, 170, 685);
-    
-    CGContextClosePath(pdfContext);
-    CGContextDrawPath(pdfContext, kCGPathFillStroke);
-    
-    //LINE 18 PART 2
-    [inspectorName drawInRect:CGRectMake(330, 670, 500, 120) withFont:[UIFont systemFontOfSize:12.0f]];
-    
-    CGContextBeginPath(pdfContext);
-    CGContextMoveToPoint(pdfContext, 370, 685);
-    CGContextAddLineToPoint(pdfContext, 550, 685);
-    
-    CGContextClosePath(pdfContext);
-    CGContextDrawPath(pdfContext, kCGPathFillStroke);
-    
-    //LINE 19
-    [certificateNum drawInRect:CGRectMake(50, 710, 500, 120) withFont:[UIFont systemFontOfSize:12.0f]];
-    
-    CGContextBeginPath(pdfContext);
-    CGContextMoveToPoint(pdfContext, 165, 725);
-    CGContextAddLineToPoint(pdfContext, 300, 725);
-    
-    CGContextClosePath(pdfContext);
-    CGContextDrawPath(pdfContext, kCGPathFillStroke);
-    
-    //LINE 19 PART 2
-    [date drawInRect:CGRectMake(330, 710, 500, 120) withFont:[UIFont systemFontOfSize:12.0f]];
-    
-    CGContextBeginPath(pdfContext);
-    CGContextMoveToPoint(pdfContext, 365, 725);
-    CGContextAddLineToPoint(pdfContext, 550, 725);
-    
-    CGContextClosePath(pdfContext);
-    CGContextDrawPath(pdfContext, kCGPathFillStroke);
-    
-    
-    [self displayComposerSheet];
-    // Clean up
-    UIGraphicsPopContext();
-    CGPDFContextEndPage(pdfContext);
-    CGPDFContextClose(pdfContext);  
-    //release memory
-    fileURL = nil;
-    pdfContext = nil;
-    myImage = nil;
-}
-
-//This text file that is written contains all the information that has been created: Customer Information; Crane Information; and Inspection Information
-- (void) writeTextFile: (ItemListConditionStorage *) myConditionList {
-    NSMutableString *printString = [NSMutableString stringWithString:@""];
-    NSMutableString *customerInfoResultsColumn = [NSMutableString stringWithString:@""];
-    NSMutableString *craneDescriptionLeftColumn = [NSMutableString stringWithString:@""];
-    NSMutableString *craneDescriptionResultsColumn = [NSMutableString stringWithString:@""];
-    NSMutableString *craneDescriptionRightColumn = [NSMutableString stringWithString:@""];
-    NSMutableString *craneDescriptionRightResultsColumn = [NSMutableString stringWithString:@""];
-    NSMutableString *partTitle = [NSMutableString stringWithString:@""];
-    NSMutableString *partDeficiency = [NSMutableString stringWithString:@""];
-    NSMutableString *partNotes = [NSMutableString stringWithString:@""];
-    NSMutableString *deficientPartString = [NSMutableString stringWithString:@""];
-    NSMutableString *footerLeft = [NSMutableString stringWithString:@""];
-    NSMutableString *footerRight = [NSMutableString stringWithString:@""];
-    NSMutableString *header = [NSMutableString stringWithString:@""];
-    NSMutableString *craneDescription = [NSMutableString stringWithString:@""];
-    //customer information titles and descriptions
-    [printString appendString:@"Customer Information\n\n"];
-    [printString appendString:[NSMutableString stringWithFormat:@"Customer Name:\n", customerName]];
-    [printString appendString:[NSString stringWithFormat:@"Customer Contact:\n", txtCustomerContact.text]];
-    [printString appendString:[NSString stringWithFormat:@"Job Number:\n", jobnumber]];
-    [printString appendString:[NSString stringWithFormat:@"Email Address:\n", txtEmail.text]];
-    [printString appendString:[NSString stringWithFormat:@"Customer Address:\n\n", txtAddress.text]];
-    //the customer information results
-    [customerInfoResultsColumn appendString:[NSMutableString stringWithFormat:@"\n\n%@\n", txtCustomerName.text]];
-    [customerInfoResultsColumn appendString:[NSString stringWithFormat:@"%@\n", txtCustomerContact.text]];
-    [customerInfoResultsColumn appendString:[NSString stringWithFormat:@"%@\n", txtJobNumber.text]];
-    [customerInfoResultsColumn appendString:[NSString stringWithFormat:@"%@\n", txtEmail.text]];
-    [customerInfoResultsColumn appendString:[NSString stringWithFormat:@"%@\n\n", txtAddress.text]];
-    
-    [craneDescription appendString:[NSString stringWithFormat:@"Crane Description: %@", txtCraneDescription.text]];
-    //the crane description titles
-    [craneDescriptionLeftColumn appendString:@"Overall Condition Rating:\n"];
-    [craneDescriptionLeftColumn appendString:@"Crane Mfg:\n"];
-    [craneDescriptionLeftColumn appendString:@"Hoist Mfg:\n"];
-    [craneDescriptionLeftColumn appendString:@"Hoist Model:\n"];
-    //crane description results
-    [craneDescriptionResultsColumn appendString:[NSMutableString stringWithFormat:@"\n\n%@\n", overallRating]];
-    [craneDescriptionResultsColumn appendString:[NSString stringWithFormat:@"%@\n", txtCraneMfg.text]];
-    [craneDescriptionResultsColumn appendString:[NSString stringWithFormat:@"%@\n", txtHoistMfg.text]];
-    [craneDescriptionResultsColumn appendString:[NSString stringWithFormat:@"%@\n", txtHoistMdl.text]];
-    //crane description titles right column
-    [craneDescriptionRightColumn appendString:@"\n\nCap:\n"];
-    [craneDescriptionRightColumn appendString:@"Crane Srl:\n"];
-    [craneDescriptionRightColumn appendString:@"Hoist Srl:\n"];
-    [craneDescriptionRightColumn appendString:@"Equip #:\n"];
-    //creane description results
-    [craneDescriptionRightResultsColumn appendString:[NSMutableString stringWithFormat:@"\n\n%@\n", txtCap.text]];
-    [craneDescriptionRightResultsColumn appendString:[NSString stringWithFormat:@"%@\n", txtCraneSrl.text]];
-    [craneDescriptionRightResultsColumn appendString:[NSString stringWithFormat:@"%@\n", txtHoistSrl.text]];
-    [craneDescriptionRightResultsColumn appendString:[NSString stringWithFormat:@"%@\n", txtEquipNum.text]];
-    
-    [footerLeft appendString:[NSString stringWithFormat:@"Technician:%@\nDate: %@",txtTechnicianName.text, txtDate.text]];
-    [footerRight appendString:[NSString stringWithFormat:@"Customer:%@\nDate: %@",txtCustomerName.text, txtDate.text]];
-    
-    [header appendString:[NSString stringWithFormat:@"Silverstate Wire Rope and Rigging\n\n24-Hour Emergency Service\nSales - Service - Repair\nElectrical - Mechanical - Pneumatic\nCal-OSHA Accredited"]];
-   
-    for (int i = 0; i < myItemListStore.myConditions.count; i++)
-    {
-        Condition *myCondition = [myItemListStore.myConditions objectAtIndex:i];
-        if (myCondition.applicable == NO)
-        {
-            if (myCondition.deficient == YES){
-                [partDeficiency appendString:@"Failed\n"];
-                [partNotes appendString:[NSString stringWithFormat:@"%d.  %@: %@\n",i + 1, myCondition.deficientPart, myCondition.notes]];
-            }
-            else if (myCondition.deficient==NO) {
-                if (![myCondition.notes isEqualToString:@""])
-                {
-                    [partNotes appendString:[NSString stringWithFormat:@"%d.  %@\n",i + 1, myCondition.notes]];
-                }
-                [partDeficiency appendString:@"Passed\n"];
-            }
-        }
-        else {
-            [partDeficiency appendString:@"N/A\n"];
-        }
-        [partTitle appendString:[NSString stringWithFormat:@"%d. %@\n",i + 1, (NSString *)[myPartsArray objectAtIndex:i]]];
-        //[deficientPartString appendString:[NSString stringWithFormat:@"%@\n", myCondition.deficientPart]];
-    }
-    
-    //Create the file
-    
-    NSError *error;
-    
-    //create file manager
-    
-    NSString *dateNoSlashes = [txtDate.text stringByReplacingOccurrencesOfString:@"/" withString:@"-"];
-    NSString* fileName = [NSString stringWithFormat:@"%@ %@ %@.PDF",txtCustomerName.text, txtHoistSrl.text, dateNoSlashes];
-    
-    NSArray *arrayPaths =
-    NSSearchPathForDirectoriesInDomains(
-                                        NSDocumentDirectory,
-                                        NSUserDomainMask,
-                                        YES);
-    NSString *path = [arrayPaths objectAtIndex:0];
-    NSString* pdfFileName = [path stringByAppendingPathComponent:fileName];
-    
-    //NSString *documentsDirectory = @"/Users/Developer/Documents";
-    NSString *filePath = pdfFileName;
-    //NSString *afilePath = [documentsDirectory stringByAppendingPathComponent:@"jobInfoArray.txt"];
-    
-    NSLog(@"string to write:%@", printString);
-    
-    [printString writeToFile:filePath atomically:YES encoding:NSUTF8StringEncoding error:&error];
-    
-    [self CreatePDFFile:printString
-                       :customerInfoResultsColumn
-                       :craneDescriptionLeftColumn
-                       :craneDescriptionResultsColumn
-                       :craneDescriptionRightColumn
-                       :craneDescriptionRightResultsColumn
-                       :filePath
-                       :partDeficiency
-                       :partTitle
-                       :partNotes
-                       :deficientPartString
-                       :footerLeft
-                       :footerRight
-                       :header
-                       :craneDescription];
-    //release memory
-    
-    printString = nil;
-    customerInfoResultsColumn = nil;
-    craneDescriptionLeftColumn = nil;
-    craneDescriptionResultsColumn = nil;
-    craneDescriptionRightColumn = nil;
-    craneDescriptionRightResultsColumn = nil;
-    filePath = nil;
-    partDeficiency = nil;
-    partTitle = nil;
-    partNotes = nil;
-    deficientPartString = nil;
-    footerLeft = nil;
-    footerRight = nil;
-    header = nil;
-    craneDescription = nil;
-}
-
-- (void) CreatePDFFile:(NSString *) printString
-                      :(NSString *) customerInfoResultsColumn
-                      :(NSString *) craneDescriptionLeftColumn
-                      :(NSString *) craneDescriptionResultsColumn
-                      :(NSString *) craneDescriptionRightColumn
-                      :(NSString *) craneDescriptionRightResultsColumn
-                      :(NSString *) filePath
-                      :(NSString *) partDeficiency
-                      :(NSString *) partTitle
-                      :(NSString *) partNotes
-                      :(NSString *) deficientPartString
-                      :(NSString *) footerLeft
-                      :(NSString *) footerRight
-                      :(NSString *) header
-                      :(NSString *) craneDescription
-{
-    // Create URL for PDF file
-    
-    NSURL *fileURL = [NSURL fileURLWithPath:filePath];
-    CGContextRef pdfContext = CGPDFContextCreateWithURL((__bridge CFURLRef)fileURL, NULL, NULL);
-    CGPDFContextBeginPage(pdfContext, NULL);
-    UIGraphicsPushContext(pdfContext);
-    UIImage *myImage = [UIImage imageNamed:@"logo.jpg"];
-    // Flip coordinate system
-    CGRect bounds = CGContextGetClipBoundingBox(pdfContext);
-    CGContextScaleCTM(pdfContext, 1.0, -1.0);
-    CGContextTranslateCTM(pdfContext, 0.0, -bounds.size.height);
-    NSString *conditionRatingString = [[NSString alloc] initWithString:@"Crane Condition Rating: \n1=Great \n2=Good Minor Problems (scheduled repair) \n3=Maintenance Problems(Immediate Repair) \n4=Safety Concern(Immediate Repair) \n5=Crane's conditions require it to be taged out"];
-    
-    // Drawing commands
-    //[printString drawAtPoint:CGPointMake(100, 100) withFont:[UIFont boldSystemFontOfSize:12.0f]];
-    [myImage drawInRect:CGRectMake(50, 150, 500, 500) blendMode:kCGBlendModeLighten alpha:.15f];
-    [header drawInRect:CGRectMake(20, 20, 200, 200) withFont:[UIFont systemFontOfSize:10.0f] lineBreakMode:UILineBreakModeWordWrap alignment:UITextAlignmentLeft];
-    [printString drawInRect:CGRectMake(225, 20, 120 , 120) withFont:[UIFont systemFontOfSize:10.0f] lineBreakMode:UILineBreakModeCharacterWrap alignment:UITextAlignmentLeft];
-    [customerInfoResultsColumn drawInRect:CGRectMake(325, 20, 400, 120) withFont:[UIFont systemFontOfSize:10.0f]];
-    [craneDescription drawInRect:CGRectMake(20, 120, 500, 160) withFont:[UIFont systemFontOfSize:10.0f]];
-    [craneDescriptionLeftColumn drawInRect:CGRectMake(20, 145, 120, 160) withFont:[UIFont systemFontOfSize:10.0f]];
-    [craneDescriptionResultsColumn drawInRect:CGRectMake(140, 120, 150, 120) withFont:[UIFont systemFontOfSize:10.0f]];
-    [craneDescriptionRightColumn drawInRect:CGRectMake(300, 120, 120, 120) withFont:[UIFont systemFontOfSize:10.0f]];
-    [craneDescriptionRightResultsColumn drawInRect:CGRectMake(410, 120, 120, 120) withFont:[UIFont systemFontOfSize:10.0f]];
-    [partTitle drawInRect:CGRectMake(20, 220, 300, 700) withFont:[UIFont systemFontOfSize:8.0f]];
-    [partDeficiency drawInRect:CGRectMake(235, 220, 120, 700) withFont:[UIFont systemFontOfSize:8.0f]];
-    [partNotes drawInRect:CGRectMake(310, 220, 220, 700) withFont:[UIFont systemFontOfSize:8.0f]];
-    [deficientPartString drawInRect:CGRectMake(500, 220, 300, 700) withFont:[UIFont systemFontOfSize:8.0f]];
-    [conditionRatingString drawInRect:CGRectMake(20, 700, 600, 70) withFont:[UIFont systemFontOfSize:8.0f]];
-    [footerLeft drawInRect:CGRectMake(300, 700, 600, 70) withFont:[UIFont systemFontOfSize:8.0f]];
-    [footerRight drawInRect:CGRectMake(450, 700, 600, 70) withFont:[UIFont systemFontOfSize:8.0f]];
-    // Clean up
-    UIGraphicsPopContext();
-    CGPDFContextEndPage(pdfContext);
-    CGPDFContextClose(pdfContext);   
-    [self displayComposerSheet];
-    //release memory
-    fileURL = nil;
-    pdfContext = nil;
-    myImage = nil;
-    conditionRatingString = nil;
-}
+#pragma mark - Textfield Delegate Methods
 
 - (BOOL) textFieldShouldReturn:(UITextField *)textField
 {
@@ -1468,87 +410,10 @@
     textField.text = [textField.text stringByReplacingCharactersInRange:range withString:[string uppercaseString]]; return NO;
 }
 
-- (IBAction)CreateCertificate:(id)sender {
-    NSString *dateNoSlashes = [txtDate.text stringByReplacingOccurrencesOfString:@"/" withString:@"-"];
-    NSString* fileName = [NSString stringWithFormat:@"%@ %@ %@ Certificate.PDF",txtCustomerName.text, txtHoistSrl.text, dateNoSlashes];
-    
-    NSArray *arrayPaths =
-    NSSearchPathForDirectoriesInDomains(
-                                        NSDocumentDirectory,
-                                        NSUserDomainMask,
-                                        YES);
-    NSString *path = [arrayPaths objectAtIndex:0];
-    NSString* pdfFileName = [path stringByAppendingPathComponent:fileName];
-    
-    secondController = [UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:pdfFileName]];
-    //[controller setUTI:@"PDF"];
-    secondController.delegate = self;
-    CGRect navRect = self.navigationController.navigationBar.frame;
-    navRect.size = CGSizeMake(1500.0f, 40.0f);
-    [secondController presentPreviewAnimated:NO];
-    //disable the button certificate button so that we make sure there's no errant certificates being made
-    CreateCertificateButton.enabled = FALSE;
-    //[CraneInspectionView removeFromSuperview];
-    //[self.view addSubview:self.autographController.view];
-}
-
-- (void) displayComposerSheet
-{
-    /*
-    MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
-    picker.mailComposeDelegate = self;
-    
-    [picker setSubject:@"Your Inspection Results"];
-    
-    // Set up the recipients.
-    NSArray *toRecipients = [NSArray arrayWithObjects:@"adeiji@yahoo.com",
-                             nil];
-    NSArray *ccRecipients = [NSArray arrayWithObjects:@"adebayoiji@gmail.com",
-                             @"third@example.com", nil];
-    NSArray *bccRecipients = [NSArray arrayWithObjects:@"four@example.com",
-                              nil];
-    
-    [picker setToRecipients:toRecipients];
-    [picker setCcRecipients:ccRecipients];
-    [picker setBccRecipients:bccRecipients];
-    
-    // Attach an image to the email.
-    NSString *path = @"/Users/Developer/Documents/jobInfo.pdf";
-    NSData *myData = [NSData dataWithContentsOfFile:path];
-    [picker addAttachmentData:myData mimeType:@"application/pdf"
-                     fileName:@"jobInfo.pdf"];
-    
-    // Fill out the email body text.
-    NSString *emailBody = @"Here is your inspection information!";
-    [picker setMessageBody:emailBody isHTML:NO];
-    
-    // Present the mail composition interface.
-    [self presentModalViewController:picker animated:YES];
-    // Can safely release the controller now.
-    
-   
-    NSString *fileToOpen = @"/Users/Developer/Documents/jobInfo.pdf";
-    
-    controller = [UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:fileToOpen]];
-    controller.delegate = self;
-    
-    CGRect navRect = secondViewController.navigationController.navigationBar.frame;
-    navRect.size = CGSizeMake(1500.0f, 40.0f);
-    [controller presentOpenInMenuFromRect:navRect inView:viewPDFController.view animated:YES];
-*/
-}
-
-// The mail compose view controller delegate method
-- (void)mailComposeController:(MFMailComposeViewController *)controller
-          didFinishWithResult:(MFMailComposeResult)result
-                        error:(NSError *)error
-{
-    [self dismissModalViewControllerAnimated:YES];
-}
 
 - (BOOL) shouldAutorotate
 {
-    return NO;
+    return YES;
 }
 
 - (IBAction)buttonPressed {
@@ -1571,7 +436,7 @@
     [self changePickerArray:pickerDataStorage];
 }
 
-- (void) changePickerArray: (NSMutableArray*)input {
+- (void) changePickerArray : (NSMutableArray*) input {
     self.pickerData = nil;
     self.pickerData = [input objectAtIndex:optionLocation];
     [self.DefficiencyPicker reloadAllComponents];
@@ -1636,7 +501,7 @@
         pageSubmitAlertView = YES;
         
         [self saveInfo:txtNotes.text :defficiencySwitch.on:[DefficiencyPicker selectedRowInComponent:0]:myDeficientPart:applicableSwitch.on];
-        [self saveData:myItemListStore];    //save the current condition so that if the user goes to the next part and back, the correct information will be displayed
+        [self insertInspectionToDatastoreTable];    //save the current condition so that if the user goes to the next part and back, the correct information will be displayed
         [self InsertCustomerIntoTable];     //save the customer to the table
         [self InsertCraneIntoTable];        //save the crane into the table
         inspectionComplete = YES;
@@ -1648,40 +513,10 @@
     }
 }
 
+//Enters a new crane into the dropbox datastore
 - (void)InsertCraneIntoTable
 {
-    sqlite3_stmt *statement;
-    const char *dbPath = [databasePath UTF8String];
-    
-    if (sqlite3_open(dbPath, &contactDB) == SQLITE_OK)
-    {
-        NSString *removeSQL = [NSString stringWithFormat:@"DELETE FROM CRANES_DONE WHERE HOISTSRL=\"%@\"", txtHoistSrl.text];
-        const char *remove_stmt = [removeSQL UTF8String];
-        
-        if (sqlite3_prepare_v2(contactDB, remove_stmt, -1, &statement, NULL)==SQLITE_OK)
-        {
-            //sqlite3_bind_text(statement, 1, [txtJobNumber.text UTF8String], -1, NULL);
-        }
-        if (sqlite3_step(statement) == SQLITE_DONE)
-        {
-            NSLog(@"removed succesfully");
-        }
 
-        NSString *insertSQL = [NSString stringWithFormat:@"INSERT OR REPLACE INTO CRANES_DONE (HOISTSRL, CUSTOMERNAME, DATE) VALUES(\"%@\", \"%@\", \"%@\");",
-                           txtHoistSrl.text,
-                           txtCustomerName.text,
-                           txtDate.text];
-        //NSString *insertSQL = [NSString stringWithFormat:@"INSERT OR REPLACE INTO ALLORDERS (JOBNUMBER, PART, DEFICIENT, DEFICIENTPART, NOTES, PICKERSELECTION) VALUES (?,?,?,?,?,?)"];
-    
-        const char *insert_stmt = [insertSQL UTF8String];
-        
-        sqlite3_prepare_v2(contactDB, insert_stmt, -1, &statement, nil);
-        
-        if (sqlite3_step(statement) != SQLITE_DONE)
-        {
-            NSAssert(0, @"Error updating table: CRANES");
-        }
-    }
 }
 - (void)InsertOwnerIntoTable:(NSString *) myOwner
 {
@@ -1699,16 +534,15 @@
         
         NSString *insertSQL = [NSString stringWithFormat:@"INSERT OR REPLACE INTO IPADOWNER (NAME) VALUES(\"%@\");",
                                myOwner];
-        //NSString *insertSQL = [NSString stringWithFormat:@"INSERT OR REPLACE INTO ALLORDERS (JOBNUMBER, PART, DEFICIENT, DEFICIENTPART, NOTES, PICKERSELECTION) VALUES (?,?,?,?,?,?)"];
-        
+    
         const char *insert_stmt = [insertSQL UTF8String];
         
-      //  sqlite3_prepare_v2(contactDB, insert_stmt, -1, &statement, nil);
+        sqlite3_prepare_v2(contactDB, insert_stmt, -1, &statement, nil);
         
-      //  if (sqlite3_step(statement) != SQLITE_DONE)
-       // {
-        //    NSAssert(0, @"Error updating table: IPADOWNER");
-       // }
+        if (sqlite3_step(statement) != SQLITE_DONE)
+        {
+            NSAssert(0, @"Error updating table: IPADOWNER");
+        }
     }
 }
 
@@ -1932,8 +766,6 @@
 
 -(void) viewWillAppear:(BOOL)animated
 {
-    CGRect arect=[[UIScreen mainScreen]applicationFrame];
-    
     CGRect anotherrect=[[UIApplication sharedApplication]statusBarFrame];
     
     if (changeLayoutNeeded == YES && ![iosVersion isEqualToString: @"5.1.1"])
@@ -1976,6 +808,30 @@
     [self writeCertificateTextFile];
 }
 
+- (IBAction)CreateCertificate:(id)sender {
+    NSString *dateNoSlashes = [txtDate.text stringByReplacingOccurrencesOfString:@"/" withString:@"-"];
+    NSString* fileName = [NSString stringWithFormat:@"%@ %@ %@ Certificate.PDF",txtCustomerName.text, txtHoistSrl.text, dateNoSlashes];
+    
+    NSArray *arrayPaths =
+    NSSearchPathForDirectoriesInDomains(
+                                        NSDocumentDirectory,
+                                        NSUserDomainMask,
+                                        YES);
+    NSString *path = [arrayPaths objectAtIndex:0];
+    NSString* pdfFileName = [path stringByAppendingPathComponent:fileName];
+    
+    secondController = [UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:pdfFileName]];
+    //[controller setUTI:@"PDF"];
+    secondController.delegate = self;
+    CGRect navRect = self.navigationController.navigationBar.frame;
+    navRect.size = CGSizeMake(1500.0f, 40.0f);
+    [secondController presentPreviewAnimated:NO];
+    //disable the button certificate button so that we make sure there's no errant certificates being made
+    CreateCertificateButton.enabled = FALSE;
+    //[CraneInspectionView removeFromSuperview];
+    //[self.view addSubview:self.autographController.view];
+}
+
 - (IBAction)partsListButtonClicked:(id)sender{
     optionLocation = 0;
     Parts *parts = [[Parts alloc] init : txtCraneDescription.text];
@@ -1997,7 +853,12 @@
 }
 
 //This method saves the information in the conditions list
-- (void) saveInfo:(NSString *) myNotes:(BOOL) myDeficient:(NSUInteger) mySelection: (NSString *) myDeficientPart: (BOOL) myApplicable {
+- (void) saveInfo : (NSString *) myNotes
+                  : (BOOL) myDeficient
+                  : (NSUInteger) mySelection
+                  : (NSString *) myDeficientPart
+                  : (BOOL) myApplicable
+{
     Condition *myCondition = [[Condition alloc] initWithParameters:myNotes :myDeficient:mySelection:myDeficientPart:myApplicable];
     [myItemListStore setCondition:optionLocation :myCondition];
     myCondition = nil;
@@ -2132,61 +993,10 @@
         }
     }
 }
-
+//Inserts a customer into the dropbox datastore jobs table
 - (void) InsertCustomerIntoTable
 {
-    sqlite3_stmt *statement;
-    const char *dbPath = [databasePath UTF8String];
     
-    //Delete job with this job number from the table
-    NSString *removeSQL = [NSString stringWithFormat:@"DELETE FROM JOBS WHERE HOISTSRL=\"%@\"", txtHoistSrl.text];
-    const char *remove_stmt = [removeSQL UTF8String];
-    
-    if (sqlite3_prepare_v2(contactDB, remove_stmt, -1, &statement, NULL)==SQLITE_OK)
-    {
-        //sqlite3_bind_text(statement, 1, [txtJobNumber.text UTF8String], -1, NULL);
-    }
-    if (sqlite3_step(statement) == SQLITE_DONE)
-    {
-        NSLog(@"removed succesfully");
-    }
-    
-    NSString *insertSQL = [NSString stringWithFormat:@"INSERT INTO JOBS (HOISTSRL, CUSTOMERNAME, CONTACT, JOBNUMBER, DATE, ADDRESS, EMAIL, EQUIPNUM, CRANEMFG, HOISTMFG, HOISTMDL, CRANEDESCRIPTION, CAP, CRANESRL) VALUES(\"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\");",
-                           txtHoistSrl.text,
-                           txtCustomerName.text,
-                           txtCustomerContact.text,
-                           txtJobNumber.text,
-                           txtDate.text,
-                           txtAddress.text,
-                           txtEmail.text,
-                           txtEquipNum.text,
-                           txtCraneMfg.text,
-                           txtHoistMfg.text,
-                           txtHoistMdl.text,
-                           txtCraneDescription.text,
-                           txtCap.text,
-                           txtCraneSrl.text];
-    //NSString *insertSQL = [NSString stringWithFormat:@"INSERT OR REPLACE INTO ALLORDERS (JOBNUMBER, PART, DEFICIENT, DEFICIENTPART, NOTES, PICKERSELECTION) VALUES (?,?,?,?,?,?)"];
-    
-    
-    //check to make sure that the database is correct
-    if (sqlite3_open(dbPath, &contactDB) == SQLITE_OK)
-    {
-        const char *insert_stmt = [insertSQL UTF8String];
-        
-        sqlite3_prepare_v2(contactDB, insert_stmt, -1, &statement, nil);
-    
-        if (sqlite3_step(statement) != SQLITE_DONE)
-        {
-            NSAssert(0, @"Error updating table: JOBS");
-        }
-        else {
-            NSLog(@"Inserted successfully");
-            //UIAlertView *view = [[UIAlertView alloc] initWithTitle:@"Customer Added" message:@"The Customer Contact Information was Saved" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
-            //[view show];
-        }
-    }
-
 }
 
 - (IBAction)nextPressed {

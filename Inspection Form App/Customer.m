@@ -10,6 +10,20 @@
 
 @implementation Customer
 
+@synthesize name;
+@synthesize contact;
+@synthesize address;
+@synthesize date;
+@synthesize jobNumber;
+@synthesize equipDescription;
+@synthesize craneMfg;
+@synthesize hoistMfg;
+@synthesize hoistMdl;
+@synthesize hoistSrl;
+@synthesize equipmentNumber;
+@synthesize email;
+@synthesize description;
+
 - (id) init {
     if (self = [super init]) {
         [self setName:@"Default Name"];

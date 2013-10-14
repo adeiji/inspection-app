@@ -46,6 +46,8 @@
 		CE40D39218087F810080E9BD /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE40D39118087F810080E9BD /* SystemConfiguration.framework */; };
 		CE40D39418087F970080E9BD /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE40D39318087F970080E9BD /* libc++.dylib */; };
 		CE40D39718088E340080E9BD /* Crane.m in Sources */ = {isa = PBXBuildFile; fileRef = CE40D39618088E340080E9BD /* Crane.m */; };
+		CE40D39A180894300080E9BD /* PDFGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = CE40D399180894300080E9BD /* PDFGenerator.m */; };
+		CE486ACB180C83E900B1B953 /* Inspection.m in Sources */ = {isa = PBXBuildFile; fileRef = CE486ACA180C83E900B1B953 /* Inspection.m */; };
 		CE9775D91718C2660037967E /* logo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE9775D81718C2660037967E /* logo.jpg */; };
 		CE9A27381716A63200FE3D32 /* ipadAppLogo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE9A27371716A63200FE3D32 /* ipadAppLogo.jpg */; };
 		CE9A273C1716A70E00FE3D32 /* titlePageLogo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE9A273B1716A70E00FE3D32 /* titlePageLogo.jpg */; };
@@ -124,6 +126,10 @@
 		CE40D39318087F970080E9BD /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		CE40D39518088E340080E9BD /* Crane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Crane.h; sourceTree = "<group>"; };
 		CE40D39618088E340080E9BD /* Crane.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Crane.m; sourceTree = "<group>"; };
+		CE40D398180894300080E9BD /* PDFGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFGenerator.h; sourceTree = "<group>"; };
+		CE40D399180894300080E9BD /* PDFGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFGenerator.m; sourceTree = "<group>"; };
+		CE486AC9180C83E900B1B953 /* Inspection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Inspection.h; sourceTree = "<group>"; };
+		CE486ACA180C83E900B1B953 /* Inspection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Inspection.m; sourceTree = "<group>"; };
 		CE9775D81718C2660037967E /* logo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = logo.jpg; sourceTree = "<group>"; };
 		CE9A27371716A63200FE3D32 /* ipadAppLogo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ipadAppLogo.jpg; sourceTree = "<group>"; };
 		CE9A273B1716A70E00FE3D32 /* titlePageLogo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = titlePageLogo.jpg; sourceTree = "<group>"; };
@@ -233,6 +239,7 @@
 				8BF10A9B152FB93D00DC5F05 /* TextField.m */,
 				8B0787C215113448006857A8 /* TableViewController.h */,
 				CE40D39518088E340080E9BD /* Crane.h */,
+				CE40D39B180894380080E9BD /* PDF Generator */,
 				CE40D39618088E340080E9BD /* Crane.m */,
 				8B0787C315113448006857A8 /* TableViewController.m */,
 				8BF97C121706683000E6D242 /* AutographViewController.h */,
@@ -251,6 +258,8 @@
 				8B0787C615113796006857A8 /* Parts.m */,
 				8BE881F61513F82400360C63 /* ItemListConditionStorage.h */,
 				8BE881F71513F82400360C63 /* ItemListConditionStorage.m */,
+				CE486AC9180C83E900B1B953 /* Inspection.h */,
+				CE486ACA180C83E900B1B953 /* Inspection.m */,
 				8BE881FA1513FA4200360C63 /* Condition.h */,
 				8BE881FB1513FA4200360C63 /* Condition.m */,
 				8B544610150F0C3E007E1CA9 /* GradientView.h */,
@@ -303,6 +312,15 @@
 				CE40D38A18087BC20080E9BD /* DataLayer.m */,
 			);
 			name = "Data Layer";
+			sourceTree = "<group>";
+		};
+		CE40D39B180894380080E9BD /* PDF Generator */ = {
+			isa = PBXGroup;
+			children = (
+				CE40D398180894300080E9BD /* PDFGenerator.h */,
+				CE40D399180894300080E9BD /* PDFGenerator.m */,
+			);
+			name = "PDF Generator";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -419,6 +437,7 @@
 			files = (
 				8BC5845F150ABD87000AC695 /* main.m in Sources */,
 				8BC58463150ABD87000AC695 /* AppDelegate.m in Sources */,
+				CE40D39A180894300080E9BD /* PDFGenerator.m in Sources */,
 				8BC58466150ABD87000AC695 /* ViewController.m in Sources */,
 				8BE08B22150D0AFE005B5E4C /* Customer.m in Sources */,
 				8BECD3BC150E920500616735 /* Options.m in Sources */,
@@ -426,6 +445,7 @@
 				8B544612150F0C3E007E1CA9 /* GradientView.m in Sources */,
 				8B0787C415113448006857A8 /* TableViewController.m in Sources */,
 				8B0787C715113796006857A8 /* Parts.m in Sources */,
+				CE486ACB180C83E900B1B953 /* Inspection.m in Sources */,
 				8BE881F81513F82400360C63 /* ItemListConditionStorage.m in Sources */,
 				8BE881FC1513FA4200360C63 /* Condition.m in Sources */,
 				8BE4CD221515957000D75629 /* T1AutographAppDelegate.m in Sources */,

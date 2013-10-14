@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "sqlite3.h"
-
+#import <Dropbox/Dropbox.h>
 
 @interface DataLayer : NSObject
 
@@ -17,4 +17,19 @@
 
 + (NSString*) LoadOwner : (NSString*) databasePath
          contactDb : (sqlite3*) contactDB;
+
++ (void) insertInspectionToDatastoreTable : (NSArray*) myConditions
+                        DictionaryToStore : (NSDictionary*) dictionaryToStore;
+
++ (void) removeFromDatastoreTable : (NSDictionary*) dictionaryQuery
+                        DBAccount : (DBAccount *) account
+                      DBDatastore : (DBDatastore *) dataStore
+                          DBTable : (DBTable *) table;
++ (void) sync : (DBDatastore*) dataStore;
+
+
+@property (strong, nonatomic) DBAccount *account;
+@property (strong, nonatomic) DBDatastore *inspectionDataStore;
+@property (strong, nonatomic) DBTable *inspectionsTable;
+
 @end
