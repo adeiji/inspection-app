@@ -28,7 +28,6 @@
 		8BC5847E150ABD88000AC695 /* Inspection_Form_AppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BC5847D150ABD88000AC695 /* Inspection_Form_AppTests.m */; };
 		8BC7D9D31522ACE000D1A863 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BC7D9D21522ACE000D1A863 /* QuartzCore.framework */; };
 		8BE08B22150D0AFE005B5E4C /* Customer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE08B21150D0AFE005B5E4C /* Customer.m */; };
-		8BE4CD221515957000D75629 /* T1AutographAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE4CD211515957000D75629 /* T1AutographAppDelegate.m */; };
 		8BE881F81513F82400360C63 /* ItemListConditionStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE881F71513F82400360C63 /* ItemListConditionStorage.m */; };
 		8BE881FC1513FA4200360C63 /* Condition.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE881FB1513FA4200360C63 /* Condition.m */; };
 		8BE8C6FB151538B700D5C7F2 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BE8C6FA151538B700D5C7F2 /* libsqlite3.dylib */; };
@@ -38,7 +37,6 @@
 		8BF09E74153A53E200E1BCB3 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BF09E73153A53E200E1BCB3 /* Security.framework */; };
 		8BF10A9C152FB93D00DC5F05 /* TextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BF10A9B152FB93D00DC5F05 /* TextField.m */; };
 		8BF3877015239E1200C3F368 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BF3876F15239E1200C3F368 /* MessageUI.framework */; };
-		8BF97C141706685500E6D242 /* AutographViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BF97C131706685500E6D242 /* AutographViewController.m */; };
 		CE3992751805FD08003AE30B /* iPadMainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE3992741805FD08003AE30B /* iPadMainStoryboard.storyboard */; };
 		CE40D38B18087BC20080E9BD /* DataLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = CE40D38A18087BC20080E9BD /* DataLayer.m */; };
 		CE40D38E18087F290080E9BD /* Dropbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE40D38D18087F290080E9BD /* Dropbox.framework */; };
@@ -98,8 +96,6 @@
 		8BDF998C150C1A090069C35B /* Customer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Customer.h; sourceTree = "<group>"; };
 		8BDF9998150C209A0069C35B /* UICustomSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UICustomSwitch.h; path = ../../../Downloads/UICustomSwitch/UICustomSwitch.h; sourceTree = "<group>"; };
 		8BE08B21150D0AFE005B5E4C /* Customer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Customer.m; sourceTree = "<group>"; };
-		8BE4CD201515957000D75629 /* T1AutographAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = T1AutographAppDelegate.h; sourceTree = "<group>"; };
-		8BE4CD211515957000D75629 /* T1AutographAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = T1AutographAppDelegate.m; sourceTree = "<group>"; };
 		8BE881F61513F82400360C63 /* ItemListConditionStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemListConditionStorage.h; sourceTree = "<group>"; };
 		8BE881F71513F82400360C63 /* ItemListConditionStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemListConditionStorage.m; sourceTree = "<group>"; };
 		8BE881FA1513FA4200360C63 /* Condition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Condition.h; sourceTree = "<group>"; };
@@ -115,8 +111,6 @@
 		8BF10A9A152FB93D00DC5F05 /* TextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextField.h; sourceTree = "<group>"; };
 		8BF10A9B152FB93D00DC5F05 /* TextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextField.m; sourceTree = "<group>"; };
 		8BF3876F15239E1200C3F368 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
-		8BF97C121706683000E6D242 /* AutographViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutographViewController.h; sourceTree = "<group>"; };
-		8BF97C131706685500E6D242 /* AutographViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutographViewController.m; sourceTree = "<group>"; };
 		CE3992741805FD08003AE30B /* iPadMainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = iPadMainStoryboard.storyboard; sourceTree = "<group>"; };
 		CE40D38918087BC20080E9BD /* DataLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataLayer.h; sourceTree = "<group>"; };
 		CE40D38A18087BC20080E9BD /* DataLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataLayer.m; sourceTree = "<group>"; };
@@ -233,43 +227,24 @@
 				CE9775D81718C2660037967E /* logo.jpg */,
 				8BC7D9D21522ACE000D1A863 /* QuartzCore.framework */,
 				8BDF9998150C209A0069C35B /* UICustomSwitch.h */,
-				8BC58461150ABD87000AC695 /* AppDelegate.h */,
-				8BC58462150ABD87000AC695 /* AppDelegate.m */,
-				8BF10A9A152FB93D00DC5F05 /* TextField.h */,
-				8BF10A9B152FB93D00DC5F05 /* TextField.m */,
-				8B0787C215113448006857A8 /* TableViewController.h */,
-				CE40D39518088E340080E9BD /* Crane.h */,
+				CE486AD6180CB1A200B1B953 /* App Delegate */,
+				CE486AD8180CB1B300B1B953 /* Text Field */,
+				CE486AD7180CB1AD00B1B953 /* Crane */,
 				CE40D39B180894380080E9BD /* PDF Generator */,
-				CE40D39618088E340080E9BD /* Crane.m */,
-				8B0787C315113448006857A8 /* TableViewController.m */,
-				8BF97C121706683000E6D242 /* AutographViewController.h */,
-				8BF97C131706685500E6D242 /* AutographViewController.m */,
-				8BC58464150ABD87000AC695 /* ViewController.h */,
-				CE3992741805FD08003AE30B /* iPadMainStoryboard.storyboard */,
+				CE486AD9180CB1C200B1B953 /* Table View Controller */,
+				CE486ADA180CB1DE00B1B953 /* UI Files */,
 				CE40D38C18087BCA0080E9BD /* Data Layer */,
-				8BC58465150ABD87000AC695 /* ViewController.m */,
-				8BE9DE7E1616355800906B98 /* OrdinalNumberFormatter.h */,
-				8BE9DE7F1616355800906B98 /* OrdinalNumberFormatter.m */,
-				8BC58467150ABD87000AC695 /* ViewController.xib */,
+				CE486AD5180CB17C00B1B953 /* View Controller */,
+				CE486AD4180CB16900B1B953 /* OrdinalNumberFormatter */,
 				CE9A27371716A63200FE3D32 /* ipadAppLogo.jpg */,
-				8BE4CD201515957000D75629 /* T1AutographAppDelegate.h */,
-				8BE4CD211515957000D75629 /* T1AutographAppDelegate.m */,
-				8B0787C515113796006857A8 /* Parts.h */,
-				8B0787C615113796006857A8 /* Parts.m */,
-				8BE881F61513F82400360C63 /* ItemListConditionStorage.h */,
-				8BE881F71513F82400360C63 /* ItemListConditionStorage.m */,
-				CE486AC9180C83E900B1B953 /* Inspection.h */,
-				CE486ACA180C83E900B1B953 /* Inspection.m */,
-				8BE881FA1513FA4200360C63 /* Condition.h */,
-				8BE881FB1513FA4200360C63 /* Condition.m */,
-				8B544610150F0C3E007E1CA9 /* GradientView.h */,
-				8B544611150F0C3E007E1CA9 /* GradientView.m */,
-				8BDF998C150C1A090069C35B /* Customer.h */,
-				8BE08B21150D0AFE005B5E4C /* Customer.m */,
-				8BECD3B9150E914800616735 /* Options.h */,
-				8BECD3BB150E920500616735 /* Options.m */,
-				8BECD3BD150E934900616735 /* OptionList.h */,
-				8BECD3BE150E934900616735 /* OptionList.m */,
+				CE486ACF180CB14100B1B953 /* Parts */,
+				CE486ACE180CB13700B1B953 /* ItemListConditionStorage */,
+				CE486ACD180CB13100B1B953 /* Inspection */,
+				CE486ACC180CB12B00B1B953 /* Condition */,
+				CE486AD0180CB14A00B1B953 /* Gradient View */,
+				CE486AD1180CB15200B1B953 /* Customer */,
+				CE486AD2180CB15800B1B953 /* Options */,
+				CE486AD3180CB15E00B1B953 /* OptionList */,
 				8BC58459150ABD87000AC695 /* Supporting Files */,
 			);
 			path = "Inspection Form App";
@@ -321,6 +296,141 @@
 				CE40D399180894300080E9BD /* PDFGenerator.m */,
 			);
 			name = "PDF Generator";
+			sourceTree = "<group>";
+		};
+		CE486ACC180CB12B00B1B953 /* Condition */ = {
+			isa = PBXGroup;
+			children = (
+				8BE881FA1513FA4200360C63 /* Condition.h */,
+				8BE881FB1513FA4200360C63 /* Condition.m */,
+			);
+			name = Condition;
+			sourceTree = "<group>";
+		};
+		CE486ACD180CB13100B1B953 /* Inspection */ = {
+			isa = PBXGroup;
+			children = (
+				CE486AC9180C83E900B1B953 /* Inspection.h */,
+				CE486ACA180C83E900B1B953 /* Inspection.m */,
+			);
+			name = Inspection;
+			sourceTree = "<group>";
+		};
+		CE486ACE180CB13700B1B953 /* ItemListConditionStorage */ = {
+			isa = PBXGroup;
+			children = (
+				8BE881F61513F82400360C63 /* ItemListConditionStorage.h */,
+				8BE881F71513F82400360C63 /* ItemListConditionStorage.m */,
+			);
+			name = ItemListConditionStorage;
+			sourceTree = "<group>";
+		};
+		CE486ACF180CB14100B1B953 /* Parts */ = {
+			isa = PBXGroup;
+			children = (
+				8B0787C515113796006857A8 /* Parts.h */,
+				8B0787C615113796006857A8 /* Parts.m */,
+			);
+			name = Parts;
+			sourceTree = "<group>";
+		};
+		CE486AD0180CB14A00B1B953 /* Gradient View */ = {
+			isa = PBXGroup;
+			children = (
+				8B544610150F0C3E007E1CA9 /* GradientView.h */,
+				8B544611150F0C3E007E1CA9 /* GradientView.m */,
+			);
+			name = "Gradient View";
+			sourceTree = "<group>";
+		};
+		CE486AD1180CB15200B1B953 /* Customer */ = {
+			isa = PBXGroup;
+			children = (
+				8BDF998C150C1A090069C35B /* Customer.h */,
+				8BE08B21150D0AFE005B5E4C /* Customer.m */,
+			);
+			name = Customer;
+			sourceTree = "<group>";
+		};
+		CE486AD2180CB15800B1B953 /* Options */ = {
+			isa = PBXGroup;
+			children = (
+				8BECD3B9150E914800616735 /* Options.h */,
+				8BECD3BB150E920500616735 /* Options.m */,
+			);
+			name = Options;
+			sourceTree = "<group>";
+		};
+		CE486AD3180CB15E00B1B953 /* OptionList */ = {
+			isa = PBXGroup;
+			children = (
+				8BECD3BD150E934900616735 /* OptionList.h */,
+				8BECD3BE150E934900616735 /* OptionList.m */,
+			);
+			name = OptionList;
+			sourceTree = "<group>";
+		};
+		CE486AD4180CB16900B1B953 /* OrdinalNumberFormatter */ = {
+			isa = PBXGroup;
+			children = (
+				8BE9DE7E1616355800906B98 /* OrdinalNumberFormatter.h */,
+				8BE9DE7F1616355800906B98 /* OrdinalNumberFormatter.m */,
+			);
+			name = OrdinalNumberFormatter;
+			sourceTree = "<group>";
+		};
+		CE486AD5180CB17C00B1B953 /* View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				8BC58465150ABD87000AC695 /* ViewController.m */,
+				8BC58464150ABD87000AC695 /* ViewController.h */,
+			);
+			name = "View Controller";
+			sourceTree = "<group>";
+		};
+		CE486AD6180CB1A200B1B953 /* App Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				8BC58461150ABD87000AC695 /* AppDelegate.h */,
+				8BC58462150ABD87000AC695 /* AppDelegate.m */,
+			);
+			name = "App Delegate";
+			sourceTree = "<group>";
+		};
+		CE486AD7180CB1AD00B1B953 /* Crane */ = {
+			isa = PBXGroup;
+			children = (
+				CE40D39518088E340080E9BD /* Crane.h */,
+				CE40D39618088E340080E9BD /* Crane.m */,
+			);
+			name = Crane;
+			sourceTree = "<group>";
+		};
+		CE486AD8180CB1B300B1B953 /* Text Field */ = {
+			isa = PBXGroup;
+			children = (
+				8BF10A9A152FB93D00DC5F05 /* TextField.h */,
+				8BF10A9B152FB93D00DC5F05 /* TextField.m */,
+			);
+			name = "Text Field";
+			sourceTree = "<group>";
+		};
+		CE486AD9180CB1C200B1B953 /* Table View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				8B0787C315113448006857A8 /* TableViewController.m */,
+				8B0787C215113448006857A8 /* TableViewController.h */,
+			);
+			name = "Table View Controller";
+			sourceTree = "<group>";
+		};
+		CE486ADA180CB1DE00B1B953 /* UI Files */ = {
+			isa = PBXGroup;
+			children = (
+				CE3992741805FD08003AE30B /* iPadMainStoryboard.storyboard */,
+				8BC58467150ABD87000AC695 /* ViewController.xib */,
+			);
+			name = "UI Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -448,12 +558,10 @@
 				CE486ACB180C83E900B1B953 /* Inspection.m in Sources */,
 				8BE881F81513F82400360C63 /* ItemListConditionStorage.m in Sources */,
 				8BE881FC1513FA4200360C63 /* Condition.m in Sources */,
-				8BE4CD221515957000D75629 /* T1AutographAppDelegate.m in Sources */,
 				8BF10A9C152FB93D00DC5F05 /* TextField.m in Sources */,
 				CE40D38B18087BC20080E9BD /* DataLayer.m in Sources */,
 				CE40D39718088E340080E9BD /* Crane.m in Sources */,
 				8BE9DE801616355800906B98 /* OrdinalNumberFormatter.m in Sources */,
-				8BF97C141706685500E6D242 /* AutographViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

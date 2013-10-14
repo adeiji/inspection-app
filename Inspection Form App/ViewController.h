@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "sqlite3.h"
-#import "TableViewController.h"
-#import "AutographViewController.h"
 #import <MessageUI/MessageUI.h>
 #import <MessageUI/MFMailComposeViewController.h>
 #import "TextField.h"
@@ -55,8 +53,6 @@
 @property (strong, nonatomic) IBOutlet UIViewController *secondViewController;
 @property (strong, nonatomic) IBOutlet UIViewController *firstViewController;
 @property (strong, nonatomic) IBOutlet UIViewController *rootViewController;
-@property (strong, nonatomic) IBOutlet TableViewController *viewAllController;
-@property (strong, nonatomic) IBOutlet AutographViewController *autographController;
 @property (strong, nonatomic) IBOutlet UINavigationController *navController;
 @property (weak, nonatomic) IBOutlet UITableView *myPartsTable;
 @property (strong, nonatomic) NSMutableArray *myPartsArray;
@@ -89,6 +85,7 @@
 @property (strong, nonatomic) IBOutlet UIPickerView *CraneDescriptionUIPicker;
 @property (strong, nonatomic) NSMutableArray *craneDescriptionsArray;
 @property (weak, nonatomic) IBOutlet UIButton *selectCraneButton;
+@property (strong, nonatomic) IBOutlet UISwipeGestureRecognizer *gestureRecognizer;
 
 - (IBAction)SelectCraneDescriptionPressed:(id)sender;
 - (IBAction)UpdateButtonPressed:(id)sender;

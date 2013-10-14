@@ -476,7 +476,11 @@
                                 <items>
                                     <navigationItem title="Customer and Job Information" id="HDl-LN-ANL">
                                         <barButtonItem key="leftBarButtonItem" title="Submit" id="Uqq-fb-DUm"/>
-                                        <barButtonItem key="rightBarButtonItem" title="Parts List" id="6cv-YP-nhB"/>
+                                        <barButtonItem key="rightBarButtonItem" title="Parts List" id="6cv-YP-nhB">
+                                            <connections>
+                                                <segue destination="ohd-4L-yxA" kind="push" id="nR4-pW-KoB"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -496,10 +500,246 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="8Sj-I6-8wL"/>
+                    <connections>
+                        <outlet property="txtAddress" destination="RTi-sd-Sx1" id="yzQ-ac-L0V"/>
+                        <outlet property="txtCap" destination="iVX-4f-sYw" id="HTX-9e-OeR"/>
+                        <outlet property="txtCraneDescription" destination="SzR-GM-f0g" id="CAR-hM-75n"/>
+                        <outlet property="txtCraneMfg" destination="fei-Od-P6t" id="LFI-V0-iOq"/>
+                        <outlet property="txtCraneSrl" destination="Aq2-G9-LuI" id="Ht2-TS-xjb"/>
+                        <outlet property="txtCustomerContact" destination="gWB-T3-X6t" id="oty-D6-tID"/>
+                        <outlet property="txtCustomerName" destination="2Jd-DJ-MFX" id="MmZ-vP-Noo"/>
+                        <outlet property="txtDate" destination="csk-TU-ped" id="yEh-53-Nog"/>
+                        <outlet property="txtEmail" destination="7Gh-Lo-jiG" id="gQ2-Vu-i89"/>
+                        <outlet property="txtEquipNum" destination="kOv-66-R3v" id="TIW-cv-P1c"/>
+                        <outlet property="txtHoistMdl" destination="KlB-pp-5ZH" id="zQC-FZ-VgV"/>
+                        <outlet property="txtHoistMfg" destination="GmN-ei-gGk" id="2oy-7W-g5x"/>
+                        <outlet property="txtHoistSrl" destination="MA1-xc-auU" id="IpE-Ed-k2G"/>
+                        <outlet property="txtJobNumber" destination="jsB-Ap-g2E" id="xQX-Jk-7ME"/>
+                        <outlet property="txtTechnicianName" destination="bdb-xb-gc8" id="vsC-uA-gbc"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="83i-uq-tas" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1690" y="739"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="cGm-1p-p0Q">
+            <objects>
+                <viewController id="ohd-4L-yxA" customClass="ViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Y5I-7R-Pp8"/>
+                        <viewControllerLayoutGuide type="bottom" id="0UW-tY-cI5"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="FK9-Lc-U88">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jWb-ru-g5i" customClass="GradientView">
+                                <rect key="frame" x="20" y="612" width="728" height="251"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Which part of this machine is defficient?" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="1" preferredMaxLayoutWidth="236" translatesAutoresizingMaskIntoConstraints="NO" id="N9M-S1-5xO">
+                                        <rect key="frame" x="54" y="92" width="236" height="71"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tWH-Qn-iav" customClass="GradientView">
+                                        <rect key="frame" x="319" y="16" width="2" height="220"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MsN-TB-8Y3" customClass="GradientView">
+                                        <rect key="frame" x="344" y="18" width="364" height="216"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <pickerView userInteractionEnabled="NO" alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" showsSelectionIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G5j-uv-CDt">
+                                                <rect key="frame" x="0.0" y="0.0" width="364" height="216"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" red="0.64132838849999996" green="0.73710078310000005" blue="0.96034307070000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            </pickerView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Part Condition:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="Hr4-fr-2XV">
+                                <rect key="frame" x="20" y="68" width="187" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Enter the condition of the part" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="kSn-d6-mCM">
+                                <rect key="frame" x="20" y="103" width="234" height="27"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tQH-1p-wVd" customClass="GradientView">
+                                <rect key="frame" x="20" y="371" width="728" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Defficient:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="rC6-KN-ZLK">
+                                        <rect key="frame" x="8" y="-466" width="77" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Defficient:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="AcW-hP-35V">
+                                        <rect key="frame" x="20" y="14" width="77" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <switch opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="BGr-wP-Lcw">
+                                        <rect key="frame" x="629" y="11" width="51" height="31"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </switch>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gPt-UM-OBt" customClass="GradientView">
+                                <rect key="frame" x="20" y="421" width="728" height="192"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Any notes that need to be made mention of:" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="10" preferredMaxLayoutWidth="228" translatesAutoresizingMaskIntoConstraints="NO" id="OLt-3R-n3X">
+                                        <rect key="frame" x="55" y="46" width="228" height="100"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qKf-Fo-2TW" customClass="GradientView">
+                                        <rect key="frame" x="318" y="21" width="2" height="151"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="New-QL-JeE" customClass="GradientView">
+                                        <rect key="frame" x="343" y="48" width="284" height="98"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R4W-rr-wGf">
+                                                <rect key="frame" x="0.0" y="0.0" width="284" height="98"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            </textView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
+                            <label opaque="NO" clipsSubviews="YES" contentMode="left" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="zPN-Ej-pJF">
+                                <rect key="frame" x="20" y="202" width="711" height="63"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" none="YES"/>
+                                </accessibility>
+                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="itg-3k-s3J">
+                                <rect key="frame" x="20" y="161" width="239" height="54"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="44"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <navigationBar clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" barStyle="blackTranslucent" translatesAutoresizingMaskIntoConstraints="NO" id="IgU-F9-DOD">
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="Title" id="9G3-Eu-saT">
+                                        <barButtonItem key="leftBarButtonItem" title="Previous" id="ydS-TF-lKp"/>
+                                        <barButtonItem key="rightBarButtonItem" title="Next" id="Wrp-ab-dea"/>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" barStyle="blackTranslucent" translatesAutoresizingMaskIntoConstraints="NO" id="V0p-Zx-VDv">
+                                <rect key="frame" x="0.0" y="980" width="768" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <items>
+                                    <barButtonItem title="Customer Info" id="Spn-F2-nAd"/>
+                                    <barButtonItem title="Submit" id="2YM-vd-SmA">
+                                        <connections>
+                                            <action selector="submitPressed:" destination="ohd-4L-yxA" id="iEo-Ff-Mp9"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem enabled="NO" title="Create Certificate" id="0hp-Iu-e5a"/>
+                                </items>
+                            </toolbar>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CWv-mU-fg7" customClass="GradientView">
+                                <rect key="frame" x="20" y="370" width="728" height="2"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Defficient:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="arf-XX-Hma">
+                                        <rect key="frame" x="8" y="-466" width="77" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="anc-cl-5wC" customClass="GradientView">
+                                <rect key="frame" x="20" y="321" width="728" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Defficient:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="Hnr-66-w9N">
+                                        <rect key="frame" x="8" y="-466" width="77" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="N/A" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="j7t-Eh-Jt9">
+                                        <rect key="frame" x="20" y="14" width="77" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <switch opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="hpt-8d-vYa">
+                                        <rect key="frame" x="629" y="11" width="51" height="31"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </switch>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.95679772419999998" green="0.95679772419999998" blue="0.95679772419999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <gestureRecognizers/>
+                        <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackOpaque"/>
+                        <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="x6T-bm-sdn" appends="YES" id="aBZ-0w-8wr"/>
+                        </connections>
+                    </view>
+                    <navigationItem key="navigationItem" id="Fhf-l3-h0H"/>
+                    <connections>
+                        <outlet property="DefficiencyPicker" destination="G5j-uv-CDt" id="y0b-fv-fS2"/>
+                        <outlet property="applicableSwitch" destination="hpt-8d-vYa" id="dUH-a8-HxY"/>
+                        <outlet property="defficiencySwitch" destination="BGr-wP-Lcw" id="6g8-1S-izH"/>
+                        <outlet property="gestureRecognizer" destination="x6T-bm-sdn" id="dcX-44-g4A"/>
+                        <outlet property="lblPart" destination="zPN-Ej-pJF" id="vJ7-gO-exm"/>
+                        <outlet property="lblPartNumber" destination="itg-3k-s3J" id="nX2-ui-1fc"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Chs-UY-VsF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="right" id="x6T-bm-sdn"/>
+            </objects>
+            <point key="canvasLocation" x="2689" y="739"/>
         </scene>
         <!--Table View Controller - Root View Controller-->
         <scene sceneID="LMG-Co-kAT">

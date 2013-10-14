@@ -57,6 +57,7 @@
     bool changeLayoutNeeded;
     NSString* iosVersion;
     Inspection *inspection;
+    int currentOrientation;
 }
 @end
 
@@ -78,8 +79,6 @@
 @synthesize secondViewController;
 @synthesize firstViewController;
 @synthesize rootViewController;
-@synthesize viewAllController;
-@synthesize autographController;
 @synthesize navController;
 @synthesize myPartsTable;
 @synthesize myPartsArray;
@@ -120,6 +119,7 @@
 @synthesize dataStore;
 @synthesize table;
 @synthesize account;
+@synthesize gestureRecognizer;
 
 #define kMinimumGestureLength   25
 #define kMaximumVariance        100
@@ -154,8 +154,7 @@
     loadRatingsText = @"";
     remarksLimitationsImposed = @"";
     [self.view insertSubview:CustomerInfoFullView atIndex:0];
-    //CustomerInfoScrollView = CustomerInfoView;
-    [self createDatastoreTable];
+
     // Do any additional setup after loading the view, typically from a nib.
     NSDate *now = [NSDate date];
     myDatePicker = [[UIDatePicker alloc] initWithFrame:CGRectZero];
@@ -170,10 +169,27 @@
     txtTechnicianName.text = technicianName;
     manufacturer = @"";
     //GradientView* myView = [[GradientView alloc] initWithFrame:CGRectMake(0, 0, 320, 100)];
-    
+    currentOrientation = self.interfaceOrientation;
     [self didPressLink];
     txtTechnicianName.text = [owner uppercaseString];
+    
+    
+    gestureRecognizer.direction = UISwipeGestureRecognizerDirectionLeft | UISwipeGestureRecognizerDirectionRight;
+    [gestureRecognizer addTarget:self action:@selector(handleSwipe:)];
+    
     [super viewDidLoad];
+}
+
+- (void) handleSwipe : (UISwipeGestureRecognizer*) sender
+{
+    if (sender.direction == UISwipeGestureRecognizerDirectionRight)
+    {
+        [self nextPressed];
+    }
+    else
+    {
+        [self previousPressed];
+    }
 }
 
 #pragma mark - Dropbox Datastore Methods
@@ -202,6 +218,17 @@
 //Adds the record to the database.  Adds the record with the corresponding date, that way we can pull previous orders by date.
 - (void) insertInspectionToDatastoreTable
 {
+    account = [[DBAccountManager sharedManager] linkedAccount];
+    
+    if (account) {
+        NSLog(@"App already linked");
+    } else {
+        [[DBAccountManager sharedManager] linkFromController:self];
+    }
+    
+    dataStore = [DBDatastore openDefaultStoreForAccount:account error:nil];
+    table = [dataStore getTable:@"inspections"];
+    
     //Get all the records with this hoistSrl and this specific date
     NSDictionary *query = @{ @"hoistSrl" : txtHoistSrl.text, @"date" : txtDate.text };
     
@@ -277,10 +304,8 @@
     [self setTxtEquipNum:nil];
     [self setTxtNotes:nil];
     [self setRootViewController:nil];
-    [self setViewAllController:nil];
     [self setNavController:nil];
     [self setMyPartsTable:nil];
-    [self setAutographController:nil];
     [self setViewPDFController:nil];
     [self setOpenInButton:nil];
     [self setTxtEmail:nil];
@@ -313,10 +338,6 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     self.datePicker = nil;
     // Release any retained subviews of the main view.
-}
-- (NSUInteger)supportedInterfaceOrientations
-{
-    return UIInterfaceOrientationPortrait;
 }
 #pragma mark TextField Methods
 
@@ -412,11 +433,6 @@
     textField.text = [textField.text stringByReplacingCharactersInRange:range withString:[string uppercaseString]]; return NO;
 }
 
-
-- (BOOL) shouldAutorotate
-{
-    return NO;
-}
 
 - (IBAction)buttonPressed {
     NSDate *myDate = [myDatePicker date];
@@ -1019,27 +1035,56 @@
     }
 }
 
+- (void) didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+    [self changeOrientation];
+}
+
+-(void) changeOrientation
+{
+    UIInterfaceOrientation orientation = self.interfaceOrientation;
+    
+    currentOrientation = orientation;
+}
+
+- (BOOL) shouldAutorotate
+{
+    return YES;
+}
+
 - (void) keyboardWasShown:(NSNotification *) notification
 {
-    //Get the size of the keyboard
     NSDictionary *info = [notification userInfo];
-    CGSize keyboardSize = [[info objectForKey:UIKeyboardBoundsUserInfoKey] CGRectValue].size;
-    
-    //Adjust the bottom content inset of your scroll view by the keyboard height
-    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, keyboardSize.height, 0.0);
-    CustomerInfoScrollView.contentInset = contentInsets;
-    CustomerInfoScrollView.scrollIndicatorInsets = contentInsets;
-    
-    //scroll the target text field into view
     CGRect aRect = self.view.frame;
-    aRect.size.height -=keyboardSize.height;
+    CGSize keyboardSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
     
-    if ([activeField isEqual:txtCap]||[activeField isEqual:txtCraneDescription]||[activeField isEqual:txtCraneMfg]||[activeField isEqual:txtCraneSrl]||
-        [activeField isEqual:txtEquipNum]||[activeField isEqual:txtEquipDesc]||[activeField isEqual:txtHoistMdl])
+    if ((currentOrientation==UIInterfaceOrientationLandscapeLeft) ||
+        (currentOrientation==UIInterfaceOrientationLandscapeRight))
     {
-    //if (CGRectContainsPoint(aRect, activeField.frame.origin)) {
-        CGPoint scrollPoint = CGPointMake(0.0, keyboardSize.height);
-        [CustomerInfoScrollView setContentOffset:scrollPoint animated:YES];
+        //Adjust the bottom content inset of your scroll view by the keyboard height
+        UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, keyboardSize.width, 0.0);
+        
+        scrollView.contentInset = contentInsets;
+        scrollView.scrollIndicatorInsets = contentInsets;
+        
+        aRect.size.height -=keyboardSize.width;
+        if (!CGRectContainsPoint(aRect, activeField.superview.frame.origin)) {
+            CGPoint scrollPoint = CGPointMake(0.0, keyboardSize.width + activeField.superview.frame.size.height);
+            [scrollView setContentOffset:scrollPoint animated:YES];
+        }
+    }
+    else if ((currentOrientation==UIInterfaceOrientationPortrait) ||
+             (currentOrientation==UIInterfaceOrientationPortraitUpsideDown))
+    {
+        UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, keyboardSize.height, 0.0);
+        scrollView.contentInset = contentInsets;
+        scrollView.scrollIndicatorInsets = contentInsets;
+        
+        aRect.size.height -=keyboardSize.height;
+        if (!CGRectContainsPoint(aRect, activeField.superview.frame.origin)) {
+            CGPoint scrollPoint = CGPointMake(0.0, keyboardSize.height);
+            [scrollView setContentOffset:scrollPoint animated:YES];
+        }
     }
 }
 - (void) keyboardWillBeHidden:(NSNotification *) notification {
@@ -1118,10 +1163,6 @@
     }
 }
 
-- (IBAction)ViewAllOrders:(id)sender {
-    [self.CraneInspectionView removeFromSuperview];
-    [self.view insertSubview:self.viewAllController.view atIndex:0];
-}
 
 - (IBAction)gotoCustomerInfo:(id)sender {
     NSUInteger selectedRow = [DefficiencyPicker selectedRowInComponent:0];
