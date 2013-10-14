@@ -7,7 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Inspection.h"
 
 @interface PDFGenerator : NSObject
+
++ (void) writeCertificateTextFile : (NSString*) testLoads
+             ProofLoadDescription : (NSString*) proofLoadDescription
+         RemarksLimitationImposed : (NSString*) remarksLimitationsImposed
+                  LoadRatingsText : (NSString*) loadRatingsText
+                       Inspection : (Inspection *) inspection;
 
 @end

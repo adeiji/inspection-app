@@ -23,6 +23,7 @@
 #import "OrdinalNumberFormatter.h"
 #import "Foundation/NSDateFormatter.h"
 #import "DataLayer.h"
+#import "PDFGenerator.h"
 
 @interface ViewController () {
     ItemListConditionStorage *myItemListStore; 
@@ -55,6 +56,7 @@
     NSString *owner;
     bool changeLayoutNeeded;
     NSString* iosVersion;
+    Inspection *inspection;
 }
 @end
 
@@ -153,7 +155,7 @@
     remarksLimitationsImposed = @"";
     [self.view insertSubview:CustomerInfoFullView atIndex:0];
     //CustomerInfoScrollView = CustomerInfoView;
-    [self createDatabase];
+    [self createDatastoreTable];
     // Do any additional setup after loading the view, typically from a nib.
     NSDate *now = [NSDate date];
     myDatePicker = [[UIDatePicker alloc] initWithFrame:CGRectZero];
@@ -413,7 +415,7 @@
 
 - (BOOL) shouldAutorotate
 {
-    return YES;
+    return NO;
 }
 
 - (IBAction)buttonPressed {
@@ -736,7 +738,7 @@
                             remarksLimitationsImposed = textField.text;
                             finished = NO;
                             [self DisplayPDFWithOverallRating];
-                            [self writeCertificateTextFile];
+                           // [PDFGenerator writeCertificateTextFile:testLoads ProofLoadDescription:proofLoadDescription RemarksLimitationImposed:remarksLimitationsImposed LoadRatingsText:loadRatingsText Inspection:<#(Inspection *)#>];
                             CreateCertificateButton.enabled = TRUE;
                         }
 
@@ -780,7 +782,7 @@
 
 -(void) DisplayPDFWithOverallRating
 {
-    [self writeTextFile:myItemListStore];
+   // [self writeTextFile:myItemListStore];
     //[CraneInspectionView removeFromSuperview];
     
     changeLayoutNeeded = YES;
@@ -798,14 +800,11 @@
     NSString* pdfFileName = [path stringByAppendingPathComponent:fileName];
     
     controller = [UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:pdfFileName]];
-    //[controller setUTI:@"PDF"];
     controller.delegate = self;
   
     [controller presentPreviewAnimated:NO];
     
-    //[CraneInspectionView removeFromSuperview];
-    //[self.view addSubview:self.autographController.view];
-    [self writeCertificateTextFile];
+    //[self writeCertificateTextFile];
 }
 
 - (IBAction)CreateCertificate:(id)sender {
@@ -1022,7 +1021,6 @@
 
 - (void) keyboardWasShown:(NSNotification *) notification
 {
-    
     //Get the size of the keyboard
     NSDictionary *info = [notification userInfo];
     CGSize keyboardSize = [[info objectForKey:UIKeyboardBoundsUserInfoKey] CGRectValue].size;

@@ -104,7 +104,6 @@
 - (IBAction)submitPressed:(id)sender;
 - (IBAction)buttonPressed;
 - (IBAction)switchChanged:(id)sender;
-- (void) createDatabase;
 - (void) createTable:(NSString *) customerName;
 - (void) userDidClickTable;
 - (IBAction) partsListButtonClicked:(id) sender;

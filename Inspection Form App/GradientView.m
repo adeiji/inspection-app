@@ -41,10 +41,6 @@
     CGGradientRelease(glossGradient);
     CGColorSpaceRelease(rgbColorspace);
     
-    //self.layer.shadowColor = [UIColor blackColor].CGColor;
-    //self.layer.shadowOpacity = 1.0;
-    //self.layer.shadowRadius = 2.0;
-    //self.layer.shadowOffset = CGSizeMake(0,3);
     self.clipsToBounds = NO;
     
     self.layer.borderColor = [UIColor lightGrayColor].CGColor;

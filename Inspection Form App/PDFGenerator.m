@@ -12,17 +12,11 @@
 
 @implementation PDFGenerator
 
-- (void) writeCertificateTextFile : (NSString*) testLoads
-                     CustomerName : (NSString*) customerName
-                 CraneDescription : (NSString*) craneDescription
-                  EquipmentNumber : (NSString*) equipmentNumber
-                         Capacity : (NSString*) capacity
++ (void) writeCertificateTextFile : (NSString*) testLoads
              ProofLoadDescription : (NSString*) proofLoadDescription
          RemarksLimitationImposed : (NSString*) remarksLimitationsImposed
                   LoadRatingsText : (NSString*) loadRatingsText
-                             Date : (NSString*) myDate
-                   TechnicianName : (NSString*) technicianName
-                         HoistSrl : (NSString*) hoistSrl
+                       Inspection : (Inspection *) inspection
 {
     if (![testLoads isEqual:NULL])
     {
@@ -61,27 +55,27 @@
         [headerString appendString:@"ANNUAL OVERHEAD BRIDGE INSPECTION: \n"];
         [headerString appendString:[NSString stringWithFormat:@"%@", @"BRIDGE, MONORAIL, JIB"]];
         
-        if ([customerName isEqualToString:@"LVVWD"])
+        if ([inspection.customer.name isEqualToString:@"LVVWD"])
         {
             [ownerString appendString:[NSString stringWithFormat:@"1.  Owner      %@", @"Las Vegas Valley Water District"]];
         }
         else {
-            [ownerString appendString:[NSString stringWithFormat:@"1.  Owner     %@", customerName]];
+            [ownerString appendString:[NSString stringWithFormat:@"1.  Owner     %@", inspection.customer.name]];
         }
         
         [titleAddress appendString:[NSString stringWithFormat:@"Silver State Wire Rope & Rigging\n8740 S. Jones Blvd Las Vegas, NV 89139\n(702) 597-2010 fax (702)896-1977"]];
-        [headerTitle appendString:[NSString stringWithFormat:@"Annual Overhead Crane Inspection:\n%@", craneDescription]];
-        [ownerAddressString appendString:[NSString stringWithFormat:@"2.  Owner's Address      %@", address]];
-        [location appendString:[NSString stringWithFormat:@"3.  Location      %@", equipmentNumber]];
-        [description appendString:[NSString stringWithFormat:@"4.  Description    %@ CRANE", craneDescription]];
-        [ratedCapacity appendString:[NSString stringWithFormat:@"    Rated Capacity      %@", capacity]];
+        [headerTitle appendString:[NSString stringWithFormat:@"Annual Overhead Crane Inspection:\n%@", inspection.crane.description]];
+        [ownerAddressString appendString:[NSString stringWithFormat:@"2.  Owner's Address      %@", inspection.customer.address]];
+        [location appendString:[NSString stringWithFormat:@"3.  Location      %@", inspection.customer.equipmentNumber]];
+        [description appendString:[NSString stringWithFormat:@"4.  Description    %@ CRANE", inspection.crane.description]];
+        [ratedCapacity appendString:[NSString stringWithFormat:@"    Rated Capacity      %@", inspection.crane.capacity]];
         [craneManafacturer appendString:[NSString stringWithFormat:@"5.  Crane Manufacturer"]];
         [modelCrane appendString:[NSString stringWithFormat:@"Model"]];
         [serialNoCrane appendString:[NSString stringWithFormat:@"Serial No."]];
         [hoistManufacturer appendString:[NSString stringWithFormat:@"6.  Hoist Manafacture"]];
         [modelHoist appendString:[NSString stringWithFormat:@"Model"]];
         [serialNoHoist appendString:[NSString stringWithFormat:@"Serial No."]];
-        [ownerID appendString:[NSString stringWithFormat:@"7.  Owner's Identification (if any)      %@", equipmentNumber]];
+        [ownerID appendString:[NSString stringWithFormat:@"7.  Owner's Identification (if any)      %@", inspection.crane.equipmentNumber]];
         [testLoadsString appendString:[NSString stringWithFormat:@"8. Test loads applied (only if examination conducted):   %@", testLoads]];
         [proofLoadString appendString:[NSString stringWithFormat:@"9. Description of proof load:   %@", proofLoadDescription]];
         [loadRatingsString appendString:[NSString stringWithFormat:@"10. Basis for assigned load ratings:   %@", loadRatingsText]];
@@ -91,7 +85,7 @@
         
         [dateFormatter setDateFormat:@"MM/dd/yyyy"];
         NSDate *dateFromString = [[NSDate alloc] init];
-        dateFromString = [dateFormatter dateFromString:myDate];
+        dateFromString = [dateFormatter dateFromString:inspection.date];
         
         NSDateComponents *components = [[NSCalendar currentCalendar] components:NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit fromDate:dateFromString];
         
@@ -111,9 +105,9 @@
         [expirationDate appendString:[NSString stringWithFormat:@"Expiration Date:  %d/%d/%d", month, day, year + 1]];
         [signature appendString:[NSString stringWithFormat:@"Signature: "]];
         [title appendString:[NSString stringWithFormat:@"Title: Crane Surveyor"]];
-        [inspectorName appendString:[NSString stringWithFormat:@"Name: %@", technicianName]];
-        [certificateNum appendString:[NSString stringWithFormat:@"Certificate #LVVWD- %@", equipmentNumber]];
-        [date appendString:[NSString stringWithFormat:@"Date:   %@", myDate]];
+        [inspectorName appendString:[NSString stringWithFormat:@"Name: %@", inspection.technicianName]];
+        [certificateNum appendString:[NSString stringWithFormat:@"Certificate #LVVWD- %@", inspection.crane.equipmentNumber]];
+        [date appendString:[NSString stringWithFormat:@"Date:   %@", inspection.date]];
         
         //Create the file
         
@@ -121,8 +115,8 @@
         
         //create file manager
         
-        NSString *dateNoSlashes = [myDate stringByReplacingOccurrencesOfString:@"/" withString:@"-"];
-        NSString* fileName = [NSString stringWithFormat:@"%@ %@ %@ Certificate.PDF",customerName, hoistSrl, dateNoSlashes];
+        NSString *dateNoSlashes = [inspection.date stringByReplacingOccurrencesOfString:@"/" withString:@"-"];
+        NSString* fileName = [NSString stringWithFormat:@"%@ %@ %@ Certificate.PDF",inspection.customer.name, inspection.crane.hoistSrl, dateNoSlashes];
         
         NSArray *arrayPaths =
         NSSearchPathForDirectoriesInDomains(
@@ -171,7 +165,8 @@
                                :inspectorName
                                :certificateNum
                                :date
-                               :filePath];
+                               :filePath
+                               :inspection];
         
     }
     else {
@@ -180,7 +175,7 @@
     }
 }
 
-- (void) createCertificate:(NSString *) titleAddress
++ (void) createCertificate:(NSString *) titleAddress
                           :(NSString *) headerTitle
                           :(NSString *) headerString
                           :(NSString *) ownerString
@@ -212,7 +207,7 @@
                           :(NSString *) certificateNum
                           :(NSString *) date
                           :(NSString *) filePath
-               Inspection : (Inspection*) inspection
+                          :(Inspection*) inspection
 {
     // Create URL for PDF file
     
