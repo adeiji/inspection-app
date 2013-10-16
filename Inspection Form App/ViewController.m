@@ -24,6 +24,7 @@
 #import "Foundation/NSDateFormatter.h"
 #import "DataLayer.h"
 #import "PDFGenerator.h"
+#import "InspectionViewController.h"
 
 @interface ViewController () {
     ItemListConditionStorage *myItemListStore; 
@@ -119,7 +120,7 @@
 @synthesize dataStore;
 @synthesize table;
 @synthesize account;
-@synthesize gestureRecognizer;
+@synthesize craneView;
 
 #define kMinimumGestureLength   25
 #define kMaximumVariance        100
@@ -129,7 +130,7 @@
     changeLayoutNeeded = NO;
     iosVersion = [[UIDevice currentDevice] systemVersion];
    // CustomerInfoView.frame = CGRectMake(0, 0, 768, 1005);
-    
+    //Keyboard manipulation
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWasShown:) 
                                                  name:UIKeyboardDidShowNotification 
@@ -168,21 +169,37 @@
     technicianName = @"";
     txtTechnicianName.text = technicianName;
     manufacturer = @"";
+    
     //GradientView* myView = [[GradientView alloc] initWithFrame:CGRectMake(0, 0, 320, 100)];
     currentOrientation = self.interfaceOrientation;
     [self didPressLink];
     txtTechnicianName.text = [owner uppercaseString];
     
+    UISwipeGestureRecognizer *gestureRecognizerLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
+    gestureRecognizerLeft.direction = UISwipeGestureRecognizerDirectionLeft;
+
+    UISwipeGestureRecognizer *gestureRecognizerRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
+    gestureRecognizerRight.direction = UISwipeGestureRecognizerDirectionRight;
     
-    gestureRecognizer.direction = UISwipeGestureRecognizerDirectionLeft | UISwipeGestureRecognizerDirectionRight;
-    [gestureRecognizer addTarget:self action:@selector(handleSwipe:)];
+    [self.view addGestureRecognizer:gestureRecognizerRight];
+    [self.view addGestureRecognizer:gestureRecognizerLeft];
+    
+    CraneDescriptionUIPicker = [[UIPickerView alloc] initWithFrame:CGRectMake(200, -10, 358, 100)];
+    CraneDescriptionUIPicker.delegate = self;
+    
+    CraneDescriptionUIPicker.hidden = false;
+    [CraneDescriptionUIPicker setTag:1];
+    [CraneDescriptionUIPicker selectRow:1 inComponent:0 animated:YES];
+    [craneView addSubview:CraneDescriptionUIPicker];
+    
+    [self addTargetsToTextFields];
     
     [super viewDidLoad];
 }
-
+//Checks to see which way the user swiped
 - (void) handleSwipe : (UISwipeGestureRecognizer*) sender
 {
-    if (sender.direction == UISwipeGestureRecognizerDirectionRight)
+    if (sender.direction == UISwipeGestureRecognizerDirectionLeft)
     {
         [self nextPressed];
     }
@@ -190,6 +207,45 @@
     {
         [self previousPressed];
     }
+}
+//Add the targets to all our textFields
+- (void) addTargetsToTextFields
+{
+    
+    SEL selector = @selector(textFieldDidBeginEditing:);
+    
+    [txtCustomerName addTarget:self action:selector forControlEvents:UIControlEventEditingDidBegin];
+    [txtCustomerContact addTarget:self action:selector forControlEvents:UIControlEventEditingDidBegin];
+    [txtJobNumber addTarget:self action:selector forControlEvents:UIControlEventEditingDidBegin];
+    [txtAddress addTarget:self action:selector forControlEvents:UIControlEventEditingDidBegin];
+    [txtEquipDesc addTarget:self action:selector forControlEvents:UIControlEventEditingDidBegin];
+    [txtCraneMfg addTarget:self action:selector forControlEvents:UIControlEventEditingDidBegin];
+    [txtHoistMfg addTarget:self action:selector forControlEvents:UIControlEventEditingDidBegin];
+    [txtHoistMdl addTarget:self action:selector forControlEvents:UIControlEventEditingDidBegin];
+    [txtCap addTarget:self action:selector forControlEvents:UIControlEventEditingDidBegin];
+    [txtCraneSrl addTarget:self action:selector forControlEvents:UIControlEventEditingDidBegin];
+    [txtHoistSrl addTarget:self action:selector forControlEvents:UIControlEventEditingDidBegin];
+    [txtEquipNum addTarget:self action:selector forControlEvents:UIControlEventEditingDidBegin];
+    [txtEmail addTarget:self action:selector forControlEvents:UIControlEventEditingDidBegin];
+    [txtCraneDescription addTarget:self action:selector forControlEvents:UIControlEventEditingDidBegin];
+    [txtTechnicianName addTarget:self action:selector forControlEvents:UIControlEventEditingDidBegin];
+    
+    [txtCustomerName setTag:0];
+    [txtCustomerContact setTag:1];
+    [txtJobNumber setTag:2];
+    [txtAddress setTag:3];
+    [txtEquipDesc setTag:4];
+    [txtCraneMfg setTag:5];
+    [txtHoistMfg setTag:6];
+    [txtHoistMdl setTag:7];
+    [txtCap setTag:8];
+    [txtCraneSrl setTag:9];
+    [txtHoistSrl setTag:10];
+    [txtEquipNum setTag:11];
+    [txtCraneDescription setTag:12];
+    [txtEmail setTag:13];
+    [txtNotes setTag:14];
+    [txtTechnicianName setTag:15];
 }
 
 #pragma mark - Dropbox Datastore Methods
@@ -267,7 +323,8 @@
                                              nil];
         
         //Add this condition to the datastore
-        [DataLayer insertInspectionToDatastoreTable:myItemListStore.myConditions DictionaryToStore:conditionDictionary];
+        [DataLayer insertToDatastoreTable:myItemListStore.myConditions DictionaryToStore:conditionDictionary TableName:@"inspections" DBAccount:account DBDatastore:dataStore DBTable:table];
+        
         i++;
     }
     //Sync the local database with the Datastore API
@@ -453,7 +510,7 @@
     pickerDataStorage = myOptions.myOptionsArray;
     [self changePickerArray:pickerDataStorage];
 }
-
+//Change the array that contains the part details th at the Defficiency Picker will be showing
 - (void) changePickerArray : (NSMutableArray*) input {
     self.pickerData = nil;
     self.pickerData = [input objectAtIndex:optionLocation];
@@ -520,6 +577,11 @@
         
         [self saveInfo:txtNotes.text :defficiencySwitch.on:[DefficiencyPicker selectedRowInComponent:0]:myDeficientPart:applicableSwitch.on];
         [self insertInspectionToDatastoreTable];    //save the current condition so that if the user goes to the next part and back, the correct information will be displayed
+        Customer* customer = [self createCustomer];
+        Crane* crane = [self createCrane];
+        //Create the inspectino with the crane and customer
+        [self createInspection:crane Customer:customer];
+        
         [self InsertCustomerIntoTable];     //save the customer to the table
         [self InsertCraneIntoTable];        //save the crane into the table
         inspectionComplete = YES;
@@ -531,10 +593,53 @@
     }
 }
 
+- (Crane *) createCrane
+{
+    Crane *crane = [[Crane alloc] init];
+    
+    crane.hoistSrl = txtHoistSrl.text;
+    crane.equipmentNumber = txtEquipNum.text;
+    crane.description = txtCraneDescription.text;
+    crane.capacity = txtCap.text;
+    crane.craneSrl = txtCraneSrl.text;
+    crane.hoistMdl = txtHoistMdl.text;
+    crane.hoistMfg = txtHoistMfg.text;
+    crane.mfg = txtCraneMfg.text;
+    
+    return crane;
+}
+
+- (Customer*) createCustomer
+{
+    Customer *customer = [[Customer alloc] init];
+    
+    customer.name = txtCustomerName.text;
+    customer.contact = txtCustomerContact.text;
+    customer.address = txtAddress.text;
+    customer.email = txtEmail.text;
+    
+//     [txtTechnicianName.text
+//     [txtJobNumber.text
+//     [txtDate.text
+    return customer;
+}
+//Create the inspection that will be read from
+- (void) createInspection : (Crane *) crane
+                 Customer : (Customer *) customer
+{
+    inspection = [[Inspection alloc] init];
+    
+    inspection.technicianName = txtTechnicianName.text;
+    inspection.date = txtDate.text;
+    inspection.jobNumber = txtJobNumber.text;
+    inspection.crane = crane;
+    inspection.customer = customer;
+}
+
 //Enters a new crane into the dropbox datastore
 - (void)InsertCraneIntoTable
 {
-
+    
 }
 - (void)InsertOwnerIntoTable:(NSString *) myOwner
 {
@@ -849,14 +954,19 @@
 
 - (IBAction)partsListButtonClicked:(id)sender{
     optionLocation = 0;
-    Parts *parts = [[Parts alloc] init : txtCraneDescription.text];
+    NSUInteger selectedRow = [CraneDescriptionUIPicker selectedRowInComponent:0];
+
+    NSString * craneType = [[CraneDescriptionUIPicker delegate] pickerView:CraneDescriptionUIPicker titleForRow:selectedRow forComponent:0];
+    Parts *parts = [[Parts alloc] init : craneType ];
     //myItemListStore = [[ItemListConditionStorage alloc] init:parts.myParts];
     [lblPart awakeFromNib];
     myPartsArray = [parts myParts];
     [self fillOptionArrays];
     [self changeLayout:optionLocation];
     [self.CustomerInfoFullView removeFromSuperview];
-    [self.view insertSubview:self.CraneInspectionView atIndex:0];
+    //[self.view insertSubview:self.CraneInspectionView atIndex:0];
+    InspectionViewController *inspectionViewController = [[UIStoryboard storyboardWithName:@"iPadMainStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"inspectionViewController"];
+    [self.navigationController pushViewController:inspectionViewController animated:YES];
 }
 
 -(void) didReceiveMemoryWarning
@@ -966,7 +1076,11 @@
     }
     else 
     {
-        Parts *parts = [[Parts alloc] init : txtCraneDescription.text];
+        NSUInteger selectedRow = [CraneDescriptionUIPicker selectedRowInComponent:0];
+
+        NSAttributedString * craneType = [[CraneDescriptionUIPicker delegate] pickerView:CraneDescriptionUIPicker attributedTitleForRow:selectedRow forComponent:0];
+        //Call the parts array, with the crane type changed to a normal NSString
+        Parts *parts = [[Parts alloc] init : [craneType string]];
         //myItemListStore = [[ItemListConditionStorage alloc] init:parts.myParts];
         [lblPart awakeFromNib];
         myPartsArray = [parts myParts];
@@ -1092,39 +1206,6 @@
     CustomerInfoScrollView.contentInset = contentInsets;
     CustomerInfoScrollView.scrollIndicatorInsets = contentInsets;
 }
-
-
-
-//-------------------------------------------------T O U C H  E V E N T S----------------------------------------------------------------------------
-
-
-
-#pragma mark - Touch Events
-- (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    UITouch *touch = [touches anyObject];
-    gestureStartPoint = [touch locationInView:self.view];
-}
-- (void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    UITouch *touch = [touches anyObject];
-    CGPoint currentPosition = [touch locationInView:self.view];
-    
-    CGFloat deltaX = fabsf(gestureStartPoint.x - currentPosition.x);
-    CGFloat deltaY = fabsf(gestureStartPoint.y - currentPosition.y);
-    
-    if (deltaX >= kMinimumGestureLength && currentPosition.x < gestureStartPoint.x && deltaY <= kMaximumVariance) {
-        [self nextPressed];
-    }
-    else if ((deltaX >= kMinimumGestureLength) && (currentPosition.x > gestureStartPoint.x) && (deltaY <= kMaximumVariance)) {
-        [self previousPressed];
-        
-    }
-    else if (deltaY >= kMinimumGestureLength && deltaX <= kMaximumVariance) {
-        //do something
-    }
-}
-
-
-
 
 //-------------------------------------------------PICKER VIEW DELEGATE METHODS----------------------------------------------------------------------------
 

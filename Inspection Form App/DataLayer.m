@@ -64,6 +64,17 @@
     }
 }
 
++ (NSArray*) getRecords : (NSDictionary*) dictionaryQuery
+             DBAccount : (DBAccount *) account
+           DBDatastore : (DBDatastore *) dataStore
+               DBTable : (DBTable *) table
+{
+    //Get all the records
+    NSArray *results = [table query:dictionaryQuery error:nil];
+
+    return results;
+}
+
 
 + (NSString*) LoadOwner : (NSString*) databasePath
          contactDb : (sqlite3*) contactDB

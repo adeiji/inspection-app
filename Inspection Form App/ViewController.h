@@ -12,6 +12,7 @@
 #import <MessageUI/MFMailComposeViewController.h>
 #import "TextField.h"
 #import <Dropbox/Dropbox.h>
+#import "GradientView.h"
 
 @class DBRestClient;
 
@@ -43,6 +44,7 @@
 @property (strong, nonatomic) NSMutableArray* pickerDataStorage;
 @property (weak, nonatomic) IBOutlet UITableViewCell *tableViewCell1;
 
+@property (strong, nonatomic) IBOutlet GradientView *craneView;
 
 //THESE ARE THE VIEW OUTLETS
 @property (strong, nonatomic) IBOutlet UIScrollView *CustomerInfoScrollView;
@@ -85,7 +87,6 @@
 @property (strong, nonatomic) IBOutlet UIPickerView *CraneDescriptionUIPicker;
 @property (strong, nonatomic) NSMutableArray *craneDescriptionsArray;
 @property (weak, nonatomic) IBOutlet UIButton *selectCraneButton;
-@property (strong, nonatomic) IBOutlet UISwipeGestureRecognizer *gestureRecognizer;
 
 - (IBAction)SelectCraneDescriptionPressed:(id)sender;
 - (IBAction)UpdateButtonPressed:(id)sender;
@@ -109,11 +110,9 @@
 - (IBAction) textViewDidBeginEditing:(UITextView *)textView;
 - (IBAction)NewCustomerPress:(id)sender;
 - (IBAction)GetOrderFromJobNumber:(id)sender;
-- (IBAction)openInClicked:(id)sender;
 - (UIViewController *) documentInteractionControllerViewControllerForPreview:(UIDocumentInteractionController *)controller;
 - (IBAction)finalBackButtonPressed:(id)sender;
 - (IBAction)dateSelected:(id)sender;
-- (IBAction)GoHome:(id)sender;
 - (IBAction)NASwitchChanged:(id)sender;
 - (BOOL) textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string;
 - (IBAction)CreateCertificate:(id)sender;

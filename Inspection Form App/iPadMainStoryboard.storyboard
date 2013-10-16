@@ -50,7 +50,7 @@
                                                 </state>
                                             </button>
                                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1O8-ki-oXR" customClass="GradientView">
-                                                <rect key="frame" x="21" y="713" width="727" height="200"/>
+                                                <rect key="frame" x="20" y="802" width="727" height="147"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <subviews>
                                                     <textField opaque="NO" clipsSubviews="YES" tag="9" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fei-Od-P6t" customClass="TextField">
@@ -80,57 +80,44 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textField opaque="NO" clipsSubviews="YES" tag="11" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KlB-pp-5ZH" customClass="TextField">
-                                                        <rect key="frame" x="151" y="149" width="137" height="30"/>
+                                                        <rect key="frame" x="560" y="101" width="137" height="30"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
                                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Hoist Mdl:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="sbG-Ru-Sg2">
-                                                        <rect key="frame" x="56" y="154" width="78" height="21"/>
+                                                        <rect key="frame" x="465" y="106" width="78" height="21"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textField opaque="NO" clipsSubviews="YES" tag="13" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iVX-4f-sYw" customClass="TextField">
-                                                        <rect key="frame" x="559" y="105" width="69" height="30"/>
+                                                        <rect key="frame" x="559" y="62" width="69" height="30"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
                                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Cap:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="ynr-0X-geL">
-                                                        <rect key="frame" x="505" y="108" width="37" height="21"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Crane Description:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="hEg-gW-AEl">
-                                                        <rect key="frame" x="408" y="8" width="134" height="53"/>
+                                                        <rect key="frame" x="505" y="65" width="37" height="21"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textField opaque="NO" clipsSubviews="YES" tag="14" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Aq2-G9-LuI" customClass="TextField">
-                                                        <rect key="frame" x="559" y="61" width="148" height="30"/>
+                                                        <rect key="frame" x="559" y="18" width="148" height="30"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
                                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Crane Srl:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="e3r-rc-Afa">
-                                                        <rect key="frame" x="465" y="66" width="77" height="21"/>
+                                                        <rect key="frame" x="465" y="23" width="77" height="21"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <textField opaque="NO" clipsSubviews="YES" tag="12" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SzR-GM-f0g" customClass="TextField">
-                                                        <rect key="frame" x="559" y="20" width="148" height="30"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits"/>
-                                                    </textField>
                                                     <textField opaque="NO" clipsSubviews="YES" tag="8" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kOv-66-R3v" customClass="TextField">
                                                         <rect key="frame" x="151" y="20" width="137" height="30"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -321,20 +308,6 @@
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                             </view>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Crane Description" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="6xB-70-nWt">
-                                                <rect key="frame" x="21" y="641" width="154" height="23"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Information about the crane" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="lhc-5n-7XR">
-                                                <rect key="frame" x="21" y="668" width="137" height="14"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Customer Information" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="eol-Tw-5Ml">
                                                 <rect key="frame" x="21" y="71" width="186" height="23"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -445,6 +418,34 @@
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pCW-pD-YBJ" customClass="GradientView">
+                                                <rect key="frame" x="20" y="650" width="727" height="151"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <subviews>
+                                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Crane Type:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="hEg-gW-AEl">
+                                                        <rect key="frame" x="39" y="49" width="98" height="53"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                            </view>
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Crane Description" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="6xB-70-nWt">
+                                                <rect key="frame" x="21" y="602" width="154" height="23"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Information about the crane" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="lhc-5n-7XR">
+                                                <rect key="frame" x="21" y="629" width="137" height="14"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" red="0.98038903060000004" green="0.98038903060000004" blue="0.98038903060000004" alpha="1" colorSpace="calibratedRGB"/>
                                         <gestureRecognizers/>
@@ -478,7 +479,7 @@
                                         <barButtonItem key="leftBarButtonItem" title="Submit" id="Uqq-fb-DUm"/>
                                         <barButtonItem key="rightBarButtonItem" title="Parts List" id="6cv-YP-nhB">
                                             <connections>
-                                                <segue destination="ohd-4L-yxA" kind="push" id="nR4-pW-KoB"/>
+                                                <action selector="partsListButtonClicked:" destination="sgx-pA-png" id="Klg-xb-kKO"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -501,9 +502,9 @@
                     </view>
                     <navigationItem key="navigationItem" id="8Sj-I6-8wL"/>
                     <connections>
+                        <outlet property="craneView" destination="pCW-pD-YBJ" id="2sS-hm-N2j"/>
                         <outlet property="txtAddress" destination="RTi-sd-Sx1" id="yzQ-ac-L0V"/>
                         <outlet property="txtCap" destination="iVX-4f-sYw" id="HTX-9e-OeR"/>
-                        <outlet property="txtCraneDescription" destination="SzR-GM-f0g" id="CAR-hM-75n"/>
                         <outlet property="txtCraneMfg" destination="fei-Od-P6t" id="LFI-V0-iOq"/>
                         <outlet property="txtCraneSrl" destination="Aq2-G9-LuI" id="Ht2-TS-xjb"/>
                         <outlet property="txtCustomerContact" destination="gWB-T3-X6t" id="oty-D6-tID"/>
@@ -522,10 +523,10 @@
             </objects>
             <point key="canvasLocation" x="1690" y="739"/>
         </scene>
-        <!--View Controller-->
+        <!--Inspection View Controller-->
         <scene sceneID="cGm-1p-p0Q">
             <objects>
-                <viewController id="ohd-4L-yxA" customClass="ViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="inspectionViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ohd-4L-yxA" customClass="InspectionViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Y5I-7R-Pp8"/>
                         <viewControllerLayoutGuide type="bottom" id="0UW-tY-cI5"/>
@@ -722,22 +723,18 @@
                         <gestureRecognizers/>
                         <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackOpaque"/>
                         <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
-                        <connections>
-                            <outletCollection property="gestureRecognizers" destination="x6T-bm-sdn" appends="YES" id="aBZ-0w-8wr"/>
-                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="Fhf-l3-h0H"/>
                     <connections>
-                        <outlet property="DefficiencyPicker" destination="G5j-uv-CDt" id="y0b-fv-fS2"/>
-                        <outlet property="applicableSwitch" destination="hpt-8d-vYa" id="dUH-a8-HxY"/>
-                        <outlet property="defficiencySwitch" destination="BGr-wP-Lcw" id="6g8-1S-izH"/>
-                        <outlet property="gestureRecognizer" destination="x6T-bm-sdn" id="dcX-44-g4A"/>
-                        <outlet property="lblPart" destination="zPN-Ej-pJF" id="vJ7-gO-exm"/>
-                        <outlet property="lblPartNumber" destination="itg-3k-s3J" id="nX2-ui-1fc"/>
+                        <outlet property="applicableSwitch" destination="hpt-8d-vYa" id="Ha7-vh-dox"/>
+                        <outlet property="defficiencyPicker" destination="G5j-uv-CDt" id="t9X-FD-TgN"/>
+                        <outlet property="defficiencySwitch" destination="BGr-wP-Lcw" id="zMN-KF-5ku"/>
+                        <outlet property="lblPart" destination="zPN-Ej-pJF" id="eHw-0o-Uky"/>
+                        <outlet property="lblPartNumber" destination="itg-3k-s3J" id="ikX-Va-458"/>
+                        <outlet property="txtNotes" destination="R4W-rr-wGf" id="3ad-Hm-v81"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Chs-UY-VsF" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <swipeGestureRecognizer direction="right" id="x6T-bm-sdn"/>
             </objects>
             <point key="canvasLocation" x="2689" y="739"/>
         </scene>

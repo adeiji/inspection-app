@@ -46,6 +46,9 @@
 		CE40D39718088E340080E9BD /* Crane.m in Sources */ = {isa = PBXBuildFile; fileRef = CE40D39618088E340080E9BD /* Crane.m */; };
 		CE40D39A180894300080E9BD /* PDFGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = CE40D399180894300080E9BD /* PDFGenerator.m */; };
 		CE486ACB180C83E900B1B953 /* Inspection.m in Sources */ = {isa = PBXBuildFile; fileRef = CE486ACA180C83E900B1B953 /* Inspection.m */; };
+		CE486AE2180F17DC00B1B953 /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE486AE1180F17DC00B1B953 /* MasterViewController.m */; };
+		CE486AE6180F1E4200B1B953 /* InspectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE486AE5180F1E4200B1B953 /* InspectionViewController.m */; };
+		CE798DB7180F369600C2E5A0 /* InspectionBussiness.m in Sources */ = {isa = PBXBuildFile; fileRef = CE798DB6180F369600C2E5A0 /* InspectionBussiness.m */; };
 		CE9775D91718C2660037967E /* logo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE9775D81718C2660037967E /* logo.jpg */; };
 		CE9A27381716A63200FE3D32 /* ipadAppLogo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE9A27371716A63200FE3D32 /* ipadAppLogo.jpg */; };
 		CE9A273C1716A70E00FE3D32 /* titlePageLogo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE9A273B1716A70E00FE3D32 /* titlePageLogo.jpg */; };
@@ -124,6 +127,12 @@
 		CE40D399180894300080E9BD /* PDFGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFGenerator.m; sourceTree = "<group>"; };
 		CE486AC9180C83E900B1B953 /* Inspection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Inspection.h; sourceTree = "<group>"; };
 		CE486ACA180C83E900B1B953 /* Inspection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Inspection.m; sourceTree = "<group>"; };
+		CE486AE0180F17DC00B1B953 /* MasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MasterViewController.h; sourceTree = "<group>"; };
+		CE486AE1180F17DC00B1B953 /* MasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
+		CE486AE4180F1E4200B1B953 /* InspectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectionViewController.h; sourceTree = "<group>"; };
+		CE486AE5180F1E4200B1B953 /* InspectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InspectionViewController.m; sourceTree = "<group>"; };
+		CE798DB5180F369600C2E5A0 /* InspectionBussiness.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectionBussiness.h; sourceTree = "<group>"; };
+		CE798DB6180F369600C2E5A0 /* InspectionBussiness.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InspectionBussiness.m; sourceTree = "<group>"; };
 		CE9775D81718C2660037967E /* logo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = logo.jpg; sourceTree = "<group>"; };
 		CE9A27371716A63200FE3D32 /* ipadAppLogo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ipadAppLogo.jpg; sourceTree = "<group>"; };
 		CE9A273B1716A70E00FE3D32 /* titlePageLogo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = titlePageLogo.jpg; sourceTree = "<group>"; };
@@ -223,6 +232,9 @@
 		8BC58458150ABD87000AC695 /* Inspection Form App */ = {
 			isa = PBXGroup;
 			children = (
+				CE798DB4180F35E400C2E5A0 /* Business Layer */,
+				CE486AE3180F1E2F00B1B953 /* Inspection View Controller */,
+				CE486ADC180F179A00B1B953 /* Master View Controller */,
 				CE9A273B1716A70E00FE3D32 /* titlePageLogo.jpg */,
 				CE9775D81718C2660037967E /* logo.jpg */,
 				8BC7D9D21522ACE000D1A863 /* QuartzCore.framework */,
@@ -433,6 +445,33 @@
 			name = "UI Files";
 			sourceTree = "<group>";
 		};
+		CE486ADC180F179A00B1B953 /* Master View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				CE486AE0180F17DC00B1B953 /* MasterViewController.h */,
+				CE486AE1180F17DC00B1B953 /* MasterViewController.m */,
+			);
+			name = "Master View Controller";
+			sourceTree = "<group>";
+		};
+		CE486AE3180F1E2F00B1B953 /* Inspection View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				CE486AE4180F1E4200B1B953 /* InspectionViewController.h */,
+				CE486AE5180F1E4200B1B953 /* InspectionViewController.m */,
+			);
+			name = "Inspection View Controller";
+			sourceTree = "<group>";
+		};
+		CE798DB4180F35E400C2E5A0 /* Business Layer */ = {
+			isa = PBXGroup;
+			children = (
+				CE798DB5180F369600C2E5A0 /* InspectionBussiness.h */,
+				CE798DB6180F369600C2E5A0 /* InspectionBussiness.m */,
+			);
+			name = "Business Layer";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -555,12 +594,15 @@
 				8B544612150F0C3E007E1CA9 /* GradientView.m in Sources */,
 				8B0787C415113448006857A8 /* TableViewController.m in Sources */,
 				8B0787C715113796006857A8 /* Parts.m in Sources */,
+				CE486AE6180F1E4200B1B953 /* InspectionViewController.m in Sources */,
+				CE798DB7180F369600C2E5A0 /* InspectionBussiness.m in Sources */,
 				CE486ACB180C83E900B1B953 /* Inspection.m in Sources */,
 				8BE881F81513F82400360C63 /* ItemListConditionStorage.m in Sources */,
 				8BE881FC1513FA4200360C63 /* Condition.m in Sources */,
 				8BF10A9C152FB93D00DC5F05 /* TextField.m in Sources */,
 				CE40D38B18087BC20080E9BD /* DataLayer.m in Sources */,
 				CE40D39718088E340080E9BD /* Crane.m in Sources */,
+				CE486AE2180F17DC00B1B953 /* MasterViewController.m in Sources */,
 				8BE9DE801616355800906B98 /* OrdinalNumberFormatter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
