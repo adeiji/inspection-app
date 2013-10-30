@@ -17,4 +17,5 @@
                   LoadRatingsText : (NSString*) loadRatingsText
                        Inspection : (Inspection *) inspection;
 
++ (void) DisplayPDFWithOverallRating : (Inspection *) inspection;
 @end

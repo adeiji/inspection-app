@@ -13,6 +13,7 @@
 #import "TextField.h"
 #import <Dropbox/Dropbox.h>
 #import "GradientView.h"
+#import "InspectionViewController.h"
 
 @class DBRestClient;
 
@@ -27,40 +28,24 @@
 @property (strong, nonatomic) DBAccount *account;
 @property (strong, nonatomic) DBDatastore *dataStore;
 @property (strong, nonatomic) DBTable *table;
-
-
-@property (weak, nonatomic) IBOutlet UISwitch *defficiencySwitch;
-@property (strong, nonatomic) IBOutlet UIPickerView *DefficiencyPicker;
 @property (weak, nonatomic) IBOutlet UIButton *btnSelectDate;
 @property (strong, nonatomic) IBOutlet UIDatePicker *datePicker;
 @property (weak, nonatomic) IBOutlet UITextField *txtDate;
 @property (strong, nonatomic) IBOutlet UIDatePicker *myDatePicker;
-@property CGPoint gestureStartPoint;
 @property int optionLocation;
-@property (weak, nonatomic) IBOutlet UITableViewCell *tableViewCell;
 @property (weak, nonatomic) IBOutlet UINavigationBar *navBar;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *navSubmit;
-@property (strong, nonatomic) NSMutableArray* pickerData;
-@property (strong, nonatomic) NSMutableArray* pickerDataStorage;
-@property (weak, nonatomic) IBOutlet UITableViewCell *tableViewCell1;
-
 @property (strong, nonatomic) IBOutlet GradientView *craneView;
 
 //THESE ARE THE VIEW OUTLETS
+@property (strong, nonatomic)  InspectionViewController* inspectionViewController;
 @property (strong, nonatomic) IBOutlet UIScrollView *CustomerInfoScrollView;
 @property (strong, nonatomic) IBOutlet UIView *CraneInspectionView;
 @property (weak, nonatomic) IBOutlet UIView *CustomerInfoView;
 @property (strong, nonatomic) IBOutlet UIView *CustomerInfoFullView;
-
-@property (strong, nonatomic) IBOutlet UIViewController *secondViewController;
-@property (strong, nonatomic) IBOutlet UIViewController *firstViewController;
 @property (strong, nonatomic) IBOutlet UIViewController *rootViewController;
-@property (strong, nonatomic) IBOutlet UINavigationController *navController;
-@property (weak, nonatomic) IBOutlet UITableView *myPartsTable;
 @property (strong, nonatomic) NSMutableArray *myPartsArray;
-@property (weak, nonatomic) IBOutlet UILabel *lblPartNumber;
-@property (weak, nonatomic) IBOutlet UILabel *lblPart;
-@property (weak, nonatomic) IBOutlet UITableView *partsTable;
+
 @property (weak, nonatomic) IBOutlet TextField *txtCustomerName;
 @property (weak, nonatomic) IBOutlet TextField *txtCustomerContact;
 @property (weak, nonatomic) IBOutlet TextField *txtJobNumber;
@@ -78,15 +63,19 @@
 @property (strong, nonatomic) NSString *customerName;
 @property (strong, nonatomic) NSString *jobnumber;
 @property (strong, nonatomic) IBOutlet UIViewController *viewPDFController;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *openInButton;
 @property (weak, nonatomic) IBOutlet UITextField *txtCraneDescription;
 @property (weak, nonatomic) IBOutlet UITextField *txtTechnicianName;
 @property (weak, nonatomic) IBOutlet UILabel *lblCraneDesc;
-@property (weak, nonatomic) IBOutlet UISwitch *applicableSwitch;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *CreateCertificateButton;
 @property (strong, nonatomic) IBOutlet UIPickerView *CraneDescriptionUIPicker;
 @property (strong, nonatomic) NSMutableArray *craneDescriptionsArray;
 @property (weak, nonatomic) IBOutlet UIButton *selectCraneButton;
+
+typedef enum {
+    INVALID_CHARACTER,
+    EMPTY_FIELD,
+    PASSED
+} ValidationResults;
 
 - (IBAction)SelectCraneDescriptionPressed:(id)sender;
 - (IBAction)UpdateButtonPressed:(id)sender;

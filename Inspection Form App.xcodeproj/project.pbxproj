@@ -232,8 +232,8 @@
 		8BC58458150ABD87000AC695 /* Inspection Form App */ = {
 			isa = PBXGroup;
 			children = (
+				CE38513D18107296003629DA /* View Controllers */,
 				CE798DB4180F35E400C2E5A0 /* Business Layer */,
-				CE486AE3180F1E2F00B1B953 /* Inspection View Controller */,
 				CE486ADC180F179A00B1B953 /* Master View Controller */,
 				CE9A273B1716A70E00FE3D32 /* titlePageLogo.jpg */,
 				CE9775D81718C2660037967E /* logo.jpg */,
@@ -290,6 +290,14 @@
 				8BC58479150ABD88000AC695 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CE38513D18107296003629DA /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				CE486AE3180F1E2F00B1B953 /* Inspection View Controller */,
+			);
+			name = "View Controllers";
 			sourceTree = "<group>";
 		};
 		CE40D38C18087BCA0080E9BD /* Data Layer */ = {

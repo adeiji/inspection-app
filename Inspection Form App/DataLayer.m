@@ -30,8 +30,7 @@
 }
 
 //Adds the record to the database.  Adds the record with the corresponding date, that way we can pull previous orders by date.
-+ (void) insertToDatastoreTable : (NSArray*) myConditions
-              DictionaryToStore : (NSDictionary*) dictionaryToStore
++ (void) insertToDatastoreTable : (NSDictionary*) dictionaryToStore
                       TableName : (NSString*) tableName
                       DBAccount : (DBAccount *) account
                     DBDatastore : (DBDatastore *) dataStore

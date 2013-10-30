@@ -18,8 +18,7 @@
 + (NSString*) LoadOwner : (NSString*) databasePath
          contactDb : (sqlite3*) contactDB;
 
-+ (void) insertToDatastoreTable : (NSArray*) myConditions
-              DictionaryToStore : (NSDictionary*) dictionaryToStore
++ (void) insertToDatastoreTable : (NSDictionary*) dictionaryToStore
                       TableName : (NSString*) tableName
                       DBAccount : (DBAccount *) account
                     DBDatastore : (DBDatastore *) dataStore

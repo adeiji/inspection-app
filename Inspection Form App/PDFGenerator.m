@@ -220,9 +220,7 @@
     CGRect bounds = CGContextGetClipBoundingBox(pdfContext);
     CGContextScaleCTM(pdfContext, 1.0, -1.0);
     CGContextTranslateCTM(pdfContext, 0.0, -bounds.size.height);
-    // Drawing commands
-    //CGRectMake(<#CGFloat x#>, <#CGFloat y#>, <#CGFloat width#>, <#CGFloat height#>)
-    //[printString drawAtPoint:CGPointMake(100, 100) withFont:[UIFont boldSystemFontOfSize:12.0f]];
+
     [myImage drawInRect:CGRectMake(-110, -30, 250, 250)];
     [myImage drawInRect:CGRectMake(50, 150, 500, 500) blendMode:kCGBlendModeLighten alpha:.15f];
     
@@ -760,6 +758,48 @@
     conditionRatingString = nil;
 }
 
++ (void) DisplayPDFWithOverallRating : (Inspection *) inspection
+{
+    NSString *dateNoSlashes = [inspection.date stringByReplacingOccurrencesOfString:@"/" withString:@"-"];
+    NSString* fileName = [NSString stringWithFormat:@"%@ %@ %@.PDF", inspection.customer.name, inspection.crane.hoistSrl, dateNoSlashes];
+    
+    NSArray *arrayPaths =
+    NSSearchPathForDirectoriesInDomains(
+                                        NSDocumentDirectory,
+                                        NSUserDomainMask,
+                                        YES);
+    NSString *path = [arrayPaths objectAtIndex:0];
+    NSString* pdfFileName = [path stringByAppendingPathComponent:fileName];
+    
+    UIDocumentInteractionController *pdfViewController = [UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:pdfFileName]];
+    pdfViewController.delegate = self;
+    
+    [pdfViewController presentPreviewAnimated:NO];
+    
+    //[self writeCertificateTextFile];
+}
+
++ (void)CreateCertificate : (Inspection*) inspection  {
+    NSString *dateNoSlashes = [inspection.date stringByReplacingOccurrencesOfString:@"/" withString:@"-"];
+    NSString* fileName = [NSString stringWithFormat:@"%@ %@ %@ Certificate.PDF", inspection.customer.name, inspection.crane.hoistSrl, dateNoSlashes];
+    
+    NSArray *arrayPaths =
+    NSSearchPathForDirectoriesInDomains(
+                                        NSDocumentDirectory,
+                                        NSUserDomainMask,
+                                        YES);
+    NSString *path = [arrayPaths objectAtIndex:0];
+    NSString* pdfFileName = [path stringByAppendingPathComponent:fileName];
+    
+    UIDocumentInteractionController *pdfViewController = [UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:pdfFileName]];
+    
+    pdfViewController.delegate = self;
+    
+    [pdfViewController presentPreviewAnimated:NO];
+    
+    //disable the button certificate button so that we make sure there's no errant certificates being made
+   // CreateCertificateButton.enabled = FALSE;
+}
 
 
 

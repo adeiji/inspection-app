@@ -25,10 +25,12 @@
 #import "DataLayer.h"
 #import "PDFGenerator.h"
 #import "InspectionViewController.h"
+#import "InspectionBussiness.h"
 
 @interface ViewController () {
     ItemListConditionStorage *myItemListStore; 
     DBRestClient *restClient;
+    Parts* parts;
     sqlite3 *contactDB;
     NSString *databasePath;
     NSString *tableName;
@@ -64,28 +66,14 @@
 
 @implementation ViewController
 @synthesize txtDate;
-@synthesize DefficiencyPicker;
-@synthesize defficiencySwitch;
-@synthesize pickerData;
 @synthesize optionLocation;
 @synthesize btnSelectDate;
 @synthesize datePicker;
 @synthesize myDatePicker;
-@synthesize gestureStartPoint;
-@synthesize tableViewCell;
-@synthesize navBar;
 @synthesize navSubmit;
-@synthesize pickerDataStorage;
-@synthesize tableViewCell1;
-@synthesize secondViewController;
-@synthesize firstViewController;
 @synthesize rootViewController;
-@synthesize navController;
-@synthesize myPartsTable;
 @synthesize myPartsArray;
-@synthesize lblPartNumber;
-@synthesize lblPart;
-@synthesize partsTable;
+@synthesize navBar;
 @synthesize txtCustomerName;
 @synthesize txtCustomerContact;
 @synthesize txtJobNumber;
@@ -102,11 +90,9 @@
 @synthesize txtEmail;
 @synthesize jobnumber;
 @synthesize viewPDFController;
-@synthesize openInButton;
 @synthesize txtCraneDescription;
 @synthesize txtTechnicianName;
 @synthesize lblCraneDesc;
-@synthesize applicableSwitch;
 @synthesize CreateCertificateButton;
 @synthesize CraneDescriptionUIPicker;
 @synthesize customerName;
@@ -121,12 +107,18 @@
 @synthesize table;
 @synthesize account;
 @synthesize craneView;
+@synthesize inspectionViewController;
 
 #define kMinimumGestureLength   25
 #define kMaximumVariance        100
 
 - (void)viewDidLoad {
-    [self InitiateParts];
+    inspectionViewController = [[UIStoryboard storyboardWithName:@"iPadMainStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"inspectionViewController"];
+    
+    [inspectionViewController initiateParts];
+    
+    inspection = [[Inspection alloc] init];
+    
     changeLayoutNeeded = NO;
     iosVersion = [[UIDevice currentDevice] systemVersion];
    // CustomerInfoView.frame = CGRectMake(0, 0, 768, 1005);
@@ -175,39 +167,21 @@
     [self didPressLink];
     txtTechnicianName.text = [owner uppercaseString];
     
-    UISwipeGestureRecognizer *gestureRecognizerLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
-    gestureRecognizerLeft.direction = UISwipeGestureRecognizerDirectionLeft;
-
-    UISwipeGestureRecognizer *gestureRecognizerRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
-    gestureRecognizerRight.direction = UISwipeGestureRecognizerDirectionRight;
-    
-    [self.view addGestureRecognizer:gestureRecognizerRight];
-    [self.view addGestureRecognizer:gestureRecognizerLeft];
-    
     CraneDescriptionUIPicker = [[UIPickerView alloc] initWithFrame:CGRectMake(200, -10, 358, 100)];
     CraneDescriptionUIPicker.delegate = self;
     
     CraneDescriptionUIPicker.hidden = false;
     [CraneDescriptionUIPicker setTag:1];
     [CraneDescriptionUIPicker selectRow:1 inComponent:0 animated:YES];
+    CraneDescriptionUIPicker.dataSource = self;
     [craneView addSubview:CraneDescriptionUIPicker];
     
     [self addTargetsToTextFields];
     
     [super viewDidLoad];
 }
-//Checks to see which way the user swiped
-- (void) handleSwipe : (UISwipeGestureRecognizer*) sender
-{
-    if (sender.direction == UISwipeGestureRecognizerDirectionLeft)
-    {
-        [self nextPressed];
-    }
-    else
-    {
-        [self previousPressed];
-    }
-}
+
+
 //Add the targets to all our textFields
 - (void) addTargetsToTextFields
 {
@@ -270,83 +244,12 @@
     table = [dataStore getTable:@"inspections"];
 }
 
-
-//Adds the record to the database.  Adds the record with the corresponding date, that way we can pull previous orders by date.
-- (void) insertInspectionToDatastoreTable
-{
-    account = [[DBAccountManager sharedManager] linkedAccount];
-    
-    if (account) {
-        NSLog(@"App already linked");
-    } else {
-        [[DBAccountManager sharedManager] linkFromController:self];
-    }
-    
-    dataStore = [DBDatastore openDefaultStoreForAccount:account error:nil];
-    table = [dataStore getTable:@"inspections"];
-    
-    //Get all the records with this hoistSrl and this specific date
-    NSDictionary *query = @{ @"hoistSrl" : txtHoistSrl.text, @"date" : txtDate.text };
-    
-    //Remove the records that match the specified query fromt he database
-    [DataLayer removeFromDatastoreTable:query DBAccount:account DBDatastore:dataStore DBTable:table];
-    
-    //Go through each condition in the current inspection and then write this information to the Datastore
-    for (Condition *condition in myItemListStore.myConditions)
-    {
-        static int i = 0;
-        NSString *isDeficient = @"NO";
-        NSString *isApplicable = @"NO";
-        
-        if (condition.deficient == YES)
-        {
-            isDeficient = @"YES";
-        }
-        if (condition.applicable == YES)
-        {
-            isApplicable = @"YES";
-        }
-        
-        //inserts the current condition in the row
-        pickerSelection =  [NSString stringWithFormat:@"%d", condition.pickerSelection];
-        //Create the dictionary that contains all the information for this record.
-        NSDictionary *conditionDictionary = [[NSDictionary alloc] initWithObjectsAndKeys
-                                             :txtHoistSrl.text, @"hoistsrl",
-                                             txtJobNumber.text, @"jobnumber",
-                                             txtEquipNum.text, @"equipmentnumber",
-                                             (NSString *)[myPartsArray objectAtIndex:i], @"part",
-                                             (NSString *) isDeficient, @"deficient",
-                                             condition.deficientPart, @"deficientpart",
-                                             [condition.notes stringByReplacingOccurrencesOfString:@"\"" withString:@"\\"], @"notes",
-                                             pickerSelection, @"pickerselection",
-                                             isApplicable, @"isapplicable",
-                                             nil];
-        
-        //Add this condition to the datastore
-        [DataLayer insertToDatastoreTable:myItemListStore.myConditions DictionaryToStore:conditionDictionary TableName:@"inspections" DBAccount:account DBDatastore:dataStore DBTable:table];
-        
-        i++;
-    }
-    //Sync the local database with the Datastore API
-    [DataLayer sync : dataStore];
-}
-
-
 - (void)viewDidUnload
 {
-    [self setDefficiencySwitch:nil];
-    [self setDefficiencyPicker:nil];
     [self setTxtDate:nil];
     [self setBtnSelectDate:nil];
-    [self setTableViewCell:nil];
     [self setNavBar:nil];
     [self setNavSubmit:nil];
-    [self setTableViewCell1:nil];
-    [self setSecondViewController:nil];
-    [self setFirstViewController:nil];
-    [self setLblPart:nil];
-    [self setLblPartNumber:nil];
-    [self setPartsTable:nil];
     [self setTxtCustomerName:nil];
     [self setTxtCustomerContact:nil];
     [self setTxtJobNumber:nil];
@@ -361,15 +264,10 @@
     [self setTxtEquipNum:nil];
     [self setTxtNotes:nil];
     [self setRootViewController:nil];
-    [self setNavController:nil];
-    [self setMyPartsTable:nil];
-    [self setViewPDFController:nil];
-    [self setOpenInButton:nil];
     [self setTxtEmail:nil];
     [self setTxtCraneDescription:nil];
     [self setTxtTechnicianName:nil];
     [self setLblCraneDesc:nil];
-    [self setApplicableSwitch:nil];
     myItemListStore = nil;
     restClient = nil;
     contactDB=nil;
@@ -432,12 +330,18 @@
     [self EmptyTextFields];
 }
 
+
 //Grab the crane information from the WATERDISTRICTCRANES table with the HoistSrl as the identifier and then insert the results onto the home page
 //Automatically insert the customerName, customerContact, Address and Email
-- (IBAction)LoadHoistSrlPressed:(id)sender {
-
+- (IBAction) LoadHoistSrlPressed : (id) sender
+{
+    NSDictionary *query = [[NSDictionary alloc] initWithObjectsAndKeys:@"hoistsrl", txtHoistSrl.text, nil];
+    
+    inspection.itemList.myConditions = [[NSMutableArray alloc] initWithArray:[InspectionBussiness getRecords:query DBAccount:account DBDatastore:dataStore DBTable:table]];
+    
     [self OpenOrderFromField:txtHoistSrl];
 }
+
 
 //this method will need to open the order by getting both the hoist srl number or equip number and the job number so that they can get any hoist srl at any time
 - (void) OpenOrderFromField: (UITextField *) input;
@@ -448,6 +352,7 @@
 - (UIViewController *) documentInteractionControllerViewControllerForPreview:(UIDocumentInteractionController *)controller {
     return self;
 }
+
 //when the back button on the viewPDFController viewController is pressed
 - (IBAction)finalBackButtonPressed:(id)sender {
     [viewPDFController.view removeFromSuperview];
@@ -504,29 +409,14 @@
     format = nil;
 }
 
-- (void) fillOptionArrays {
-    Options* myOptions = [[Options alloc] init:txtCraneDescription.text];
-    
-    pickerDataStorage = myOptions.myOptionsArray;
-    [self changePickerArray:pickerDataStorage];
-}
-//Change the array that contains the part details th at the Defficiency Picker will be showing
-- (void) changePickerArray : (NSMutableArray*) input {
-    self.pickerData = nil;
-    self.pickerData = [input objectAtIndex:optionLocation];
-    [self.DefficiencyPicker reloadAllComponents];
-}
-
 - (IBAction)datePressed:(id)sender {
     btnSelectDate.hidden = NO;
 }
 
-//On the deficiency information pages, when you press the submit button
-- (IBAction)submitPressed:(id)sender {
-    //First we check to see if any of the fields in the customerInfo page and if there are any empty fields then the user is not allowed to submit the information and a UIAlertView pops
-    //up telling you that there are fields where nothing was inserted into the fields
-    if ([txtHoistSrl.text isEqualToString:@""] || 
-        [txtTechnicianName.text isEqualToString:@""] || 
+- (ValidationResults) validateSubmission : (BOOL) showResults
+{
+    if ([txtHoistSrl.text isEqualToString:@""] ||
+        [txtTechnicianName.text isEqualToString:@""] ||
         [txtCustomerName.text isEqualToString:@""] ||
         [txtCustomerContact.text isEqualToString:@""] ||
         [txtJobNumber.text isEqualToString:@""] ||
@@ -537,17 +427,15 @@
         [txtCraneMfg.text isEqualToString:@""] ||
         [txtHoistMfg.text isEqualToString:@""] ||
         [txtHoistMdl.text isEqualToString:@""] ||
-        [txtCraneDescription.text isEqualToString:@""] ||
         [txtCraneSrl.text isEqualToString:@""] ||
         [txtCap.text isEqualToString:@""])
     {
-        UIAlertView *error = [[UIAlertView alloc] initWithTitle:@"Customer Error" message:@"All values on the main screen must be entered!" 
-                                                       delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [error show];
-    } //checks to see if there are any quotation marks inside of any of the fields, and if there are any then the user is not allowed to enter the customer, and a UIAlertView pops up
-    //telling you that there are fields with quotations marks inside of it
-    else if ([txtHoistSrl.text rangeOfString:@"\""].location != NSNotFound || 
-             [txtTechnicianName.text rangeOfString:@"\""].location != NSNotFound || 
+        if (showResults)
+            
+        return EMPTY_FIELD;
+    }
+    else if ([txtHoistSrl.text rangeOfString:@"\""].location != NSNotFound ||
+             [txtTechnicianName.text rangeOfString:@"\""].location != NSNotFound ||
              [txtCustomerName.text rangeOfString:@"\""].location != NSNotFound ||
              [txtCustomerContact.text rangeOfString:@"\""].location != NSNotFound ||
              [txtJobNumber.text rangeOfString:@"\""].location != NSNotFound ||
@@ -558,38 +446,76 @@
              [txtCraneMfg.text rangeOfString:@"\""].location != NSNotFound ||
              [txtHoistMfg.text rangeOfString:@"\""].location != NSNotFound ||
              [txtHoistMdl.text rangeOfString:@"\""].location != NSNotFound ||
-             [txtCraneDescription.text rangeOfString:@"\""].location != NSNotFound ||
              [txtCraneSrl.text rangeOfString:@"\""].location != NSNotFound ||
              [txtCap.text rangeOfString:@"\""].location != NSNotFound)
     {
+        return INVALID_CHARACTER;
+    }
+    
+    return PASSED;
+}
+
+
+
+//On the deficiency information pages, when you press the submit button
+- (void) showValidationResults : (ValidationResults) results {
+    //First we check to see if any of the fields in the customerInfo page and if there are any empty fields then the user is not allowed to submit the information and a UIAlertView pops up telling you that there are fields where nothing was inserted into the fields
+    if (results == EMPTY_FIELD)
+    {
+        UIAlertView *error = [[UIAlertView alloc] initWithTitle:@"Customer Error" message:@"All values on the main screen must be entered!" 
+                                                       delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        [error show];
+    } //checks to see if there are any quotation marks inside of any of the fields, and if there are any then the user is not allowed to enter the customer, and a UIAlertView pops up telling you this
+    else if (results == INVALID_CHARACTER)
+    {
         UIAlertView *error = [[UIAlertView alloc] initWithTitle:@"Customer Error" message:@"Can not enter character 'quotation mark' ' \" ' into any field!" 
                                                        delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        
         [error show];
     }
-    else { //if all the fields entered pass then, the the customer information is inserted and all the data is saved into a table
-        NSUInteger selectedRow = [DefficiencyPicker selectedRowInComponent:0];
-        NSString *myDeficientPart = [[DefficiencyPicker delegate] pickerView:DefficiencyPicker titleForRow:selectedRow forComponent:0];
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Overall Rating" message:@"What is the overall condition rating?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"ok", nil];
-        [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
-        [alert show];
-        pageSubmitAlertView = YES;
+}
+
+
+
+- (void) saveInspectionToDatabase
+{
+    //Go through each condition in the current inspection and then write this information to the Datastore
+    for (Condition *condition in myItemListStore.myConditions)
+    {
+        static int i = 0;
+        NSString *isDeficient = @"NO";
+        NSString *isApplicable = @"NO";
         
-        [self saveInfo:txtNotes.text :defficiencySwitch.on:[DefficiencyPicker selectedRowInComponent:0]:myDeficientPart:applicableSwitch.on];
-        [self insertInspectionToDatastoreTable];    //save the current condition so that if the user goes to the next part and back, the correct information will be displayed
-        Customer* customer = [self createCustomer];
-        Crane* crane = [self createCrane];
-        //Create the inspectino with the crane and customer
-        [self createInspection:crane Customer:customer];
+        if (condition.deficient == YES)
+        {
+            isDeficient = @"YES";
+        }
+        if (condition.applicable == YES)
+        {
+            isApplicable = @"YES";
+        }
         
-        [self InsertCustomerIntoTable];     //save the customer to the table
-        [self InsertCraneIntoTable];        //save the crane into the table
-        inspectionComplete = YES;
-        myDeficientPart = nil;
-        loadRatingsText = @"";
-        proofLoadDescription = @"";
-        testLoads = @"";
-        remarksLimitationsImposed = @"";
+        //inserts the current condition in the row
+        pickerSelection =  [NSString stringWithFormat:@"%d", condition.pickerSelection];
+        
+        //Create the dictionary that contains all the information for this record.
+        NSDictionary *conditionDictionary = [[NSDictionary alloc] initWithObjectsAndKeys
+                                             :inspection.crane.hoistSrl, @"hoistsrl",
+                                             inspection.jobNumber, @"jobnumber",
+                                             inspection.crane.equipmentNumber, @"equipmentnumber",
+                                             (NSString *)[myPartsArray objectAtIndex:i], @"part",
+                                             (NSString *) isDeficient, @"deficient",
+                                             condition.deficientPart, @"deficientpart",
+                                             [condition.notes stringByReplacingOccurrencesOfString:@"\"" withString:@"\\"], @"notes",
+                                             pickerSelection, @"pickerselection",
+                                             isApplicable, @"isapplicable",
+                                             nil];
+        
+        
+        //Add this condition to the datastore
+        //Insert the inspection into the Dropbox Datastore
+        [InspectionBussiness insertToDatastoreTable:account DataStore:dataStore Table:table TableName:@"inspections" DictionaryToAdd:conditionDictionary];
+        
+        i++;
     }
 }
 
@@ -618,9 +544,6 @@
     customer.address = txtAddress.text;
     customer.email = txtEmail.text;
     
-//     [txtTechnicianName.text
-//     [txtJobNumber.text
-//     [txtDate.text
     return customer;
 }
 //Create the inspection that will be read from
@@ -634,6 +557,7 @@
     inspection.jobNumber = txtJobNumber.text;
     inspection.crane = crane;
     inspection.customer = customer;
+    inspection.itemList = myItemListStore;
 }
 
 //Enters a new crane into the dropbox datastore
@@ -669,44 +593,6 @@
     }
 }
 
--(IBAction)switchView {
-    [CustomerInfoFullView removeFromSuperview];
-    [self.view addSubview:CraneInspectionView];
-}
-
-- (IBAction)switchChanged:(id)sender {
-    UISwitch *mySwitch = (UISwitch *)sender;
-    BOOL setting = mySwitch.isOn;
-    
-    if (setting == TRUE) {
-        DefficiencyPicker.alpha = 1;
-        DefficiencyPicker.showsSelectionIndicator = YES;
-        DefficiencyPicker.userInteractionEnabled = YES;
-
-        if ([lblPart.text isEqualToString:@"Wire Rope, Load Chain, Fittings"])
-        {
-            timesShown=0;
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Length, size, fittings" message:@"Enter the Length:" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Ok", nil];
-            [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
-            [alert show];
-            pageSubmitAlertView = NO;
-        }
-        else if ([lblPart.text isEqualToString:@"Hoist Load Brake"])
-        {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Type" message:@"What is the type?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Ok", nil];
-            [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
-            [alert show];
-            pageSubmitAlertView = NO;
-        }
-    }
-    else {
-        DefficiencyPicker.alpha = .5;
-        DefficiencyPicker.showsSelectionIndicator = NO;
-        DefficiencyPicker.userInteractionEnabled = NO;
-        }
-}
-
-//################################################################### A L E R T  V I E W  M E T H O D S ########################################################
 #pragma mark - Alert View Methods
 //this method handles all alert view finishes
 - (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -734,157 +620,12 @@
                     }
                 }
             }
-    }
-    }
-    if ((buttonIndex!=0 || loadRatings == YES || remarksLimitations == YES || finished == YES || proofLoad == YES) || (buttonIndex == 1 && testLoad == YES))
-    {
-        for (UIView* view in alertView.subviews)
-        {
-            if ([view isKindOfClass:[UITextField class]])
-            {
-                UITextField *textField = (UITextField*) view;
-                //if this is not the alert box that opens when you submit the final page
-                if (pageSubmitAlertView==NO)
-                {
-                    if ([lblPart.text isEqualToString:@"Control Station Markings"])
-                    {
-                        txtNotes.text = [NSString stringWithFormat:@"%@ %@", txtNotes.text, textField.text];
-                    }
-                    else if (timesShown==0&&optionLocation==22)
-                    {
-                        timesShown++;
-                        txtNotes.text = [NSString stringWithFormat:@"Length: %@ - %@",textField.text, txtNotes.text]; 
-                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Length, size, fittings" message:@"Enter the Size:" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Ok", nil];
-                        [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
-                        [alert show];
-                        pageSubmitAlertView = NO;
-                    }
-                    else if (timesShown==1&&optionLocation==22)
-                    {
-                        timesShown++;
-                        txtNotes.text = [NSString stringWithFormat:@"Size: %@ - %@",textField.text, txtNotes.text]; 
-                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Length, size, fittings" message:@"Enter the Fittings:" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Ok", nil];
-                        [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
-                        [alert show];
-                        pageSubmitAlertView = NO;
-                    }
-                    else if (timesShown==2&&optionLocation==22)
-                    {
-                        timesShown++;
-                        txtNotes.text = [NSString stringWithFormat:@"Fittings: %@ - %@",textField.text, txtNotes.text]; 
-                        pageSubmitAlertView = NO;
-                    }
-                    else if (![textField.text isEqualToString:@""])
-                    {
-                        txtNotes.text = [NSString stringWithFormat:@"%@ - %@",textField.text, txtNotes.text]; 
-                        NSLog(@"text:[%@]", textField.text);
-                        break;
-                    }
-                    else {
-                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"You must enter a value" message:@"A value must be entered" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
-                        [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
-                        [alert show];
-                    }
-                }
-                //if this is the alertbox for when you submit the form
-                else {
-                    //first we check to see if we are at the testLoad box
-                    if (loadRatings == NO && testLoad == NO && remarksLimitations == NO && finished == NO && proofLoad == NO)
-                    {
-                        //check to see if this is a number
-                        if ([[NSScanner scannerWithString:textField.text] scanFloat:NULL])
-                        {
-                            if (([textField.text intValue]<0 || [textField.text intValue]>5) && (loadRatings == NO && testLoad == NO && remarksLimitations == NO && finished == NO && proofLoad == NO))
-                            {   
-                                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Incorrect Input" message:@"You must enter a number between 1 and 5" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
-                                [alert show];
-                                overallRating = @"";
-                            }
-                            //if this is the overall rating box and its a number between 1 and 5
-                            else {
-                                overallRating = textField.text;
-                        
-                                //convert overall rating to int and then if it's less then 3 then we ask three more questions
-                                if ([overallRating intValue] < 3)
-                                {
-                                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Test Loads?" message:@"Is This a Test Load?" delegate:self cancelButtonTitle:@"NO" otherButtonTitles:@"YES", nil];
-                                    [alert show];
-                                    testLoad = YES;
-                                    CreateCertificateButton.enabled = TRUE;
-                                }
-                                else {
-                                    CreateCertificateButton.enabled = FALSE;
-                                    [self DisplayPDFWithOverallRating];
-                                }
-                            }
-                        }
-                        else {//if the overall rating was inputed as greater then 5 or less than 1, and if it was not an integer
-                            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Incorrect Input" message:@"You must enter a number between 1 and 5" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
-                            [alert show];
-                            overallRating = @"";
-                        }
-                    }
-                    else {//here is where we start displaying the Alert Boxes which will ask questions about for the Certficate
-                        if (proofLoad == YES)
-                        {
-                            testLoads = textField.text;
-                            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Proof Load Description" message:@"Description of Proof Load" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
-                            [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
-                            [alert show];
-                            loadRatings = YES;
-                            proofLoad = NO;
-                            testLoads = textField.text;
-                        }
-                        else if (loadRatings == YES)
-                        {
-                            proofLoadDescription = textField.text;
-                            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Load Ratings" message:@"Basis for assigned load ratings" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
-                            [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
-                            [alert show];
-                            remarksLimitations = YES;
-                            loadRatings = NO;
-                        }
-                        else if (remarksLimitations == YES)
-                        {
-                            loadRatingsText = textField.text;
-                            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Remarks Limitations" message:@"Remarks and/or Limitations Imposed" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
-                            [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
-                            [alert show];
-                            remarksLimitations = NO;
-                            finished = YES;
-                            loadRatingsText = textField.text;
-                        }
-                        else if (finished == YES)
-                        {
-                            remarksLimitationsImposed = textField.text;
-                            finished = NO;
-                            [self DisplayPDFWithOverallRating];
-                           // [PDFGenerator writeCertificateTextFile:testLoads ProofLoadDescription:proofLoadDescription RemarksLimitationImposed:remarksLimitationsImposed LoadRatingsText:loadRatingsText Inspection:<#(Inspection *)#>];
-                            CreateCertificateButton.enabled = TRUE;
-                        }
-
-                    }
-                }
-            }
-            else {
-                if (pageSubmitAlertView==YES && testLoad == YES) {
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Applied Test Loads" message:@"Test Loads Applied" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
-                    [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
-                    [alert show];
-                    proofLoad = YES;
-                    testLoad = NO;
-                }
-            }
         }
-    }//if the cancel button is pressed and we are in the midst of asking the questions for the certificate
-    else if (buttonIndex ==0 && testLoad == false)
-    {
     }
-    else
-    {
-        testLoad = NO;
-        [self DisplayPDFWithOverallRating];
-    }
+}
+-(IBAction)switchView {
+    [CustomerInfoFullView removeFromSuperview];
+    [self.view addSubview:CraneInspectionView];
 }
 
 -(void) viewWillAppear:(BOOL)animated
@@ -901,72 +642,31 @@
     }
 }
 
--(void) DisplayPDFWithOverallRating
-{
-   // [self writeTextFile:myItemListStore];
-    //[CraneInspectionView removeFromSuperview];
-    
-    changeLayoutNeeded = YES;
-    
-    //[self.view insertSubview:viewPDFController.view atIndex:0];
-    NSString *dateNoSlashes = [txtDate.text stringByReplacingOccurrencesOfString:@"/" withString:@"-"];
-    NSString* fileName = [NSString stringWithFormat:@"%@ %@ %@.PDF",txtCustomerName.text, txtHoistSrl.text, dateNoSlashes];
-    
-    NSArray *arrayPaths =
-    NSSearchPathForDirectoriesInDomains(
-                                        NSDocumentDirectory,
-                                        NSUserDomainMask,
-                                        YES);
-    NSString *path = [arrayPaths objectAtIndex:0];
-    NSString* pdfFileName = [path stringByAppendingPathComponent:fileName];
-    
-    controller = [UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:pdfFileName]];
-    controller.delegate = self;
-  
-    [controller presentPreviewAnimated:NO];
-    
-    //[self writeCertificateTextFile];
-}
-
-- (IBAction)CreateCertificate:(id)sender {
-    NSString *dateNoSlashes = [txtDate.text stringByReplacingOccurrencesOfString:@"/" withString:@"-"];
-    NSString* fileName = [NSString stringWithFormat:@"%@ %@ %@ Certificate.PDF",txtCustomerName.text, txtHoistSrl.text, dateNoSlashes];
-    
-    NSArray *arrayPaths =
-    NSSearchPathForDirectoriesInDomains(
-                                        NSDocumentDirectory,
-                                        NSUserDomainMask,
-                                        YES);
-    NSString *path = [arrayPaths objectAtIndex:0];
-    NSString* pdfFileName = [path stringByAppendingPathComponent:fileName];
-    
-    secondController = [UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:pdfFileName]];
-    //[controller setUTI:@"PDF"];
-    secondController.delegate = self;
-    CGRect navRect = self.navigationController.navigationBar.frame;
-    navRect.size = CGSizeMake(1500.0f, 40.0f);
-    [secondController presentPreviewAnimated:NO];
-    //disable the button certificate button so that we make sure there's no errant certificates being made
-    CreateCertificateButton.enabled = FALSE;
-    //[CraneInspectionView removeFromSuperview];
-    //[self.view addSubview:self.autographController.view];
-}
-
 - (IBAction)partsListButtonClicked:(id)sender{
     optionLocation = 0;
     NSUInteger selectedRow = [CraneDescriptionUIPicker selectedRowInComponent:0];
 
     NSString * craneType = [[CraneDescriptionUIPicker delegate] pickerView:CraneDescriptionUIPicker titleForRow:selectedRow forComponent:0];
     Parts *parts = [[Parts alloc] init : craneType ];
-    //myItemListStore = [[ItemListConditionStorage alloc] init:parts.myParts];
-    [lblPart awakeFromNib];
+    
+    //Gets all the parts that have to do with this specific crane
     myPartsArray = [parts myParts];
-    [self fillOptionArrays];
-    [self changeLayout:optionLocation];
-    [self.CustomerInfoFullView removeFromSuperview];
-    //[self.view insertSubview:self.CraneInspectionView atIndex:0];
-    InspectionViewController *inspectionViewController = [[UIStoryboard storyboardWithName:@"iPadMainStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"inspectionViewController"];
+    
+    Customer *customer = [InspectionBussiness createCustomer:txtCustomerName.text CustomerContact:txtCustomerContact.text CustomerAddress:txtAddress.text CustomerEmail:txtEmail.text];
+    
+    Crane *crane = [InspectionBussiness createCrane:txtHoistSrl.text CraneType:craneType EquipmentNumber:txtEquipNum.text CraneMfg:txtCraneMfg.text hoistMfg:txtHoistMfg.text CraneSrl:txtCraneSrl.text Capacity:txtCap.text HoistMdl:txtHoistMdl.text];
+    
+    inspection.crane = crane;
+    inspection.customer = customer;
+    
+    inspection.jobNumber = txtJobNumber.text;
+    inspection.date = txtDate.text;
+    inspection.technicianName = txtTechnicianName.text;
+    
     [self.navigationController pushViewController:inspectionViewController animated:YES];
+
+    [inspectionViewController fillOptionArrays:inspection.crane.description];
+    [inspectionViewController changeLayout:optionLocation PartsArray:myPartsArray ItemListStore:myItemListStore];
 }
 
 -(void) didReceiveMemoryWarning
@@ -976,176 +676,75 @@
 
 - (IBAction)buttonPressed:(id)sender {
 }
-
-//This method saves the information in the conditions list
-- (void) saveInfo : (NSString *) myNotes
-                  : (BOOL) myDeficient
-                  : (NSUInteger) mySelection
-                  : (NSString *) myDeficientPart
-                  : (BOOL) myApplicable
+//Create a dictionary that will store the customer information that will then be stored in our Dropbox datastore.
+- (NSDictionary *) createCustomerDictionary
 {
-    Condition *myCondition = [[Condition alloc] initWithParameters:myNotes :myDeficient:mySelection:myDeficientPart:myApplicable];
-    [myItemListStore setCondition:optionLocation :myCondition];
-    myCondition = nil;
+    NSDictionary *dictionary = [[NSDictionary alloc] initWithObjectsAndKeys:txtCustomerName.text, @"customerName",
+                                txtAddress.text, @"address",
+                                txtCustomerContact.text, @"customercontact",
+                                txtCustomerName.text, @"customername",
+                                txtEmail.text, @"email", nil];
+    
+    return dictionary;
 }
 
-- (void) changeLayout:(int) input {
-    Condition *myCondition = [[Condition alloc] init ];
-    myCondition = [myItemListStore.myConditions objectAtIndex:input];
-    txtNotes.text = myCondition.notes;
-    NSString* myPart = [myPartsArray objectAtIndex:optionLocation];
-    NSString* myPartNumber = [NSString stringWithFormat:@"Part #%d", optionLocation + 1];
-    [lblPart setText:myPart];
-    [lblPartNumber setText:myPartNumber];
-    [DefficiencyPicker selectRow:myCondition.pickerSelection inComponent:0 animated:YES];
-    [defficiencySwitch setOn:myCondition.deficient];
-    [applicableSwitch setOn:myCondition.applicable];
+- (NSDictionary *) createCraneDictinoary
+{
+    //Get the crane type fromt he UIPicker
+    NSUInteger selectedRow = [CraneDescriptionUIPicker selectedRowInComponent:0];
+    NSString * craneType = [[CraneDescriptionUIPicker delegate] pickerView:CraneDescriptionUIPicker titleForRow:selectedRow forComponent:0];
     
-    if ([lblPart.text isEqualToString:@"Control Station Markings"])
-    {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Additional Information" message:@"Is this a pendant or radio, and what is the manufacturer and model" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Ok", nil];
-        [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
-        [alert show];
-        pageSubmitAlertView = NO;
-    }
+    NSDictionary *dictionary = [[NSDictionary alloc] initWithObjectsAndKeys:
+                                txtCap.text, @"capacity",
+                                craneType, @"cranetype",
+                                txtCraneMfg.text, @"cranemfg",
+                                txtCraneSrl.text, @"cranesrl",
+                                txtEquipNum.text, @"equipmentnumber",
+                                txtHoistMdl.text, @"hoistmdl",
+                                txtHoistMfg.text, @"hoistmfg",
+                                txtHoistSrl.text, @"hoistsrl", nil];
     
-    if (defficiencySwitch.isOn==YES) {
-        DefficiencyPicker.userInteractionEnabled = YES;
-        DefficiencyPicker.alpha = 1;
-        DefficiencyPicker.showsSelectionIndicator = YES;
-    }
-    else {
-        DefficiencyPicker.userInteractionEnabled = NO;
-        DefficiencyPicker.showsSelectionIndicator = NO;
-        DefficiencyPicker.alpha = .5;
-    }
-    if (applicableSwitch.on == NO)
-    {
-        defficiencySwitch.enabled = YES;
-        txtNotes.userInteractionEnabled = YES;
-        txtNotes.alpha = 1;
-    }
-    else {
-        defficiencySwitch.enabled = NO;
-        txtNotes.userInteractionEnabled = NO;
-        txtNotes.alpha = .5;
-    }
+    return dictionary;
 }
+
 //On the customer page, submits the information into the database on the iPad
 - (IBAction)CustomerSubmitPressed:(id)sender {
-    if ([txtHoistSrl.text isEqualToString:@""] || 
-        [txtTechnicianName.text isEqualToString:@""] || 
-        [txtCustomerName.text isEqualToString:@""] ||
-        [txtCustomerContact.text isEqualToString:@""] ||
-        [txtJobNumber.text isEqualToString:@""] ||
-        [txtDate.text isEqualToString:@""] ||
-        [txtAddress.text isEqualToString:@""] ||
-        [txtEmail.text isEqualToString:@""] ||
-        [txtEquipNum.text isEqualToString:@""] ||
-        [txtCraneMfg.text isEqualToString:@""] ||
-        [txtHoistMfg.text isEqualToString:@""] ||
-        [txtHoistMdl.text isEqualToString:@""] ||
-        [txtCraneDescription.text isEqualToString:@""] ||
-        [txtCraneSrl.text isEqualToString:@""] ||
-        [txtCap.text isEqualToString:@""])
+    if ([self validateSubmission : YES] != EMPTY_FIELD || INVALID_CHARACTER)
     {
-        UIAlertView *error = [[UIAlertView alloc] initWithTitle:@"Customer Error" message:@"All values must be entered!" 
-                                                       delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        
-        [error show];
-    }
-    else if ([txtHoistSrl.text rangeOfString:@"\""].location != NSNotFound || 
-             [txtTechnicianName.text rangeOfString:@"\""].location != NSNotFound || 
-             [txtCustomerName.text rangeOfString:@"\""].location != NSNotFound ||
-             [txtCustomerContact.text rangeOfString:@"\""].location != NSNotFound ||
-             [txtJobNumber.text rangeOfString:@"\""].location != NSNotFound ||
-             [txtDate.text rangeOfString:@"\""].location != NSNotFound ||
-             [txtAddress.text rangeOfString:@"\""].location != NSNotFound ||
-             [txtEmail.text rangeOfString:@"\""].location != NSNotFound ||
-             [txtEquipNum.text rangeOfString:@"\""].location != NSNotFound ||
-             [txtCraneMfg.text rangeOfString:@"\""].location != NSNotFound ||
-             [txtHoistMfg.text rangeOfString:@"\""].location != NSNotFound ||
-             [txtHoistMdl.text rangeOfString:@"\""].location != NSNotFound ||
-             [txtCraneDescription.text rangeOfString:@"\""].location != NSNotFound ||
-             [txtCraneSrl.text rangeOfString:@"\""].location != NSNotFound ||
-             [txtCap.text rangeOfString:@"\""].location != NSNotFound)
-    {
-        UIAlertView *error = [[UIAlertView alloc] initWithTitle:@"Customer Error" message:@"Can not enter character ' \" ' into any field!" 
-                                                       delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [error show];
-    }
-    else 
-    {
+        //Get the selected crane type fromt he crane picker.
         NSUInteger selectedRow = [CraneDescriptionUIPicker selectedRowInComponent:0];
 
-        NSAttributedString * craneType = [[CraneDescriptionUIPicker delegate] pickerView:CraneDescriptionUIPicker attributedTitleForRow:selectedRow forComponent:0];
+        NSString * craneType = [[CraneDescriptionUIPicker delegate] pickerView:CraneDescriptionUIPicker titleForRow:selectedRow forComponent:0];
+        
+        inspection.crane.description = craneType;
+        
         //Call the parts array, with the crane type changed to a normal NSString
-        Parts *parts = [[Parts alloc] init : [craneType string]];
-        //myItemListStore = [[ItemListConditionStorage alloc] init:parts.myParts];
-        [lblPart awakeFromNib];
+        parts = [[Parts alloc] init : craneType];
+
         myPartsArray = [parts myParts];
-        [self fillOptionArrays];
-        [self changeLayout:optionLocation];
-        [self InsertCustomerIntoTable];
-        [self.CustomerInfoFullView removeFromSuperview];
-        [self.view insertSubview:self.CraneInspectionView atIndex:0];
+        
+        //Insert the customer info into the customer table
+        dataStore = [DBDatastore openDefaultStoreForAccount:account error:nil];
+        table = [dataStore getTable:@"customer"];
+        [InspectionBussiness insertToDatastoreTable:account DataStore:dataStore Table:table TableName:@"customer" DictionaryToAdd:[self createCustomerDictionary]];
+        
+        //Insert the crane info into the crane table
+        table = [dataStore getTable:@"crane"];
+        [InspectionBussiness insertToDatastoreTable:account DataStore:dataStore Table:table TableName:@"crane" DictionaryToAdd:[self createCraneDictinoary]];
+        
+        [self.navigationController pushViewController:inspectionViewController animated:YES];
+        
+        [inspectionViewController fillOptionArrays:inspection.crane.description];
+        [inspectionViewController changeLayout:optionLocation PartsArray:myPartsArray ItemListStore:myItemListStore];
+        
+        [dataStore sync:nil];
     }
-}
-
-- (IBAction)GoHome:(id)sender
-{
-    [self.viewPDFController.view removeFromSuperview];
-    [self.view insertSubview:self.CustomerInfoFullView atIndex:0];
-}
-
-- (IBAction)NASwitchChanged:(id)sender {
-    if (applicableSwitch.on == YES)
+    else
     {
-        defficiencySwitch.enabled = NO;
-        DefficiencyPicker.userInteractionEnabled = NO;
-        DefficiencyPicker.alpha = .5;
-        DefficiencyPicker.showsSelectionIndicator = NO;
-        defficiencySwitch.on = NO;
-        txtNotes.userInteractionEnabled = NO;
-        txtNotes.alpha = .25;
-        txtNotes.text = @"";
-    }
-    else {
-        defficiencySwitch.enabled = YES;
-        txtNotes.alpha = 1;
-        txtNotes.userInteractionEnabled = YES;
-        if (defficiencySwitch.on == YES)
-        {
-            DefficiencyPicker.userInteractionEnabled = YES;
-            DefficiencyPicker.alpha = 1;
-            DefficiencyPicker.showsSelectionIndicator = YES;
-        }
-    }
-}
-//Inserts a customer into the dropbox datastore jobs table
-- (void) InsertCustomerIntoTable
-{
-    
-}
-
-- (IBAction)nextPressed {
-    if (optionLocation < pickerDataStorage.count - 1) {
-        NSUInteger selectedRow = [DefficiencyPicker selectedRowInComponent:0];
-        NSString *myDeficientPart = [[DefficiencyPicker delegate] pickerView:DefficiencyPicker titleForRow:selectedRow forComponent:0];
-        [self saveInfo:txtNotes.text :defficiencySwitch.on:[DefficiencyPicker selectedRowInComponent:0]:myDeficientPart:applicableSwitch.on];
-        optionLocation = optionLocation + 1;
-        [self changePickerArray:pickerDataStorage];
-        [self changeLayout:optionLocation];
-    }
-}
-- (IBAction)previousPressed {
-    if (optionLocation > 0) {
-        NSUInteger selectedRow = [DefficiencyPicker selectedRowInComponent:0];
-        NSString *myDeficientPart = [[DefficiencyPicker delegate] pickerView:DefficiencyPicker titleForRow:selectedRow forComponent:0];
-        [self saveInfo:txtNotes.text :defficiencySwitch.on:[DefficiencyPicker selectedRowInComponent:0]:myDeficientPart:applicableSwitch.on];
-        optionLocation = optionLocation - 1;
-        [self changePickerArray:pickerDataStorage];
-        [self changeLayout:optionLocation];
+        //Display that the user needs to change some information on the Customer Submit page in order to submit this page.
+        UIAlertView *view = [[UIAlertView alloc] initWithTitle:@"Errors on Page" message:@"There is an error on the customer page.  Can not submit." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        
+        [view show];
     }
 }
 
@@ -1207,69 +806,33 @@
     CustomerInfoScrollView.scrollIndicatorInsets = contentInsets;
 }
 
-//-------------------------------------------------PICKER VIEW DELEGATE METHODS----------------------------------------------------------------------------
-
-
 
 #pragma mark Picker Data Source Methods
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *) pickerView {
-    if (pickerView.tag == 0)
-        return 1;
-    else {
-        return 1;
-    }
+    return 1;
 }
+
 - (NSInteger) pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-    if (pickerView.tag == 0 )
-        return [pickerData count];
-    else 
-        return [craneDescriptionsArray count];
+    
+    return [craneDescriptionsArray count];
 }
 #pragma mark Picker Delegate Methods
 - (NSString *) pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-    if (pickerView.tag == 0)
-        return [pickerData objectAtIndex:row];
-    else {
-        return [craneDescriptionsArray objectAtIndex:row];
-    }
+    
+    return [craneDescriptionsArray objectAtIndex:row];
+    
 }
 
 - (CGFloat) pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component
 {
-    if (pickerView.tag == 1)
-        return 300.0f;
-    else {
-        return 333.0f;
-    }
-}
-
-
-- (IBAction)gotoCustomerInfo:(id)sender {
-    NSUInteger selectedRow = [DefficiencyPicker selectedRowInComponent:0];
-    NSString *myDeficientPart = [[DefficiencyPicker delegate] pickerView:DefficiencyPicker titleForRow:selectedRow forComponent:0];
-    [self saveInfo:txtNotes.text :defficiencySwitch.on:[DefficiencyPicker selectedRowInComponent:0]:myDeficientPart:applicableSwitch.on];
-    [self.CraneInspectionView removeFromSuperview];
-    [self.view insertSubview:self.CustomerInfoFullView atIndex:0];
-    
-}
-//Create the objects necessary to view the parts list
-- (void) InitiateParts
-{
-    Parts *parts = [[Parts alloc] init:@"Bridge"];
-    myPartsArray = [parts myParts];
-    myItemListStore = [[ItemListConditionStorage alloc] init:parts.myParts];
-    optionLocation = 0;
-    [self changeLayout:optionLocation];
-    [self changePickerArray:pickerDataStorage];
-    inspectionComplete = NO;
-
+    return 333.0f;
 }
 
 - (IBAction)NewCustomerPress:(id)sender {
     [self EmptyTextFields];
     
-    [self InitiateParts];
+    [inspectionViewController initiateParts];
 }
 - (void) EmptyTextFields
 {
