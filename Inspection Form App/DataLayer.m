@@ -11,6 +11,7 @@
 #import "Customer.h"
 #import "Crane.h"
 #import <Dropbox/Dropbox.h>
+#import "MongoDBCollection.h"
 
 @implementation DataLayer
 

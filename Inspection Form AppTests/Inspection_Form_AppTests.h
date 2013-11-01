@@ -6,8 +6,8 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 
-@interface Inspection_Form_AppTests : SenTestCase
+@interface Inspection_Form_AppTests : XCTestCase
 
 @end

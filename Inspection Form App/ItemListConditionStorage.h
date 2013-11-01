@@ -16,5 +16,6 @@
 - (id) init:(NSMutableArray *) input;
 - (void)fillConditions:(NSMutableArray *) input;
 - (NSMutableArray *)getCondition:(int)input;
-- (void) setCondition:(int) input: (Condition *) myCondition;
+- (void) setCondition : (int) input
+            Condition : (Condition *) myCondition;
 @end

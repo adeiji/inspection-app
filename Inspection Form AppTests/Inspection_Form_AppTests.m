@@ -7,6 +7,8 @@
 //
 
 #import "Inspection_Form_AppTests.h"
+#import <XCTest/XCTest.h>
+#import "ViewController.h"
 
 @implementation Inspection_Form_AppTests
 
@@ -24,4 +26,10 @@
     [super tearDown];
 }
 
+- (void) testHoist
+{
+    ViewController *viewController = [[ViewController alloc] init];
+    
+    XCTAssertNil(nil, @"This failed");
+}
 @end

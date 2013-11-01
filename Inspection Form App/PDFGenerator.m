@@ -111,7 +111,8 @@
         
         //Create the file
         
-        NSError *error;
+        //Initiate Error Catching
+        //NSError *error;
         
         //create file manager
         
@@ -173,6 +174,32 @@
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"You must first fill out an application" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
         [alert show];
     }
+}
+
+- (void) drawTextToPDF : (NSString *) text
+       RectangleToDraw : (CGRect *) rect
+              FontSize : (CGFloat) fontSize
+
+{
+    UIFont *font = [UIFont systemFontOfSize:fontSize];
+    NSDictionary *dictionary = @{NSFontAttributeName : font};
+    
+    [text drawInRect:CGRectMake(95, 35, 270, 45) withAttributes:dictionary];
+    
+    
+}
+
+- (void) drawContextToPDF :
+               PDFContext : (CGContextRef) pdfContext
+               StartPoint : (CGPoint) startPoint
+                 EndPoint : (CGPoint) endPoint
+{
+    CGContextBeginPath(pdfContext);
+    CGContextMoveToPoint(pdfContext, startPoint.x, startPoint.y);
+    CGContextAddLineToPoint(pdfContext, endPoint.x, endPoint.y);
+    
+    CGContextClosePath(pdfContext);
+    CGContextDrawPath(pdfContext, kCGPathFillStroke);
 }
 
 + (void) createCertificate:(NSString *) titleAddress
@@ -253,6 +280,9 @@
     
     CGContextClosePath(pdfContext);
     CGContextDrawPath(pdfContext, kCGPathFillStroke);
+    
+    
+    
     [titleAddress drawInRect:CGRectMake(95, 35, 270, 45) withFont:[UIFont systemFontOfSize:12.0]];
     [headerTitle drawInRect:CGRectMake(355, 35, 300, 50) withFont:[UIFont systemFontOfSize:12.0f]];
     
@@ -488,6 +518,10 @@
     
     CGContextClosePath(pdfContext);
     CGContextDrawPath(pdfContext, kCGPathFillStroke);
+    
+    UIFont *font = [UIFont systemFontOfSize:12.0f];
+
+    NSDictionary *dictionary = @{NSFontAttributeName : font};
     
     //LINE 18
     [title drawInRect:CGRectMake(50, 670, 500, 120) withFont:[UIFont systemFontOfSize:12.0f]];

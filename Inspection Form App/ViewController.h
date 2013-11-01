@@ -24,7 +24,6 @@
     UIDocumentInteractionController *secondController;
 }
 
-
 @property (strong, nonatomic) DBAccount *account;
 @property (strong, nonatomic) DBDatastore *dataStore;
 @property (strong, nonatomic) DBTable *table;
@@ -105,6 +104,8 @@ typedef enum {
 - (IBAction)NASwitchChanged:(id)sender;
 - (BOOL) textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string;
 - (IBAction)CreateCertificate:(id)sender;
+
+- (NSDictionary *) createCraneDictionary;
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 
 
