@@ -17,8 +17,8 @@
 @synthesize collection;
 
 //Set the address to the ip of my mac or whatever the ip address is of the server
-#define address @"54.213.167.56"
-
+//#define address @"54.213.167.56"
+#define address @"127.0.0.1"
 //mac home address - 192.168.1.129
 
 - (void) setUpConnection : (NSString *) collectionName
@@ -57,12 +57,11 @@
     [collection insertDictionary:loginInfo writeConcern:nil error:&error];
 }
 
-+ (id) getValues :(NSString *) valueToGet
++ (NSArray *) getValues :(NSString *) valueToGet
               keyPathToSearch:(NSString *) keyPathToSearch
                collectionName:(NSString *) collectionName
 
 {
-    
     if ([valueToGet isEqualToString:@"GET_ALL_VALUES"])
     {
         NSError *error = nil;
@@ -78,8 +77,8 @@
     NSError *error = nil;
     MongoKeyedPredicate *predicate = [MongoKeyedPredicate predicate];
     [predicate keyPath:keyPathToSearch matches:valueToGet];
-    BSONDocument *resultDoc = [[[MongoConnection connectionForServer:address error:&error] collectionWithName:collectionName ] findOneWithPredicate:predicate error:&error];
-    NSDictionary * result = [BSONDecoder decodeDictionaryWithDocument:resultDoc];
+    NSArray *result = [[[MongoConnection connectionForServer:address error:&error] collectionWithName:collectionName ] findWithPredicate:predicate error:&error];
+    //NSDictionary * result = [BSONDecoder decodeDictionaryWithDocument:resultDoc];
     NSLog(@"fetch result: %@", result);
     
     return result;

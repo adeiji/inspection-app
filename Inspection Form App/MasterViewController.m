@@ -7,20 +7,100 @@
 //
 
 #import "MasterViewController.h"
+#import "MongoDbConnection.h"
+#import "BSONParser.h"
+#import "OrderedDictionary.h"
 
 @interface MasterViewController ()
-
+{
+    NSMutableArray *tableData;
+    int level;
+    NSDictionary *inspectionCriteria;
+    NSString *valueToSearch;
+    NSString *keyPathToSearch;
+}
 @end
 
 @implementation MasterViewController
 
-- (id)initWithStyle:(UITableViewStyle)style
+#define PART_NAME_COL @"partName"
+#define TYPE_COL @"type"
+#define COLLECTION_NAME @"test.inspectioncriterias"
+#define PART_COL @"part"
+#define OPTIONS_COL @"optionList"
+#define OPTIONS_PATH @"type.part.partName"
+#define PART_NAME_PATH @"type.typeName"
+#define TYPE_NAME_COL @"typeName"
+
+
+- (id)initWithStyle : (UITableViewStyle)style
+              Level : (int) currentLevel
+          NextValue : (NSString*) nextValue
+       PathToSearch : (NSString*) keyToSearch
+
 {
     self = [super initWithStyle:style];
     if (self) {
-        // Custom initialization
+        level = currentLevel;
+        valueToSearch = nextValue;
+        keyPathToSearch = keyToSearch;
     }
     return self;
+}
+
+//Get the information that will be stored in the Table
+- (void) getTableData : (NSString*) searchValue
+{
+    tableData = [[NSMutableArray alloc] init];
+    
+    NSArray *results = [MongoDbConnection getValues:searchValue keyPathToSearch:keyPathToSearch     collectionName:COLLECTION_NAME];
+    
+    
+    if (level == PART_NAME)
+    {
+        for (int i = 0; i < results.count; i++) {
+            NSDictionary *bsonDictionary = [results[i] dictionaryValue];
+            NSArray *parts = [[bsonDictionary objectForKey:TYPE_COL] objectForKey:PART_COL];
+            
+            for (NSDictionary *value in parts)
+            {
+                //Pull the parts from the array that contains all the parts
+                NSString *part = [value objectForKey:PART_NAME_COL];
+                [tableData addObject:part];
+            }
+        }
+    }
+    else if (level == OPTIONS)
+    {
+        for (int i = 0; i < results.count; i++) {
+            NSDictionary *bsonDictionary = [results[i] dictionaryValue];
+            //Get all the parts from this specific document.
+            NSArray *parts = [[bsonDictionary objectForKey:TYPE_COL] objectForKey:PART_COL];
+            
+            //Travers the parts to get the current part that we want
+            for (int i = 0; i < [parts count]; i++) {
+                //Once we've found the part that we're currently need.
+                if ([[parts[i] objectForKey:PART_NAME_COL ]  isEqualToString:searchValue])
+                {
+                    //Get the options from the specific desired part.
+                    NSArray *options = [parts[i] objectForKey:OPTIONS_COL];
+                    
+                    for (NSString *option in options) {
+                        //Add the options to the array that will display in the table.
+                        [tableData addObject:option];
+                    }
+                }
+            }
+        }
+    }
+    else
+    {
+        for (int i = 0; i < results.count; i++) {
+            NSDictionary *bsonDictionary = [results[i] dictionaryValue];
+            NSString *craneType = [[bsonDictionary objectForKey:TYPE_COL] objectForKey:TYPE_NAME_COL];
+            [tableData addObject:craneType];
+        }
+    }
 }
 
 - (void)viewDidLoad
@@ -32,6 +112,16 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    //Get the data that will be stored in the table
+    if (level != PART_NAME && level != OPTIONS)
+    {
+        valueToSearch = @"GET_ALL_VALUES";
+        keyPathToSearch = nil;
+    }
+    
+    [self getTableData : valueToSearch];
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -44,26 +134,48 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 0;
+    return [tableData count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    UITableViewCell *cell = [[UITableViewCell alloc] init];
     
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, 150, 50)];
+    label.text = [NSString stringWithFormat:@"%ld. %@", (long)indexPath.row + 1, [tableData objectAtIndex:indexPath.row]];
+    
+    [cell addSubview:label];
     // Configure the cell...
     
     return cell;
+}
+
+- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (level == PART_NAME)
+    {
+        MasterViewController *mvc = [[MasterViewController alloc] initWithStyle:nil Level:OPTIONS NextValue:[tableData objectAtIndex:indexPath.row] PathToSearch:OPTIONS_PATH];
+        
+        [self.navigationController pushViewController:mvc animated:YES];
+    }
+    else if (level == OPTIONS)
+    {
+        
+    }
+    else
+    {
+        MasterViewController *mvc = [[MasterViewController alloc] initWithStyle:nil Level:PART_NAME NextValue:[tableData objectAtIndex:indexPath.row] PathToSearch:PART_NAME_PATH];
+        
+        [self.navigationController pushViewController:mvc animated:YES];
+    }
 }
 
 /*

@@ -20,9 +20,9 @@
                           : (NSString *) device;
 - (NSArray *) getAllValuesFromTable;
 - (void) changeUserName : (NSString*) oldUserName : (NSString *) newUserName;
-- (void) setUpConnection : (NSString *) collectionName;\
+- (void) setUpConnection : (NSString *) collectionName;
 - (void) changeValue : (NSDictionary *) oldValue : (NSDictionary *) newValue;
-+ (NSDictionary *) getValues :(NSString *) valueToGet
++ (NSArray *) getValues :(NSString *) valueToGet
               keyPathToSearch:(NSString *) keyPathToSearch
                collectionName:(NSString *) collectionName;
 //Takes a dictionary of info and inputs it into the specified collection of the mongo database

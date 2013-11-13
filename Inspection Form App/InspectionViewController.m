@@ -504,7 +504,8 @@
                   : (NSString *) myDeficientPart
                   : (BOOL) myApplicable
 {
-    Condition *myCondition = [[Condition alloc] initWithParameters:myNotes Defficiency:myDeficient PickerSelection:mySelection DeficientPicker:myDeficientPart Applicable:myApplicable];
+    Condition *myCondition = [[Condition alloc] initWithParameters:myNotes Defficiency:myDeficient PickerSelection:mySelection DeficientPart:myDeficientPart Applicable:myApplicable];
+
     [itemListStore setCondition:optionLocation Condition : myCondition];
     myCondition = nil;
 }

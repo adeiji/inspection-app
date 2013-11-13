@@ -81,6 +81,7 @@
 		CE486ACB180C83E900B1B953 /* Inspection.m in Sources */ = {isa = PBXBuildFile; fileRef = CE486ACA180C83E900B1B953 /* Inspection.m */; };
 		CE486AE2180F17DC00B1B953 /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE486AE1180F17DC00B1B953 /* MasterViewController.m */; };
 		CE486AE6180F1E4200B1B953 /* InspectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE486AE5180F1E4200B1B953 /* InspectionViewController.m */; };
+		CE492A1F183175A1002A6197 /* BSONParser.m in Sources */ = {isa = PBXBuildFile; fileRef = CE492A1E183175A1002A6197 /* BSONParser.m */; };
 		CE6F9359182416EA008E1DDC /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE27C21F18234FC100EDDFC1 /* XCTest.framework */; };
 		CE798DB7180F369600C2E5A0 /* InspectionBussiness.m in Sources */ = {isa = PBXBuildFile; fileRef = CE798DB6180F369600C2E5A0 /* InspectionBussiness.m */; };
 		CE9775D91718C2660037967E /* logo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE9775D81718C2660037967E /* logo.jpg */; };
@@ -238,6 +239,8 @@
 		CE486AE1180F17DC00B1B953 /* MasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
 		CE486AE4180F1E4200B1B953 /* InspectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectionViewController.h; sourceTree = "<group>"; };
 		CE486AE5180F1E4200B1B953 /* InspectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InspectionViewController.m; sourceTree = "<group>"; };
+		CE492A1D183175A1002A6197 /* BSONParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSONParser.h; sourceTree = "<group>"; };
+		CE492A1E183175A1002A6197 /* BSONParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSONParser.m; sourceTree = "<group>"; };
 		CE6F935A18241825008E1DDC /* Inspection_Form_AppTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Inspection_Form_AppTests.h; sourceTree = "<group>"; };
 		CE798DB5180F369600C2E5A0 /* InspectionBussiness.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectionBussiness.h; sourceTree = "<group>"; };
 		CE798DB6180F369600C2E5A0 /* InspectionBussiness.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InspectionBussiness.m; sourceTree = "<group>"; };
@@ -447,6 +450,8 @@
 		CE27C1CA1821BAEB00EDDFC1 /* BSON */ = {
 			isa = PBXGroup;
 			children = (
+				CE492A1D183175A1002A6197 /* BSONParser.h */,
+				CE492A1E183175A1002A6197 /* BSONParser.m */,
 				CE27C1CB1821BAEB00EDDFC1 /* BSON_Helper.h */,
 				CE27C1CC1821BAEB00EDDFC1 /* BSON_Helper.m */,
 				CE27C1CD1821BAEB00EDDFC1 /* BSON_PrivateInterfaces.h */,
@@ -853,6 +858,7 @@
 				8B0787C715113796006857A8 /* Parts.m in Sources */,
 				CE27C2131821BAEB00EDDFC1 /* MongoWriteConcern.m in Sources */,
 				CE486AE6180F1E4200B1B953 /* InspectionViewController.m in Sources */,
+				CE492A1F183175A1002A6197 /* BSONParser.m in Sources */,
 				CE27C21E1821BB8000EDDFC1 /* MongoDbConnection.m in Sources */,
 				CE27C2061821BAEB00EDDFC1 /* NSManagedObject+BSONCoding.m in Sources */,
 				CE798DB7180F369600C2E5A0 /* InspectionBussiness.m in Sources */,

@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MasterViewController : UITableViewController
+@interface MasterViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate>
+
+typedef enum {
+    TYPE_NAME,
+    PART_NAME,
+    OPTIONS
+} TableLevel;
 
 @end

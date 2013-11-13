@@ -30,7 +30,8 @@
 - (Condition *)getCondition:(int)input {
     return (Condition*)[myConditions objectAtIndex:input];
 }
-- (void) setCondition :(int)input : (Condition *) myCondition {
+- (void) setCondition :(int)input
+            Condition : (Condition *) myCondition {
     [[myConditions objectAtIndex:input] setDeficient:myCondition.deficient];
     [[myConditions objectAtIndex:input] setNotes:myCondition.notes];
     [[myConditions objectAtIndex:input] setDeficientPart:myCondition.deficientPart];

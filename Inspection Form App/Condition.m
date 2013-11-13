@@ -21,7 +21,12 @@
     }
     return self;
 }
-- (id) initWithParameters : (NSString *) myNotes : (BOOL) myDeficient : (NSUInteger *) myPickerSelection : (NSString *) myDeficientPart : (BOOL) myApplicable {
+- (Condition *) initWithParameters : (NSString *) myNotes
+                       Defficiency : (BOOL) myDeficient
+                   PickerSelection : (NSUInteger *) myPickerSelection
+                     DeficientPart : (NSString *) myDeficientPart
+                        Applicable : (BOOL) myApplicable
+{
     if (self=[super init]) {
         notes = [[NSString alloc] initWithString:myNotes];
         deficient = myDeficient;

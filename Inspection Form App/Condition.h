@@ -16,11 +16,11 @@
     BOOL applicable;
 }
 
-- (id) initWithParameters : (NSString *) myNotes
-              Defficiency : (BOOL) myDeficient
-          PickerSelection : (NSUInteger *) myPickerSelection
-          DeficientPicker : (NSString *) myDeficientPicker
-               Applicable : (BOOL) myApplicable;
+- (Condition *) initWithParameters : (NSString *) myNotes
+                       Defficiency : (BOOL) myDeficient
+                   PickerSelection : (NSUInteger *) myPickerSelection
+                     DeficientPart : (NSString *) myDeficientPart
+                        Applicable : (BOOL) myApplicable;
 - (NSString *) notes;
 - (BOOL) deficient;
 - (NSUInteger *) pickerSelection;
