@@ -14,5 +14,9 @@
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property (strong, nonatomic) NSArray *searchCriteria;
+@property (strong, nonatomic) NSMutableDictionary *partsDictionary;
+@property (strong, nonatomic) NSMutableDictionary *optionsDictionary;
+@property (strong, nonatomic) NSMutableArray *craneTypes;
 
 @end

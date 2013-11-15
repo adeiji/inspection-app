@@ -7,16 +7,24 @@
 //
 
 #import "Parts.h"
+#import "BSONParser.h"
+#import "AppDelegate.h"
 
 @implementation Parts
 @synthesize myParts;
+
+#define TYPE_COL @"type"
+#define PART_COL @"part"
+#define PART_NAME_COL @"partName"
 
 - (id) init : (NSString*) typeOfCrane {
     if (self = [super init])
     {
         myParts = [NSMutableArray array];
     }
-    [self fillParts : typeOfCrane];
+    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+    
+    [self fillPartsFromDb : typeOfCrane PartsDictionary:delegate.partsDictionary];
     return self;
 }
 
@@ -26,6 +34,19 @@
 
 - (void)setMyParts:(NSMutableArray *)input {
     myParts = input;
+}
+
+- (void) fillPartsFromDb : (NSString *) searchValue
+        PartsDictionary : (NSDictionary *) partsDictionary
+{
+    [partsDictionary enumerateKeysAndObjectsUsingBlock:^(id key, id parts, BOOL *stop) {
+        if ([key isEqualToString:searchValue])
+        {
+            for (int i = 0; i < [parts count]; i++) {
+                [myParts addObject:parts[i]];
+            }
+        }
+    }];
 }
 
 - (void) fillParts : (NSString*) typeOfCrane {

@@ -21,7 +21,7 @@
 }
 
 -(void)fillConditions:(NSMutableArray *)input {
-    
+    //Add a default condition for every single part that there is.
     for (int i=0; i<input.count; i++) {
         Condition *myCondition = [[Condition alloc] init];
         [myConditions addObject:myCondition];

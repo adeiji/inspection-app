@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "ViewController.h"
 #import <Dropbox/Dropbox.h>
+#import "MongoDbConnection.h"
 
 @interface AppDelegate ()
 
@@ -16,7 +17,19 @@
 
 @implementation AppDelegate
 
+#define SEARCH_VALUE @"GET_ALL_VALUES"
+#define COLLECTION_NAME @"sswr.inspectioncriterias"
+#define TYPE_COL @"type"
+#define PART_COL @"part"
+#define TYPE_NAME_COL @"typeName"
+#define PART_NAME_COL @"partName"
+#define OPTIONS_COL @"optionList"
+
 @synthesize window = __window;
+@synthesize searchCriteria = __searchCriteria;
+@synthesize partsDictionary = __partsDictionary;
+@synthesize optionsDictionary = __optionsDictionary;
+@synthesize craneTypes = __craneTypes;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -27,11 +40,50 @@
         UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
         UINavigationController *navigationController = [splitViewController.viewControllers lastObject];
         splitViewController.delegate = (id)navigationController.topViewController;
-        
 
     }
     
+    [self getCriteriaFromMongoDb];
+    [self fillCriteriaObjects];
+    
     return YES;
+}
+
+- (void) getCriteriaFromMongoDb
+{
+    //Return everything from the mongo database
+    __searchCriteria = [MongoDbConnection getValues:SEARCH_VALUE keyPathToSearch:nil collectionName:COLLECTION_NAME ];
+}
+//Fill the two dictionaries partsDictionary and searchDictionary so that we can easily pull these values from the array later
+- (void) fillCriteriaObjects
+{
+    __optionsDictionary = [[NSMutableDictionary alloc] init];
+    __partsDictionary = [[NSMutableDictionary alloc] init];
+    __craneTypes = [[NSMutableArray alloc] init];
+    for (int i = 0; i < __searchCriteria.count; i++)
+    {
+        NSDictionary *bsonDictionary = [__searchCriteria[i] dictionaryValue];
+        
+        //Get the type name that we're at in the array.
+        NSString *typeName = [[bsonDictionary objectForKey:TYPE_COL] objectForKey:TYPE_NAME_COL];
+        
+        [__craneTypes addObject:typeName];
+        
+        NSArray *parts = [[bsonDictionary objectForKey:TYPE_COL] objectForKey:PART_COL];
+        NSMutableArray *myParts = [[NSMutableArray alloc] init];
+        
+        for (NSDictionary *value in parts)
+        {
+            //Pull the parts from the array that contains all the parts
+            NSString *part = [value objectForKey:PART_NAME_COL];
+            NSArray *options = [value objectForKey:OPTIONS_COL];
+            
+            [__optionsDictionary setObject:options forKey:part];
+            [myParts addObject:part];
+        }
+        
+        [__partsDictionary setObject:myParts forKey:typeName];
+    }
 }
 
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url

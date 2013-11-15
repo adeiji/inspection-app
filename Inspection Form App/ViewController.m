@@ -26,6 +26,7 @@
 #import "PDFGenerator.h"
 #import "InspectionViewController.h"
 #import "InspectionBussiness.h"
+#import "AppDelegate.h"
 
 @interface ViewController () {
     ItemListConditionStorage *myItemListStore; 
@@ -34,7 +35,6 @@
     sqlite3 *contactDB;
     NSString *databasePath;
     NSString *tableName;
-    NSString *part;
     int *deficient;
     int timesShown;
     NSString *deficientPart;
@@ -61,6 +61,7 @@
     NSString* iosVersion;
     Inspection *inspection;
     int currentOrientation;
+    AppDelegate* delegate;
 }
 @end
 
@@ -115,8 +116,6 @@
 - (void)viewDidLoad {
     inspectionViewController = [[UIStoryboard storyboardWithName:@"iPadMainStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"inspectionViewController"];
     
-    [inspectionViewController initiateParts];
-    
     inspection = [[Inspection alloc] init];
     
     changeLayoutNeeded = NO;
@@ -131,7 +130,9 @@
                                              selector:@selector(keyboardWillBeHidden:) 
                                                  name:UIKeyboardWillHideNotification 
                                                object:nil];
-    craneDescriptionsArray = [[NSMutableArray alloc] initWithObjects:@"BRIDGE", @"JIB", @"MONORAIL", @"GANTRY", nil];
+    delegate = [[UIApplication sharedApplication] delegate];
+    
+    craneDescriptionsArray = delegate.craneTypes;
     owner = @"";
     [self LoadOwner];
     if ([owner isEqual:@""])
@@ -273,7 +274,6 @@
     contactDB=nil;
     databasePath = nil;
     tableName = nil;
-    part = nil;
     deficient = nil;
     deficientPart = nil;
     notes = nil;
@@ -643,6 +643,7 @@
 }
 
 - (IBAction)partsListButtonClicked:(id)sender{
+
     optionLocation = 0;
     NSUInteger selectedRow = [CraneDescriptionUIPicker selectedRowInComponent:0];
 
@@ -663,10 +664,17 @@
     inspection.date = txtDate.text;
     inspection.technicianName = txtTechnicianName.text;
     
+    inspectionViewController.craneType = inspection.crane.type;
+    inspectionViewController.partsArray = myPartsArray;
+    
     [self.navigationController pushViewController:inspectionViewController animated:YES];
-
-    [inspectionViewController fillOptionArrays:inspection.crane.description];
-    [inspectionViewController changeLayout:optionLocation PartsArray:myPartsArray ItemListStore:myItemListStore];
+//
+//    //We get the first part from the dictionary that stores all the parts of the specific crane types.
+//    NSString *part = [delegate.partsDictionary objectForKey:inspection.crane.type][0];
+//    
+//    //Send the current part so that we can fill the options array with the correct part.
+//    [inspectionViewController fillOptionArrays:part];
+//    [inspectionViewController changeLayout:optionLocation PartsArray:myPartsArray ItemListStore:myItemListStore];
 }
 
 -(void) didReceiveMemoryWarning
@@ -734,7 +742,10 @@
         
         [self.navigationController pushViewController:inspectionViewController animated:YES];
         
-        [inspectionViewController fillOptionArrays:inspection.crane.description];
+        NSString *part = [delegate.partsDictionary objectForKey:inspection.crane.type][0];
+        
+        //Send the current part so that we can fill the options array with the correct part.
+        [inspectionViewController fillOptionArrays:part];
         [inspectionViewController changeLayout:optionLocation PartsArray:myPartsArray ItemListStore:myItemListStore];
         
         [dataStore sync:nil];
@@ -747,6 +758,7 @@
         [view show];
     }
 }
+
 
 - (void) didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {

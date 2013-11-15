@@ -10,14 +10,15 @@
 #import "MongoDbConnection.h"
 #import "BSONParser.h"
 #import "OrderedDictionary.h"
+#import "AppDelegate.h"
 
 @interface MasterViewController ()
 {
     NSMutableArray *tableData;
     int level;
     NSDictionary *inspectionCriteria;
-    NSString *valueToSearch;
-    NSString *keyPathToSearch;
+    NSArray *results;
+    NSString *searchValue;
 }
 @end
 
@@ -25,7 +26,7 @@
 
 #define PART_NAME_COL @"partName"
 #define TYPE_COL @"type"
-#define COLLECTION_NAME @"test.inspectioncriterias"
+#define COLLECTION_NAME @"sswr.inspectioncriterias"
 #define PART_COL @"part"
 #define OPTIONS_COL @"optionList"
 #define OPTIONS_PATH @"type.part.partName"
@@ -35,71 +36,54 @@
 
 - (id)initWithStyle : (UITableViewStyle)style
               Level : (int) currentLevel
-          NextValue : (NSString*) nextValue
-       PathToSearch : (NSString*) keyToSearch
+        SearchValue : (NSString*) mySearchValue
 
 {
     self = [super initWithStyle:style];
     if (self) {
         level = currentLevel;
-        valueToSearch = nextValue;
-        keyPathToSearch = keyToSearch;
+        searchValue = mySearchValue;
     }
     return self;
 }
 
 //Get the information that will be stored in the Table
-- (void) getTableData : (NSString*) searchValue
+- (void) getTableData
 {
     tableData = [[NSMutableArray alloc] init];
     
-    NSArray *results = [MongoDbConnection getValues:searchValue keyPathToSearch:keyPathToSearch     collectionName:COLLECTION_NAME];
+    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
     
-    
+    //If we're retrieving only the partNames
     if (level == PART_NAME)
     {
-        for (int i = 0; i < results.count; i++) {
-            NSDictionary *bsonDictionary = [results[i] dictionaryValue];
-            NSArray *parts = [[bsonDictionary objectForKey:TYPE_COL] objectForKey:PART_COL];
-            
-            for (NSDictionary *value in parts)
+        
+        [delegate.partsDictionary enumerateKeysAndObjectsUsingBlock:^(id key, id part, BOOL *stop) {
+            if ([key isEqualToString:searchValue])
             {
-                //Pull the parts from the array that contains all the parts
-                NSString *part = [value objectForKey:PART_NAME_COL];
-                [tableData addObject:part];
+                for (int i = 0; i < [part count]; i ++)
+                {
+                    [tableData addObject:part[i]];
+                }
             }
-        }
+        } ];
+        
     }
     else if (level == OPTIONS)
     {
-        for (int i = 0; i < results.count; i++) {
-            NSDictionary *bsonDictionary = [results[i] dictionaryValue];
-            //Get all the parts from this specific document.
-            NSArray *parts = [[bsonDictionary objectForKey:TYPE_COL] objectForKey:PART_COL];
-            
-            //Travers the parts to get the current part that we want
-            for (int i = 0; i < [parts count]; i++) {
-                //Once we've found the part that we're currently need.
-                if ([[parts[i] objectForKey:PART_NAME_COL ]  isEqualToString:searchValue])
-                {
-                    //Get the options from the specific desired part.
-                    NSArray *options = [parts[i] objectForKey:OPTIONS_COL];
-                    
-                    for (NSString *option in options) {
-                        //Add the options to the array that will display in the table.
-                        [tableData addObject:option];
-                    }
+        [delegate.optionsDictionary enumerateKeysAndObjectsUsingBlock:^(id key, id options, BOOL *stop) {
+            if ([key isEqualToString:searchValue])
+            {
+                for (int i = 0; i < [options count]; i++) {
+                    [tableData addObject:options[i]];
                 }
             }
-        }
+        }];
     }
     else
+        
     {
-        for (int i = 0; i < results.count; i++) {
-            NSDictionary *bsonDictionary = [results[i] dictionaryValue];
-            NSString *craneType = [[bsonDictionary objectForKey:TYPE_COL] objectForKey:TYPE_NAME_COL];
-            [tableData addObject:craneType];
-        }
+        tableData = delegate.craneTypes;
     }
 }
 
@@ -113,14 +97,11 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    //Get the data that will be stored in the table
-    if (level != PART_NAME && level != OPTIONS)
-    {
-        valueToSearch = @"GET_ALL_VALUES";
-        keyPathToSearch = nil;
-    }
+    //Get the mongo search criteria from the application delegate
     
-    [self getTableData : valueToSearch];
+    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+    results = delegate.searchCriteria;
+    [self getTableData];
     
 }
 
@@ -149,7 +130,7 @@
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [[UITableViewCell alloc] init];
     
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, 150, 50)];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, 300, 50)];
     label.text = [NSString stringWithFormat:@"%ld. %@", (long)indexPath.row + 1, [tableData objectAtIndex:indexPath.row]];
     
     [cell addSubview:label];
@@ -162,7 +143,7 @@
 {
     if (level == PART_NAME)
     {
-        MasterViewController *mvc = [[MasterViewController alloc] initWithStyle:nil Level:OPTIONS NextValue:[tableData objectAtIndex:indexPath.row] PathToSearch:OPTIONS_PATH];
+        MasterViewController *mvc = [[MasterViewController alloc] initWithStyle:nil Level:OPTIONS SearchValue:[tableData objectAtIndex:indexPath.row]];
         
         [self.navigationController pushViewController:mvc animated:YES];
     }
@@ -172,7 +153,7 @@
     }
     else
     {
-        MasterViewController *mvc = [[MasterViewController alloc] initWithStyle:nil Level:PART_NAME NextValue:[tableData objectAtIndex:indexPath.row] PathToSearch:PART_NAME_PATH];
+        MasterViewController *mvc = [[MasterViewController alloc] initWithStyle:nil Level:PART_NAME SearchValue:[tableData objectAtIndex:indexPath.row]];
         
         [self.navigationController pushViewController:mvc animated:YES];
     }

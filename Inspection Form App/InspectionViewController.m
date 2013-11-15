@@ -12,6 +12,7 @@
 #import "Customer.h"
 #import "Crane.h"
 #import "PDFGenerator.h"
+#import "AppDelegate.h"
 
 @interface InspectionViewController ()
 {
@@ -35,8 +36,6 @@
     NSString *overallRating;
     
     NSArray *defficiencyPickerArray;
-    NSArray *partsArray;
-
 }
 @end
 
@@ -50,6 +49,8 @@
 @synthesize txtNotes;
 @synthesize pickerData;
 @synthesize createCertificateButton;
+@synthesize craneType = __craneType;
+@synthesize partsArray = __partsArray;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -78,6 +79,8 @@
     
     [self.view addGestureRecognizer:gestureRecognizerRight];
     [self.view addGestureRecognizer:gestureRecognizerLeft];
+    
+    [self initiateParts];
 }
 
 
@@ -100,16 +103,18 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void) changeLayout : (int) optionLocation
+- (void) changeLayout : (int) myOptionLocation
            PartsArray : (NSArray*) myPartsArray
         ItemListStore : (ItemListConditionStorage *) myItemListStore
 {
-    
     Condition *myCondition = [[Condition alloc] init ];
-    myCondition = [myItemListStore.myConditions objectAtIndex:optionLocation];
+    myCondition = [myItemListStore.myConditions objectAtIndex:myOptionLocation];
+    
     txtNotes.text = myCondition.notes;
+    
     NSString* myPart = [myPartsArray objectAtIndex:optionLocation];
-    NSString* myPartNumber = [NSString stringWithFormat:@"Part #%d", optionLocation + 1];
+    NSString* myPartNumber = [NSString stringWithFormat:@"Part #%d", myOptionLocation + 1];
+    
     [lblPart setText:myPart];
     [lblPartNumber setText:myPartNumber];
     [defficiencyPicker selectRow:myCondition.pickerSelection inComponent:0 animated:YES];
@@ -172,10 +177,11 @@
     }
 }
 
-- (void) fillOptionArrays : (NSString*) craneDescription {
-    Options* myOptions = [[Options alloc] init:craneDescription];
+- (void) fillOptionArrays : (NSString*) currentPart {
+    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+    Options* myOptions = [[Options alloc] init:currentPart OptionsDictionary:delegate.optionsDictionary];
     
-    defficiencyPickerArray = myOptions.myOptionsArray;
+    defficiencyPickerArray = myOptions.optionsArray;
     //Send the array that contains the particular defficiencies unique to this part
     [self changePickerArray:defficiencyPickerArray];
 }
@@ -183,18 +189,19 @@
 //Change the array that contains the part details th at the Defficiency Picker will be showing
 - (void) changePickerArray : (NSArray*) input {
     pickerData = nil;
-    pickerData = [input objectAtIndex:optionLocation];
+    pickerData = input;
     [self.defficiencyPicker reloadAllComponents];
 }
 
 //Create the objects necessary to view the parts list
 - (void) initiateParts
 {
-    Parts *parts = [[Parts alloc] init:@"Bridge"];
-    partsArray = [parts myParts];
+    [self fillOptionArrays:__partsArray[0]];
+    Parts *parts = [[Parts alloc] init:__craneType];
+    __partsArray = [parts myParts];
     itemListStore = [[ItemListConditionStorage alloc] init:parts.myParts];
     optionLocation = 0;
-    [self changeLayout:optionLocation PartsArray:partsArray ItemListStore:itemListStore];
+    [self changeLayout:optionLocation PartsArray:__partsArray ItemListStore:itemListStore];
     //Send the array that contains the particular defficiencies unique to this part
     [self changePickerArray:defficiencyPickerArray];
     inspectionComplete = NO;
@@ -466,6 +473,7 @@
     }//if the cancel button is pressed and we are in the midst of asking the questions for the certificate
     else if (buttonIndex ==0 && testLoad == false)
     {
+        
     }
     else
     {
@@ -474,15 +482,22 @@
     }
 }
 
+#pragma mark - Outlet methods
+
+- (IBAction)gotoCustomerInformation : (id) sender
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 - (IBAction)nextPressed {
-    if (optionLocation < defficiencyPickerArray.count - 1) {
+    if (optionLocation < [__partsArray count] - 1) {
         NSUInteger selectedRow = [defficiencyPicker selectedRowInComponent:0];
         NSString *myDeficientPart = [[defficiencyPicker delegate] pickerView: defficiencyPicker titleForRow:selectedRow forComponent:0];
         [self saveInfo:txtNotes.text :defficiencySwitch.on:[defficiencyPicker selectedRowInComponent:0]:myDeficientPart:applicableSwitch.on];
         optionLocation = optionLocation + 1;
+        [self fillOptionArrays:__partsArray[optionLocation]];
         [self changePickerArray:defficiencyPickerArray];
-        [self changeLayout:optionLocation PartsArray:partsArray ItemListStore:itemListStore];
+        [self changeLayout:optionLocation PartsArray:__partsArray ItemListStore:itemListStore];
     }
 }
 - (IBAction)previousPressed {
@@ -491,8 +506,9 @@
         NSString *myDeficientPart = [[defficiencyPicker delegate] pickerView:defficiencyPicker titleForRow:selectedRow forComponent:0];
         [self saveInfo:txtNotes.text :defficiencySwitch.on:[defficiencyPicker selectedRowInComponent:0]:myDeficientPart:applicableSwitch.on];
         optionLocation = optionLocation - 1;
+        [self fillOptionArrays:__partsArray[optionLocation]];
         [self changePickerArray:defficiencyPickerArray];
-        [self changeLayout:optionLocation PartsArray:partsArray ItemListStore:itemListStore];
+        [self changeLayout:optionLocation PartsArray:__partsArray ItemListStore:itemListStore];
     }
 }
 
@@ -527,6 +543,5 @@
 {
     return 300.0f;
 }
-
 
 @end

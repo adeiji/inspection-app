@@ -13,15 +13,20 @@
 
 #endif
 
-@interface Options : NSObject {
+@interface Options : NSObject
     
-    NSMutableArray* myOptionsArray;
+@property (strong, nonatomic)  NSMutableArray* optionsArray;
     
-}
 
-- (id) init : (NSString*) typeOfCrane;
+- (id)         init : (NSString*) typeOfCrane
+  OptionsDictionary : (NSDictionary *) optionsDictionary;
+
+- (void) addOptionsFromMongo : (NSString *) searchValue
+           OptionsDictinoary : (NSDictionary *) optionsDictionary;
+
 - (NSMutableArray*) myOptionsArray;
 - (void) addMyOptions : (NSString*) typeOfCrane;
 - (void) setMyOptionsArray: (NSMutableArray*) input;
+
 
 @end
