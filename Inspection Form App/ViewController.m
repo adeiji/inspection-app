@@ -23,10 +23,10 @@
 #import "OrdinalNumberFormatter.h"
 #import "Foundation/NSDateFormatter.h"
 #import "DataLayer.h"
-#import "PDFGenerator.h"
 #import "InspectionViewController.h"
 #import "InspectionBussiness.h"
 #import "AppDelegate.h"
+#import "InspectionManager.h"
 
 @interface ViewController () {
     ItemListConditionStorage *myItemListStore; 
@@ -68,9 +68,7 @@
 @implementation ViewController
 @synthesize txtDate;
 @synthesize optionLocation;
-@synthesize btnSelectDate;
 @synthesize datePicker;
-@synthesize myDatePicker;
 @synthesize navSubmit;
 @synthesize rootViewController;
 @synthesize myPartsArray;
@@ -79,7 +77,6 @@
 @synthesize txtCustomerContact;
 @synthesize txtJobNumber;
 @synthesize txtAddress;
-@synthesize txtEquipDesc;
 @synthesize txtCraneMfg;
 @synthesize txtHoistMfg;
 @synthesize txtHoistMdl;
@@ -99,9 +96,7 @@
 @synthesize customerName;
 @synthesize craneDescriptionsArray;
 @synthesize selectCraneButton;
-@synthesize CustomerInfoView;
 @synthesize CustomerInfoScrollView;
-@synthesize CustomerInfoFullView;
 @synthesize CraneInspectionView;
 @synthesize scrollView;
 @synthesize dataStore;
@@ -114,13 +109,14 @@
 #define kMaximumVariance        100
 
 - (void)viewDidLoad {
-    inspectionViewController = [[UIStoryboard storyboardWithName:@"iPadMainStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"inspectionViewController"];
     
+    [self editInspectionViewController];
+
     inspection = [[Inspection alloc] init];
     
     changeLayoutNeeded = NO;
     iosVersion = [[UIDevice currentDevice] systemVersion];
-   // CustomerInfoView.frame = CGRectMake(0, 0, 768, 1005);
+   
     //Keyboard manipulation
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWasShown:) 
@@ -130,44 +126,78 @@
                                              selector:@selector(keyboardWillBeHidden:) 
                                                  name:UIKeyboardWillHideNotification 
                                                object:nil];
+    
     delegate = [[UIApplication sharedApplication] delegate];
     
     craneDescriptionsArray = delegate.craneTypes;
     owner = @"";
+    
     [self LoadOwner];
+    
     if ([owner isEqual:@""])
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Enter Name Alert" message:@"Enter your name" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
         [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
         [alert show];
     }
+    
     txtCraneDescription.inputView = CraneDescriptionUIPicker;
     txtCraneDescription.inputAccessoryView = selectCraneButton;
+
+    // Do any additional setup after loading the view, typically from a nib.
+    UIButton *btnSelectDate = [[UIButton alloc] init];
+    
+    [btnSelectDate addTarget:self action:@selector(dateSelected:) forControlEvents:UIControlEventTouchDown];
+    
+    NSDate *now = [NSDate date];
+    datePicker = [[UIDatePicker alloc] initWithFrame:CGRectZero];
+    [datePicker setDate:now animated:NO];
+    [datePicker setDatePickerMode:UIDatePickerModeDate];
+    [datePicker addTarget:self action:@selector(dateSelectionChanged:) forControlEvents:UIControlEventValueChanged];
+    txtDate.inputView = datePicker;
+    [self dateSelectionChanged:datePicker];
+    
+    navBar.topItem.title = @"Inspection Form App";
+    optionLocation=0;
+    
+    [self resetVariables];
+    
+    currentOrientation = self.interfaceOrientation;
+    [self didPressLink];
+    
+    txtTechnicianName.text = [owner uppercaseString];
+    
+    [self setUpCraneDescriptionPicker];
+    [super viewDidLoad];
+    
+    [self addTargetsToTextFields];
+    
+    [self createDatastoreTable];
+}
+//Every time the date selection changes it will also change in the text box
+- (void) dateSelectionChanged:(id)sender
+{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateStyle:NSDateFormatterShortStyle];
+    
+    txtDate.text = [dateFormatter stringFromDate:[datePicker date]];
+}
+
+//When the view is loaded there are specific variables that we want to be reset to force the user to have to renter them, or to refresh.
+- (void) resetVariables
+{
+    overallRating = @"";
+    txtTechnicianName.text = technicianName;
+    manufacturer = @"";
     testLoads =  @"";
     proofLoadDescription = @"";
     loadRatingsText = @"";
     remarksLimitationsImposed = @"";
-    [self.view insertSubview:CustomerInfoFullView atIndex:0];
+}
 
-    // Do any additional setup after loading the view, typically from a nib.
-    NSDate *now = [NSDate date];
-    myDatePicker = [[UIDatePicker alloc] initWithFrame:CGRectZero];
-    [myDatePicker setDate:now animated:NO];
-    [myDatePicker setDatePickerMode:UIDatePickerModeDate];
-    txtDate.inputView = myDatePicker; 
-    txtDate.inputAccessoryView = btnSelectDate;
-    navBar.topItem.title = @"Inspection Form App";
-    optionLocation=0;
-    overallRating = @"";
-    technicianName = @"";
-    txtTechnicianName.text = technicianName;
-    manufacturer = @"";
-    
-    //GradientView* myView = [[GradientView alloc] initWithFrame:CGRectMake(0, 0, 320, 100)];
-    currentOrientation = self.interfaceOrientation;
-    [self didPressLink];
-    txtTechnicianName.text = [owner uppercaseString];
-    
+//This UIPicker is what is used to select the crane type.  This method will set up the necessary attributes.
+- (void) setUpCraneDescriptionPicker
+{
     CraneDescriptionUIPicker = [[UIPickerView alloc] initWithFrame:CGRectMake(200, -10, 358, 100)];
     CraneDescriptionUIPicker.delegate = self;
     
@@ -176,13 +206,14 @@
     [CraneDescriptionUIPicker selectRow:1 inComponent:0 animated:YES];
     CraneDescriptionUIPicker.dataSource = self;
     [craneView addSubview:CraneDescriptionUIPicker];
-    
-    [self addTargetsToTextFields];
-    
-    [super viewDidLoad];
 }
 
-
+- (void) editInspectionViewController
+{
+    
+    inspectionViewController = [[UIStoryboard storyboardWithName:@"iPadMainStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"inspectionViewController"];
+    inspectionViewController.optionLocation = 0;
+}
 //Add the targets to all our textFields
 - (void) addTargetsToTextFields
 {
@@ -193,7 +224,6 @@
     [txtCustomerContact addTarget:self action:selector forControlEvents:UIControlEventEditingDidBegin];
     [txtJobNumber addTarget:self action:selector forControlEvents:UIControlEventEditingDidBegin];
     [txtAddress addTarget:self action:selector forControlEvents:UIControlEventEditingDidBegin];
-    [txtEquipDesc addTarget:self action:selector forControlEvents:UIControlEventEditingDidBegin];
     [txtCraneMfg addTarget:self action:selector forControlEvents:UIControlEventEditingDidBegin];
     [txtHoistMfg addTarget:self action:selector forControlEvents:UIControlEventEditingDidBegin];
     [txtHoistMdl addTarget:self action:selector forControlEvents:UIControlEventEditingDidBegin];
@@ -205,22 +235,36 @@
     [txtCraneDescription addTarget:self action:selector forControlEvents:UIControlEventEditingDidBegin];
     [txtTechnicianName addTarget:self action:selector forControlEvents:UIControlEventEditingDidBegin];
     
+    txtCustomerName.delegate = self;
+    txtCustomerContact.delegate = self;
+    txtJobNumber.delegate = self;
+    txtAddress.delegate = self;
+    txtCraneMfg.delegate = self;
+    txtHoistMfg.delegate = self;
+    txtHoistMdl.delegate = self;
+    txtCap.delegate = self;
+    txtCraneSrl.delegate = self;
+    txtHoistSrl.delegate = self;
+    txtEquipNum.delegate = self;
+    txtEmail.delegate = self;
+    txtCraneDescription.delegate = self;
+    txtTechnicianName.delegate = self;
+    
     [txtCustomerName setTag:0];
     [txtCustomerContact setTag:1];
     [txtJobNumber setTag:2];
     [txtAddress setTag:3];
-    [txtEquipDesc setTag:4];
-    [txtCraneMfg setTag:5];
-    [txtHoistMfg setTag:6];
-    [txtHoistMdl setTag:7];
-    [txtCap setTag:8];
-    [txtCraneSrl setTag:9];
-    [txtHoistSrl setTag:10];
-    [txtEquipNum setTag:11];
-    [txtCraneDescription setTag:12];
-    [txtEmail setTag:13];
-    [txtNotes setTag:14];
-    [txtTechnicianName setTag:15];
+    [txtCraneMfg setTag:4];
+    [txtHoistMfg setTag:5];
+    [txtHoistMdl setTag:6];
+    [txtCap setTag:7];
+    [txtCraneSrl setTag:8];
+    [txtHoistSrl setTag:9];
+    [txtEquipNum setTag:10];
+    [txtCraneDescription setTag:11];
+    [txtEmail setTag:12];
+    [txtNotes setTag:13];
+    [txtTechnicianName setTag:14];
 }
 
 #pragma mark - Dropbox Datastore Methods
@@ -243,19 +287,22 @@
     account = [[DBAccountManager sharedManager] linkedAccount];
     dataStore = [DBDatastore openDefaultStoreForAccount:account error:nil];
     table = [dataStore getTable:@"inspections"];
+    
+    //Set the account and datastore objects for the singleton object
+    [[InspectionManager sharedManager] setDropboxAccount:account];
+    [[InspectionManager sharedManager] setDataStore:dataStore];
+    [[InspectionManager sharedManager] setTable:table];
 }
 
 - (void)viewDidUnload
 {
     [self setTxtDate:nil];
-    [self setBtnSelectDate:nil];
     [self setNavBar:nil];
     [self setNavSubmit:nil];
     [self setTxtCustomerName:nil];
     [self setTxtCustomerContact:nil];
     [self setTxtJobNumber:nil];
     [self setTxtAddress:nil];
-    [self setTxtEquipDesc:nil];
     [self setTxtCraneMfg:nil];
     [self setTxtHoistMfg:nil];
     [self setTxtHoistMdl:nil];
@@ -288,7 +335,6 @@
     [self setCustomerInfoView:nil];
     [self setCraneInspectionView:nil];
     [self setCustomerInfoView:nil];
-    [self setCustomerInfoFullView:nil];
     [super viewDidUnload];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     self.datePicker = nil;
@@ -297,15 +343,15 @@
 #pragma mark TextField Methods
 
 //When you begin editing any text field this method is called in order to tell the compiler which text field is currently in focus
-//so that it is known where the screen needs to scroll to, to show the text box when it is being edited
+//so that it is known where the screen needs to scroll to, to show the text box when it is being edited also so that we can set the text to all capitalized.
 - (void) textFieldDidBeginEditing:(UITextField *)textField
 {
     if (textField.tag == 12)
     {
         CraneDescriptionUIPicker.hidden = FALSE;
         selectCraneButton.hidden = FALSE;
-    } 
-    activeField = textField;
+    }
+    textField.text = [textField.text capitalizedString];
 }
 //memmory management
 - (void) textFieldDidEndEditing:(UITextField *)textField {
@@ -364,7 +410,7 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     NSString * date = [[NSString alloc] init];
     [dateFormatter setDateStyle:NSDateFormatterShortStyle];
-    date = [dateFormatter stringFromDate:myDatePicker.date];
+    date = [dateFormatter stringFromDate:datePicker.date];
     txtDate.text = date;
     
     [txtDate resignFirstResponder];
@@ -397,20 +443,20 @@
 
 
 - (IBAction)buttonPressed {
-    NSDate *myDate = [myDatePicker date];
+    NSDate *myDate = [datePicker date];
     NSDateFormatter *format = [[NSDateFormatter alloc] init];
     [format setDateFormat:@"MM/dd/yyyy"];
     NSString *dateString = [format stringFromDate:myDate];
     NSLog (@"date: %@", dateString);
     txtDate.text = dateString;
-    [myDatePicker removeFromSuperview];
+    [datePicker removeFromSuperview];
     dateString = nil;
     myDate = nil;
     format = nil;
 }
 
 - (IBAction)datePressed:(id)sender {
-    btnSelectDate.hidden = NO;
+    //btnSelectDate.hidden = NO;
 }
 
 - (ValidationResults) validateSubmission : (BOOL) showResults
@@ -476,49 +522,7 @@
 
 
 
-- (void) saveInspectionToDatabase
-{
-    //Go through each condition in the current inspection and then write this information to the Datastore
-    for (Condition *condition in myItemListStore.myConditions)
-    {
-        static int i = 0;
-        NSString *isDeficient = @"NO";
-        NSString *isApplicable = @"NO";
-        
-        if (condition.deficient == YES)
-        {
-            isDeficient = @"YES";
-        }
-        if (condition.applicable == YES)
-        {
-            isApplicable = @"YES";
-        }
-        
-        //inserts the current condition in the row
-        pickerSelection =  [NSString stringWithFormat:@"%d", condition.pickerSelection];
-        
-        //Create the dictionary that contains all the information for this record.
-        NSDictionary *conditionDictionary = [[NSDictionary alloc] initWithObjectsAndKeys
-                                             :inspection.crane.hoistSrl, @"hoistsrl",
-                                             inspection.jobNumber, @"jobnumber",
-                                             inspection.crane.equipmentNumber, @"equipmentnumber",
-                                             (NSString *)[myPartsArray objectAtIndex:i], @"part",
-                                             (NSString *) isDeficient, @"deficient",
-                                             condition.deficientPart, @"deficientpart",
-                                             [condition.notes stringByReplacingOccurrencesOfString:@"\"" withString:@"\\"], @"notes",
-                                             pickerSelection, @"pickerselection",
-                                             isApplicable, @"isapplicable",
-                                             nil];
-        
-        
-        //Add this condition to the datastore
-        //Insert the inspection into the Dropbox Datastore
-        [InspectionBussiness insertToDatastoreTable:account DataStore:dataStore Table:table TableName:@"inspections" DictionaryToAdd:conditionDictionary];
-        
-        i++;
-    }
-}
-
+//Create the crane from the info that has been inserted into the text boxes.  This crane will then be passed to the InspectionViewController.
 - (Crane *) createCrane
 {
     Crane *crane = [[Crane alloc] init];
@@ -534,7 +538,7 @@
     
     return crane;
 }
-
+//Create the customer from the info that has been inserted into the text boxes.  This customer will then be passed to the InspectionViewController.
 - (Customer*) createCustomer
 {
     Customer *customer = [[Customer alloc] init];
@@ -546,7 +550,7 @@
     
     return customer;
 }
-//Create the inspection that will be read from
+//Create the inspection that will be read from.
 - (void) createInspection : (Crane *) crane
                  Customer : (Customer *) customer
 {
@@ -624,8 +628,6 @@
     }
 }
 -(IBAction)switchView {
-    [CustomerInfoFullView removeFromSuperview];
-    [self.view addSubview:CraneInspectionView];
 }
 
 -(void) viewWillAppear:(BOOL)animated
@@ -653,6 +655,7 @@
     //Gets all the parts that have to do with this specific crane
     myPartsArray = [parts myParts];
     
+    //Here we create all the necessary objects to store the customer and the crane information so that this can be saved to a singleton object and accessed from anywhere.
     Customer *customer = [InspectionBussiness createCustomer:txtCustomerName.text CustomerContact:txtCustomerContact.text CustomerAddress:txtAddress.text CustomerEmail:txtEmail.text];
     
     Crane *crane = [InspectionBussiness createCrane:txtHoistSrl.text CraneType:craneType EquipmentNumber:txtEquipNum.text CraneMfg:txtCraneMfg.text hoistMfg:txtHoistMfg.text CraneSrl:txtCraneSrl.text Capacity:txtCap.text HoistMdl:txtHoistMdl.text];
@@ -666,6 +669,11 @@
     
     inspectionViewController.craneType = inspection.crane.type;
     inspectionViewController.partsArray = myPartsArray;
+    
+    //Set the objects on the singleton object
+    [[InspectionManager sharedManager] setCrane:crane];
+    [[InspectionManager sharedManager] setCustomer:customer];
+    [[InspectionManager sharedManager] setInspection:inspection];
     
     [self.navigationController pushViewController:inspectionViewController animated:YES];
 //
@@ -726,7 +734,7 @@
         
         inspection.crane.description = craneType;
         
-        //Call the parts array, with the crane type changed to a normal NSString
+        //Gets the parts array, with the crane type changed to a normal NSString
         parts = [[Parts alloc] init : craneType];
 
         myPartsArray = [parts myParts];
@@ -740,11 +748,31 @@
         table = [dataStore getTable:@"crane"];
         [InspectionBussiness insertToDatastoreTable:account DataStore:dataStore Table:table TableName:@"crane" DictionaryToAdd:[self createCraneDictinoary]];
         
+        Customer *customer = [InspectionBussiness createCustomer:txtCustomerName.text CustomerContact:txtCustomerContact.text CustomerAddress:txtAddress.text CustomerEmail:txtEmail.text];
+        
+        Crane *crane = [InspectionBussiness createCrane:txtHoistSrl.text CraneType:craneType EquipmentNumber:txtEquipNum.text CraneMfg:txtCraneMfg.text hoistMfg:txtHoistMfg.text CraneSrl:txtCraneSrl.text Capacity:txtCap.text HoistMdl:txtHoistMdl.text];
+        
+        inspection.crane = crane;
+        inspection.customer = customer;
+        
+        inspection.jobNumber = txtJobNumber.text;
+        inspection.date = txtDate.text;
+        inspection.technicianName = txtTechnicianName.text;
+        
+        inspectionViewController.craneType = inspection.crane.type;
+        inspectionViewController.partsArray = myPartsArray;
+        
+        inspectionViewController.validated = YES;
+        
+        //Set the objects on the singleton object
+        [[InspectionManager sharedManager] setCrane:crane];
+        [[InspectionManager sharedManager] setCustomer:customer];
+        [[InspectionManager sharedManager] setInspection:inspection];
+        
         [self.navigationController pushViewController:inspectionViewController animated:YES];
         
         NSString *part = [delegate.partsDictionary objectForKey:inspection.crane.type][0];
         
-        //Send the current part so that we can fill the options array with the correct part.
         [inspectionViewController fillOptionArrays:part];
         [inspectionViewController changeLayout:optionLocation PartsArray:myPartsArray ItemListStore:myItemListStore];
         
@@ -856,7 +884,6 @@
     txtCraneMfg.text = @"";
     txtCraneSrl.text = @"";
     txtCustomerName.text = @"";
-    txtEquipDesc.text = @"";
     txtEquipNum.text = @"";
     txtHoistMdl.text = @"";
     txtHoistMfg.text = @"";
@@ -865,4 +892,5 @@
     txtCraneDescription.text = @"";
     lblCraneDesc.text = @"";
 }
+
 @end

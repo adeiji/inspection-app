@@ -576,7 +576,7 @@
 }
 
 //This text file that is written contains all the information that has been created: Customer Information; Crane Information; and Inspection Information
-- (void) writeTextFile: (ItemListConditionStorage *) myConditionList
++ (void)  writeReport : (ItemListConditionStorage *) myConditionList
            Inspection : (Inspection*) inspection
         OverallRating : (NSString*) overallRating
            PartsArray : (NSArray*) myPartsArray
@@ -733,7 +733,7 @@
     craneDescription = nil;
 }
 
-- (void) CreatePDFFile:(NSString *) printString
++ (void) CreatePDFFile:(NSString *) printString
                       :(NSString *) customerInfoResultsColumn
                       :(NSString *) craneDescriptionLeftColumn
                       :(NSString *) craneDescriptionResultsColumn
@@ -792,7 +792,7 @@
     conditionRatingString = nil;
 }
 
-+ (void) DisplayPDFWithOverallRating : (Inspection *) inspection
++ (UIDocumentInteractionController *) DisplayPDFWithOverallRating : (Inspection *) inspection
 {
     NSString *dateNoSlashes = [inspection.date stringByReplacingOccurrencesOfString:@"/" withString:@"-"];
     NSString* fileName = [NSString stringWithFormat:@"%@ %@ %@.PDF", inspection.customer.name, inspection.crane.hoistSrl, dateNoSlashes];
@@ -806,7 +806,8 @@
     NSString* pdfFileName = [path stringByAppendingPathComponent:fileName];
     
     UIDocumentInteractionController *pdfViewController = [UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:pdfFileName]];
-    pdfViewController.delegate = self;
+    
+    return pdfViewController;
     
     [pdfViewController presentPreviewAnimated:NO];
     
@@ -826,8 +827,6 @@
     NSString* pdfFileName = [path stringByAppendingPathComponent:fileName];
     
     UIDocumentInteractionController *pdfViewController = [UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:pdfFileName]];
-    
-    pdfViewController.delegate = self;
     
     [pdfViewController presentPreviewAnimated:NO];
     

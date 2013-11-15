@@ -18,25 +18,26 @@
 @class DBRestClient;
 
 @interface ViewController : UIViewController
-<UIPickerViewDelegate, UIPickerViewDataSource, MFMailComposeViewControllerDelegate, UIDocumentInteractionControllerDelegate, UIAlertViewDelegate, UIPickerViewAccessibilityDelegate, UITextFieldDelegate> { 
+<UIPickerViewDelegate, UIPickerViewDataSource, MFMailComposeViewControllerDelegate, UIDocumentInteractionControllerDelegate, UIAlertViewDelegate, UIPickerViewAccessibilityDelegate, UITextFieldDelegate> {
     sqlite3 *contactDb; 
     UIDocumentInteractionController *controller;
     UIDocumentInteractionController *secondController;
 }
 
+//Dropbox Objects
 @property (strong, nonatomic) DBAccount *account;
 @property (strong, nonatomic) DBDatastore *dataStore;
 @property (strong, nonatomic) DBTable *table;
-@property (weak, nonatomic) IBOutlet UIButton *btnSelectDate;
-@property (strong, nonatomic) IBOutlet UIDatePicker *datePicker;
+
+
 @property (weak, nonatomic) IBOutlet UITextField *txtDate;
-@property (strong, nonatomic) IBOutlet UIDatePicker *myDatePicker;
+@property (strong, nonatomic) UIDatePicker *datePicker;
 @property int optionLocation;
 @property (weak, nonatomic) IBOutlet UINavigationBar *navBar;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *navSubmit;
 @property (strong, nonatomic) IBOutlet GradientView *craneView;
 
-//THESE ARE THE VIEW OUTLETS
+
 @property (strong, nonatomic)  InspectionViewController* inspectionViewController;
 @property (strong, nonatomic) IBOutlet UIScrollView *CustomerInfoScrollView;
 @property (strong, nonatomic) IBOutlet UIView *CraneInspectionView;
@@ -49,7 +50,6 @@
 @property (weak, nonatomic) IBOutlet TextField *txtCustomerContact;
 @property (weak, nonatomic) IBOutlet TextField *txtJobNumber;
 @property (weak, nonatomic) IBOutlet TextField *txtAddress;
-@property (weak, nonatomic) IBOutlet TextField *txtEquipDesc;
 @property (weak, nonatomic) IBOutlet TextField *txtCraneMfg;
 @property (weak, nonatomic) IBOutlet TextField *txtHoistMfg;
 @property (weak, nonatomic) IBOutlet TextField *txtHoistMdl;
@@ -57,6 +57,8 @@
 @property (weak, nonatomic) IBOutlet TextField *txtCraneSrl;
 @property (weak, nonatomic) IBOutlet TextField *txtHoistSrl;
 @property (weak, nonatomic) IBOutlet TextField *txtEquipNum;
+
+
 @property (weak, nonatomic) IBOutlet UITextView *txtNotes;
 @property (weak, nonatomic) IBOutlet TextField *txtEmail;
 @property (strong, nonatomic) NSString *customerName;

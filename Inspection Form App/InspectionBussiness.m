@@ -7,7 +7,7 @@
 //
 
 #import "InspectionBussiness.h"
-
+#import "InspectionManager.h"
 
 @implementation InspectionBussiness
 
@@ -27,7 +27,6 @@
                       TableName : (NSString *) tableName
                 DictionaryToAdd : (NSDictionary *) dictionaryToAdd
 {
-        
         //Add this condition to the datastore
         [DataLayer insertToDatastoreTable:dictionaryToAdd TableName:tableName DBAccount:account DBDatastore:dataStore DBTable:table];
 }

@@ -36,6 +36,8 @@
 		8BF09E74153A53E200E1BCB3 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BF09E73153A53E200E1BCB3 /* Security.framework */; };
 		8BF10A9C152FB93D00DC5F05 /* TextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BF10A9B152FB93D00DC5F05 /* TextField.m */; };
 		8BF3877015239E1200C3F368 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BF3876F15239E1200C3F368 /* MessageUI.framework */; };
+		CE147B661835C2EA005CC483 /* Part.m in Sources */ = {isa = PBXBuildFile; fileRef = CE147B651835C2EA005CC483 /* Part.m */; };
+		CE147B691836844C005CC483 /* InspectionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CE147B681836844C005CC483 /* InspectionManager.m */; };
 		CE27C1C41821BAB300EDDFC1 /* bson.c in Sources */ = {isa = PBXBuildFile; fileRef = CE27C1B71821BA7600EDDFC1 /* bson.c */; };
 		CE27C1C51821BAB300EDDFC1 /* encoding.c in Sources */ = {isa = PBXBuildFile; fileRef = CE27C1B91821BA7600EDDFC1 /* encoding.c */; };
 		CE27C1C61821BAB300EDDFC1 /* env.c in Sources */ = {isa = PBXBuildFile; fileRef = CE27C1BB1821BA7600EDDFC1 /* env.c */; };
@@ -148,6 +150,11 @@
 		8BF10A9A152FB93D00DC5F05 /* TextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextField.h; sourceTree = "<group>"; };
 		8BF10A9B152FB93D00DC5F05 /* TextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextField.m; sourceTree = "<group>"; };
 		8BF3876F15239E1200C3F368 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		CE147B631835C263005CC483 /* PartSelectionDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PartSelectionDelegate.h; sourceTree = "<group>"; };
+		CE147B641835C2EA005CC483 /* Part.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Part.h; sourceTree = "<group>"; };
+		CE147B651835C2EA005CC483 /* Part.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Part.m; sourceTree = "<group>"; };
+		CE147B671836844C005CC483 /* InspectionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectionManager.h; sourceTree = "<group>"; };
+		CE147B681836844C005CC483 /* InspectionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InspectionManager.m; sourceTree = "<group>"; };
 		CE27C1B51821BA7600EDDFC1 /* bcon.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = bcon.c; sourceTree = "<group>"; };
 		CE27C1B61821BA7600EDDFC1 /* bcon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = bcon.h; sourceTree = "<group>"; };
 		CE27C1B71821BA7600EDDFC1 /* bson.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = bson.c; sourceTree = "<group>"; };
@@ -307,6 +314,9 @@
 		8BC58443150ABD87000AC695 = {
 			isa = PBXGroup;
 			children = (
+				CE147B671836844C005CC483 /* InspectionManager.h */,
+				CE147B681836844C005CC483 /* InspectionManager.m */,
+				CE147B631835C263005CC483 /* PartSelectionDelegate.h */,
 				CE40D38D18087F290080E9BD /* Dropbox.framework */,
 				8B6BA17C1708BF1B00E08D9D /* T1Autograph */,
 				8BF09E73153A53E200E1BCB3 /* Security.framework */,
@@ -355,7 +365,7 @@
 				CE9775D81718C2660037967E /* logo.jpg */,
 				8BC7D9D21522ACE000D1A863 /* QuartzCore.framework */,
 				8BDF9998150C209A0069C35B /* UICustomSwitch.h */,
-				CE486AD6180CB1A200B1B953 /* App Delegate */,
+				CE486AD6180CB1A200B1B953 /* Delegates */,
 				CE486AD8180CB1B300B1B953 /* Text Field */,
 				CE486AD7180CB1AD00B1B953 /* Crane */,
 				CE40D39B180894380080E9BD /* PDF Generator */,
@@ -580,6 +590,8 @@
 			children = (
 				8B0787C515113796006857A8 /* Parts.h */,
 				8B0787C615113796006857A8 /* Parts.m */,
+				CE147B641835C2EA005CC483 /* Part.h */,
+				CE147B651835C2EA005CC483 /* Part.m */,
 			);
 			name = Parts;
 			sourceTree = "<group>";
@@ -638,13 +650,13 @@
 			name = "View Controller";
 			sourceTree = "<group>";
 		};
-		CE486AD6180CB1A200B1B953 /* App Delegate */ = {
+		CE486AD6180CB1A200B1B953 /* Delegates */ = {
 			isa = PBXGroup;
 			children = (
 				8BC58461150ABD87000AC695 /* AppDelegate.h */,
 				8BC58462150ABD87000AC695 /* AppDelegate.m */,
 			);
-			name = "App Delegate";
+			name = Delegates;
 			sourceTree = "<group>";
 		};
 		CE486AD7180CB1AD00B1B953 /* Crane */ = {
@@ -824,6 +836,7 @@
 			files = (
 				CE27C2001821BAEB00EDDFC1 /* BSONDocument.m in Sources */,
 				CE27C20E1821BAEB00EDDFC1 /* MongoFindRequest.m in Sources */,
+				CE147B661835C2EA005CC483 /* Part.m in Sources */,
 				CE27C1C41821BAB300EDDFC1 /* bson.c in Sources */,
 				CE27C2011821BAEB00EDDFC1 /* BSONEncoder.m in Sources */,
 				CE27C2071821BAEB00EDDFC1 /* NSString+BSONAdditions.m in Sources */,
@@ -853,6 +866,7 @@
 				CE27C2051821BAEB00EDDFC1 /* NSDictionary+BSONAdditions.m in Sources */,
 				8B544612150F0C3E007E1CA9 /* GradientView.m in Sources */,
 				8B0787C415113448006857A8 /* TableViewController.m in Sources */,
+				CE147B691836844C005CC483 /* InspectionManager.m in Sources */,
 				CE27C1C71821BAB300EDDFC1 /* md5.c in Sources */,
 				CE27C1C81821BAB300EDDFC1 /* mongo.c in Sources */,
 				8B0787C715113796006857A8 /* Parts.m in Sources */,

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PartSelectionDelegate.h"
 
 @interface MasterViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate>
 
@@ -15,5 +16,7 @@ typedef enum {
     PART_NAME,
     OPTIONS
 } TableLevel;
+
+@property (nonatomic, assign) id<PartSelectionDelegate> delegate;
 
 @end

@@ -10,6 +10,7 @@
 #import "ViewController.h"
 #import <Dropbox/Dropbox.h>
 #import "MongoDbConnection.h"
+#import "MasterViewController.h"
 
 @interface AppDelegate ()
 
@@ -39,8 +40,8 @@
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
         UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
         UINavigationController *navigationController = [splitViewController.viewControllers lastObject];
-        splitViewController.delegate = (id)navigationController.topViewController;
-
+        
+        splitViewController.delegate = (id)navigationController.topViewController;                
     }
     
     [self getCriteriaFromMongoDb];

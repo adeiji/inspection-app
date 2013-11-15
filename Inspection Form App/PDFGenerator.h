@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "Inspection.h"
 
-@interface PDFGenerator : NSObject
+@interface PDFGenerator : NSObject <UIDocumentInteractionControllerDelegate>
 
 + (void) writeCertificateTextFile : (NSString*) testLoads
              ProofLoadDescription : (NSString*) proofLoadDescription
@@ -17,5 +17,11 @@
                   LoadRatingsText : (NSString*) loadRatingsText
                        Inspection : (Inspection *) inspection;
 
-+ (void) DisplayPDFWithOverallRating : (Inspection *) inspection;
+//This text file that is written contains all the information that has been created: Customer Information; Crane Information; and Inspection Information
++ (void)  writeReport : (ItemListConditionStorage *) myConditionList
+           Inspection : (Inspection*) inspection
+        OverallRating : (NSString*) overallRating
+           PartsArray : (NSArray*) myPartsArray;
+
++ (UIDocumentInteractionController *) DisplayPDFWithOverallRating : (Inspection *) inspection;
 @end

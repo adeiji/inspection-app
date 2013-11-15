@@ -13,16 +13,17 @@
 #import "Crane.h"
 #import "PDFGenerator.h"
 #import "AppDelegate.h"
+#import "Part.h"
+#import "InspectionManager.h"
+#import "InspectionBussiness.h"
 
 @interface InspectionViewController ()
 {
     int timesShown;
     int buttonIndex;
-    int optionLocation;
     
     BOOL pageSubmitAlertView;
     BOOL inspectionComplete;
-    BOOL validated;
     BOOL loadRatings;
     BOOL remarksLimitations;
     BOOL finished;
@@ -51,6 +52,8 @@
 @synthesize createCertificateButton;
 @synthesize craneType = __craneType;
 @synthesize partsArray = __partsArray;
+@synthesize optionLocation = __optionLocation;
+@synthesize validated = __validated;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -81,6 +84,7 @@
     [self.view addGestureRecognizer:gestureRecognizerLeft];
     
     [self initiateParts];
+    inspection = [InspectionManager sharedManager].inspection;
 }
 
 
@@ -112,7 +116,7 @@
     
     txtNotes.text = myCondition.notes;
     
-    NSString* myPart = [myPartsArray objectAtIndex:optionLocation];
+    NSString* myPart = [myPartsArray objectAtIndex:__optionLocation];
     NSString* myPartNumber = [NSString stringWithFormat:@"Part #%d", myOptionLocation + 1];
     
     [lblPart setText:myPart];
@@ -196,12 +200,19 @@
 //Create the objects necessary to view the parts list
 - (void) initiateParts
 {
-    [self fillOptionArrays:__partsArray[0]];
+    //We need to get the parts that are unique to this particular crane.
     Parts *parts = [[Parts alloc] init:__craneType];
+
+    //Get the actual array itself from the parts object
     __partsArray = [parts myParts];
+    
+    //Get the options that are unique to this particular part.
+    [self fillOptionArrays:__partsArray[__optionLocation]];
+    
+    //Create the itemListStore which will store all the conditions as they are set.
     itemListStore = [[ItemListConditionStorage alloc] init:parts.myParts];
-    optionLocation = 0;
-    [self changeLayout:optionLocation PartsArray:__partsArray ItemListStore:itemListStore];
+    [self changeLayout:__optionLocation PartsArray:__partsArray ItemListStore:itemListStore];
+    
     //Send the array that contains the particular defficiencies unique to this part
     [self changePickerArray:defficiencyPickerArray];
     inspectionComplete = NO;
@@ -209,7 +220,7 @@
 //Check to see if all the values have been validated on the home page.  If so then we continue, if not, we return to the home page.
 - (BOOL) validate
 {
-    if (validated == YES)
+    if (__validated == YES)
     {
         return YES;
     }
@@ -223,7 +234,11 @@
 //On the deficiency information pages, when you press the submit button
 - (IBAction)submitPressed:(id)sender {
 
+    //If all the information is correctly inputed on the page, then we simply save the information.  Otherwise we go back so that the user can change whatever is necessary.
     if ([self validate]) {
+        
+        inspection.itemList = itemListStore;
+        
         //if all the fields entered pass then, the the customer information is inserted and all the data is saved into a table
         NSUInteger selectedRow = [defficiencyPicker selectedRowInComponent:0];
         NSString *myDeficientPart = [[defficiencyPicker delegate]
@@ -248,30 +263,74 @@
                        : myDeficientPart:applicableSwitch.on];
         
         
-        //save the current condition so that if the user goes to the next part and back, the correct information will be displayed
+        //Get all the records with this hoistSrl and this specific date
+        NSDictionary *query = @{ @"hoistSrl" : inspection.crane.hoistSrl, @"date" : inspection.date };
         
-//        Customer* customer = [self createCustomer];
-//        Crane* crane = [self createCrane];
-//        
-//        //Create the inspection with the crane and customer
-//        [self createInspection:crane Customer:customer];
-//        
-//        [self InsertCustomerIntoTable];     //save the customer to the table
-//        [self InsertCraneIntoTable];        //save the crane into the table
-//        
-//        //Get all the records with this hoistSrl and this specific date
-//        NSDictionary *query = @{ @"hoistSrl" : inspection.crane.hoistSrl, @"date" : inspection.date };
-//        
-//        [self saveInspectionToDatabase];
-//        
-//        
-//        inspectionComplete = YES;
-//        myDeficientPart = nil;
-//        loadRatingsText = @"";
-//        proofLoadDescription = @"";
-//        testLoads = @"";
-//        remarksLimitationsImposed = @"";
+        [self saveInspectionToDatabase];
+        
+        inspectionComplete = YES;
+        myDeficientPart = nil;
+        loadRatings = @"";
+        proofLoadDescription = @"";
+        testLoad = @"";
+        remarksLimitations = @"";
+        
+        [PDFGenerator writeReport:inspection.itemList Inspection:inspection OverallRating:overallRating PartsArray:__partsArray];
+        UIDocumentInteractionController *pdfViewController = [PDFGenerator DisplayPDFWithOverallRating:inspection];
+        pdfViewController.delegate = self;
+        [pdfViewController presentPreviewAnimated:NO];
     }
+}
+
+- (void) saveInspectionToDatabase
+{
+    DBAccount *account = [InspectionManager sharedManager].dropboxAccount;
+    DBDatastore *dataStore = [InspectionManager sharedManager].dataStore;
+    DBTable *table = [InspectionManager sharedManager].table;
+    
+    //this is the counter for the partsArray object index
+    int i = 0;
+    //Go through each condition in the current inspection and then write this information to the Datastore
+    for (Condition *condition in inspection.itemList.myConditions)
+    {
+        
+        NSString *isDeficient = @"NO";
+        NSString *isApplicable = @"NO";
+        
+        if (condition.deficient == YES)
+        {
+            isDeficient = @"YES";
+        }
+        if (condition.applicable == YES)
+        {
+            isApplicable = @"YES";
+        }
+        
+        //inserts the current condition in the row
+        int pickerSelection =  [NSString stringWithFormat:@"%d", (int) condition.pickerSelection];
+        
+        //Create the dictionary that contains all the information for this record.
+        NSDictionary *conditionDictionary = [[NSDictionary alloc] initWithObjectsAndKeys
+                                             :inspection.crane.hoistSrl, @"hoistsrl",
+                                             inspection.jobNumber, @"jobnumber",
+                                             inspection.crane.equipmentNumber, @"equipmentnumber",
+                                             (NSString *)[__partsArray objectAtIndex:i], @"part",
+                                             (NSString *) isDeficient, @"deficient",
+                                             condition.deficientPart, @"deficientpart",
+                                             [condition.notes stringByReplacingOccurrencesOfString:@"\"" withString:@"\\"], @"notes",
+                                             pickerSelection, @"pickerselection",
+                                             isApplicable, @"isapplicable",
+                                             nil];
+        
+        
+        //Add this condition to the datastore
+        //Insert the inspection into the Dropbox Datastore
+        [InspectionBussiness insertToDatastoreTable:account DataStore:dataStore Table:table TableName:@"inspections" DictionaryToAdd:conditionDictionary];
+        
+        i++;
+    }
+    
+    [dataStore sync:nil];
 }
 
 - (IBAction)gotoCustomerInfo:(id)sender {
@@ -343,7 +402,7 @@
                     {
                         txtNotes.text = [NSString stringWithFormat:@"%@ %@", txtNotes.text, textField.text];
                     }
-                    else if (timesShown==0&&optionLocation==22)
+                    else if (timesShown==0&&__optionLocation==22)
                     {
                         timesShown++;
                         txtNotes.text = [NSString stringWithFormat:@"Length: %@ - %@",textField.text, txtNotes.text];
@@ -352,7 +411,7 @@
                         [alert show];
                         pageSubmitAlertView = NO;
                     }
-                    else if (timesShown==1&&optionLocation==22)
+                    else if (timesShown==1&&__optionLocation==22)
                     {
                         timesShown++;
                         txtNotes.text = [NSString stringWithFormat:@"Size: %@ - %@",textField.text, txtNotes.text];
@@ -361,7 +420,7 @@
                         [alert show];
                         pageSubmitAlertView = NO;
                     }
-                    else if (timesShown==2&&optionLocation==22)
+                    else if (timesShown==2&&__optionLocation==22)
                     {
                         timesShown++;
                         txtNotes.text = [NSString stringWithFormat:@"Fittings: %@ - %@",textField.text, txtNotes.text];
@@ -490,25 +549,25 @@
 }
 
 - (IBAction)nextPressed {
-    if (optionLocation < [__partsArray count] - 1) {
+    if (__optionLocation < [__partsArray count] - 1) {
         NSUInteger selectedRow = [defficiencyPicker selectedRowInComponent:0];
         NSString *myDeficientPart = [[defficiencyPicker delegate] pickerView: defficiencyPicker titleForRow:selectedRow forComponent:0];
         [self saveInfo:txtNotes.text :defficiencySwitch.on:[defficiencyPicker selectedRowInComponent:0]:myDeficientPart:applicableSwitch.on];
-        optionLocation = optionLocation + 1;
-        [self fillOptionArrays:__partsArray[optionLocation]];
+        __optionLocation = __optionLocation + 1;
+        [self fillOptionArrays:__partsArray[__optionLocation]];
         [self changePickerArray:defficiencyPickerArray];
-        [self changeLayout:optionLocation PartsArray:__partsArray ItemListStore:itemListStore];
+        [self changeLayout:__optionLocation PartsArray:__partsArray ItemListStore:itemListStore];
     }
 }
 - (IBAction)previousPressed {
-    if (optionLocation > 0) {
+    if (__optionLocation > 0) {
         NSUInteger selectedRow = [defficiencyPicker selectedRowInComponent:0];
         NSString *myDeficientPart = [[defficiencyPicker delegate] pickerView:defficiencyPicker titleForRow:selectedRow forComponent:0];
         [self saveInfo:txtNotes.text :defficiencySwitch.on:[defficiencyPicker selectedRowInComponent:0]:myDeficientPart:applicableSwitch.on];
-        optionLocation = optionLocation - 1;
-        [self fillOptionArrays:__partsArray[optionLocation]];
+        __optionLocation = __optionLocation - 1;
+        [self fillOptionArrays:__partsArray[__optionLocation]];
         [self changePickerArray:defficiencyPickerArray];
-        [self changeLayout:optionLocation PartsArray:__partsArray ItemListStore:itemListStore];
+        [self changeLayout:__optionLocation PartsArray:__partsArray ItemListStore:itemListStore];
     }
 }
 
@@ -522,7 +581,7 @@
 {
     Condition *myCondition = [[Condition alloc] initWithParameters:myNotes Defficiency:myDeficient PickerSelection:mySelection DeficientPart:myDeficientPart Applicable:myApplicable];
 
-    [itemListStore setCondition:optionLocation Condition : myCondition];
+    [itemListStore setCondition:__optionLocation Condition : myCondition];
     myCondition = nil;
 }
 
@@ -542,6 +601,43 @@
 - (CGFloat) pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component
 {
     return 300.0f;
+}
+
+- (void) selectedOption : (NSString *) selection
+{
+    //If the item is contained in the picker, than we go straight to that in the picker.
+    if ([defficiencyPickerArray containsObject:selection])
+    {
+        [defficiencyPicker selectRow:[defficiencyPickerArray indexOfObject:selection] inComponent:0 animated:YES];
+    }
+}
+
+- (void) selectedPart:(Part *)currentPart
+{
+    //If the view controller has already been loaded then we continue to save the information on the current page.
+    if (txtNotes != nil)
+    {
+        NSUInteger selectedRow = [defficiencyPicker selectedRowInComponent:0];
+        NSString *myDeficientPart = [[defficiencyPicker delegate] pickerView: defficiencyPicker titleForRow:selectedRow forComponent:0];
+        [self saveInfo:txtNotes.text :defficiencySwitch.on:[defficiencyPicker selectedRowInComponent:0]:myDeficientPart:applicableSwitch.on];
+        
+        //We need to get the parts that are unique to this particular crane.
+        Parts *parts = [[Parts alloc] init:__craneType];
+        
+        //Get the actual array itself from the parts object
+        __partsArray = [parts myParts];
+        
+        //Get the options that are unique to this particular part.
+        [self fillOptionArrays:__partsArray[__optionLocation]];
+        
+        [self changePickerArray:defficiencyPickerArray];
+        [self changeLayout:__optionLocation PartsArray:__partsArray ItemListStore:itemListStore];
+    }
+}
+//This method gets the view controller that will display the UIDocumentInteractionController preview
+- (UIViewController *) documentInteractionControllerViewControllerForPreview:(UIDocumentInteractionController *)controller
+{
+    return self;
 }
 
 @end

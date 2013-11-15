@@ -11,6 +11,8 @@
 #import "BSONParser.h"
 #import "OrderedDictionary.h"
 #import "AppDelegate.h"
+#import "Part.h"
+
 
 @interface MasterViewController ()
 {
@@ -23,6 +25,8 @@
 @end
 
 @implementation MasterViewController
+
+@synthesize delegate = __delegate;
 
 #define PART_NAME_COL @"partName"
 #define TYPE_COL @"type"
@@ -44,6 +48,7 @@
         level = currentLevel;
         searchValue = mySearchValue;
     }
+    
     return self;
 }
 
@@ -143,13 +148,49 @@
 {
     if (level == PART_NAME)
     {
+        //Create the Master View controller that we will push onto the view controller stack.
         MasterViewController *mvc = [[MasterViewController alloc] initWithStyle:nil Level:OPTIONS SearchValue:[tableData objectAtIndex:indexPath.row]];
+        //Get a reference to the current displayed view controller.
         
+        UINavigationController *navigationController = [self.splitViewController.viewControllers objectAtIndex:1] ;
+        ViewController *vc = [navigationController.viewControllers objectAtIndex:0];
+        //Push the InspectionViewController ontop of the stack.
+        
+        if (![vc.navigationController.viewControllers containsObject:vc.inspectionViewController])
+        {
+            [vc.navigationController pushViewController:vc.inspectionViewController animated:YES];
+        }
+        //Set the delegate to the InspectionViewController so that all changes are read by the inspection view controlller.
+        __delegate = vc.inspectionViewController;
         [self.navigationController pushViewController:mvc animated:YES];
+        if (__delegate)
+        {
+            Part *part = [[Part alloc] init];
+            [part setPart:[tableData objectAtIndex:indexPath.row]];
+            
+            vc.inspectionViewController.craneType = searchValue;
+            vc.inspectionViewController.optionLocation = indexPath.row;
+            [__delegate selectedPart:[tableData objectAtIndex:indexPath.row]];
+            
+            vc = nil;
+        }
     }
     else if (level == OPTIONS)
     {
-        
+        UINavigationController *navigationController = [self.splitViewController.viewControllers objectAtIndex:1] ;
+        ViewController *vc = [navigationController.viewControllers objectAtIndex:0];
+
+        //Push the InspectionViewController ontop of the stack.
+        if (![vc.navigationController.viewControllers containsObject:vc.inspectionViewController])
+        {
+            [vc.navigationController pushViewController:vc.inspectionViewController animated:YES];
+        }
+        //Set the delegate to the InspectionViewController so that all changes are read by the inspection view controlller.
+        __delegate = vc.inspectionViewController;
+        if (__delegate)
+        {
+            [__delegate selectedOption:[tableData objectAtIndex:indexPath.row]];
+        }
     }
     else
     {

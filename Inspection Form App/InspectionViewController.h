@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "Condition.h"
 #import "ItemListConditionStorage.h"
+#import "PartSelectionDelegate.h"
 
-@interface InspectionViewController : UIViewController <UIPickerViewDelegate, UIPickerViewDataSource>
+@interface InspectionViewController : UIViewController <UIPickerViewDelegate, UIPickerViewDataSource, PartSelectionDelegate, UIDocumentInteractionControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet UILabel *lblPartNumber;
 @property (strong, nonatomic) IBOutlet UILabel *lblPart;
@@ -21,9 +22,10 @@
 @property (strong, nonatomic) IBOutlet NSArray *pickerData;
 @property (strong, nonatomic) NSString *craneType;
 @property (strong, nonatomic) NSArray *partsArray;
+@property BOOL validated;
 
 @property (strong, nonatomic) IBOutlet UIButton* createCertificateButton;
-
+@property int optionLocation;
 typedef enum {
     FINAL_SUBMISSION_APPROVED,
 } CurrentState;
