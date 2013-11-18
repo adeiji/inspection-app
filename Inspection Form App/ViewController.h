@@ -29,6 +29,7 @@
 @property (strong, nonatomic) DBDatastore *dataStore;
 @property (strong, nonatomic) DBTable *table;
 
+- (IBAction)test:(id)sender;
 
 @property (weak, nonatomic) IBOutlet UITextField *txtDate;
 @property (strong, nonatomic) UIDatePicker *datePicker;

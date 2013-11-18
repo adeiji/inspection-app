@@ -86,9 +86,11 @@
 		CE492A1F183175A1002A6197 /* BSONParser.m in Sources */ = {isa = PBXBuildFile; fileRef = CE492A1E183175A1002A6197 /* BSONParser.m */; };
 		CE6F9359182416EA008E1DDC /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE27C21F18234FC100EDDFC1 /* XCTest.framework */; };
 		CE798DB7180F369600C2E5A0 /* InspectionBussiness.m in Sources */ = {isa = PBXBuildFile; fileRef = CE798DB6180F369600C2E5A0 /* InspectionBussiness.m */; };
+		CE8028AD1837337C00B40DCB /* iPhoneStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE8028AC1837337C00B40DCB /* iPhoneStoryboard.storyboard */; };
 		CE9775D91718C2660037967E /* logo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE9775D81718C2660037967E /* logo.jpg */; };
 		CE9A27381716A63200FE3D32 /* ipadAppLogo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE9A27371716A63200FE3D32 /* ipadAppLogo.jpg */; };
 		CE9A273C1716A70E00FE3D32 /* titlePageLogo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE9A273B1716A70E00FE3D32 /* titlePageLogo.jpg */; };
+		CEFD6D2D1839575E001764E9 /* CraneView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEFD6D2C1839575E001764E9 /* CraneView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -251,9 +253,11 @@
 		CE6F935A18241825008E1DDC /* Inspection_Form_AppTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Inspection_Form_AppTests.h; sourceTree = "<group>"; };
 		CE798DB5180F369600C2E5A0 /* InspectionBussiness.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectionBussiness.h; sourceTree = "<group>"; };
 		CE798DB6180F369600C2E5A0 /* InspectionBussiness.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InspectionBussiness.m; sourceTree = "<group>"; };
+		CE8028AC1837337C00B40DCB /* iPhoneStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = iPhoneStoryboard.storyboard; path = ../iPhoneStoryboard.storyboard; sourceTree = "<group>"; };
 		CE9775D81718C2660037967E /* logo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = logo.jpg; sourceTree = "<group>"; };
 		CE9A27371716A63200FE3D32 /* ipadAppLogo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ipadAppLogo.jpg; sourceTree = "<group>"; };
 		CE9A273B1716A70E00FE3D32 /* titlePageLogo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = titlePageLogo.jpg; sourceTree = "<group>"; };
+		CEFD6D2C1839575E001764E9 /* CraneView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CraneView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -689,6 +693,8 @@
 		CE486ADA180CB1DE00B1B953 /* UI Files */ = {
 			isa = PBXGroup;
 			children = (
+				CE8028AC1837337C00B40DCB /* iPhoneStoryboard.storyboard */,
+				CEFD6D2C1839575E001764E9 /* CraneView.xib */,
 				CE3992741805FD08003AE30B /* iPadMainStoryboard.storyboard */,
 				8BC58467150ABD87000AC695 /* ViewController.xib */,
 			);
@@ -768,6 +774,11 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0430;
+				TargetAttributes = {
+					8BC5844D150ABD87000AC695 = {
+						DevelopmentTeam = HJPTQ3N75W;
+					};
+				};
 			};
 			buildConfigurationList = 8BC58448150ABD87000AC695 /* Build configuration list for PBXProject "Inspection Form App" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -794,11 +805,13 @@
 			files = (
 				8BC5845D150ABD87000AC695 /* InfoPlist.strings in Resources */,
 				8BC58469150ABD87000AC695 /* ViewController.xib in Resources */,
+				CE8028AD1837337C00B40DCB /* iPhoneStoryboard.storyboard in Resources */,
 				CE3992751805FD08003AE30B /* iPadMainStoryboard.storyboard in Resources */,
 				8B6BA1831708BF1B00E08D9D /* autograph_x.png in Resources */,
 				8B6BA1841708BF1B00E08D9D /* t1_logo.png in Resources */,
 				CE9A27381716A63200FE3D32 /* ipadAppLogo.jpg in Resources */,
 				CE9A273C1716A70E00FE3D32 /* titlePageLogo.jpg in Resources */,
+				CEFD6D2D1839575E001764E9 /* CraneView.xib in Resources */,
 				CE9775D91718C2660037967E /* logo.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1022,6 +1035,7 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1052,6 +1066,7 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
 			};

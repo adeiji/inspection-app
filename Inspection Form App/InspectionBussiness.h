@@ -16,6 +16,10 @@
 
 @interface InspectionBussiness : NSObject
 
++ (void) removeFromDatastoreTable : (DBAccount *) account
+                            Query : (NSDictionary *) query
+                        Datastore : (DBDatastore *) dataStore
+                            Table : (DBTable *) table;
 
 + (void) insertToDatastoreTable : (DBAccount*) account
                       DataStore : (DBDatastore *) dataStore

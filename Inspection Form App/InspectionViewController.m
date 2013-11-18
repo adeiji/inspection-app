@@ -85,6 +85,8 @@
     
     [self initiateParts];
     inspection = [InspectionManager sharedManager].inspection;
+    
+    //[self.view setTranslatesAutoresizingMaskIntoConstraints:NO];
 }
 
 
@@ -94,11 +96,22 @@
     if (sender.direction == UISwipeGestureRecognizerDirectionLeft)
     {
         [self nextPressed];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"SwipeDetected"
+                                                            object:self
+                                                          userInfo:@{    @"part"        : __partsArray[__optionLocation],
+                                                                         @"optionLocation"   : [NSNumber numberWithInt:__optionLocation] }];
     }
     else
     {
         [self previousPressed];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"SwipeDetected"
+                                                            object:self
+                                                          userInfo:@{    @"part"        : __partsArray[__optionLocation],
+                                                                         @"optionLocation"   : [NSNumber numberWithInt:__optionLocation] }];
     }
+    
+    
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -205,6 +218,7 @@
 
     //Get the actual array itself from the parts object
     __partsArray = [parts myParts];
+    
     
     //Get the options that are unique to this particular part.
     [self fillOptionArrays:__partsArray[__optionLocation]];

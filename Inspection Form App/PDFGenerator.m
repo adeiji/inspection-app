@@ -809,8 +809,6 @@
     
     return pdfViewController;
     
-    [pdfViewController presentPreviewAnimated:NO];
-    
     //[self writeCertificateTextFile];
 }
 

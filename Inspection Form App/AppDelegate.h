@@ -18,5 +18,6 @@
 @property (strong, nonatomic) NSMutableDictionary *partsDictionary;
 @property (strong, nonatomic) NSMutableDictionary *optionsDictionary;
 @property (strong, nonatomic) NSMutableArray *craneTypes;
+@property (strong, nonatomic) NSArray *pastCranes;
 
 @end

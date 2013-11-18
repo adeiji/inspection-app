@@ -110,6 +110,7 @@
 
 - (void)viewDidLoad {
     
+    
     [self editInspectionViewController];
 
     inspection = [[Inspection alloc] init];
@@ -128,6 +129,8 @@
                                                object:nil];
     
     delegate = [[UIApplication sharedApplication] delegate];
+    
+
     
     craneDescriptionsArray = delegate.craneTypes;
     owner = @"";
@@ -163,16 +166,17 @@
     [self resetVariables];
     
     currentOrientation = self.interfaceOrientation;
-    [self didPressLink];
     
     txtTechnicianName.text = [owner uppercaseString];
     
     [self setUpCraneDescriptionPicker];
     [super viewDidLoad];
     
+    //[self didPressLink];
+    
     [self addTargetsToTextFields];
     
-    [self createDatastoreTable];
+    //[self createDatastoreTable];
 }
 //Every time the date selection changes it will also change in the text box
 - (void) dateSelectionChanged:(id)sender
@@ -210,8 +214,16 @@
 
 - (void) editInspectionViewController
 {
+    NSString* deviceType = [UIDevice currentDevice].model;
+    if (![[UIDevice currentDevice].model isEqualToString:@"iPad"])
+    {
+        inspectionViewController = [[UIStoryboard storyboardWithName:@"iPhoneStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"inspectionViewController"];
+    }
+    else
+    {
+        inspectionViewController = [[UIStoryboard storyboardWithName:@"iPadMainStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"inspectionViewController"];
+    }
     
-    inspectionViewController = [[UIStoryboard storyboardWithName:@"iPadMainStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"inspectionViewController"];
     inspectionViewController.optionLocation = 0;
 }
 //Add the targets to all our textFields
@@ -284,6 +296,7 @@
 //If there is not a Dropbox Datastore Table already created, we create it, as well as the data store.
 - (void) createDatastoreTable
 {
+    
     account = [[DBAccountManager sharedManager] linkedAccount];
     dataStore = [DBDatastore openDefaultStoreForAccount:account error:nil];
     table = [dataStore getTable:@"inspections"];
@@ -292,6 +305,12 @@
     [[InspectionManager sharedManager] setDropboxAccount:account];
     [[InspectionManager sharedManager] setDataStore:dataStore];
     [[InspectionManager sharedManager] setTable:table];
+}
+
+- (void) viewWillDisappear:(BOOL)animated
+{
+   // [self didPressLink];
+    //[self createDatastoreTable];
 }
 
 - (void)viewDidUnload
@@ -350,6 +369,7 @@
     {
         CraneDescriptionUIPicker.hidden = FALSE;
         selectCraneButton.hidden = FALSE;
+        
     }
     textField.text = [textField.text capitalizedString];
 }

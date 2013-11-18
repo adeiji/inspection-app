@@ -36,7 +36,7 @@
 #define OPTIONS_PATH @"type.part.partName"
 #define PART_NAME_PATH @"type.typeName"
 #define TYPE_NAME_COL @"typeName"
-
+#define COLUMN_CONTAINING_TOP_ELEMENTS @"hoistsrl"
 
 - (id)initWithStyle : (UITableViewStyle)style
               Level : (int) currentLevel
@@ -88,8 +88,14 @@
     else
         
     {
-        tableData = delegate.craneTypes;
+        for (DBRecord *result in delegate.pastCranes)
+        {
+            //Get all the cranes that were done previously
+            [tableData addObject:result[COLUMN_CONTAINING_TOP_ELEMENTS]];
+        }
     }
+    
+    delegate = nil;
 }
 
 - (void)viewDidLoad
@@ -102,12 +108,26 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    //Get the mongo search criteria from the application delegate
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changePart:) name:@"SwipeDetected" object:nil];
     
     AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
     results = delegate.searchCriteria;
     [self getTableData];
     
+}
+
+- (void) changePart : (NSNotification *) notification
+{
+    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+    
+    if (level == OPTIONS)
+    {
+        //[self.navigationController popViewControllerAnimated:YES];
+        tableData = [[NSMutableArray alloc] init];
+        tableData = [delegate.optionsDictionary objectForKey: notification.userInfo[@"part"]];
+        
+        [self.tableView reloadData];
+    }
 }
 
 - (void)didReceiveMemoryWarning

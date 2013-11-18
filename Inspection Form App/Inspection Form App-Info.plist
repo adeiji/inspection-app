@@ -41,11 +41,18 @@
 	<true/>
 	<key>UIFileSharingEnabled</key>
 	<string>YES</string>
+	<key>UIMainStoryboardFile</key>
+	<string>iPhoneStoryboard</string>
 	<key>UIMainStoryboardFile~ipad</key>
 	<string>iPadMainStoryboard</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
+	</array>
+	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>

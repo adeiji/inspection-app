@@ -11,6 +11,8 @@
 #import <Dropbox/Dropbox.h>
 #import "MongoDbConnection.h"
 #import "MasterViewController.h"
+#import "InspectionManager.h"
+#import "InspectionBussiness.h"
 
 @interface AppDelegate ()
 
@@ -31,6 +33,7 @@
 @synthesize partsDictionary = __partsDictionary;
 @synthesize optionsDictionary = __optionsDictionary;
 @synthesize craneTypes = __craneTypes;
+@synthesize pastCranes = __pastCranes;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -43,11 +46,31 @@
         
         splitViewController.delegate = (id)navigationController.topViewController;                
     }
+    else if ([[UIDevice currentDevice] userInterfaceIdiom] ==UIUserInterfaceIdiomPhone)
+    {
+        ViewController *viewController = (ViewController *)[(UINavigationController *) self.window.rootViewController topViewController];
+    }
     
     [self getCriteriaFromMongoDb];
     [self fillCriteriaObjects];
+    [self getPreviouslyFinishedCranes];
     
     return YES;
+}
+
+- (void) getPreviouslyFinishedCranes
+{
+    DBAccount * account = [[DBAccountManager sharedManager] linkedAccount];
+    
+    if (account)
+    {
+        DBDatastore *dataStore = [DBDatastore openDefaultStoreForAccount:account error:nil];
+        DBTable *table = [dataStore getTable:@"crane"];
+    
+        [dataStore sync:nil];
+    
+        __pastCranes = [InspectionBussiness getRecords:nil DBAccount:account DBDatastore:dataStore DBTable:table];
+    }
 }
 
 - (void) getCriteriaFromMongoDb
@@ -61,6 +84,7 @@
     __optionsDictionary = [[NSMutableDictionary alloc] init];
     __partsDictionary = [[NSMutableDictionary alloc] init];
     __craneTypes = [[NSMutableArray alloc] init];
+    
     for (int i = 0; i < __searchCriteria.count; i++)
     {
         NSDictionary *bsonDictionary = [__searchCriteria[i] dictionaryValue];
