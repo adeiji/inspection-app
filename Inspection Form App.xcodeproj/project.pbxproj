@@ -91,6 +91,8 @@
 		CE9A27381716A63200FE3D32 /* ipadAppLogo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE9A27371716A63200FE3D32 /* ipadAppLogo.jpg */; };
 		CE9A273C1716A70E00FE3D32 /* titlePageLogo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE9A273B1716A70E00FE3D32 /* titlePageLogo.jpg */; };
 		CEFD6D2D1839575E001764E9 /* CraneView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEFD6D2C1839575E001764E9 /* CraneView.xib */; };
+		CEFD6D70183A8705001764E9 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFD6D6F183A8705001764E9 /* Default-568h@2x.png */; };
+		CEFD6D72183A87D8001764E9 /* JobInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEFD6D71183A87D8001764E9 /* JobInfoView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -258,6 +260,8 @@
 		CE9A27371716A63200FE3D32 /* ipadAppLogo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ipadAppLogo.jpg; sourceTree = "<group>"; };
 		CE9A273B1716A70E00FE3D32 /* titlePageLogo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = titlePageLogo.jpg; sourceTree = "<group>"; };
 		CEFD6D2C1839575E001764E9 /* CraneView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CraneView.xib; sourceTree = "<group>"; };
+		CEFD6D6F183A8705001764E9 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		CEFD6D71183A87D8001764E9 /* JobInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JobInfoView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -395,6 +399,7 @@
 		8BC58459150ABD87000AC695 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				CEFD6D6F183A8705001764E9 /* Default-568h@2x.png */,
 				8BC5845A150ABD87000AC695 /* Inspection Form App-Info.plist */,
 				8BC5845B150ABD87000AC695 /* InfoPlist.strings */,
 				8BC5845E150ABD87000AC695 /* main.m */,
@@ -697,6 +702,7 @@
 				CEFD6D2C1839575E001764E9 /* CraneView.xib */,
 				CE3992741805FD08003AE30B /* iPadMainStoryboard.storyboard */,
 				8BC58467150ABD87000AC695 /* ViewController.xib */,
+				CEFD6D71183A87D8001764E9 /* JobInfoView.xib */,
 			);
 			name = "UI Files";
 			sourceTree = "<group>";
@@ -804,6 +810,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				8BC5845D150ABD87000AC695 /* InfoPlist.strings in Resources */,
+				CEFD6D70183A8705001764E9 /* Default-568h@2x.png in Resources */,
+				CEFD6D72183A87D8001764E9 /* JobInfoView.xib in Resources */,
 				8BC58469150ABD87000AC695 /* ViewController.xib in Resources */,
 				CE8028AD1837337C00B40DCB /* iPhoneStoryboard.storyboard in Resources */,
 				CE3992751805FD08003AE30B /* iPadMainStoryboard.storyboard in Resources */,

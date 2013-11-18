@@ -702,39 +702,39 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9e5-qO-FVj">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="578"/>
+                                        <rect key="frame" x="0.0" y="55" width="320" height="524"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <subviews>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Part Condition:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y32-PW-c5s">
-                                                <rect key="frame" x="20" y="129" width="190" height="21"/>
+                                                <rect key="frame" x="20" y="76" width="190" height="21"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="27"/>
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Enter the condition of the part:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tEy-bk-sPS">
-                                                <rect key="frame" x="20" y="158" width="241" height="21"/>
+                                                <rect key="frame" x="20" y="105" width="241" height="21"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Part Number" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eht-bm-QMk">
-                                                <rect key="frame" x="20" y="187" width="280" height="21"/>
+                                                <rect key="frame" x="20" y="134" width="280" height="21"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Part:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="99U-k1-Qcy">
-                                                <rect key="frame" x="20" y="218" width="280" height="21"/>
+                                                <rect key="frame" x="20" y="165" width="280" height="21"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Eug-Qy-7rB" customClass="GradientView">
-                                                <rect key="frame" x="20" y="249" width="280" height="43"/>
+                                                <rect key="frame" x="20" y="196" width="280" height="43"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <subviews>
                                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="N/A" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yiC-Ag-5Kh">
@@ -752,7 +752,7 @@
                                                 <color key="backgroundColor" red="0.94065151700000005" green="0.97539184300000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             </view>
                                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Q9l-0p-xgx" customClass="GradientView">
-                                                <rect key="frame" x="20" y="292" width="280" height="43"/>
+                                                <rect key="frame" x="20" y="239" width="280" height="43"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <subviews>
                                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Defficient" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9g7-XR-b5X">
@@ -769,7 +769,7 @@
                                                 <color key="backgroundColor" red="0.94065151700000005" green="0.97539184300000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             </view>
                                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EIj-Hy-bb0" customClass="GradientView">
-                                                <rect key="frame" x="20" y="335" width="280" height="87"/>
+                                                <rect key="frame" x="20" y="282" width="280" height="87"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <subviews>
                                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Any notes that need to be made mention of:" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="10" preferredMaxLayoutWidth="96" translatesAutoresizingMaskIntoConstraints="NO" id="ED0-OH-hMZ">
@@ -791,7 +791,7 @@
                                                 <color key="backgroundColor" red="0.94065151700000005" green="0.97539184300000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             </view>
                                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cRS-As-z6i" customClass="GradientView">
-                                                <rect key="frame" x="20" y="421" width="280" height="146"/>
+                                                <rect key="frame" x="20" y="368" width="280" height="146"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <subviews>
                                                     <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="db5-cv-gCs">
