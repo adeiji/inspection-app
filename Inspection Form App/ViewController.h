@@ -60,6 +60,7 @@
 @property (weak, nonatomic) IBOutlet TextField *txtEquipNum;
 
 
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *btnDropboxLink;
 @property (weak, nonatomic) IBOutlet UITextView *txtNotes;
 @property (weak, nonatomic) IBOutlet TextField *txtEmail;
 @property (strong, nonatomic) NSString *customerName;
@@ -101,6 +102,7 @@ typedef enum {
 - (IBAction) textViewDidBeginEditing:(UITextView *)textView;
 - (IBAction)NewCustomerPress:(id)sender;
 - (IBAction)GetOrderFromJobNumber:(id)sender;
+- (IBAction) didPressLink;
 - (UIViewController *) documentInteractionControllerViewControllerForPreview:(UIDocumentInteractionController *)controller;
 - (IBAction)finalBackButtonPressed:(id)sender;
 - (IBAction)dateSelected:(id)sender;
@@ -109,6 +111,7 @@ typedef enum {
 - (IBAction)CreateCertificate:(id)sender;
 
 - (NSDictionary *) createCraneDictionary;
+
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 
 

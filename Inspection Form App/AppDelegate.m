@@ -116,6 +116,14 @@
     DBAccount *account = [[DBAccountManager sharedManager] handleOpenURL:url];
     if (account) {
         NSLog(@"App linked successfully!");
+        
+        DBDatastore *dataStore = [DBDatastore openDefaultStoreForAccount:account error:nil];
+        DBTable *table = [dataStore getTable:@"crane"];
+        
+        [dataStore sync:nil];
+        
+        __pastCranes = [InspectionBussiness getRecords:nil DBAccount:account DBDatastore:dataStore DBTable:table];
+        
         return YES;
     }
     return NO;

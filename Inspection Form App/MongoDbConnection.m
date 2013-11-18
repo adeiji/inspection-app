@@ -18,8 +18,9 @@
 
 //Set the address to the ip of my mac or whatever the ip address is of the server
 //#define address @"54.213.167.56"
-#define address @"127.0.0.1"
-//mac home address - 192.168.1.129
+#define address @"192.168.1.140:27017"
+//mac home address - 192.168.1.140
+//mac - public address -  72.193.47.90
 
 - (void) setUpConnection : (NSString *) collectionName
 {

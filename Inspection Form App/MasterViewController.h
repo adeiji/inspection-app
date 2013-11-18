@@ -19,4 +19,8 @@ typedef enum {
 
 @property (nonatomic, assign) id<PartSelectionDelegate> delegate;
 
+- (id)initWithStyle : (UITableViewStyle)style
+              Level : (int) currentLevel
+        SearchValue : (NSString*) mySearchValue;
+
 @end

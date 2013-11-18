@@ -189,7 +189,7 @@
     
 }
 
-- (void) drawContextToPDF :
++ (void) drawContextToPDF :
                PDFContext : (CGContextRef) pdfContext
                StartPoint : (CGPoint) startPoint
                  EndPoint : (CGPoint) endPoint
@@ -253,6 +253,7 @@
     
     //Border lines
     //left vertical line
+    [self drawContextToPDF: :pdfContext StartPoint:CGPointMake(13, 231) EndPoint:CGPointMake(13, 780)];
     CGContextBeginPath(pdfContext);
     CGContextMoveToPoint(pdfContext, 13, 231);
     CGContextAddLineToPoint(pdfContext, 13, 780);

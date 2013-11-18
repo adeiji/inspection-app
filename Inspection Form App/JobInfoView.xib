@@ -4,10 +4,14 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ViewController"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ViewController">
+            <connections>
+                <outlet property="craneView" destination="Aoo-A7-8fH" id="L4X-el-RfX"/>
+            </connections>
+        </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QXH-Fb-xm6">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="1136"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="1030"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Ry-tV-idt" customClass="GradientView">
@@ -158,7 +162,7 @@
                     <color key="tintColor" red="0.70320961569999996" green="0.83395144580000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cba-kF-Daf" customClass="GradientView">
-                    <rect key="frame" x="0.0" y="376" width="320" height="43"/>
+                    <rect key="frame" x="0.0" y="375" width="320" height="43"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vl3-Ty-XtY" customClass="TextField">
@@ -186,20 +190,14 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Crane Description" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZdP-AS-vYt">
-                    <rect key="frame" x="20" y="585" width="151" height="43"/>
+                    <rect key="frame" x="10" y="501" width="151" height="43"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="All information about the crane" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="28k-WD-1BG">
-                    <rect key="frame" x="20" y="606" width="192" height="43"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FZ5-y3-Tvv" customClass="GradientView">
-                    <rect key="frame" x="0.0" y="635" width="320" height="43"/>
+                    <rect key="frame" x="0.0" y="537" width="320" height="43"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rRO-H4-3F6" customClass="TextField">
@@ -220,7 +218,7 @@
                     <color key="tintColor" red="0.70320961569999996" green="0.83395144580000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="m2P-0j-vAU" customClass="GradientView">
-                    <rect key="frame" x="0.0" y="681" width="320" height="43"/>
+                    <rect key="frame" x="0.0" y="583" width="320" height="43"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="W7z-q8-5Tm" customClass="TextField">
@@ -241,7 +239,7 @@
                     <color key="tintColor" red="0.70320961569999996" green="0.83395144580000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2pT-OK-sTE" customClass="GradientView">
-                    <rect key="frame" x="0.0" y="727" width="320" height="43"/>
+                    <rect key="frame" x="0.0" y="629" width="320" height="43"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="R1O-qq-dHZ" customClass="TextField">
@@ -262,7 +260,7 @@
                     <color key="tintColor" red="0.70320961569999996" green="0.83395144580000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XvO-hu-79L" customClass="GradientView">
-                    <rect key="frame" x="0.0" y="773" width="320" height="43"/>
+                    <rect key="frame" x="0.0" y="675" width="320" height="43"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OKg-sd-M9w" customClass="TextField">
@@ -283,7 +281,7 @@
                     <color key="tintColor" red="0.70320961569999996" green="0.83395144580000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AH6-XN-eSV" customClass="GradientView">
-                    <rect key="frame" x="0.0" y="819" width="320" height="43"/>
+                    <rect key="frame" x="0.0" y="721" width="320" height="43"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="H9t-kG-PJ5" customClass="TextField">
@@ -304,7 +302,7 @@
                     <color key="tintColor" red="0.70320961569999996" green="0.83395144580000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LwJ-5C-Sz5" customClass="GradientView">
-                    <rect key="frame" x="0.0" y="865" width="320" height="43"/>
+                    <rect key="frame" x="0.0" y="767" width="320" height="43"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qrE-jH-UNq" customClass="TextField">
@@ -325,7 +323,7 @@
                     <color key="tintColor" red="0.70320961569999996" green="0.83395144580000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Aoo-A7-8fH" customClass="GradientView">
-                    <rect key="frame" x="0.0" y="911" width="320" height="195"/>
+                    <rect key="frame" x="0.0" y="814" width="320" height="195"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Crane Type" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q7z-7N-vht">
@@ -340,6 +338,10 @@
                 </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="width" constant="320" id="IYh-HW-sDA"/>
+                <constraint firstAttribute="height" constant="1030" id="iO1-vg-Kkh"/>
+            </constraints>
         </view>
     </objects>
 </document>

@@ -16,6 +16,7 @@
 #import "Part.h"
 #import "InspectionManager.h"
 #import "InspectionBussiness.h"
+#import "MasterViewController.h"
 
 @interface InspectionViewController ()
 {
@@ -561,6 +562,13 @@
 {
     [self.navigationController popViewControllerAnimated:YES];
 }
+//The Master View Controller displaying the parts is displayed by being pushed onto the stack.
+- (IBAction)showPartsController:(id)sender {
+    //Create the Master View Controller.  The Level is the current type of data that's being displayed, and the search value is the value that will be searched
+    //in Mongo to reveal the correct information.
+    MasterViewController *mvc = [[MasterViewController alloc] initWithStyle:nil Level:PART_NAME SearchValue:inspection.crane.type];
+    [self.navigationController pushViewController:mvc animated:YES];
+}
 
 - (IBAction)nextPressed {
     if (__optionLocation < [__partsArray count] - 1) {
@@ -617,6 +625,26 @@
     return 300.0f;
 }
 
+- (UIView *) pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view
+{
+    //Get the label from the view.
+    UILabel *label = (UILabel *) view;
+    
+    if (!label)
+    {
+        //Create the label with the width equal to that of the picker view, and then set the alignment to center, so that the picker view looks
+        //like the default iOS 7 picker view.
+        label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, pickerView.frame.size.width, 30) ];
+        [label setTextAlignment:NSTextAlignmentCenter];
+        //Set the font of the label to 12.0f
+        [label setFont:[UIFont systemFontOfSize:16.0f]];
+    }
+    
+    label.text = [pickerData objectAtIndex:row];
+    
+    return label;
+}
+
 - (void) selectedOption : (NSString *) selection
 {
     //If the item is contained in the picker, than we go straight to that in the picker.
@@ -653,5 +681,6 @@
 {
     return self;
 }
+
 
 @end

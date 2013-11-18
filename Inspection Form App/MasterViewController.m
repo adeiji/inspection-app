@@ -109,11 +109,29 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changePart:) name:@"SwipeDetected" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayParts:) name:@"InspectionViewControllerPushed" object:nil];
     
     AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
     results = delegate.searchCriteria;
     [self getTableData];
     
+}
+
+#pragma mark - Notification methods
+
+- (void) displayParts : (NSNotification *) notification
+{
+    //Get the shared delegate so that we can get the parts dictionary.
+    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+    
+    //Reload the table data with the different part types.
+    tableData = [[NSMutableArray alloc] init];
+    tableData = [delegate.partsDictionary objectForKey: notification.userInfo[@"craneType"]];
+    //Set the level to part name so that way when the user clicks on a part, we handle the click event as a part click event.
+    level = PART_NAME;
+    self.title = @"Parts";
+    //Reload the data.
+    [self.tableView reloadData];
 }
 
 - (void) changePart : (NSNotification *) notification

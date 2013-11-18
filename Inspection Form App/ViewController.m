@@ -62,6 +62,7 @@
     Inspection *inspection;
     int currentOrientation;
     AppDelegate* delegate;
+    NSString *deviceType;
 }
 @end
 
@@ -104,12 +105,43 @@
 @synthesize account;
 @synthesize craneView;
 @synthesize inspectionViewController;
+@synthesize btnDropboxLink;
 
 #define kMinimumGestureLength   25
 #define kMaximumVariance        100
 
 - (void)viewDidLoad {
     
+    [super viewDidLoad];
+    deviceType = [UIDevice currentDevice].model;
+    
+    if (![deviceType isEqualToString:@"iPad"])
+    {
+        //Get the view that will be allow the user to enter in all the job information
+        UIView *view = [[[NSBundle mainBundle] loadNibNamed:@"JobInfoView" owner:self options:nil] objectAtIndex:0];
+        [view setTranslatesAutoresizingMaskIntoConstraints:NO];
+        
+        NSLayoutConstraint *topSpaceConstraint = [NSLayoutConstraint constraintWithItem:self.scrollView
+                                                                              attribute:NSLayoutAttributeTop
+                                                                              relatedBy:NSLayoutRelationEqual
+                                                                                 toItem:view
+                                                                              attribute:NSLayoutAttributeTop
+                                                                             multiplier:1.0f
+                                                                               constant:0.0f];
+        NSLayoutConstraint *leftEdgeConstraint = [NSLayoutConstraint constraintWithItem:self.scrollView
+                                                                              attribute:NSLayoutAttributeLeft
+                                                                              relatedBy:NSLayoutRelationEqual
+                                                                                 toItem:view
+                                                                              attribute:NSLayoutAttributeLeft
+                                                                             multiplier:1.0f
+                                                                               constant:0.0f];
+        [self.scrollView addConstraint:topSpaceConstraint];
+        [self.scrollView addConstraint:leftEdgeConstraint];
+        
+        [self.scrollView setContentSize:CGSizeMake(view.frame.size.width, view.frame.size.height)];
+        
+        [self.scrollView addSubview:view];
+    }
     
     [self editInspectionViewController];
 
@@ -146,18 +178,8 @@
     
     txtCraneDescription.inputView = CraneDescriptionUIPicker;
     txtCraneDescription.inputAccessoryView = selectCraneButton;
-
-    // Do any additional setup after loading the view, typically from a nib.
-    UIButton *btnSelectDate = [[UIButton alloc] init];
     
-    [btnSelectDate addTarget:self action:@selector(dateSelected:) forControlEvents:UIControlEventTouchDown];
-    
-    NSDate *now = [NSDate date];
-    datePicker = [[UIDatePicker alloc] initWithFrame:CGRectZero];
-    [datePicker setDate:now animated:NO];
-    [datePicker setDatePickerMode:UIDatePickerModeDate];
-    [datePicker addTarget:self action:@selector(dateSelectionChanged:) forControlEvents:UIControlEventValueChanged];
-    txtDate.inputView = datePicker;
+    [self setupTxtDate];
     [self dateSelectionChanged:datePicker];
     
     navBar.topItem.title = @"Inspection Form App";
@@ -170,14 +192,39 @@
     txtTechnicianName.text = [owner uppercaseString];
     
     [self setUpCraneDescriptionPicker];
-    [super viewDidLoad];
     
     //[self didPressLink];
     
     [self addTargetsToTextFields];
     
+    
+    //If the Dropbox account is linked to this device then we remove the link to dropbox button.
+    account = [[DBAccountManager sharedManager] linkedAccount];
+    if (account)
+    {
+        //If the app is already linked to dropbox then we remove the link to dropbox button
+        NSMutableArray *toolbarItems = [self.toolbarItems mutableCopy];
+        [toolbarItems removeObject:btnDropboxLink];
+        self.toolbarItems = toolbarItems;
+    }
+    
     //[self createDatastoreTable];
 }
+
+- (void) setupTxtDate
+{
+    // Do any additional setup after loading the view, typically from a nib.
+    UIButton *btnSelectDate = [[UIButton alloc] init];
+    
+    [btnSelectDate addTarget:self action:@selector(dateSelected:) forControlEvents:UIControlEventTouchDown];
+    NSDate *now = [NSDate date];
+    datePicker = [[UIDatePicker alloc] initWithFrame:CGRectZero];
+    [datePicker setDate:now animated:NO];
+    [datePicker setDatePickerMode:UIDatePickerModeDate];
+    [datePicker addTarget:self action:@selector(dateSelectionChanged:) forControlEvents:UIControlEventValueChanged];
+    txtDate.inputView = datePicker;
+}
+
 //Every time the date selection changes it will also change in the text box
 - (void) dateSelectionChanged:(id)sender
 {
@@ -202,6 +249,7 @@
 //This UIPicker is what is used to select the crane type.  This method will set up the necessary attributes.
 - (void) setUpCraneDescriptionPicker
 {
+    //Create the crane description picker and add it to the gradient view at the very bottom which is where we show the different potential Crane Types.
     CraneDescriptionUIPicker = [[UIPickerView alloc] initWithFrame:CGRectMake(200, -10, 358, 100)];
     CraneDescriptionUIPicker.delegate = self;
     
@@ -214,7 +262,6 @@
 
 - (void) editInspectionViewController
 {
-    NSString* deviceType = [UIDevice currentDevice].model;
     if (![[UIDevice currentDevice].model isEqualToString:@"iPad"])
     {
         inspectionViewController = [[UIStoryboard storyboardWithName:@"iPhoneStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"inspectionViewController"];
@@ -281,14 +328,22 @@
 
 #pragma mark - Dropbox Datastore Methods
 
-- (void) didPressLink
+- (IBAction) didPressLink
 {
     account = [[DBAccountManager sharedManager] linkedAccount];
     
     if (account) {
         NSLog(@"App already linked");
+        //If the app is already linked to dropbox then we remove the link to dropbox button
+        NSMutableArray *toolbarItems = [self.toolbarItems mutableCopy];
+        [toolbarItems removeObject:btnDropboxLink];
+        self.toolbarItems = toolbarItems;
     } else {
         [[DBAccountManager sharedManager] linkFromController:self];
+        //If the app is already linked to dropbox then we remove the link to dropbox button
+        NSMutableArray *toolbarItems = [self.toolbarItems mutableCopy];
+        [toolbarItems removeObject:btnDropboxLink];
+        self.toolbarItems = toolbarItems;
     }
 }
 
@@ -696,6 +751,12 @@
     [[InspectionManager sharedManager] setInspection:inspection];
     
     [self.navigationController pushViewController:inspectionViewController animated:YES];
+    
+    //Send out a notification that the InspectionViewController is pushed onto the stack.
+    //Send the crane type that is being pushed.
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"InspectionViewControllerPushed"
+                                                        object:self
+                                                      userInfo:@{@"craneType": inspectionViewController.craneType }];
 //
 //    //We get the first part from the dictionary that stores all the parts of the specific crane types.
 //    NSString *part = [delegate.partsDictionary objectForKey:inspection.crane.type][0];
