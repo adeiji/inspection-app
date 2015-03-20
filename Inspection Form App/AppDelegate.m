@@ -9,7 +9,6 @@
 #import "AppDelegate.h"
 #import "ViewController.h"
 #import <Dropbox/Dropbox.h>
-#import "MongoDbConnection.h"
 #import "MasterViewController.h"
 #import "InspectionManager.h"
 #import "InspectionBussiness.h"
@@ -51,7 +50,6 @@
         ViewController *viewController = (ViewController *)[(UINavigationController *) self.window.rootViewController topViewController];
     }
     
-    [self getCriteriaFromMongoDb];
     [self fillCriteriaObjects];
     [self getPreviouslyFinishedCranes];
     
@@ -73,11 +71,6 @@
     }
 }
 
-- (void) getCriteriaFromMongoDb
-{
-    //Return everything from the mongo database
-    __searchCriteria = [MongoDbConnection getValues:SEARCH_VALUE keyPathToSearch:nil collectionName:COLLECTION_NAME ];
-}
 //Fill the two dictionaries partsDictionary and searchDictionary so that we can easily pull these values from the array later
 - (void) fillCriteriaObjects
 {
@@ -87,8 +80,8 @@
     
     for (int i = 0; i < __searchCriteria.count; i++)
     {
-        NSDictionary *bsonDictionary = [__searchCriteria[i] dictionaryValue];
-        
+//        NSDictionary *bsonDictionary = [__searchCriteria[i] dictionaryValue];
+        NSDictionary *bsonDictionary;
         //Get the type name that we're at in the array.
         NSString *typeName = [[bsonDictionary objectForKey:TYPE_COL] objectForKey:TYPE_NAME_COL];
         

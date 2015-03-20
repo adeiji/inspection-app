@@ -121,23 +121,6 @@
         UIView *view = [[[NSBundle mainBundle] loadNibNamed:@"JobInfoView" owner:self options:nil] objectAtIndex:0];
         [view setTranslatesAutoresizingMaskIntoConstraints:NO];
         
-        NSLayoutConstraint *topSpaceConstraint = [NSLayoutConstraint constraintWithItem:self.scrollView
-                                                                              attribute:NSLayoutAttributeTop
-                                                                              relatedBy:NSLayoutRelationEqual
-                                                                                 toItem:view
-                                                                              attribute:NSLayoutAttributeTop
-                                                                             multiplier:1.0f
-                                                                               constant:0.0f];
-        NSLayoutConstraint *leftEdgeConstraint = [NSLayoutConstraint constraintWithItem:self.scrollView
-                                                                              attribute:NSLayoutAttributeLeft
-                                                                              relatedBy:NSLayoutRelationEqual
-                                                                                 toItem:view
-                                                                              attribute:NSLayoutAttributeLeft
-                                                                             multiplier:1.0f
-                                                                               constant:0.0f];
-        [self.scrollView addConstraint:topSpaceConstraint];
-        [self.scrollView addConstraint:leftEdgeConstraint];
-        
         [self.scrollView setContentSize:CGSizeMake(view.frame.size.width, view.frame.size.height)];
         
         [self.scrollView addSubview:view];
@@ -370,49 +353,8 @@
 
 - (void)viewDidUnload
 {
-    [self setTxtDate:nil];
-    [self setNavBar:nil];
-    [self setNavSubmit:nil];
-    [self setTxtCustomerName:nil];
-    [self setTxtCustomerContact:nil];
-    [self setTxtJobNumber:nil];
-    [self setTxtAddress:nil];
-    [self setTxtCraneMfg:nil];
-    [self setTxtHoistMfg:nil];
-    [self setTxtHoistMdl:nil];
-    [self setTxtCap:nil];
-    [self setTxtCraneSrl:nil];
-    [self setTxtHoistSrl:nil];
-    [self setTxtEquipNum:nil];
-    [self setTxtNotes:nil];
-    [self setRootViewController:nil];
-    [self setTxtEmail:nil];
-    [self setTxtCraneDescription:nil];
-    [self setTxtTechnicianName:nil];
-    [self setLblCraneDesc:nil];
-    myItemListStore = nil;
-    restClient = nil;
-    contactDB=nil;
-    databasePath = nil;
-    tableName = nil;
-    deficient = nil;
-    deficientPart = nil;
-    notes = nil;
-    pickerSelection = nil;
-    theScrollView = nil;
-    activeField = nil;
-    overallRating = nil;
-    technicianName = nil;
-    [self setCreateCertificateButton:nil];
-    [self setCraneDescriptionUIPicker:nil];
-    [self setSelectCraneButton:nil];
-    [self setCustomerInfoView:nil];
-    [self setCraneInspectionView:nil];
-    [self setCustomerInfoView:nil];
     [super viewDidUnload];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    self.datePicker = nil;
-    // Release any retained subviews of the main view.
 }
 #pragma mark TextField Methods
 
@@ -719,6 +661,12 @@
     }
 }
 
+/*
+ 
+ We will be changing the way this method works
+ 
+ */
+
 - (IBAction)partsListButtonClicked:(id)sender{
 
     optionLocation = 0;
@@ -757,13 +705,6 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"InspectionViewControllerPushed"
                                                         object:self
                                                       userInfo:@{@"craneType": inspectionViewController.craneType }];
-//
-//    //We get the first part from the dictionary that stores all the parts of the specific crane types.
-//    NSString *part = [delegate.partsDictionary objectForKey:inspection.crane.type][0];
-//    
-//    //Send the current part so that we can fill the options array with the correct part.
-//    [inspectionViewController fillOptionArrays:part];
-//    [inspectionViewController changeLayout:optionLocation PartsArray:myPartsArray ItemListStore:myItemListStore];
 }
 
 -(void) didReceiveMemoryWarning
