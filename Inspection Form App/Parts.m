@@ -21,9 +21,7 @@
     {
         myParts = [NSMutableArray array];
     }
-    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
-    
-    [self fillPartsFromDb : typeOfCrane PartsDictionary:delegate.partsDictionary];
+    [self fillParts:typeOfCrane];
     return self;
 }
 

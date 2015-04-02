@@ -10,7 +10,7 @@
 #import "Options.h"
 #import "Parts.h"
 #import "Customer.h"
-#import "Crane.h"
+#import "InspectionCrane.h"
 #import "PDFGenerator.h"
 #import "AppDelegate.h"
 #import "Part.h"
@@ -19,42 +19,11 @@
 #import "MasterViewController.h"
 
 @interface InspectionViewController ()
-{
-    int timesShown;
-    int buttonIndex;
-    
-    BOOL pageSubmitAlertView;
-    BOOL inspectionComplete;
-    BOOL loadRatings;
-    BOOL remarksLimitations;
-    BOOL finished;
-    BOOL proofLoad;
-    BOOL testLoad;
-    BOOL proofLoadDescription;
-    
-    Inspection *inspection;
-    ItemListConditionStorage *itemListStore;
 
-    NSString *overallRating;
-    
-    NSArray *defficiencyPickerArray;
-}
 @end
 
 @implementation InspectionViewController
 
-@synthesize lblPartNumber;
-@synthesize lblPart;
-@synthesize applicableSwitch;
-@synthesize defficiencyPicker;
-@synthesize defficiencySwitch;
-@synthesize txtNotes;
-@synthesize pickerData;
-@synthesize createCertificateButton;
-@synthesize craneType = __craneType;
-@synthesize partsArray = __partsArray;
-@synthesize optionLocation = __optionLocation;
-@synthesize validated = __validated;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -69,11 +38,11 @@
 {
     [super viewDidLoad];
 	
-    defficiencyPicker.delegate = self;
-    defficiencyPicker.dataSource = self;
+    _deficiencyPicker.delegate = self;
+    _deficiencyPicker.dataSource = self;
     
-    [defficiencySwitch addTarget:self action:@selector(switchChanged:) forControlEvents:UIControlEventTouchUpInside];
-    [applicableSwitch addTarget:self action:@selector(applicableSwitchChanged:) forControlEvents:UIControlEventTouchUpInside];
+    [_deficiencySwitch addTarget:self action:@selector(switchChanged:) forControlEvents:UIControlEventTouchUpInside];
+    [_applicableSwitch addTarget:self action:@selector(applicableSwitchChanged:) forControlEvents:UIControlEventTouchUpInside];
     
     UISwipeGestureRecognizer *gestureRecognizerLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
     gestureRecognizerLeft.direction = UISwipeGestureRecognizerDirectionLeft;
@@ -99,16 +68,18 @@
         [self nextPressed];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"SwipeDetected"
                                                             object:self
-                                                          userInfo:@{    @"part"        : __partsArray[__optionLocation],
-                                                                         @"optionLocation"   : [NSNumber numberWithInt:__optionLocation] }];
+                                                          userInfo:@{
+                                                                     @"part": _partsArray[_optionLocation],
+                                                                    @"optionLocation": [NSNumber numberWithInt:_optionLocation] }];
     }
     else
     {
         [self previousPressed];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"SwipeDetected"
                                                             object:self
-                                                          userInfo:@{    @"part"        : __partsArray[__optionLocation],
-                                                                         @"optionLocation"   : [NSNumber numberWithInt:__optionLocation] }];
+                                                          userInfo:@{
+                                                                     @"part": _partsArray[_optionLocation],
+                                                                    @"optionLocation": [NSNumber numberWithInt:_optionLocation] }];
     }
     
     
@@ -128,18 +99,18 @@
     Condition *myCondition = [[Condition alloc] init ];
     myCondition = [myItemListStore.myConditions objectAtIndex:myOptionLocation];
     
-    txtNotes.text = myCondition.notes;
+    _txtNotes.text = myCondition.notes;
     
-    NSString* myPart = [myPartsArray objectAtIndex:__optionLocation];
+    NSString* myPart = [myPartsArray objectAtIndex:_optionLocation];
     NSString* myPartNumber = [NSString stringWithFormat:@"Part #%d", myOptionLocation + 1];
     
-    [lblPart setText:myPart];
-    [lblPartNumber setText:myPartNumber];
-    [defficiencyPicker selectRow:myCondition.pickerSelection inComponent:0 animated:YES];
-    [defficiencySwitch setOn:myCondition.deficient];
-    [applicableSwitch setOn:myCondition.applicable];
+    [_lblPart setText:myPart];
+    [_lblPartNumber setText:myPartNumber];
+    [_deficiencyPicker selectRow:myCondition.pickerSelection inComponent:0 animated:YES];
+    [_deficiencySwitch setOn:myCondition.deficient];
+    [_applicableSwitch setOn:myCondition.applicable];
     
-    if ([lblPart.text isEqualToString:@"Control Station Markings"])
+    if ([_lblPart.text isEqualToString:@"Control Station Markings"])
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Additional Information" message:@"Is this a pendant or radio, and what is the manufacturer and model" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Ok", nil];
         [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
@@ -147,95 +118,89 @@
         pageSubmitAlertView = NO;
     }
     
-    if (defficiencySwitch.isOn==YES) {
-        defficiencyPicker.userInteractionEnabled = YES;
-        defficiencyPicker.alpha = 1;
-        defficiencyPicker.showsSelectionIndicator = YES;
+    [self setDeficiencyViews];
+}
+
+- (void) setDeficiencyViews {
+    if (_deficiencySwitch.isOn==YES) {
+        _deficiencyPicker.userInteractionEnabled = YES;
+        _deficiencyPicker.alpha = 1;
+        _deficiencyPicker.showsSelectionIndicator = YES;
     }
     else {
-        defficiencyPicker.userInteractionEnabled = NO;
-        defficiencyPicker.showsSelectionIndicator = NO;
-        defficiencyPicker.alpha = .5;
+        _deficiencyPicker.userInteractionEnabled = NO;
+        _deficiencyPicker.showsSelectionIndicator = NO;
+        _deficiencyPicker.alpha = .5;
     }
-    if (applicableSwitch.on == NO)
+    if (_applicableSwitch.on == NO)
     {
-        defficiencySwitch.enabled = YES;
-        txtNotes.userInteractionEnabled = YES;
-        txtNotes.alpha = 1;
+        _deficiencySwitch.enabled = YES;
+        _txtNotes.userInteractionEnabled = YES;
+        _txtNotes.alpha = 1;
     }
     else {
-        defficiencySwitch.enabled = NO;
-        txtNotes.userInteractionEnabled = NO;
-        txtNotes.alpha = .5;
+        _deficiencySwitch.enabled = NO;
+        _txtNotes.userInteractionEnabled = NO;
+        _txtNotes.alpha = .5;
     }
 }
 
-- (void )applicableSwitchChanged : (id)sender {
-    if (applicableSwitch.on == YES)
+- (void )_applicableSwitchChanged : (id)sender {
+    if (_applicableSwitch.on == YES)
     {
-        defficiencySwitch.enabled = NO;
-        defficiencyPicker.userInteractionEnabled = NO;
-        defficiencyPicker.alpha = .5;
-        defficiencyPicker.showsSelectionIndicator = NO;
-        defficiencySwitch.on = NO;
-        txtNotes.userInteractionEnabled = NO;
-        txtNotes.alpha = .25;
-        txtNotes.text = @"";
+        _deficiencySwitch.enabled = NO;
+        _deficiencyPicker.userInteractionEnabled = NO;
+        _deficiencyPicker.alpha = .5;
+        _deficiencyPicker.showsSelectionIndicator = NO;
+        _deficiencySwitch.on = NO;
+        _txtNotes.userInteractionEnabled = NO;
+        _txtNotes.alpha = .25;
+        _txtNotes.text = @"";
     }
     else {
-        defficiencySwitch.enabled = YES;
-        txtNotes.alpha = 1;
-        txtNotes.userInteractionEnabled = YES;
-        if (defficiencySwitch.on == YES)
+        _deficiencySwitch.enabled = YES;
+        _txtNotes.alpha = 1;
+        _txtNotes.userInteractionEnabled = YES;
+        if (_deficiencySwitch.on == YES)
         {
-            defficiencyPicker.userInteractionEnabled = YES;
-            defficiencyPicker.alpha = 1;
-            defficiencyPicker.showsSelectionIndicator = YES;
+            _deficiencyPicker.userInteractionEnabled = YES;
+            _deficiencyPicker.alpha = 1;
+            _deficiencyPicker.showsSelectionIndicator = YES;
         }
     }
 }
 
 - (void) fillOptionArrays : (NSString*) currentPart {
-    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
-    Options* myOptions = [[Options alloc] init:currentPart OptionsDictionary:delegate.optionsDictionary];
-    
-    defficiencyPickerArray = myOptions.optionsArray;
+    Options* myOptions = [[Options alloc] initWithPart:currentPart];
+    _deficiencyPickerArray = myOptions.optionsArray;
     //Send the array that contains the particular defficiencies unique to this part
-    [self changePickerArray:defficiencyPickerArray];
+    [self changePickerArray:_deficiencyPickerArray];
 }
 
 //Change the array that contains the part details th at the Defficiency Picker will be showing
 - (void) changePickerArray : (NSArray*) input {
-    pickerData = nil;
-    pickerData = input;
-    [self.defficiencyPicker reloadAllComponents];
+    _pickerData = nil;
+    _pickerData = input;
+    [_deficiencyPicker reloadAllComponents];
 }
 
 //Create the objects necessary to view the parts list
 - (void) initiateParts
 {
     //We need to get the parts that are unique to this particular crane.
-    Parts *parts = [[Parts alloc] init:__craneType];
-
-    //Get the actual array itself from the parts object
-    __partsArray = [parts myParts];
-    
-    
-    //Get the options that are unique to this particular part.
-    [self fillOptionArrays:__partsArray[__optionLocation]];
-    
-    //Create the itemListStore which will store all the conditions as they are set.
-    itemListStore = [[ItemListConditionStorage alloc] init:parts.myParts];
-    [self changeLayout:__optionLocation PartsArray:__partsArray ItemListStore:itemListStore];
-    
-    //Send the array that contains the particular defficiencies unique to this part
-    [self changePickerArray:defficiencyPickerArray];
+    Parts *parts = [[Parts alloc] init:_craneType];
+    _partsArray = [parts myParts];    //Get the actual array itself from the parts object
+    [self fillOptionArrays:_partsArray[_optionLocation]];     //Get the options that are unique to this particular part.
+    itemListStore = [[ItemListConditionStorage alloc] init:parts.myParts];       /*Create the itemListStore which will 
+                                                                                  store all the conditions as they are set.*/
+    [self changeLayout:_optionLocation PartsArray:_partsArray ItemListStore:itemListStore];
+    [self changePickerArray:_deficiencyPickerArray];    //Send the array that contains the particular deficiencies unique to this part
     inspectionComplete = NO;
 }
 //Check to see if all the values have been validated on the home page.  If so then we continue, if not, we return to the home page.
 - (BOOL) validate
 {
-    if (__validated == YES)
+    if (_validated == YES)
     {
         return YES;
     }
@@ -255,9 +220,9 @@
         inspection.itemList = itemListStore;
         
         //if all the fields entered pass then, the the customer information is inserted and all the data is saved into a table
-        NSUInteger selectedRow = [defficiencyPicker selectedRowInComponent:0];
-        NSString *myDeficientPart = [[defficiencyPicker delegate]
-                                     pickerView:defficiencyPicker
+        NSUInteger selectedRow = [_deficiencyPicker selectedRowInComponent:0];
+        NSString *myDeficientPart = [[_deficiencyPicker delegate]
+                                     pickerView:_deficiencyPicker
                                      titleForRow:selectedRow
                                      forComponent:0];
         UIAlertView *alert = [[UIAlertView alloc]
@@ -272,10 +237,10 @@
         pageSubmitAlertView = YES;
         
         //Save the status of this page so that when going back to it we can view it as we left it
-        [self saveInfo : txtNotes.text
-                       : defficiencySwitch.on
-                       : [defficiencyPicker selectedRowInComponent:0]
-                       : myDeficientPart:applicableSwitch.on];
+        [self saveInfo : _txtNotes.text
+                       : _deficiencySwitch.on
+                       : [_deficiencyPicker selectedRowInComponent:0]
+                       : myDeficientPart:_applicableSwitch.on];
         
         
         //Get all the records with this hoistSrl and this specific date
@@ -290,7 +255,7 @@
         testLoad = @"";
         remarksLimitations = @"";
         
-        [PDFGenerator writeReport:inspection.itemList Inspection:inspection OverallRating:overallRating PartsArray:__partsArray];
+        [PDFGenerator writeReport:inspection.itemList Inspection:inspection OverallRating:overallRating PartsArray:_partsArray];
         UIDocumentInteractionController *pdfViewController = [PDFGenerator DisplayPDFWithOverallRating:inspection];
         pdfViewController.delegate = self;
         [pdfViewController presentPreviewAnimated:NO];
@@ -329,7 +294,7 @@
                                              :inspection.crane.hoistSrl, @"hoistsrl",
                                              inspection.jobNumber, @"jobnumber",
                                              inspection.crane.equipmentNumber, @"equipmentnumber",
-                                             (NSString *)[__partsArray objectAtIndex:i], @"part",
+                                             (NSString *)[_partsArray objectAtIndex:i], @"part",
                                              (NSString *) isDeficient, @"deficient",
                                              condition.deficientPart, @"deficientpart",
                                              [condition.notes stringByReplacingOccurrencesOfString:@"\"" withString:@"\\"], @"notes",
@@ -349,10 +314,10 @@
 }
 
 - (IBAction)gotoCustomerInfo:(id)sender {
-    NSUInteger selectedRow = [defficiencyPicker selectedRowInComponent:0];
-    NSString *myDeficientPart = [[defficiencyPicker delegate] pickerView:defficiencyPicker titleForRow:selectedRow forComponent:0];
+    NSUInteger selectedRow = [_deficiencyPicker selectedRowInComponent:0];
+    NSString *myDeficientPart = [[_deficiencyPicker delegate] pickerView:_deficiencyPicker titleForRow:selectedRow forComponent:0];
     
-    [self saveInfo:txtNotes.text :defficiencySwitch.on:[defficiencyPicker selectedRowInComponent:0]:myDeficientPart:applicableSwitch.on];
+    [self saveInfo:_txtNotes.text :_deficiencySwitch.on:[_deficiencyPicker selectedRowInComponent:0]:myDeficientPart:_applicableSwitch.on];
     
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -363,11 +328,11 @@
     BOOL setting = mySwitch.isOn;
     
     if (setting == TRUE) {
-        defficiencyPicker.alpha = 1;
-        defficiencyPicker.showsSelectionIndicator = YES;
-        defficiencyPicker.userInteractionEnabled = YES;
+        _deficiencyPicker.alpha = 1;
+        _deficiencyPicker.showsSelectionIndicator = YES;
+        _deficiencyPicker.userInteractionEnabled = YES;
         
-        if ([lblPart.text isEqualToString:@"Wire Rope, Load Chain, Fittings"])
+        if ([_lblPart.text isEqualToString:@"Wire Rope, Load Chain, Fittings"])
         {
             timesShown=0;
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Length, size, fittings" message:@"Enter the Length:" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Ok", nil];
@@ -375,7 +340,7 @@
             [alert show];
             pageSubmitAlertView = NO;
         }
-        else if ([lblPart.text isEqualToString:@"Hoist Load Brake"])
+        else if ([_lblPart.text isEqualToString:@"Hoist Load Brake"])
         {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Type" message:@"What is the type?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Ok", nil];
             [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
@@ -384,9 +349,9 @@
         }
     }
     else {
-        defficiencyPicker.alpha = .5;
-        defficiencyPicker.showsSelectionIndicator = NO;
-        defficiencyPicker.userInteractionEnabled = NO;
+        _deficiencyPicker.alpha = .5;
+        _deficiencyPicker.showsSelectionIndicator = NO;
+        _deficiencyPicker.userInteractionEnabled = NO;
     }
     
 }
@@ -413,37 +378,37 @@
                 //if this is not the alert box that opens when you submit the final page
                 if (pageSubmitAlertView==NO)
                 {
-                    if ([lblPart.text isEqualToString:@"Control Station Markings"])
+                    if ([_lblPart.text isEqualToString:@"Control Station Markings"])
                     {
-                        txtNotes.text = [NSString stringWithFormat:@"%@ %@", txtNotes.text, textField.text];
+                        _txtNotes.text = [NSString stringWithFormat:@"%@ %@", _txtNotes.text, textField.text];
                     }
-                    else if (timesShown==0&&__optionLocation==22)
+                    else if (timesShown==0&&_optionLocation==22)
                     {
                         timesShown++;
-                        txtNotes.text = [NSString stringWithFormat:@"Length: %@ - %@",textField.text, txtNotes.text];
+                        _txtNotes.text = [NSString stringWithFormat:@"Length: %@ - %@",textField.text, _txtNotes.text];
                         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Length, size, fittings" message:@"Enter the Size:" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Ok", nil];
                         [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
                         [alert show];
                         pageSubmitAlertView = NO;
                     }
-                    else if (timesShown==1&&__optionLocation==22)
+                    else if (timesShown==1&&_optionLocation==22)
                     {
                         timesShown++;
-                        txtNotes.text = [NSString stringWithFormat:@"Size: %@ - %@",textField.text, txtNotes.text];
+                        _txtNotes.text = [NSString stringWithFormat:@"Size: %@ - %@",textField.text, _txtNotes.text];
                         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Length, size, fittings" message:@"Enter the Fittings:" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Ok", nil];
                         [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
                         [alert show];
                         pageSubmitAlertView = NO;
                     }
-                    else if (timesShown==2&&__optionLocation==22)
+                    else if (timesShown==2&&_optionLocation==22)
                     {
                         timesShown++;
-                        txtNotes.text = [NSString stringWithFormat:@"Fittings: %@ - %@",textField.text, txtNotes.text];
+                        _txtNotes.text = [NSString stringWithFormat:@"Fittings: %@ - %@",textField.text, _txtNotes.text];
                         pageSubmitAlertView = NO;
                     }
                     else if (![textField.text isEqualToString:@""])
                     {
-                        txtNotes.text = [NSString stringWithFormat:@"%@ - %@",textField.text, txtNotes.text];
+                        _txtNotes.text = [NSString stringWithFormat:@"%@ - %@",textField.text, _txtNotes.text];
                         NSLog(@"text:[%@]", textField.text);
                         break;
                     }
@@ -477,10 +442,10 @@
                                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Test Loads?" message:@"Is This a Test Load?" delegate:self cancelButtonTitle:@"NO" otherButtonTitles:@"YES", nil];
                                     [alert show];
                                     testLoad = YES;
-                                    createCertificateButton.enabled = TRUE;
+                                    _createCertificateButton.enabled = TRUE;
                                 }
                                 else {
-                                    createCertificateButton.enabled = FALSE;
+                                    _createCertificateButton.enabled = FALSE;
 
                                     [PDFGenerator DisplayPDFWithOverallRating:inspection];
                                 }
@@ -528,7 +493,7 @@
                             finished = NO;
                             [PDFGenerator DisplayPDFWithOverallRating : inspection];
                             
-                            createCertificateButton.enabled = TRUE;
+                            _createCertificateButton.enabled = TRUE;
                         }
                         
                     }
@@ -570,26 +535,26 @@
     [self.navigationController pushViewController:mvc animated:YES];
 }
 
-- (IBAction)nextPressed {
-    if (__optionLocation < [__partsArray count] - 1) {
-        NSUInteger selectedRow = [defficiencyPicker selectedRowInComponent:0];
-        NSString *myDeficientPart = [[defficiencyPicker delegate] pickerView: defficiencyPicker titleForRow:selectedRow forComponent:0];
-        [self saveInfo:txtNotes.text :defficiencySwitch.on:[defficiencyPicker selectedRowInComponent:0]:myDeficientPart:applicableSwitch.on];
-        __optionLocation = __optionLocation + 1;
-        [self fillOptionArrays:__partsArray[__optionLocation]];
-        [self changePickerArray:defficiencyPickerArray];
-        [self changeLayout:__optionLocation PartsArray:__partsArray ItemListStore:itemListStore];
+- (void) nextPressed {
+    if (_optionLocation < [_partsArray count] - 1) {
+        NSUInteger selectedRow = [_deficiencyPicker selectedRowInComponent:0];
+        NSString *myDeficientPart = [self pickerView: _deficiencyPicker titleForRow:selectedRow forComponent:0];
+        [self saveInfo:_txtNotes.text :_deficiencySwitch.on:[_deficiencyPicker selectedRowInComponent:0]:myDeficientPart:_applicableSwitch.on];
+        _optionLocation = _optionLocation + 1;
+        [self fillOptionArrays:_partsArray[_optionLocation]];
+        [self changePickerArray:_deficiencyPickerArray];
+        [self changeLayout:_optionLocation PartsArray:_partsArray ItemListStore:itemListStore];
     }
 }
-- (IBAction)previousPressed {
-    if (__optionLocation > 0) {
-        NSUInteger selectedRow = [defficiencyPicker selectedRowInComponent:0];
-        NSString *myDeficientPart = [[defficiencyPicker delegate] pickerView:defficiencyPicker titleForRow:selectedRow forComponent:0];
-        [self saveInfo:txtNotes.text :defficiencySwitch.on:[defficiencyPicker selectedRowInComponent:0]:myDeficientPart:applicableSwitch.on];
-        __optionLocation = __optionLocation - 1;
-        [self fillOptionArrays:__partsArray[__optionLocation]];
-        [self changePickerArray:defficiencyPickerArray];
-        [self changeLayout:__optionLocation PartsArray:__partsArray ItemListStore:itemListStore];
+- (void) previousPressed {
+    if (_optionLocation > 0) {
+        NSUInteger selectedRow = [_deficiencyPicker selectedRowInComponent:0];
+        NSString *myDeficientPart = [[_deficiencyPicker delegate] pickerView:_deficiencyPicker titleForRow:selectedRow forComponent:0];
+        [self saveInfo:_txtNotes.text :_deficiencySwitch.on:[_deficiencyPicker selectedRowInComponent:0]:myDeficientPart:_applicableSwitch.on];
+        _optionLocation = _optionLocation - 1;
+        [self fillOptionArrays:_partsArray[_optionLocation]];
+        [self changePickerArray:_deficiencyPickerArray];
+        [self changeLayout:_optionLocation PartsArray:_partsArray ItemListStore:itemListStore];
     }
 }
 
@@ -603,7 +568,7 @@
 {
     Condition *myCondition = [[Condition alloc] initWithParameters:myNotes Defficiency:myDeficient PickerSelection:mySelection DeficientPart:myDeficientPart Applicable:myApplicable];
 
-    [itemListStore setCondition:__optionLocation Condition : myCondition];
+    [itemListStore setCondition:_optionLocation Condition : myCondition];
     myCondition = nil;
 }
 
@@ -613,11 +578,11 @@
     return 1;
 }
 - (NSInteger) pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-    return [pickerData count];
+    return [_pickerData count];
 }
 #pragma mark Picker Delegate Methods
 - (NSString *) pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-    return [pickerData objectAtIndex:row];
+    return [_pickerData objectAtIndex:row];
 }
 
 - (CGFloat) pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component
@@ -640,7 +605,7 @@
         [label setFont:[UIFont systemFontOfSize:16.0f]];
     }
     
-    label.text = [pickerData objectAtIndex:row];
+    label.text = [_pickerData objectAtIndex:row];
     
     return label;
 }
@@ -648,32 +613,32 @@
 - (void) selectedOption : (NSString *) selection
 {
     //If the item is contained in the picker, than we go straight to that in the picker.
-    if ([defficiencyPickerArray containsObject:selection])
+    if ([_deficiencyPickerArray containsObject:selection])
     {
-        [defficiencyPicker selectRow:[defficiencyPickerArray indexOfObject:selection] inComponent:0 animated:YES];
+        [_deficiencyPicker selectRow:[_deficiencyPickerArray indexOfObject:selection] inComponent:0 animated:YES];
     }
 }
 
 - (void) selectedPart:(Part *)currentPart
 {
     //If the view controller has already been loaded then we continue to save the information on the current page.
-    if (txtNotes != nil)
+    if (_txtNotes != nil)
     {
-        NSUInteger selectedRow = [defficiencyPicker selectedRowInComponent:0];
-        NSString *myDeficientPart = [[defficiencyPicker delegate] pickerView: defficiencyPicker titleForRow:selectedRow forComponent:0];
-        [self saveInfo:txtNotes.text :defficiencySwitch.on:[defficiencyPicker selectedRowInComponent:0]:myDeficientPart:applicableSwitch.on];
+        NSUInteger selectedRow = [_deficiencyPicker selectedRowInComponent:0];
+        NSString *myDeficientPart = [[_deficiencyPicker delegate] pickerView: _deficiencyPicker titleForRow:selectedRow forComponent:0];
+        [self saveInfo:_txtNotes.text :_deficiencySwitch.on:[_deficiencyPicker selectedRowInComponent:0]:myDeficientPart:_applicableSwitch.on];
         
         //We need to get the parts that are unique to this particular crane.
-        Parts *parts = [[Parts alloc] init:__craneType];
+        Parts *parts = [[Parts alloc] init:_craneType];
         
         //Get the actual array itself from the parts object
-        __partsArray = [parts myParts];
+        _partsArray = [parts myParts];
         
         //Get the options that are unique to this particular part.
-        [self fillOptionArrays:__partsArray[__optionLocation]];
+        [self fillOptionArrays:_partsArray[_optionLocation]];
         
-        [self changePickerArray:defficiencyPickerArray];
-        [self changeLayout:__optionLocation PartsArray:__partsArray ItemListStore:itemListStore];
+        [self changePickerArray:_deficiencyPickerArray];
+        [self changeLayout:_optionLocation PartsArray:_partsArray ItemListStore:itemListStore];
     }
 }
 //This method gets the view controller that will display the UIDocumentInteractionController preview

@@ -13,13 +13,12 @@
 
 @synthesize optionsArray = __optionsArray;
 
-- (id) init         : (NSString*) typeOfCrane
-  OptionsDictionary : (NSDictionary *) optionsDictionary
+- (id) initWithPart : (NSString*) part
 {
     if (self = [super init]) {
         __optionsArray = [[NSMutableArray alloc] init];
     }
-    [self addOptionsFromMongo:typeOfCrane OptionsDictinoary:optionsDictionary];
+    [self addOptions:part];
     
     return self;
 }
@@ -28,17 +27,12 @@
     return __optionsArray;
 }
 
-- (void) addOptionsFromMongo : (NSString *) searchValue
-           OptionsDictinoary : (NSDictionary *) optionsDictionary
+// This method fills the options
+- (void) addOptions : (NSString *) searchValue
 {
-    [optionsDictionary enumerateKeysAndObjectsUsingBlock:^(id key, id options, BOOL *stop) {
-        if ([key isEqualToString:searchValue])
-        {
-            for (int i = 0; i < [options count]; i++) {
-                [__optionsArray addObject:options[i]];
-            }
-        }
-    }];
+    // Here's our point of attack
+    __optionsArray  = [NSMutableArray arrayWithObjects:@"1", @"2", @"1", @"2", @"1", @"2", @"1", @"2", @"1", @"2", nil];
+
 }
 
 -(void) setMyOptionsArray:(NSMutableArray *)input {

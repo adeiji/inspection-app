@@ -12,6 +12,9 @@
 #import "MasterViewController.h"
 #import "InspectionManager.h"
 #import "InspectionBussiness.h"
+#import <Parse/Parse.h>
+#import <ParseCrashReporting/ParseCrashReporting.h>
+#import "SyncManager.h"
 
 @interface AppDelegate ()
 
@@ -36,6 +39,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [self setUpParseWithLaunchOptions:launchOptions];
     DBAccountManager* accountMgr =[[DBAccountManager alloc] initWithAppKey:@"878n3v7pfduyrrr" secret:@"0745q3julqjk9mb"];
     [DBAccountManager setSharedManager:accountMgr];
     
@@ -47,13 +51,25 @@
     }
     else if ([[UIDevice currentDevice] userInterfaceIdiom] ==UIUserInterfaceIdiomPhone)
     {
-        ViewController *viewController = (ViewController *)[(UINavigationController *) self.window.rootViewController topViewController];
+
     }
-    
+
+    [SyncManager getAllInspectionDetails];
     [self fillCriteriaObjects];
     [self getPreviouslyFinishedCranes];
     
     return YES;
+}
+
+- (void) setUpParseWithLaunchOptions : (NSDictionary *) launchOptions {
+    // Connect our app to Parse
+    // Allow the parse local data store
+    [ParseCrashReporting enable];
+    // Parse Keys - Live
+    [Parse setApplicationId:@"pXYoDYstnZ7wvICh2nNtxmAwegOpjhsdRpFjNoVE"
+                  clientKey:@"QiK7CN2M6Yh86Kn9FMLk8OBO0uHV9Icg0ryxrc11"];
+
+    [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
 }
 
 - (void) getPreviouslyFinishedCranes
@@ -80,7 +96,6 @@
     
     for (int i = 0; i < __searchCriteria.count; i++)
     {
-//        NSDictionary *bsonDictionary = [__searchCriteria[i] dictionaryValue];
         NSDictionary *bsonDictionary;
         //Get the type name that we're at in the array.
         NSString *typeName = [[bsonDictionary objectForKey:TYPE_COL] objectForKey:TYPE_NAME_COL];

@@ -17,15 +17,8 @@
     
 @property (strong, nonatomic)  NSMutableArray* optionsArray;
     
-
-- (id)         init : (NSString*) typeOfCrane
-  OptionsDictionary : (NSDictionary *) optionsDictionary;
-
-- (void) addOptionsFromMongo : (NSString *) searchValue
-           OptionsDictinoary : (NSDictionary *) optionsDictionary;
-
+- (id) initWithPart : (NSString*) part;
 - (NSMutableArray*) myOptionsArray;
-- (void) addMyOptions : (NSString*) typeOfCrane;
 - (void) setMyOptionsArray: (NSMutableArray*) input;
 
 

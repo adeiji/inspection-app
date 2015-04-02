@@ -45,7 +45,7 @@
 		CE40D39018087F670080E9BD /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE40D38F18087F670080E9BD /* CFNetwork.framework */; };
 		CE40D39218087F810080E9BD /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE40D39118087F810080E9BD /* SystemConfiguration.framework */; };
 		CE40D39418087F970080E9BD /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE40D39318087F970080E9BD /* libc++.dylib */; };
-		CE40D39718088E340080E9BD /* Crane.m in Sources */ = {isa = PBXBuildFile; fileRef = CE40D39618088E340080E9BD /* Crane.m */; };
+		CE40D39718088E340080E9BD /* InspectionCrane.m in Sources */ = {isa = PBXBuildFile; fileRef = CE40D39618088E340080E9BD /* InspectionCrane.m */; };
 		CE40D39A180894300080E9BD /* PDFGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = CE40D399180894300080E9BD /* PDFGenerator.m */; };
 		CE486ACB180C83E900B1B953 /* Inspection.m in Sources */ = {isa = PBXBuildFile; fileRef = CE486ACA180C83E900B1B953 /* Inspection.m */; };
 		CE486AE2180F17DC00B1B953 /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE486AE1180F17DC00B1B953 /* MasterViewController.m */; };
@@ -59,6 +59,13 @@
 		CEFD6D2D1839575E001764E9 /* CraneView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEFD6D2C1839575E001764E9 /* CraneView.xib */; };
 		CEFD6D70183A8705001764E9 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFD6D6F183A8705001764E9 /* Default-568h@2x.png */; };
 		CEFD6D72183A87D8001764E9 /* JobInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEFD6D71183A87D8001764E9 /* JobInfoView.xib */; };
+		F49DDEA71ACCC60C00A02162 /* SyncManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F49DDEA61ACCC60C00A02162 /* SyncManager.m */; };
+		F49DDEAD1ACCCB2700A02162 /* IAConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = F49DDEAC1ACCCB2700A02162 /* IAConstants.m */; };
+		F49DDEB11ACCDA5C00A02162 /* IACraneInspectionDetailsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F49DDEB01ACCDA5C00A02162 /* IACraneInspectionDetailsManager.m */; };
+		F49DDEB41ACCDAEB00A02162 /* InspectionModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F49DDEB21ACCDAEB00A02162 /* InspectionModel.xcdatamodeld */; };
+		F49DDEBB1ACCDC6300A02162 /* InspectionPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = F49DDEBA1ACCDC6300A02162 /* InspectionPoint.m */; };
+		F49DDEBE1ACCDC6300A02162 /* Option.m in Sources */ = {isa = PBXBuildFile; fileRef = F49DDEBD1ACCDC6300A02162 /* Option.m */; };
+		F49DDED31ACCE08A00A02162 /* InspectionCraneObject.m in Sources */ = {isa = PBXBuildFile; fileRef = F49DDED21ACCE08A00A02162 /* InspectionCraneObject.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +79,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3D84AFA8E9F5B30D7C62C404 /* Pods-Inspection Form App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Inspection Form App.release.xcconfig"; path = "Pods/Target Support Files/Pods-Inspection Form App/Pods-Inspection Form App.release.xcconfig"; sourceTree = "<group>"; };
+		75F0F745295218DBBA164DA6 /* libPods-Inspection Form App.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Inspection Form App.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B0787C215113448006857A8 /* TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewController.h; sourceTree = "<group>"; };
 		8B0787C315113448006857A8 /* TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewController.m; sourceTree = "<group>"; };
 		8B0787C515113796006857A8 /* Parts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Parts.h; sourceTree = "<group>"; };
@@ -134,8 +143,8 @@
 		CE40D38F18087F670080E9BD /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		CE40D39118087F810080E9BD /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		CE40D39318087F970080E9BD /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
-		CE40D39518088E340080E9BD /* Crane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Crane.h; sourceTree = "<group>"; };
-		CE40D39618088E340080E9BD /* Crane.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Crane.m; sourceTree = "<group>"; };
+		CE40D39518088E340080E9BD /* InspectionCrane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectionCrane.h; sourceTree = "<group>"; };
+		CE40D39618088E340080E9BD /* InspectionCrane.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InspectionCrane.m; sourceTree = "<group>"; };
 		CE40D398180894300080E9BD /* PDFGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFGenerator.h; sourceTree = "<group>"; };
 		CE40D399180894300080E9BD /* PDFGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFGenerator.m; sourceTree = "<group>"; };
 		CE486AC9180C83E900B1B953 /* Inspection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Inspection.h; sourceTree = "<group>"; };
@@ -154,6 +163,20 @@
 		CEFD6D2C1839575E001764E9 /* CraneView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CraneView.xib; sourceTree = "<group>"; };
 		CEFD6D6F183A8705001764E9 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		CEFD6D71183A87D8001764E9 /* JobInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JobInfoView.xib; sourceTree = "<group>"; };
+		E1A4C2449B6DA9D1ED2E1AE3 /* Pods-Inspection Form App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Inspection Form App.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Inspection Form App/Pods-Inspection Form App.debug.xcconfig"; sourceTree = "<group>"; };
+		F49DDEA51ACCC60C00A02162 /* SyncManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncManager.h; sourceTree = "<group>"; };
+		F49DDEA61ACCC60C00A02162 /* SyncManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncManager.m; sourceTree = "<group>"; };
+		F49DDEAB1ACCCB2700A02162 /* IAConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAConstants.h; sourceTree = "<group>"; };
+		F49DDEAC1ACCCB2700A02162 /* IAConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAConstants.m; sourceTree = "<group>"; };
+		F49DDEAF1ACCDA5C00A02162 /* IACraneInspectionDetailsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IACraneInspectionDetailsManager.h; sourceTree = "<group>"; };
+		F49DDEB01ACCDA5C00A02162 /* IACraneInspectionDetailsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IACraneInspectionDetailsManager.m; sourceTree = "<group>"; };
+		F49DDEB31ACCDAEB00A02162 /* InspectionModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = InspectionModel.xcdatamodel; sourceTree = "<group>"; };
+		F49DDEB91ACCDC6300A02162 /* InspectionPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InspectionPoint.h; path = "core data/InspectionPoint.h"; sourceTree = "<group>"; };
+		F49DDEBA1ACCDC6300A02162 /* InspectionPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InspectionPoint.m; path = "core data/InspectionPoint.m"; sourceTree = "<group>"; };
+		F49DDEBC1ACCDC6300A02162 /* Option.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Option.h; path = "core data/Option.h"; sourceTree = "<group>"; };
+		F49DDEBD1ACCDC6300A02162 /* Option.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Option.m; path = "core data/Option.m"; sourceTree = "<group>"; };
+		F49DDED11ACCE08A00A02162 /* InspectionCraneObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectionCraneObject.h; sourceTree = "<group>"; };
+		F49DDED21ACCE08A00A02162 /* InspectionCraneObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InspectionCraneObject.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -213,6 +236,10 @@
 		8BC58443150ABD87000AC695 = {
 			isa = PBXGroup;
 			children = (
+				F49DDEB51ACCDC4800A02162 /* Core Data */,
+				F49DDEAB1ACCCB2700A02162 /* IAConstants.h */,
+				F49DDEAC1ACCCB2700A02162 /* IAConstants.m */,
+				F49DDEA01ACCC5CE00A02162 /* Managers */,
 				CE147B671836844C005CC483 /* InspectionManager.h */,
 				CE147B681836844C005CC483 /* InspectionManager.m */,
 				CE147B631835C263005CC483 /* PartSelectionDelegate.h */,
@@ -225,6 +252,7 @@
 				8BC58476150ABD88000AC695 /* Inspection Form AppTests */,
 				8BC58451150ABD87000AC695 /* Frameworks */,
 				8BC5844F150ABD87000AC695 /* Products */,
+				BC9FDC5E9812E79FC3CEC513 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -249,6 +277,7 @@
 				8BC58454150ABD87000AC695 /* Foundation.framework */,
 				8BC58456150ABD87000AC695 /* CoreGraphics.framework */,
 				8BC58470150ABD88000AC695 /* SenTestingKit.framework */,
+				75F0F745295218DBBA164DA6 /* libPods-Inspection Form App.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -315,6 +344,15 @@
 				8BC58479150ABD88000AC695 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		BC9FDC5E9812E79FC3CEC513 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E1A4C2449B6DA9D1ED2E1AE3 /* Pods-Inspection Form App.debug.xcconfig */,
+				3D84AFA8E9F5B30D7C62C404 /* Pods-Inspection Form App.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		CE38513D18107296003629DA /* View Controllers */ = {
@@ -447,8 +485,8 @@
 		CE486AD7180CB1AD00B1B953 /* Crane */ = {
 			isa = PBXGroup;
 			children = (
-				CE40D39518088E340080E9BD /* Crane.h */,
-				CE40D39618088E340080E9BD /* Crane.m */,
+				CE40D39518088E340080E9BD /* InspectionCrane.h */,
+				CE40D39618088E340080E9BD /* InspectionCrane.m */,
 			);
 			name = Crane;
 			sourceTree = "<group>";
@@ -510,6 +548,47 @@
 			name = "Business Layer";
 			sourceTree = "<group>";
 		};
+		F49DDEA01ACCC5CE00A02162 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				F49DDEAE1ACCDA4600A02162 /* Crane Inspection Manager */,
+				F49DDEA11ACCC5D200A02162 /* Sync Manager */,
+			);
+			name = Managers;
+			sourceTree = "<group>";
+		};
+		F49DDEA11ACCC5D200A02162 /* Sync Manager */ = {
+			isa = PBXGroup;
+			children = (
+				F49DDEA51ACCC60C00A02162 /* SyncManager.h */,
+				F49DDEA61ACCC60C00A02162 /* SyncManager.m */,
+			);
+			name = "Sync Manager";
+			sourceTree = "<group>";
+		};
+		F49DDEAE1ACCDA4600A02162 /* Crane Inspection Manager */ = {
+			isa = PBXGroup;
+			children = (
+				F49DDEAF1ACCDA5C00A02162 /* IACraneInspectionDetailsManager.h */,
+				F49DDEB01ACCDA5C00A02162 /* IACraneInspectionDetailsManager.m */,
+			);
+			name = "Crane Inspection Manager";
+			sourceTree = "<group>";
+		};
+		F49DDEB51ACCDC4800A02162 /* Core Data */ = {
+			isa = PBXGroup;
+			children = (
+				F49DDEB21ACCDAEB00A02162 /* InspectionModel.xcdatamodeld */,
+				F49DDEBC1ACCDC6300A02162 /* Option.h */,
+				F49DDEBD1ACCDC6300A02162 /* Option.m */,
+				F49DDEB91ACCDC6300A02162 /* InspectionPoint.h */,
+				F49DDEBA1ACCDC6300A02162 /* InspectionPoint.m */,
+				F49DDED11ACCE08A00A02162 /* InspectionCraneObject.h */,
+				F49DDED21ACCE08A00A02162 /* InspectionCraneObject.m */,
+			);
+			name = "Core Data";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -517,9 +596,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8BC58481150ABD88000AC695 /* Build configuration list for PBXNativeTarget "Inspection Form App" */;
 			buildPhases = (
+				12D7C41C3A7D475C14C223B7 /* Check Pods Manifest.lock */,
 				8BC5844A150ABD87000AC695 /* Sources */,
 				8BC5844B150ABD87000AC695 /* Frameworks */,
 				8BC5844C150ABD87000AC695 /* Resources */,
+				A0995222D9DDBB7A6B3F0375 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -611,6 +692,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		12D7C41C3A7D475C14C223B7 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 		8BC5846D150ABD88000AC695 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -623,6 +719,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+		A0995222D9DDBB7A6B3F0375 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Inspection Form App/Pods-Inspection Form App-resources.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -638,21 +749,28 @@
 				8BC58466150ABD87000AC695 /* ViewController.m in Sources */,
 				8BE08B22150D0AFE005B5E4C /* Customer.m in Sources */,
 				8BECD3BC150E920500616735 /* Options.m in Sources */,
+				F49DDEA71ACCC60C00A02162 /* SyncManager.m in Sources */,
 				8BECD3BF150E934900616735 /* OptionList.m in Sources */,
 				8B544612150F0C3E007E1CA9 /* GradientView.m in Sources */,
 				8B0787C415113448006857A8 /* TableViewController.m in Sources */,
 				CE147B691836844C005CC483 /* InspectionManager.m in Sources */,
 				8B0787C715113796006857A8 /* Parts.m in Sources */,
 				CE486AE6180F1E4200B1B953 /* InspectionViewController.m in Sources */,
+				F49DDED31ACCE08A00A02162 /* InspectionCraneObject.m in Sources */,
 				CE798DB7180F369600C2E5A0 /* InspectionBussiness.m in Sources */,
 				CE486ACB180C83E900B1B953 /* Inspection.m in Sources */,
 				8BE881F81513F82400360C63 /* ItemListConditionStorage.m in Sources */,
 				8BE881FC1513FA4200360C63 /* Condition.m in Sources */,
 				8BF10A9C152FB93D00DC5F05 /* TextField.m in Sources */,
 				CE40D38B18087BC20080E9BD /* DataLayer.m in Sources */,
-				CE40D39718088E340080E9BD /* Crane.m in Sources */,
+				F49DDEB11ACCDA5C00A02162 /* IACraneInspectionDetailsManager.m in Sources */,
+				F49DDEB41ACCDAEB00A02162 /* InspectionModel.xcdatamodeld in Sources */,
+				F49DDEBE1ACCDC6300A02162 /* Option.m in Sources */,
+				CE40D39718088E340080E9BD /* InspectionCrane.m in Sources */,
 				CE486AE2180F17DC00B1B953 /* MasterViewController.m in Sources */,
 				8BE9DE801616355800906B98 /* OrdinalNumberFormatter.m in Sources */,
+				F49DDEBB1ACCDC6300A02162 /* InspectionPoint.m in Sources */,
+				F49DDEAD1ACCCB2700A02162 /* IAConstants.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -755,6 +873,7 @@
 		};
 		8BC58482150ABD88000AC695 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E1A4C2449B6DA9D1ED2E1AE3 /* Pods-Inspection Form App.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -794,6 +913,7 @@
 		};
 		8BC58483150ABD88000AC695 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3D84AFA8E9F5B30D7C62C404 /* Pods-Inspection Form App.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -892,6 +1012,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		F49DDEB21ACCDAEB00A02162 /* InspectionModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				F49DDEB31ACCDAEB00A02162 /* InspectionModel.xcdatamodel */,
+			);
+			currentVersion = F49DDEB31ACCDAEB00A02162 /* InspectionModel.xcdatamodel */;
+			path = InspectionModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 8BC58445150ABD87000AC695 /* Project object */;
 }

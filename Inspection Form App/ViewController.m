@@ -93,9 +93,8 @@
 @synthesize txtTechnicianName;
 @synthesize lblCraneDesc;
 @synthesize CreateCertificateButton;
-@synthesize CraneDescriptionUIPicker;
+@synthesize craneDescriptionPickerView;
 @synthesize customerName;
-@synthesize craneDescriptionsArray;
 @synthesize selectCraneButton;
 @synthesize CustomerInfoScrollView;
 @synthesize CraneInspectionView;
@@ -145,9 +144,7 @@
     
     delegate = [[UIApplication sharedApplication] delegate];
     
-
-    
-    craneDescriptionsArray = delegate.craneTypes;
+    _craneDescriptionsArray = [NSMutableArray arrayWithObjects:@"Jib", @"Monorial", @"Bridge", nil];
     owner = @"";
     
     [self LoadOwner];
@@ -159,7 +156,7 @@
         [alert show];
     }
     
-    txtCraneDescription.inputView = CraneDescriptionUIPicker;
+    txtCraneDescription.inputView = craneDescriptionPickerView;
     txtCraneDescription.inputAccessoryView = selectCraneButton;
     
     [self setupTxtDate];
@@ -233,26 +230,15 @@
 - (void) setUpCraneDescriptionPicker
 {
     //Create the crane description picker and add it to the gradient view at the very bottom which is where we show the different potential Crane Types.
-    CraneDescriptionUIPicker = [[UIPickerView alloc] initWithFrame:CGRectMake(200, -10, 358, 100)];
-    CraneDescriptionUIPicker.delegate = self;
-    
-    CraneDescriptionUIPicker.hidden = false;
-    [CraneDescriptionUIPicker setTag:1];
-    [CraneDescriptionUIPicker selectRow:1 inComponent:0 animated:YES];
-    CraneDescriptionUIPicker.dataSource = self;
-    [craneView addSubview:CraneDescriptionUIPicker];
+    craneDescriptionPickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(200, -10, 358, 100)];
+    [craneDescriptionPickerView setTag:1];
+    [craneDescriptionPickerView selectRow:1 inComponent:0 animated:YES];
+    [craneView addSubview:craneDescriptionPickerView];
 }
 
 - (void) editInspectionViewController
 {
-    if (![[UIDevice currentDevice].model isEqualToString:@"iPad"])
-    {
-        inspectionViewController = [[UIStoryboard storyboardWithName:@"iPhoneStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"inspectionViewController"];
-    }
-    else
-    {
-        inspectionViewController = [[UIStoryboard storyboardWithName:@"iPadMainStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"inspectionViewController"];
-    }
+    inspectionViewController = [[UIStoryboard storyboardWithName:@"iPadMainStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"inspectionViewController"];
     
     inspectionViewController.optionLocation = 0;
 }
@@ -364,7 +350,7 @@
 {
     if (textField.tag == 12)
     {
-        CraneDescriptionUIPicker.hidden = FALSE;
+        craneDescriptionPickerView.hidden = FALSE;
         selectCraneButton.hidden = FALSE;
         
     }
@@ -374,7 +360,7 @@
 - (void) textFieldDidEndEditing:(UITextField *)textField {
     if (textField.tag == 12)
     {
-        CraneDescriptionUIPicker.hidden = TRUE;
+        craneDescriptionPickerView.hidden = TRUE;
     }
     activeField = nil;
 }
@@ -540,9 +526,9 @@
 
 
 //Create the crane from the info that has been inserted into the text boxes.  This crane will then be passed to the InspectionViewController.
-- (Crane *) createCrane
+- (InspectionCrane *) createCrane
 {
-    Crane *crane = [[Crane alloc] init];
+    InspectionCrane *crane = [[InspectionCrane alloc] init];
     
     crane.hoistSrl = txtHoistSrl.text;
     crane.equipmentNumber = txtEquipNum.text;
@@ -568,7 +554,7 @@
     return customer;
 }
 //Create the inspection that will be read from.
-- (void) createInspection : (Crane *) crane
+- (void) createInspection : (InspectionCrane *) crane
                  Customer : (Customer *) customer
 {
     inspection = [[Inspection alloc] init];
@@ -670,9 +656,9 @@
 - (IBAction)partsListButtonClicked:(id)sender{
 
     optionLocation = 0;
-    NSUInteger selectedRow = [CraneDescriptionUIPicker selectedRowInComponent:0];
-
-    NSString * craneType = [[CraneDescriptionUIPicker delegate] pickerView:CraneDescriptionUIPicker titleForRow:selectedRow forComponent:0];
+    NSInteger selectedRow = [craneDescriptionPickerView selectedRowInComponent:0];
+    
+    NSString * craneType = [self pickerView:craneDescriptionPickerView titleForRow:selectedRow forComponent:0];
     Parts *parts = [[Parts alloc] init : craneType ];
     
     //Gets all the parts that have to do with this specific crane
@@ -681,7 +667,7 @@
     //Here we create all the necessary objects to store the customer and the crane information so that this can be saved to a singleton object and accessed from anywhere.
     Customer *customer = [InspectionBussiness createCustomer:txtCustomerName.text CustomerContact:txtCustomerContact.text CustomerAddress:txtAddress.text CustomerEmail:txtEmail.text];
     
-    Crane *crane = [InspectionBussiness createCrane:txtHoistSrl.text CraneType:craneType EquipmentNumber:txtEquipNum.text CraneMfg:txtCraneMfg.text hoistMfg:txtHoistMfg.text CraneSrl:txtCraneSrl.text Capacity:txtCap.text HoistMdl:txtHoistMdl.text];
+    InspectionCrane *crane = [InspectionBussiness createCrane:txtHoistSrl.text CraneType:craneType EquipmentNumber:txtEquipNum.text CraneMfg:txtCraneMfg.text hoistMfg:txtHoistMfg.text CraneSrl:txtCraneSrl.text Capacity:txtCap.text HoistMdl:txtHoistMdl.text];
     
     inspection.crane = crane;
     inspection.customer = customer;
@@ -729,8 +715,8 @@
 - (NSDictionary *) createCraneDictinoary
 {
     //Get the crane type fromt he UIPicker
-    NSUInteger selectedRow = [CraneDescriptionUIPicker selectedRowInComponent:0];
-    NSString * craneType = [[CraneDescriptionUIPicker delegate] pickerView:CraneDescriptionUIPicker titleForRow:selectedRow forComponent:0];
+    NSUInteger selectedRow = [craneDescriptionPickerView selectedRowInComponent:0];
+    NSString * craneType = [[craneDescriptionPickerView delegate] pickerView:craneDescriptionPickerView titleForRow:selectedRow forComponent:0];
     
     NSDictionary *dictionary = [[NSDictionary alloc] initWithObjectsAndKeys:
                                 txtCap.text, @"capacity",
@@ -750,9 +736,9 @@
     if ([self validateSubmission : YES] != EMPTY_FIELD || INVALID_CHARACTER)
     {
         //Get the selected crane type fromt he crane picker.
-        NSUInteger selectedRow = [CraneDescriptionUIPicker selectedRowInComponent:0];
+        NSUInteger selectedRow = [craneDescriptionPickerView selectedRowInComponent:0];
 
-        NSString * craneType = [[CraneDescriptionUIPicker delegate] pickerView:CraneDescriptionUIPicker titleForRow:selectedRow forComponent:0];
+        NSString * craneType = [[craneDescriptionPickerView delegate] pickerView:craneDescriptionPickerView titleForRow:selectedRow forComponent:0];
         
         inspection.crane.description = craneType;
         
@@ -772,7 +758,7 @@
         
         Customer *customer = [InspectionBussiness createCustomer:txtCustomerName.text CustomerContact:txtCustomerContact.text CustomerAddress:txtAddress.text CustomerEmail:txtEmail.text];
         
-        Crane *crane = [InspectionBussiness createCrane:txtHoistSrl.text CraneType:craneType EquipmentNumber:txtEquipNum.text CraneMfg:txtCraneMfg.text hoistMfg:txtHoistMfg.text CraneSrl:txtCraneSrl.text Capacity:txtCap.text HoistMdl:txtHoistMdl.text];
+        InspectionCrane *crane = [InspectionBussiness createCrane:txtHoistSrl.text CraneType:craneType EquipmentNumber:txtEquipNum.text CraneMfg:txtCraneMfg.text hoistMfg:txtHoistMfg.text CraneSrl:txtCraneSrl.text Capacity:txtCap.text HoistMdl:txtHoistMdl.text];
         
         inspection.crane = crane;
         inspection.customer = customer;
@@ -877,12 +863,12 @@
 
 - (NSInteger) pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
     
-    return [craneDescriptionsArray count];
+    return [_craneDescriptionsArray count];
 }
 #pragma mark Picker Delegate Methods
 - (NSString *) pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
     
-    return [craneDescriptionsArray objectAtIndex:row];
+    return [_craneDescriptionsArray objectAtIndex:row];
     
 }
 

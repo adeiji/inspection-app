@@ -40,7 +40,7 @@
           CustomerEmail : (NSString*) customerEmail;
 
 //Create a crane object and send it to the recipient
-+ (Crane*) createCrane : (NSString*) hoistSrl
++ (InspectionCrane*) createCrane : (NSString*) hoistSrl
              CraneType : (NSString*) craneType
        EquipmentNumber : (NSString*) equipmentNumber
               CraneMfg : (NSString*) craneMfg

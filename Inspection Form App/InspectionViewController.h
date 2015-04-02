@@ -10,15 +10,34 @@
 #import "Condition.h"
 #import "ItemListConditionStorage.h"
 #import "PartSelectionDelegate.h"
+#import "InspectionBussiness.h"
 
 @interface InspectionViewController : UIViewController <UIPickerViewDelegate, UIPickerViewDataSource, PartSelectionDelegate, UIDocumentInteractionControllerDelegate>
+{
+
+    int timesShown;
+    int buttonIndex;
+    BOOL pageSubmitAlertView;
+    BOOL inspectionComplete;
+    BOOL loadRatings;
+    BOOL remarksLimitations;
+    BOOL finished;
+    BOOL proofLoad;
+    BOOL testLoad;
+    BOOL proofLoadDescription;
+    Inspection *inspection;
+    ItemListConditionStorage *itemListStore;
+    NSString *overallRating;
+    NSArray *_deficiencyPickerArray;
+    
+}
 
 @property (strong, nonatomic) IBOutlet UILabel *lblPartNumber;
 @property (strong, nonatomic) IBOutlet UILabel *lblPart;
 @property (strong, nonatomic) IBOutlet UISwitch *applicableSwitch;
-@property (strong, nonatomic) IBOutlet UISwitch *defficiencySwitch;
+@property (strong, nonatomic) IBOutlet UISwitch *deficiencySwitch;
 @property (strong, nonatomic) IBOutlet UITextView *txtNotes;
-@property (strong, nonatomic) IBOutlet UIPickerView *defficiencyPicker;
+@property (strong, nonatomic) IBOutlet UIPickerView *deficiencyPicker;
 @property (strong, nonatomic) IBOutlet NSArray *pickerData;
 @property (strong, nonatomic) NSString *craneType;
 @property (strong, nonatomic) NSArray *partsArray;

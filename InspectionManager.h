@@ -7,14 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Crane.h"
+#import "InspectionCrane.h"
 #import "Customer.h"
 #import "Inspection.h"
 #import <Dropbox/Dropbox.h>
 
 @interface InspectionManager : NSObject
 {
-    Crane *crane;
+    InspectionCrane *crane;
     Customer *customer;
     Inspection *inspection;
     DBAccount *dropboxAccount;
@@ -22,7 +22,7 @@
     DBTable *table;
 }
 
-@property (nonatomic, retain) Crane *crane;
+@property (nonatomic, retain) InspectionCrane *crane;
 @property (nonatomic, retain) Customer *customer;
 @property (nonatomic, retain) Inspection *inspection;
 @property (nonatomic, retain) DBAccount *dropboxAccount;
@@ -32,7 +32,7 @@
 
 + (InspectionManager *) sharedManager;
 
-- (void) setCrane:(Crane *)myCrane;
+- (void) setCrane:(InspectionCrane *)myCrane;
 - (void) setCustomer:(Customer *)myCustomer;
 - (void) setInspection:(Inspection *)myInspection;
 - (void) setDropboxAccount:(DBAccount *)myDropboxAccount;
