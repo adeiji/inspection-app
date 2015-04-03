@@ -32,4 +32,10 @@
  
  */
 - (void) saveInspectionDetailsWithCranes : (NSArray *) cranes;
+/*
+ 
+ Get all the inspection details from the server and store it in an array to be used through the application
+ 
+ */
+- (void) loadAllInspectionDetails;
 @end

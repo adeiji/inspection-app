@@ -43,7 +43,7 @@
     DBAccountManager* accountMgr =[[DBAccountManager alloc] initWithAppKey:@"878n3v7pfduyrrr" secret:@"0745q3julqjk9mb"];
     [DBAccountManager setSharedManager:accountMgr];
     [IACraneInspectionDetailsManager sharedManager];
-    [[IACraneInspectionDetailsManager sharedManager] getInspectionDetails];
+    [[IACraneInspectionDetailsManager sharedManager] loadAllInspectionDetails];
     
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
         UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;

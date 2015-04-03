@@ -36,7 +36,7 @@
  
  */
 - (void) saveInspectionDetailsWithCranes : (NSArray *) cranes {
-    [self resetInspectionDetailsDatabase];
+//    [self resetInspectionDetailsDatabase];
     NSManagedObjectContext *context =  ((AppDelegate *)[ [UIApplication sharedApplication] delegate]).managedObjectContext;
     NSEntityDescription *entity = [NSEntityDescription entityForName:kCoreDataClassCrane inManagedObjectContext:context];
     /* Get every crane that we just received from the server and grab all it's subdocuments and store them into coredata */

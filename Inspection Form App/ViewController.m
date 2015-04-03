@@ -57,7 +57,7 @@
                                                  name:UIKeyboardWillHideNotification 
                                                object:nil];
     
-    _craneDescriptionsArray = [NSMutableArray arrayWithObjects:@"Jib", @"Monorial", @"Bridge", nil];
+    _craneDescriptionsArray = [[IACraneInspectionDetailsManager sharedManager] cranes];
     owner = @"";
     
     [self LoadOwner];
@@ -77,8 +77,6 @@
     _optionLocation=0;
     [self resetVariables];
     _txtTechnicianName.text = [owner uppercaseString];
-    [self setUpCraneDescriptionPicker];
-    
     
     //If the Dropbox account is linked to this device then we remove the link to dropbox button.
     _account = [[DBAccountManager sharedManager] linkedAccount];
@@ -128,15 +126,6 @@
     remarksLimitationsImposed = @"";
 }
 
-//This UIPicker is what is used to select the crane type.  This method will set up the necessary attributes.
-- (void) setUpCraneDescriptionPicker
-{
-    //Create the crane description picker and add it to the gradient view at the very bottom which is where we show the different potential Crane Types.
-    _craneDescriptionPickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(200, -10, 358, 100)];
-    [_craneDescriptionPickerView setTag:1];
-    [_craneDescriptionPickerView selectRow:1 inComponent:0 animated:YES];
-    [_craneView addSubview:_craneDescriptionPickerView];
-}
 
 - (void) editInspectionViewController
 {
@@ -520,14 +509,13 @@
 
     _optionLocation = 0;
     NSInteger selectedRow = [_craneDescriptionPickerView selectedRowInComponent:0];
-    NSString * craneType = [self pickerView:_craneDescriptionPickerView titleForRow:selectedRow forComponent:0];
-    Parts *craneParts = [[Parts alloc] init : craneType ];
-    [self storeInspectionJobInformationWithCraneType:craneType SelectedRow:selectedRow];
+    InspectionCrane *selectedCrane = [_craneDescriptionsArray objectAtIndex:selectedRow];
+    Parts *craneParts = [[Parts alloc] init : selectedCrane.name ];
+    [self storeInspectionJobInformationWithCraneType:selectedCrane.name SelectedRow:selectedRow];
 
     //Gets all the parts that have to do with this specific crane
     _myPartsArray = [craneParts myParts];
-    InspectionCrane *inspectionCrane = [[IACraneInspectionDetailsManager sharedManager] crane];
-    _inspectionViewController.craneType = inspectionCrane.name;
+    _inspectionViewController.craneType = selectedCrane.name;
     _inspectionViewController.partsArray = _myPartsArray;
     [[InspectionManager sharedManager] setInspection:inspection];
     
@@ -537,7 +525,7 @@
     //Send the crane type that is being pushed.
     [[NSNotificationCenter defaultCenter] postNotificationName:kInspectionViewControllerPushed
                                                         object:self
-                                                      userInfo:@{@"craneType": craneType }];
+                                                      userInfo:@{@"craneType": selectedCrane.name }];
 }
 
 -(void) didReceiveMemoryWarning
@@ -555,25 +543,6 @@
                                 _txtCustomerContact.text, @"customercontact",
                                 _txtCustomerName.text, @"customername",
                                 _txtEmail.text, @"email", nil];
-    
-    return dictionary;
-}
-
-- (NSDictionary *) createCraneDictinoary
-{
-    //Get the crane type fromt he UIPicker
-    NSUInteger selectedRow = [_craneDescriptionPickerView selectedRowInComponent:0];
-    NSString * craneType = [[_craneDescriptionPickerView delegate] pickerView:_craneDescriptionPickerView titleForRow:selectedRow forComponent:0];
-    
-    NSDictionary *dictionary = [[NSDictionary alloc] initWithObjectsAndKeys:
-                                _txtCap.text, @"capacity",
-                                craneType, @"cranetype",
-                                _txtCraneMfg.text, @"cranemfg",
-                                _txtCraneSrl.text, @"cranesrl",
-                                _txtEquipNum.text, @"equipmentnumber",
-                                _txtHoistMdl.text, @"hoistmdl",
-                                _txtHoistMfg.text, @"hoistmfg",
-                                _txtHoistSrl.text, @"hoistsrl", nil];
     
     return dictionary;
 }
@@ -713,7 +682,9 @@
 #pragma mark Picker Delegate Methods
 - (NSString *) pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
     
-    return [_craneDescriptionsArray objectAtIndex:row];
+    InspectionCrane *crane = [_craneDescriptionsArray objectAtIndex:row];
+    
+    return crane.name;
     
 }
 

@@ -104,7 +104,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblCraneDesc;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *CreateCertificateButton;
 @property (strong, nonatomic) IBOutlet UIPickerView *craneDescriptionPickerView;
-@property (strong, nonatomic) NSMutableArray *craneDescriptionsArray;
+@property (strong, nonatomic) NSArray *craneDescriptionsArray;
 @property (weak, nonatomic) IBOutlet UIButton *selectCraneButton;
 
 typedef enum {
