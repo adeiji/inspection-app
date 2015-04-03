@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "IACraneInspectionDetailsManager.h"
 #import "InspectionCrane.h"
+#import "InspectionPoint.h"
+#import "InspectionOption.h"
 #import "AppDelegate.h"
 
 @interface SyncManager : NSObject

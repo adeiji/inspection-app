@@ -12,4 +12,7 @@ FOUNDATION_EXPORT NSString *const kParseClassCrane;
 FOUNDATION_EXPORT NSString *const kObjectName;
 FOUNDATION_EXPORT NSString *const kInspectionPoints;
 FOUNDATION_EXPORT NSString *const kCoreDataClassCrane;
+FOUNDATION_EXPORT NSString *const kCoreDataClassInspectionPoint;
+FOUNDATION_EXPORT NSString *const kOptions;
 FOUNDATION_EXPORT NSString *const kInspectionViewControllerPushed;
+FOUNDATION_EXPORT NSString *const kCoreDataClassInspectionOption;

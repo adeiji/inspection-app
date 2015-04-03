@@ -11,5 +11,8 @@
 NSString *const kParseClassCrane = @"Crane";
 NSString *const kObjectName = @"name";
 NSString *const kInspectionPoints = @"inspectionPoints";
+NSString *const kOptions = @"options";
 NSString *const kCoreDataClassCrane = @"InspectionCrane";
+NSString *const kCoreDataClassInspectionPoint = @"InspectionPoint";
+NSString *const kCoreDataClassInspectionOption = @"InspectionOption";
 NSString *const kInspectionViewControllerPushed = @"com.inspection.app.inspection.view.controller.pushed";

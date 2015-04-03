@@ -63,9 +63,9 @@
 		F49DDEAD1ACCCB2700A02162 /* IAConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = F49DDEAC1ACCCB2700A02162 /* IAConstants.m */; };
 		F49DDEB11ACCDA5C00A02162 /* IACraneInspectionDetailsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F49DDEB01ACCDA5C00A02162 /* IACraneInspectionDetailsManager.m */; };
 		F49DDEB41ACCDAEB00A02162 /* InspectionModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F49DDEB21ACCDAEB00A02162 /* InspectionModel.xcdatamodeld */; };
-		F49DDEBB1ACCDC6300A02162 /* InspectionPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = F49DDEBA1ACCDC6300A02162 /* InspectionPoint.m */; };
-		F49DDEBE1ACCDC6300A02162 /* Option.m in Sources */ = {isa = PBXBuildFile; fileRef = F49DDEBD1ACCDC6300A02162 /* Option.m */; };
 		F49DDED91ACCED1600A02162 /* InspectionCrane.m in Sources */ = {isa = PBXBuildFile; fileRef = F49DDED81ACCED1600A02162 /* InspectionCrane.m */; };
+		F49DDEDF1ACF332900A02162 /* InspectionPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = F49DDEDE1ACF332900A02162 /* InspectionPoint.m */; };
+		F49DDEE51ACF33F100A02162 /* InspectionOption.m in Sources */ = {isa = PBXBuildFile; fileRef = F49DDEE41ACF33F100A02162 /* InspectionOption.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -171,12 +171,12 @@
 		F49DDEAF1ACCDA5C00A02162 /* IACraneInspectionDetailsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IACraneInspectionDetailsManager.h; sourceTree = "<group>"; };
 		F49DDEB01ACCDA5C00A02162 /* IACraneInspectionDetailsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IACraneInspectionDetailsManager.m; sourceTree = "<group>"; };
 		F49DDEB31ACCDAEB00A02162 /* InspectionModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = InspectionModel.xcdatamodel; sourceTree = "<group>"; };
-		F49DDEB91ACCDC6300A02162 /* InspectionPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InspectionPoint.h; path = "core data/InspectionPoint.h"; sourceTree = "<group>"; };
-		F49DDEBA1ACCDC6300A02162 /* InspectionPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InspectionPoint.m; path = "core data/InspectionPoint.m"; sourceTree = "<group>"; };
-		F49DDEBC1ACCDC6300A02162 /* Option.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Option.h; path = "core data/Option.h"; sourceTree = "<group>"; };
-		F49DDEBD1ACCDC6300A02162 /* Option.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Option.m; path = "core data/Option.m"; sourceTree = "<group>"; };
 		F49DDED71ACCED1600A02162 /* InspectionCrane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectionCrane.h; sourceTree = "<group>"; };
 		F49DDED81ACCED1600A02162 /* InspectionCrane.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InspectionCrane.m; sourceTree = "<group>"; };
+		F49DDEDD1ACF332900A02162 /* InspectionPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectionPoint.h; sourceTree = "<group>"; };
+		F49DDEDE1ACF332900A02162 /* InspectionPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InspectionPoint.m; sourceTree = "<group>"; };
+		F49DDEE31ACF33F100A02162 /* InspectionOption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectionOption.h; sourceTree = "<group>"; };
+		F49DDEE41ACF33F100A02162 /* InspectionOption.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InspectionOption.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -579,12 +579,12 @@
 			isa = PBXGroup;
 			children = (
 				F49DDEB21ACCDAEB00A02162 /* InspectionModel.xcdatamodeld */,
-				F49DDEBC1ACCDC6300A02162 /* Option.h */,
-				F49DDEBD1ACCDC6300A02162 /* Option.m */,
-				F49DDEB91ACCDC6300A02162 /* InspectionPoint.h */,
-				F49DDEBA1ACCDC6300A02162 /* InspectionPoint.m */,
+				F49DDEDD1ACF332900A02162 /* InspectionPoint.h */,
+				F49DDEDE1ACF332900A02162 /* InspectionPoint.m */,
 				F49DDED71ACCED1600A02162 /* InspectionCrane.h */,
 				F49DDED81ACCED1600A02162 /* InspectionCrane.m */,
+				F49DDEE31ACF33F100A02162 /* InspectionOption.h */,
+				F49DDEE41ACF33F100A02162 /* InspectionOption.m */,
 			);
 			name = "Core Data";
 			sourceTree = "<group>";
@@ -744,12 +744,14 @@
 			files = (
 				CE147B661835C2EA005CC483 /* Part.m in Sources */,
 				8BC5845F150ABD87000AC695 /* main.m in Sources */,
+				F49DDEDF1ACF332900A02162 /* InspectionPoint.m in Sources */,
 				8BC58463150ABD87000AC695 /* AppDelegate.m in Sources */,
 				CE40D39A180894300080E9BD /* PDFGenerator.m in Sources */,
 				8BC58466150ABD87000AC695 /* ViewController.m in Sources */,
 				F49DDED91ACCED1600A02162 /* InspectionCrane.m in Sources */,
 				8BE08B22150D0AFE005B5E4C /* Customer.m in Sources */,
 				8BECD3BC150E920500616735 /* Options.m in Sources */,
+				F49DDEE51ACF33F100A02162 /* InspectionOption.m in Sources */,
 				F49DDEA71ACCC60C00A02162 /* SyncManager.m in Sources */,
 				8BECD3BF150E934900616735 /* OptionList.m in Sources */,
 				8B544612150F0C3E007E1CA9 /* GradientView.m in Sources */,
@@ -765,11 +767,9 @@
 				CE40D38B18087BC20080E9BD /* DataLayer.m in Sources */,
 				F49DDEB11ACCDA5C00A02162 /* IACraneInspectionDetailsManager.m in Sources */,
 				F49DDEB41ACCDAEB00A02162 /* InspectionModel.xcdatamodeld in Sources */,
-				F49DDEBE1ACCDC6300A02162 /* Option.m in Sources */,
 				CE40D39718088E340080E9BD /* Crane.m in Sources */,
 				CE486AE2180F17DC00B1B953 /* MasterViewController.m in Sources */,
 				8BE9DE801616355800906B98 /* OrdinalNumberFormatter.m in Sources */,
-				F49DDEBB1ACCDC6300A02162 /* InspectionPoint.m in Sources */,
 				F49DDEAD1ACCCB2700A02162 /* IAConstants.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -876,6 +876,7 @@
 			baseConfigurationReference = E1A4C2449B6DA9D1ED2E1AE3 /* Pods-Inspection Form App.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
+				ARCHS = "$(ARCHS_STANDARD)";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -891,7 +892,7 @@
 				GCC_PREFIX_HEADER = "Inspection Form App/Inspection Form App-Prefix.pch";
 				"HEADER_SEARCH_PATHS[sdk=*]" = "\"${SRCROOT}/relative/path/to/RESTClient/Source\"";
 				INFOPLIST_FILE = "Inspection Form App/Inspection Form App-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/T1Autograph\"",
@@ -916,6 +917,7 @@
 			baseConfigurationReference = 3D84AFA8E9F5B30D7C62C404 /* Pods-Inspection Form App.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
+				ARCHS = "$(ARCHS_STANDARD)";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -930,7 +932,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Inspection Form App/Inspection Form App-Prefix.pch";
 				INFOPLIST_FILE = "Inspection Form App/Inspection Form App-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/T1Autograph\"",

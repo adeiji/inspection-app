@@ -18,21 +18,21 @@
         <attribute name="objectId" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="inspectionPoints" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="InspectionPoint" inverseName="inspectionCrane" inverseEntity="InspectionPoint" syncable="YES"/>
     </entity>
+    <entity name="InspectionOption" representedClassName="InspectionOption" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="objectId" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="inspectionPoint" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="InspectionPoint" inverseName="inspectionOptions" inverseEntity="InspectionPoint" syncable="YES"/>
+    </entity>
     <entity name="InspectionPoint" representedClassName="InspectionPoint" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="objectId" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="inspectionCrane" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="InspectionCrane" inverseName="inspectionPoints" inverseEntity="InspectionCrane" syncable="YES"/>
-        <relationship name="inspectionOption" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Option" inverseName="inspectionPoint" inverseEntity="Option" syncable="YES"/>
-    </entity>
-    <entity name="Option" representedClassName="Option" syncable="YES">
-        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="objectId" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="inspectionPoint" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="InspectionPoint" inverseName="inspectionOption" inverseEntity="InspectionPoint" syncable="YES"/>
+        <relationship name="inspectionOptions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="InspectionOption" inverseName="inspectionPoint" inverseEntity="InspectionOption" syncable="YES"/>
     </entity>
     <elements>
         <element name="InspectionCrane" positionX="0" positionY="0" width="128" height="88"/>
         <element name="InspectionPoint" positionX="0" positionY="0" width="128" height="103"/>
-        <element name="Option" positionX="0" positionY="0" width="128" height="90"/>
+        <element name="InspectionOption" positionX="0" positionY="0" width="128" height="88"/>
         <element name="InspectedCrane" positionX="36" positionY="54" width="128" height="73"/>
         <element name="InspectedPoint" positionX="54" positionY="63" width="128" height="88"/>
         <element name="InspectedOption" positionX="72" positionY="81" width="128" height="73"/>

@@ -42,6 +42,8 @@
     [self setUpParseWithLaunchOptions:launchOptions];
     DBAccountManager* accountMgr =[[DBAccountManager alloc] initWithAppKey:@"878n3v7pfduyrrr" secret:@"0745q3julqjk9mb"];
     [DBAccountManager setSharedManager:accountMgr];
+    [IACraneInspectionDetailsManager sharedManager];
+    [[IACraneInspectionDetailsManager sharedManager] getInspectionDetails];
     
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
         UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
@@ -57,9 +59,11 @@
     [SyncManager getAllInspectionDetails];
     [self fillCriteriaObjects];
     [self getPreviouslyFinishedCranes];
+
     
     return YES;
 }
+
 
 - (NSManagedObjectContext *) managedObjectContext {
     
@@ -129,6 +133,7 @@
     
     return _persistentStoreCoordinator;
 }
+
 
 #pragma mark - Application's Documents directory
 
