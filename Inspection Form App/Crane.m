@@ -6,9 +6,9 @@
 //
 //
 
-#import "InspectionCrane.h"
+#import "Crane.h"
 
-@implementation InspectionCrane
+@implementation Crane
 
 
 

@@ -282,9 +282,8 @@
     CGContextDrawPath(pdfContext, kCGPathFillStroke);
     
     
-    
-    [titleAddress drawInRect:CGRectMake(95, 35, 270, 45) withFont:[UIFont systemFontOfSize:12.0]];
-    [headerTitle drawInRect:CGRectMake(355, 35, 300, 50) withFont:[UIFont systemFontOfSize:12.0f]];
+    [titleAddress drawInRect:CGRectMake(95, 35, 270, 45) withAttributes:@{ NSFontAttributeName : [UIFont systemFontOfSize:12.0f] }];
+    [headerTitle drawInRect:CGRectMake(355, 35, 300, 50)withAttributes:@{ NSFontAttributeName : [UIFont systemFontOfSize:12.0f] }];
     
     //LINE 1
     [ownerString drawInRect:CGRectMake(50, 160, 500, 20) withFont:[UIFont systemFontOfSize:12.0f] lineBreakMode:UILineBreakModeWordWrap alignment:UITextAlignmentLeft];

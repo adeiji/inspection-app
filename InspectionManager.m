@@ -37,7 +37,7 @@
     return self;
 }
 
-- (void) setCrane:(InspectionCrane *) myCrane {
+- (void) setCrane:(Crane *) myCrane {
     crane = myCrane;
 }
 

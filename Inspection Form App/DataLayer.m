@@ -9,7 +9,7 @@
 #import "DataLayer.h"
 #import "sqlite3.h"
 #import "Customer.h"
-#import "InspectionCrane.h"
+#import "Crane.h"
 #import <Dropbox/Dropbox.h>
 
 @implementation DataLayer

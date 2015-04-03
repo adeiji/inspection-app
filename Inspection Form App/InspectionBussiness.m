@@ -61,7 +61,7 @@
 }
 
 //Create a crane object and send it to the recipient
-+ (InspectionCrane*) createCrane : (NSString*) hoistSrl
++ (Crane*) createCrane : (NSString*) hoistSrl
            CraneType : (NSString*) craneType
      EquipmentNumber : (NSString*) equipmentNumber
             CraneMfg : (NSString*) craneMfg
@@ -70,7 +70,7 @@
             Capacity : (NSString*) capacity
             HoistMdl : (NSString*) hoistMdl
 {
-    InspectionCrane *crane = [[InspectionCrane alloc] init];
+    Crane *crane = [[Crane alloc] init];
     
     crane.hoistSrl          = hoistSrl;
     crane.type              = craneType;

@@ -10,7 +10,7 @@
 #import "Options.h"
 #import "Parts.h"
 #import "Customer.h"
-#import "InspectionCrane.h"
+#import "Crane.h"
 #import "PDFGenerator.h"
 #import "AppDelegate.h"
 #import "Part.h"

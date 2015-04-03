@@ -11,7 +11,7 @@
 
 @interface IACraneInspectionDetailsManager : NSObject
 
-@property (strong, nonatomic) NSArray *cranes;
+@property (strong, nonatomic) NSMutableArray *cranes;
 @property (strong, nonatomic) InspectionCrane *crane;
 @property (strong, nonatomic) NSMutableArray *parts;
 

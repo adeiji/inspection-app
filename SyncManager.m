@@ -14,12 +14,22 @@
 
 + (void) getAllInspectionDetails {
 
-    PFQuery *query = [PFQuery queryWithClassName:PARSE_CLASS_CRANE];
+    PFQuery *query = [PFQuery queryWithClassName:kParseClassCrane];
 
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        
-        [[IACraneInspectionDetailsManager sharedManager] setCranes:objects];
-        
+        if (!error)
+        {
+            for (id crane in objects) {
+                // Convert the Parse Crane Object into a Core Data Object
+                NSManagedObjectContext *context =  ((AppDelegate *)[ [UIApplication sharedApplication] delegate]).managedObjectContext;
+                NSEntityDescription *entity = [NSEntityDescription entityForName:kCoreDataClassCrane inManagedObjectContext:context];
+                InspectionCrane *craneObject = [[InspectionCrane alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
+                craneObject.name = [crane objectForKey:kObjectName];
+                NSSet *set = [[NSSet alloc] init];
+                [set setByAddingObjectsFromArray:[crane objectForKey:kInspectionPoints]];
+                craneObject.inspectionPoints = set;
+            }
+        }
     }];
 }
 

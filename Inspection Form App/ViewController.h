@@ -14,6 +14,9 @@
 #import <Dropbox/Dropbox.h>
 #import "GradientView.h"
 #import "InspectionViewController.h"
+#import "IACraneInspectionDetailsManager.h"
+#import "InspectionCrane.h"
+#import "IAConstants.h"
 
 @class DBRestClient;
 
@@ -22,6 +25,38 @@
     sqlite3 *contactDb; 
     UIDocumentInteractionController *controller;
     UIDocumentInteractionController *secondController;
+    ItemListConditionStorage *myItemListStore;
+    DBRestClient *restClient;
+    Parts* parts;
+    sqlite3 *contactDB;
+    NSString *databasePath;
+    NSString *tableName;
+    int *deficient;
+    int timesShown;
+    NSString *deficientPart;
+    NSString *notes;
+    NSString *pickerSelection;
+    UIScrollView *theScrollView;
+    UITextField *activeField;
+    BOOL pageSubmitAlertView;
+    NSString *overallRating;
+    NSString *technicianName;
+    NSString *manufacturer;
+    NSString *testLoads;
+    NSString *proofLoadDescription;
+    NSString *loadRatingsText;
+    NSString *remarksLimitationsImposed;
+    bool testLoad;
+    bool loadRatings;
+    bool remarksLimitations;
+    bool finished;
+    bool proofLoad;
+    bool inspectionComplete;
+    NSString *owner;
+    bool changeLayoutNeeded;
+    NSString* iosVersion;
+    Inspection *inspection;
+    int currentOrientation;
 }
 
 //Dropbox Objects

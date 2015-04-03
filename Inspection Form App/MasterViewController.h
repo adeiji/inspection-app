@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "PartSelectionDelegate.h"
+#import "IAConstants.h"
 
 @interface MasterViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate>
 

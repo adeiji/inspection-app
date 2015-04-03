@@ -98,20 +98,17 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changePart:) name:@"SwipeDetected" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayParts:) name:@"InspectionViewControllerPushed" object:nil];
+    [self setObservers];
     
     AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
     results = delegate.searchCriteria;
     [self getTableData];
     
+}
+
+- (void) setObservers {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changePart:) name:@"SwipeDetected" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayParts:) name:kInspectionViewControllerPushed object:nil];
 }
 
 #pragma mark - Notification methods

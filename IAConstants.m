@@ -8,4 +8,8 @@
 
 #import "IAConstants.h"
 
-NSString *const PARSE_CLASS_CRANE = @"Crane";
+NSString *const kParseClassCrane = @"Crane";
+NSString *const kObjectName = @"name";
+NSString *const kInspectionPoints = @"inspectionPoints";
+NSString *const kCoreDataClassCrane = @"InspectionCrane";
+NSString *const kInspectionViewControllerPushed = @"com.inspection.app.inspection.view.controller.pushed";

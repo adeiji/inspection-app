@@ -28,42 +28,7 @@
 #import "AppDelegate.h"
 #import "InspectionManager.h"
 
-@interface ViewController () {
-    ItemListConditionStorage *myItemListStore; 
-    DBRestClient *restClient;
-    Parts* parts;
-    sqlite3 *contactDB;
-    NSString *databasePath;
-    NSString *tableName;
-    int *deficient;
-    int timesShown;
-    NSString *deficientPart;
-    NSString *notes;
-    NSString *pickerSelection;
-    UIScrollView *theScrollView;
-    UITextField *activeField;
-    BOOL pageSubmitAlertView;
-    NSString *overallRating;
-    NSString *technicianName;
-    NSString *manufacturer;
-    NSString *testLoads;
-    NSString *proofLoadDescription;
-    NSString *loadRatingsText;
-    NSString *remarksLimitationsImposed;
-    bool testLoad;
-    bool loadRatings;
-    bool remarksLimitations;
-    bool finished;
-    bool proofLoad;
-    bool inspectionComplete;
-    NSString *owner;
-    bool changeLayoutNeeded;
-    NSString* iosVersion;
-    Inspection *inspection;
-    int currentOrientation;
-    AppDelegate* delegate;
-    NSString *deviceType;
-}
+@interface ViewController ()
 @end
 
 @implementation ViewController
@@ -98,7 +63,6 @@
 @synthesize selectCraneButton;
 @synthesize CustomerInfoScrollView;
 @synthesize CraneInspectionView;
-@synthesize scrollView;
 @synthesize dataStore;
 @synthesize table;
 @synthesize account;
@@ -112,19 +76,6 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    deviceType = [UIDevice currentDevice].model;
-    
-    if (![deviceType isEqualToString:@"iPad"])
-    {
-        //Get the view that will be allow the user to enter in all the job information
-        UIView *view = [[[NSBundle mainBundle] loadNibNamed:@"JobInfoView" owner:self options:nil] objectAtIndex:0];
-        [view setTranslatesAutoresizingMaskIntoConstraints:NO];
-        
-        [self.scrollView setContentSize:CGSizeMake(view.frame.size.width, view.frame.size.height)];
-        
-        [self.scrollView addSubview:view];
-    }
-    
     [self editInspectionViewController];
 
     inspection = [[Inspection alloc] init];
@@ -142,13 +93,11 @@
                                                  name:UIKeyboardWillHideNotification 
                                                object:nil];
     
-    delegate = [[UIApplication sharedApplication] delegate];
-    
     _craneDescriptionsArray = [NSMutableArray arrayWithObjects:@"Jib", @"Monorial", @"Bridge", nil];
     owner = @"";
     
     [self LoadOwner];
-    
+    currentOrientation = self.interfaceOrientation;
     if ([owner isEqual:@""])
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Enter Name Alert" message:@"Enter your name" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
@@ -158,23 +107,13 @@
     
     txtCraneDescription.inputView = craneDescriptionPickerView;
     txtCraneDescription.inputAccessoryView = selectCraneButton;
-    
     [self setupTxtDate];
     [self dateSelectionChanged:datePicker];
-    
     navBar.topItem.title = @"Inspection Form App";
     optionLocation=0;
-    
     [self resetVariables];
-    
-    currentOrientation = self.interfaceOrientation;
-    
     txtTechnicianName.text = [owner uppercaseString];
-    
     [self setUpCraneDescriptionPicker];
-    
-    //[self didPressLink];
-    
     [self addTargetsToTextFields];
     
     
@@ -329,12 +268,6 @@
     [[InspectionManager sharedManager] setDropboxAccount:account];
     [[InspectionManager sharedManager] setDataStore:dataStore];
     [[InspectionManager sharedManager] setTable:table];
-}
-
-- (void) viewWillDisappear:(BOOL)animated
-{
-   // [self didPressLink];
-    //[self createDatastoreTable];
 }
 
 - (void)viewDidUnload
@@ -526,9 +459,9 @@
 
 
 //Create the crane from the info that has been inserted into the text boxes.  This crane will then be passed to the InspectionViewController.
-- (InspectionCrane *) createCrane
+- (Crane *) createCrane
 {
-    InspectionCrane *crane = [[InspectionCrane alloc] init];
+    Crane *crane = [[Crane alloc] init];
     
     crane.hoistSrl = txtHoistSrl.text;
     crane.equipmentNumber = txtEquipNum.text;
@@ -554,7 +487,7 @@
     return customer;
 }
 //Create the inspection that will be read from.
-- (void) createInspection : (InspectionCrane *) crane
+- (void) createInspection : (Crane *) crane
                  Customer : (Customer *) customer
 {
     inspection = [[Inspection alloc] init];
@@ -647,6 +580,26 @@
     }
 }
 
+
+- (void) storeInspectionJobInformationWithCraneType : (NSString *) craneType
+                                        SelectedRow : (NSInteger) selectedRow
+{
+    //Here we create all the necessary objects to store the customer and the crane information so that this can be saved to a singleton object and accessed from anywhere.
+    Customer *customer = [InspectionBussiness createCustomer:txtCustomerName.text CustomerContact:txtCustomerContact.text CustomerAddress:txtAddress.text CustomerEmail:txtEmail.text];
+    
+    Crane *crane = [InspectionBussiness createCrane:txtHoistSrl.text CraneType:craneType EquipmentNumber:txtEquipNum.text CraneMfg:txtCraneMfg.text hoistMfg:txtHoistMfg.text CraneSrl:txtCraneSrl.text Capacity:txtCap.text HoistMdl:txtHoistMdl.text];
+    
+    inspection.crane = crane;
+    inspection.customer = customer;
+    
+    inspection.jobNumber = txtJobNumber.text;
+    inspection.date = txtDate.text;
+    inspection.technicianName = txtTechnicianName.text;
+    //Set the objects on the singleton object
+    [[InspectionManager sharedManager] setCrane:crane];
+    [[InspectionManager sharedManager] setCustomer:customer];
+}
+
 /*
  
  We will be changing the way this method works
@@ -657,40 +610,24 @@
 
     optionLocation = 0;
     NSInteger selectedRow = [craneDescriptionPickerView selectedRowInComponent:0];
-    
     NSString * craneType = [self pickerView:craneDescriptionPickerView titleForRow:selectedRow forComponent:0];
-    Parts *parts = [[Parts alloc] init : craneType ];
-    
+    Parts *craneParts = [[Parts alloc] init : craneType ];
+    [self storeInspectionJobInformationWithCraneType:craneType SelectedRow:selectedRow];
+
     //Gets all the parts that have to do with this specific crane
-    myPartsArray = [parts myParts];
-    
-    //Here we create all the necessary objects to store the customer and the crane information so that this can be saved to a singleton object and accessed from anywhere.
-    Customer *customer = [InspectionBussiness createCustomer:txtCustomerName.text CustomerContact:txtCustomerContact.text CustomerAddress:txtAddress.text CustomerEmail:txtEmail.text];
-    
-    InspectionCrane *crane = [InspectionBussiness createCrane:txtHoistSrl.text CraneType:craneType EquipmentNumber:txtEquipNum.text CraneMfg:txtCraneMfg.text hoistMfg:txtHoistMfg.text CraneSrl:txtCraneSrl.text Capacity:txtCap.text HoistMdl:txtHoistMdl.text];
-    
-    inspection.crane = crane;
-    inspection.customer = customer;
-    
-    inspection.jobNumber = txtJobNumber.text;
-    inspection.date = txtDate.text;
-    inspection.technicianName = txtTechnicianName.text;
-    
-    inspectionViewController.craneType = inspection.crane.type;
+    myPartsArray = [craneParts myParts];
+    InspectionCrane *inspectionCrane = [[IACraneInspectionDetailsManager sharedManager] crane];
+    inspectionViewController.craneType = inspectionCrane.name;
     inspectionViewController.partsArray = myPartsArray;
-    
-    //Set the objects on the singleton object
-    [[InspectionManager sharedManager] setCrane:crane];
-    [[InspectionManager sharedManager] setCustomer:customer];
     [[InspectionManager sharedManager] setInspection:inspection];
     
     [self.navigationController pushViewController:inspectionViewController animated:YES];
     
     //Send out a notification that the InspectionViewController is pushed onto the stack.
     //Send the crane type that is being pushed.
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"InspectionViewControllerPushed"
+    [[NSNotificationCenter defaultCenter] postNotificationName:kInspectionViewControllerPushed
                                                         object:self
-                                                      userInfo:@{@"craneType": inspectionViewController.craneType }];
+                                                      userInfo:@{@"craneType": craneType }];
 }
 
 -(void) didReceiveMemoryWarning
@@ -740,28 +677,22 @@
 
         NSString * craneType = [[craneDescriptionPickerView delegate] pickerView:craneDescriptionPickerView titleForRow:selectedRow forComponent:0];
         
-        inspection.crane.description = craneType;
-        
         //Gets the parts array, with the crane type changed to a normal NSString
         parts = [[Parts alloc] init : craneType];
 
-        myPartsArray = [parts myParts];
-        
-        //Insert the customer info into the customer table
-        dataStore = [DBDatastore openDefaultStoreForAccount:account error:nil];
-        table = [dataStore getTable:@"customer"];
-        [InspectionBussiness insertToDatastoreTable:account DataStore:dataStore Table:table TableName:@"customer" DictionaryToAdd:[self createCustomerDictionary]];
-        
-        //Insert the crane info into the crane table
-        table = [dataStore getTable:@"crane"];
-        [InspectionBussiness insertToDatastoreTable:account DataStore:dataStore Table:table TableName:@"crane" DictionaryToAdd:[self createCraneDictinoary]];
-        
+        myPartsArray = [parts myParts];        
         Customer *customer = [InspectionBussiness createCustomer:txtCustomerName.text CustomerContact:txtCustomerContact.text CustomerAddress:txtAddress.text CustomerEmail:txtEmail.text];
         
-        InspectionCrane *crane = [InspectionBussiness createCrane:txtHoistSrl.text CraneType:craneType EquipmentNumber:txtEquipNum.text CraneMfg:txtCraneMfg.text hoistMfg:txtHoistMfg.text CraneSrl:txtCraneSrl.text Capacity:txtCap.text HoistMdl:txtHoistMdl.text];
+        Crane *crane = [InspectionBussiness createCrane:txtHoistSrl.text CraneType:craneType EquipmentNumber:txtEquipNum.text CraneMfg:txtCraneMfg.text hoistMfg:txtHoistMfg.text CraneSrl:txtCraneSrl.text Capacity:txtCap.text HoistMdl:txtHoistMdl.text];
         
         inspection.crane = crane;
         inspection.customer = customer;
+        if (!craneType) {
+            inspection.crane.description = @"Jib";
+        }
+        else {
+            inspection.crane.description = craneType;
+        }
         
         inspection.jobNumber = txtJobNumber.text;
         inspection.date = txtDate.text;
@@ -779,7 +710,8 @@
         
         [self.navigationController pushViewController:inspectionViewController animated:YES];
         
-        NSString *part = [delegate.partsDictionary objectForKey:inspection.crane.type][0];
+//        NSString *part = [delegate.partsDictionary objectForKey:inspection.crane.type][0];
+        NSString *part = @"";
         
         [inspectionViewController fillOptionArrays:part];
         [inspectionViewController changeLayout:optionLocation PartsArray:myPartsArray ItemListStore:myItemListStore];
@@ -804,7 +736,6 @@
 -(void) changeOrientation
 {
     UIInterfaceOrientation orientation = self.interfaceOrientation;
-    
     currentOrientation = orientation;
 }
 
@@ -825,26 +756,26 @@
         //Adjust the bottom content inset of your scroll view by the keyboard height
         UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, keyboardSize.width, 0.0);
         
-        scrollView.contentInset = contentInsets;
-        scrollView.scrollIndicatorInsets = contentInsets;
+        _scrollView.contentInset = contentInsets;
+        _scrollView.scrollIndicatorInsets = contentInsets;
         
         aRect.size.height -=keyboardSize.width;
         if (!CGRectContainsPoint(aRect, activeField.superview.frame.origin)) {
             CGPoint scrollPoint = CGPointMake(0.0, keyboardSize.width + activeField.superview.frame.size.height);
-            [scrollView setContentOffset:scrollPoint animated:YES];
+            [_scrollView setContentOffset:scrollPoint animated:YES];
         }
     }
     else if ((currentOrientation==UIInterfaceOrientationPortrait) ||
              (currentOrientation==UIInterfaceOrientationPortraitUpsideDown))
     {
         UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, keyboardSize.height, 0.0);
-        scrollView.contentInset = contentInsets;
-        scrollView.scrollIndicatorInsets = contentInsets;
+        _scrollView.contentInset = contentInsets;
+        _scrollView.scrollIndicatorInsets = contentInsets;
         
         aRect.size.height -=keyboardSize.height;
         if (!CGRectContainsPoint(aRect, activeField.superview.frame.origin)) {
             CGPoint scrollPoint = CGPointMake(0.0, keyboardSize.height);
-            [scrollView setContentOffset:scrollPoint animated:YES];
+            [_scrollView setContentOffset:scrollPoint animated:YES];
         }
     }
 }
@@ -852,6 +783,10 @@
     UIEdgeInsets contentInsets = UIEdgeInsetsZero;
     CustomerInfoScrollView.contentInset = contentInsets;
     CustomerInfoScrollView.scrollIndicatorInsets = contentInsets;
+}
+
+- (void) viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
+
 }
 
 

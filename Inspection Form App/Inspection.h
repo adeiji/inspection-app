@@ -7,13 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "InspectionCrane.h"
+#import "Crane.h"
 #import "Customer.h"
 #import "ItemListConditionStorage.h"
 
 @interface Inspection : NSObject
 
-@property (strong, nonatomic) InspectionCrane* crane;
+@property (strong, nonatomic) Crane* crane;
 @property (strong, nonatomic) Customer* customer;
 @property (strong, nonatomic) ItemListConditionStorage* itemList;
 @property (strong, nonatomic) NSString *jobNumber;

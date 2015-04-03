@@ -20,4 +20,13 @@
     return sharedMyManager;
 }
 
+- (id) init {
+    if (self = [super init])
+    {
+        _cranes = [NSMutableArray new];
+    }
+    
+    return self;
+}
+
 @end

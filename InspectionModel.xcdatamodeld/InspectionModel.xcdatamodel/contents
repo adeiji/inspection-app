@@ -1,22 +1,40 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6254" systemVersion="14B25" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
-    <entity name="InspectionCrane" representedClassName="InspectionCraneObject" syncable="YES">
+    <entity name="InspectedCrane" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="inspectedPoints" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="InspectedPoint" inverseName="inspectedCrane" inverseEntity="InspectedPoint" syncable="YES"/>
+    </entity>
+    <entity name="InspectedOption" syncable="YES">
+        <attribute name="option" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="inspectedPoint" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="InspectedPoint" inverseName="inspectedOptions" inverseEntity="InspectedPoint" syncable="YES"/>
+    </entity>
+    <entity name="InspectedPoint" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="inspectedCrane" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="InspectedCrane" inverseName="inspectedPoints" inverseEntity="InspectedCrane" syncable="YES"/>
+        <relationship name="inspectedOptions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="InspectedOption" inverseName="inspectedPoint" inverseEntity="InspectedOption" syncable="YES"/>
+    </entity>
+    <entity name="InspectionCrane" representedClassName="InspectionCrane" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="objectId" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="relationship" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="InspectionPoint" syncable="YES"/>
+        <relationship name="inspectionPoints" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="InspectionPoint" inverseName="inspectionCrane" inverseEntity="InspectionPoint" syncable="YES"/>
     </entity>
     <entity name="InspectionPoint" representedClassName="InspectionPoint" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="objectId" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="relationship" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Option" syncable="YES"/>
+        <relationship name="inspectionCrane" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="InspectionCrane" inverseName="inspectionPoints" inverseEntity="InspectionCrane" syncable="YES"/>
+        <relationship name="inspectionOption" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Option" inverseName="inspectionPoint" inverseEntity="Option" syncable="YES"/>
     </entity>
     <entity name="Option" representedClassName="Option" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="objectId" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="inspectionPoint" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="InspectionPoint" inverseName="inspectionOption" inverseEntity="InspectionPoint" syncable="YES"/>
     </entity>
     <elements>
-        <element name="InspectionCrane" positionX="0" positionY="0" width="128" height="90"/>
-        <element name="InspectionPoint" positionX="0" positionY="0" width="128" height="90"/>
-        <element name="Option" positionX="0" positionY="0" width="128" height="75"/>
+        <element name="InspectionCrane" positionX="0" positionY="0" width="128" height="88"/>
+        <element name="InspectionPoint" positionX="0" positionY="0" width="128" height="103"/>
+        <element name="Option" positionX="0" positionY="0" width="128" height="90"/>
+        <element name="InspectedCrane" positionX="36" positionY="54" width="128" height="73"/>
+        <element name="InspectedPoint" positionX="54" positionY="63" width="128" height="88"/>
+        <element name="InspectedOption" positionX="72" positionY="81" width="128" height="73"/>
     </elements>
 </model>

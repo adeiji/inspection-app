@@ -1,18 +1,19 @@
 //
-//  InspectionCraneObject.m
+//  InspectionCrane.m
 //  Inspection Form App
 //
 //  Created by adeiji on 4/1/15.
 //
 //
 
-#import "InspectionCraneObject.h"
+#import "InspectionCrane.h"
+#import "InspectionPoint.h"
 
-@implementation InspectionCraneObject
+
+@implementation InspectionCrane
 
 @dynamic name;
 @dynamic objectId;
 @dynamic inspectionPoints;
-
 
 @end

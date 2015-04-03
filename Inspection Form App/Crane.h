@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface InspectionCrane : NSObject
+@interface Crane : NSObject
 
 @property (strong, nonatomic) NSString* type;
 @property (strong, nonatomic) NSString* capacity;

@@ -45,7 +45,7 @@
 		CE40D39018087F670080E9BD /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE40D38F18087F670080E9BD /* CFNetwork.framework */; };
 		CE40D39218087F810080E9BD /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE40D39118087F810080E9BD /* SystemConfiguration.framework */; };
 		CE40D39418087F970080E9BD /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE40D39318087F970080E9BD /* libc++.dylib */; };
-		CE40D39718088E340080E9BD /* InspectionCrane.m in Sources */ = {isa = PBXBuildFile; fileRef = CE40D39618088E340080E9BD /* InspectionCrane.m */; };
+		CE40D39718088E340080E9BD /* Crane.m in Sources */ = {isa = PBXBuildFile; fileRef = CE40D39618088E340080E9BD /* Crane.m */; };
 		CE40D39A180894300080E9BD /* PDFGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = CE40D399180894300080E9BD /* PDFGenerator.m */; };
 		CE486ACB180C83E900B1B953 /* Inspection.m in Sources */ = {isa = PBXBuildFile; fileRef = CE486ACA180C83E900B1B953 /* Inspection.m */; };
 		CE486AE2180F17DC00B1B953 /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE486AE1180F17DC00B1B953 /* MasterViewController.m */; };
@@ -65,7 +65,7 @@
 		F49DDEB41ACCDAEB00A02162 /* InspectionModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F49DDEB21ACCDAEB00A02162 /* InspectionModel.xcdatamodeld */; };
 		F49DDEBB1ACCDC6300A02162 /* InspectionPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = F49DDEBA1ACCDC6300A02162 /* InspectionPoint.m */; };
 		F49DDEBE1ACCDC6300A02162 /* Option.m in Sources */ = {isa = PBXBuildFile; fileRef = F49DDEBD1ACCDC6300A02162 /* Option.m */; };
-		F49DDED31ACCE08A00A02162 /* InspectionCraneObject.m in Sources */ = {isa = PBXBuildFile; fileRef = F49DDED21ACCE08A00A02162 /* InspectionCraneObject.m */; };
+		F49DDED91ACCED1600A02162 /* InspectionCrane.m in Sources */ = {isa = PBXBuildFile; fileRef = F49DDED81ACCED1600A02162 /* InspectionCrane.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -143,8 +143,8 @@
 		CE40D38F18087F670080E9BD /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		CE40D39118087F810080E9BD /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		CE40D39318087F970080E9BD /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
-		CE40D39518088E340080E9BD /* InspectionCrane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectionCrane.h; sourceTree = "<group>"; };
-		CE40D39618088E340080E9BD /* InspectionCrane.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InspectionCrane.m; sourceTree = "<group>"; };
+		CE40D39518088E340080E9BD /* Crane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Crane.h; sourceTree = "<group>"; };
+		CE40D39618088E340080E9BD /* Crane.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Crane.m; sourceTree = "<group>"; };
 		CE40D398180894300080E9BD /* PDFGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFGenerator.h; sourceTree = "<group>"; };
 		CE40D399180894300080E9BD /* PDFGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFGenerator.m; sourceTree = "<group>"; };
 		CE486AC9180C83E900B1B953 /* Inspection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Inspection.h; sourceTree = "<group>"; };
@@ -175,8 +175,8 @@
 		F49DDEBA1ACCDC6300A02162 /* InspectionPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InspectionPoint.m; path = "core data/InspectionPoint.m"; sourceTree = "<group>"; };
 		F49DDEBC1ACCDC6300A02162 /* Option.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Option.h; path = "core data/Option.h"; sourceTree = "<group>"; };
 		F49DDEBD1ACCDC6300A02162 /* Option.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Option.m; path = "core data/Option.m"; sourceTree = "<group>"; };
-		F49DDED11ACCE08A00A02162 /* InspectionCraneObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectionCraneObject.h; sourceTree = "<group>"; };
-		F49DDED21ACCE08A00A02162 /* InspectionCraneObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InspectionCraneObject.m; sourceTree = "<group>"; };
+		F49DDED71ACCED1600A02162 /* InspectionCrane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectionCrane.h; sourceTree = "<group>"; };
+		F49DDED81ACCED1600A02162 /* InspectionCrane.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InspectionCrane.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -485,8 +485,8 @@
 		CE486AD7180CB1AD00B1B953 /* Crane */ = {
 			isa = PBXGroup;
 			children = (
-				CE40D39518088E340080E9BD /* InspectionCrane.h */,
-				CE40D39618088E340080E9BD /* InspectionCrane.m */,
+				CE40D39518088E340080E9BD /* Crane.h */,
+				CE40D39618088E340080E9BD /* Crane.m */,
 			);
 			name = Crane;
 			sourceTree = "<group>";
@@ -583,8 +583,8 @@
 				F49DDEBD1ACCDC6300A02162 /* Option.m */,
 				F49DDEB91ACCDC6300A02162 /* InspectionPoint.h */,
 				F49DDEBA1ACCDC6300A02162 /* InspectionPoint.m */,
-				F49DDED11ACCE08A00A02162 /* InspectionCraneObject.h */,
-				F49DDED21ACCE08A00A02162 /* InspectionCraneObject.m */,
+				F49DDED71ACCED1600A02162 /* InspectionCrane.h */,
+				F49DDED81ACCED1600A02162 /* InspectionCrane.m */,
 			);
 			name = "Core Data";
 			sourceTree = "<group>";
@@ -747,6 +747,7 @@
 				8BC58463150ABD87000AC695 /* AppDelegate.m in Sources */,
 				CE40D39A180894300080E9BD /* PDFGenerator.m in Sources */,
 				8BC58466150ABD87000AC695 /* ViewController.m in Sources */,
+				F49DDED91ACCED1600A02162 /* InspectionCrane.m in Sources */,
 				8BE08B22150D0AFE005B5E4C /* Customer.m in Sources */,
 				8BECD3BC150E920500616735 /* Options.m in Sources */,
 				F49DDEA71ACCC60C00A02162 /* SyncManager.m in Sources */,
@@ -756,7 +757,6 @@
 				CE147B691836844C005CC483 /* InspectionManager.m in Sources */,
 				8B0787C715113796006857A8 /* Parts.m in Sources */,
 				CE486AE6180F1E4200B1B953 /* InspectionViewController.m in Sources */,
-				F49DDED31ACCE08A00A02162 /* InspectionCraneObject.m in Sources */,
 				CE798DB7180F369600C2E5A0 /* InspectionBussiness.m in Sources */,
 				CE486ACB180C83E900B1B953 /* Inspection.m in Sources */,
 				8BE881F81513F82400360C63 /* ItemListConditionStorage.m in Sources */,
@@ -766,7 +766,7 @@
 				F49DDEB11ACCDA5C00A02162 /* IACraneInspectionDetailsManager.m in Sources */,
 				F49DDEB41ACCDAEB00A02162 /* InspectionModel.xcdatamodeld in Sources */,
 				F49DDEBE1ACCDC6300A02162 /* Option.m in Sources */,
-				CE40D39718088E340080E9BD /* InspectionCrane.m in Sources */,
+				CE40D39718088E340080E9BD /* Crane.m in Sources */,
 				CE486AE2180F17DC00B1B953 /* MasterViewController.m in Sources */,
 				8BE9DE801616355800906B98 /* OrdinalNumberFormatter.m in Sources */,
 				F49DDEBB1ACCDC6300A02162 /* InspectionPoint.m in Sources */,
