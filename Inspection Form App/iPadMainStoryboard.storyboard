@@ -47,6 +47,11 @@
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
+                                                        <connections>
+                                                            <action selector="textFieldDidBeginEditing:" destination="sgx-pA-png" eventType="editingDidBegin" id="09T-Lo-KxX"/>
+                                                            <action selector="textFieldDidEndEditing:" destination="sgx-pA-png" eventType="editingDidEnd" id="mhj-ef-tGI"/>
+                                                            <outlet property="delegate" destination="sgx-pA-png" id="bTF-Gy-wcv"/>
+                                                        </connections>
                                                     </textField>
                                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Crane Mfg:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="0Na-8b-Wi1">
                                                         <rect key="frame" x="50" y="66" width="85" height="21"/>
@@ -60,6 +65,11 @@
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
+                                                        <connections>
+                                                            <action selector="textFieldDidBeginEditing:" destination="sgx-pA-png" eventType="editingDidBegin" id="4n9-Od-IKG"/>
+                                                            <action selector="textFieldDidEndEditing:" destination="sgx-pA-png" eventType="editingDidEnd" id="ips-UF-aJn"/>
+                                                            <outlet property="delegate" destination="sgx-pA-png" id="Qjp-YI-azs"/>
+                                                        </connections>
                                                     </textField>
                                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Hoist Mfg:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="iS6-e8-0jd">
                                                         <rect key="frame" x="56" y="110" width="79" height="21"/>
@@ -68,11 +78,16 @@
                                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <textField opaque="NO" clipsSubviews="YES" tag="11" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="KlB-pp-5ZH" customClass="TextField">
+                                                    <textField opaque="NO" clipsSubviews="YES" tag="13" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="KlB-pp-5ZH" customClass="TextField">
                                                         <rect key="frame" x="560" y="101" width="137" height="30"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
+                                                        <connections>
+                                                            <action selector="textFieldDidBeginEditing:" destination="sgx-pA-png" eventType="editingDidBegin" id="0hs-Le-bKY"/>
+                                                            <action selector="textFieldDidEndEditing:" destination="sgx-pA-png" eventType="editingDidEnd" id="w86-ki-MCS"/>
+                                                            <outlet property="delegate" destination="sgx-pA-png" id="ULo-E2-gSa"/>
+                                                        </connections>
                                                     </textField>
                                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Hoist Mdl:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="sbG-Ru-Sg2">
                                                         <rect key="frame" x="465" y="106" width="78" height="21"/>
@@ -81,11 +96,16 @@
                                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <textField opaque="NO" clipsSubviews="YES" tag="13" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="iVX-4f-sYw" customClass="TextField">
+                                                    <textField opaque="NO" clipsSubviews="YES" tag="12" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="iVX-4f-sYw" customClass="TextField">
                                                         <rect key="frame" x="559" y="62" width="69" height="30"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
+                                                        <connections>
+                                                            <action selector="textFieldDidBeginEditing:" destination="sgx-pA-png" eventType="editingDidBegin" id="YQz-jb-Eeq"/>
+                                                            <action selector="textFieldDidEndEditing:" destination="sgx-pA-png" eventType="editingDidEnd" id="fnQ-DV-QPH"/>
+                                                            <outlet property="delegate" destination="sgx-pA-png" id="xIE-FJ-hWb"/>
+                                                        </connections>
                                                     </textField>
                                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Cap:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="ynr-0X-geL">
                                                         <rect key="frame" x="505" y="65" width="37" height="21"/>
@@ -94,11 +114,16 @@
                                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <textField opaque="NO" clipsSubviews="YES" tag="14" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="Aq2-G9-LuI" customClass="TextField">
+                                                    <textField opaque="NO" clipsSubviews="YES" tag="11" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="Aq2-G9-LuI" customClass="TextField">
                                                         <rect key="frame" x="559" y="18" width="148" height="30"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
+                                                        <connections>
+                                                            <action selector="textFieldDidBeginEditing:" destination="sgx-pA-png" eventType="editingDidBegin" id="J8c-oc-oZv"/>
+                                                            <action selector="textFieldDidEndEditing:" destination="sgx-pA-png" eventType="editingDidEnd" id="dCO-VX-1tH"/>
+                                                            <outlet property="delegate" destination="sgx-pA-png" id="7I0-oc-CFh"/>
+                                                        </connections>
                                                     </textField>
                                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Crane Srl:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="e3r-rc-Afa">
                                                         <rect key="frame" x="465" y="23" width="77" height="21"/>
@@ -112,6 +137,11 @@
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                        <connections>
+                                                            <action selector="textFieldDidBeginEditing:" destination="sgx-pA-png" eventType="editingDidBegin" id="w9E-Xg-HYG"/>
+                                                            <action selector="textFieldDidEndEditing:" destination="sgx-pA-png" eventType="editingDidEnd" id="J2Z-gO-mbU"/>
+                                                            <outlet property="delegate" destination="sgx-pA-png" id="amc-M0-EtG"/>
+                                                        </connections>
                                                     </textField>
                                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Equip #:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="d7n-DM-xfy">
                                                         <rect key="frame" x="71" y="25" width="63" height="21"/>
@@ -149,6 +179,11 @@
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
+                                                        <connections>
+                                                            <action selector="textFieldDidBeginEditing:" destination="sgx-pA-png" eventType="editingDidBegin" id="l1y-3h-TW4"/>
+                                                            <action selector="textFieldDidEndEditing:" destination="sgx-pA-png" eventType="editingDidEnd" id="LSg-Kf-NJw"/>
+                                                            <outlet property="delegate" destination="sgx-pA-png" id="9HB-am-dUp"/>
+                                                        </connections>
                                                     </textField>
                                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Customer Name:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="bKQ-GJ-KWS">
                                                         <rect key="frame" x="61" y="20" width="130" height="21"/>
@@ -174,6 +209,11 @@
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                        <connections>
+                                                            <action selector="textFieldDidBeginEditing:" destination="sgx-pA-png" eventType="editingDidBegin" id="nN8-ZD-yOe"/>
+                                                            <action selector="textFieldDidEndEditing:" destination="sgx-pA-png" eventType="editingDidEnd" id="aFK-kO-atO"/>
+                                                            <outlet property="delegate" destination="sgx-pA-png" id="Bq4-DV-rWz"/>
+                                                        </connections>
                                                     </textField>
                                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Job Number:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="Y7r-9j-H9Z">
                                                         <rect key="frame" x="89" y="20" width="100" height="21"/>
@@ -230,6 +270,11 @@
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
+                                                        <connections>
+                                                            <action selector="textFieldDidBeginEditing:" destination="sgx-pA-png" eventType="editingDidBegin" id="ZoV-Gl-NhO"/>
+                                                            <action selector="textFieldDidEndEditing:" destination="sgx-pA-png" eventType="editingDidEnd" id="kzB-IK-1Lh"/>
+                                                            <outlet property="delegate" destination="sgx-pA-png" id="9NX-Ir-SSh"/>
+                                                        </connections>
                                                     </textField>
                                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Customer Contact:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="zzB-cr-Nej">
                                                         <rect key="frame" x="45" y="20" width="145" height="21"/>
@@ -255,6 +300,11 @@
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
+                                                        <connections>
+                                                            <action selector="textFieldDidBeginEditing:" destination="sgx-pA-png" eventType="editingDidBegin" id="vB9-aI-eEy"/>
+                                                            <action selector="textFieldDidEndEditing:" destination="sgx-pA-png" eventType="editingDidEnd" id="0KU-7i-Heh"/>
+                                                            <outlet property="delegate" destination="sgx-pA-png" id="fPq-xa-gEJ"/>
+                                                        </connections>
                                                     </textField>
                                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Customer Address:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="MhA-ae-sPs">
                                                         <rect key="frame" x="60" y="18" width="129" height="21"/>
@@ -281,6 +331,11 @@
                                                         <accessibility key="accessibilityConfiguration" label="txtDate"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
+                                                        <connections>
+                                                            <action selector="textFieldDidBeginEditing:" destination="sgx-pA-png" eventType="editingDidBegin" id="BLK-yI-MlI"/>
+                                                            <action selector="textFieldDidEndEditing:" destination="sgx-pA-png" eventType="editingDidEnd" id="dYw-LG-pdD"/>
+                                                            <outlet property="delegate" destination="sgx-pA-png" id="8IQ-yW-Dm5"/>
+                                                        </connections>
                                                     </textField>
                                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Date:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="Q8A-HM-WBa">
                                                         <rect key="frame" x="148" y="20" width="41" height="21"/>
@@ -321,6 +376,11 @@
                                                         <accessibility key="accessibilityConfiguration" label="txtDate"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
+                                                        <connections>
+                                                            <action selector="textFieldDidBeginEditing:" destination="sgx-pA-png" eventType="editingDidBegin" id="dRj-QW-FL7"/>
+                                                            <action selector="textFieldDidEndEditing:" destination="sgx-pA-png" eventType="editingDidEnd" id="Q5u-uL-PTp"/>
+                                                            <outlet property="delegate" destination="sgx-pA-png" id="H6t-dF-1vC"/>
+                                                        </connections>
                                                     </textField>
                                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Email:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="s2m-nv-BSz">
                                                         <rect key="frame" x="139" y="20" width="48" height="21"/>
@@ -347,6 +407,11 @@
                                                         <accessibility key="accessibilityConfiguration" label="txtDate"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
+                                                        <connections>
+                                                            <action selector="textFieldDidBeginEditing:" destination="sgx-pA-png" eventType="editingDidBegin" id="Brm-FD-9kP"/>
+                                                            <action selector="textFieldDidEndEditing:" destination="sgx-pA-png" eventType="editingDidEnd" id="W8u-c5-JA4"/>
+                                                            <outlet property="delegate" destination="sgx-pA-png" id="uAf-F8-YwE"/>
+                                                        </connections>
                                                     </textField>
                                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Technician Name:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="gic-xD-FWT">
                                                         <rect key="frame" x="57" y="15" width="134" height="34"/>
@@ -384,6 +449,11 @@
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" keyboardType="numberPad"/>
+                                                        <connections>
+                                                            <action selector="textFieldDidBeginEditing:" destination="sgx-pA-png" eventType="editingDidBegin" id="dvl-ru-qLk"/>
+                                                            <action selector="textFieldDidEndEditing:" destination="sgx-pA-png" eventType="editingDidEnd" id="7jQ-JE-7BF"/>
+                                                            <outlet property="delegate" destination="sgx-pA-png" id="NRG-Mz-Vln"/>
+                                                        </connections>
                                                     </textField>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="detailDisclosure" lineBreakMode="middleTruncation" id="Gof-Kp-BT6">
                                                         <rect key="frame" x="686" y="16" width="22" height="22"/>

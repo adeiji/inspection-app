@@ -32,43 +32,7 @@
 @end
 
 @implementation ViewController
-@synthesize txtDate;
-@synthesize optionLocation;
-@synthesize datePicker;
-@synthesize navSubmit;
-@synthesize rootViewController;
-@synthesize myPartsArray;
-@synthesize navBar;
-@synthesize txtCustomerName;
-@synthesize txtCustomerContact;
-@synthesize txtJobNumber;
-@synthesize txtAddress;
-@synthesize txtCraneMfg;
-@synthesize txtHoistMfg;
-@synthesize txtHoistMdl;
-@synthesize txtCap;
-@synthesize txtCraneSrl;
-@synthesize txtHoistSrl;
-@synthesize txtEquipNum;
-@synthesize txtNotes;
-@synthesize txtEmail;
-@synthesize jobnumber;
-@synthesize viewPDFController;
-@synthesize txtCraneDescription;
-@synthesize txtTechnicianName;
-@synthesize lblCraneDesc;
-@synthesize CreateCertificateButton;
-@synthesize craneDescriptionPickerView;
-@synthesize customerName;
-@synthesize selectCraneButton;
-@synthesize CustomerInfoScrollView;
-@synthesize CraneInspectionView;
-@synthesize dataStore;
-@synthesize table;
-@synthesize account;
-@synthesize craneView;
-@synthesize inspectionViewController;
-@synthesize btnDropboxLink;
+
 
 #define kMinimumGestureLength   25
 #define kMaximumVariance        100
@@ -105,25 +69,24 @@
         [alert show];
     }
     
-    txtCraneDescription.inputView = craneDescriptionPickerView;
-    txtCraneDescription.inputAccessoryView = selectCraneButton;
+    _txtCraneDescription.inputView = _craneDescriptionPickerView;
+    _txtCraneDescription.inputAccessoryView = _selectCraneButton;
     [self setupTxtDate];
-    [self dateSelectionChanged:datePicker];
-    navBar.topItem.title = @"Inspection Form App";
-    optionLocation=0;
+    [self dateSelectionChanged:_datePicker];
+    _navBar.topItem.title = @"Inspection Form App";
+    _optionLocation=0;
     [self resetVariables];
-    txtTechnicianName.text = [owner uppercaseString];
+    _txtTechnicianName.text = [owner uppercaseString];
     [self setUpCraneDescriptionPicker];
-    [self addTargetsToTextFields];
     
     
     //If the Dropbox account is linked to this device then we remove the link to dropbox button.
-    account = [[DBAccountManager sharedManager] linkedAccount];
-    if (account)
+    _account = [[DBAccountManager sharedManager] linkedAccount];
+    if (_account)
     {
         //If the app is already linked to dropbox then we remove the link to dropbox button
         NSMutableArray *toolbarItems = [self.toolbarItems mutableCopy];
-        [toolbarItems removeObject:btnDropboxLink];
+        [toolbarItems removeObject:_btnDropboxLink];
         self.toolbarItems = toolbarItems;
     }
     
@@ -137,11 +100,11 @@
     
     [btnSelectDate addTarget:self action:@selector(dateSelected:) forControlEvents:UIControlEventTouchDown];
     NSDate *now = [NSDate date];
-    datePicker = [[UIDatePicker alloc] initWithFrame:CGRectZero];
-    [datePicker setDate:now animated:NO];
-    [datePicker setDatePickerMode:UIDatePickerModeDate];
-    [datePicker addTarget:self action:@selector(dateSelectionChanged:) forControlEvents:UIControlEventValueChanged];
-    txtDate.inputView = datePicker;
+    _datePicker = [[UIDatePicker alloc] initWithFrame:CGRectZero];
+    [_datePicker setDate:now animated:NO];
+    [_datePicker setDatePickerMode:UIDatePickerModeDate];
+    [_datePicker addTarget:self action:@selector(dateSelectionChanged:) forControlEvents:UIControlEventValueChanged];
+    _txtDate.inputView = _datePicker;
 }
 
 //Every time the date selection changes it will also change in the text box
@@ -150,14 +113,14 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateStyle:NSDateFormatterShortStyle];
     
-    txtDate.text = [dateFormatter stringFromDate:[datePicker date]];
+    _txtDate.text = [dateFormatter stringFromDate:[_datePicker date]];
 }
 
 //When the view is loaded there are specific variables that we want to be reset to force the user to have to renter them, or to refresh.
 - (void) resetVariables
 {
     overallRating = @"";
-    txtTechnicianName.text = technicianName;
+    _txtTechnicianName.text = technicianName;
     manufacturer = @"";
     testLoads =  @"";
     proofLoadDescription = @"";
@@ -169,88 +132,35 @@
 - (void) setUpCraneDescriptionPicker
 {
     //Create the crane description picker and add it to the gradient view at the very bottom which is where we show the different potential Crane Types.
-    craneDescriptionPickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(200, -10, 358, 100)];
-    [craneDescriptionPickerView setTag:1];
-    [craneDescriptionPickerView selectRow:1 inComponent:0 animated:YES];
-    [craneView addSubview:craneDescriptionPickerView];
+    _craneDescriptionPickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(200, -10, 358, 100)];
+    [_craneDescriptionPickerView setTag:1];
+    [_craneDescriptionPickerView selectRow:1 inComponent:0 animated:YES];
+    [_craneView addSubview:_craneDescriptionPickerView];
 }
 
 - (void) editInspectionViewController
 {
-    inspectionViewController = [[UIStoryboard storyboardWithName:@"iPadMainStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"inspectionViewController"];
-    
-    inspectionViewController.optionLocation = 0;
-}
-//Add the targets to all our textFields
-- (void) addTargetsToTextFields
-{
-    
-    SEL selector = @selector(textFieldDidBeginEditing:);
-    
-    [txtCustomerName addTarget:self action:selector forControlEvents:UIControlEventEditingDidBegin];
-    [txtCustomerContact addTarget:self action:selector forControlEvents:UIControlEventEditingDidBegin];
-    [txtJobNumber addTarget:self action:selector forControlEvents:UIControlEventEditingDidBegin];
-    [txtAddress addTarget:self action:selector forControlEvents:UIControlEventEditingDidBegin];
-    [txtCraneMfg addTarget:self action:selector forControlEvents:UIControlEventEditingDidBegin];
-    [txtHoistMfg addTarget:self action:selector forControlEvents:UIControlEventEditingDidBegin];
-    [txtHoistMdl addTarget:self action:selector forControlEvents:UIControlEventEditingDidBegin];
-    [txtCap addTarget:self action:selector forControlEvents:UIControlEventEditingDidBegin];
-    [txtCraneSrl addTarget:self action:selector forControlEvents:UIControlEventEditingDidBegin];
-    [txtHoistSrl addTarget:self action:selector forControlEvents:UIControlEventEditingDidBegin];
-    [txtEquipNum addTarget:self action:selector forControlEvents:UIControlEventEditingDidBegin];
-    [txtEmail addTarget:self action:selector forControlEvents:UIControlEventEditingDidBegin];
-    [txtCraneDescription addTarget:self action:selector forControlEvents:UIControlEventEditingDidBegin];
-    [txtTechnicianName addTarget:self action:selector forControlEvents:UIControlEventEditingDidBegin];
-    
-    txtCustomerName.delegate = self;
-    txtCustomerContact.delegate = self;
-    txtJobNumber.delegate = self;
-    txtAddress.delegate = self;
-    txtCraneMfg.delegate = self;
-    txtHoistMfg.delegate = self;
-    txtHoistMdl.delegate = self;
-    txtCap.delegate = self;
-    txtCraneSrl.delegate = self;
-    txtHoistSrl.delegate = self;
-    txtEquipNum.delegate = self;
-    txtEmail.delegate = self;
-    txtCraneDescription.delegate = self;
-    txtTechnicianName.delegate = self;
-    
-    [txtCustomerName setTag:0];
-    [txtCustomerContact setTag:1];
-    [txtJobNumber setTag:2];
-    [txtAddress setTag:3];
-    [txtCraneMfg setTag:4];
-    [txtHoistMfg setTag:5];
-    [txtHoistMdl setTag:6];
-    [txtCap setTag:7];
-    [txtCraneSrl setTag:8];
-    [txtHoistSrl setTag:9];
-    [txtEquipNum setTag:10];
-    [txtCraneDescription setTag:11];
-    [txtEmail setTag:12];
-    [txtNotes setTag:13];
-    [txtTechnicianName setTag:14];
+    _inspectionViewController = [[UIStoryboard storyboardWithName:@"iPadMainStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"inspectionViewController"];
+    _inspectionViewController.optionLocation = 0;
 }
 
 #pragma mark - Dropbox Datastore Methods
 
 - (IBAction) didPressLink
 {
-    account = [[DBAccountManager sharedManager] linkedAccount];
+    _account = [[DBAccountManager sharedManager] linkedAccount];
     
-    if (account) {
+    if (_account) {
         NSLog(@"App already linked");
         //If the app is already linked to dropbox then we remove the link to dropbox button
         NSMutableArray *toolbarItems = [self.toolbarItems mutableCopy];
-        [toolbarItems removeObject:btnDropboxLink];
+        [toolbarItems removeObject:_btnDropboxLink];
         self.toolbarItems = toolbarItems;
     } else {
         [[DBAccountManager sharedManager] linkFromController:self];
         //If the app is already linked to dropbox then we remove the link to dropbox button
         NSMutableArray *toolbarItems = [self.toolbarItems mutableCopy];
-        [toolbarItems removeObject:btnDropboxLink];
+        [toolbarItems removeObject:_btnDropboxLink];
         self.toolbarItems = toolbarItems;
     }
 }
@@ -260,14 +170,14 @@
 - (void) createDatastoreTable
 {
     
-    account = [[DBAccountManager sharedManager] linkedAccount];
-    dataStore = [DBDatastore openDefaultStoreForAccount:account error:nil];
-    table = [dataStore getTable:@"inspections"];
+    _account = [[DBAccountManager sharedManager] linkedAccount];
+    _dataStore = [DBDatastore openDefaultStoreForAccount:_account error:nil];
+    _table = [_dataStore getTable:@"inspections"];
     
     //Set the account and datastore objects for the singleton object
-    [[InspectionManager sharedManager] setDropboxAccount:account];
-    [[InspectionManager sharedManager] setDataStore:dataStore];
-    [[InspectionManager sharedManager] setTable:table];
+    [[InspectionManager sharedManager] setDropboxAccount:_account];
+    [[InspectionManager sharedManager] setDataStore:_dataStore];
+    [[InspectionManager sharedManager] setTable:_table];
 }
 
 - (void)viewDidUnload
@@ -279,21 +189,21 @@
 
 //When you begin editing any text field this method is called in order to tell the compiler which text field is currently in focus
 //so that it is known where the screen needs to scroll to, to show the text box when it is being edited also so that we can set the text to all capitalized.
-- (void) textFieldDidBeginEditing:(UITextField *)textField
+- (IBAction) textFieldDidBeginEditing:(UITextField *)textField
 {
     if (textField.tag == 12)
     {
-        craneDescriptionPickerView.hidden = FALSE;
-        selectCraneButton.hidden = FALSE;
+        _craneDescriptionPickerView.hidden = FALSE;
+        _selectCraneButton.hidden = FALSE;
         
     }
     textField.text = [textField.text capitalizedString];
 }
 //memmory management
-- (void) textFieldDidEndEditing:(UITextField *)textField {
+- (IBAction) textFieldDidEndEditing:(UITextField *)textField {
     if (textField.tag == 12)
     {
-        craneDescriptionPickerView.hidden = TRUE;
+        _craneDescriptionPickerView.hidden = TRUE;
     }
     activeField = nil;
 }
@@ -317,11 +227,11 @@
 //Automatically insert the customerName, customerContact, Address and Email
 - (IBAction) LoadHoistSrlPressed : (id) sender
 {
-    NSDictionary *query = [[NSDictionary alloc] initWithObjectsAndKeys:@"hoistsrl", txtHoistSrl.text, nil];
+    NSDictionary *query = [[NSDictionary alloc] initWithObjectsAndKeys:@"hoistsrl", _txtHoistSrl.text, nil];
     
-    inspection.itemList.myConditions = [[NSMutableArray alloc] initWithArray:[InspectionBussiness getRecords:query DBAccount:account DBDatastore:dataStore DBTable:table]];
+    inspection.itemList.myConditions = [[NSMutableArray alloc] initWithArray:[InspectionBussiness getRecords:query DBAccount:_account DBDatastore:_dataStore DBTable:_table]];
     
-    [self OpenOrderFromField:txtHoistSrl];
+    [self OpenOrderFromField:_txtHoistSrl];
 }
 
 
@@ -337,8 +247,8 @@
 
 //when the back button on the viewPDFController viewController is pressed
 - (IBAction)finalBackButtonPressed:(id)sender {
-    [viewPDFController.view removeFromSuperview];
-    [self.view insertSubview:CraneInspectionView atIndex:0];
+    [_viewPDFController.view removeFromSuperview];
+    [self.view insertSubview:_CraneInspectionView atIndex:0];
 }
 //When the correct date is selected from the DatePicker then this method will convert the long date to the short date
 //ex: April 12, 2012 = 4/12/12
@@ -346,10 +256,10 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     NSString * date = [[NSString alloc] init];
     [dateFormatter setDateStyle:NSDateFormatterShortStyle];
-    date = [dateFormatter stringFromDate:datePicker.date];
-    txtDate.text = date;
+    date = [dateFormatter stringFromDate:_datePicker.date];
+    _txtDate.text = date;
     
-    [txtDate resignFirstResponder];
+    [_txtDate resignFirstResponder];
     date = nil;
     dateFormatter= nil;
 }
@@ -379,13 +289,13 @@
 
 
 - (IBAction)buttonPressed {
-    NSDate *myDate = [datePicker date];
+    NSDate *myDate = [_datePicker date];
     NSDateFormatter *format = [[NSDateFormatter alloc] init];
     [format setDateFormat:@"MM/dd/yyyy"];
     NSString *dateString = [format stringFromDate:myDate];
     NSLog (@"date: %@", dateString);
-    txtDate.text = dateString;
-    [datePicker removeFromSuperview];
+    _txtDate.text = dateString;
+    [_datePicker removeFromSuperview];
     dateString = nil;
     myDate = nil;
     format = nil;
@@ -397,39 +307,39 @@
 
 - (ValidationResults) validateSubmission : (BOOL) showResults
 {
-    if ([txtHoistSrl.text isEqualToString:@""] ||
-        [txtTechnicianName.text isEqualToString:@""] ||
-        [txtCustomerName.text isEqualToString:@""] ||
-        [txtCustomerContact.text isEqualToString:@""] ||
-        [txtJobNumber.text isEqualToString:@""] ||
-        [txtDate.text isEqualToString:@""] ||
-        [txtAddress.text isEqualToString:@""] ||
-        [txtEmail.text isEqualToString:@""] ||
-        [txtEquipNum.text isEqualToString:@""] ||
-        [txtCraneMfg.text isEqualToString:@""] ||
-        [txtHoistMfg.text isEqualToString:@""] ||
-        [txtHoistMdl.text isEqualToString:@""] ||
-        [txtCraneSrl.text isEqualToString:@""] ||
-        [txtCap.text isEqualToString:@""])
+    if ([_txtHoistSrl.text isEqualToString:@""] ||
+        [_txtTechnicianName.text isEqualToString:@""] ||
+        [_txtCustomerName.text isEqualToString:@""] ||
+        [_txtCustomerContact.text isEqualToString:@""] ||
+        [_txtJobNumber.text isEqualToString:@""] ||
+        [_txtDate.text isEqualToString:@""] ||
+        [_txtAddress.text isEqualToString:@""] ||
+        [_txtEmail.text isEqualToString:@""] ||
+        [_txtEquipNum.text isEqualToString:@""] ||
+        [_txtCraneMfg.text isEqualToString:@""] ||
+        [_txtHoistMfg.text isEqualToString:@""] ||
+        [_txtHoistMdl.text isEqualToString:@""] ||
+        [_txtCraneSrl.text isEqualToString:@""] ||
+        [_txtCap.text isEqualToString:@""])
     {
         if (showResults)
             
         return EMPTY_FIELD;
     }
-    else if ([txtHoistSrl.text rangeOfString:@"\""].location != NSNotFound ||
-             [txtTechnicianName.text rangeOfString:@"\""].location != NSNotFound ||
-             [txtCustomerName.text rangeOfString:@"\""].location != NSNotFound ||
-             [txtCustomerContact.text rangeOfString:@"\""].location != NSNotFound ||
-             [txtJobNumber.text rangeOfString:@"\""].location != NSNotFound ||
-             [txtDate.text rangeOfString:@"\""].location != NSNotFound ||
-             [txtAddress.text rangeOfString:@"\""].location != NSNotFound ||
-             [txtEmail.text rangeOfString:@"\""].location != NSNotFound ||
-             [txtEquipNum.text rangeOfString:@"\""].location != NSNotFound ||
-             [txtCraneMfg.text rangeOfString:@"\""].location != NSNotFound ||
-             [txtHoistMfg.text rangeOfString:@"\""].location != NSNotFound ||
-             [txtHoistMdl.text rangeOfString:@"\""].location != NSNotFound ||
-             [txtCraneSrl.text rangeOfString:@"\""].location != NSNotFound ||
-             [txtCap.text rangeOfString:@"\""].location != NSNotFound)
+    else if ([_txtHoistSrl.text rangeOfString:@"\""].location != NSNotFound ||
+             [_txtTechnicianName.text rangeOfString:@"\""].location != NSNotFound ||
+             [_txtCustomerName.text rangeOfString:@"\""].location != NSNotFound ||
+             [_txtCustomerContact.text rangeOfString:@"\""].location != NSNotFound ||
+             [_txtJobNumber.text rangeOfString:@"\""].location != NSNotFound ||
+             [_txtDate.text rangeOfString:@"\""].location != NSNotFound ||
+             [_txtAddress.text rangeOfString:@"\""].location != NSNotFound ||
+             [_txtEmail.text rangeOfString:@"\""].location != NSNotFound ||
+             [_txtEquipNum.text rangeOfString:@"\""].location != NSNotFound ||
+             [_txtCraneMfg.text rangeOfString:@"\""].location != NSNotFound ||
+             [_txtHoistMfg.text rangeOfString:@"\""].location != NSNotFound ||
+             [_txtHoistMdl.text rangeOfString:@"\""].location != NSNotFound ||
+             [_txtCraneSrl.text rangeOfString:@"\""].location != NSNotFound ||
+             [_txtCap.text rangeOfString:@"\""].location != NSNotFound)
     {
         return INVALID_CHARACTER;
     }
@@ -463,14 +373,14 @@
 {
     Crane *crane = [[Crane alloc] init];
     
-    crane.hoistSrl = txtHoistSrl.text;
-    crane.equipmentNumber = txtEquipNum.text;
-    crane.description = txtCraneDescription.text;
-    crane.capacity = txtCap.text;
-    crane.craneSrl = txtCraneSrl.text;
-    crane.hoistMdl = txtHoistMdl.text;
-    crane.hoistMfg = txtHoistMfg.text;
-    crane.mfg = txtCraneMfg.text;
+    crane.hoistSrl = _txtHoistSrl.text;
+    crane.equipmentNumber = _txtEquipNum.text;
+    crane.description = _txtCraneDescription.text;
+    crane.capacity = _txtCap.text;
+    crane.craneSrl = _txtCraneSrl.text;
+    crane.hoistMdl = _txtHoistMdl.text;
+    crane.hoistMfg = _txtHoistMfg.text;
+    crane.mfg = _txtCraneMfg.text;
     
     return crane;
 }
@@ -479,10 +389,10 @@
 {
     Customer *customer = [[Customer alloc] init];
     
-    customer.name = txtCustomerName.text;
-    customer.contact = txtCustomerContact.text;
-    customer.address = txtAddress.text;
-    customer.email = txtEmail.text;
+    customer.name = _txtCustomerName.text;
+    customer.contact = _txtCustomerContact.text;
+    customer.address = _txtAddress.text;
+    customer.email = _txtEmail.text;
     
     return customer;
 }
@@ -492,9 +402,9 @@
 {
     inspection = [[Inspection alloc] init];
     
-    inspection.technicianName = txtTechnicianName.text;
-    inspection.date = txtDate.text;
-    inspection.jobNumber = txtJobNumber.text;
+    inspection.technicianName = _txtTechnicianName.text;
+    inspection.date = _txtDate.text;
+    inspection.jobNumber = _txtJobNumber.text;
     inspection.crane = crane;
     inspection.customer = customer;
     inspection.itemList = myItemListStore;
@@ -555,7 +465,7 @@
                     else
                     {
                         owner = textField.text;
-                        txtTechnicianName.text = [owner uppercaseString];
+                        _txtTechnicianName.text = [owner uppercaseString];
                         [self InsertOwnerIntoTable:owner];
                     }
                 }
@@ -573,10 +483,10 @@
     if (changeLayoutNeeded == YES && ![iosVersion isEqualToString: @"5.1.1"])
     {
         changeLayoutNeeded = NO;
-        CustomerInfoScrollView.center=CGPointMake(CustomerInfoScrollView.center.x, CustomerInfoScrollView.center.y+anotherrect.size.height); // fix silliness in IB that makes view start 20 pixels higher than it should on iPhone
-        CustomerInfoScrollView.frame = CGRectMake(0, 20, 768, 1004);
-        CraneInspectionView.center=CGPointMake(CraneInspectionView.center.x, CraneInspectionView.center.y+anotherrect.size.height); // fix silliness in IB that makes view start 20 pixels higher than it should on iPhone
-        CraneInspectionView.frame = CGRectMake(0, 20, 768, 1004);
+        _CustomerInfoScrollView.center=CGPointMake(_CustomerInfoScrollView.center.x, _CustomerInfoScrollView.center.y+anotherrect.size.height); // fix silliness in IB that makes view start 20 pixels higher than it should on iPhone
+        _CustomerInfoScrollView.frame = CGRectMake(0, 20, 768, 1004);
+        _CraneInspectionView.center=CGPointMake(_CraneInspectionView.center.x, _CraneInspectionView.center.y+anotherrect.size.height); // fix silliness in IB that makes view start 20 pixels higher than it should on iPhone
+        _CraneInspectionView.frame = CGRectMake(0, 20, 768, 1004);
     }
 }
 
@@ -585,16 +495,16 @@
                                         SelectedRow : (NSInteger) selectedRow
 {
     //Here we create all the necessary objects to store the customer and the crane information so that this can be saved to a singleton object and accessed from anywhere.
-    Customer *customer = [InspectionBussiness createCustomer:txtCustomerName.text CustomerContact:txtCustomerContact.text CustomerAddress:txtAddress.text CustomerEmail:txtEmail.text];
+    Customer *customer = [InspectionBussiness createCustomer:_txtCustomerName.text CustomerContact:_txtCustomerContact.text CustomerAddress:_txtAddress.text CustomerEmail:_txtEmail.text];
     
-    Crane *crane = [InspectionBussiness createCrane:txtHoistSrl.text CraneType:craneType EquipmentNumber:txtEquipNum.text CraneMfg:txtCraneMfg.text hoistMfg:txtHoistMfg.text CraneSrl:txtCraneSrl.text Capacity:txtCap.text HoistMdl:txtHoistMdl.text];
+    Crane *crane = [InspectionBussiness createCrane:_txtHoistSrl.text CraneType:craneType EquipmentNumber:_txtEquipNum.text CraneMfg:_txtCraneMfg.text hoistMfg:_txtHoistMfg.text CraneSrl:_txtCraneSrl.text Capacity:_txtCap.text HoistMdl:_txtHoistMdl.text];
     
     inspection.crane = crane;
     inspection.customer = customer;
     
-    inspection.jobNumber = txtJobNumber.text;
-    inspection.date = txtDate.text;
-    inspection.technicianName = txtTechnicianName.text;
+    inspection.jobNumber = _txtJobNumber.text;
+    inspection.date = _txtDate.text;
+    inspection.technicianName = _txtTechnicianName.text;
     //Set the objects on the singleton object
     [[InspectionManager sharedManager] setCrane:crane];
     [[InspectionManager sharedManager] setCustomer:customer];
@@ -608,20 +518,20 @@
 
 - (IBAction)partsListButtonClicked:(id)sender{
 
-    optionLocation = 0;
-    NSInteger selectedRow = [craneDescriptionPickerView selectedRowInComponent:0];
-    NSString * craneType = [self pickerView:craneDescriptionPickerView titleForRow:selectedRow forComponent:0];
+    _optionLocation = 0;
+    NSInteger selectedRow = [_craneDescriptionPickerView selectedRowInComponent:0];
+    NSString * craneType = [self pickerView:_craneDescriptionPickerView titleForRow:selectedRow forComponent:0];
     Parts *craneParts = [[Parts alloc] init : craneType ];
     [self storeInspectionJobInformationWithCraneType:craneType SelectedRow:selectedRow];
 
     //Gets all the parts that have to do with this specific crane
-    myPartsArray = [craneParts myParts];
+    _myPartsArray = [craneParts myParts];
     InspectionCrane *inspectionCrane = [[IACraneInspectionDetailsManager sharedManager] crane];
-    inspectionViewController.craneType = inspectionCrane.name;
-    inspectionViewController.partsArray = myPartsArray;
+    _inspectionViewController.craneType = inspectionCrane.name;
+    _inspectionViewController.partsArray = _myPartsArray;
     [[InspectionManager sharedManager] setInspection:inspection];
     
-    [self.navigationController pushViewController:inspectionViewController animated:YES];
+    [self.navigationController pushViewController:_inspectionViewController animated:YES];
     
     //Send out a notification that the InspectionViewController is pushed onto the stack.
     //Send the crane type that is being pushed.
@@ -640,11 +550,11 @@
 //Create a dictionary that will store the customer information that will then be stored in our Dropbox datastore.
 - (NSDictionary *) createCustomerDictionary
 {
-    NSDictionary *dictionary = [[NSDictionary alloc] initWithObjectsAndKeys:txtCustomerName.text, @"customerName",
-                                txtAddress.text, @"address",
-                                txtCustomerContact.text, @"customercontact",
-                                txtCustomerName.text, @"customername",
-                                txtEmail.text, @"email", nil];
+    NSDictionary *dictionary = [[NSDictionary alloc] initWithObjectsAndKeys:_txtCustomerName.text, @"customerName",
+                                _txtAddress.text, @"address",
+                                _txtCustomerContact.text, @"customercontact",
+                                _txtCustomerName.text, @"customername",
+                                _txtEmail.text, @"email", nil];
     
     return dictionary;
 }
@@ -652,18 +562,18 @@
 - (NSDictionary *) createCraneDictinoary
 {
     //Get the crane type fromt he UIPicker
-    NSUInteger selectedRow = [craneDescriptionPickerView selectedRowInComponent:0];
-    NSString * craneType = [[craneDescriptionPickerView delegate] pickerView:craneDescriptionPickerView titleForRow:selectedRow forComponent:0];
+    NSUInteger selectedRow = [_craneDescriptionPickerView selectedRowInComponent:0];
+    NSString * craneType = [[_craneDescriptionPickerView delegate] pickerView:_craneDescriptionPickerView titleForRow:selectedRow forComponent:0];
     
     NSDictionary *dictionary = [[NSDictionary alloc] initWithObjectsAndKeys:
-                                txtCap.text, @"capacity",
+                                _txtCap.text, @"capacity",
                                 craneType, @"cranetype",
-                                txtCraneMfg.text, @"cranemfg",
-                                txtCraneSrl.text, @"cranesrl",
-                                txtEquipNum.text, @"equipmentnumber",
-                                txtHoistMdl.text, @"hoistmdl",
-                                txtHoistMfg.text, @"hoistmfg",
-                                txtHoistSrl.text, @"hoistsrl", nil];
+                                _txtCraneMfg.text, @"cranemfg",
+                                _txtCraneSrl.text, @"cranesrl",
+                                _txtEquipNum.text, @"equipmentnumber",
+                                _txtHoistMdl.text, @"hoistmdl",
+                                _txtHoistMfg.text, @"hoistmfg",
+                                _txtHoistSrl.text, @"hoistsrl", nil];
     
     return dictionary;
 }
@@ -673,17 +583,17 @@
     if ([self validateSubmission : YES] != EMPTY_FIELD || INVALID_CHARACTER)
     {
         //Get the selected crane type fromt he crane picker.
-        NSUInteger selectedRow = [craneDescriptionPickerView selectedRowInComponent:0];
+        NSUInteger selectedRow = [_craneDescriptionPickerView selectedRowInComponent:0];
 
-        NSString * craneType = [[craneDescriptionPickerView delegate] pickerView:craneDescriptionPickerView titleForRow:selectedRow forComponent:0];
+        NSString * craneType = [[_craneDescriptionPickerView delegate] pickerView:_craneDescriptionPickerView titleForRow:selectedRow forComponent:0];
         
         //Gets the parts array, with the crane type changed to a normal NSString
         parts = [[Parts alloc] init : craneType];
 
-        myPartsArray = [parts myParts];        
-        Customer *customer = [InspectionBussiness createCustomer:txtCustomerName.text CustomerContact:txtCustomerContact.text CustomerAddress:txtAddress.text CustomerEmail:txtEmail.text];
+        _myPartsArray = [parts myParts];
+        Customer *customer = [InspectionBussiness createCustomer:_txtCustomerName.text CustomerContact:_txtCustomerContact.text CustomerAddress:_txtAddress.text CustomerEmail:_txtEmail.text];
         
-        Crane *crane = [InspectionBussiness createCrane:txtHoistSrl.text CraneType:craneType EquipmentNumber:txtEquipNum.text CraneMfg:txtCraneMfg.text hoistMfg:txtHoistMfg.text CraneSrl:txtCraneSrl.text Capacity:txtCap.text HoistMdl:txtHoistMdl.text];
+        Crane *crane = [InspectionBussiness createCrane:_txtHoistSrl.text CraneType:craneType EquipmentNumber:_txtEquipNum.text CraneMfg:_txtCraneMfg.text hoistMfg:_txtHoistMfg.text CraneSrl:_txtCraneSrl.text Capacity:_txtCap.text HoistMdl:_txtHoistMdl.text];
         
         inspection.crane = crane;
         inspection.customer = customer;
@@ -694,29 +604,29 @@
             inspection.crane.description = craneType;
         }
         
-        inspection.jobNumber = txtJobNumber.text;
-        inspection.date = txtDate.text;
-        inspection.technicianName = txtTechnicianName.text;
+        inspection.jobNumber = _txtJobNumber.text;
+        inspection.date = _txtDate.text;
+        inspection.technicianName = _txtTechnicianName.text;
         
-        inspectionViewController.craneType = inspection.crane.type;
-        inspectionViewController.partsArray = myPartsArray;
+        _inspectionViewController.craneType = inspection.crane.type;
+        _inspectionViewController.partsArray = _myPartsArray;
         
-        inspectionViewController.validated = YES;
+        _inspectionViewController.validated = YES;
         
         //Set the objects on the singleton object
         [[InspectionManager sharedManager] setCrane:crane];
         [[InspectionManager sharedManager] setCustomer:customer];
         [[InspectionManager sharedManager] setInspection:inspection];
         
-        [self.navigationController pushViewController:inspectionViewController animated:YES];
+        [self.navigationController pushViewController:_inspectionViewController animated:YES];
         
 //        NSString *part = [delegate.partsDictionary objectForKey:inspection.crane.type][0];
         NSString *part = @"";
         
-        [inspectionViewController fillOptionArrays:part];
-        [inspectionViewController changeLayout:optionLocation PartsArray:myPartsArray ItemListStore:myItemListStore];
+        [_inspectionViewController fillOptionArrays:part];
+        [_inspectionViewController changeLayout:_optionLocation PartsArray:_myPartsArray ItemListStore:myItemListStore];
         
-        [dataStore sync:nil];
+        [_dataStore sync:nil];
     }
     else
     {
@@ -781,8 +691,8 @@
 }
 - (void) keyboardWillBeHidden:(NSNotification *) notification {
     UIEdgeInsets contentInsets = UIEdgeInsetsZero;
-    CustomerInfoScrollView.contentInset = contentInsets;
-    CustomerInfoScrollView.scrollIndicatorInsets = contentInsets;
+    _CustomerInfoScrollView.contentInset = contentInsets;
+    _CustomerInfoScrollView.scrollIndicatorInsets = contentInsets;
 }
 
 - (void) viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
@@ -815,25 +725,25 @@
 - (IBAction)NewCustomerPress:(id)sender {
     [self EmptyTextFields];
     
-    [inspectionViewController initiateParts];
+    [_inspectionViewController initiateParts];
 }
 - (void) EmptyTextFields
 {
-    txtCustomerName.text = @"";
-    txtAddress.text=@"";
-    txtJobNumber.text = @"";
-    txtCustomerContact.text = @"";
-    txtCap.text = @"";
-    txtCraneMfg.text = @"";
-    txtCraneSrl.text = @"";
-    txtCustomerName.text = @"";
-    txtEquipNum.text = @"";
-    txtHoistMdl.text = @"";
-    txtHoistMfg.text = @"";
-    txtHoistSrl.text = @"";
-    txtEmail.text = @"";
-    txtCraneDescription.text = @"";
-    lblCraneDesc.text = @"";
+    _txtCustomerName.text = @"";
+    _txtAddress.text=@"";
+    _txtJobNumber.text = @"";
+    _txtCustomerContact.text = @"";
+    _txtCap.text = @"";
+    _txtCraneMfg.text = @"";
+    _txtCraneSrl.text = @"";
+    _txtCustomerName.text = @"";
+    _txtEquipNum.text = @"";
+    _txtHoistMdl.text = @"";
+    _txtHoistMfg.text = @"";
+    _txtHoistSrl.text = @"";
+    _txtEmail.text = @"";
+    _txtCraneDescription.text = @"";
+    _lblCraneDesc.text = @"";
 }
 
 @end

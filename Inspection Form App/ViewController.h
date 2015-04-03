@@ -64,8 +64,6 @@
 @property (strong, nonatomic) DBDatastore *dataStore;
 @property (strong, nonatomic) DBTable *table;
 
-- (IBAction)test:(id)sender;
-
 @property (weak, nonatomic) IBOutlet UITextField *txtDate;
 @property (strong, nonatomic) UIDatePicker *datePicker;
 @property int optionLocation;
@@ -115,37 +113,22 @@ typedef enum {
     PASSED
 } ValidationResults;
 
-- (IBAction)SelectCraneDescriptionPressed:(id)sender;
-- (IBAction)UpdateButtonPressed:(id)sender;
 - (IBAction)LoadEquipNumPressed:(id)sender;
 - (IBAction)LoadHoistSrlPressed:(id)sender;
-- (IBAction)ViewAllOrders:(id)sender;
-- (IBAction)gotoCustomerInfo:(id)sender;
 - (IBAction)CustomerSubmitPressed:(id)sender;
-- (IBAction)nextPressed;
-- (IBAction)previousPressed;
 - (IBAction)switchView;
 - (IBAction)datePressed:(id)sender;
-- (IBAction)submitPressed:(id)sender;
 - (IBAction)buttonPressed;
-- (IBAction)switchChanged:(id)sender;
-- (void) createTable:(NSString *) customerName;
-- (void) userDidClickTable;
 - (IBAction) partsListButtonClicked:(id) sender;
 - (IBAction) textFieldDidBeginEditing:(UITextField *) textField;
 - (IBAction) textFieldDidEndEditing:(UITextField *) textField;
-- (IBAction) textViewDidBeginEditing:(UITextView *)textView;
 - (IBAction)NewCustomerPress:(id)sender;
-- (IBAction)GetOrderFromJobNumber:(id)sender;
 - (IBAction) didPressLink;
 - (UIViewController *) documentInteractionControllerViewControllerForPreview:(UIDocumentInteractionController *)controller;
 - (IBAction)finalBackButtonPressed:(id)sender;
 - (IBAction)dateSelected:(id)sender;
-- (IBAction)NASwitchChanged:(id)sender;
 - (BOOL) textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string;
-- (IBAction)CreateCertificate:(id)sender;
 
-- (NSDictionary *) createCraneDictionary;
 
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 

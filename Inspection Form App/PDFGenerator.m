@@ -282,11 +282,18 @@
     CGContextDrawPath(pdfContext, kCGPathFillStroke);
     
     
+    NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
+
+    paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
+    paragraphStyle.alignment = NSTextAlignmentLeft;
+
     [titleAddress drawInRect:CGRectMake(95, 35, 270, 45) withAttributes:@{ NSFontAttributeName : [UIFont systemFontOfSize:12.0f] }];
     [headerTitle drawInRect:CGRectMake(355, 35, 300, 50)withAttributes:@{ NSFontAttributeName : [UIFont systemFontOfSize:12.0f] }];
     
     //LINE 1
-    [ownerString drawInRect:CGRectMake(50, 160, 500, 20) withFont:[UIFont systemFontOfSize:12.0f] lineBreakMode:UILineBreakModeWordWrap alignment:UITextAlignmentLeft];
+    [ownerString drawInRect:CGRectMake(50, 160, 500, 20) withAttributes: @{ NSFontAttributeName : [UIFont systemFontOfSize:12.0f],
+                                                                            NSParagraphStyleAttributeName : paragraphStyle
+                                                                            }];
     CGContextSetLineWidth(pdfContext, 1);
     
     CGContextSetStrokeColorWithColor(pdfContext, [UIColor blackColor].CGColor);
@@ -348,20 +355,6 @@
     CGContextDrawPath(pdfContext, kCGPathFillStroke);
     //Crane Mfg
     [inspection.crane.mfg drawInRect:CGRectMake(180, 280, 230, 20) withFont:[UIFont systemFontOfSize:10.0f]];
-    
-    //LINE 6 Part 2
-    /*
-     [modelCrane drawInRect:CGRectMake(270, 280, 230, 20) withFont:[UIFont systemFontOfSize:12.0f]];
-     
-     CGContextBeginPath(pdfContext);
-     CGContextMoveToPoint(pdfContext, 310, 295);
-     CGContextAddLineToPoint(pdfContext, 400, 295);
-     
-     CGContextClosePath(pdfContext);
-     CGContextDrawPath(pdfContext, kCGPathFillStroke);
-     
-     [txtHoistMdl.text drawInRect:CGRectMake(310, 280, 230, 20) withFont:[UIFont systemFontOfSize:8.0f]];
-     */
     
     //LINE 6 Part 3
     [serialNoCrane drawInRect:CGRectMake(410, 280, 230, 20) withFont:[UIFont systemFontOfSize:12.0f]];
