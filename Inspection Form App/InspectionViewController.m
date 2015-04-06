@@ -68,21 +68,17 @@
         [self nextPressed];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"SwipeDetected"
                                                             object:self
-                                                          userInfo:@{
-                                                                     @"part": _partsArray[_optionLocation],
-                                                                    @"optionLocation": [NSNumber numberWithInt:_optionLocation] }];
+                                                          userInfo:@{   @"part": _partsArray[_optionLocation],
+                                                                        @"optionLocation": [NSNumber numberWithInt:_optionLocation] }];
     }
     else
     {
         [self previousPressed];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"SwipeDetected"
                                                             object:self
-                                                          userInfo:@{
-                                                                     @"part": _partsArray[_optionLocation],
-                                                                    @"optionLocation": [NSNumber numberWithInt:_optionLocation] }];
+                                                          userInfo:@{ @"part": _partsArray[_optionLocation],
+                                                                      @"optionLocation": [NSNumber numberWithInt:_optionLocation] }];
     }
-    
-    
 
 }
 
@@ -96,15 +92,16 @@
            PartsArray : (NSArray*) myPartsArray
         ItemListStore : (ItemListConditionStorage *) myItemListStore
 {
+    
     Condition *myCondition = [[Condition alloc] init ];
     myCondition = [myItemListStore.myConditions objectAtIndex:myOptionLocation];
     
     _txtNotes.text = myCondition.notes;
     
-    NSString* myPart = [myPartsArray objectAtIndex:_optionLocation];
+    InspectionPoint *point = [myPartsArray objectAtIndex:_optionLocation];
     NSString* myPartNumber = [NSString stringWithFormat:@"Part #%d", myOptionLocation + 1];
     
-    [_lblPart setText:myPart];
+    [_lblPart setText:point.name];
     [_lblPartNumber setText:myPartNumber];
     [_deficiencyPicker selectRow:myCondition.pickerSelection inComponent:0 animated:YES];
     [_deficiencySwitch setOn:myCondition.deficient];
@@ -188,10 +185,10 @@
 - (void) initiateParts
 {
     //We need to get the parts that are unique to this particular crane.
-    Parts *parts = [[Parts alloc] init:_craneType];
-    _partsArray = [parts myParts];    //Get the actual array itself from the parts object
+    InspectionCrane *selectedCrane = [[IACraneInspectionDetailsManager sharedManager] crane];
+    _partsArray = [selectedCrane.inspectionPoints allObjects];    //Get the actual array itself from the parts object
     [self fillOptionArrays:_partsArray[_optionLocation]];     //Get the options that are unique to this particular part.
-    itemListStore = [[ItemListConditionStorage alloc] init:parts.myParts];       /*Create the itemListStore which will 
+    itemListStore = [[ItemListConditionStorage alloc] init:[_partsArray mutableCopy]];       /*Create the itemListStore which will
                                                                                   store all the conditions as they are set.*/
     [self changeLayout:_optionLocation PartsArray:_partsArray ItemListStore:itemListStore];
     [self changePickerArray:_deficiencyPickerArray];    //Send the array that contains the particular deficiencies unique to this part
@@ -242,12 +239,6 @@
                        : [_deficiencyPicker selectedRowInComponent:0]
                        : myDeficientPart:_applicableSwitch.on];
         
-        
-        //Get all the records with this hoistSrl and this specific date
-        NSDictionary *query = @{ @"hoistSrl" : inspection.crane.hoistSrl, @"date" : inspection.date };
-        
-        [self saveInspectionToDatabase];
-        
         inspectionComplete = YES;
         myDeficientPart = nil;
         loadRatings = @"";
@@ -262,56 +253,6 @@
     }
 }
 
-- (void) saveInspectionToDatabase
-{
-    DBAccount *account = [InspectionManager sharedManager].dropboxAccount;
-    DBDatastore *dataStore = [InspectionManager sharedManager].dataStore;
-    DBTable *table = [InspectionManager sharedManager].table;
-    
-    //this is the counter for the partsArray object index
-    int i = 0;
-    //Go through each condition in the current inspection and then write this information to the Datastore
-    for (Condition *condition in inspection.itemList.myConditions)
-    {
-        
-        NSString *isDeficient = @"NO";
-        NSString *isApplicable = @"NO";
-        
-        if (condition.deficient == YES)
-        {
-            isDeficient = @"YES";
-        }
-        if (condition.applicable == YES)
-        {
-            isApplicable = @"YES";
-        }
-        
-        //inserts the current condition in the row
-        int pickerSelection =  [NSString stringWithFormat:@"%d", (int) condition.pickerSelection];
-        
-        //Create the dictionary that contains all the information for this record.
-        NSDictionary *conditionDictionary = [[NSDictionary alloc] initWithObjectsAndKeys
-                                             :inspection.crane.hoistSrl, @"hoistsrl",
-                                             inspection.jobNumber, @"jobnumber",
-                                             inspection.crane.equipmentNumber, @"equipmentnumber",
-                                             (NSString *)[_partsArray objectAtIndex:i], @"part",
-                                             (NSString *) isDeficient, @"deficient",
-                                             condition.deficientPart, @"deficientpart",
-                                             [condition.notes stringByReplacingOccurrencesOfString:@"\"" withString:@"\\"], @"notes",
-                                             pickerSelection, @"pickerselection",
-                                             isApplicable, @"isapplicable",
-                                             nil];
-        
-        
-        //Add this condition to the datastore
-        //Insert the inspection into the Dropbox Datastore
-        [InspectionBussiness insertToDatastoreTable:account DataStore:dataStore Table:table TableName:@"inspections" DictionaryToAdd:conditionDictionary];
-        
-        i++;
-    }
-    
-    [dataStore sync:nil];
-}
 
 - (IBAction)gotoCustomerInfo:(id)sender {
     NSUInteger selectedRow = [_deficiencyPicker selectedRowInComponent:0];
@@ -605,7 +546,8 @@
         [label setFont:[UIFont systemFontOfSize:16.0f]];
     }
     
-    label.text = [_pickerData objectAtIndex:row];
+    InspectionOption *option = [_pickerData objectAtIndex:row];
+    label.text = option.name;
     
     return label;
 }

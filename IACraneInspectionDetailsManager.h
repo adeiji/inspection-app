@@ -11,6 +11,7 @@
 #import "AppDelegate.h"
 #import "InspectionOption.h"
 #import "InspectionPoint.h"
+#import <Parse/Parse.h>
 
 @interface IACraneInspectionDetailsManager : NSObject
 

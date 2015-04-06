@@ -7,12 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "InspectionCrane.h"
 
 @interface Parts : NSObject
 
 @property (strong, nonatomic) NSMutableArray *myParts;
 
-- (id) init : (NSString*) typeOfCrane;
-- (void) fillParts : (NSString*) typeOfCrane;
+- (id) init : (InspectionCrane *) crane;
 
 @end

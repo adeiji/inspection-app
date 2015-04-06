@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Crane.h"
+#import "InspectionCrane.h"
 #import "Customer.h"
 #import "Inspection.h"
 #import <Dropbox/Dropbox.h>

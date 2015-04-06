@@ -13,30 +13,28 @@
 
 @synthesize optionsArray = __optionsArray;
 
-- (id) initWithPart : (NSString*) part
+- (id) initWithPart : (InspectionPoint *) inspectionPoint
 {
     if (self = [super init]) {
         __optionsArray = [[NSMutableArray alloc] init];
     }
-    [self addOptions:part];
+    [self addOptions:inspectionPoint];
     
     return self;
 }
 
-- (NSMutableArray*) myOptionsArray {
+- (NSArray *) myOptionsArray {
     return __optionsArray;
 }
 
 // This method fills the options
-- (void) addOptions : (NSString *) searchValue
+- (void) addOptions : (InspectionPoint *) inspectionPoint
 {
     // Here's our point of attack
-    __optionsArray  = [NSMutableArray arrayWithObjects:@"1", @"2", @"1", @"2", @"1", @"2", @"1", @"2", @"1", @"2", nil];
+    __optionsArray  = [
+                       inspectionPoint.inspectionOptions allObjects];
 
 }
 
--(void) setMyOptionsArray:(NSMutableArray *)input {
-    __optionsArray = input;
-}
 
 @end

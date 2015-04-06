@@ -17,6 +17,7 @@
 #import "IACraneInspectionDetailsManager.h"
 #import "InspectionCrane.h"
 #import "IAConstants.h"
+#import "SyncManager.h"
 
 @class DBRestClient;
 
@@ -112,7 +113,7 @@ typedef enum {
     EMPTY_FIELD,
     PASSED
 } ValidationResults;
-
+- (IBAction)syncCraneInspectionDetails:(id)sender;
 - (IBAction)LoadEquipNumPressed:(id)sender;
 - (IBAction)LoadHoistSrlPressed:(id)sender;
 - (IBAction)CustomerSubmitPressed:(id)sender;

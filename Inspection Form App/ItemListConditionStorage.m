@@ -12,7 +12,7 @@
 @implementation ItemListConditionStorage
 @synthesize myConditions;
 
-- (id) init:(NSMutableArray *) input {
+- (id) init:(NSArray *) input {
     if (self = [super init]) {
         myConditions = [[NSMutableArray alloc] init];
         [self fillConditions:input];
@@ -20,7 +20,7 @@
     return  self;
 }
 
--(void)fillConditions:(NSMutableArray *)input {
+-(void)fillConditions:(NSArray *)input {
     //Add a default condition for every single part that there is.
     for (int i=0; i<input.count; i++) {
         Condition *myCondition = [[Condition alloc] init];

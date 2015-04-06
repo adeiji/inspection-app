@@ -16,3 +16,6 @@ FOUNDATION_EXPORT NSString *const kCoreDataClassInspectionPoint;
 FOUNDATION_EXPORT NSString *const kOptions;
 FOUNDATION_EXPORT NSString *const kInspectionViewControllerPushed;
 FOUNDATION_EXPORT NSString *const kCoreDataClassInspectionOption;
+
+// Notification Center
+FOUNDATION_EXPORT NSString *const NOTIFICATION_CRANE_DETAILS_FINISHED_SAVING;

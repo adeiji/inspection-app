@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "InspectionPoint.h"
 
 #ifndef Inspection_Form_App_Options_h
 #define Inspection_Form_App_Options_h
@@ -15,11 +16,10 @@
 
 @interface Options : NSObject
     
-@property (strong, nonatomic)  NSMutableArray* optionsArray;
+@property (strong, nonatomic)  NSArray* optionsArray;
     
 - (id) initWithPart : (NSString*) part;
-- (NSMutableArray*) myOptionsArray;
-- (void) setMyOptionsArray: (NSMutableArray*) input;
+- (NSMutableArray *) myOptionsArray;
 
 
 @end

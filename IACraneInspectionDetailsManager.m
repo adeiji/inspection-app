@@ -36,39 +36,57 @@
  
  */
 - (void) saveInspectionDetailsWithCranes : (NSArray *) cranes {
-//    [self resetInspectionDetailsDatabase];
-    NSManagedObjectContext *context =  ((AppDelegate *)[ [UIApplication sharedApplication] delegate]).managedObjectContext;
-    NSEntityDescription *entity = [NSEntityDescription entityForName:kCoreDataClassCrane inManagedObjectContext:context];
-    /* Get every crane that we just received from the server and grab all it's subdocuments and store them into coredata */
-    for (id crane in cranes) {
-        InspectionCrane *craneObject = [[InspectionCrane alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
-        craneObject.name = [crane objectForKey:kObjectName];
-        // Convert the Parse Crane Object into a Core Data Object
-        NSSet *set = [[NSSet alloc] init];
-        [set setByAddingObjectsFromArray:[crane objectForKey:kInspectionPoints]];
-        NSMutableArray *inspectionPoints = [NSMutableArray new];
-        
-        for (id inspectionPoint in craneObject.inspectionPoints) {
-            // Create Core Data objects for all the inspcetion points
-            NSEntityDescription *entity = [NSEntityDescription entityForName:kCoreDataClassInspectionPoint inManagedObjectContext:context];
-            InspectionPoint *inspectionPointObject = [[InspectionPoint alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
-            inspectionPointObject.name = [inspectionPoint objectForKey:kObjectName];
-            [set setByAddingObjectsFromArray:[inspectionPoint objectForKey:kOptions]];
-            inspectionPointObject.inspectionOptions = set;
-            [inspectionPoints addObject:inspectionPointObject];
-            
-            NSMutableArray *options = [NSMutableArray new];
-            for (id option in inspectionPointObject.inspectionOptions) {
-                NSEntityDescription *entity = [NSEntityDescription entityForName:kCoreDataClassInspectionOption inManagedObjectContext:context];
-                InspectionOption *inspectionOptionObject = [[InspectionOption alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
-                inspectionOptionObject.name = [option objectForKey:kObjectName];
-                [options addObject:inspectionOptionObject];
-            }
-        }
-    }
+    [self resetInspectionDetailsDatabase];
     
-    [((AppDelegate *) [[UIApplication sharedApplication] delegate]) saveContext];
-    [self loadAllInspectionDetails];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSManagedObjectContext *context =  ((AppDelegate *)[ [UIApplication sharedApplication] delegate]).managedObjectContext;
+        NSMutableArray *cranesArray = [NSMutableArray new];
+        NSEntityDescription *entity = [NSEntityDescription entityForName:kCoreDataClassCrane inManagedObjectContext:context];
+        NSError *error;
+        /* Get every crane that we just received from the server and grab all it's subdocuments and store them into coredata */
+        for (id crane in cranes) {
+            InspectionCrane *craneObject = [[InspectionCrane alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
+            craneObject.name = [crane objectForKey:kObjectName];
+            // Convert the Parse Crane Object into a Core Data Object
+            NSSet *set = [[NSSet alloc] init];
+            [set setByAddingObjectsFromArray:[crane objectForKey:kInspectionPoints]];
+            NSMutableArray *inspectionPoints = [NSMutableArray new];
+            
+            for (id inspectionPoint in crane[kInspectionPoints]) {
+                PFObject *inspectionPointParseObject = (PFObject *) inspectionPoint;
+                [inspectionPointParseObject fetch:&error];
+                // Create Core Data objects for all the inspcetion points
+                NSEntityDescription *entity = [NSEntityDescription entityForName:kCoreDataClassInspectionPoint inManagedObjectContext:context];
+                InspectionPoint *inspectionPointObject = [[InspectionPoint alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
+                inspectionPointObject.name = [inspectionPointParseObject objectForKey:kObjectName];
+                [set setByAddingObjectsFromArray:[inspectionPointParseObject objectForKey:kOptions]];
+                inspectionPointObject.inspectionOptions = set;
+                [inspectionPoints addObject:inspectionPointObject];
+                
+                NSMutableArray *options = [NSMutableArray new];
+                
+                for (id option in inspectionPoint[kOptions]) {
+                    PFObject *optionParseObject = (PFObject *) option;
+                    [optionParseObject fetchIfNeeded];
+                    NSEntityDescription *entity = [NSEntityDescription entityForName:kCoreDataClassInspectionOption inManagedObjectContext:context];
+                    InspectionOption *inspectionOptionObject = [[InspectionOption alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
+                    inspectionOptionObject.name = [optionParseObject objectForKey:kObjectName];
+                    [options addObject:inspectionOptionObject];
+                    [inspectionOptionObject setInspectionPoint:inspectionPointObject];
+                }
+                [inspectionPointObject setInspectionOptions:[NSSet setWithArray:options]];
+                [inspectionPointObject setInspectionCrane:craneObject];
+            }
+            [craneObject setInspectionPoints:[NSSet setWithArray:inspectionPoints]];
+            
+            [cranesArray addObject:craneObject];
+        }
+        
+        [((AppDelegate *) [[UIApplication sharedApplication] delegate]) saveContext];
+        [self loadAllInspectionDetails];
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CRANE_DETAILS_FINISHED_SAVING object:nil];
+        NSLog(@"%@ sent", NOTIFICATION_CRANE_DETAILS_FINISHED_SAVING);
+    });
 }
 
 
@@ -83,8 +101,9 @@
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:kCoreDataClassCrane inManagedObjectContext:_context];
     [fetchRequest setEntity:entity];
+    // Make sure that all subdocuments are also retrieved from this fetch request
+    [fetchRequest setReturnsObjectsAsFaults:NO];
     // Specify how the fetched objects should be sorted
-
     NSError *error = nil;
     NSArray *fetchedObjects = [_context executeFetchRequest:fetchRequest error:&error];
     if (fetchedObjects == nil) {

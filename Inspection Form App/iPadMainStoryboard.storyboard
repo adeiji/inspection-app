@@ -524,6 +524,18 @@
                                 <items>
                                     <barButtonItem title="New Customer" id="Pwy-UG-jgZ"/>
                                     <barButtonItem title="Update" id="wvV-2M-ldN"/>
+                                    <barButtonItem style="plain" id="8SS-9q-4My">
+                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="MvB-S2-A4f">
+                                            <rect key="frame" x="212" y="7" width="233" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" title="Sync Crane Inspection Details">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="syncCraneInspectionDetails:" destination="sgx-pA-png" eventType="touchUpInside" id="X8b-a4-aAP"/>
+                                            </connections>
+                                        </button>
+                                    </barButtonItem>
                                 </items>
                             </toolbar>
                             <navigationBar contentMode="scaleToFill" id="u1W-jj-YwG">

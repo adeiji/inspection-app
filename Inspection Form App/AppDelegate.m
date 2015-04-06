@@ -56,7 +56,6 @@
 
     }
 
-    [SyncManager getAllInspectionDetails];
     [self fillCriteriaObjects];
     [self getPreviouslyFinishedCranes];
 

@@ -16,3 +16,6 @@ NSString *const kCoreDataClassCrane = @"InspectionCrane";
 NSString *const kCoreDataClassInspectionPoint = @"InspectionPoint";
 NSString *const kCoreDataClassInspectionOption = @"InspectionOption";
 NSString *const kInspectionViewControllerPushed = @"com.inspection.app.inspection.view.controller.pushed";
+
+// Notification Center
+NSString *const NOTIFICATION_CRANE_DETAILS_FINISHED_SAVING = @"com.inspection.app.crane.details.finished.downloading";

@@ -91,6 +91,14 @@
     //[self createDatastoreTable];
 }
 
+- (void) addObservers {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetCraneTypePickerView) name:NOTIFICATION_CRANE_DETAILS_FINISHED_SAVING object:nil];
+}
+
+- (void) resetCraneTypePickerView {
+    [_craneDescriptionPickerView reloadAllComponents];
+}
+
 - (void) setupTxtDate
 {
     // Do any additional setup after loading the view, typically from a nib.
@@ -205,6 +213,10 @@
 
 
 //gets customer information and crane information from the JOBS table with the specified equip # and then displays this information on the home page
+
+- (IBAction)syncCraneInspectionDetails:(id)sender {
+    [SyncManager getAllInspectionDetails];
+}
 
 - (void) LoadEquipNumPressed:(id)sender
 {
@@ -364,7 +376,7 @@
     
     crane.hoistSrl = _txtHoistSrl.text;
     crane.equipmentNumber = _txtEquipNum.text;
-    crane.description = _txtCraneDescription.text;
+    crane.craneDescription = _txtCraneDescription.text;
     crane.capacity = _txtCap.text;
     crane.craneSrl = _txtCraneSrl.text;
     crane.hoistMdl = _txtHoistMdl.text;
@@ -510,7 +522,7 @@
     _optionLocation = 0;
     NSInteger selectedRow = [_craneDescriptionPickerView selectedRowInComponent:0];
     InspectionCrane *selectedCrane = [_craneDescriptionsArray objectAtIndex:selectedRow];
-    Parts *craneParts = [[Parts alloc] init : selectedCrane.name ];
+    Parts *craneParts = [[Parts alloc] init : selectedCrane ];
     [self storeInspectionJobInformationWithCraneType:selectedCrane.name SelectedRow:selectedRow];
 
     //Gets all the parts that have to do with this specific crane
@@ -518,6 +530,7 @@
     _inspectionViewController.craneType = selectedCrane.name;
     _inspectionViewController.partsArray = _myPartsArray;
     [[InspectionManager sharedManager] setInspection:inspection];
+    [[IACraneInspectionDetailsManager sharedManager] setCrane:selectedCrane];
     
     [self.navigationController pushViewController:_inspectionViewController animated:YES];
     
@@ -547,55 +560,52 @@
     return dictionary;
 }
 
+- (Inspection *) createInspectionObjectWithSelectedCrane : (InspectionCrane *) selectedCrane {
+    Customer *customer = [InspectionBussiness createCustomer:_txtCustomerName.text CustomerContact:_txtCustomerContact.text CustomerAddress:_txtAddress.text CustomerEmail:_txtEmail.text];
+    Crane *crane = [InspectionBussiness createCrane:_txtHoistSrl.text CraneType:selectedCrane.name EquipmentNumber:_txtEquipNum.text CraneMfg:_txtCraneMfg.text hoistMfg:_txtHoistMfg.text CraneSrl:_txtCraneSrl.text Capacity:_txtCap.text HoistMdl:_txtHoistMdl.text];
+    inspection.crane = crane;
+    inspection.customer = customer;
+    inspection.crane.craneDescription = selectedCrane.name;
+    inspection.jobNumber = _txtJobNumber.text;
+    inspection.date = _txtDate.text;
+    inspection.technicianName = _txtTechnicianName.text;
+    
+    _inspectionViewController.craneType = inspection.crane.type;
+    _inspectionViewController.partsArray = _myPartsArray;
+    
+    _inspectionViewController.validated = YES;
+    [[InspectionManager sharedManager] setInspection:inspection];
+    
+    return inspection;
+}
+
 //On the customer page, submits the information into the database on the iPad
 - (IBAction)CustomerSubmitPressed:(id)sender {
     if ([self validateSubmission : YES] != EMPTY_FIELD || INVALID_CHARACTER)
     {
+        _optionLocation = 0;
         //Get the selected crane type fromt he crane picker.
-        NSUInteger selectedRow = [_craneDescriptionPickerView selectedRowInComponent:0];
-
-        NSString * craneType = [[_craneDescriptionPickerView delegate] pickerView:_craneDescriptionPickerView titleForRow:selectedRow forComponent:0];
+        NSInteger selectedRow = [_craneDescriptionPickerView selectedRowInComponent:0];
+        InspectionCrane *selectedCrane = [_craneDescriptionsArray objectAtIndex:selectedRow];
+        Parts *craneParts = [[Parts alloc] init: selectedCrane];
+        _myPartsArray = [craneParts myParts];
         
-        //Gets the parts array, with the crane type changed to a normal NSString
-        parts = [[Parts alloc] init : craneType];
-
-        _myPartsArray = [parts myParts];
-        Customer *customer = [InspectionBussiness createCustomer:_txtCustomerName.text CustomerContact:_txtCustomerContact.text CustomerAddress:_txtAddress.text CustomerEmail:_txtEmail.text];
-        
-        Crane *crane = [InspectionBussiness createCrane:_txtHoistSrl.text CraneType:craneType EquipmentNumber:_txtEquipNum.text CraneMfg:_txtCraneMfg.text hoistMfg:_txtHoistMfg.text CraneSrl:_txtCraneSrl.text Capacity:_txtCap.text HoistMdl:_txtHoistMdl.text];
-        
-        inspection.crane = crane;
-        inspection.customer = customer;
-        if (!craneType) {
-            inspection.crane.description = @"Jib";
-        }
-        else {
-            inspection.crane.description = craneType;
-        }
-        
-        inspection.jobNumber = _txtJobNumber.text;
-        inspection.date = _txtDate.text;
-        inspection.technicianName = _txtTechnicianName.text;
-        
-        _inspectionViewController.craneType = inspection.crane.type;
+        [self storeInspectionJobInformationWithCraneType:selectedCrane.name SelectedRow:selectedRow];
+        //Gets all the parts that have to do with this specific crane
+        _inspectionViewController.craneType = selectedCrane.name;
         _inspectionViewController.partsArray = _myPartsArray;
-        
-        _inspectionViewController.validated = YES;
-        
-        //Set the objects on the singleton object
-        [[InspectionManager sharedManager] setCrane:crane];
-        [[InspectionManager sharedManager] setCustomer:customer];
+        inspection = [self createInspectionObjectWithSelectedCrane:selectedCrane];
         [[InspectionManager sharedManager] setInspection:inspection];
+        [[IACraneInspectionDetailsManager sharedManager] setCrane:selectedCrane];
         
         [self.navigationController pushViewController:_inspectionViewController animated:YES];
         
-//        NSString *part = [delegate.partsDictionary objectForKey:inspection.crane.type][0];
-        NSString *part = @"";
+        //Send out a notification that the InspectionViewController is pushed onto the stack.
+        //Send the crane type that is being pushed.
+        [[NSNotificationCenter defaultCenter] postNotificationName:kInspectionViewControllerPushed
+                                                            object:self
+                                                          userInfo:@{@"craneType": selectedCrane.name }];
         
-        [_inspectionViewController fillOptionArrays:part];
-        [_inspectionViewController changeLayout:_optionLocation PartsArray:_myPartsArray ItemListStore:myItemListStore];
-        
-        [_dataStore sync:nil];
     }
     else
     {

@@ -20,6 +20,7 @@
         if (!error)
         {
             [[IACraneInspectionDetailsManager sharedManager] saveInspectionDetailsWithCranes:objects];
+            NSLog(@"com.inspectionapp - All Crane details downloaded from the server.");
         }
     }];
 }
