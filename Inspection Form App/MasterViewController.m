@@ -29,8 +29,11 @@
 #define TYPE_NAME_COL @"typeName"
 #define COLUMN_CONTAINING_TOP_ELEMENTS @"hoistsrl"
 
+static NSString *const PART_NAME = @"partName";
+static NSString *const OPTIONS = @"options";
+
 - (id)initWithStyle : (UITableViewStyle)style
-              Level : (int) currentLevel
+              Level : (NSString *) currentLevel
         SearchValue : (NSArray *) tableData
 
 {
@@ -60,21 +63,27 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayParts:) name:kInspectionViewControllerPushed object:nil];
 }
 
+- (void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self setObservers];
+}
+
+- (void) viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 #pragma mark - Notification methods
 
 - (void) displayParts : (NSNotification *) notification
 {
-    //Get the shared delegate so that we can get the parts dictionary.
-    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+    NSArray *inspectionPoints = [notification.userInfo[USER_INFO_SELECTED_CRANE_INSPECTION_POINTS] allObjects];
     
-    //Reload the table data with the different part types.
-    _tableData = [[NSMutableArray alloc] init];
-    _tableData = [delegate.partsDictionary objectForKey: notification.userInfo[@"craneType"]];
-    //Set the level to part name so that way when the user clicks on a part, we handle the click event as a part click event.
-    level = PART_NAME;
-    self.title = @"Parts";
-    //Reload the data.
-    [self.tableView reloadData];
+    if (level == nil && [self.navigationController.topViewController isEqual:self])
+    {
+        MasterViewController *mvc = [[MasterViewController alloc] initWithStyle:nil Level:PART_NAME SearchValue:inspectionPoints];
+        [self.navigationController pushViewController:mvc animated:YES];
+    }
 }
 
 - (void) changePart : (NSNotification *) notification
@@ -186,12 +195,10 @@
     [self.navigationController pushViewController:mvc animated:YES];
     if (__delegate)
     {
-        Part *part = [[Part alloc] init];
-        [part setPart:[_tableData objectAtIndex:indexPath.row]];
         
         mainPageViewController.inspectionViewController.craneType = inspectionPoint.inspectionCrane.name;
         mainPageViewController.inspectionViewController.optionLocation = indexPath.row;
-        [__delegate selectedPart:[_tableData objectAtIndex:indexPath.row]];
+        [__delegate selectedPart:inspectionPoint];
         
         mainPageViewController = nil;
     }
@@ -199,11 +206,11 @@
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (level == PART_NAME)
+    if ([level isEqualToString:PART_NAME])
     {
         [self showOptionsForInspectionPointAtIndexPath:indexPath];
     }
-    else if (level == OPTIONS)
+    else if ([level isEqualToString:OPTIONS])
     {
         [self handleOptionSelectedAtIndexPath:indexPath];
     }

@@ -18,7 +18,7 @@
     
 @property (strong, nonatomic)  NSArray* optionsArray;
     
-- (id) initWithPart : (NSString*) part;
+- (id) initWithPart : (InspectionPoint *) part;
 - (NSMutableArray *) myOptionsArray;
 
 

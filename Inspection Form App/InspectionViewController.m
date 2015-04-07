@@ -167,7 +167,7 @@
     }
 }
 
-- (void) fillOptionArrays : (NSString*) currentPart {
+- (void) fillOptionArrays : (InspectionPoint *) currentPart {
     Options* myOptions = [[Options alloc] initWithPart:currentPart];
     _deficiencyPickerArray = myOptions.optionsArray;
     //Send the array that contains the particular defficiencies unique to this part
@@ -467,13 +467,7 @@
 {
     [self.navigationController popViewControllerAnimated:YES];
 }
-//The Master View Controller displaying the parts is displayed by being pushed onto the stack.
-- (IBAction)showPartsController:(id)sender {
-    //Create the Master View Controller.  The Level is the current type of data that's being displayed, and the search value is the value that will be searched
-    //in Mongo to reveal the correct information.
-    MasterViewController *mvc = [[MasterViewController alloc] initWithStyle:nil Level:PART_NAME SearchValue:inspection.inspectedCrane.type];
-    [self.navigationController pushViewController:mvc animated:YES];
-}
+
 
 - (void) nextPressed {
     if (_optionLocation < [_partsArray count] - 1) {
@@ -560,7 +554,7 @@
     }
 }
 
-- (void) selectedPart:(Part *)currentPart
+- (void) selectedPart:(InspectionPoint *) currentPart
 {
     //If the view controller has already been loaded then we continue to save the information on the current page.
     if (_txtNotes != nil)
@@ -568,16 +562,7 @@
         NSUInteger selectedRow = [_deficiencyPicker selectedRowInComponent:0];
         NSString *myDeficientPart = [[_deficiencyPicker delegate] pickerView: _deficiencyPicker titleForRow:selectedRow forComponent:0];
         [self saveInfo:_txtNotes.text :_deficiencySwitch.on:[_deficiencyPicker selectedRowInComponent:0]:myDeficientPart:_applicableSwitch.on];
-        
-        //We need to get the parts that are unique to this particular crane.
-        Parts *parts = [[Parts alloc] init:_craneType];
-        
-        //Get the actual array itself from the parts object
-        _partsArray = [parts myParts];
-        
-        //Get the options that are unique to this particular part.
-        [self fillOptionArrays:_partsArray[_optionLocation]];
-        
+        [self fillOptionArrays:currentPart];
         [self changePickerArray:_deficiencyPickerArray];
         [self changeLayout:_optionLocation PartsArray:_partsArray ItemListStore:itemListStore];
     }

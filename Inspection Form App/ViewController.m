@@ -564,7 +564,7 @@
     Send the crane type that is being pushed. */
     [[NSNotificationCenter defaultCenter] postNotificationName:kInspectionViewControllerPushed
                                                         object:self
-                                                      userInfo:@{@"craneType": selectedCrane.name }];
+                                                      userInfo:@{ USER_INFO_SELECTED_CRANE_INSPECTION_POINTS : selectedCrane.inspectionPoints }];
 }
 
 /*

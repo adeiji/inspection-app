@@ -52,10 +52,10 @@ typedef enum {
 - (void) changeLayout : (int) optionLocation
            PartsArray : (NSArray*) myPartsArray
         ItemListStore : (ItemListConditionStorage *) myItemListStore;
-- (void) fillOptionArrays : (NSString*) craneDescription;
+- (void) fillOptionArrays : (InspectionPoint *) craneDescription;
 - (void) initiateParts;
 
 //Action Outlets
 - (IBAction)gotoCustomerInformation:(id)sender;
-- (IBAction)showPartsController:(id)sender;
+
 @end

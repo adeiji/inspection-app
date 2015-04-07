@@ -12,22 +12,17 @@
 
 @interface MasterViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate>
 {
-    int level;
+    NSString *level;
     NSDictionary *inspectionCriteria;
     NSArray *results;
     NSString *searchValue;
 }
-typedef enum {
-    TYPE_NAME,
-    PART_NAME,
-    OPTIONS
-} TableLevel;
 
 @property (nonatomic, assign) id<PartSelectionDelegate> delegate;
 @property (strong, nonatomic) NSArray *tableData;
 
 - (id)initWithStyle : (UITableViewStyle)style
-              Level : (int) currentLevel
+              Level : (NSString *) currentLevel
         SearchValue : (NSArray *) tableData;
 
 @end

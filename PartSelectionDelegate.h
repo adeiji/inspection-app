@@ -9,12 +9,12 @@
 #import <Foundation/Foundation.h>
 
 
-@class Part;
+@class InspectionPoint;
 
 @protocol PartSelectionDelegate <NSObject>
 
 @required
-- (void) selectedPart : (Part *) currentPart;
+- (void) selectedPart : (InspectionPoint *) currentPart;
 - (void) selectedOption : (NSString *) selectedOption;
 
 @end
