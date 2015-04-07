@@ -513,7 +513,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
-                                        <color key="backgroundColor" red="0.98038903060000004" green="0.98038903060000004" blue="0.98038903060000004" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <gestureRecognizers/>
                                     </view>
                                 </subviews>
@@ -522,7 +522,11 @@
                                 <rect key="frame" x="0.0" y="980" width="768" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
-                                    <barButtonItem title="New Customer" id="Pwy-UG-jgZ"/>
+                                    <barButtonItem title="New Customer" id="Pwy-UG-jgZ">
+                                        <connections>
+                                            <action selector="NewCustomerPress:" destination="sgx-pA-png" id="GKV-WQ-aSP"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem title="Update" id="wvV-2M-ldN"/>
                                     <barButtonItem style="plain" id="8SS-9q-4My">
                                         <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="MvB-S2-A4f">
@@ -537,19 +541,27 @@
                                         </button>
                                     </barButtonItem>
                                 </items>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="barTintColor" red="0.0" green="0.67450980390000004" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
                             </toolbar>
                             <navigationBar contentMode="scaleToFill" id="u1W-jj-YwG">
                                 <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <inset key="insetFor6xAndEarlier" minX="0.0" minY="-20" maxX="0.0" maxY="20"/>
+                                <color key="barTintColor" red="0.0" green="0.67450980390000004" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <textAttributes key="titleTextAttributes">
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </textAttributes>
                                 <items>
                                     <navigationItem title="Customer and Job Information" id="HDl-LN-ANL">
                                         <barButtonItem key="leftBarButtonItem" title="Submit" id="Uqq-fb-DUm">
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <connections>
                                                 <action selector="CustomerSubmitPressed:" destination="sgx-pA-png" id="tgK-gV-U2o"/>
                                             </connections>
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" title="Parts List" id="6cv-YP-nhB">
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <connections>
                                                 <action selector="partsListButtonClicked:" destination="sgx-pA-png" id="Klg-xb-kKO"/>
                                             </connections>
@@ -703,9 +715,11 @@
                             <navigationBar clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="blackTranslucent" id="IgU-F9-DOD">
                                 <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="barTintColor" red="0.25882352939999997" green="0.73725490199999999" blue="0.38431372549999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <items>
-                                    <navigationItem title="Title" id="9G3-Eu-saT">
+                                    <navigationItem title="Inspection Points" id="9G3-Eu-saT">
                                         <barButtonItem key="leftBarButtonItem" title="Customer Information" id="c3C-xH-oi7">
+                                            <color key="tintColor" red="0.98038903060000004" green="0.98038903060000004" blue="0.98038903060000004" alpha="1" colorSpace="calibratedRGB"/>
                                             <connections>
                                                 <action selector="gotoCustomerInformation:" destination="ohd-4L-yxA" id="MlQ-oP-nF6"/>
                                             </connections>
@@ -717,14 +731,18 @@
                                 <rect key="frame" x="0.0" y="980" width="768" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <items>
-                                    <barButtonItem title="Customer Info" id="Spn-F2-nAd"/>
                                     <barButtonItem title="Submit" id="2YM-vd-SmA">
+                                        <color key="tintColor" red="0.98038903060000004" green="0.98038903060000004" blue="0.98038903060000004" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <action selector="submitPressed:" destination="ohd-4L-yxA" id="iEo-Ff-Mp9"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem title="Create Certificate" id="0hp-Iu-e5a"/>
+                                    <barButtonItem title="Create Certificate" id="0hp-Iu-e5a">
+                                        <color key="tintColor" red="0.98038903060000004" green="0.98038903060000004" blue="0.98038903060000004" alpha="1" colorSpace="calibratedRGB"/>
+                                    </barButtonItem>
                                 </items>
+                                <color key="tintColor" red="0.0" green="0.67450980390000004" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="barTintColor" red="0.25882352939999997" green="0.73725490199999999" blue="0.38431372549999998" alpha="1" colorSpace="calibratedRGB"/>
                             </toolbar>
                             <view contentMode="scaleToFill" id="anc-cl-5wC" customClass="GradientView">
                                 <rect key="frame" x="20" y="321" width="728" height="50"/>
@@ -752,7 +770,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" red="0.95679772419999998" green="0.95679772419999998" blue="0.95679772419999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                     </view>
                     <navigationItem key="navigationItem" id="Fhf-l3-h0H"/>

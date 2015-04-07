@@ -262,6 +262,7 @@
     
     [self saveInfo:_txtNotes.text :_deficiencySwitch.on:[_deficiencyPicker selectedRowInComponent:0]:myDeficientPart:_applicableSwitch.on];
     
+    [[((AppDelegate *) [[UIApplication sharedApplication] delegate]) managedObjectContext] rollback];
     [self.navigationController popViewControllerAnimated:YES];
 }
 

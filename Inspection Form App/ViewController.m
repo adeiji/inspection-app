@@ -720,8 +720,7 @@
 
 - (IBAction)NewCustomerPress:(id)sender {
     [self EmptyTextFields];
-    
-    [_inspectionViewController initiateParts];
+    [_inspectionViewController setOptionLocation:0];
 }
 - (void) EmptyTextFields
 {

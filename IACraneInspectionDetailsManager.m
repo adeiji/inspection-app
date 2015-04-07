@@ -166,7 +166,7 @@
     crane.capacity          = capacity;
     crane.hoistMdl          = hoistMdl;
     
-    NSLog(@"Crane object saved to database - com.inspectionapp.coredata");
+    NSLog(@"Crane object created - com.inspectionapp.coredata");
 
     return crane;
 }

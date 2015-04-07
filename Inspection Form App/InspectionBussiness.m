@@ -58,7 +58,6 @@
     customer.address    = customerAddress;
     customer.email      = customerEmail;
     
-    [((AppDelegate *) [[UIApplication sharedApplication] delegate]) saveContext];
     return customer;
 }
 
