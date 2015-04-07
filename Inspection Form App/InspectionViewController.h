@@ -16,7 +16,6 @@
 {
 
     int timesShown;
-    int buttonIndex;
     BOOL pageSubmitAlertView;
     BOOL inspectionComplete;
     BOOL loadRatings;
@@ -54,6 +53,7 @@ typedef enum {
         ItemListStore : (ItemListConditionStorage *) myItemListStore;
 - (void) fillOptionArrays : (InspectionPoint *) craneDescription;
 - (void) initiateParts;
+- (IBAction)createCertificateButtonPressed:(id)sender;
 
 //Action Outlets
 - (IBAction)gotoCustomerInformation:(id)sender;

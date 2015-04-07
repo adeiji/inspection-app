@@ -61,26 +61,12 @@
         [alert show];
     }
     
-    _txtCraneDescription.inputView = _craneDescriptionPickerView;
-    _txtCraneDescription.inputAccessoryView = _selectCraneButton;
     [self setupTxtDate];
     [self dateSelectionChanged:_datePicker];
-    _navBar.topItem.title = @"Inspection Form App";
+    
     _optionLocation=0;
     [self resetVariables];
     _txtTechnicianName.text = [owner uppercaseString];
-    
-    //If the Dropbox account is linked to this device then we remove the link to dropbox button.
-    _account = [[DBAccountManager sharedManager] linkedAccount];
-    if (_account)
-    {
-        //If the app is already linked to dropbox then we remove the link to dropbox button
-        NSMutableArray *toolbarItems = [self.toolbarItems mutableCopy];
-        [toolbarItems removeObject:_btnDropboxLink];
-        self.toolbarItems = toolbarItems;
-    }
-    
-    //[self createDatastoreTable];
 }
 
 - (void) addObservers {
@@ -102,7 +88,7 @@
     InspectedCrane *crane = [notification.userInfo objectForKey:kSelectedInspectedCrane];
     
     _txtCap.text = crane.capacity;
-    _txtCraneDescription.text = crane.craneDescription;
+#warning - need to set the picker view to the crane type
     _txtCraneSrl.text = crane.craneSrl;
     _txtEquipNum.text = crane.equipmentNumber;
     _txtHoistMdl.text = crane.hoistMdl;
@@ -168,26 +154,6 @@
 
 #pragma mark - Dropbox Datastore Methods
 
-- (IBAction) didPressLink
-{
-    _account = [[DBAccountManager sharedManager] linkedAccount];
-    
-    if (_account) {
-        NSLog(@"App already linked");
-        //If the app is already linked to dropbox then we remove the link to dropbox button
-        NSMutableArray *toolbarItems = [self.toolbarItems mutableCopy];
-        [toolbarItems removeObject:_btnDropboxLink];
-        self.toolbarItems = toolbarItems;
-    } else {
-        [[DBAccountManager sharedManager] linkFromController:self];
-        //If the app is already linked to dropbox then we remove the link to dropbox button
-        NSMutableArray *toolbarItems = [self.toolbarItems mutableCopy];
-        [toolbarItems removeObject:_btnDropboxLink];
-        self.toolbarItems = toolbarItems;
-    }
-}
-
-
 //If there is not a Dropbox Datastore Table already created, we create it, as well as the data store.
 - (void) createDatastoreTable
 {
@@ -216,8 +182,6 @@
     if (textField.tag == 12)
     {
         _craneDescriptionPickerView.hidden = FALSE;
-        _selectCraneButton.hidden = FALSE;
-        
     }
     textField.text = [textField.text capitalizedString];
 }
@@ -271,11 +235,6 @@
     return self;
 }
 
-//when the back button on the viewPDFController viewController is pressed
-- (IBAction)finalBackButtonPressed:(id)sender {
-    [_viewPDFController.view removeFromSuperview];
-    [self.view insertSubview:_CraneInspectionView atIndex:0];
-}
 //When the correct date is selected from the DatePicker then this method will convert the long date to the short date
 //ex: April 12, 2012 = 4/12/12
 - (IBAction)dateSelected:(id)sender {
@@ -401,7 +360,7 @@
     
     crane.hoistSrl = _txtHoistSrl.text;
     crane.equipmentNumber = _txtEquipNum.text;
-    crane.craneDescription = _txtCraneDescription.text;
+    // Need to get the crane type
     crane.capacity = _txtCap.text;
     crane.craneSrl = _txtCraneSrl.text;
     crane.hoistMdl = _txtHoistMdl.text;
@@ -499,21 +458,10 @@
         }
     }
 }
--(IBAction)switchView {
-}
 
 -(void) viewWillAppear:(BOOL)animated
 {
-    CGRect anotherrect=[[UIApplication sharedApplication]statusBarFrame];
-    
-    if (changeLayoutNeeded == YES && ![iosVersion isEqualToString: @"5.1.1"])
-    {
-        changeLayoutNeeded = NO;
-        _CustomerInfoScrollView.center=CGPointMake(_CustomerInfoScrollView.center.x, _CustomerInfoScrollView.center.y+anotherrect.size.height); // fix silliness in IB that makes view start 20 pixels higher than it should on iPhone
-        _CustomerInfoScrollView.frame = CGRectMake(0, 20, 768, 1004);
-        _CraneInspectionView.center=CGPointMake(_CraneInspectionView.center.x, _CraneInspectionView.center.y+anotherrect.size.height); // fix silliness in IB that makes view start 20 pixels higher than it should on iPhone
-        _CraneInspectionView.frame = CGRectMake(0, 20, 768, 1004);
-    }
+    [super viewWillAppear:animated];
 }
 
 
@@ -685,8 +633,8 @@
 }
 - (void) keyboardWillBeHidden:(NSNotification *) notification {
     UIEdgeInsets contentInsets = UIEdgeInsetsZero;
-    _CustomerInfoScrollView.contentInset = contentInsets;
-    _CustomerInfoScrollView.scrollIndicatorInsets = contentInsets;
+//    _CustomerInfoScrollView.contentInset = contentInsets;
+//    _CustomerInfoScrollView.scrollIndicatorInsets = contentInsets;
 }
 
 - (void) viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
@@ -737,8 +685,6 @@
     _txtHoistMfg.text = @"";
     _txtHoistSrl.text = @"";
     _txtEmail.text = @"";
-    _txtCraneDescription.text = @"";
-    _lblCraneDesc.text = @"";
 }
 
 @end

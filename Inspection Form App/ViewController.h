@@ -68,19 +68,10 @@
 @property (weak, nonatomic) IBOutlet UITextField *txtDate;
 @property (strong, nonatomic) UIDatePicker *datePicker;
 @property int optionLocation;
-@property (weak, nonatomic) IBOutlet UINavigationBar *navBar;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *navSubmit;
 @property (strong, nonatomic) IBOutlet GradientView *craneView;
-
-
 @property (strong, nonatomic)  InspectionViewController* inspectionViewController;
-@property (strong, nonatomic) IBOutlet UIScrollView *CustomerInfoScrollView;
-@property (strong, nonatomic) IBOutlet UIView *CraneInspectionView;
-@property (weak, nonatomic) IBOutlet UIView *CustomerInfoView;
-@property (strong, nonatomic) IBOutlet UIView *CustomerInfoFullView;
 @property (strong, nonatomic) IBOutlet UIViewController *rootViewController;
 @property (strong, nonatomic) NSMutableArray *myPartsArray;
-
 @property (weak, nonatomic) IBOutlet TextField *txtCustomerName;
 @property (weak, nonatomic) IBOutlet TextField *txtCustomerContact;
 @property (weak, nonatomic) IBOutlet TextField *txtJobNumber;
@@ -92,21 +83,12 @@
 @property (weak, nonatomic) IBOutlet TextField *txtCraneSrl;
 @property (weak, nonatomic) IBOutlet TextField *txtHoistSrl;
 @property (weak, nonatomic) IBOutlet TextField *txtEquipNum;
-
-
-@property (strong, nonatomic) IBOutlet UIBarButtonItem *btnDropboxLink;
-@property (weak, nonatomic) IBOutlet UITextView *txtNotes;
 @property (weak, nonatomic) IBOutlet TextField *txtEmail;
 @property (strong, nonatomic) NSString *customerName;
 @property (strong, nonatomic) NSString *jobnumber;
-@property (strong, nonatomic) IBOutlet UIViewController *viewPDFController;
-@property (weak, nonatomic) IBOutlet UITextField *txtCraneDescription;
 @property (weak, nonatomic) IBOutlet UITextField *txtTechnicianName;
-@property (weak, nonatomic) IBOutlet UILabel *lblCraneDesc;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *CreateCertificateButton;
 @property (strong, nonatomic) IBOutlet UIPickerView *craneDescriptionPickerView;
 @property (strong, nonatomic) NSArray *craneDescriptionsArray;
-@property (weak, nonatomic) IBOutlet UIButton *selectCraneButton;
 
 typedef enum {
     INVALID_CHARACTER,
@@ -114,17 +96,11 @@ typedef enum {
     PASSED
 } ValidationResults;
 - (IBAction)syncCraneInspectionDetails:(id)sender;
-- (IBAction)LoadEquipNumPressed:(id)sender;
-- (IBAction)LoadHoistSrlPressed:(id)sender;
 - (IBAction)CustomerSubmitPressed:(id)sender;
-- (IBAction)switchView;
-- (IBAction)datePressed:(id)sender;
-- (IBAction)buttonPressed;
 - (IBAction) partsListButtonClicked:(id) sender;
 - (IBAction) textFieldDidBeginEditing:(UITextField *) textField;
 - (IBAction) textFieldDidEndEditing:(UITextField *) textField;
 - (IBAction)NewCustomerPress:(id)sender;
-- (IBAction)dateSelected:(id)sender;
 - (BOOL) textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string;
 - (void) storeInformationAndDisplayInspectionViewWithCrane : (InspectionCrane *) selectedCrane
                                                SelectedRow : (NSInteger) selectedRow;

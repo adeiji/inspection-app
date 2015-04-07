@@ -18,4 +18,6 @@
            PartsArray : (NSArray*) myPartsArray;
 
 + (UIDocumentInteractionController *) DisplayPDFWithOverallRating : (Inspection *) inspection;
++ (void) createCertificate:(Inspection*) inspection;
++ (UIDocumentInteractionController *) displayCertificate : (Inspection*) inspection;
 @end

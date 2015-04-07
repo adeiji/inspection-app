@@ -739,6 +739,9 @@
                                     </barButtonItem>
                                     <barButtonItem title="Create Certificate" id="0hp-Iu-e5a">
                                         <color key="tintColor" red="0.98038903060000004" green="0.98038903060000004" blue="0.98038903060000004" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <action selector="createCertificateButtonPressed:" destination="ohd-4L-yxA" id="daG-3H-M5i"/>
+                                        </connections>
                                     </barButtonItem>
                                 </items>
                                 <color key="tintColor" red="0.0" green="0.67450980390000004" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>

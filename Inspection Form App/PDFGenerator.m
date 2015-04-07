@@ -85,45 +85,31 @@
 
 }
 
++ (void) MoveToPoint : (CGPoint) startPoint
+       AndDrawString : (NSString *) string
+              InRect : (CGRect) rect
+         WithContext : (CGContextRef) pdfContext
+          AddToPoint : (CGPoint) endPoint
+            FontSize : (CGFloat) fontSize
+     ParagraphyStyle : (NSParagraphStyle *) paragraphStyle
+{
+    NSDictionary *attributesDictionary = @{ NSFontAttributeName : [UIFont systemFontOfSize:fontSize],
+                                            NSParagraphStyleAttributeName : paragraphStyle } ;
+    [string drawInRect:rect withAttributes:attributesDictionary];
+    CGContextBeginPath(pdfContext);
+    CGContextMoveToPoint(pdfContext, startPoint.x, startPoint.y);
+    CGContextAddLineToPoint(pdfContext, endPoint.x, endPoint.y);
+    CGContextClosePath(pdfContext);
+    CGContextDrawPath(pdfContext, kCGPathFillStroke);
+
+}
 
 
-+ (void) createCertificate:(NSString *) titleAddress
-                          :(NSString *) headerTitle
-                          :(NSString *) headerString
-                          :(NSString *) ownerString
-                          :(NSString *) ownerAddressString
-                          :(NSString *) device
-                          :(NSString *) location
-                          :(NSString *) description
-                          :(NSString *) ratedCapacity
-                          :(NSString *) craneManafacturer
-                          :(NSString *) modelCrane
-                          :(NSString *) serialNoCrane
-                          :(NSString *) hoistManufacturer
-                          :(NSString *) modelHoist
-                          :(NSString *) serialNoHoist
-                          :(NSString *) ownerID
-                          :(NSString *) lifting
-                          :(NSString *) other
-                          :(NSString *) testLoadsString
-                          :(NSString *) proofLoadString
-                          :(NSString *) loadRatingsString
-                          :(NSString *) remarksLimitationsString
-                          :(NSString *) footer
-                          :(NSString *) nameAddress
-                          :(NSString *) address
-                          :(NSString *) expirationDate
-                          :(NSString *) signature
-                          :(NSString *) title
-                          :(NSString *) inspectorName
-                          :(NSString *) certificateNum
-                          :(NSString *) date
-                          :(NSString *) filePath
-                          :(Inspection*) inspection
++ (void) createCertificate:(Inspection*) inspection
 {
     // Create URL for PDF file
     
-    NSURL *fileURL = [NSURL fileURLWithPath:filePath];
+    NSURL *fileURL = [NSURL fileURLWithPath:[self getFilePathForInspection:inspection]];
     CGContextRef pdfContext = CGPDFContextCreateWithURL((__bridge CFURLRef)fileURL, NULL, NULL);
     [self drawInContext:pdfContext];
     
@@ -132,11 +118,10 @@
     paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
     paragraphStyle.alignment = NSTextAlignmentLeft;
 
-    [titleAddress drawInRect:CGRectMake(95, 35, 270, 45) withAttributes:@{ NSFontAttributeName : [UIFont systemFontOfSize:12.0f] }];
-    [headerTitle drawInRect:CGRectMake(355, 35, 300, 50)withAttributes:@{ NSFontAttributeName : [UIFont systemFontOfSize:12.0f] }];
+    [@"Silver State Wire Rope & Rigging\n8740 S. Jones Blvd Las Vegas, NV 89139\n(702) 597-2010 fax (702) 896-1977" drawInRect:CGRectMake(95, 35, 270, 45) withAttributes:@{ NSFontAttributeName : [UIFont systemFontOfSize:12.0f] }];
+    [@"Annual Overhead Crane Inspection" drawInRect:CGRectMake(355, 35, 300, 50)withAttributes:@{ NSFontAttributeName : [UIFont systemFontOfSize:12.0f] }];
     
-    //LINE 1
-    [ownerString drawInRect:CGRectMake(50, 160, 500, 20) withAttributes: @{ NSFontAttributeName : [UIFont systemFontOfSize:12.0f],
+    [@"Owner" drawInRect:CGRectMake(50, 160, 500, 20) withAttributes: @{ NSFontAttributeName : [UIFont systemFontOfSize:12.0f],
                                                                             NSParagraphStyleAttributeName : paragraphStyle
                                                                             }];
     CGContextSetLineWidth(pdfContext, 1);
@@ -150,170 +135,80 @@
     CGContextClosePath(pdfContext);
     CGContextDrawPath(pdfContext, kCGPathFillStroke);
     
-    //LINE 2
-    [ownerAddressString drawInRect:CGRectMake(50, 190, 500 , 20) withFont:[UIFont systemFontOfSize:12.0f] lineBreakMode:UILineBreakModeCharacterWrap alignment:UITextAlignmentLeft];
+    //  Owner Address
+    [self MoveToPoint:CGPointMake(170, 205) AndDrawString:@"Owner's Address" InRect:CGRectMake(50, 190, 500, 20) WithContext:pdfContext AddToPoint:CGPointMake(550, 205) FontSize:12.0f ParagraphyStyle:paragraphStyle];
     
-    CGContextBeginPath(pdfContext);
-    CGContextMoveToPoint(pdfContext, 170, 205);
-    CGContextAddLineToPoint(pdfContext, 550, 205);
+    //  Location
+    [self MoveToPoint:CGPointMake(120, 235) AndDrawString:@"Address: " InRect:CGRectMake(50, 220, 500, 20) WithContext:pdfContext AddToPoint:CGPointMake(550, 235) FontSize:12.0f ParagraphyStyle:paragraphStyle];
     
-    CGContextClosePath(pdfContext);
-    CGContextDrawPath(pdfContext, kCGPathFillStroke);
+    // Description
+    [self MoveToPoint:CGPointMake(130, 265) AndDrawString:@"Description: " InRect:CGRectMake(50, 250, 230, 20) WithContext:pdfContext AddToPoint:CGPointMake(260, 265) FontSize:12.0f ParagraphyStyle:paragraphStyle];
     
-    //LINE 3
-    [location drawInRect:CGRectMake(50, 220, 500, 20) withFont:[UIFont systemFontOfSize:12.0f]];
+    // Rated Capacity
+    [self MoveToPoint:CGPointMake(355, 265) AndDrawString:inspection.inspectedCrane.capacity InRect:CGRectMake(255, 250, 230, 20) WithContext:pdfContext AddToPoint:CGPointMake(550, 265) FontSize:12.0f ParagraphyStyle:paragraphStyle];
     
-    CGContextBeginPath(pdfContext);
-    CGContextMoveToPoint(pdfContext, 120, 235);
-    CGContextAddLineToPoint(pdfContext, 550, 235);
+    // Crane Manufacturer
+    [self MoveToPoint:CGPointMake(180, 295) AndDrawString:@"Crane Manufacturer"  InRect:CGRectMake(50, 280, 230, 20) WithContext:pdfContext AddToPoint:CGPointMake(265, 295) FontSize:12.0f ParagraphyStyle:paragraphStyle];
     
-    CGContextClosePath(pdfContext);
-    CGContextDrawPath(pdfContext, kCGPathFillStroke);
-    
-    //LINE 4
-    [description drawInRect:CGRectMake(50, 250, 230, 20) withFont:[UIFont systemFontOfSize:12.0f]];
-    
-    CGContextBeginPath(pdfContext);
-    CGContextMoveToPoint(pdfContext, 130, 265);
-    CGContextAddLineToPoint(pdfContext, 260, 265);
-    
-    CGContextClosePath(pdfContext);
-    CGContextDrawPath(pdfContext, kCGPathFillStroke);
-    //LINE 4 PART 2
-    [ratedCapacity drawInRect:CGRectMake(255, 250, 230, 20) withFont:[UIFont systemFontOfSize:12.0f]];
-    
-    CGContextBeginPath(pdfContext);
-    CGContextMoveToPoint(pdfContext, 355, 265);
-    CGContextAddLineToPoint(pdfContext, 550, 265);
-    
-    CGContextClosePath(pdfContext);
-    CGContextDrawPath(pdfContext, kCGPathFillStroke);
-    
-    //LINE 5
-    [craneManafacturer drawInRect:CGRectMake(50, 280, 230, 20) withFont:[UIFont systemFontOfSize:12.0f]];
-    
-    CGContextBeginPath(pdfContext);
-    CGContextMoveToPoint(pdfContext, 180, 295);
-    CGContextAddLineToPoint(pdfContext, 265, 295);
-    
-    CGContextClosePath(pdfContext);
-    CGContextDrawPath(pdfContext, kCGPathFillStroke);
     //Crane Mfg
-    [inspection.inspectedCrane.mfg drawInRect:CGRectMake(180, 280, 230, 20) withFont:[UIFont systemFontOfSize:10.0f]];
+    [inspection.inspectedCrane.hoistMfg drawInRect:CGRectMake(180, 280, 230, 20) withAttributes: @{ NSFontAttributeName : [UIFont systemFontOfSize:10.0f] }];
     
-    //LINE 6 Part 3
-    [serialNoCrane drawInRect:CGRectMake(410, 280, 230, 20) withFont:[UIFont systemFontOfSize:12.0f]];
+    //  LINE 6 Part 3
+    [self MoveToPoint:CGPointMake(470, 295) AndDrawString:@"Serial No." InRect:CGRectMake(410, 280, 230, 20) WithContext:pdfContext AddToPoint:CGPointMake(550, 295) FontSize:12.0f ParagraphyStyle:paragraphStyle];
     
-    CGContextBeginPath(pdfContext);
-    CGContextMoveToPoint(pdfContext, 470, 295);
-    CGContextAddLineToPoint(pdfContext, 550, 295);
-    
-    CGContextClosePath(pdfContext);
-    CGContextDrawPath(pdfContext, kCGPathFillStroke);
-    //Crane Srl
-    [inspection.inspectedCrane.craneSrl drawInRect:CGRectMake(470, 280, 230, 20) withFont:[UIFont systemFontOfSize:8.0f]];
+    //  Crane Srl
+    [inspection.inspectedCrane.craneSrl drawInRect:CGRectMake(470, 280, 230, 20) withAttributes:@{ NSFontAttributeName : [UIFont systemFontOfSize:8.0f] }];
     
     CGContextClosePath(pdfContext);
     CGContextDrawPath(pdfContext, kCGPathFillStroke);
     
-    //LINE 7
-    [hoistManufacturer drawInRect:CGRectMake(50, 310, 230, 20) withFont:[UIFont systemFontOfSize:12.0f]];
+    // Hoist Manufacturer
+    [self MoveToPoint:CGPointMake(170, 325) AndDrawString:@"Hoist Manufacturer" InRect:CGRectMake(50, 310, 230, 20) WithContext:pdfContext AddToPoint:CGPointMake(265, 325) FontSize:12.0f ParagraphyStyle:paragraphStyle];
     
-    CGContextBeginPath(pdfContext);
-    CGContextMoveToPoint(pdfContext, 170, 325);
-    CGContextAddLineToPoint(pdfContext, 265, 325);
-    
-    CGContextClosePath(pdfContext);
-    CGContextDrawPath(pdfContext, kCGPathFillStroke);
     //Hoist Mfg
-    [inspection.inspectedCrane.hoistMfg drawInRect:CGRectMake(170, 310, 230, 20) withFont:[UIFont systemFontOfSize:10.0f]];
+    [inspection.inspectedCrane.hoistMfg drawInRect:CGRectMake(170, 310, 230, 20) withAttributes:@{ NSFontAttributeName : [UIFont systemFontOfSize:10.0f] }];
     
     //LINE 7 Part 2
-    [modelHoist drawInRect:CGRectMake(270, 310, 230, 20) withFont:[UIFont systemFontOfSize:12.0f]];
-    
-    CGContextBeginPath(pdfContext);
-    CGContextMoveToPoint(pdfContext, 310, 325);
-    CGContextAddLineToPoint(pdfContext, 400, 325);
-    
-    CGContextClosePath(pdfContext);
-    CGContextDrawPath(pdfContext, kCGPathFillStroke);
+    [self MoveToPoint:CGPointMake(310, 325) AndDrawString:@"Model" InRect:CGRectMake(270, 310, 230, 20) WithContext:pdfContext AddToPoint:CGPointMake(400, 325) FontSize:12.0f ParagraphyStyle:paragraphStyle];
+
     //Hoist Mdl
-    [inspection.inspectedCrane.hoistMdl drawInRect:CGRectMake(310, 310, 230, 20) withFont:[UIFont systemFontOfSize:8.0f]];
+    [inspection.inspectedCrane.hoistMdl drawInRect:CGRectMake(310, 310, 230, 20) withAttributes:@{ NSFontAttributeName : [UIFont systemFontOfSize:8.0f] }];
     
-    //LINE 7 Part 3
-    [serialNoHoist drawInRect:CGRectMake(410, 310, 230, 20) withFont:[UIFont systemFontOfSize:12.0f]];
+    // Serial Number Hoist
+    [self MoveToPoint:CGPointMake(470, 325) AndDrawString:@"Serial No." InRect:CGRectMake(410, 310, 230, 20) WithContext:pdfContext AddToPoint:CGPointMake(550, 325) FontSize:12.0f ParagraphyStyle:paragraphStyle];
     
-    CGContextBeginPath(pdfContext);
-    CGContextMoveToPoint(pdfContext, 470, 325);
-    CGContextAddLineToPoint(pdfContext, 550, 325);
-    
-    CGContextClosePath(pdfContext);
-    CGContextDrawPath(pdfContext, kCGPathFillStroke);
     //Hoist Srl
-    [inspection.inspectedCrane.hoistSrl drawInRect:CGRectMake(470, 310, 230, 20) withFont:[UIFont systemFontOfSize:8.0f]];
-    CGContextBeginPath(pdfContext);
-    CGContextMoveToPoint(pdfContext, 470, 325);
-    CGContextAddLineToPoint(pdfContext, 550, 325);
+    [self MoveToPoint:CGPointMake(470, 325) AndDrawString:inspection.inspectedCrane.hoistSrl InRect:CGRectMake(470, 310, 230, 20) WithContext:pdfContext AddToPoint:CGPointMake(550, 325) FontSize:8.0f ParagraphyStyle:paragraphStyle];
     
-    CGContextClosePath(pdfContext);
-    CGContextDrawPath(pdfContext, kCGPathFillStroke);
+    // Owner Id
+    [self MoveToPoint:CGPointMake(230, 355) AndDrawString:@"Owner's Identification (if any)" InRect:CGRectMake(50, 340, 500, 20) WithContext:pdfContext AddToPoint:CGPointMake(550, 355) FontSize:12.0f ParagraphyStyle:paragraphStyle];
     
-    //LINE 8
-    [ownerID drawInRect:CGRectMake(50, 340, 500, 20) withFont:[UIFont systemFontOfSize:12.0f]];
+    // Test Loads String
+    [self MoveToPoint:CGPointMake(340, 385) AndDrawString:@"Test loads applied (only if examination conducted):" InRect:CGRectMake(50, 370, 500, 20) WithContext:pdfContext AddToPoint:CGPointMake(550, 385) FontSize:12.0f ParagraphyStyle:paragraphStyle];
     
-    CGContextBeginPath(pdfContext);
-    CGContextMoveToPoint(pdfContext, 230, 355);
-    CGContextAddLineToPoint(pdfContext, 550, 355);
+    // Proof Load String
+    [self MoveToPoint:CGPointMake(210, 415) AndDrawString:@"Description of proof load:" InRect:CGRectMake(50, 400, 500, 20) WithContext:pdfContext AddToPoint:CGPointMake(550, 415) FontSize:12.0f ParagraphyStyle:paragraphStyle];
     
-    CGContextClosePath(pdfContext);
-    CGContextDrawPath(pdfContext, kCGPathFillStroke);
+    //  Load RatingsString
+    [self MoveToPoint:CGPointMake(240, 445) AndDrawString:@"Basis for assigned load ratings:" InRect:CGRectMake(50, 430, 500, 20) WithContext:pdfContext AddToPoint:CGPointMake(550, 445) FontSize:12.0f ParagraphyStyle:paragraphStyle];
     
-    //LINE 9
-    [testLoadsString drawInRect:CGRectMake(50, 370, 500, 20) withFont:[UIFont systemFontOfSize:12.0f]];
+    //  Remarks Limitations String
+    [self MoveToPoint:CGPointMake(270, 475) AndDrawString:@"Remarks and/or limitations imposed:" InRect:CGRectMake(50, 460, 500, 20) WithContext:pdfContext AddToPoint:CGPointMake(550, 475) FontSize:12.0f ParagraphyStyle:paragraphStyle];
     
-    CGContextBeginPath(pdfContext);
-    CGContextMoveToPoint(pdfContext, 340, 385);
-    CGContextAddLineToPoint(pdfContext, 550, 385);
+    // Footer
     
-    CGContextClosePath(pdfContext);
-    CGContextDrawPath(pdfContext, kCGPathFillStroke);
-    
-    //LINE 10
-    [proofLoadString drawInRect:CGRectMake(50, 400, 500, 20) withFont:[UIFont systemFontOfSize:12.0f]];
-    
-    CGContextBeginPath(pdfContext);
-    CGContextMoveToPoint(pdfContext, 210, 415);
-    CGContextAddLineToPoint(pdfContext, 550, 415);
-    
-    CGContextClosePath(pdfContext);
-    CGContextDrawPath(pdfContext, kCGPathFillStroke);
-    //LINE 11
-    [loadRatingsString drawInRect:CGRectMake(50, 430, 500, 20) withFont:[UIFont systemFontOfSize:12.0f]];
-    
-    CGContextBeginPath(pdfContext);
-    CGContextMoveToPoint(pdfContext, 240, 445);
-    CGContextAddLineToPoint(pdfContext, 550, 445);
-    
-    CGContextClosePath(pdfContext);
-    CGContextDrawPath(pdfContext, kCGPathFillStroke);
-    //LINE 12
-    [remarksLimitationsString drawInRect:CGRectMake(50, 460, 500, 20) withFont:[UIFont systemFontOfSize:12.0f]];
-    
-    CGContextBeginPath(pdfContext);
-    CGContextMoveToPoint(pdfContext, 270, 475);
-    CGContextAddLineToPoint(pdfContext, 550, 475);
-    
-    CGContextClosePath(pdfContext);
-    CGContextDrawPath(pdfContext, kCGPathFillStroke);
-    
-    //LINE 14
-    [footer drawInRect:CGRectMake(50, 495, 500, 120) withFont:[UIFont systemFontOfSize:12.0f] lineBreakMode:UILineBreakModeCharacterWrap alignment:UITextAlignmentCenter];
+    NSMutableParagraphStyle *footerParagraphStyle = [NSMutableParagraphStyle new];
+    footerParagraphStyle.lineBreakMode = NSLineBreakByCharWrapping;
+    footerParagraphStyle.alignment = NSTextAlignmentCenter;
+    NSDictionary *footerAttributesDictionary = @{ NSFontAttributeName : [UIFont systemFontOfSize:12.0f],
+                                                  NSParagraphStyleAttributeName : footerParagraphStyle };
+    [@"I certify that on the 18th day of April 2012 the above described device was tested X examined X by the undersigned; that said test and/or examination met with the requirements of the Division of Occupational Safety and Health Administration and ANSI B30 series orANSI/SIA A92.2 as applicable." drawInRect:CGRectMake(50, 495, 500, 120) withAttributes:footerAttributesDictionary];
     
     //LINE 15
-    [nameAddress drawInRect:CGRectMake(50, 565, 500, 120) withFont:[UIFont systemFontOfSize:12.0f]];
+    [@"Name and address of authorized certificating agent:" drawInRect:CGRectMake(50, 565, 500, 120) withAttributes:@{ NSFontAttributeName : [UIFont systemFontOfSize:10.0f] }];
     
     //LINE 16
-    [address drawInRect:CGRectMake(330, 565, 500, 120) withFont:[UIFont systemFontOfSize:11.0f]];
+    [@"SILVER STATE WIRE ROPE AND RIGGING\n8740 S. JONES BLVD.\nLAS VEGAS, NV 89139" drawInRect:CGRectMake(330, 565, 500, 120) withAttributes:@{ NSFontAttributeName : [UIFont systemFontOfSize:11.0f] }];
     
     CGContextBeginPath(pdfContext);
     CGContextMoveToPoint(pdfContext, 330, 577);
@@ -336,72 +231,26 @@
     CGContextClosePath(pdfContext);
     CGContextDrawPath(pdfContext, kCGPathFillStroke);
     
-    //LINE 17
-    [expirationDate drawInRect:CGRectMake(50, 630, 500, 120) withFont:[UIFont systemFontOfSize:12.0f]];
+    NSDate *expirationDate = [[NSDate date] dateByAddingTimeInterval:(60 * 60 * 24 * 365)];
+    NSDateFormatter *df = [NSDateFormatter new];
+    //  Expiration Date
+    [self MoveToPoint:CGPointMake(140, 645) AndDrawString:@"Expiration Date:    " InRect:CGRectMake(50, 630, 500, 120) WithContext:pdfContext AddToPoint:CGPointMake(300, 645) FontSize:12.0f ParagraphyStyle:paragraphStyle];
     
-    CGContextBeginPath(pdfContext);
-    CGContextMoveToPoint(pdfContext, 140, 645);
-    CGContextAddLineToPoint(pdfContext, 300, 645);
+    // Signature
+    [self MoveToPoint:CGPointMake(390, 645) AndDrawString:@"Signature" InRect:CGRectMake(330, 630, 500, 120) WithContext:pdfContext AddToPoint:CGPointMake(550, 645) FontSize:12.0f ParagraphyStyle:paragraphStyle];
     
-    CGContextClosePath(pdfContext);
-    CGContextDrawPath(pdfContext, kCGPathFillStroke);
+    // Title
+    [self MoveToPoint:CGPointMake(80, 685) AndDrawString:@"Title" InRect:CGRectMake(50, 670, 500, 120) WithContext:pdfContext AddToPoint:CGPointMake(170, 685) FontSize:12.0f ParagraphyStyle:paragraphStyle];
     
-    //LINE 17 PART 2
-    [signature drawInRect:CGRectMake(330, 630, 500, 120) withFont:[UIFont systemFontOfSize:12.0f]];
+    // Inspector Name
+    [self MoveToPoint:CGPointMake(370, 685) AndDrawString:@"Name:" InRect:CGRectMake(330, 670, 500, 120) WithContext:pdfContext AddToPoint:CGPointMake(550, 685) FontSize:12.0f ParagraphyStyle:paragraphStyle];
     
-    CGContextBeginPath(pdfContext);
-    CGContextMoveToPoint(pdfContext, 390, 645);
-    CGContextAddLineToPoint(pdfContext, 550, 645);
+    // Certificate Number
+    [self MoveToPoint:CGPointMake(165, 725) AndDrawString:@"Certificate #:" InRect:CGRectMake(50, 710, 500, 120) WithContext:pdfContext AddToPoint:CGPointMake(300, 725) FontSize:12.0f ParagraphyStyle:paragraphStyle];
     
-    CGContextClosePath(pdfContext);
-    CGContextDrawPath(pdfContext, kCGPathFillStroke);
+    // Date
+    [self MoveToPoint:CGPointMake(365, 725) AndDrawString:@"Date:" InRect:CGRectMake(330, 710, 500, 120) WithContext:pdfContext AddToPoint:CGPointMake(550, 725) FontSize:12.0f ParagraphyStyle:paragraphStyle];
     
-    UIFont *font = [UIFont systemFontOfSize:12.0f];
-
-    NSDictionary *dictionary = @{NSFontAttributeName : font};
-    
-    //LINE 18
-    [title drawInRect:CGRectMake(50, 670, 500, 120) withFont:[UIFont systemFontOfSize:12.0f]];
-    
-    CGContextBeginPath(pdfContext);
-    CGContextMoveToPoint(pdfContext, 80, 685);
-    CGContextAddLineToPoint(pdfContext, 170, 685);
-    
-    CGContextClosePath(pdfContext);
-    CGContextDrawPath(pdfContext, kCGPathFillStroke);
-    
-    //LINE 18 PART 2
-    [inspectorName drawInRect:CGRectMake(330, 670, 500, 120) withFont:[UIFont systemFontOfSize:12.0f]];
-    
-    CGContextBeginPath(pdfContext);
-    CGContextMoveToPoint(pdfContext, 370, 685);
-    CGContextAddLineToPoint(pdfContext, 550, 685);
-    
-    CGContextClosePath(pdfContext);
-    CGContextDrawPath(pdfContext, kCGPathFillStroke);
-    
-    //LINE 19
-    [certificateNum drawInRect:CGRectMake(50, 710, 500, 120) withFont:[UIFont systemFontOfSize:12.0f]];
-    
-    CGContextBeginPath(pdfContext);
-    CGContextMoveToPoint(pdfContext, 165, 725);
-    CGContextAddLineToPoint(pdfContext, 300, 725);
-    
-    CGContextClosePath(pdfContext);
-    CGContextDrawPath(pdfContext, kCGPathFillStroke);
-    
-    //LINE 19 PART 2
-    [date drawInRect:CGRectMake(330, 710, 500, 120) withFont:[UIFont systemFontOfSize:12.0f]];
-    
-    CGContextBeginPath(pdfContext);
-    CGContextMoveToPoint(pdfContext, 365, 725);
-    CGContextAddLineToPoint(pdfContext, 550, 725);
-    
-    CGContextClosePath(pdfContext);
-    CGContextDrawPath(pdfContext, kCGPathFillStroke);
-    
-    
-    //[self displayComposerSheet];
     // Clean up
     UIGraphicsPopContext();
     CGPDFContextEndPage(pdfContext);
@@ -409,6 +258,8 @@
     //release memory
     fileURL = nil;
     pdfContext = nil;
+    
+    [self displayCertificate:inspection];
 }
 
 + (NSString *) createCustomerInfoTitleString {
@@ -670,6 +521,22 @@
     conditionRatingString = nil;
 }
 
++ (NSString *) getFilePathForInspection : (Inspection *) inspection {
+    NSString *dateNoSlashes = [inspection.date stringByReplacingOccurrencesOfString:@"/" withString:@"-"];
+    NSString* fileName = [NSString stringWithFormat:@"%@ %@ %@ Certificate.PDF", inspection.customer.name, inspection.inspectedCrane.hoistSrl, dateNoSlashes];
+    
+    NSArray *arrayPaths =
+    NSSearchPathForDirectoriesInDomains(
+                                        NSDocumentDirectory,
+                                        NSUserDomainMask,
+                                        YES);
+    NSString *path = [arrayPaths objectAtIndex:0];
+    NSString* pdfFileName = [path stringByAppendingPathComponent:fileName];
+    
+    return pdfFileName;
+
+}
+
 + (UIDocumentInteractionController *) DisplayPDFWithOverallRating : (Inspection *) inspection
 {
     NSString *dateNoSlashes = [inspection.date stringByReplacingOccurrencesOfString:@"/" withString:@"-"];
@@ -690,7 +557,7 @@
     //[self writeCertificateTextFile];
 }
 
-+ (void)CreateCertificate : (Inspection*) inspection  {
++ (UIDocumentInteractionController *) displayCertificate : (Inspection*) inspection  {
     NSString *dateNoSlashes = [inspection.date stringByReplacingOccurrencesOfString:@"/" withString:@"-"];
     NSString* fileName = [NSString stringWithFormat:@"%@ %@ %@ Certificate.PDF", inspection.customer.name, inspection.inspectedCrane.hoistSrl, dateNoSlashes];
     
@@ -706,8 +573,8 @@
     
     [pdfViewController presentPreviewAnimated:NO];
     
-    //disable the button certificate button so that we make sure there's no errant certificates being made
-   // CreateCertificateButton.enabled = FALSE;
+
+    return pdfViewController;
 }
 
 
