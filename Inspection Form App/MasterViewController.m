@@ -171,16 +171,16 @@
     
     //Get a reference to the current displayed view controller.
     UINavigationController *navigationController = [self.splitViewController.viewControllers objectAtIndex:1] ;
-    ViewController *vc = [navigationController.viewControllers objectAtIndex:0];
+    ViewController *mainPageViewController = [navigationController.viewControllers objectAtIndex:0];
     //Push the InspectionViewController ontop of the stack.
     
-    if (![vc.navigationController.viewControllers containsObject:vc.inspectionViewController])
+    if (![mainPageViewController.navigationController.viewControllers containsObject:mainPageViewController.inspectionViewController])
     {
-        [vc.navigationController pushViewController:vc.inspectionViewController animated:YES];
+        [mainPageViewController storeInformationAndDisplayInspectionViewWithCrane:inspectionPoint.inspectionCrane SelectedRow:nil];
     }
     
     //Set the delegate to the InspectionViewController so that all changes are read by the inspection view controlller.
-    __delegate = vc.inspectionViewController;
+    __delegate = mainPageViewController.inspectionViewController;
     
     [self.navigationController pushViewController:mvc animated:YES];
     if (__delegate)
@@ -188,11 +188,11 @@
         Part *part = [[Part alloc] init];
         [part setPart:[_tableData objectAtIndex:indexPath.row]];
         
-        vc.inspectionViewController.craneType = inspectionPoint.inspectionCrane.name;
-        vc.inspectionViewController.optionLocation = indexPath.row;
+        mainPageViewController.inspectionViewController.craneType = inspectionPoint.inspectionCrane.name;
+        mainPageViewController.inspectionViewController.optionLocation = indexPath.row;
         [__delegate selectedPart:[_tableData objectAtIndex:indexPath.row]];
         
-        vc = nil;
+        mainPageViewController = nil;
     }
 }
 

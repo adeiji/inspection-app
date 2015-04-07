@@ -250,6 +250,8 @@
         UIDocumentInteractionController *pdfViewController = [PDFGenerator DisplayPDFWithOverallRating:inspection];
         pdfViewController.delegate = self;
         [pdfViewController presentPreviewAnimated:NO];
+        // Save everything that has been created
+        [((AppDelegate *) [[UIApplication sharedApplication] delegate]) saveContext];
     }
 }
 

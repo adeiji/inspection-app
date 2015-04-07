@@ -511,34 +511,63 @@
     [[InspectionManager sharedManager] setCustomer:customer];
 }
 
-/*
- 
- We will be changing the way this method works
- 
- */
 
 - (IBAction)partsListButtonClicked:(id)sender{
-
     _optionLocation = 0;
     NSInteger selectedRow = [_craneDescriptionPickerView selectedRowInComponent:0];
     InspectionCrane *selectedCrane = [_craneDescriptionsArray objectAtIndex:selectedRow];
-    Parts *craneParts = [[Parts alloc] init : selectedCrane ];
-    [self storeInspectionJobInformationWithCraneType:selectedCrane.name SelectedRow:selectedRow];
+    [self storeInformationAndDisplayInspectionViewWithCrane:selectedCrane SelectedRow:selectedRow];
+}
 
-    //Gets all the parts that have to do with this specific crane
+- (void) storeInformationAndDisplayInspectionViewWithCrane : (InspectionCrane *) selectedCrane
+                                               SelectedRow : (NSInteger) selectedRow
+{
+    Parts *craneParts = [[Parts alloc] init: selectedCrane];
     _myPartsArray = [craneParts myParts];
     _inspectionViewController.craneType = selectedCrane.name;
     _inspectionViewController.partsArray = _myPartsArray;
+    
+    if (selectedRow)    // If the user clicked on the submit button or parts list button
+    {
+        [self storeInspectionJobInformationWithCraneType:selectedCrane.name SelectedRow:selectedRow];
+    }
+    
+    inspection = [self createInspectionObjectWithSelectedCrane:selectedCrane];
     [[InspectionManager sharedManager] setInspection:inspection];
     [[IACraneInspectionDetailsManager sharedManager] setCrane:selectedCrane];
     
     [self.navigationController pushViewController:_inspectionViewController animated:YES];
     
-    //Send out a notification that the InspectionViewController is pushed onto the stack.
-    //Send the crane type that is being pushed.
+    /* Send out a notification that the InspectionViewController is pushed onto the stack.
+    Send the crane type that is being pushed. */
     [[NSNotificationCenter defaultCenter] postNotificationName:kInspectionViewControllerPushed
                                                         object:self
                                                       userInfo:@{@"craneType": selectedCrane.name }];
+}
+
+/*
+ 
+ On the customer page, submits the information into the database on the iPad
+ 
+ */
+- (IBAction)CustomerSubmitPressed:(id)sender {
+    
+    if ([self validateSubmission : YES] != EMPTY_FIELD || INVALID_CHARACTER)
+    {
+        _optionLocation = 0;
+        // Get the selected crane type fromt he crane picker.
+        NSInteger selectedRow = [_craneDescriptionPickerView selectedRowInComponent:0];
+        InspectionCrane *selectedCrane = [_craneDescriptionsArray objectAtIndex:selectedRow];
+        [self storeInformationAndDisplayInspectionViewWithCrane:selectedCrane SelectedRow:selectedRow];
+        [((AppDelegate *) [[UIApplication sharedApplication] delegate]) saveContext];
+    }
+    else
+    {
+        // Display that the user needs to change some information on the Customer Submit page in order to submit this page.
+        UIAlertView *view = [[UIAlertView alloc] initWithTitle:@"Errors on Page" message:@"There is an error on the customer page.  Can not submit." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        [view show];
+    }
+    
 }
 
 -(void) didReceiveMemoryWarning
@@ -579,42 +608,7 @@
     return inspection;
 }
 
-//On the customer page, submits the information into the database on the iPad
-- (IBAction)CustomerSubmitPressed:(id)sender {
-    if ([self validateSubmission : YES] != EMPTY_FIELD || INVALID_CHARACTER)
-    {
-        _optionLocation = 0;
-        //Get the selected crane type fromt he crane picker.
-        NSInteger selectedRow = [_craneDescriptionPickerView selectedRowInComponent:0];
-        InspectionCrane *selectedCrane = [_craneDescriptionsArray objectAtIndex:selectedRow];
-        Parts *craneParts = [[Parts alloc] init: selectedCrane];
-        _myPartsArray = [craneParts myParts];
-        
-        [self storeInspectionJobInformationWithCraneType:selectedCrane.name SelectedRow:selectedRow];
-        //Gets all the parts that have to do with this specific crane
-        _inspectionViewController.craneType = selectedCrane.name;
-        _inspectionViewController.partsArray = _myPartsArray;
-        inspection = [self createInspectionObjectWithSelectedCrane:selectedCrane];
-        [[InspectionManager sharedManager] setInspection:inspection];
-        [[IACraneInspectionDetailsManager sharedManager] setCrane:selectedCrane];
-        
-        [self.navigationController pushViewController:_inspectionViewController animated:YES];
-        
-        //Send out a notification that the InspectionViewController is pushed onto the stack.
-        //Send the crane type that is being pushed.
-        [[NSNotificationCenter defaultCenter] postNotificationName:kInspectionViewControllerPushed
-                                                            object:self
-                                                          userInfo:@{@"craneType": selectedCrane.name }];
-        
-    }
-    else
-    {
-        //Display that the user needs to change some information on the Customer Submit page in order to submit this page.
-        UIAlertView *view = [[UIAlertView alloc] initWithTitle:@"Errors on Page" message:@"There is an error on the customer page.  Can not submit." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        
-        [view show];
-    }
-}
+
 
 - (void) didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {

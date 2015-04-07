@@ -124,11 +124,10 @@ typedef enum {
 - (IBAction) textFieldDidBeginEditing:(UITextField *) textField;
 - (IBAction) textFieldDidEndEditing:(UITextField *) textField;
 - (IBAction)NewCustomerPress:(id)sender;
-- (IBAction) didPressLink;
-- (UIViewController *) documentInteractionControllerViewControllerForPreview:(UIDocumentInteractionController *)controller;
-- (IBAction)finalBackButtonPressed:(id)sender;
 - (IBAction)dateSelected:(id)sender;
 - (BOOL) textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string;
+- (void) storeInformationAndDisplayInspectionViewWithCrane : (InspectionCrane *) selectedCrane
+                                               SelectedRow : (NSInteger) selectedRow;
 
 
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;

@@ -166,7 +166,6 @@
     crane.capacity          = capacity;
     crane.hoistMdl          = hoistMdl;
     
-    [((AppDelegate *) [[UIApplication sharedApplication] delegate]) saveContext];
     NSLog(@"Crane object saved to database - com.inspectionapp.coredata");
 
     return crane;
