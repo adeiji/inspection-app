@@ -20,5 +20,6 @@
 @dynamic hoistMdl;
 @dynamic hoistSrl;
 @dynamic craneDescription;
+@dynamic customer;
 
 @end

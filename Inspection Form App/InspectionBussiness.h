@@ -13,6 +13,8 @@
 #import "Inspection.h"
 #import "Parts.h"
 #import "Customer.h"
+#import "IAConstants.h"
+#import "AppDelegate.h"
 
 @interface InspectionBussiness : NSObject
 

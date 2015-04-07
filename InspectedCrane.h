@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
+@class Customer;
 
 @interface InspectedCrane : NSManagedObject
 
@@ -21,5 +22,6 @@
 @property (nonatomic, retain) NSString * hoistMdl;
 @property (nonatomic, retain) NSString * hoistSrl;
 @property (nonatomic, retain) NSString * craneDescription;
+@property (nonatomic, retain) Customer *customer;
 
 @end

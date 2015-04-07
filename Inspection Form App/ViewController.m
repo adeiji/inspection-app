@@ -110,6 +110,13 @@
     _txtHoistSrl.text = crane.hoistSrl;
     _txtCraneMfg.text = crane.mfg;
     
+    Customer *customer = crane.customer;
+    if (customer) {
+        _txtCustomerName.text = customer.name;
+        _txtCustomerContact.text = customer.contact;
+        _txtAddress.text = customer.address;
+        _txtEmail.text = customer.email;
+    }
 }
 
 - (void) resetCraneTypePickerView {
@@ -517,6 +524,7 @@
     Customer *customer = [InspectionBussiness createCustomer:_txtCustomerName.text CustomerContact:_txtCustomerContact.text CustomerAddress:_txtAddress.text CustomerEmail:_txtEmail.text];
     
     InspectedCrane *crane = [[IACraneInspectionDetailsManager sharedManager] createCrane:_txtHoistSrl.text CraneType:craneType EquipmentNumber:_txtEquipNum.text CraneMfg:_txtCraneMfg.text hoistMfg:_txtHoistMfg.text CraneSrl:_txtCraneSrl.text Capacity:_txtCap.text HoistMdl:_txtHoistMdl.text];
+    [crane setCustomer:customer];
     
     inspection.inspectedCrane = crane;
     inspection.customer = customer;
@@ -545,11 +553,7 @@
     _inspectionViewController.craneType = selectedCrane.name;
     _inspectionViewController.partsArray = _myPartsArray;
     
-    if (selectedRow)    // If the user clicked on the submit button or parts list button
-    {
-        [self storeInspectionJobInformationWithCraneType:selectedCrane.name SelectedRow:selectedRow];
-    }
-    
+    [self storeInspectionJobInformationWithCraneType:selectedCrane.name SelectedRow:selectedRow];
     inspection = [self createInspectionObjectWithSelectedCrane:selectedCrane];
     [[InspectionManager sharedManager] setInspection:inspection];
     [[IACraneInspectionDetailsManager sharedManager] setCrane:selectedCrane];

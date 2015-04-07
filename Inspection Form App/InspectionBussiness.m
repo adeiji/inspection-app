@@ -50,13 +50,15 @@
         CustomerAddress : (NSString*) customerAddress
           CustomerEmail : (NSString*) customerEmail
 {
-    Customer *customer = [[Customer alloc] init];
-    
+    NSManagedObjectContext *context = [((AppDelegate *) [[UIApplication sharedApplication] delegate]) managedObjectContext];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:kCoreDataClassCustomer inManagedObjectContext:context];
+    Customer *customer = [[Customer alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
     customer.name       = customerName;
     customer.contact    = customerContact;
     customer.address    = customerAddress;
     customer.email      = customerEmail;
     
+    [((AppDelegate *) [[UIApplication sharedApplication] delegate]) saveContext];
     return customer;
 }
 

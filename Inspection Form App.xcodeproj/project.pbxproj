@@ -25,7 +25,6 @@
 		8BC5847B150ABD88000AC695 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8BC58479150ABD88000AC695 /* InfoPlist.strings */; };
 		8BC5847E150ABD88000AC695 /* Inspection_Form_AppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BC5847D150ABD88000AC695 /* Inspection_Form_AppTests.m */; };
 		8BC7D9D31522ACE000D1A863 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BC7D9D21522ACE000D1A863 /* QuartzCore.framework */; };
-		8BE08B22150D0AFE005B5E4C /* Customer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE08B21150D0AFE005B5E4C /* Customer.m */; };
 		8BE881F81513F82400360C63 /* ItemListConditionStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE881F71513F82400360C63 /* ItemListConditionStorage.m */; };
 		8BE881FC1513FA4200360C63 /* Condition.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE881FB1513FA4200360C63 /* Condition.m */; };
 		8BE8C6FB151538B700D5C7F2 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BE8C6FA151538B700D5C7F2 /* libsqlite3.dylib */; };
@@ -60,6 +59,7 @@
 		CEFD6D72183A87D8001764E9 /* JobInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEFD6D71183A87D8001764E9 /* JobInfoView.xib */; };
 		F453A3AF1AD3354700319D7A /* InspectedCrane.m in Sources */ = {isa = PBXBuildFile; fileRef = F453A3AE1AD3354700319D7A /* InspectedCrane.m */; };
 		F453A3B21AD43E3B00319D7A /* InspectionModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F453A3B01AD43E3B00319D7A /* InspectionModel.xcdatamodeld */; };
+		F453A3B51AD43FB200319D7A /* Customer.m in Sources */ = {isa = PBXBuildFile; fileRef = F453A3B41AD43FB200319D7A /* Customer.m */; };
 		F49DDEA71ACCC60C00A02162 /* SyncManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F49DDEA61ACCC60C00A02162 /* SyncManager.m */; };
 		F49DDEAD1ACCCB2700A02162 /* IAConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = F49DDEAC1ACCCB2700A02162 /* IAConstants.m */; };
 		F49DDEB11ACCDA5C00A02162 /* IACraneInspectionDetailsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F49DDEB01ACCDA5C00A02162 /* IACraneInspectionDetailsManager.m */; };
@@ -111,9 +111,7 @@
 		8BC5847A150ABD88000AC695 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		8BC5847D150ABD88000AC695 /* Inspection_Form_AppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Inspection_Form_AppTests.m; sourceTree = "<group>"; };
 		8BC7D9D21522ACE000D1A863 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		8BDF998C150C1A090069C35B /* Customer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Customer.h; sourceTree = "<group>"; };
 		8BDF9998150C209A0069C35B /* UICustomSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UICustomSwitch.h; path = ../../../Downloads/UICustomSwitch/UICustomSwitch.h; sourceTree = "<group>"; };
-		8BE08B21150D0AFE005B5E4C /* Customer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Customer.m; sourceTree = "<group>"; };
 		8BE881F61513F82400360C63 /* ItemListConditionStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemListConditionStorage.h; sourceTree = "<group>"; };
 		8BE881F71513F82400360C63 /* ItemListConditionStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemListConditionStorage.m; sourceTree = "<group>"; };
 		8BE881FA1513FA4200360C63 /* Condition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Condition.h; sourceTree = "<group>"; };
@@ -165,6 +163,8 @@
 		F453A3AD1AD3354700319D7A /* InspectedCrane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectedCrane.h; sourceTree = "<group>"; };
 		F453A3AE1AD3354700319D7A /* InspectedCrane.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InspectedCrane.m; sourceTree = "<group>"; };
 		F453A3B11AD43E3B00319D7A /* InspectionModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = InspectionModel.xcdatamodel; sourceTree = "<group>"; };
+		F453A3B31AD43FB200319D7A /* Customer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Customer.h; sourceTree = "<group>"; };
+		F453A3B41AD43FB200319D7A /* Customer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Customer.m; sourceTree = "<group>"; };
 		F49DDEA51ACCC60C00A02162 /* SyncManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncManager.h; sourceTree = "<group>"; };
 		F49DDEA61ACCC60C00A02162 /* SyncManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncManager.m; sourceTree = "<group>"; };
 		F49DDEAB1ACCCB2700A02162 /* IAConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAConstants.h; sourceTree = "<group>"; };
@@ -431,8 +431,6 @@
 		CE486AD1180CB15200B1B953 /* Customer */ = {
 			isa = PBXGroup;
 			children = (
-				8BDF998C150C1A090069C35B /* Customer.h */,
-				8BE08B21150D0AFE005B5E4C /* Customer.m */,
 			);
 			name = Customer;
 			sourceTree = "<group>";
@@ -585,6 +583,8 @@
 				F49DDEE41ACF33F100A02162 /* InspectionOption.m */,
 				F453A3AD1AD3354700319D7A /* InspectedCrane.h */,
 				F453A3AE1AD3354700319D7A /* InspectedCrane.m */,
+				F453A3B31AD43FB200319D7A /* Customer.h */,
+				F453A3B41AD43FB200319D7A /* Customer.m */,
 			);
 			name = "Core Data";
 			sourceTree = "<group>";
@@ -750,13 +750,13 @@
 				CE40D39A180894300080E9BD /* PDFGenerator.m in Sources */,
 				8BC58466150ABD87000AC695 /* ViewController.m in Sources */,
 				F49DDED91ACCED1600A02162 /* InspectionCrane.m in Sources */,
-				8BE08B22150D0AFE005B5E4C /* Customer.m in Sources */,
 				8BECD3BC150E920500616735 /* Options.m in Sources */,
 				F49DDEE51ACF33F100A02162 /* InspectionOption.m in Sources */,
 				F453A3AF1AD3354700319D7A /* InspectedCrane.m in Sources */,
 				F49DDEA71ACCC60C00A02162 /* SyncManager.m in Sources */,
 				8BECD3BF150E934900616735 /* OptionList.m in Sources */,
 				8B544612150F0C3E007E1CA9 /* GradientView.m in Sources */,
+				F453A3B51AD43FB200319D7A /* Customer.m in Sources */,
 				8B0787C415113448006857A8 /* TableViewController.m in Sources */,
 				CE147B691836844C005CC483 /* InspectionManager.m in Sources */,
 				8B0787C715113796006857A8 /* Parts.m in Sources */,
