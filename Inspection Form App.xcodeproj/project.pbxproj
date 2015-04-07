@@ -59,10 +59,10 @@
 		CEFD6D70183A8705001764E9 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFD6D6F183A8705001764E9 /* Default-568h@2x.png */; };
 		CEFD6D72183A87D8001764E9 /* JobInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEFD6D71183A87D8001764E9 /* JobInfoView.xib */; };
 		F453A3AF1AD3354700319D7A /* InspectedCrane.m in Sources */ = {isa = PBXBuildFile; fileRef = F453A3AE1AD3354700319D7A /* InspectedCrane.m */; };
+		F453A3B21AD43E3B00319D7A /* InspectionModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F453A3B01AD43E3B00319D7A /* InspectionModel.xcdatamodeld */; };
 		F49DDEA71ACCC60C00A02162 /* SyncManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F49DDEA61ACCC60C00A02162 /* SyncManager.m */; };
 		F49DDEAD1ACCCB2700A02162 /* IAConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = F49DDEAC1ACCCB2700A02162 /* IAConstants.m */; };
 		F49DDEB11ACCDA5C00A02162 /* IACraneInspectionDetailsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F49DDEB01ACCDA5C00A02162 /* IACraneInspectionDetailsManager.m */; };
-		F49DDEB41ACCDAEB00A02162 /* InspectionModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F49DDEB21ACCDAEB00A02162 /* InspectionModel.xcdatamodeld */; };
 		F49DDED91ACCED1600A02162 /* InspectionCrane.m in Sources */ = {isa = PBXBuildFile; fileRef = F49DDED81ACCED1600A02162 /* InspectionCrane.m */; };
 		F49DDEDF1ACF332900A02162 /* InspectionPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = F49DDEDE1ACF332900A02162 /* InspectionPoint.m */; };
 		F49DDEE51ACF33F100A02162 /* InspectionOption.m in Sources */ = {isa = PBXBuildFile; fileRef = F49DDEE41ACF33F100A02162 /* InspectionOption.m */; };
@@ -164,13 +164,13 @@
 		E1A4C2449B6DA9D1ED2E1AE3 /* Pods-Inspection Form App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Inspection Form App.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Inspection Form App/Pods-Inspection Form App.debug.xcconfig"; sourceTree = "<group>"; };
 		F453A3AD1AD3354700319D7A /* InspectedCrane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectedCrane.h; sourceTree = "<group>"; };
 		F453A3AE1AD3354700319D7A /* InspectedCrane.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InspectedCrane.m; sourceTree = "<group>"; };
+		F453A3B11AD43E3B00319D7A /* InspectionModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = InspectionModel.xcdatamodel; sourceTree = "<group>"; };
 		F49DDEA51ACCC60C00A02162 /* SyncManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncManager.h; sourceTree = "<group>"; };
 		F49DDEA61ACCC60C00A02162 /* SyncManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncManager.m; sourceTree = "<group>"; };
 		F49DDEAB1ACCCB2700A02162 /* IAConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAConstants.h; sourceTree = "<group>"; };
 		F49DDEAC1ACCCB2700A02162 /* IAConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAConstants.m; sourceTree = "<group>"; };
 		F49DDEAF1ACCDA5C00A02162 /* IACraneInspectionDetailsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IACraneInspectionDetailsManager.h; sourceTree = "<group>"; };
 		F49DDEB01ACCDA5C00A02162 /* IACraneInspectionDetailsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IACraneInspectionDetailsManager.m; sourceTree = "<group>"; };
-		F49DDEB31ACCDAEB00A02162 /* InspectionModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = InspectionModel.xcdatamodel; sourceTree = "<group>"; };
 		F49DDED71ACCED1600A02162 /* InspectionCrane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectionCrane.h; sourceTree = "<group>"; };
 		F49DDED81ACCED1600A02162 /* InspectionCrane.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InspectionCrane.m; sourceTree = "<group>"; };
 		F49DDEDD1ACF332900A02162 /* InspectionPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectionPoint.h; sourceTree = "<group>"; };
@@ -576,7 +576,7 @@
 		F49DDEB51ACCDC4800A02162 /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
-				F49DDEB21ACCDAEB00A02162 /* InspectionModel.xcdatamodeld */,
+				F453A3B01AD43E3B00319D7A /* InspectionModel.xcdatamodeld */,
 				F49DDEDD1ACF332900A02162 /* InspectionPoint.h */,
 				F49DDEDE1ACF332900A02162 /* InspectionPoint.m */,
 				F49DDED71ACCED1600A02162 /* InspectionCrane.h */,
@@ -745,6 +745,7 @@
 				CE147B661835C2EA005CC483 /* Part.m in Sources */,
 				8BC5845F150ABD87000AC695 /* main.m in Sources */,
 				F49DDEDF1ACF332900A02162 /* InspectionPoint.m in Sources */,
+				F453A3B21AD43E3B00319D7A /* InspectionModel.xcdatamodeld in Sources */,
 				8BC58463150ABD87000AC695 /* AppDelegate.m in Sources */,
 				CE40D39A180894300080E9BD /* PDFGenerator.m in Sources */,
 				8BC58466150ABD87000AC695 /* ViewController.m in Sources */,
@@ -767,7 +768,6 @@
 				8BF10A9C152FB93D00DC5F05 /* TextField.m in Sources */,
 				CE40D38B18087BC20080E9BD /* DataLayer.m in Sources */,
 				F49DDEB11ACCDA5C00A02162 /* IACraneInspectionDetailsManager.m in Sources */,
-				F49DDEB41ACCDAEB00A02162 /* InspectionModel.xcdatamodeld in Sources */,
 				CE486AE2180F17DC00B1B953 /* MasterViewController.m in Sources */,
 				8BE9DE801616355800906B98 /* OrdinalNumberFormatter.m in Sources */,
 				F49DDEAD1ACCCB2700A02162 /* IAConstants.m in Sources */,
@@ -1016,12 +1016,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		F49DDEB21ACCDAEB00A02162 /* InspectionModel.xcdatamodeld */ = {
+		F453A3B01AD43E3B00319D7A /* InspectionModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				F49DDEB31ACCDAEB00A02162 /* InspectionModel.xcdatamodel */,
+				F453A3B11AD43E3B00319D7A /* InspectionModel.xcdatamodel */,
 			);
-			currentVersion = F49DDEB31ACCDAEB00A02162 /* InspectionModel.xcdatamodel */;
+			currentVersion = F453A3B11AD43E3B00319D7A /* InspectionModel.xcdatamodel */;
 			path = InspectionModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

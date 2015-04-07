@@ -46,16 +46,8 @@
     
     changeLayoutNeeded = NO;
     iosVersion = [[UIDevice currentDevice] systemVersion];
-   
-    //Keyboard manipulation
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWasShown:) 
-                                                 name:UIKeyboardDidShowNotification 
-                                               object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillBeHidden:) 
-                                                 name:UIKeyboardWillHideNotification 
-                                               object:nil];
+    [self addObservers];
+
     
     _craneDescriptionsArray = [[IACraneInspectionDetailsManager sharedManager] cranes];
     owner = @"";
@@ -93,9 +85,35 @@
 
 - (void) addObservers {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetCraneTypePickerView) name:NOTIFICATION_CRANE_DETAILS_FINISHED_SAVING object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayCraneInformation:) name:NOTIFICATION_HOISTSRL_SELECTED object:nil];
+    //Keyboard manipulation
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWasShown:)
+                                                 name:UIKeyboardDidShowNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillBeHidden:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
+}
+
+- (void) displayCraneInformation : (NSNotification *) notification {
+    
+    InspectedCrane *crane = [notification.userInfo objectForKey:kSelectedInspectedCrane];
+    
+    _txtCap.text = crane.capacity;
+    _txtCraneDescription.text = crane.craneDescription;
+    _txtCraneSrl.text = crane.craneSrl;
+    _txtEquipNum.text = crane.equipmentNumber;
+    _txtHoistMdl.text = crane.hoistMdl;
+    _txtHoistMfg.text = crane.hoistMfg;
+    _txtHoistSrl.text = crane.hoistSrl;
+    _txtCraneMfg.text = crane.mfg;
+    
 }
 
 - (void) resetCraneTypePickerView {
+    _craneDescriptionsArray = [[IACraneInspectionDetailsManager sharedManager] cranes];
     [_craneDescriptionPickerView reloadAllComponents];
 }
 

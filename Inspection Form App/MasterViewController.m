@@ -143,6 +143,7 @@
         InspectionCrane *inspectionCrane = inspectionCranes[0];
         MasterViewController *mvc = [[MasterViewController alloc] initWithStyle:nil Level:PART_NAME SearchValue:[inspectionCrane.inspectionPoints allObjects]];
         [self.navigationController pushViewController:mvc animated:YES];
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_HOISTSRL_SELECTED object:nil userInfo:@{ kSelectedInspectedCrane : crane }];
     }
 }
 
