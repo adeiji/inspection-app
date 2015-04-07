@@ -60,28 +60,6 @@
     return customer;
 }
 
-//Create a crane object and send it to the recipient
-+ (Crane*) createCrane : (NSString*) hoistSrl
-           CraneType : (NSString*) craneType
-     EquipmentNumber : (NSString*) equipmentNumber
-            CraneMfg : (NSString*) craneMfg
-            hoistMfg : (NSString*) hoistMfg
-            CraneSrl : (NSString*) craneSrl
-            Capacity : (NSString*) capacity
-            HoistMdl : (NSString*) hoistMdl
-{
-    Crane *crane = [[Crane alloc] init];
-    
-    crane.hoistSrl          = hoistSrl;
-    crane.type              = craneType;
-    crane.equipmentNumber   = equipmentNumber;
-    crane.mfg               = craneMfg;
-    crane.hoistMfg          = hoistMfg;
-    crane.craneSrl          = craneSrl;
-    crane.capacity          = capacity;
-    crane.hoistMdl          = hoistMdl;
-    
-    return crane;
-}
+
 
 @end

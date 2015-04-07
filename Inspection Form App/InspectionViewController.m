@@ -10,7 +10,7 @@
 #import "Options.h"
 #import "Parts.h"
 #import "Customer.h"
-#import "Crane.h"
+#import "InspectedCrane.h"
 #import "PDFGenerator.h"
 #import "AppDelegate.h"
 #import "Part.h"
@@ -311,143 +311,136 @@
 {
     if ((buttonIndex!=0 || loadRatings == YES || remarksLimitations == YES || finished == YES || proofLoad == YES) || (buttonIndex == 1 && testLoad == YES))
     {
-        for (UIView* view in alertView.subviews)
+        
+        UITextField *textField = [alertView textFieldAtIndex:0];
+        //if this is not the alert box that opens when you submit the final page
+        if (pageSubmitAlertView==NO)
         {
-            if ([view isKindOfClass:[UITextField class]])
+            if ([_lblPart.text isEqualToString:@"Control Station Markings"])
             {
-                UITextField *textField = (UITextField*) view;
-                //if this is not the alert box that opens when you submit the final page
-                if (pageSubmitAlertView==NO)
-                {
-                    if ([_lblPart.text isEqualToString:@"Control Station Markings"])
-                    {
-                        _txtNotes.text = [NSString stringWithFormat:@"%@ %@", _txtNotes.text, textField.text];
-                    }
-                    else if (timesShown==0&&_optionLocation==22)
-                    {
-                        timesShown++;
-                        _txtNotes.text = [NSString stringWithFormat:@"Length: %@ - %@",textField.text, _txtNotes.text];
-                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Length, size, fittings" message:@"Enter the Size:" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Ok", nil];
-                        [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
-                        [alert show];
-                        pageSubmitAlertView = NO;
-                    }
-                    else if (timesShown==1&&_optionLocation==22)
-                    {
-                        timesShown++;
-                        _txtNotes.text = [NSString stringWithFormat:@"Size: %@ - %@",textField.text, _txtNotes.text];
-                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Length, size, fittings" message:@"Enter the Fittings:" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Ok", nil];
-                        [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
-                        [alert show];
-                        pageSubmitAlertView = NO;
-                    }
-                    else if (timesShown==2&&_optionLocation==22)
-                    {
-                        timesShown++;
-                        _txtNotes.text = [NSString stringWithFormat:@"Fittings: %@ - %@",textField.text, _txtNotes.text];
-                        pageSubmitAlertView = NO;
-                    }
-                    else if (![textField.text isEqualToString:@""])
-                    {
-                        _txtNotes.text = [NSString stringWithFormat:@"%@ - %@",textField.text, _txtNotes.text];
-                        NSLog(@"text:[%@]", textField.text);
-                        break;
-                    }
-                    else {
-                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"You must enter a value" message:@"A value must be entered" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
-                        [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
-                        [alert show];
-                    }
-                }
-                //if this is the alertbox for when you submit the form
-                else {
-                    //first we check to see if we are at the testLoad box
-                    if (loadRatings == NO && testLoad == NO && remarksLimitations == NO && finished == NO && proofLoad == NO)
-                    {
-                        //check to see if this is a number
-                        if ([[NSScanner scannerWithString:textField.text] scanFloat:NULL])
-                        {
-                            if (([textField.text intValue]<0 || [textField.text intValue]>5) && (loadRatings == NO && testLoad == NO && remarksLimitations == NO && finished == NO && proofLoad == NO))
-                            {
-                                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Incorrect Input" message:@"You must enter a number between 1 and 5" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
-                                [alert show];
-                                overallRating = @"";
-                            }
-                            //if this is the overall rating box and its a number between 1 and 5
-                            else {
-                                overallRating = textField.text;
-                                
-                                //convert overall rating to int and then if it's less then 3 then we ask three more questions
-                                if ([overallRating intValue] < 3)
-                                {
-                                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Test Loads?" message:@"Is This a Test Load?" delegate:self cancelButtonTitle:@"NO" otherButtonTitles:@"YES", nil];
-                                    [alert show];
-                                    testLoad = YES;
-                                    _createCertificateButton.enabled = TRUE;
-                                }
-                                else {
-                                    _createCertificateButton.enabled = FALSE;
-
-                                    [PDFGenerator DisplayPDFWithOverallRating:inspection];
-                                }
-                            }
-                        }
-                        else {//if the overall rating was inputed as greater then 5 or less than 1, and if it was not an integer
-                            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Incorrect Input" message:@"You must enter a number between 1 and 5" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
-                            [alert show];
-                            overallRating = @"";
-                        }
-                    }
-                    else {//here is where we start displaying the Alert Boxes which will ask questions about for the Certficate
-                        if (proofLoad == YES)
-                        {
-                            testLoad = textField.text;
-                            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Proof Load Description" message:@"Description of Proof Load" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
-                            [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
-                            [alert show];
-                            loadRatings = YES;
-                            proofLoad = NO;
-                            testLoad = textField.text;
-                        }
-                        else if (loadRatings == YES)
-                        {
-                            proofLoadDescription = textField.text;
-                            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Load Ratings" message:@"Basis for assigned load ratings" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
-                            [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
-                            [alert show];
-                            remarksLimitations = YES;
-                            loadRatings = NO;
-                        }
-                        else if (remarksLimitations == YES)
-                        {
-                            loadRatings = textField.text;
-                            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Remarks Limitations" message:@"Remarks and/or Limitations Imposed" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
-                            [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
-                            [alert show];
-                            remarksLimitations = NO;
-                            finished = YES;
-                            loadRatings = textField.text;
-                        }
-                        else if (finished == YES)
-                        {
-                            remarksLimitations = textField.text;
-                            finished = NO;
-                            [PDFGenerator DisplayPDFWithOverallRating : inspection];
-                            
-                            _createCertificateButton.enabled = TRUE;
-                        }
-                        
-                    }
-                }
+                _txtNotes.text = [NSString stringWithFormat:@"%@ %@", _txtNotes.text, textField.text];
+            }
+            else if (timesShown==0&&_optionLocation==22)
+            {
+                timesShown++;
+                _txtNotes.text = [NSString stringWithFormat:@"Length: %@ - %@",textField.text, _txtNotes.text];
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Length, size, fittings" message:@"Enter the Size:" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Ok", nil];
+                [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
+                [alert show];
+                pageSubmitAlertView = NO;
+            }
+            else if (timesShown==1&&_optionLocation==22)
+            {
+                timesShown++;
+                _txtNotes.text = [NSString stringWithFormat:@"Size: %@ - %@",textField.text, _txtNotes.text];
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Length, size, fittings" message:@"Enter the Fittings:" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Ok", nil];
+                [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
+                [alert show];
+                pageSubmitAlertView = NO;
+            }
+            else if (timesShown==2&&_optionLocation==22)
+            {
+                timesShown++;
+                _txtNotes.text = [NSString stringWithFormat:@"Fittings: %@ - %@",textField.text, _txtNotes.text];
+                pageSubmitAlertView = NO;
+            }
+            else if (![textField.text isEqualToString:@""])
+            {
+                _txtNotes.text = [NSString stringWithFormat:@"%@ - %@",textField.text, _txtNotes.text];
+                NSLog(@"text:[%@]", textField.text);
             }
             else {
-                if (pageSubmitAlertView==YES && testLoad == YES) {
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Applied Test Loads" message:@"Test Loads Applied" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"You must enter a value" message:@"A value must be entered" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
+                [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
+                [alert show];
+            }
+        }
+        //if this is the alertbox for when you submit the form
+        else {
+            //first we check to see if we are at the testLoad box
+            if (loadRatings == NO && testLoad == NO && remarksLimitations == NO && finished == NO && proofLoad == NO)
+            {
+                //check to see if this is a number
+                if ([[NSScanner scannerWithString:textField.text] scanFloat:NULL])
+                {
+                    if (([textField.text intValue]<0 || [textField.text intValue]>5) && (loadRatings == NO && testLoad == NO && remarksLimitations == NO && finished == NO && proofLoad == NO))
+                    {
+                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Incorrect Input" message:@"You must enter a number between 1 and 5" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+                        [alert show];
+                        overallRating = @"";
+                    }
+                    //if this is the overall rating box and its a number between 1 and 5
+                    else {
+                        overallRating = textField.text;
+                        
+                        //convert overall rating to int and then if it's less then 3 then we ask three more questions
+                        if ([overallRating intValue] < 3)
+                        {
+                            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Test Loads?" message:@"Is This a Test Load?" delegate:self cancelButtonTitle:@"NO" otherButtonTitles:@"YES", nil];
+                            [alert show];
+                            testLoad = YES;
+                            _createCertificateButton.enabled = TRUE;
+                        }
+                        else {
+                            _createCertificateButton.enabled = FALSE;
+
+                            [PDFGenerator DisplayPDFWithOverallRating:inspection];
+                        }
+                    }
+                }
+                else {//if the overall rating was inputed as greater then 5 or less than 1, and if it was not an integer
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Incorrect Input" message:@"You must enter a number between 1 and 5" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+                    [alert show];
+                    overallRating = @"";
+                }
+            }
+            else {//here is where we start displaying the Alert Boxes which will ask questions about for the Certficate
+                if (proofLoad == YES)
+                {
+                    testLoad = textField.text;
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Proof Load Description" message:@"Description of Proof Load" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
                     [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
                     [alert show];
-                    proofLoad = YES;
-                    testLoad = NO;
+                    loadRatings = YES;
+                    proofLoad = NO;
+                    testLoad = textField.text;
                 }
+                else if (loadRatings == YES)
+                {
+                    proofLoadDescription = textField.text;
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Load Ratings" message:@"Basis for assigned load ratings" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+                    [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
+                    [alert show];
+                    remarksLimitations = YES;
+                    loadRatings = NO;
+                }
+                else if (remarksLimitations == YES)
+                {
+                    loadRatings = textField.text;
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Remarks Limitations" message:@"Remarks and/or Limitations Imposed" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+                    [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
+                    [alert show];
+                    remarksLimitations = NO;
+                    finished = YES;
+                    loadRatings = textField.text;
+                }
+                else if (finished == YES)
+                {
+                    remarksLimitations = textField.text;
+                    finished = NO;
+                    [PDFGenerator DisplayPDFWithOverallRating : inspection];
+                    
+                    _createCertificateButton.enabled = TRUE;
+                }
+                
+            }
+            
+            if (pageSubmitAlertView==YES && testLoad == YES) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Applied Test Loads" message:@"Test Loads Applied" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+                [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
+                [alert show];
+                proofLoad = YES;
+                testLoad = NO;
             }
         }
     }//if the cancel button is pressed and we are in the midst of asking the questions for the certificate
@@ -460,6 +453,9 @@
         testLoad = NO;
         [PDFGenerator DisplayPDFWithOverallRating:inspection];
     }
+    
+    _createCertificateButton.enabled = YES;
+    _createCertificateButton.hidden = NO;
 }
 
 #pragma mark - Outlet methods
@@ -472,7 +468,7 @@
 - (IBAction)showPartsController:(id)sender {
     //Create the Master View Controller.  The Level is the current type of data that's being displayed, and the search value is the value that will be searched
     //in Mongo to reveal the correct information.
-    MasterViewController *mvc = [[MasterViewController alloc] initWithStyle:nil Level:PART_NAME SearchValue:inspection.crane.type];
+    MasterViewController *mvc = [[MasterViewController alloc] initWithStyle:nil Level:PART_NAME SearchValue:inspection.inspectedCrane.type];
     [self.navigationController pushViewController:mvc animated:YES];
 }
 

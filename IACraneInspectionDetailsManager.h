@@ -39,4 +39,28 @@
  
  */
 - (void) loadAllInspectionDetails;
+
+//Create a crane object and send it to the recipient
+- (InspectedCrane *) createCrane : (NSString*) hoistSrl
+                       CraneType : (NSString*) craneType
+                 EquipmentNumber : (NSString*) equipmentNumber
+                        CraneMfg : (NSString*) craneMfg
+                        hoistMfg : (NSString*) hoistMfg
+                        CraneSrl : (NSString*) craneSrl
+                        Capacity : (NSString*) capacity
+                        HoistMdl : (NSString*) hoistMdl;
+
+/*
+ 
+ Get all the cranes that have already been inspected
+ 
+ */
+- (NSArray *) getAllInspectedCranes;
+
+/*
+ 
+ Get the specified crane from the InspectionCrane class
+ 
+ */
+- (NSArray *) getInspectionCraneOfType : (NSString *) craneType;
 @end

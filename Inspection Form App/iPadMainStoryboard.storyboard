@@ -723,7 +723,7 @@
                                             <action selector="submitPressed:" destination="ohd-4L-yxA" id="iEo-Ff-Mp9"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem enabled="NO" title="Create Certificate" id="0hp-Iu-e5a"/>
+                                    <barButtonItem title="Create Certificate" id="0hp-Iu-e5a"/>
                                 </items>
                             </toolbar>
                             <view contentMode="scaleToFill" id="anc-cl-5wC" customClass="GradientView">

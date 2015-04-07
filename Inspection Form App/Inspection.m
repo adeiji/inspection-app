@@ -11,7 +11,7 @@
 @implementation Inspection
 
 @synthesize customer;
-@synthesize crane;
+@synthesize inspectedCrane;
 @synthesize itemList;
 
 @end

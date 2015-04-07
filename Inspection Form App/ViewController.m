@@ -370,9 +370,9 @@
 
 
 //Create the crane from the info that has been inserted into the text boxes.  This crane will then be passed to the InspectionViewController.
-- (Crane *) createCrane
+- (InspectedCrane *) createCrane
 {
-    Crane *crane = [[Crane alloc] init];
+    InspectedCrane *crane = [[InspectedCrane alloc] init];
     
     crane.hoistSrl = _txtHoistSrl.text;
     crane.equipmentNumber = _txtEquipNum.text;
@@ -398,7 +398,7 @@
     return customer;
 }
 //Create the inspection that will be read from.
-- (void) createInspection : (Crane *) crane
+- (void) createInspection : (InspectedCrane *) crane
                  Customer : (Customer *) customer
 {
     inspection = [[Inspection alloc] init];
@@ -406,7 +406,7 @@
     inspection.technicianName = _txtTechnicianName.text;
     inspection.date = _txtDate.text;
     inspection.jobNumber = _txtJobNumber.text;
-    inspection.crane = crane;
+    inspection.inspectedCrane = crane;
     inspection.customer = customer;
     inspection.itemList = myItemListStore;
 }
@@ -498,9 +498,9 @@
     //Here we create all the necessary objects to store the customer and the crane information so that this can be saved to a singleton object and accessed from anywhere.
     Customer *customer = [InspectionBussiness createCustomer:_txtCustomerName.text CustomerContact:_txtCustomerContact.text CustomerAddress:_txtAddress.text CustomerEmail:_txtEmail.text];
     
-    Crane *crane = [InspectionBussiness createCrane:_txtHoistSrl.text CraneType:craneType EquipmentNumber:_txtEquipNum.text CraneMfg:_txtCraneMfg.text hoistMfg:_txtHoistMfg.text CraneSrl:_txtCraneSrl.text Capacity:_txtCap.text HoistMdl:_txtHoistMdl.text];
+    InspectedCrane *crane = [[IACraneInspectionDetailsManager sharedManager] createCrane:_txtHoistSrl.text CraneType:craneType EquipmentNumber:_txtEquipNum.text CraneMfg:_txtCraneMfg.text hoistMfg:_txtHoistMfg.text CraneSrl:_txtCraneSrl.text Capacity:_txtCap.text HoistMdl:_txtHoistMdl.text];
     
-    inspection.crane = crane;
+    inspection.inspectedCrane = crane;
     inspection.customer = customer;
     
     inspection.jobNumber = _txtJobNumber.text;
@@ -562,15 +562,15 @@
 
 - (Inspection *) createInspectionObjectWithSelectedCrane : (InspectionCrane *) selectedCrane {
     Customer *customer = [InspectionBussiness createCustomer:_txtCustomerName.text CustomerContact:_txtCustomerContact.text CustomerAddress:_txtAddress.text CustomerEmail:_txtEmail.text];
-    Crane *crane = [InspectionBussiness createCrane:_txtHoistSrl.text CraneType:selectedCrane.name EquipmentNumber:_txtEquipNum.text CraneMfg:_txtCraneMfg.text hoistMfg:_txtHoistMfg.text CraneSrl:_txtCraneSrl.text Capacity:_txtCap.text HoistMdl:_txtHoistMdl.text];
-    inspection.crane = crane;
+    InspectedCrane *crane = [[IACraneInspectionDetailsManager sharedManager] createCrane:_txtHoistSrl.text CraneType:selectedCrane.name EquipmentNumber:_txtEquipNum.text CraneMfg:_txtCraneMfg.text hoistMfg:_txtHoistMfg.text CraneSrl:_txtCraneSrl.text Capacity:_txtCap.text HoistMdl:_txtHoistMdl.text];
+    inspection.inspectedCrane = crane;
     inspection.customer = customer;
-    inspection.crane.craneDescription = selectedCrane.name;
+    inspection.inspectedCrane.craneDescription = selectedCrane.name;
     inspection.jobNumber = _txtJobNumber.text;
     inspection.date = _txtDate.text;
     inspection.technicianName = _txtTechnicianName.text;
     
-    _inspectionViewController.craneType = inspection.crane.type;
+    _inspectionViewController.craneType = inspection.inspectedCrane.type;
     _inspectionViewController.partsArray = _myPartsArray;
     
     _inspectionViewController.validated = YES;
@@ -615,7 +615,6 @@
         [view show];
     }
 }
-
 
 - (void) didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {

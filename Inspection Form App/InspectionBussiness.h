@@ -39,14 +39,5 @@
         CustomerAddress : (NSString*) customerAddress
           CustomerEmail : (NSString*) customerEmail;
 
-//Create a crane object and send it to the recipient
-+ (Crane*) createCrane : (NSString*) hoistSrl
-             CraneType : (NSString*) craneType
-       EquipmentNumber : (NSString*) equipmentNumber
-              CraneMfg : (NSString*) craneMfg
-              hoistMfg : (NSString*) hoistMfg
-              CraneSrl : (NSString*) craneSrl
-              Capacity : (NSString*) capacity
-              HoistMdl : (NSString*) hoistMdl;
 
 @end

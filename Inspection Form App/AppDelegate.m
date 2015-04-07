@@ -147,7 +147,7 @@
     // Connect our app to Parse
     // Allow the parse local data store
     [ParseCrashReporting enable];
-    // Parse Keys - Live
+    // Parse Keys - Livead
     [Parse setApplicationId:@"pXYoDYstnZ7wvICh2nNtxmAwegOpjhsdRpFjNoVE"
                   clientKey:@"QiK7CN2M6Yh86Kn9FMLk8OBO0uHV9Icg0ryxrc11"];
 

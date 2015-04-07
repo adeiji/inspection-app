@@ -11,12 +11,6 @@
 
 @interface PDFGenerator : NSObject <UIDocumentInteractionControllerDelegate>
 
-+ (void) writeCertificateTextFile : (NSString*) testLoads
-             ProofLoadDescription : (NSString*) proofLoadDescription
-         RemarksLimitationImposed : (NSString*) remarksLimitationsImposed
-                  LoadRatingsText : (NSString*) loadRatingsText
-                       Inspection : (Inspection *) inspection;
-
 //This text file that is written contains all the information that has been created: Customer Information; Crane Information; and Inspection Information
 + (void)  writeReport : (ItemListConditionStorage *) myConditionList
            Inspection : (Inspection*) inspection

@@ -14,7 +14,7 @@
 
 @interface InspectionManager : NSObject
 {
-    Crane *crane;
+    InspectedCrane *crane;
     Customer *customer;
     Inspection *inspection;
     DBAccount *dropboxAccount;
@@ -22,7 +22,7 @@
     DBTable *table;
 }
 
-@property (nonatomic, retain) Crane *crane;
+@property (nonatomic, retain) InspectedCrane *crane;
 @property (nonatomic, retain) Customer *customer;
 @property (nonatomic, retain) Inspection *inspection;
 @property (nonatomic, retain) DBAccount *dropboxAccount;
@@ -32,7 +32,7 @@
 
 + (InspectionManager *) sharedManager;
 
-- (void) setCrane:(Crane *)myCrane;
+- (void) setCrane:(InspectedCrane *)myCrane;
 - (void) setCustomer:(Customer *)myCustomer;
 - (void) setInspection:(Inspection *)myInspection;
 - (void) setDropboxAccount:(DBAccount *)myDropboxAccount;

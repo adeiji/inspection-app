@@ -89,7 +89,6 @@
     });
 }
 
-
 /*
  
  Get all the inspection details from the Database
@@ -144,6 +143,75 @@
     _cranes = [self getInspectionDetails];
 }
 
+//Create a crane object and send it to the recipient
+- (InspectedCrane *) createCrane : (NSString*) hoistSrl
+                       CraneType : (NSString*) craneType
+                 EquipmentNumber : (NSString*) equipmentNumber
+                        CraneMfg : (NSString*) craneMfg
+                        hoistMfg : (NSString*) hoistMfg
+                        CraneSrl : (NSString*) craneSrl
+                        Capacity : (NSString*) capacity
+                        HoistMdl : (NSString*) hoistMdl
+{
+    NSEntityDescription *entity = [NSEntityDescription entityForName:kCoreDataClassInspectedCrane inManagedObjectContext:_context];
+    
+    InspectedCrane *crane = [[InspectedCrane alloc] initWithEntity:entity insertIntoManagedObjectContext:_context];
+
+    crane.hoistSrl          = hoistSrl;
+    crane.type              = craneType;
+    crane.equipmentNumber   = equipmentNumber;
+    crane.mfg               = craneMfg;
+    crane.hoistMfg          = hoistMfg;
+    crane.craneSrl          = craneSrl;
+    crane.capacity          = capacity;
+    crane.hoistMdl          = hoistMdl;
+    
+    [((AppDelegate *) [[UIApplication sharedApplication] delegate]) saveContext];
+    NSLog(@"Crane object saved to database - com.inspectionapp.coredata");
+
+    return crane;
+}
+/*
+ 
+ Get all the cranes that have already been inspected
+ 
+ */
+- (NSArray *) getAllInspectedCranes {
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:kCoreDataClassInspectedCrane inManagedObjectContext:_context];
+    [fetchRequest setEntity:entity];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:kCoreDataClassAttributeHoistSrl
+                                                                   ascending:YES];
+    [fetchRequest setSortDescriptors:[NSArray arrayWithObjects:sortDescriptor, nil]];
+    
+    NSError *error = nil;
+    NSArray *fetchedObjects = [_context executeFetchRequest:fetchRequest error:&error];
+    
+    return fetchedObjects;
+}
+/*
+ 
+ Get the specified crane from the InspectionCrane class
+ 
+ */
+- (NSArray *) getInspectionCraneOfType : (NSString *) craneType {
+    
+    NSManagedObjectContext *context = [((AppDelegate *) [[UIApplication sharedApplication] delegate]) managedObjectContext];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:kCoreDataClassCrane inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    // Specify criteria for filtering which objects to fetch
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name = %@", craneType];
+    [fetchRequest setPredicate:predicate];
+    
+    NSError *error = nil;
+    NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
+    if (fetchedObjects == nil) {
+        
+    }
+    
+    return fetchedObjects;
+}
 
 
 @end

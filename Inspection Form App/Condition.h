@@ -7,29 +7,20 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "InspectionPoint.h"
 
-@interface Condition : NSObject {
-    NSString *notes;
-    BOOL deficient;
-    NSUInteger *pickerSelection;
-    NSString *deficientPart;
-    BOOL applicable;
-}
+@interface Condition : NSObject
+
+@property (strong, nonatomic) NSString *notes;
+@property BOOL deficient;
+@property NSUInteger pickerSelection;
+@property (strong, nonatomic) InspectionPoint *deficientPart;
+@property BOOL applicable;
 
 - (Condition *) initWithParameters : (NSString *) myNotes
                        Defficiency : (BOOL) myDeficient
                    PickerSelection : (NSUInteger *) myPickerSelection
-                     DeficientPart : (NSString *) myDeficientPart
+                     DeficientPart : (InspectionPoint *) myDeficientPart
                         Applicable : (BOOL) myApplicable;
-- (NSString *) notes;
-- (BOOL) deficient;
-- (NSUInteger *) pickerSelection;
-- (NSString *) deficientPart;
-- (BOOL) applicable;
 
-- (void) setNotes:(id) input;
-- (void) setDeficient:(BOOL) input;
-- (void) setPickerSelection: (NSUInteger *) input;
-- (void) setDeficientPart:(NSString *) input;
-- (void) setApplicable: (BOOL) input;
 @end

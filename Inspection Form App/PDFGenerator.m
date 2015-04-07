@@ -12,169 +12,6 @@
 
 @implementation PDFGenerator
 
-+ (void) writeCertificateTextFile : (NSString*) testLoads
-             ProofLoadDescription : (NSString*) proofLoadDescription
-         RemarksLimitationImposed : (NSString*) remarksLimitationsImposed
-                  LoadRatingsText : (NSString*) loadRatingsText
-                       Inspection : (Inspection *) inspection
-{
-    if (![testLoads isEqual:NULL])
-    {
-        NSMutableString *headerString = [NSMutableString stringWithString:@""];
-        NSMutableString *ownerString = [NSMutableString stringWithString:@""];
-        NSMutableString *ownerAddressString = [NSMutableString stringWithString:@""];
-        NSMutableString *device = [NSMutableString stringWithString:@""];
-        NSMutableString *location = [NSMutableString stringWithString:@""];
-        NSMutableString *description = [NSMutableString stringWithString:@""];
-        NSMutableString *ratedCapacity = [NSMutableString stringWithString:@""];
-        NSMutableString *craneManafacturer = [NSMutableString stringWithString:@""];
-        NSMutableString *modelCrane = [NSMutableString stringWithString:@""];
-        NSMutableString *serialNoCrane = [NSMutableString stringWithString:@""];
-        NSMutableString *hoistManufacturer = [NSMutableString stringWithString:@""];
-        NSMutableString *modelHoist = [NSMutableString stringWithString:@""];
-        NSMutableString *serialNoHoist = [NSMutableString stringWithString:@""];
-        NSMutableString *ownerID = [NSMutableString stringWithString:@""];
-        NSMutableString *lifting = [NSMutableString stringWithString:@""];
-        NSMutableString *other = [NSMutableString stringWithString:@""];
-        NSMutableString *testLoadsString = [NSMutableString stringWithString:@""];
-        NSMutableString *proofLoadString = [NSMutableString stringWithString:@""];
-        NSMutableString *loadRatingsString = [NSMutableString stringWithString:@""];
-        NSMutableString *remarksLimitationsString = [NSMutableString stringWithString:@""];
-        NSMutableString *footer = [NSMutableString stringWithString:@""];
-        NSMutableString *nameAddress = [NSMutableString stringWithString:@""];
-        NSMutableString *expirationDate = [NSMutableString stringWithString:@""];
-        NSMutableString *signature = [NSMutableString stringWithString:@""];
-        NSMutableString *title = [NSMutableString stringWithString:@""];
-        NSMutableString *inspectorName = [NSMutableString stringWithString:@""];
-        NSMutableString *certificateNum = [NSMutableString stringWithString:@""];
-        NSMutableString *date = [NSMutableString stringWithString:@""];
-        NSMutableString *address = [NSMutableString stringWithString:@""];
-        NSMutableString *headerTitle = [NSMutableString stringWithString:@""];
-        NSMutableString *titleAddress = [NSMutableString stringWithString:@""];
-        
-        [headerString appendString:@"ANNUAL OVERHEAD BRIDGE INSPECTION: \n"];
-        [headerString appendString:[NSString stringWithFormat:@"%@", @"BRIDGE, MONORAIL, JIB"]];
-        
-        if ([inspection.customer.name isEqualToString:@"LVVWD"])
-        {
-            [ownerString appendString:[NSString stringWithFormat:@"1.  Owner      %@", @"Las Vegas Valley Water District"]];
-        }
-        else {
-            [ownerString appendString:[NSString stringWithFormat:@"1.  Owner     %@", inspection.customer.name]];
-        }
-        
-        [titleAddress appendString:[NSString stringWithFormat:@"Silver State Wire Rope & Rigging\n8740 S. Jones Blvd Las Vegas, NV 89139\n(702) 597-2010 fax (702)896-1977"]];
-        [headerTitle appendString:[NSString stringWithFormat:@"Annual Overhead Crane Inspection:\n%@", inspection.crane.description]];
-        [ownerAddressString appendString:[NSString stringWithFormat:@"2.  Owner's Address      %@", inspection.customer.address]];
-        [location appendString:[NSString stringWithFormat:@"3.  Location      %@", inspection.customer.equipmentNumber]];
-        [description appendString:[NSString stringWithFormat:@"4.  Description    %@ CRANE", inspection.crane.description]];
-        [ratedCapacity appendString:[NSString stringWithFormat:@"    Rated Capacity      %@", inspection.crane.capacity]];
-        [craneManafacturer appendString:[NSString stringWithFormat:@"5.  Crane Manufacturer"]];
-        [modelCrane appendString:[NSString stringWithFormat:@"Model"]];
-        [serialNoCrane appendString:[NSString stringWithFormat:@"Serial No."]];
-        [hoistManufacturer appendString:[NSString stringWithFormat:@"6.  Hoist Manafacture"]];
-        [modelHoist appendString:[NSString stringWithFormat:@"Model"]];
-        [serialNoHoist appendString:[NSString stringWithFormat:@"Serial No."]];
-        [ownerID appendString:[NSString stringWithFormat:@"7.  Owner's Identification (if any)      %@", inspection.crane.equipmentNumber]];
-        [testLoadsString appendString:[NSString stringWithFormat:@"8. Test loads applied (only if examination conducted):   %@", testLoads]];
-        [proofLoadString appendString:[NSString stringWithFormat:@"9. Description of proof load:   %@", proofLoadDescription]];
-        [loadRatingsString appendString:[NSString stringWithFormat:@"10. Basis for assigned load ratings:   %@", loadRatingsText]];
-        [remarksLimitationsString appendString:[NSString stringWithFormat:@"11. Remarks and/or limitations imposed:   %@", remarksLimitationsImposed]];
-        //convert the date of the inspection to the Long Date format
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        
-        [dateFormatter setDateFormat:@"MM/dd/yyyy"];
-        NSDate *dateFromString = [[NSDate alloc] init];
-        dateFromString = [dateFormatter dateFromString:inspection.date];
-        
-        NSDateComponents *components = [[NSCalendar currentCalendar] components:NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit fromDate:dateFromString];
-        
-        NSInteger day = [components day];
-        //convert day to an NSNumber so that it can be sent to OrdinalNumberFormatter which will turn the NSNumber into an ORdinal Number
-        NSNumber *myNumDay = [NSNumber numberWithInt:day];
-        NSInteger month = [components month];
-        NSInteger year = [components year];
-        NSString *monthName = [[dateFormatter monthSymbols] objectAtIndex:(month - 1)];
-        OrdinalNumberFormatter *formatter = [[OrdinalNumberFormatter alloc] init];
-        
-        NSString *myDay = [formatter stringForObjectValue:myNumDay];
-        
-        [footer appendString:[NSString stringWithFormat:@"I certify that on the %@ day of %@ %d the above described device was tested and \n examined by the undersigned; that said test and/or examination met with the requirements \n of the Division of Occupational Safety and Health Administration and ANSI B30 series or \nANSI/SIA A92.2 as applicable. ", myDay, monthName, year]];
-        [nameAddress appendString:[NSString stringWithFormat:@"Name and address of authorized certificating agent: "]];
-        [address appendString:[NSString stringWithFormat:@"SILVER STATE WIRE ROPE AND RIGGING\n8740 S. JONES BLVD.\nLAS VEGAS, NV 89139"]];
-        [expirationDate appendString:[NSString stringWithFormat:@"Expiration Date:  %d/%d/%d", month, day, year + 1]];
-        [signature appendString:[NSString stringWithFormat:@"Signature: "]];
-        [title appendString:[NSString stringWithFormat:@"Title: Crane Surveyor"]];
-        [inspectorName appendString:[NSString stringWithFormat:@"Name: %@", inspection.technicianName]];
-        [certificateNum appendString:[NSString stringWithFormat:@"Certificate #LVVWD- %@", inspection.crane.equipmentNumber]];
-        [date appendString:[NSString stringWithFormat:@"Date:   %@", inspection.date]];
-        
-        //Create the file
-        
-        //Initiate Error Catching
-        //NSError *error;
-        
-        //create file manager
-        
-        NSString *dateNoSlashes = [inspection.date stringByReplacingOccurrencesOfString:@"/" withString:@"-"];
-        NSString* fileName = [NSString stringWithFormat:@"%@ %@ %@ Certificate.PDF",inspection.customer.name, inspection.crane.hoistSrl, dateNoSlashes];
-        
-        NSArray *arrayPaths =
-        NSSearchPathForDirectoriesInDomains(
-                                            NSDocumentDirectory,
-                                            NSUserDomainMask,
-                                            YES);
-        NSString *path = [arrayPaths objectAtIndex:0];
-        NSString* pdfFileName = [path stringByAppendingPathComponent:fileName];
-        
-        //NSString *documentsDirectory = @"/Users/Developer/Documents";
-        NSString *filePath = pdfFileName;
-        //NSString *afilePath = [documentsDirectory stringByAppendingPathComponent:@"jobInfoArray.txt"];
-        
-        // NSLog(@"string to write:%@", printString);
-        
-        //[printString writeToFile:filePath atomically:YES encoding:NSUTF8StringEncoding error:&error];
-        
-        [self createCertificate:titleAddress
-                               :headerTitle
-                               :headerString
-                               :ownerString
-                               :ownerAddressString
-                               :device
-                               :location
-                               :description
-                               :ratedCapacity
-                               :craneManafacturer
-                               :modelCrane
-                               :serialNoCrane
-                               :hoistManufacturer
-                               :modelHoist
-                               :serialNoHoist
-                               :ownerID
-                               :lifting
-                               :other
-                               :testLoadsString
-                               :proofLoadString
-                               :loadRatingsString
-                               :remarksLimitationsString
-                               :footer
-                               :nameAddress
-                               :address
-                               :expirationDate
-                               :signature
-                               :title
-                               :inspectorName
-                               :certificateNum
-                               :date
-                               :filePath
-                               :inspection];
-        
-    }
-    else {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"You must first fill out an application" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
-        [alert show];
-    }
-}
 
 - (void) drawTextToPDF : (NSString *) text
        RectangleToDraw : (CGRect *) rect
@@ -200,6 +37,55 @@
     CGContextClosePath(pdfContext);
     CGContextDrawPath(pdfContext, kCGPathFillStroke);
 }
+
+
++ (void) drawInContext : (CGContextRef) pdfContext {
+    CGPDFContextBeginPage(pdfContext, NULL);
+    UIGraphicsPushContext(pdfContext);
+    UIImage *myImage = [UIImage imageNamed:@"logo.jpg"];
+    // Flip coordinate system
+    CGRect bounds = CGContextGetClipBoundingBox(pdfContext);
+    CGContextScaleCTM(pdfContext, 1.0, -1.0);
+    CGContextTranslateCTM(pdfContext, 0.0, -bounds.size.height);
+    
+    [myImage drawInRect:CGRectMake(-110, -30, 250, 250)];
+    [myImage drawInRect:CGRectMake(50, 150, 500, 500) blendMode:kCGBlendModeLighten alpha:.15f];
+    
+    //Border lines
+    //left vertical line
+    [self drawContextToPDFContext:pdfContext StartPoint:CGPointMake(13, 231) EndPoint:CGPointMake(13, 780)];
+    
+    CGContextBeginPath(pdfContext);
+    CGContextMoveToPoint(pdfContext, 13, 231);
+    CGContextAddLineToPoint(pdfContext, 13, 780);
+    
+    CGContextClosePath(pdfContext);
+    CGContextDrawPath(pdfContext, kCGPathFillStroke);
+    //right vertical lines
+    CGContextBeginPath(pdfContext);
+    CGContextMoveToPoint(pdfContext, 600, 13);
+    CGContextAddLineToPoint(pdfContext, 600, 780);
+    
+    CGContextClosePath(pdfContext);
+    CGContextDrawPath(pdfContext, kCGPathFillStroke);
+    //top line
+    CGContextBeginPath(pdfContext);
+    CGContextMoveToPoint(pdfContext, 29, 13);
+    CGContextAddLineToPoint(pdfContext, 600, 13);
+    
+    CGContextClosePath(pdfContext);
+    CGContextDrawPath(pdfContext, kCGPathFillStroke);
+    //bottom line
+    CGContextBeginPath(pdfContext);
+    CGContextMoveToPoint(pdfContext, 13, 780);
+    CGContextAddLineToPoint(pdfContext, 600, 780);
+    
+    CGContextClosePath(pdfContext);
+    CGContextDrawPath(pdfContext, kCGPathFillStroke);
+
+}
+
+
 
 + (void) createCertificate:(NSString *) titleAddress
                           :(NSString *) headerTitle
@@ -239,48 +125,7 @@
     
     NSURL *fileURL = [NSURL fileURLWithPath:filePath];
     CGContextRef pdfContext = CGPDFContextCreateWithURL((__bridge CFURLRef)fileURL, NULL, NULL);
-    CGPDFContextBeginPage(pdfContext, NULL);
-    UIGraphicsPushContext(pdfContext);
-    UIImage *myImage = [UIImage imageNamed:@"logo.jpg"];
-    // Flip coordinate system
-    CGRect bounds = CGContextGetClipBoundingBox(pdfContext);
-    CGContextScaleCTM(pdfContext, 1.0, -1.0);
-    CGContextTranslateCTM(pdfContext, 0.0, -bounds.size.height);
-
-    [myImage drawInRect:CGRectMake(-110, -30, 250, 250)];
-    [myImage drawInRect:CGRectMake(50, 150, 500, 500) blendMode:kCGBlendModeLighten alpha:.15f];
-    
-    //Border lines
-    //left vertical line
-    [self drawContextToPDFContext:pdfContext StartPoint:CGPointMake(13, 231) EndPoint:CGPointMake(13, 780)];
-    CGContextBeginPath(pdfContext);
-    CGContextMoveToPoint(pdfContext, 13, 231);
-    CGContextAddLineToPoint(pdfContext, 13, 780);
-    
-    CGContextClosePath(pdfContext);
-    CGContextDrawPath(pdfContext, kCGPathFillStroke);
-    //right vertical lines
-    CGContextBeginPath(pdfContext);
-    CGContextMoveToPoint(pdfContext, 600, 13);
-    CGContextAddLineToPoint(pdfContext, 600, 780);
-    
-    CGContextClosePath(pdfContext);
-    CGContextDrawPath(pdfContext, kCGPathFillStroke);
-    //top line
-    CGContextBeginPath(pdfContext);
-    CGContextMoveToPoint(pdfContext, 29, 13);
-    CGContextAddLineToPoint(pdfContext, 600, 13);
-    
-    CGContextClosePath(pdfContext);
-    CGContextDrawPath(pdfContext, kCGPathFillStroke);
-    //bottom line
-    CGContextBeginPath(pdfContext);
-    CGContextMoveToPoint(pdfContext, 13, 780);
-    CGContextAddLineToPoint(pdfContext, 600, 780);
-    
-    CGContextClosePath(pdfContext);
-    CGContextDrawPath(pdfContext, kCGPathFillStroke);
-    
+    [self drawInContext:pdfContext];
     
     NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
 
@@ -354,7 +199,7 @@
     CGContextClosePath(pdfContext);
     CGContextDrawPath(pdfContext, kCGPathFillStroke);
     //Crane Mfg
-    [inspection.crane.mfg drawInRect:CGRectMake(180, 280, 230, 20) withFont:[UIFont systemFontOfSize:10.0f]];
+    [inspection.inspectedCrane.mfg drawInRect:CGRectMake(180, 280, 230, 20) withFont:[UIFont systemFontOfSize:10.0f]];
     
     //LINE 6 Part 3
     [serialNoCrane drawInRect:CGRectMake(410, 280, 230, 20) withFont:[UIFont systemFontOfSize:12.0f]];
@@ -366,7 +211,7 @@
     CGContextClosePath(pdfContext);
     CGContextDrawPath(pdfContext, kCGPathFillStroke);
     //Crane Srl
-    [inspection.crane.craneSrl drawInRect:CGRectMake(470, 280, 230, 20) withFont:[UIFont systemFontOfSize:8.0f]];
+    [inspection.inspectedCrane.craneSrl drawInRect:CGRectMake(470, 280, 230, 20) withFont:[UIFont systemFontOfSize:8.0f]];
     
     CGContextClosePath(pdfContext);
     CGContextDrawPath(pdfContext, kCGPathFillStroke);
@@ -381,7 +226,7 @@
     CGContextClosePath(pdfContext);
     CGContextDrawPath(pdfContext, kCGPathFillStroke);
     //Hoist Mfg
-    [inspection.crane.hoistMfg drawInRect:CGRectMake(170, 310, 230, 20) withFont:[UIFont systemFontOfSize:10.0f]];
+    [inspection.inspectedCrane.hoistMfg drawInRect:CGRectMake(170, 310, 230, 20) withFont:[UIFont systemFontOfSize:10.0f]];
     
     //LINE 7 Part 2
     [modelHoist drawInRect:CGRectMake(270, 310, 230, 20) withFont:[UIFont systemFontOfSize:12.0f]];
@@ -393,7 +238,7 @@
     CGContextClosePath(pdfContext);
     CGContextDrawPath(pdfContext, kCGPathFillStroke);
     //Hoist Mdl
-    [inspection.crane.hoistMdl drawInRect:CGRectMake(310, 310, 230, 20) withFont:[UIFont systemFontOfSize:8.0f]];
+    [inspection.inspectedCrane.hoistMdl drawInRect:CGRectMake(310, 310, 230, 20) withFont:[UIFont systemFontOfSize:8.0f]];
     
     //LINE 7 Part 3
     [serialNoHoist drawInRect:CGRectMake(410, 310, 230, 20) withFont:[UIFont systemFontOfSize:12.0f]];
@@ -405,7 +250,7 @@
     CGContextClosePath(pdfContext);
     CGContextDrawPath(pdfContext, kCGPathFillStroke);
     //Hoist Srl
-    [inspection.crane.hoistSrl drawInRect:CGRectMake(470, 310, 230, 20) withFont:[UIFont systemFontOfSize:8.0f]];
+    [inspection.inspectedCrane.hoistSrl drawInRect:CGRectMake(470, 310, 230, 20) withFont:[UIFont systemFontOfSize:8.0f]];
     CGContextBeginPath(pdfContext);
     CGContextMoveToPoint(pdfContext, 470, 325);
     CGContextAddLineToPoint(pdfContext, 550, 325);
@@ -564,29 +409,11 @@
     //release memory
     fileURL = nil;
     pdfContext = nil;
-    myImage = nil;
 }
 
-//This text file that is written contains all the information that has been created: Customer Information; Crane Information; and Inspection Information
-+ (void)  writeReport : (ItemListConditionStorage *) myConditionList
-           Inspection : (Inspection*) inspection
-        OverallRating : (NSString*) overallRating
-           PartsArray : (NSArray*) myPartsArray
-{
++ (NSString *) createCustomerInfoTitleString {
     NSMutableString *printString = [NSMutableString stringWithString:@""];
-    NSMutableString *customerInfoResultsColumn = [NSMutableString stringWithString:@""];
-    NSMutableString *craneDescriptionLeftColumn = [NSMutableString stringWithString:@""];
-    NSMutableString *craneDescriptionResultsColumn = [NSMutableString stringWithString:@""];
-    NSMutableString *craneDescriptionRightColumn = [NSMutableString stringWithString:@""];
-    NSMutableString *craneDescriptionRightResultsColumn = [NSMutableString stringWithString:@""];
-    NSMutableString *partTitle = [NSMutableString stringWithString:@""];
-    NSMutableString *partDeficiency = [NSMutableString stringWithString:@""];
-    NSMutableString *partNotes = [NSMutableString stringWithString:@""];
-    NSMutableString *deficientPartString = [NSMutableString stringWithString:@""];
-    NSMutableString *footerLeft = [NSMutableString stringWithString:@""];
-    NSMutableString *footerRight = [NSMutableString stringWithString:@""];
-    NSMutableString *header = [NSMutableString stringWithString:@""];
-    NSMutableString *craneDescription = [NSMutableString stringWithString:@""];
+    
     //customer information titles and descriptions
     [printString appendString:@"Customer Information\n\n"];
     [printString appendString:[NSMutableString stringWithFormat:@"Customer Name:\n"]];
@@ -594,6 +421,13 @@
     [printString appendString:[NSString stringWithFormat:@"Job Number:\n"]];
     [printString appendString:[NSString stringWithFormat:@"Email Address:\n"]];
     [printString appendString:[NSString stringWithFormat:@"Customer Address:\n\n"]];
+    
+    return printString;
+}
+
++ (NSString *) createCustomerInfoResultsStringWithInspection : (Inspection *) inspection {
+    NSMutableString *customerInfoResultsColumn = [NSMutableString stringWithString:@""];
+    
     //the customer information results
     //Customer - Name
     [customerInfoResultsColumn appendString:[NSMutableString stringWithFormat:@"\n\n%@\n", inspection.customer.name]];
@@ -605,75 +439,149 @@
     [customerInfoResultsColumn appendString:[NSString stringWithFormat:@"%@\n", inspection.customer.email]];
     //-Address
     [customerInfoResultsColumn appendString:[NSString stringWithFormat:@"%@\n\n", inspection.customer.address]];
+    
+    return customerInfoResultsColumn;
+}
+
++ (NSString *) createCraneDescriptionStringWithInspection : (Inspection *) inspection {
+
+    NSMutableString *craneDescription = [NSMutableString stringWithString:@""];
+    
     //Crane Description
-    [craneDescription appendString:[NSString stringWithFormat:@"Crane Description: %@", inspection.crane.description]];
+    [craneDescription appendString:[NSString stringWithFormat:@"Crane Description: %@", inspection.inspectedCrane.craneDescription]];
+    return craneDescription;
+}
+
++ (NSString *) createCraneDescriptionLeftColumnString {
+    NSMutableString *craneDescriptionLeftColumn = [NSMutableString stringWithString:@""];
+    
     //the crane description titles
     [craneDescriptionLeftColumn appendString:@"Overall Condition Rating:\n"];
     [craneDescriptionLeftColumn appendString:@"Crane Mfg:\n"];
     [craneDescriptionLeftColumn appendString:@"Hoist Mfg:\n"];
     [craneDescriptionLeftColumn appendString:@"Hoist Model:\n"];
+    
+    return craneDescriptionLeftColumn;
+}
+
++ (NSString *) createCraneDescriptionResultsColumnWithInspection : (Inspection *) inspection
+                                                   OverallRating : (NSString *) overallRating  {
+    NSMutableString *craneDescriptionResultsColumn = [NSMutableString stringWithString:@""];
+    
     //crane description results
     [craneDescriptionResultsColumn appendString:[NSMutableString stringWithFormat:@"\n\n%@\n", overallRating]];
     //CraneMfg
-    [craneDescriptionResultsColumn appendString:[NSString stringWithFormat:@"%@\n", inspection.crane.mfg]];
+    [craneDescriptionResultsColumn appendString:[NSString stringWithFormat:@"%@\n", inspection.inspectedCrane.mfg]];
     //HoistMfg
-    [craneDescriptionResultsColumn appendString:[NSString stringWithFormat:@"%@\n", inspection.crane.hoistMfg]];
+
+    [craneDescriptionResultsColumn appendString:[NSString stringWithFormat:@"%@\n", inspection.inspectedCrane.hoistMfg]];
     //HoistMdl
-    [craneDescriptionResultsColumn appendString:[NSString stringWithFormat:@"%@\n", inspection.crane.hoistMdl]];
+    [craneDescriptionResultsColumn appendString:[NSString stringWithFormat:@"%@\n", inspection.inspectedCrane.hoistMdl]];
+    
+    return craneDescriptionResultsColumn;
+}
+
++ (NSString *) createCraneDescriptionRightColumnWithInspection {
+    NSMutableString *craneDescriptionRightColumn = [NSMutableString stringWithString:@""];
+    
     //crane description titles right column
     [craneDescriptionRightColumn appendString:@"\n\nCap:\n"];
     [craneDescriptionRightColumn appendString:@"Crane Srl:\n"];
     [craneDescriptionRightColumn appendString:@"Hoist Srl:\n"];
     [craneDescriptionRightColumn appendString:@"Equip #:\n"];
+    
+    return craneDescriptionRightColumn;
+}
+
++ (NSString *) createCraneDescriptionRightResultsColumnWithInspection : (Inspection *) inspection {
+    NSMutableString *craneDescriptionRightResultsColumn = [NSMutableString stringWithString:@""];
+    
     //creane description results
     //-Crane-Capacity
-    [craneDescriptionRightResultsColumn appendString:[NSMutableString stringWithFormat:@"\n\n%@\n", inspection.crane.capacity]];
+    [craneDescriptionRightResultsColumn appendString:[NSMutableString stringWithFormat:@"\n\n%@\n", inspection.inspectedCrane.capacity]];
     //Crane Srl
-    [craneDescriptionRightResultsColumn appendString:[NSString stringWithFormat:@"%@\n", inspection.crane.craneSrl]];
+    [craneDescriptionRightResultsColumn appendString:[NSString stringWithFormat:@"%@\n", inspection.inspectedCrane.craneSrl]];
     //Hoist Srl
-    [craneDescriptionRightResultsColumn appendString:[NSString stringWithFormat:@"%@\n", inspection.crane.hoistSrl]];
+    [craneDescriptionRightResultsColumn appendString:[NSString stringWithFormat:@"%@\n", inspection.inspectedCrane.hoistSrl]];
     //Equipment Number
-    [craneDescriptionRightResultsColumn appendString:[NSString stringWithFormat:@"%@\n", inspection.crane.equipmentNumber]];
-    //Technician Name
-    [footerLeft appendString:[NSString stringWithFormat:@"Technician:%@\nDate: %@",inspection.technicianName, inspection.date]];
-    //Customer Name
-    [footerRight appendString:[NSString stringWithFormat:@"Customer:%@\nDate: %@",inspection.customer.name, inspection.date]];
+    [craneDescriptionRightResultsColumn appendString:[NSString stringWithFormat:@"%@\n", inspection.inspectedCrane.equipmentNumber]];
     
-    [header appendString:[NSString stringWithFormat:@"Silverstate Wire Rope and Rigging\n\n24-Hour Emergency Service\nSales - Service - Repair\nElectrical - Mechanical - Pneumatic\nCal-OSHA Accredited"]];
-    
-    int i = 0;
-    
+    return craneDescriptionRightResultsColumn;
+}
+
+/*
+ 
+ Go through every single part that is associated with this crane and write it's details to string
+ 
+ */
++ (void) updateCraneInspectionDetailsStringsWithConditionList : (ItemListConditionStorage *) myConditionList
+                                         PartDeficiencyString : (NSMutableString **) partDeficiency
+                                                    PartNotes : (NSMutableString **) partNotes
+                                                    PartTitle : (NSMutableString **) partTitle
+                                                   PartsArray : (NSArray *) myPartsArray
+{
+    int optionNumber = 0;
     for (Condition *myCondition in myConditionList.myConditions)
     {
         if (myCondition.applicable == NO)
         {
             if (myCondition.deficient == YES){
-                [partDeficiency appendString:@"Failed\n"];
-                [partNotes appendString:[NSString stringWithFormat:@"%d.  %@: %@\n",i + 1, myCondition.deficientPart, myCondition.notes]];
+                [*partDeficiency appendString:@"Failed\n"];
+                [*partNotes appendString:[NSString stringWithFormat:@"%d.  %@: %@\n",optionNumber + 1, myCondition.deficientPart.name, myCondition.notes]];
             }
             else if (myCondition.deficient==NO) {
                 if (![myCondition.notes isEqualToString:@""])
                 {
-                    [partNotes appendString:[NSString stringWithFormat:@"%d.  %@\n",i + 1, myCondition.notes]];
+                    [*partNotes appendString:[NSString stringWithFormat:@"%d.  %@\n",optionNumber + 1, myCondition.notes]];
                 }
-                [partDeficiency appendString:@"Passed\n"];
+                [*partDeficiency appendString:@"Passed\n"];
             }
         }
         else {
-            [partDeficiency appendString:@"N/A\n"];
+            [*partDeficiency appendString:@"N/A\n"];
         }
-        [partTitle appendString:[NSString stringWithFormat:@"%d. %@\n",i + 1, (NSString *)[myPartsArray objectAtIndex:i]]];
-        i ++;
+        InspectionPoint *inspectionPoint = [myPartsArray objectAtIndex:optionNumber];
+        [*partTitle appendString:[NSString stringWithFormat:@"%d. %@\n",optionNumber + 1, inspectionPoint.name ]];
+        optionNumber ++;
     }
     
-    //Create the file
+}
+
+
+//This text file that is written contains all the information that has been created: Customer Information; Crane Information; and Inspection Information
++ (void)  writeReport : (ItemListConditionStorage *) myConditionList
+           Inspection : (Inspection*) inspection
+        OverallRating : (NSString*) overallRating
+           PartsArray : (NSArray*) myPartsArray
+{
+
+    NSMutableString *partTitle = [NSMutableString stringWithString:@""];
+    NSMutableString *partDeficiency = [NSMutableString stringWithString:@""];
+    NSMutableString *partNotes = [NSMutableString stringWithString:@""];
+    NSMutableString *deficientPartString = [NSMutableString stringWithString:@""];
+    NSMutableString *footerLeft = [NSMutableString stringWithString:@""];
+    NSMutableString *footerRight = [NSMutableString stringWithString:@""];
+    NSMutableString *header = [NSMutableString stringWithString:@""];
+
+    NSString *customerInfoTitleString = [self createCustomerInfoTitleString];
+    NSString *customerInfoResultsColumn = [self createCustomerInfoResultsStringWithInspection:inspection];
+    NSString *craneDescriptionLeftColumn = [self createCraneDescriptionLeftColumnString];
+    NSString *craneDescriptionResultsColumn = [self createCraneDescriptionResultsColumnWithInspection:inspection OverallRating:overallRating];
+    NSString *craneDescriptionRightColumn = [self createCraneDescriptionRightColumnWithInspection];
+    NSString *craneDescriptionRightResultsColumn = [self createCraneDescriptionRightResultsColumnWithInspection:inspection];
+    NSString *craneDescription = [self createCraneDescriptionStringWithInspection:inspection];
+    [self updateCraneInspectionDetailsStringsWithConditionList:myConditionList
+                                          PartDeficiencyString:&partDeficiency
+                                                     PartNotes:&partNotes
+                                                     PartTitle:&partTitle
+                                                    PartsArray:myPartsArray];
+    [footerLeft appendString:[NSString stringWithFormat:@"Technician:%@\nDate: %@",inspection.technicianName, inspection.date]];    //Technician Name
+    [footerRight appendString:[NSString stringWithFormat:@"Customer:%@\nDate: %@",inspection.customer.name, inspection.date]];      //Customer name and date
+    [header appendString:[NSString stringWithFormat:@"Silverstate Wire Rope and Rigging\n\n24-Hour Emergency Service\nSales - Service - Repair\nElectrical - Mechanical - Pneumatic\nCal-OSHA Accredited"]];
     
-    NSError *error;
-    
-    //create file manager
     
     NSString *dateNoSlashes = [inspection.date stringByReplacingOccurrencesOfString:@"/" withString:@"-"];
-    NSString* fileName = [NSString stringWithFormat:@"%@ %@ %@.PDF",inspection.customer.name, inspection.crane.hoistSrl, dateNoSlashes];
+    NSString* fileName = [NSString stringWithFormat:@"%@ %@ %@.PDF",inspection.customer.name, inspection.inspectedCrane.hoistSrl, dateNoSlashes];
     
     NSArray *arrayPaths =
     NSSearchPathForDirectoriesInDomains(
@@ -682,16 +590,10 @@
                                         YES);
     NSString *path = [arrayPaths objectAtIndex:0];
     NSString* pdfFileName = [path stringByAppendingPathComponent:fileName];
-    
-    //NSString *documentsDirectory = @"/Users/Developer/Documents";
     NSString *filePath = pdfFileName;
-    //NSString *afilePath = [documentsDirectory stringByAppendingPathComponent:@"jobInfoArray.txt"];
     
-    NSLog(@"string to write:%@", printString);
     
-    [printString writeToFile:filePath atomically:YES encoding:NSUTF8StringEncoding error:&error];
-    
-    [self CreatePDFFile:printString
+    [self CreatePDFFile:customerInfoTitleString
                        :customerInfoResultsColumn
                        :craneDescriptionLeftColumn
                        :craneDescriptionResultsColumn
@@ -706,23 +608,7 @@
                        :footerRight
                        :header
                        :craneDescription];
-    //release memory
-    
-    printString = nil;
-    customerInfoResultsColumn = nil;
-    craneDescriptionLeftColumn = nil;
-    craneDescriptionResultsColumn = nil;
-    craneDescriptionRightColumn = nil;
-    craneDescriptionRightResultsColumn = nil;
-    filePath = nil;
-    partDeficiency = nil;
-    partTitle = nil;
-    partNotes = nil;
-    deficientPartString = nil;
-    footerLeft = nil;
-    footerRight = nil;
-    header = nil;
-    craneDescription = nil;
+
 }
 
 + (void) CreatePDFFile:(NSString *) printString
@@ -787,7 +673,7 @@
 + (UIDocumentInteractionController *) DisplayPDFWithOverallRating : (Inspection *) inspection
 {
     NSString *dateNoSlashes = [inspection.date stringByReplacingOccurrencesOfString:@"/" withString:@"-"];
-    NSString* fileName = [NSString stringWithFormat:@"%@ %@ %@.PDF", inspection.customer.name, inspection.crane.hoistSrl, dateNoSlashes];
+    NSString* fileName = [NSString stringWithFormat:@"%@ %@ %@.PDF", inspection.customer.name, inspection.inspectedCrane.hoistSrl, dateNoSlashes];
     
     NSArray *arrayPaths =
     NSSearchPathForDirectoriesInDomains(
@@ -806,7 +692,7 @@
 
 + (void)CreateCertificate : (Inspection*) inspection  {
     NSString *dateNoSlashes = [inspection.date stringByReplacingOccurrencesOfString:@"/" withString:@"-"];
-    NSString* fileName = [NSString stringWithFormat:@"%@ %@ %@ Certificate.PDF", inspection.customer.name, inspection.crane.hoistSrl, dateNoSlashes];
+    NSString* fileName = [NSString stringWithFormat:@"%@ %@ %@ Certificate.PDF", inspection.customer.name, inspection.inspectedCrane.hoistSrl, dateNoSlashes];
     
     NSArray *arrayPaths =
     NSSearchPathForDirectoriesInDomains(
