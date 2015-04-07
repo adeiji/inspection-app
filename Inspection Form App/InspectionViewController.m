@@ -66,19 +66,13 @@
     if (sender.direction == UISwipeGestureRecognizerDirectionLeft)
     {
         [self nextPressed];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"SwipeDetected"
-                                                            object:self
-                                                          userInfo:@{   @"part": _partsArray[_optionLocation],
-                                                                        @"optionLocation": [NSNumber numberWithInt:_optionLocation] }];
     }
     else
     {
         [self previousPressed];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"SwipeDetected"
-                                                            object:self
-                                                          userInfo:@{ @"part": _partsArray[_optionLocation],
-                                                                      @"optionLocation": [NSNumber numberWithInt:_optionLocation] }];
     }
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"SwipeDetected" object:self userInfo:@{  USER_INFO_SELECTED_INSPECTION_POINT : _partsArray[_optionLocation] }];
 
 }
 
@@ -253,17 +247,6 @@
         // Save everything that has been created
         [((AppDelegate *) [[UIApplication sharedApplication] delegate]) saveContext];
     }
-}
-
-
-- (IBAction)gotoCustomerInfo:(id)sender {
-    NSUInteger selectedRow = [_deficiencyPicker selectedRowInComponent:0];
-    NSString *myDeficientPart = [[_deficiencyPicker delegate] pickerView:_deficiencyPicker titleForRow:selectedRow forComponent:0];
-    
-    [self saveInfo:_txtNotes.text :_deficiencySwitch.on:[_deficiencyPicker selectedRowInComponent:0]:myDeficientPart:_applicableSwitch.on];
-    
-    [[((AppDelegate *) [[UIApplication sharedApplication] delegate]) managedObjectContext] rollback];
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void) switchChanged : (id) sender {
@@ -466,6 +449,9 @@
 - (IBAction)gotoCustomerInformation : (id) sender
 {
     [self.navigationController popViewControllerAnimated:YES];
+    [[((AppDelegate *) [[UIApplication sharedApplication] delegate]) managedObjectContext] rollback];
+    // Notify the app that the user is going back to the customer info page
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_GOTO_CUSTOMER_INFO_PRESSED object:nil];
 }
 
 

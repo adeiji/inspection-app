@@ -61,6 +61,11 @@ static NSString *const OPTIONS = @"options";
 - (void) setObservers {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changePart:) name:@"SwipeDetected" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayParts:) name:kInspectionViewControllerPushed object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gotoRootViewController) name:NOTIFICATION_GOTO_CUSTOMER_INFO_PRESSED object:nil];
+}
+
+- (void) gotoRootViewController {
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -88,14 +93,10 @@ static NSString *const OPTIONS = @"options";
 
 - (void) changePart : (NSNotification *) notification
 {
-    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
-    
     if (level == OPTIONS)
     {
-        //[self.navigationController popViewControllerAnimated:YES];
-        _tableData = [[NSMutableArray alloc] init];
-        _tableData = [delegate.optionsDictionary objectForKey: notification.userInfo[@"part"]];
-        
+        InspectionPoint *inspectionPoint = notification.userInfo[USER_INFO_SELECTED_INSPECTION_POINT];
+        _tableData = [inspectionPoint.inspectionOptions allObjects];
         [self.tableView reloadData];
     }
 }

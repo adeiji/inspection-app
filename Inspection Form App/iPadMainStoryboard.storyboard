@@ -787,7 +787,7 @@
             </objects>
             <point key="canvasLocation" x="2689" y="739"/>
         </scene>
-        <!--Root View Controller-->
+        <!--Hoist Serial Numbers-->
         <scene sceneID="LMG-Co-kAT">
             <objects>
                 <tableViewController clearsSelectionOnViewWillAppear="NO" id="idw-ZA-hiy" customClass="MasterViewController" sceneMemberID="viewController">
@@ -810,7 +810,7 @@
                             <outlet property="delegate" destination="idw-ZA-hiy" id="fky-Zv-g2J"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="xWu-KR-Ibj"/>
+                    <navigationItem key="navigationItem" title="Hoist Serial Numbers" id="xWu-KR-Ibj"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Wv-Nw-JfO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

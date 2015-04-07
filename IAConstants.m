@@ -26,4 +26,6 @@ NSString *const kCoreDataClassCustomer = @"Customer";
 // Notification Center
 NSString *const NOTIFICATION_CRANE_DETAILS_FINISHED_SAVING = @"com.inspection.app.crane.details.finished.downloading";
 NSString *const NOTIFICATION_HOISTSRL_SELECTED = @"com.inspection.app.hoistsrl.selected";
+NSString *const NOTIFICATION_GOTO_CUSTOMER_INFO_PRESSED = @"com.inspection.app.goto.customer.info.pressed";
 NSString *const USER_INFO_SELECTED_CRANE_INSPECTION_POINTS = @"com.inspection.app.selected.crane.inspection.points";
+NSString *const USER_INFO_SELECTED_INSPECTION_POINT = @"com.inspection.app.selected.inspection.point";
