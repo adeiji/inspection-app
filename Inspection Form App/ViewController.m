@@ -569,18 +569,6 @@
 }
 
 
-
-- (void) didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
-{
-    [self changeOrientation];
-}
-
--(void) changeOrientation
-{
-    UIInterfaceOrientation orientation = self.interfaceOrientation;
-    currentOrientation = orientation;
-}
-
 - (BOOL) shouldAutorotate
 {
     return YES;
