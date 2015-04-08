@@ -179,18 +179,10 @@
 //so that it is known where the screen needs to scroll to, to show the text box when it is being edited also so that we can set the text to all capitalized.
 - (IBAction) textFieldDidBeginEditing:(UITextField *)textField
 {
-    if (textField.tag == 12)
-    {
-        _craneDescriptionPickerView.hidden = FALSE;
-    }
     textField.text = [textField.text capitalizedString];
 }
 //memmory management
 - (IBAction) textFieldDidEndEditing:(UITextField *)textField {
-    if (textField.tag == 12)
-    {
-        _craneDescriptionPickerView.hidden = TRUE;
-    }
     activeField = nil;
 }
 

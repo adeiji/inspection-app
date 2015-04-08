@@ -155,6 +155,7 @@
 {
     NSEntityDescription *entity = [NSEntityDescription entityForName:kCoreDataClassInspectedCrane inManagedObjectContext:_context];
 
+    // If this crane already exist than we want to use the previous existing one and not add another to the DB
     InspectedCrane *crane = [self getCraneFromDatabaseWithHoistSrl:hoistSrl];
     
     if (!crane)
