@@ -47,13 +47,11 @@
     changeLayoutNeeded = NO;
     iosVersion = [[UIDevice currentDevice] systemVersion];
     [self addObservers];
-
-    
     _craneDescriptionsArray = [[IACraneInspectionDetailsManager sharedManager] cranes];
     owner = @"";
     
     [self LoadOwner];
-    currentOrientation = self.interfaceOrientation;
+    
     if ([owner isEqual:@""])
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Enter Name Alert" message:@"Enter your name" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
