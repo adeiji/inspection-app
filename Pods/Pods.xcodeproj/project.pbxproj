@@ -36,7 +36,6 @@
 		979EDE8B27996F354DE820AF /* BFAppLinkTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = 31F7A8ABBA4232742C1998FB /* BFAppLinkTarget.m */; settings = {COMPILER_FLAGS = "-fobjc-arc -DOS_OBJECT_USE_OBJC=0"; }; };
 		982BAB98BE7F5B6A2E34F1C9 /* Pods-Inspection Form App-ParseCrashReporting-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C54D79A6B1071B96A8EA65B /* Pods-Inspection Form App-ParseCrashReporting-dummy.m */; };
 		986099433E6D5C8D1E9E50C0 /* Pods-Inspection Form App-Bolts-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 94F2AD636503011AF8073C8F /* Pods-Inspection Form App-Bolts-dummy.m */; };
-		991A88DD01B06AAC964A4C40 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D43A6B6E2EB6CA8257110BF6 /* Foundation.framework */; };
 		9D0EA31BFDA6921B1E1B8556 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96F15ADF71A8E2975CE160B3 /* MobileCoreServices.framework */; };
 		A4932715BDF986ADAEA86BB9 /* Bolts.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F2C6634F3EC5BF77B842C6B /* Bolts.h */; };
 		B35D236F5FA6BF93228508B9 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8C04A799B2109A5D5132D4F /* AudioToolbox.framework */; };
@@ -209,7 +208,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				991A88DD01B06AAC964A4C40 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -805,7 +803,7 @@
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
@@ -853,7 +851,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/Pods-Inspection Form App-Bolts/Pods-Inspection Form App-Bolts-prefix.pch";
 				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				OTHER_CFLAGS = (
 					"-DNS_BLOCK_ASSERTIONS=1",
 					"$(inherited)",

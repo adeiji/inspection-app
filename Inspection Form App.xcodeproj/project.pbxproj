@@ -880,7 +880,7 @@
 				GCC_PREFIX_HEADER = "Inspection Form App/Inspection Form App-Prefix.pch";
 				"HEADER_SEARCH_PATHS[sdk=*]" = "\"${SRCROOT}/relative/path/to/RESTClient/Source\"";
 				INFOPLIST_FILE = "Inspection Form App/Inspection Form App-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/T1Autograph\"",
@@ -892,6 +892,7 @@
 					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/SDKs/MacOSX10.7.sdk/usr/lib\"",
 					"\"$(SRCROOT)\"",
 				);
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 2;
@@ -920,11 +921,12 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Inspection Form App/Inspection Form App-Prefix.pch";
 				INFOPLIST_FILE = "Inspection Form App/Inspection Form App-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/T1Autograph\"",
 				);
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 2;

@@ -3,6 +3,8 @@
 
 source 'https://github.com/CocoaPods/Specs.git'
 
+platform:ios, :deployment_target => '8.0'
+
 target 'Inspection Form App' do
 
 pod 'Parse', '~> 1.7'
