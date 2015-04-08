@@ -715,7 +715,7 @@
                             <navigationBar clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="blackTranslucent" id="IgU-F9-DOD">
                                 <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="barTintColor" red="0.25882352939999997" green="0.73725490199999999" blue="0.38431372549999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="barTintColor" red="0.0" green="0.67450980390000004" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <items>
                                     <navigationItem title="Inspection Points" id="9G3-Eu-saT">
                                         <barButtonItem key="leftBarButtonItem" title="Customer Information" id="c3C-xH-oi7">
@@ -745,7 +745,7 @@
                                     </barButtonItem>
                                 </items>
                                 <color key="tintColor" red="0.0" green="0.67450980390000004" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="barTintColor" red="0.25882352939999997" green="0.73725490199999999" blue="0.38431372549999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="barTintColor" red="0.0" green="0.67450980390000004" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
                             </toolbar>
                             <view contentMode="scaleToFill" id="anc-cl-5wC" customClass="GradientView">
                                 <rect key="frame" x="20" y="321" width="728" height="50"/>

@@ -154,21 +154,47 @@
                         HoistMdl : (NSString*) hoistMdl
 {
     NSEntityDescription *entity = [NSEntityDescription entityForName:kCoreDataClassInspectedCrane inManagedObjectContext:_context];
-    
-    InspectedCrane *crane = [[InspectedCrane alloc] initWithEntity:entity insertIntoManagedObjectContext:_context];
 
-    crane.hoistSrl          = hoistSrl;
-    crane.type              = craneType;
-    crane.equipmentNumber   = equipmentNumber;
-    crane.mfg               = craneMfg;
-    crane.hoistMfg          = hoistMfg;
-    crane.craneSrl          = craneSrl;
-    crane.capacity          = capacity;
-    crane.hoistMdl          = hoistMdl;
+    InspectedCrane *crane = [self getCraneFromDatabaseWithHoistSrl:hoistSrl];
     
-    NSLog(@"Crane object created - com.inspectionapp.coredata");
+    if (!crane)
+    {
+        crane = [[InspectedCrane alloc] initWithEntity:entity insertIntoManagedObjectContext:_context];
+
+        crane.hoistSrl          = hoistSrl;
+        crane.type              = craneType;
+        crane.equipmentNumber   = equipmentNumber;
+        crane.mfg               = craneMfg;
+        crane.hoistMfg          = hoistMfg;
+        crane.craneSrl          = craneSrl;
+        crane.capacity          = capacity;
+        crane.hoistMdl          = hoistMdl;
+        
+        NSLog(@"Crane object created - com.inspectionapp.coredata");
+        
+        return crane;
+    }
 
     return crane;
+}
+
+- (InspectedCrane *) getCraneFromDatabaseWithHoistSrl : (NSString *) hoistSrl {
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:kCoreDataClassInspectedCrane inManagedObjectContext:_context];
+    [fetchRequest setEntity:entity];
+    // Specify criteria for filtering which objects to fetch
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"hoistSrl == %@", hoistSrl];
+    [fetchRequest setPredicate:predicate];
+    // Specify how the fetched objects should be sorted
+    
+    NSError *error = nil;
+    NSArray *fetchedObjects = [_context executeFetchRequest:fetchRequest error:&error];
+    
+    if ([fetchedObjects count] == 0) {
+        return nil;
+    }
+    
+    return fetchedObjects[0];
 }
 /*
  
