@@ -59,6 +59,7 @@
     [self fillCriteriaObjects];
     [self getPreviouslyFinishedCranes];
 
+
     
     return YES;
 }

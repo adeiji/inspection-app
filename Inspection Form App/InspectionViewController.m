@@ -53,12 +53,17 @@
     [self.view addGestureRecognizer:gestureRecognizerRight];
     [self.view addGestureRecognizer:gestureRecognizerLeft];
     
-    [self initiateParts];
+
     inspection = [InspectionManager sharedManager].inspection;
     
     //[self.view setTranslatesAutoresizingMaskIntoConstraints:NO];
 }
 
+
+- (void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self initiateParts];
+}
 
 //Checks to see which way the user swiped
 - (void) handleSwipe : (UISwipeGestureRecognizer*) sender

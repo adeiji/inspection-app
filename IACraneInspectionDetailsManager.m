@@ -30,12 +30,35 @@
     return self;
 }
 
+- (UIView *) showDownloadProgressBar {
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 64, [[UIScreen mainScreen] bounds].size.width, 25)];
+    [view setBackgroundColor:[UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:.8f]];
+    
+    UIProgressView *progressView = [[UIProgressView alloc] initWithFrame:CGRectMake(20, view.frame.size.height / 2.0f, view.frame.size.width - 40, 10)];
+    [progressView setProgress:0.0f];
+    
+    [view addSubview:progressView];
+    [[view layer] setZPosition:1.0f];
+    [[[[UIApplication sharedApplication] delegate] window] addSubview:view];
+    
+    return view;
+}
+
 /*
  
  Store all the cranes, and their inspection details to the database
  
  */
 - (void) saveInspectionDetailsWithCranes : (NSArray *) cranes {
+    UIView *progressContainerView = [self showDownloadProgressBar];
+    UIProgressView *progressIndicatorView;
+    for (UIView *subview in [progressContainerView subviews]) {
+        if ([subview isKindOfClass:[UIProgressView class]])
+        {
+            progressIndicatorView = (UIProgressView *) subview;
+        }
+    }
+    
     [self resetInspectionDetailsDatabase];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -73,19 +96,28 @@
                     inspectionOptionObject.name = [optionParseObject objectForKey:kObjectName];
                     [options addObject:inspectionOptionObject];
                     [inspectionOptionObject setInspectionPoint:inspectionPointObject];
+
                 }
                 [inspectionPointObject setInspectionOptions:[NSSet setWithArray:options]];
                 [inspectionPointObject setInspectionCrane:craneObject];
+                double progressToChange = (1.0f/cranes.count);
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    progressIndicatorView.progress += progressToChange / [crane[kInspectionPoints] count];
+                });
             }
             [craneObject setInspectionPoints:[NSSet setWithArray:inspectionPoints]];
             
             [cranesArray addObject:craneObject];
+
         }
         
         [((AppDelegate *) [[UIApplication sharedApplication] delegate]) saveContext];
         [self loadAllInspectionDetails];
         [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CRANE_DETAILS_FINISHED_SAVING object:nil];
         NSLog(@"%@ sent", NOTIFICATION_CRANE_DETAILS_FINISHED_SAVING);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [progressContainerView removeFromSuperview];
+        });
     });
 }
 

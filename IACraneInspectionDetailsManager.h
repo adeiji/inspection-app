@@ -63,4 +63,6 @@
  
  */
 - (NSArray *) getInspectionCraneOfType : (NSString *) craneType;
+
+- (UIView *) showDownloadProgressBar;
 @end

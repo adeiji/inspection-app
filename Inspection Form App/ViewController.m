@@ -479,8 +479,17 @@
 - (IBAction)partsListButtonClicked:(id)sender{
     _optionLocation = 0;
     NSInteger selectedRow = [_craneDescriptionPickerView selectedRowInComponent:0];
-    InspectionCrane *selectedCrane = [_craneDescriptionsArray objectAtIndex:selectedRow];
-    [self storeInformationAndDisplayInspectionViewWithCrane:selectedCrane SelectedRow:selectedRow];
+    NSNumber *selectedRowObject = [NSNumber numberWithInteger:selectedRow];
+    
+    if (selectedRowObject)
+    {
+        InspectionCrane *selectedCrane = [_craneDescriptionsArray objectAtIndex:selectedRow];
+        [self storeInformationAndDisplayInspectionViewWithCrane:selectedCrane SelectedRow:selectedRow];
+    }
+    else {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"No Crane" message:@"Sorry, but there's no cranes to select.  Click Sync Crane Details"  delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+        [alertView show];
+    }
 }
 
 - (void) storeInformationAndDisplayInspectionViewWithCrane : (InspectionCrane *) selectedCrane
@@ -496,6 +505,7 @@
     [[InspectionManager sharedManager] setInspection:inspection];
     [[IACraneInspectionDetailsManager sharedManager] setCrane:selectedCrane];
     
+    _inspectionViewController.optionLocation = 0;
     [self.navigationController pushViewController:_inspectionViewController animated:YES];
     
     /* Send out a notification that the InspectionViewController is pushed onto the stack.
@@ -517,9 +527,17 @@
         _optionLocation = 0;
         // Get the selected crane type fromt he crane picker.
         NSInteger selectedRow = [_craneDescriptionPickerView selectedRowInComponent:0];
-        InspectionCrane *selectedCrane = [_craneDescriptionsArray objectAtIndex:selectedRow];
-        [self storeInformationAndDisplayInspectionViewWithCrane:selectedCrane SelectedRow:selectedRow];
-        [((AppDelegate *) [[UIApplication sharedApplication] delegate]) saveContext];
+        NSNumber *selectedRowObject = [NSNumber numberWithInteger:selectedRow];
+        if (selectedRowObject)
+        {
+            InspectionCrane *selectedCrane = [_craneDescriptionsArray objectAtIndex:selectedRow];
+            [self storeInformationAndDisplayInspectionViewWithCrane:selectedCrane SelectedRow:selectedRow];
+            [((AppDelegate *) [[UIApplication sharedApplication] delegate]) saveContext];
+        }
+        else {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"No Crane" message:@"Sorry, but there's no cranes to select.  Click Sync Crane Details"  delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+            [alertView show];
+        }
     }
     else
     {
