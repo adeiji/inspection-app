@@ -19,4 +19,9 @@
 @property (strong, nonatomic) NSString *date;
 @property (strong, nonatomic) NSString *technicianName;
 
+@property (strong, nonatomic) NSString *loadRatings;
+@property (strong, nonatomic) NSString *testLoad;
+@property (strong, nonatomic) NSString *remarksLimitations;
+@property (strong, nonatomic) NSString *proofLoad;
+
 @end

@@ -297,9 +297,9 @@
         [_txtCraneSrl.text isEqualToString:@""] ||
         [_txtCap.text isEqualToString:@""])
     {
-        if (showResults)
-            
+
         return EMPTY_FIELD;
+     
     }
     else if ([_txtHoistSrl.text rangeOfString:@"\""].location != NSNotFound ||
              [_txtTechnicianName.text rangeOfString:@"\""].location != NSNotFound ||
@@ -480,7 +480,10 @@
     _optionLocation = 0;
     NSInteger selectedRow = [_craneDescriptionPickerView selectedRowInComponent:0];
     NSNumber *selectedRowObject = [NSNumber numberWithInteger:selectedRow];
-    
+    if ([self validateSubmission:NO] == PASSED)
+    {
+        _inspectionViewController.validated = YES;
+    }
     if (selectedRowObject)
     {
         InspectionCrane *selectedCrane = [_craneDescriptionsArray objectAtIndex:selectedRow];
@@ -533,6 +536,7 @@
             InspectionCrane *selectedCrane = [_craneDescriptionsArray objectAtIndex:selectedRow];
             [self storeInformationAndDisplayInspectionViewWithCrane:selectedCrane SelectedRow:selectedRow];
             [((AppDelegate *) [[UIApplication sharedApplication] delegate]) saveContext];
+            _inspectionViewController.validated = YES;
         }
         else {
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"No Crane" message:@"Sorry, but there's no cranes to select.  Click Sync Crane Details"  delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
@@ -580,7 +584,6 @@
     _inspectionViewController.craneType = inspection.inspectedCrane.type;
     _inspectionViewController.partsArray = _myPartsArray;
     
-    _inspectionViewController.validated = YES;
     [[InspectionManager sharedManager] setInspection:inspection];
     
     return inspection;

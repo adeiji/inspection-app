@@ -24,11 +24,11 @@
 #define HOIST_MANUFACTURER @"Hoist Manufacturer"
 #define MODEL @"Model"
 #define OWNER_ID @"Owner's Identification (if any)"
-#define TEST_LOADS_APPLIED @"Test loads applied (only if examination conducted)"
-#define DESCRIPTION_OF_PROOF_LOAD @"Description of proof load:"
-#define BASIS_FOR_ASSIGNED_LOAD_RATINGS @"Basis for assigned load ratings:"
-#define REMARKS_LIMITATIONS_IMPOSED @"Remarks and/or limitations imposed:"
-#define FOOTER @"I certify that on the 18th day of April 2012 the above described device was tested X examined X by the undersigned; that said test and/or examination met with the requirements of the Division of Occupational Safety and Health Administration and ANSI B30 series orANSI/SIA A92.2 as applicable."
+#define TEST_LOADS_APPLIED @"Test loads applied (only if examination conducted)\t\t%@"
+#define DESCRIPTION_OF_PROOF_LOAD @"Description of proof load:\t%@"
+#define BASIS_FOR_ASSIGNED_LOAD_RATINGS @"Basis for assigned load ratings:\t%@"
+#define REMARKS_LIMITATIONS_IMPOSED @"Remarks and/or limitations imposed:\t%@"
+#define FOOTER @"I certify that on the %@th day of %@ %@ the above described device was tested X examined X by the undersigned; that said test and/or examination met with the requirements of the Division of Occupational Safety and Health Administration and ANSI B30 series orANSI/SIA A92.2 as applicable."
 #define AUTHORIZED_CERTIFICATION_AGENT_ADDRESS @"Name and address of authorized certificating agent:"
 #define SSWR_ADDRESS @"SILVER STATE WIRE ROPE AND RIGGING\n8740 S. JONES BLVD.\nLAS VEGAS, NV 89139"
 #define EXPIRATION_DATE @"Expiration Date:\t%@"
@@ -209,16 +209,16 @@
     [self MoveToPoint:CGPointMake(230, 355) AndDrawString:OWNER_ID InRect:CGRectMake(50, 340, 500, 20) WithContext:pdfContext AddToPoint:CGPointMake(550, 355) FontSize:12.0f ParagraphyStyle:paragraphStyle];
     
     // Test Loads String
-    [self MoveToPoint:CGPointMake(340, 385) AndDrawString:TEST_LOADS_APPLIED InRect:CGRectMake(50, 370, 500, 20) WithContext:pdfContext AddToPoint:CGPointMake(550, 385) FontSize:12.0f ParagraphyStyle:paragraphStyle];
+    [self MoveToPoint:CGPointMake(340, 385) AndDrawString:[NSString stringWithFormat:TEST_LOADS_APPLIED, inspection.testLoad] InRect:CGRectMake(50, 370, 500, 20) WithContext:pdfContext AddToPoint:CGPointMake(550, 385) FontSize:12.0f ParagraphyStyle:paragraphStyle];
     
     // Proof Load String
-    [self MoveToPoint:CGPointMake(210, 415) AndDrawString:DESCRIPTION_OF_PROOF_LOAD InRect:CGRectMake(50, 400, 500, 20) WithContext:pdfContext AddToPoint:CGPointMake(550, 415) FontSize:12.0f ParagraphyStyle:paragraphStyle];
+    [self MoveToPoint:CGPointMake(210, 415) AndDrawString:[NSString stringWithFormat:DESCRIPTION_OF_PROOF_LOAD, inspection.proofLoad] InRect:CGRectMake(50, 400, 500, 20) WithContext:pdfContext AddToPoint:CGPointMake(550, 415) FontSize:12.0f ParagraphyStyle:paragraphStyle];
     
     //  Load RatingsString
-    [self MoveToPoint:CGPointMake(240, 445) AndDrawString:BASIS_FOR_ASSIGNED_LOAD_RATINGS InRect:CGRectMake(50, 430, 500, 20) WithContext:pdfContext AddToPoint:CGPointMake(550, 445) FontSize:12.0f ParagraphyStyle:paragraphStyle];
+    [self MoveToPoint:CGPointMake(240, 445) AndDrawString:[NSString stringWithFormat:BASIS_FOR_ASSIGNED_LOAD_RATINGS, inspection.loadRatings] InRect:CGRectMake(50, 430, 500, 20) WithContext:pdfContext AddToPoint:CGPointMake(550, 445) FontSize:12.0f ParagraphyStyle:paragraphStyle];
     
     //  Remarks Limitations String
-    [self MoveToPoint:CGPointMake(270, 475) AndDrawString:REMARKS_LIMITATIONS_IMPOSED InRect:CGRectMake(50, 460, 500, 20) WithContext:pdfContext AddToPoint:CGPointMake(550, 475) FontSize:12.0f ParagraphyStyle:paragraphStyle];
+    [self MoveToPoint:CGPointMake(270, 475) AndDrawString:[NSString stringWithFormat:REMARKS_LIMITATIONS_IMPOSED, inspection.remarksLimitations] InRect:CGRectMake(50, 460, 500, 20) WithContext:pdfContext AddToPoint:CGPointMake(550, 475) FontSize:12.0f ParagraphyStyle:paragraphStyle];
     
     // Footer
     
@@ -227,7 +227,20 @@
     footerParagraphStyle.alignment = NSTextAlignmentCenter;
     NSDictionary *footerAttributesDictionary = @{ NSFontAttributeName : [UIFont systemFontOfSize:12.0f],
                                                   NSParagraphStyleAttributeName : footerParagraphStyle };
-    [FOOTER drawInRect:CGRectMake(50, 495, 500, 120) withAttributes:footerAttributesDictionary];
+    NSDateFormatter *dff = [[NSDateFormatter alloc] init];
+    [dff setDateStyle:NSDateFormatterLongStyle];
+    NSString *now = [dff stringFromDate:[NSDate date]];
+    
+    NSRange indexOfSpace = [now rangeOfString:@" "];
+    NSString *month = [now substringToIndex:indexOfSpace.location];
+    NSString *daySubstring = [now substringFromIndex:indexOfSpace.location + 1];
+    NSRange indexOfComma = [daySubstring rangeOfString:@","];
+    NSString *day = [daySubstring substringToIndex:indexOfComma.location];
+    indexOfSpace = [daySubstring rangeOfString:@" "];
+    NSString *year = [daySubstring substringFromIndex:indexOfSpace.location];
+    
+    NSString *footer = [NSString stringWithFormat:FOOTER, day, month, year];
+    [footer drawInRect:CGRectMake(50, 495, 500, 120) withAttributes:footerAttributesDictionary];
     
     //LINE 15
     [AUTHORIZED_CERTIFICATION_AGENT_ADDRESS drawInRect:CGRectMake(50, 565, 500, 120) withAttributes:@{ NSFontAttributeName : [UIFont systemFontOfSize:10.0f] }];

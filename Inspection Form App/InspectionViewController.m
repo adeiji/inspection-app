@@ -361,13 +361,14 @@
 - (void) getFinalNecessaryAttributesWithTextField : (UITextField *) textField {
     if (proofLoad == YES)
     {
-        testLoad = textField.text;
+//        testLoad = textField.text;
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Proof Load Description" message:@"Description of Proof Load" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
         [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
         [alert show];
         loadRatings = YES;
         proofLoad = NO;
         testLoad = textField.text;
+        inspection.testLoad = textField.text;
     }
     else if (loadRatings == YES)
     {
@@ -377,6 +378,8 @@
         [alert show];
         remarksLimitations = YES;
         loadRatings = NO;
+        inspection.proofLoad = textField.text;
+
     }
     else if (remarksLimitations == YES)
     {
@@ -386,11 +389,12 @@
         [alert show];
         remarksLimitations = NO;
         finished = YES;
-        loadRatings = textField.text;
+        inspection.loadRatings = textField.text;
     }
     else if (finished == YES)
     {
         remarksLimitations = textField.text;
+        inspection.remarksLimitations = textField.text;
         finished = NO;
         [PDFGenerator writeReport:inspection.itemList Inspection:inspection OverallRating:overallRating PartsArray:_partsArray];
         UIDocumentInteractionController *pdfViewController = [PDFGenerator DisplayPDFWithOverallRating:inspection];

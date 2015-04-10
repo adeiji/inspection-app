@@ -14,4 +14,16 @@
 @synthesize inspectedCrane;
 @synthesize itemList;
 
+- (id) init {
+    if (self = [super init])
+    {
+        _loadRatings = @"";
+        _testLoad = @"";
+        _remarksLimitations = @"";
+        _proofLoad = @"";
+    }
+    
+    return self;
+}
+
 @end
