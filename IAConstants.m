@@ -12,7 +12,8 @@ NSString *const kParseClassCrane = @"Crane";
 NSString *const kObjectName = @"name";
 NSString *const kInspectionPoints = @"inspectionPoints";
 NSString *const kOptions = @"options";
-
+NSString *const kPrompts = @"prompts";
+NSString *const kRequiresDeficiency = @"requiresDeficiency";
 
 // Core Data
 NSString *const kCoreDataClassCrane = @"InspectionCrane";
@@ -23,6 +24,9 @@ NSString *const kCoreDataClassInspectedCrane = @"InspectedCrane";
 NSString *const kCoreDataClassAttributeHoistSrl = @"hoistSrl";
 NSString *const kSelectedInspectedCrane = @"selectedInspectedCrane";
 NSString *const kCoreDataClassCustomer = @"Customer";
+NSString *const kCoreDataClassPrompt = @"Prompt";
+
+
 // Notification Center
 NSString *const NOTIFICATION_CRANE_DETAILS_FINISHED_SAVING = @"com.inspection.app.crane.details.finished.downloading";
 NSString *const NOTIFICATION_HOISTSRL_SELECTED = @"com.inspection.app.hoistsrl.selected";

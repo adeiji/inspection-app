@@ -12,6 +12,7 @@
 #import "InspectionOption.h"
 #import "InspectionPoint.h"
 #import <Parse/Parse.h>
+#import "Prompt.h"
 
 @interface IACraneInspectionDetailsManager : NSObject
 
@@ -65,4 +66,5 @@
 - (NSArray *) getInspectionCraneOfType : (NSString *) craneType;
 
 - (UIView *) showDownloadProgressBar;
+- (NSArray *) getPromptsFromInspectionPoint : (InspectionPoint *) point;
 @end

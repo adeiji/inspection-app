@@ -62,7 +62,9 @@
     [self resetInspectionDetailsDatabase];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSManagedObjectContext *context =  ((AppDelegate *)[ [UIApplication sharedApplication] delegate]).managedObjectContext;
+//        NSManagedObjectContext *context =  ((AppDelegate *)[ [UIApplication sharedApplication] delegate]).managedObjectContext;
+        NSManagedObjectContext *context = [[NSManagedObjectContext alloc] init];
+        [context setPersistentStoreCoordinator:(((AppDelegate *)[ [UIApplication sharedApplication] delegate]).managedObjectContext).persistentStoreCoordinator];
         NSMutableArray *cranesArray = [NSMutableArray new];
         NSEntityDescription *entity = [NSEntityDescription entityForName:kCoreDataClassCrane inManagedObjectContext:context];
         NSError *error;
@@ -96,8 +98,33 @@
                     inspectionOptionObject.name = [optionParseObject objectForKey:kObjectName];
                     [options addObject:inspectionOptionObject];
                     [inspectionOptionObject setInspectionPoint:inspectionPointObject];
-
                 }
+                
+                NSMutableArray *prompts = [NSMutableArray new];
+                
+                for (id promptObject in inspectionPoint[kPrompts])
+                {
+                    NSEntityDescription *entity = [NSEntityDescription entityForName:kCoreDataClassPrompt inManagedObjectContext:context];
+                    Prompt *prompt = [[Prompt alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
+                    prompt.title = promptObject[kObjectName];
+                    prompt.inspectionPoint = inspectionPointObject;
+                    
+                    if (promptObject[kRequiresDeficiency])
+                    {
+                        prompt.requiresDeficiency = [NSNumber numberWithBool:YES];
+                    }
+                    else {
+                        prompt.requiresDeficiency = [NSNumber numberWithBool:NO];
+                    }
+                    
+                    [prompts addObject:prompt];
+                }
+                
+                if ([prompts count] > 0)
+                {
+                    [inspectionPointObject setPrompts:[NSSet setWithArray:prompts]];
+                }
+                
                 [inspectionPointObject setInspectionOptions:[NSSet setWithArray:options]];
                 [inspectionPointObject setInspectionCrane:craneObject];
                 double progressToChange = (1.0f/cranes.count);
@@ -111,7 +138,12 @@
 
         }
         
-        [((AppDelegate *) [[UIApplication sharedApplication] delegate]) saveContext];
+//        [((AppDelegate *) [[UIApplication sharedApplication] delegate]) saveContext];
+
+        if ([context save:&error])
+        {
+            
+        }
         [self loadAllInspectionDetails];
         [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CRANE_DETAILS_FINISHED_SAVING object:nil];
         NSLog(@"%@ sent", NOTIFICATION_CRANE_DETAILS_FINISHED_SAVING);
@@ -266,6 +298,22 @@
     NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
     if (fetchedObjects == nil) {
         
+    }
+    
+    return fetchedObjects;
+}
+
+- (NSArray *) getPromptsFromInspectionPoint:(InspectionPoint *)point {
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:kCoreDataClassPrompt inManagedObjectContext:_context];
+    [fetchRequest setEntity:entity];
+    // Specify criteria for filtering which objects to fetch
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"inspectionPoint == %@", point];
+    [fetchRequest setPredicate:predicate];
+    NSError *error = nil;
+    NSArray *fetchedObjects = [_context executeFetchRequest:fetchRequest error:&error];
+    if (fetchedObjects == nil) {
+
     }
     
     return fetchedObjects;

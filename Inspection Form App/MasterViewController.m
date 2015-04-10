@@ -196,7 +196,6 @@ static NSString *const OPTIONS = @"options";
     [self.navigationController pushViewController:mvc animated:YES];
     if (__delegate)
     {
-        
         mainPageViewController.inspectionViewController.craneType = inspectionPoint.inspectionCrane.name;
         mainPageViewController.inspectionViewController.optionLocation = indexPath.row;
         [__delegate selectedPart:inspectionPoint];

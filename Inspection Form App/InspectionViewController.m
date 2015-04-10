@@ -114,6 +114,10 @@
         pageSubmitAlertView = NO;
     }
     
+    if ([point.prompts count] > 0) {
+        [[IACraneInspectionDetailsManager sharedManager] getPromptsFromInspectionPoint:point];
+    }
+    
     [self setDeficiencyViews];
 }
 

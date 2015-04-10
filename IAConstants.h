@@ -20,6 +20,9 @@ FOUNDATION_EXPORT NSString *const kCoreDataClassInspectedCrane;
 FOUNDATION_EXPORT NSString *const kCoreDataClassAttributeHoistSrl;
 FOUNDATION_EXPORT NSString *const kSelectedInspectedCrane;
 FOUNDATION_EXPORT NSString *const kCoreDataClassCustomer;
+FOUNDATION_EXPORT NSString *const kPrompts;
+FOUNDATION_EXPORT NSString *const kCoreDataClassPrompt;
+FOUNDATION_EXPORT NSString *const kRequiresDeficiency;
 
 // Notification Center
 FOUNDATION_EXPORT NSString *const NOTIFICATION_CRANE_DETAILS_FINISHED_SAVING;
