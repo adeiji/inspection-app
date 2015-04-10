@@ -1,0 +1,1 @@
+PODS_INSPECTION_FORM_APP_MASONRY_OTHER_LDFLAGS = -framework "Foundation" -framework "UIKit"

@@ -484,7 +484,7 @@
     {
         _inspectionViewController.validated = YES;
     }
-    if (selectedRowObject)
+    if ([_craneDescriptionsArray count] > 0)
     {
         InspectionCrane *selectedCrane = [_craneDescriptionsArray objectAtIndex:selectedRow];
         [self storeInformationAndDisplayInspectionViewWithCrane:selectedCrane SelectedRow:selectedRow];

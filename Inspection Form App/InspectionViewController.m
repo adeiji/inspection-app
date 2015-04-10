@@ -123,37 +123,37 @@
     [[promptView layer] setBorderWidth:2.0f];
     [[promptView layer] setBorderColor:[UIColor colorWithRed:0.0f green:172.0f/255.0f blue:238.0f/255.0f alpha:1.0].CGColor];
     promptView.prompts = prompts;
-    
-    UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
-
-    if (orientation == UIInterfaceOrientationLandscapeLeft || orientation == UIInterfaceOrientationLandscapeRight)
-    {
-        CGPoint center = CGPointMake(self.view.center.x + 325, self.view.center.y - 100);
-        [promptView setCenter:center];
-    }
-    else {
-        CGPoint center = CGPointMake(self.view.center.x, self.view.center.y-100);
-        [promptView setCenter:center];
-    }
-    
-    
+    [[NSNotificationCenter defaultCenter] postNotificationName:UI_PROMPT_SHOWN object:nil];
     [self.view setUserInteractionEnabled:NO];
     [[[[UIApplication sharedApplication] delegate] window] addSubview:promptView];
+    [promptView mas_makeConstraints:^(MASConstraintMaker *make) {
+        UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
+        if (orientation == UIInterfaceOrientationLandscapeRight || orientation == UIInterfaceOrientationLandscapeLeft)
+        {
+            make.centerX.equalTo([[[UIApplication sharedApplication] delegate] window]).with.offset(75);
+            make.centerY.equalTo([[[UIApplication sharedApplication] delegate] window]).with.offset(-120);
+        }
+        else {
+            make.center.equalTo([[[UIApplication sharedApplication] delegate] window]);
+        }
+        make.width.equalTo(@385);
+        make.height.equalTo(@249);
+    }];
 }
 - (IBAction)promptOkPressed:(id)sender {
     _txtNotes.text = [NSString stringWithFormat:@"%@ %@ - %@\n", _txtNotes.text, promptView.lblPromptText.text ,promptView.txtPromptResult.text];
-    [promptView removeFromSuperview];
     
     if (promptView.promptLocation < [promptView.prompts count] - 1) {
         promptView.promptLocation ++;
         Prompt *prompt = promptView.prompts[promptView.promptLocation];
         promptView.lblPromptText.text = prompt.title;
         [self.view setUserInteractionEnabled:NO];
-        [[[[UIApplication sharedApplication] delegate] window] addSubview:promptView];
     }
     else {
+        [promptView removeFromSuperview];
         promptView = nil;
         [self.view setUserInteractionEnabled:YES];
+        [[NSNotificationCenter defaultCenter] postNotificationName:UI_PROMPT_HIDDEN object:nil];
     }
 }
 
@@ -161,6 +161,7 @@
     [promptView removeFromSuperview];
     promptView = nil;
     [self.view setUserInteractionEnabled:YES];
+    [[NSNotificationCenter defaultCenter] postNotificationName:UI_PROMPT_HIDDEN object:nil];
 }
 
 - (void) setDeficiencyViews {

@@ -12,6 +12,7 @@
 #import "PartSelectionDelegate.h"
 #import "InspectionBussiness.h"
 #import "PromptView.h"
+#import <Masonry/Masonry.h>
 
 @interface InspectionViewController : UIViewController <UIPickerViewDelegate, UIPickerViewDataSource, PartSelectionDelegate, UIDocumentInteractionControllerDelegate>
 {

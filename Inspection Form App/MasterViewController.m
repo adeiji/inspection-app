@@ -62,6 +62,18 @@ static NSString *const OPTIONS = @"options";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changePart:) name:@"SwipeDetected" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayParts:) name:kInspectionViewControllerPushed object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gotoRootViewController) name:NOTIFICATION_GOTO_CUSTOMER_INFO_PRESSED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(promptShown) name:UI_PROMPT_SHOWN object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(promptHidden) name:UI_PROMPT_HIDDEN object:nil];
+}
+
+- (void) promptShown {
+    [self.navigationItem setHidesBackButton:YES animated:NO];
+}
+
+- (void) promptHidden {
+    for (UIViewController *viewController in self.navigationController.viewControllers) {
+        [viewController.navigationItem setHidesBackButton:NO animated:NO];
+    }
 }
 
 - (void) gotoRootViewController {
@@ -71,6 +83,12 @@ static NSString *const OPTIONS = @"options";
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self setObservers];
+    
+    if (!level)
+    {
+        UINavigationController *navigationController = [self.splitViewController.viewControllers objectAtIndex:1] ;
+        [navigationController popToRootViewControllerAnimated:YES];
+    }
 }
 
 - (void) viewWillDisappear:(BOOL)animated {
@@ -219,8 +237,6 @@ static NSString *const OPTIONS = @"options";
         [self showInspectionPointsForCraneAtIndexPath:indexPath];
     }
 }
-
-
 
 
 @end
