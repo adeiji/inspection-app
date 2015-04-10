@@ -16,20 +16,20 @@
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSString * objectId;
 @property (nonatomic, retain) InspectionCrane *inspectionCrane;
-@property (nonatomic, retain) NSSet *inspectionOptions;
-@property (nonatomic, retain) NSSet *prompts;
+@property (nonatomic, retain) NSOrderedSet *inspectionOptions;
+@property (nonatomic, retain) NSOrderedSet *prompts;
 @end
 
 @interface InspectionPoint (CoreDataGeneratedAccessors)
 
 - (void)addInspectionOptionsObject:(InspectionOption *)value;
 - (void)removeInspectionOptionsObject:(InspectionOption *)value;
-- (void)addInspectionOptions:(NSSet *)values;
-- (void)removeInspectionOptions:(NSSet *)values;
+- (void)addInspectionOptions:(NSOrderedSet *)values;
+- (void)removeInspectionOptions:(NSOrderedSet *)values;
 
 - (void)addPromptsObject:(Prompt *)value;
 - (void)removePromptsObject:(Prompt *)value;
-- (void)addPrompts:(NSSet *)values;
-- (void)removePrompts:(NSSet *)values;
+- (void)addPrompts:(NSOrderedSet *)values;
+- (void)removePrompts:(NSOrderedSet *)values;
 
 @end

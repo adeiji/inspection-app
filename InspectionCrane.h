@@ -15,14 +15,14 @@
 
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSString * objectId;
-@property (nonatomic, retain) NSSet *inspectionPoints;
+@property (nonatomic, retain) NSOrderedSet *inspectionPoints;
 @end
 
 @interface InspectionCrane (CoreDataGeneratedAccessors)
 
 - (void)addInspectionPointsObject:(InspectionPoint *)value;
 - (void)removeInspectionPointsObject:(InspectionPoint *)value;
-- (void)addInspectionPoints:(NSSet *)values;
-- (void)removeInspectionPoints:(NSSet *)values;
+- (void)addInspectionPoints:(NSOrderedSet *)values;
+- (void)removeInspectionPoints:(NSOrderedSet *)values;
 
 @end

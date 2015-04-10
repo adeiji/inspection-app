@@ -106,17 +106,10 @@
     [_deficiencySwitch setOn:myCondition.deficient];
     [_applicableSwitch setOn:myCondition.applicable];
     
-    if ([_lblPart.text isEqualToString:@"Control Station Markings"])
-    {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Additional Information" message:@"Is this a pendant or radio, and what is the manufacturer and model" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Ok", nil];
-        [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
-        [alert show];
-        pageSubmitAlertView = NO;
-    }
     
     if ([point.prompts count] > 0) {
 
-        [self displayPromptViewWithPrompts:[point.prompts allObjects]];
+        [self displayPromptViewWithPrompts:[point.prompts array]];
         promptView.promptLocation = 0;
         Prompt *prompt = promptView.prompts[promptView.promptLocation];
         promptView.lblPromptText.text = prompt.title;
@@ -220,7 +213,7 @@
 {
     //We need to get the parts that are unique to this particular crane.
     InspectionCrane *selectedCrane = [[IACraneInspectionDetailsManager sharedManager] crane];
-    _partsArray = [selectedCrane.inspectionPoints allObjects];    //Get the actual array itself from the parts object
+    _partsArray = [selectedCrane.inspectionPoints array];    //Get the actual array itself from the parts object
     [self fillOptionArrays:_partsArray[_optionLocation]];     //Get the options that are unique to this particular part.
     itemListStore = [[ItemListConditionStorage alloc] init:[_partsArray mutableCopy]];       /*Create the itemListStore which will
                                                                                   store all the conditions as they are set.*/

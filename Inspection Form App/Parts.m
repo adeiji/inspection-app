@@ -35,6 +35,6 @@
 
 
 - (void) fillPartsFromCrane : (InspectionCrane *) crane {
-    [myParts addObjectsFromArray:[crane.inspectionPoints allObjects] ];
+    [myParts addObjectsFromArray:[crane.inspectionPoints array] ];
 }
 @end

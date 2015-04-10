@@ -32,7 +32,7 @@
 {
     // Here's our point of attack
     __optionsArray  = [
-                       inspectionPoint.inspectionOptions allObjects];
+                       inspectionPoint.inspectionOptions array];
 
 }
 

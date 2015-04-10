@@ -31,7 +31,7 @@
     <entity name="InspectionCrane" representedClassName="InspectionCrane" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="objectId" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="inspectionPoints" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="InspectionPoint" inverseName="inspectionCrane" inverseEntity="InspectionPoint" syncable="YES"/>
+        <relationship name="inspectionPoints" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="InspectionPoint" inverseName="inspectionCrane" inverseEntity="InspectionPoint" syncable="YES"/>
     </entity>
     <entity name="InspectionOption" representedClassName="InspectionOption" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
@@ -42,8 +42,8 @@
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="objectId" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="inspectionCrane" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="InspectionCrane" inverseName="inspectionPoints" inverseEntity="InspectionCrane" syncable="YES"/>
-        <relationship name="inspectionOptions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="InspectionOption" inverseName="inspectionPoint" inverseEntity="InspectionOption" syncable="YES"/>
-        <relationship name="prompts" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Prompt" inverseName="inspectionPoint" inverseEntity="Prompt" syncable="YES"/>
+        <relationship name="inspectionOptions" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="InspectionOption" inverseName="inspectionPoint" inverseEntity="InspectionOption" syncable="YES"/>
+        <relationship name="prompts" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Prompt" inverseName="inspectionPoint" inverseEntity="Prompt" syncable="YES"/>
     </entity>
     <entity name="Prompt" representedClassName="Prompt" syncable="YES">
         <attribute name="objectId" optional="YES" attributeType="String" syncable="YES"/>

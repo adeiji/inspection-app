@@ -96,7 +96,7 @@ static NSString *const OPTIONS = @"options";
     if (level == OPTIONS)
     {
         InspectionPoint *inspectionPoint = notification.userInfo[USER_INFO_SELECTED_INSPECTION_POINT];
-        _tableData = [inspectionPoint.inspectionOptions allObjects];
+        _tableData = [inspectionPoint.inspectionOptions array];
         [self.tableView reloadData];
     }
 }
@@ -151,7 +151,7 @@ static NSString *const OPTIONS = @"options";
     if ([inspectionCranes count] != 0)
     {
         InspectionCrane *inspectionCrane = inspectionCranes[0];
-        MasterViewController *mvc = [[MasterViewController alloc] initWithStyle:nil Level:PART_NAME SearchValue:[inspectionCrane.inspectionPoints allObjects]];
+        MasterViewController *mvc = [[MasterViewController alloc] initWithStyle:nil Level:PART_NAME SearchValue:[inspectionCrane.inspectionPoints array]];
         [self.navigationController pushViewController:mvc animated:YES];
         [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_HOISTSRL_SELECTED object:nil userInfo:@{ kSelectedInspectedCrane : crane }];
     }
@@ -178,7 +178,7 @@ static NSString *const OPTIONS = @"options";
     InspectionPoint *inspectionPoint = [_tableData objectAtIndex:indexPath.row];
     
     //Create the Master View controller that we will push onto the view controller stack.
-    MasterViewController *mvc = [[MasterViewController alloc] initWithStyle:nil Level:OPTIONS SearchValue:[inspectionPoint.inspectionOptions allObjects]];
+    MasterViewController *mvc = [[MasterViewController alloc] initWithStyle:nil Level:OPTIONS SearchValue:[inspectionPoint.inspectionOptions array]];
     
     //Get a reference to the current displayed view controller.
     UINavigationController *navigationController = [self.splitViewController.viewControllers objectAtIndex:1] ;

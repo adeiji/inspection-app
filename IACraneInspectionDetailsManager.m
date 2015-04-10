@@ -85,7 +85,7 @@
                 InspectionPoint *inspectionPointObject = [[InspectionPoint alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
                 inspectionPointObject.name = [inspectionPointParseObject objectForKey:kObjectName];
                 [set setByAddingObjectsFromArray:[inspectionPointParseObject objectForKey:kOptions]];
-                inspectionPointObject.inspectionOptions = set;
+                inspectionPointObject.inspectionOptions = [NSOrderedSet orderedSetWithSet:set];
                 [inspectionPoints addObject:inspectionPointObject];
                 
                 NSMutableArray *options = [NSMutableArray new];
@@ -122,17 +122,17 @@
                 
                 if ([prompts count] > 0)
                 {
-                    [inspectionPointObject setPrompts:[NSSet setWithArray:prompts]];
+                    [inspectionPointObject setPrompts:[NSOrderedSet orderedSetWithArray:prompts]];
                 }
                 
-                [inspectionPointObject setInspectionOptions:[NSSet setWithArray:options]];
+                [inspectionPointObject setInspectionOptions:[NSOrderedSet orderedSetWithArray:options]];
                 [inspectionPointObject setInspectionCrane:craneObject];
                 double progressToChange = (1.0f/cranes.count);
                 dispatch_async(dispatch_get_main_queue(), ^{
                     progressIndicatorView.progress += progressToChange / [crane[kInspectionPoints] count];
                 });
             }
-            [craneObject setInspectionPoints:[NSSet setWithArray:inspectionPoints]];
+            [craneObject setInspectionPoints:[NSOrderedSet orderedSetWithArray:inspectionPoints]];
             
             [cranesArray addObject:craneObject];
 
