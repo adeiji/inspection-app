@@ -53,7 +53,6 @@
     [self.view addGestureRecognizer:gestureRecognizerRight];
     [self.view addGestureRecognizer:gestureRecognizerLeft];
     
-
     inspection = [InspectionManager sharedManager].inspection;
     
     //[self.view setTranslatesAutoresizingMaskIntoConstraints:NO];
@@ -124,9 +123,22 @@
     [[promptView layer] setBorderWidth:2.0f];
     [[promptView layer] setBorderColor:[UIColor colorWithRed:0.0f green:172.0f/255.0f blue:238.0f/255.0f alpha:1.0].CGColor];
     promptView.prompts = prompts;
-    CGPoint center = CGPointMake(self.view.center.x, self.view.center.y-100);
-    [promptView setCenter:center];
-    [self.view addSubview:promptView];
+    
+    UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
+
+    if (orientation == UIInterfaceOrientationLandscapeLeft || orientation == UIInterfaceOrientationLandscapeRight)
+    {
+        CGPoint center = CGPointMake(self.view.center.x + 325, self.view.center.y - 100);
+        [promptView setCenter:center];
+    }
+    else {
+        CGPoint center = CGPointMake(self.view.center.x, self.view.center.y-100);
+        [promptView setCenter:center];
+    }
+    
+    
+    [self.view setUserInteractionEnabled:NO];
+    [[[[UIApplication sharedApplication] delegate] window] addSubview:promptView];
 }
 - (IBAction)promptOkPressed:(id)sender {
     _txtNotes.text = [NSString stringWithFormat:@"%@ %@ - %@\n", _txtNotes.text, promptView.lblPromptText.text ,promptView.txtPromptResult.text];
@@ -136,13 +148,19 @@
         promptView.promptLocation ++;
         Prompt *prompt = promptView.prompts[promptView.promptLocation];
         promptView.lblPromptText.text = prompt.title;
-        [self.view addSubview:promptView];
+        [self.view setUserInteractionEnabled:NO];
+        [[[[UIApplication sharedApplication] delegate] window] addSubview:promptView];
+    }
+    else {
+        promptView = nil;
+        [self.view setUserInteractionEnabled:YES];
     }
 }
 
 - (IBAction)promptCancelPressed:(id)sender {
     [promptView removeFromSuperview];
     promptView = nil;
+    [self.view setUserInteractionEnabled:YES];
 }
 
 - (void) setDeficiencyViews {
