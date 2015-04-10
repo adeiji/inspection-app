@@ -853,7 +853,7 @@
                                             <action selector="submitPressed:" destination="ohd-4L-yxA" id="iEo-Ff-Mp9"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem title="Create Certificate" id="0hp-Iu-e5a">
+                                    <barButtonItem enabled="NO" title="Create Certificate" id="0hp-Iu-e5a">
                                         <color key="tintColor" red="0.98038903060000004" green="0.98038903060000004" blue="0.98038903060000004" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <action selector="createCertificateButtonPressed:" destination="ohd-4L-yxA" id="daG-3H-M5i"/>
@@ -973,6 +973,7 @@
                     <navigationItem key="navigationItem" id="Fhf-l3-h0H"/>
                     <connections>
                         <outlet property="applicableSwitch" destination="hpt-8d-vYa" id="Ha7-vh-dox"/>
+                        <outlet property="createCertificateButton" destination="0hp-Iu-e5a" id="CFe-Bd-bvh"/>
                         <outlet property="deficiencyPicker" destination="G5j-uv-CDt" id="iVo-Vb-Wma"/>
                         <outlet property="deficiencySwitch" destination="BGr-wP-Lcw" id="pc3-9w-nZ4"/>
                         <outlet property="lblPart" destination="zPN-Ej-pJF" id="eHw-0o-Uky"/>

@@ -11,6 +11,7 @@
 #import "ItemListConditionStorage.h"
 #import "PartSelectionDelegate.h"
 #import "InspectionBussiness.h"
+#import "PromptView.h"
 
 @interface InspectionViewController : UIViewController <UIPickerViewDelegate, UIPickerViewDataSource, PartSelectionDelegate, UIDocumentInteractionControllerDelegate>
 {
@@ -28,6 +29,7 @@
     ItemListConditionStorage *itemListStore;
     NSString *overallRating;
     NSArray *_deficiencyPickerArray;
+    PromptView *promptView;
     
 }
 
@@ -42,7 +44,7 @@
 @property (strong, nonatomic) NSArray *partsArray;
 @property BOOL validated;
 
-@property (strong, nonatomic) IBOutlet UIButton* createCertificateButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *createCertificateButton;
 @property int optionLocation;
 typedef enum {
     FINAL_SUBMISSION_APPROVED,

@@ -115,10 +115,41 @@
     }
     
     if ([point.prompts count] > 0) {
-        [[IACraneInspectionDetailsManager sharedManager] getPromptsFromInspectionPoint:point];
+
+        [self displayPromptViewWithPrompts:[point.prompts allObjects]];
+        promptView.promptLocation = 0;
+        Prompt *prompt = promptView.prompts[promptView.promptLocation];
+        promptView.lblPromptText.text = prompt.title;
     }
     
     [self setDeficiencyViews];
+}
+
+- (void) displayPromptViewWithPrompts : (NSArray *) prompts {
+    promptView = [[[NSBundle mainBundle] loadNibNamed:@"PromptView" owner:self options:nil] firstObject];
+    [[promptView layer] setCornerRadius:25.0f];
+    [[promptView layer] setBorderWidth:2.0f];
+    [[promptView layer] setBorderColor:[UIColor colorWithRed:0.0f green:172.0f/255.0f blue:238.0f/255.0f alpha:1.0].CGColor];
+    promptView.prompts = prompts;
+    CGPoint center = CGPointMake(self.view.center.x, self.view.center.y-100);
+    [promptView setCenter:center];
+    [self.view addSubview:promptView];
+}
+- (IBAction)promptOkPressed:(id)sender {
+    _txtNotes.text = [NSString stringWithFormat:@"%@ %@ - %@\n", _txtNotes.text, promptView.lblPromptText.text ,promptView.txtPromptResult.text];
+    [promptView removeFromSuperview];
+    
+    if (promptView.promptLocation < [promptView.prompts count] - 1) {
+        promptView.promptLocation ++;
+        Prompt *prompt = promptView.prompts[promptView.promptLocation];
+        promptView.lblPromptText.text = prompt.title;
+        [self.view addSubview:promptView];
+    }
+}
+
+- (IBAction)promptCancelPressed:(id)sender {
+    [promptView removeFromSuperview];
+    promptView = nil;
 }
 
 - (void) setDeficiencyViews {
@@ -252,16 +283,11 @@
         
         inspectionComplete = YES;
         myDeficientPart = nil;
-        loadRatings = @"";
-        proofLoadDescription = @"";
-        testLoad = @"";
-        remarksLimitations = @"";
-        
-        [PDFGenerator writeReport:inspection.itemList Inspection:inspection OverallRating:overallRating PartsArray:_partsArray];
-        UIDocumentInteractionController *pdfViewController = [PDFGenerator DisplayPDFWithOverallRating:inspection];
-        pdfViewController.delegate = self;
-        [pdfViewController presentPreviewAnimated:NO];
-        // Save everything that has been created
+        loadRatings = NO;
+        proofLoadDescription = NO;
+        testLoad = NO;
+        remarksLimitations = NO;
+
         [((AppDelegate *) [[UIApplication sharedApplication] delegate]) saveContext];
     }
 }
@@ -300,59 +326,6 @@
     
 }
 
-- (void) getLengthFromTextField : (UITextField *) textField {
-    timesShown++;
-    _txtNotes.text = [NSString stringWithFormat:@"Length: %@ - %@",textField.text, _txtNotes.text];
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Length, size, fittings" message:@"Enter the Size:" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Ok", nil];
-    [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
-    [alert show];
-    pageSubmitAlertView = NO;
-}
-
-- (void) getSizeFromTextField : (UITextField *) textField {
-    timesShown++;
-    _txtNotes.text = [NSString stringWithFormat:@"Size: %@ - %@",textField.text, _txtNotes.text];
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Length, size, fittings" message:@"Enter the Fittings:" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Ok", nil];
-    [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
-    [alert show];
-    pageSubmitAlertView = NO;
-}
-
-- (void) getFittingsFromTextField : (UITextField *) textField {
-    timesShown++;
-    _txtNotes.text = [NSString stringWithFormat:@"Fittings: %@ - %@",textField.text, _txtNotes.text];
-    pageSubmitAlertView = NO;
-}
-
-- (void) getSizeFittingsLengthWithTextField : (UITextField *) textField {
-    if ([_lblPart.text isEqualToString:@"Control Station Markings"])
-    {
-        _txtNotes.text = [NSString stringWithFormat:@"%@ %@", _txtNotes.text, textField.text];
-    }
-    else if (timesShown==0&&_optionLocation==22)
-    {
-        [self getLengthFromTextField:textField];
-    }
-    else if (timesShown==1&&_optionLocation==22)
-    {
-        [self getSizeFromTextField:textField];
-    }
-    else if (timesShown==2&&_optionLocation==22)
-    {
-        [self getFittingsFromTextField:textField];
-    }
-    else if (![textField.text isEqualToString:@""])
-    {
-        _txtNotes.text = [NSString stringWithFormat:@"%@ - %@",textField.text, _txtNotes.text];
-        NSLog(@"text:[%@]", textField.text);
-    }
-    else {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"You must enter a value" message:@"A value must be entered" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
-        [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
-        [alert show];
-    }
-}
-
 - (void) getOverallRatingAndShowPDFWithTextField : (UITextField *) textField {
     
     if (([textField.text intValue]<0 || [textField.text intValue]>5) && (loadRatings == NO && testLoad == NO && remarksLimitations == NO && finished == NO && proofLoad == NO))
@@ -375,7 +348,11 @@
         }
         else {
             _createCertificateButton.enabled = FALSE;
-            [PDFGenerator DisplayPDFWithOverallRating:inspection];
+            [PDFGenerator writeReport:inspection.itemList Inspection:inspection OverallRating:overallRating PartsArray:_partsArray];
+            UIDocumentInteractionController *pdfViewController = [PDFGenerator DisplayPDFWithOverallRating:inspection];
+            pdfViewController.delegate = self;
+            [pdfViewController presentPreviewAnimated:NO];
+            // Save everything that has been created
         }
     }
 }
@@ -415,7 +392,11 @@
     {
         remarksLimitations = textField.text;
         finished = NO;
-        [PDFGenerator DisplayPDFWithOverallRating : inspection];
+        [PDFGenerator writeReport:inspection.itemList Inspection:inspection OverallRating:overallRating PartsArray:_partsArray];
+        UIDocumentInteractionController *pdfViewController = [PDFGenerator DisplayPDFWithOverallRating:inspection];
+        pdfViewController.delegate = self;
+        [pdfViewController presentPreviewAnimated:NO];
+        // Save everything that has been created
         
         _createCertificateButton.enabled = TRUE;
     }
@@ -427,13 +408,8 @@
     if ((buttonIndex!=0 || loadRatings == YES || remarksLimitations == YES || finished == YES || proofLoad == YES) || (buttonIndex == 1 && testLoad == YES))
     {
         UITextField *textField = [alertView textFieldAtIndex:0];
-        //if this is not the alert box that opens when you submit the final page
-        if (pageSubmitAlertView==NO)
-        {
-            [self getSizeFittingsLengthWithTextField:textField];
-        }
         //if this is the alertbox for when you submit the form
-        else {
+        if (pageSubmitAlertView == YES) {
             //first we check to see if we are at the testLoad box
             if (loadRatings == NO && testLoad == NO && remarksLimitations == NO && finished == NO && proofLoad == NO)
             {
@@ -448,31 +424,38 @@
                     overallRating = @"";
                 }
             }
-            else {//here is where we start displaying the Alert Boxes which will ask questions about for the Certficate
-                [self getFinalNecessaryAttributesWithTextField:textField];
-            }
-            
-            if (pageSubmitAlertView==YES && testLoad == YES) {
+            else if (pageSubmitAlertView==YES && testLoad == YES) {
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Applied Test Loads" message:@"Test Loads Applied" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
                 [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
                 [alert show];
                 proofLoad = YES;
                 testLoad = NO;
             }
-        }
+
+            else {//here is where we start displaying the Alert Boxes which will ask questions about for the Certficate
+                [self getFinalNecessaryAttributesWithTextField:textField];
+            }
+            
+                    }
     }//if the cancel button is pressed and we are in the midst of asking the questions for the certificate
-    else if (buttonIndex ==0 && testLoad == false)
+    else if (buttonIndex ==0 && testLoad == NO)
     {
-        return;
+        [PDFGenerator writeReport:inspection.itemList Inspection:inspection OverallRating:overallRating PartsArray:_partsArray];
+        UIDocumentInteractionController *pdfViewController = [PDFGenerator DisplayPDFWithOverallRating:inspection];
+        pdfViewController.delegate = self;
+        [pdfViewController presentPreviewAnimated:NO];
+        // Save everything that has been created
     }
     else
     {
         testLoad = NO;
-        [PDFGenerator DisplayPDFWithOverallRating:inspection];
+        [PDFGenerator writeReport:inspection.itemList Inspection:inspection OverallRating:overallRating PartsArray:_partsArray];
+        UIDocumentInteractionController *pdfViewController = [PDFGenerator DisplayPDFWithOverallRating:inspection];
+        pdfViewController.delegate = self;
+        [pdfViewController presentPreviewAnimated:NO];
+        // Save everything that has been created
+
     }
-    
-    _createCertificateButton.enabled = YES;
-    _createCertificateButton.hidden = NO;
 }
 
 #pragma mark - Outlet methods

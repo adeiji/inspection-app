@@ -637,6 +637,13 @@
 
 }
 
+- (IBAction)promptOkPressed:(id)sender {
+    
+}
+
+- (IBAction)promptCancelPressed:(id)sender {
+    
+}
 
 #pragma mark Picker Data Source Methods
 

@@ -68,6 +68,7 @@
 		F4FBDADC1AD765420090DA72 /* InspectionPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = F4FBDADB1AD765420090DA72 /* InspectionPoint.m */; };
 		F4FBDADE1AD78B530090DA72 /* PromptView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4FBDADD1AD78B530090DA72 /* PromptView.xib */; };
 		F4FBDAE11AD804200090DA72 /* Prompt.m in Sources */ = {isa = PBXBuildFile; fileRef = F4FBDAE01AD804200090DA72 /* Prompt.m */; };
+		F4FBDAE51AD80A520090DA72 /* PromptView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4FBDAE41AD80A520090DA72 /* PromptView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -181,6 +182,8 @@
 		F4FBDADD1AD78B530090DA72 /* PromptView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PromptView.xib; sourceTree = "<group>"; };
 		F4FBDADF1AD804200090DA72 /* Prompt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Prompt.h; sourceTree = "<group>"; };
 		F4FBDAE01AD804200090DA72 /* Prompt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Prompt.m; sourceTree = "<group>"; };
+		F4FBDAE31AD80A520090DA72 /* PromptView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PromptView.h; sourceTree = "<group>"; };
+		F4FBDAE41AD80A520090DA72 /* PromptView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PromptView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -290,6 +293,7 @@
 		8BC58458150ABD87000AC695 /* Inspection Form App */ = {
 			isa = PBXGroup;
 			children = (
+				F4FBDAE21AD80A430090DA72 /* Views */,
 				CE38513D18107296003629DA /* View Controllers */,
 				CE798DB4180F35E400C2E5A0 /* Business Layer */,
 				CE486ADC180F179A00B1B953 /* Master View Controller */,
@@ -596,6 +600,15 @@
 			name = "Core Data";
 			sourceTree = "<group>";
 		};
+		F4FBDAE21AD80A430090DA72 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F4FBDAE31AD80A520090DA72 /* PromptView.h */,
+				F4FBDAE41AD80A520090DA72 /* PromptView.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -774,6 +787,7 @@
 				8BE881F81513F82400360C63 /* ItemListConditionStorage.m in Sources */,
 				8BE881FC1513FA4200360C63 /* Condition.m in Sources */,
 				8BF10A9C152FB93D00DC5F05 /* TextField.m in Sources */,
+				F4FBDAE51AD80A520090DA72 /* PromptView.m in Sources */,
 				CE40D38B18087BC20080E9BD /* DataLayer.m in Sources */,
 				F49DDEB11ACCDA5C00A02162 /* IACraneInspectionDetailsManager.m in Sources */,
 				CE486AE2180F17DC00B1B953 /* MasterViewController.m in Sources */,
