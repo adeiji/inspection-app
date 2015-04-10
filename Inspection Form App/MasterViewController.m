@@ -197,8 +197,8 @@ static NSString *const OPTIONS = @"options";
     if (__delegate)
     {
         mainPageViewController.inspectionViewController.craneType = inspectionPoint.inspectionCrane.name;
-        mainPageViewController.inspectionViewController.optionLocation = indexPath.row;
-        [__delegate selectedPart:inspectionPoint];
+
+        [__delegate selectedPart:inspectionPoint newOptionLocation:indexPath.row];
         
         mainPageViewController = nil;
     }

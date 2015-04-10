@@ -14,7 +14,8 @@
 @protocol PartSelectionDelegate <NSObject>
 
 @required
-- (void) selectedPart : (InspectionPoint *) currentPart;
+- (void) selectedPart : (InspectionPoint *) currentPart
+    newOptionLocation : (NSInteger) optionLocation;
 - (void) selectedOption : (NSString *) selectedOption;
 
 @end

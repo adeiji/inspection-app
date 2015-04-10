@@ -469,7 +469,7 @@
 - (void) nextPressed {
     if (_optionLocation < [_partsArray count] - 1) {
         NSUInteger selectedRow = [_deficiencyPicker selectedRowInComponent:0];
-        NSString *myDeficientPart = [self pickerView: _deficiencyPicker titleForRow:selectedRow forComponent:0];
+        InspectionPoint *myDeficientPart = [_pickerData objectAtIndex:selectedRow];
         [self saveInfo:_txtNotes.text :_deficiencySwitch.on:[_deficiencyPicker selectedRowInComponent:0]:myDeficientPart:_applicableSwitch.on];
         _optionLocation = _optionLocation + 1;
         [self fillOptionArrays:_partsArray[_optionLocation]];
@@ -480,7 +480,7 @@
 - (void) previousPressed {
     if (_optionLocation > 0) {
         NSUInteger selectedRow = [_deficiencyPicker selectedRowInComponent:0];
-        NSString *myDeficientPart = [[_deficiencyPicker delegate] pickerView:_deficiencyPicker titleForRow:selectedRow forComponent:0];
+        InspectionPoint *myDeficientPart = [_pickerData objectAtIndex:selectedRow];
         [self saveInfo:_txtNotes.text :_deficiencySwitch.on:[_deficiencyPicker selectedRowInComponent:0]:myDeficientPart:_applicableSwitch.on];
         _optionLocation = _optionLocation - 1;
         [self fillOptionArrays:_partsArray[_optionLocation]];
@@ -494,7 +494,7 @@
 - (void) saveInfo : (NSString *) myNotes
                   : (BOOL) myDeficient
                   : (NSUInteger) mySelection
-                  : (NSString *) myDeficientPart
+                  : (InspectionPoint *) myDeficientPart
                   : (BOOL) myApplicable
 {
     Condition *myCondition = [[Condition alloc] initWithParameters:myNotes Defficiency:myDeficient PickerSelection:mySelection DeficientPart:myDeficientPart Applicable:myApplicable];
@@ -552,13 +552,15 @@
 }
 
 - (void) selectedPart:(InspectionPoint *) currentPart
+    newOptionLocation:(NSInteger)optionLocation
 {
     //If the view controller has already been loaded then we continue to save the information on the current page.
     if (_txtNotes != nil)
     {
         NSUInteger selectedRow = [_deficiencyPicker selectedRowInComponent:0];
-        NSString *myDeficientPart = [[_deficiencyPicker delegate] pickerView: _deficiencyPicker titleForRow:selectedRow forComponent:0];
+        InspectionPoint *myDeficientPart = [_pickerData objectAtIndex:selectedRow];
         [self saveInfo:_txtNotes.text :_deficiencySwitch.on:[_deficiencyPicker selectedRowInComponent:0]:myDeficientPart:_applicableSwitch.on];
+        _optionLocation = optionLocation;
         [self fillOptionArrays:currentPart];
         [self changePickerArray:_deficiencyPickerArray];
         [self changeLayout:_optionLocation PartsArray:_partsArray ItemListStore:itemListStore];
