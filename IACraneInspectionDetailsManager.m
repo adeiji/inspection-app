@@ -138,6 +138,8 @@
 
         }
 
+        [self saveAllWaterDistrictCranes];
+        
         if ([context save:&error])
         {
             
@@ -151,12 +153,53 @@
     });
 }
 
+- (void) saveAllWaterDistrictCranes {
+    [self deleteAllWaterDistrictCranes];
+    NSString *plistFilePath = [[NSBundle mainBundle] pathForResource:@"lvwwdcranes" ofType:@"plist"];
+    NSArray *lvwwdCranes = [[NSArray alloc] initWithContentsOfFile:plistFilePath];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:kCoreDataClassInspectedCrane inManagedObjectContext:_context];
+    
+    for (id dictionary in lvwwdCranes) {
+        InspectedCrane *inspectedCrane = [[InspectedCrane alloc] initWithEntity:entity insertIntoManagedObjectContext:_context];
+        inspectedCrane.type = dictionary[@"TYPE"];
+        inspectedCrane.capacity = dictionary[@"CAPACITY"];
+        inspectedCrane.hoistMdl = dictionary[@"MDL:HOIST"];
+        inspectedCrane.mfg = dictionary[@"SRL: CRANE/MFG"];
+        inspectedCrane.hoistSrl = dictionary[@"SRL: HOIST"];
+    }
+    
+    [((AppDelegate *) [[UIApplication sharedApplication] delegate]) saveContext];
+}
+
+- (void) deleteAllWaterDistrictCranes {
+    NSString *plistFilePath = [[NSBundle mainBundle] pathForResource:@"lvwwdcranes" ofType:@"plist"];
+    NSArray *lvwwdCranes = [[NSArray alloc] initWithContentsOfFile:plistFilePath];
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:kCoreDataClassInspectedCrane inManagedObjectContext:_context];
+    [fetchRequest setEntity:entity];
+    // Specify criteria for filtering which objects to fetch
+    
+    for (id dictionary in lvwwdCranes) {
+        NSString *hoistSrlToDelete = dictionary[@"SRL: HOIST"];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"hoistSrl == %@", hoistSrlToDelete];
+        [fetchRequest setPredicate:predicate];
+        
+        NSError *error = nil;
+        NSArray *fetchedObjects = [_context executeFetchRequest:fetchRequest error:&error];
+        for (id object in fetchedObjects) {
+            [_context deleteObject:object];
+        }
+    }
+    
+    [((AppDelegate *) [[UIApplication sharedApplication] delegate]) saveContext];
+}
+
 /*
  
  Get all the inspection details from the Database
  
  */
-
 - (NSArray *) getInspectionDetails {
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
@@ -289,7 +332,7 @@
     NSEntityDescription *entity = [NSEntityDescription entityForName:kCoreDataClassCrane inManagedObjectContext:context];
     [fetchRequest setEntity:entity];
     // Specify criteria for filtering which objects to fetch
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name = %@", craneType];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name == [c] %@", craneType];
     [fetchRequest setPredicate:predicate];
     
     NSError *error = nil;

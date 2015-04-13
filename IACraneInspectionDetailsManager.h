@@ -77,4 +77,6 @@
 - (NSArray *) getAllConditionsForCrane : (InspectedCrane *) crane;
 - (void) saveAllConditionsForCrane : (InspectedCrane *) crane
                         Conditions : (NSArray *) conditions;
+
+- (void) saveAllWaterDistrictCranes;
 @end

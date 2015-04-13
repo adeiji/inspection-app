@@ -58,7 +58,7 @@
 
     [self fillCriteriaObjects];
     [self getPreviouslyFinishedCranes];
-
+    [[IACraneInspectionDetailsManager sharedManager] saveAllWaterDistrictCranes];
 
     
     return YES;

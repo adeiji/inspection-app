@@ -60,7 +60,6 @@ static NSString *const OPTIONS = @"options";
         _tableData = [[IACraneInspectionDetailsManager sharedManager] getAllInspectedCranes];
         [self.tableView reloadData];
     }
-    
 }
 
 - (void) setObservers {
