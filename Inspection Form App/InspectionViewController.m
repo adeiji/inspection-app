@@ -282,11 +282,11 @@
     NSString *myDeficientPart = option.name;
     [self saveInfo:_txtNotes.text :_deficiencySwitch.on:[_deficiencyPicker selectedRowInComponent:0]:myDeficientPart:_applicableSwitch.on];
 
-    [[IACraneInspectionDetailsManager sharedManager] saveAllConditionsForCrane:inspection.inspectedCrane
+    if (inspection.inspectedCrane.hoistSrl)
+    {
+        [[IACraneInspectionDetailsManager sharedManager] saveAllConditionsForCrane:inspection.inspectedCrane
                                                                     Conditions:_itemListStore.myConditions];
-    
-    
-    
+    }
     //If all the information is correctly inputed on the page, then we simply save the information.  Otherwise we go back so that the user can change whatever is necessary.
     if ([self validate]) {
         

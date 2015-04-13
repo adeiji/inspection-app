@@ -490,7 +490,7 @@
                                                             <outlet property="delegate" destination="sgx-pA-png" id="NRG-Mz-Vln"/>
                                                         </connections>
                                                     </textField>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="detailDisclosure" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gof-Kp-BT6">
+                                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="detailDisclosure" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gof-Kp-BT6">
                                                         <rect key="frame" x="686" y="16" width="22" height="22"/>
                                                         <fontDescription key="fontDescription" type="boldSystem" size="button"/>
                                                         <state key="normal">

@@ -46,7 +46,7 @@
         for (CoreDataCondition *coreDataCondition in sortedConditions) {
             Condition *myCondition = [[Condition alloc] init];
             myCondition.notes = coreDataCondition.notes;
-            myCondition.pickerSelection = coreDataCondition.optionSelectedIndex;
+            myCondition.pickerSelection = [coreDataCondition.optionSelectedIndex intValue];
             myCondition.deficientPart = coreDataCondition.optionSelected;
             myCondition.applicable = coreDataCondition.isApplicable == [NSNumber numberWithInt:1] ? YES : NO;
             myCondition.deficient = coreDataCondition.isDeficient == [NSNumber numberWithInt:1] ? YES : NO;
