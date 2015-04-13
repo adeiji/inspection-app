@@ -144,6 +144,20 @@ static NSString *const OPTIONS = @"options";
     return [_tableData count];
 }
 
+/*
+ 
+ When user presses the load button, than we load the crane conditions for the specific crane
+ 
+ */
+- (void) loadCraneConditions : (UIButton *) button {
+    
+    InspectedCrane *crane = [_tableData objectAtIndex:button.tag];
+    
+    UINavigationController *navigationController = [self.splitViewController.viewControllers objectAtIndex:1] ;
+    ViewController *viewController = [navigationController.viewControllers objectAtIndex:0];
+    [viewController.inspectionViewController.itemListStore loadConditionsForCrane:crane] ;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [[UITableViewCell alloc] init];
@@ -159,6 +173,8 @@ static NSString *const OPTIONS = @"options";
         [loadButton setFrame:CGRectMake(cell.frame.size.width - 100, 12, 75, 30)];
         [loadButton setTitle:@"Load" forState:UIControlStateNormal];
         [loadButton setBackgroundColor:[UIColor colorWithRed:66.0/255.0f green:188.0/255.0f blue:98.0f/255.0f alpha:1.0f]];
+        loadButton.tag = indexPath.row;
+        [loadButton addTarget:self action:@selector(loadCraneConditions:) forControlEvents:UIControlEventTouchUpInside];
         [cell addSubview:loadButton];
     }
     else {
@@ -226,9 +242,7 @@ static NSString *const OPTIONS = @"options";
     if (__delegate)
     {
         mainPageViewController.inspectionViewController.craneType = inspectionPoint.inspectionCrane.name;
-
         [__delegate selectedPart:inspectionPoint newOptionLocation:indexPath.row];
-        
         mainPageViewController = nil;
     }
 }

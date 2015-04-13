@@ -24,7 +24,7 @@
 - (Condition *) initWithParameters : (NSString *) myNotes
                        Defficiency : (BOOL) myDeficient
                    PickerSelection : (NSUInteger *) myPickerSelection
-                     DeficientPart : (InspectionPoint *) myDeficientPart
+                     DeficientPart : (InspectionOption *) myDeficientPart
                         Applicable : (BOOL) myApplicable
 {
     if (self=[super init]) {

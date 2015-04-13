@@ -318,22 +318,41 @@
 }
 
 - (void) saveAllConditionsForCrane : (InspectedCrane *) crane
-                        Conditions : (NSArray *) conditons;
+                        Conditions : (NSArray *) conditions;
 {
     NSManagedObjectContext *context = [((AppDelegate *) [[UIApplication sharedApplication] delegate]) managedObjectContext];
     NSEntityDescription *entity = [NSEntityDescription entityForName:kCoreDataClassCondition inManagedObjectContext:context];
-    
-    for (Condition *condition in conditons) {
+
+    for (Condition *condition in conditions) {
         CoreDataCondition *coreDataCondition = [[CoreDataCondition alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
         coreDataCondition.isDeficient = [NSNumber numberWithBool:condition.deficient];
         coreDataCondition.isApplicable = [NSNumber numberWithBool:condition.applicable];
         coreDataCondition.notes = condition.notes;
         coreDataCondition.optionSelectedIndex = [NSNumber numberWithInteger:condition.pickerSelection];
-        coreDataCondition.defectivePart = condition.deficientPart;
+        coreDataCondition.optionSelected = condition.deficientPart;
         coreDataCondition.inspectedCrane = crane;
     }
     
     [((AppDelegate *) [[UIApplication sharedApplication] delegate]) saveContext];
+}
+
+- (NSArray *) getAllConditionsForCrane : (InspectedCrane *) crane {
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:kCoreDataClassCondition inManagedObjectContext:_context];
+    [fetchRequest setEntity:entity];
+    // Specify criteria for filtering which objects to fetch
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"inspectedCrane == %@", crane];
+    [fetchRequest setPredicate:predicate];
+    NSError *error = nil;
+    NSArray *fetchedObjects = [_context executeFetchRequest:fetchRequest error:&error];
+    
+    if (fetchedObjects == nil) {
+        
+    }
+    
+    return fetchedObjects;
+
 }
 
 

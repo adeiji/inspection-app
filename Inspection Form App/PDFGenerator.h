@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "Inspection.h"
+#import "InspectionPoint.h"
 
 @interface PDFGenerator : NSObject <UIDocumentInteractionControllerDelegate>
 

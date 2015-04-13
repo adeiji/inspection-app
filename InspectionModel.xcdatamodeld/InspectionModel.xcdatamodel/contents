@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6751" systemVersion="14B25" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
-    <entity name="Condition" representedClassName="Condition" syncable="YES">
+    <entity name="Condition" representedClassName="CoreDataCondition" syncable="YES">
         <attribute name="isApplicable" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="isDeficient" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="notes" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="optionSelected" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="optionSelectedIndex" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <relationship name="defectivePart" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="InspectedPoint" syncable="YES"/>
         <relationship name="inspectedCrane" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="InspectedCrane" inverseName="conditions" inverseEntity="InspectedCrane" syncable="YES"/>
     </entity>
     <entity name="Customer" representedClassName="Customer" syncable="YES">

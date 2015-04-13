@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "Condition.h"
+#import "IACraneInspectionDetailsManager.h"
+#import "InspectedCrane.h"
 
 @interface ItemListConditionStorage : NSObject
 
@@ -18,6 +20,6 @@
 - (NSMutableArray *)getCondition:(int)input;
 - (void) setCondition : (int) input
             Condition : (Condition *) myCondition;
-- (void) loadConditionsWithHoistSrl;
+- (void) loadConditionsForCrane : (InspectedCrane *) crane;
 
 @end

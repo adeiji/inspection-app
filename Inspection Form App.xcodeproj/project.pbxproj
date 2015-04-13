@@ -57,7 +57,6 @@
 		CEFD6D2D1839575E001764E9 /* CraneView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEFD6D2C1839575E001764E9 /* CraneView.xib */; };
 		CEFD6D70183A8705001764E9 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFD6D6F183A8705001764E9 /* Default-568h@2x.png */; };
 		CEFD6D72183A87D8001764E9 /* JobInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEFD6D71183A87D8001764E9 /* JobInfoView.xib */; };
-		F453A3AF1AD3354700319D7A /* InspectedCrane.m in Sources */ = {isa = PBXBuildFile; fileRef = F453A3AE1AD3354700319D7A /* InspectedCrane.m */; };
 		F453A3B21AD43E3B00319D7A /* InspectionModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F453A3B01AD43E3B00319D7A /* InspectionModel.xcdatamodeld */; };
 		F453A3B51AD43FB200319D7A /* Customer.m in Sources */ = {isa = PBXBuildFile; fileRef = F453A3B41AD43FB200319D7A /* Customer.m */; };
 		F49DDEA71ACCC60C00A02162 /* SyncManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F49DDEA61ACCC60C00A02162 /* SyncManager.m */; };
@@ -66,6 +65,7 @@
 		F49DDED91ACCED1600A02162 /* InspectionCrane.m in Sources */ = {isa = PBXBuildFile; fileRef = F49DDED81ACCED1600A02162 /* InspectionCrane.m */; };
 		F49DDEE51ACF33F100A02162 /* InspectionOption.m in Sources */ = {isa = PBXBuildFile; fileRef = F49DDEE41ACF33F100A02162 /* InspectionOption.m */; };
 		F4B29E641ADC1E740025A091 /* CoreDataCondition.m in Sources */ = {isa = PBXBuildFile; fileRef = F4B29E631ADC1E740025A091 /* CoreDataCondition.m */; };
+		F4B29E671ADC281B0025A091 /* InspectedCrane.m in Sources */ = {isa = PBXBuildFile; fileRef = F4B29E661ADC281B0025A091 /* InspectedCrane.m */; };
 		F4FBDADC1AD765420090DA72 /* InspectionPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = F4FBDADB1AD765420090DA72 /* InspectionPoint.m */; };
 		F4FBDADE1AD78B530090DA72 /* PromptView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4FBDADD1AD78B530090DA72 /* PromptView.xib */; };
 		F4FBDAE11AD804200090DA72 /* Prompt.m in Sources */ = {isa = PBXBuildFile; fileRef = F4FBDAE01AD804200090DA72 /* Prompt.m */; };
@@ -163,8 +163,6 @@
 		CEFD6D6F183A8705001764E9 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		CEFD6D71183A87D8001764E9 /* JobInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JobInfoView.xib; sourceTree = "<group>"; };
 		E1A4C2449B6DA9D1ED2E1AE3 /* Pods-Inspection Form App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Inspection Form App.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Inspection Form App/Pods-Inspection Form App.debug.xcconfig"; sourceTree = "<group>"; };
-		F453A3AD1AD3354700319D7A /* InspectedCrane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectedCrane.h; sourceTree = "<group>"; };
-		F453A3AE1AD3354700319D7A /* InspectedCrane.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InspectedCrane.m; sourceTree = "<group>"; };
 		F453A3B11AD43E3B00319D7A /* InspectionModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = InspectionModel.xcdatamodel; sourceTree = "<group>"; };
 		F453A3B31AD43FB200319D7A /* Customer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Customer.h; sourceTree = "<group>"; };
 		F453A3B41AD43FB200319D7A /* Customer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Customer.m; sourceTree = "<group>"; };
@@ -180,6 +178,8 @@
 		F49DDEE41ACF33F100A02162 /* InspectionOption.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InspectionOption.m; sourceTree = "<group>"; };
 		F4B29E621ADC1E740025A091 /* CoreDataCondition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataCondition.h; sourceTree = "<group>"; };
 		F4B29E631ADC1E740025A091 /* CoreDataCondition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataCondition.m; sourceTree = "<group>"; };
+		F4B29E651ADC281B0025A091 /* InspectedCrane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectedCrane.h; sourceTree = "<group>"; };
+		F4B29E661ADC281B0025A091 /* InspectedCrane.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InspectedCrane.m; sourceTree = "<group>"; };
 		F4FBDADA1AD765420090DA72 /* InspectionPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectionPoint.h; sourceTree = "<group>"; };
 		F4FBDADB1AD765420090DA72 /* InspectionPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InspectionPoint.m; sourceTree = "<group>"; };
 		F4FBDADD1AD78B530090DA72 /* PromptView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PromptView.xib; sourceTree = "<group>"; };
@@ -247,8 +247,6 @@
 		8BC58443150ABD87000AC695 = {
 			isa = PBXGroup;
 			children = (
-				F4B29E621ADC1E740025A091 /* CoreDataCondition.h */,
-				F4B29E631ADC1E740025A091 /* CoreDataCondition.m */,
 				F49DDEB51ACCDC4800A02162 /* Core Data */,
 				F49DDEAB1ACCCB2700A02162 /* IAConstants.h */,
 				F49DDEAC1ACCCB2700A02162 /* IAConstants.m */,
@@ -587,7 +585,11 @@
 		F49DDEB51ACCDC4800A02162 /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
+				F4B29E621ADC1E740025A091 /* CoreDataCondition.h */,
+				F4B29E631ADC1E740025A091 /* CoreDataCondition.m */,
 				F453A3B01AD43E3B00319D7A /* InspectionModel.xcdatamodeld */,
+				F4B29E651ADC281B0025A091 /* InspectedCrane.h */,
+				F4B29E661ADC281B0025A091 /* InspectedCrane.m */,
 				F4FBDADF1AD804200090DA72 /* Prompt.h */,
 				F4FBDAE01AD804200090DA72 /* Prompt.m */,
 				F4FBDADD1AD78B530090DA72 /* PromptView.xib */,
@@ -595,8 +597,6 @@
 				F49DDED81ACCED1600A02162 /* InspectionCrane.m */,
 				F49DDEE31ACF33F100A02162 /* InspectionOption.h */,
 				F49DDEE41ACF33F100A02162 /* InspectionOption.m */,
-				F453A3AD1AD3354700319D7A /* InspectedCrane.h */,
-				F453A3AE1AD3354700319D7A /* InspectedCrane.m */,
 				F453A3B31AD43FB200319D7A /* Customer.h */,
 				F453A3B41AD43FB200319D7A /* Customer.m */,
 				F4FBDADA1AD765420090DA72 /* InspectionPoint.h */,
@@ -777,7 +777,6 @@
 				F49DDED91ACCED1600A02162 /* InspectionCrane.m in Sources */,
 				8BECD3BC150E920500616735 /* Options.m in Sources */,
 				F49DDEE51ACF33F100A02162 /* InspectionOption.m in Sources */,
-				F453A3AF1AD3354700319D7A /* InspectedCrane.m in Sources */,
 				F49DDEA71ACCC60C00A02162 /* SyncManager.m in Sources */,
 				8BECD3BF150E934900616735 /* OptionList.m in Sources */,
 				F4B29E641ADC1E740025A091 /* CoreDataCondition.m in Sources */,
@@ -787,6 +786,7 @@
 				F4FBDADC1AD765420090DA72 /* InspectionPoint.m in Sources */,
 				CE147B691836844C005CC483 /* InspectionManager.m in Sources */,
 				8B0787C715113796006857A8 /* Parts.m in Sources */,
+				F4B29E671ADC281B0025A091 /* InspectedCrane.m in Sources */,
 				CE486AE6180F1E4200B1B953 /* InspectionViewController.m in Sources */,
 				CE798DB7180F369600C2E5A0 /* InspectionBussiness.m in Sources */,
 				CE486ACB180C83E900B1B953 /* Inspection.m in Sources */,

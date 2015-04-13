@@ -74,7 +74,7 @@
  Get all the condtions specific to the hoist srl
  
  */
-- (NSArray *) getAllConditionsForHoistSrl;
+- (NSArray *) getAllConditionsForCrane : (InspectedCrane *) crane;
 - (void) saveAllConditionsForCrane : (InspectedCrane *) crane
-                        Conditions : (NSArray *) conditons;
+                        Conditions : (NSArray *) conditions;
 @end

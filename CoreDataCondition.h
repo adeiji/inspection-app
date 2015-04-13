@@ -17,7 +17,7 @@
 @property (nonatomic, retain) NSNumber * isApplicable;
 @property (nonatomic, retain) NSString * notes;
 @property (nonatomic, retain) NSNumber * optionSelectedIndex;
-@property (nonatomic, retain) NSManagedObject *defectivePart;
+@property (nonatomic, retain) NSString * optionSelected;
 @property (nonatomic, retain) InspectedCrane *inspectedCrane;
 
 @end

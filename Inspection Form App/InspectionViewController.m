@@ -63,7 +63,7 @@
     InspectionCrane *selectedCrane = [[IACraneInspectionDetailsManager sharedManager] crane];
     _partsArray = [selectedCrane.inspectionPoints array];                                    /*Get the actual array itself from the parts object*/
     [self fillOptionArrays:_partsArray[_optionLocation]];                                    /*Get the options that are unique to this particular part.*/
-    [self changeLayout:_optionLocation PartsArray:_partsArray ItemListStore:itemListStore];
+    [self changeLayout:_optionLocation PartsArray:_partsArray ItemListStore:_itemListStore];
     [self changePickerArray:_deficiencyPickerArray];    //Send the array that contains the particular deficiencies unique to this part
     inspectionComplete = NO;
 
@@ -247,9 +247,9 @@
     InspectionCrane *selectedCrane = [[IACraneInspectionDetailsManager sharedManager] crane];
     _partsArray = [selectedCrane.inspectionPoints array];                                    /*Get the actual array itself from the parts object*/
     [self fillOptionArrays:_partsArray[_optionLocation]];                                    /*Get the options that are unique to this particular part.*/
-    itemListStore = [[ItemListConditionStorage alloc] init:[_partsArray mutableCopy]];       /*Create the itemListStore which will 
+    _itemListStore = [[ItemListConditionStorage alloc] init:[_partsArray mutableCopy]];       /*Create the itemListStore which will 
                                                                                               store all the conditions as they are set.*/
-    [self changeLayout:_optionLocation PartsArray:_partsArray ItemListStore:itemListStore];
+    [self changeLayout:_optionLocation PartsArray:_partsArray ItemListStore:_itemListStore];
     [self changePickerArray:_deficiencyPickerArray];    //Send the array that contains the particular deficiencies unique to this part
     inspectionComplete = NO;
 }
@@ -280,13 +280,13 @@
 
 
     [[IACraneInspectionDetailsManager sharedManager] saveAllConditionsForCrane:inspection.inspectedCrane
-                                                                    Conditions:itemListStore.myConditions];
+                                                                    Conditions:_itemListStore.myConditions];
     
     
     //If all the information is correctly inputed on the page, then we simply save the information.  Otherwise we go back so that the user can change whatever is necessary.
     if ([self validate]) {
         
-        inspection.itemList = itemListStore;
+        inspection.itemList = _itemListStore;
         
         //if all the fields entered pass then, the the customer information is inserted and all the data is saved into a table
         NSUInteger selectedRow = [_deficiencyPicker selectedRowInComponent:0];
@@ -506,23 +506,25 @@
 - (void) nextPressed {
     if (_optionLocation < [_partsArray count] - 1) {
         NSUInteger selectedRow = [_deficiencyPicker selectedRowInComponent:0];
-        InspectionPoint *myDeficientPart = [_pickerData objectAtIndex:selectedRow];
+        InspectionOption *option = [_pickerData objectAtIndex:selectedRow];
+        NSString *myDeficientPart = option.name;
         [self saveInfo:_txtNotes.text :_deficiencySwitch.on:[_deficiencyPicker selectedRowInComponent:0]:myDeficientPart:_applicableSwitch.on];
         _optionLocation = _optionLocation + 1;
         [self fillOptionArrays:_partsArray[_optionLocation]];
         [self changePickerArray:_deficiencyPickerArray];
-        [self changeLayout:_optionLocation PartsArray:_partsArray ItemListStore:itemListStore];
+        [self changeLayout:_optionLocation PartsArray:_partsArray ItemListStore:_itemListStore];
     }
 }
 - (void) previousPressed {
     if (_optionLocation > 0) {
         NSUInteger selectedRow = [_deficiencyPicker selectedRowInComponent:0];
-        InspectionPoint *myDeficientPart = [_pickerData objectAtIndex:selectedRow];
+        InspectionOption *option = [_pickerData objectAtIndex:selectedRow];
+        NSString *myDeficientPart = option.name;
         [self saveInfo:_txtNotes.text :_deficiencySwitch.on:[_deficiencyPicker selectedRowInComponent:0]:myDeficientPart:_applicableSwitch.on];
         _optionLocation = _optionLocation - 1;
         [self fillOptionArrays:_partsArray[_optionLocation]];
         [self changePickerArray:_deficiencyPickerArray];
-        [self changeLayout:_optionLocation PartsArray:_partsArray ItemListStore:itemListStore];
+        [self changeLayout:_optionLocation PartsArray:_partsArray ItemListStore:_itemListStore];
     }
 }
 
@@ -531,12 +533,12 @@
 - (void) saveInfo : (NSString *) myNotes
                   : (BOOL) myDeficient
                   : (NSUInteger) mySelection
-                  : (InspectionPoint *) myDeficientPart
+                  : (NSString *) myDeficientPart
                   : (BOOL) myApplicable
 {
     Condition *myCondition = [[Condition alloc] initWithParameters:myNotes Defficiency:myDeficient PickerSelection:mySelection DeficientPart:myDeficientPart Applicable:myApplicable];
 
-    [itemListStore setCondition:_optionLocation Condition : myCondition];
+    [_itemListStore setCondition:_optionLocation Condition : myCondition];
     myCondition = nil;
 }
 
@@ -595,12 +597,12 @@
     if (_txtNotes != nil)
     {
         NSUInteger selectedRow = [_deficiencyPicker selectedRowInComponent:0];
-        InspectionPoint *myDeficientPart = [_pickerData objectAtIndex:selectedRow];
+        InspectionOption *myDeficientPart = [_pickerData objectAtIndex:selectedRow];
         [self saveInfo:_txtNotes.text :_deficiencySwitch.on:[_deficiencyPicker selectedRowInComponent:0]:myDeficientPart:_applicableSwitch.on];
         _optionLocation = optionLocation;
         [self fillOptionArrays:currentPart];
         [self changePickerArray:_deficiencyPickerArray];
-        [self changeLayout:_optionLocation PartsArray:_partsArray ItemListStore:itemListStore];
+        [self changeLayout:_optionLocation PartsArray:_partsArray ItemListStore:_itemListStore];
     }
 }
 //This method gets the view controller that will display the UIDocumentInteractionController preview

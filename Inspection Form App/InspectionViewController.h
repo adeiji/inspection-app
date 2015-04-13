@@ -14,6 +14,8 @@
 #import "PromptView.h"
 #import <Masonry/Masonry.h>
 
+@class ItemListConditionStorage, Inspection;
+
 @interface InspectionViewController : UIViewController <UIPickerViewDelegate, UIPickerViewDataSource, PartSelectionDelegate, UIDocumentInteractionControllerDelegate>
 {
 
@@ -27,7 +29,7 @@
     BOOL testLoad;
     BOOL proofLoadDescription;
     Inspection *inspection;
-    ItemListConditionStorage *itemListStore;
+    
     NSString *overallRating;
     NSArray *_deficiencyPickerArray;
     PromptView *promptView;
@@ -44,6 +46,7 @@
 @property (strong, nonatomic) NSString *craneType;
 @property (strong, nonatomic) NSArray *partsArray;
 @property (strong, nonatomic) NSString *hoistSrlToLoad;
+@property (strong, nonatomic) ItemListConditionStorage *itemListStore;
 @property BOOL validated;
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *createCertificateButton;

@@ -31,10 +31,19 @@
     return (Condition*)[myConditions objectAtIndex:input];
 }
 
-- (void) loadConditionsWithHoistSrl {
+- (void) loadConditionsForCrane : (InspectedCrane *) crane {
     
-    
-    
+    NSArray *conditions = [[IACraneInspectionDetailsManager sharedManager] getAllConditionsForCrane : crane];
+    myConditions = [NSMutableArray new];
+    for (CoreDataCondition *coreDataCondition in conditions) {
+        Condition *myCondition = [[Condition alloc] init];
+        myCondition.notes = coreDataCondition.notes;
+        myCondition.pickerSelection = coreDataCondition.optionSelectedIndex;
+        myCondition.deficientPart = coreDataCondition.optionSelected;
+        myCondition.applicable = coreDataCondition.isApplicable == [NSNumber numberWithInt:1] ? YES : NO;
+        myCondition.deficient = coreDataCondition.isDeficient == [NSNumber numberWithInt:1] ? YES : NO;
+        [myConditions addObject:myCondition];
+    }
 }
 
 - (void) setCondition :(int)input

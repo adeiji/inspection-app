@@ -10,6 +10,9 @@
 #import "Customer.h"
 #import "ItemListConditionStorage.h"
 #import "InspectedCrane.h"
+
+@class ItemListConditionStorage;
+
 @interface Inspection : NSObject
 
 @property (strong, nonatomic) InspectedCrane* inspectedCrane;

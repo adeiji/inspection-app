@@ -19,7 +19,7 @@
 #import "IAConstants.h"
 #import "SyncManager.h"
 
-@class DBRestClient, InspectionViewController;
+@class DBRestClient, InspectionViewController, ItemListConditionStorage, Parts, Inspection;
 
 @interface ViewController : UIViewController
 <UIPickerViewDelegate, UIPickerViewDataSource, MFMailComposeViewControllerDelegate, UIDocumentInteractionControllerDelegate, UIAlertViewDelegate, UIPickerViewAccessibilityDelegate, UITextFieldDelegate> {
