@@ -24,6 +24,7 @@
     //Add a default condition for every single part that there is.
     for (int i=0; i<input.count; i++) {
         Condition *myCondition = [[Condition alloc] init];
+        [myCondition setOptionLocation:i];
         [myConditions addObject:myCondition];
     }
 }
@@ -33,16 +34,23 @@
 
 - (void) loadConditionsForCrane : (InspectedCrane *) crane {
     
-    NSArray *conditions = [[IACraneInspectionDetailsManager sharedManager] getAllConditionsForCrane : crane];
-    myConditions = [NSMutableArray new];
-    for (CoreDataCondition *coreDataCondition in conditions) {
-        Condition *myCondition = [[Condition alloc] init];
-        myCondition.notes = coreDataCondition.notes;
-        myCondition.pickerSelection = coreDataCondition.optionSelectedIndex;
-        myCondition.deficientPart = coreDataCondition.optionSelected;
-        myCondition.applicable = coreDataCondition.isApplicable == [NSNumber numberWithInt:1] ? YES : NO;
-        myCondition.deficient = coreDataCondition.isDeficient == [NSNumber numberWithInt:1] ? YES : NO;
-        [myConditions addObject:myCondition];
+    if ([crane.conditions count] > 0)
+    {
+        NSOrderedSet *conditions = crane.conditions;
+        NSSortDescriptor *sorter = [NSSortDescriptor sortDescriptorWithKey:@"optionLocation" ascending:YES];
+        NSArray *sortDescriptors = [NSArray arrayWithObject:sorter];
+        NSArray *sortedConditions = [conditions sortedArrayUsingDescriptors:sortDescriptors];
+        myConditions = [NSMutableArray new];
+        for (CoreDataCondition *coreDataCondition in sortedConditions) {
+            Condition *myCondition = [[Condition alloc] init];
+            myCondition.notes = coreDataCondition.notes;
+            myCondition.pickerSelection = coreDataCondition.optionSelectedIndex;
+            myCondition.deficientPart = coreDataCondition.optionSelected;
+            myCondition.applicable = coreDataCondition.isApplicable == [NSNumber numberWithInt:1] ? YES : NO;
+            myCondition.deficient = coreDataCondition.isDeficient == [NSNumber numberWithInt:1] ? YES : NO;
+            myCondition.optionLocation = [coreDataCondition.optionLocation intValue];
+            [myConditions addObject:myCondition];
+        }
     }
 }
 

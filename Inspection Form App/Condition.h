@@ -16,6 +16,7 @@
 @property NSUInteger pickerSelection;
 @property (strong, nonatomic) NSString *deficientPart;
 @property BOOL applicable;
+@property NSInteger *optionLocation;
 
 - (Condition *) initWithParameters : (NSString *) myNotes
                        Defficiency : (BOOL) myDeficient

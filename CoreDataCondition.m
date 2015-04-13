@@ -16,6 +16,7 @@
 @dynamic isApplicable;
 @dynamic notes;
 @dynamic optionSelectedIndex;
+@dynamic optionLocation;
 @dynamic optionSelected;
 @dynamic inspectedCrane;
 

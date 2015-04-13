@@ -18,13 +18,14 @@
         _notes = @"";
         _pickerSelection = 0;
         _deficientPart = nil;
+        _optionLocation = 0;
     }
     return self;
 }
 - (Condition *) initWithParameters : (NSString *) myNotes
                        Defficiency : (BOOL) myDeficient
                    PickerSelection : (NSUInteger *) myPickerSelection
-                     DeficientPart : (InspectionOption *) myDeficientPart
+                     DeficientPart : (NSString *) myDeficientPart
                         Applicable : (BOOL) myApplicable
 {
     if (self=[super init]) {

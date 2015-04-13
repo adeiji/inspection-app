@@ -317,9 +317,18 @@
     return fetchedObjects;
 }
 
+- (void) removeAllConditionsForCrane : (InspectedCrane *) crane {
+    for (CoreDataCondition *condition in crane.conditions) {
+        [_context deleteObject:condition];
+    }
+    
+    [((AppDelegate *) [[UIApplication sharedApplication] delegate]) saveContext];
+}
+
 - (void) saveAllConditionsForCrane : (InspectedCrane *) crane
                         Conditions : (NSArray *) conditions;
 {
+    [self removeAllConditionsForCrane:crane];
     NSManagedObjectContext *context = [((AppDelegate *) [[UIApplication sharedApplication] delegate]) managedObjectContext];
     NSEntityDescription *entity = [NSEntityDescription entityForName:kCoreDataClassCondition inManagedObjectContext:context];
 
@@ -331,6 +340,7 @@
         coreDataCondition.optionSelectedIndex = [NSNumber numberWithInteger:condition.pickerSelection];
         coreDataCondition.optionSelected = condition.deficientPart;
         coreDataCondition.inspectedCrane = crane;
+        coreDataCondition.optionLocation = [NSNumber numberWithInteger:condition.optionLocation];
     }
     
     [((AppDelegate *) [[UIApplication sharedApplication] delegate]) saveContext];

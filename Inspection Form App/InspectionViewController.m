@@ -290,10 +290,10 @@
         
         //if all the fields entered pass then, the the customer information is inserted and all the data is saved into a table
         NSUInteger selectedRow = [_deficiencyPicker selectedRowInComponent:0];
-        NSString *myDeficientPart = [[_deficiencyPicker delegate]
+        NSString *myDeficientPart = ((InspectionOption *)[[_deficiencyPicker delegate]
                                      pickerView:_deficiencyPicker
                                      titleForRow:selectedRow
-                                     forComponent:0];
+                                     forComponent:0]).name;
         UIAlertView *alert = [[UIAlertView alloc]
                               initWithTitle:@"Overall Rating"
                               message:@"What is the overall condition rating?"
@@ -598,7 +598,7 @@
     {
         NSUInteger selectedRow = [_deficiencyPicker selectedRowInComponent:0];
         InspectionOption *myDeficientPart = [_pickerData objectAtIndex:selectedRow];
-        [self saveInfo:_txtNotes.text :_deficiencySwitch.on:[_deficiencyPicker selectedRowInComponent:0]:myDeficientPart:_applicableSwitch.on];
+        [self saveInfo:_txtNotes.text :_deficiencySwitch.on:[_deficiencyPicker selectedRowInComponent:0]:myDeficientPart.name:_applicableSwitch.on];
         _optionLocation = optionLocation;
         [self fillOptionArrays:currentPart];
         [self changePickerArray:_deficiencyPickerArray];
