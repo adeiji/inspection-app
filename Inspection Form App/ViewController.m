@@ -112,6 +112,16 @@
         _txtAddress.text = customer.address;
         _txtEmail.text = customer.email;
     }
+    
+    int counter = 0;
+    for (InspectionCrane *myCrane in _craneDescriptionsArray) {
+        if ([[myCrane.name lowercaseString] isEqualToString:[crane.type lowercaseString]])
+        {
+            [_craneDescriptionPickerView selectRow:counter inComponent:0 animated:YES];
+        }
+        
+        counter ++;
+    }
 }
 
 - (void) resetCraneTypePickerView {

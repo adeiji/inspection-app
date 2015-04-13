@@ -168,13 +168,17 @@ static NSString *const OPTIONS = @"options";
         InspectedCrane *crane = (InspectedCrane *) obj;
         label.text = [NSString stringWithFormat:@"%ld. %@", (long)indexPath.row + 1, crane.hoistSrl];
         
-        UIButton *loadButton = [[UIButton alloc] init];
-        [loadButton setFrame:CGRectMake(cell.frame.size.width - 100, 12, 75, 30)];
-        [loadButton setTitle:@"Load" forState:UIControlStateNormal];
-        [loadButton setBackgroundColor:[UIColor colorWithRed:66.0/255.0f green:188.0/255.0f blue:98.0f/255.0f alpha:1.0f]];
-        loadButton.tag = indexPath.row;
-        [loadButton addTarget:self action:@selector(loadCraneConditions:) forControlEvents:UIControlEventTouchUpInside];
-        [cell addSubview:loadButton];
+        if ([crane.conditions count] > 0)
+        {
+            UIButton *loadButton = [[UIButton alloc] init];
+            [loadButton setFrame:CGRectMake(cell.frame.size.width - 100, 12, 75, 30)];
+            [loadButton setTitle:@"Load" forState:UIControlStateNormal];
+            [loadButton setBackgroundColor:[UIColor colorWithRed:66.0/255.0f green:188.0/255.0f blue:98.0f/255.0f alpha:1.0f]];
+            loadButton.tag = indexPath.row;
+            [loadButton addTarget:self action:@selector(loadCraneConditions:) forControlEvents:UIControlEventTouchUpInside];
+            [loadButton setShowsTouchWhenHighlighted:YES];
+            [cell addSubview:loadButton];
+        }
     }
     else {
         id obj = [_tableData objectAtIndex:indexPath.row];

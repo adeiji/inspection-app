@@ -66,7 +66,7 @@
 		F49DDEE51ACF33F100A02162 /* InspectionOption.m in Sources */ = {isa = PBXBuildFile; fileRef = F49DDEE41ACF33F100A02162 /* InspectionOption.m */; };
 		F4B29E641ADC1E740025A091 /* CoreDataCondition.m in Sources */ = {isa = PBXBuildFile; fileRef = F4B29E631ADC1E740025A091 /* CoreDataCondition.m */; };
 		F4B29E671ADC281B0025A091 /* InspectedCrane.m in Sources */ = {isa = PBXBuildFile; fileRef = F4B29E661ADC281B0025A091 /* InspectedCrane.m */; };
-		F4B29E6B1ADC56660025A091 /* lvwwdcranes.plist in Resources */ = {isa = PBXBuildFile; fileRef = F4B29E6A1ADC56660025A091 /* lvwwdcranes.plist */; };
+		F4B29E6D1ADC6A620025A091 /* lvwwdcranes.plist in Resources */ = {isa = PBXBuildFile; fileRef = F4B29E6C1ADC6A620025A091 /* lvwwdcranes.plist */; };
 		F4FBDADC1AD765420090DA72 /* InspectionPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = F4FBDADB1AD765420090DA72 /* InspectionPoint.m */; };
 		F4FBDADE1AD78B530090DA72 /* PromptView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4FBDADD1AD78B530090DA72 /* PromptView.xib */; };
 		F4FBDAE11AD804200090DA72 /* Prompt.m in Sources */ = {isa = PBXBuildFile; fileRef = F4FBDAE01AD804200090DA72 /* Prompt.m */; };
@@ -181,7 +181,7 @@
 		F4B29E631ADC1E740025A091 /* CoreDataCondition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataCondition.m; sourceTree = "<group>"; };
 		F4B29E651ADC281B0025A091 /* InspectedCrane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectedCrane.h; sourceTree = "<group>"; };
 		F4B29E661ADC281B0025A091 /* InspectedCrane.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InspectedCrane.m; sourceTree = "<group>"; };
-		F4B29E6A1ADC56660025A091 /* lvwwdcranes.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = lvwwdcranes.plist; sourceTree = "<group>"; };
+		F4B29E6C1ADC6A620025A091 /* lvwwdcranes.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = lvwwdcranes.plist; sourceTree = "<group>"; };
 		F4FBDADA1AD765420090DA72 /* InspectionPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectionPoint.h; sourceTree = "<group>"; };
 		F4FBDADB1AD765420090DA72 /* InspectionPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InspectionPoint.m; sourceTree = "<group>"; };
 		F4FBDADD1AD78B530090DA72 /* PromptView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PromptView.xib; sourceTree = "<group>"; };
@@ -332,7 +332,7 @@
 		8BC58459150ABD87000AC695 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				F4B29E6A1ADC56660025A091 /* lvwwdcranes.plist */,
+				F4B29E6C1ADC6A620025A091 /* lvwwdcranes.plist */,
 				CEFD6D6F183A8705001764E9 /* Default-568h@2x.png */,
 				8BC5845A150ABD87000AC695 /* Inspection Form App-Info.plist */,
 				8BC5845B150ABD87000AC695 /* InfoPlist.strings */,
@@ -699,7 +699,7 @@
 				CEFD6D72183A87D8001764E9 /* JobInfoView.xib in Resources */,
 				CE8028AD1837337C00B40DCB /* iPhoneStoryboard.storyboard in Resources */,
 				CE3992751805FD08003AE30B /* iPadMainStoryboard.storyboard in Resources */,
-				F4B29E6B1ADC56660025A091 /* lvwwdcranes.plist in Resources */,
+				F4B29E6D1ADC6A620025A091 /* lvwwdcranes.plist in Resources */,
 				8B6BA1831708BF1B00E08D9D /* autograph_x.png in Resources */,
 				8B6BA1841708BF1B00E08D9D /* t1_logo.png in Resources */,
 				CE9A27381716A63200FE3D32 /* ipadAppLogo.jpg in Resources */,

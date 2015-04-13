@@ -159,13 +159,23 @@
     NSArray *lvwwdCranes = [[NSArray alloc] initWithContentsOfFile:plistFilePath];
     NSEntityDescription *entity = [NSEntityDescription entityForName:kCoreDataClassInspectedCrane inManagedObjectContext:_context];
     
+    NSEntityDescription *customerEntity = [NSEntityDescription entityForName:kCoreDataClassCustomer inManagedObjectContext:_context];
+    
     for (id dictionary in lvwwdCranes) {
+        
+        Customer *customer = [[Customer alloc] initWithEntity:customerEntity insertIntoManagedObjectContext:_context];
+        customer.name = @"LVWWD";
+        customer.contact = @"DAVID BARNES";
+        customer.address = @"2545 WATER DISTRICT AVE";
+        customer.email = @"EMAIL@EMAIL.COM";
+        
         InspectedCrane *inspectedCrane = [[InspectedCrane alloc] initWithEntity:entity insertIntoManagedObjectContext:_context];
         inspectedCrane.type = dictionary[@"TYPE"];
         inspectedCrane.capacity = dictionary[@"CAPACITY"];
         inspectedCrane.hoistMdl = dictionary[@"MDL:HOIST"];
         inspectedCrane.mfg = dictionary[@"SRL: CRANE/MFG"];
         inspectedCrane.hoistSrl = dictionary[@"SRL: HOIST"];
+        inspectedCrane.customer = customer;
     }
     
     [((AppDelegate *) [[UIApplication sharedApplication] delegate]) saveContext];
@@ -178,7 +188,6 @@
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:kCoreDataClassInspectedCrane inManagedObjectContext:_context];
     [fetchRequest setEntity:entity];
-    // Specify criteria for filtering which objects to fetch
     
     for (id dictionary in lvwwdCranes) {
         NSString *hoistSrlToDelete = dictionary[@"SRL: HOIST"];
@@ -192,9 +201,27 @@
         }
     }
     
+    [self deleteAllWaterDistrictCustomers];
+    
     [((AppDelegate *) [[UIApplication sharedApplication] delegate]) saveContext];
 }
 
+- (void) deleteAllWaterDistrictCustomers {
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:kCoreDataClassCustomer inManagedObjectContext:_context];
+    [fetchRequest setEntity:entity];
+    // Specify criteria for filtering which objects to fetch
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name == %@", @"LVWWD"];
+    [fetchRequest setPredicate:predicate];
+    
+    NSError *error = nil;
+    NSArray *fetchedObjects = [_context executeFetchRequest:fetchRequest error:&error];
+    if (fetchedObjects == nil) {
+        for (id object in fetchedObjects) {
+            [_context deleteObject:object];
+        }
+    }
+}
 /*
  
  Get all the inspection details from the Database
