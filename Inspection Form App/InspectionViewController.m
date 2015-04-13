@@ -278,6 +278,11 @@
 //On the deficiency information pages, when you press the submit button
 - (IBAction)submitPressed:(id)sender {
 
+
+    [[IACraneInspectionDetailsManager sharedManager] saveAllConditionsForCrane:inspection.inspectedCrane
+                                                                    Conditions:itemListStore.myConditions];
+    
+    
     //If all the information is correctly inputed on the page, then we simply save the information.  Otherwise we go back so that the user can change whatever is necessary.
     if ([self validate]) {
         

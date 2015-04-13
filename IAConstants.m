@@ -25,6 +25,7 @@ NSString *const kCoreDataClassAttributeHoistSrl = @"hoistSrl";
 NSString *const kSelectedInspectedCrane = @"selectedInspectedCrane";
 NSString *const kCoreDataClassCustomer = @"Customer";
 NSString *const kCoreDataClassPrompt = @"Prompt";
+NSString *const kCoreDataClassCondition = @"Condition";
 
 
 // Notification Center

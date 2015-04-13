@@ -69,11 +69,14 @@
 }
 
 - (void) initiatePartsForSelectedCrane {
-    NSInteger selectedRow = [_craneDescriptionPickerView selectedRowInComponent:0];
-    _inspectionViewController.optionLocation = 0;
-    InspectionCrane *crane = [_craneDescriptionsArray objectAtIndex:selectedRow];
-    [[IACraneInspectionDetailsManager sharedManager] setCrane:crane];
-    [_inspectionViewController initiateParts];
+    if ([_craneDescriptionsArray count] > 0)
+    {
+        NSInteger selectedRow = [_craneDescriptionPickerView selectedRowInComponent:0];
+        _inspectionViewController.optionLocation = 0;
+        InspectionCrane *crane = [_craneDescriptionsArray objectAtIndex:selectedRow];
+        [[IACraneInspectionDetailsManager sharedManager] setCrane:crane];
+        [_inspectionViewController initiateParts];
+    }
 }
 
 - (void) addObservers {
@@ -95,7 +98,7 @@
     InspectedCrane *crane = [notification.userInfo objectForKey:kSelectedInspectedCrane];
     
     _txtCap.text = crane.capacity;
-#warning - need to set the picker view to the crane type
+    #warning - need to set the picker view to the crane type
     _txtCraneSrl.text = crane.craneSrl;
     _txtEquipNum.text = crane.equipmentNumber;
     _txtHoistMdl.text = crane.hoistMdl;

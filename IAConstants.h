@@ -23,6 +23,8 @@ FOUNDATION_EXPORT NSString *const kCoreDataClassCustomer;
 FOUNDATION_EXPORT NSString *const kPrompts;
 FOUNDATION_EXPORT NSString *const kCoreDataClassPrompt;
 FOUNDATION_EXPORT NSString *const kRequiresDeficiency;
+FOUNDATION_EXPORT NSString *const kCoreDataClassCondition;
+
 
 // Notification Center
 FOUNDATION_EXPORT NSString *const NOTIFICATION_CRANE_DETAILS_FINISHED_SAVING;

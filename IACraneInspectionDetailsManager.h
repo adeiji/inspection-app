@@ -13,6 +13,7 @@
 #import "InspectionPoint.h"
 #import <Parse/Parse.h>
 #import "Prompt.h"
+#import "CoreDataCondition.h"
 
 @interface IACraneInspectionDetailsManager : NSObject
 
@@ -67,4 +68,13 @@
 
 - (UIView *) showDownloadProgressBar;
 - (NSArray *) getPromptsFromInspectionPoint : (InspectionPoint *) point;
+
+/*
+ 
+ Get all the condtions specific to the hoist srl
+ 
+ */
+- (NSArray *) getAllConditionsForHoistSrl;
+- (void) saveAllConditionsForCrane : (InspectedCrane *) crane
+                        Conditions : (NSArray *) conditons;
 @end

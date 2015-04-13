@@ -137,8 +137,6 @@
             [cranesArray addObject:craneObject];
 
         }
-        
-//        [((AppDelegate *) [[UIApplication sharedApplication] delegate]) saveContext];
 
         if ([context save:&error])
         {
@@ -317,6 +315,25 @@
     }
     
     return fetchedObjects;
+}
+
+- (void) saveAllConditionsForCrane : (InspectedCrane *) crane
+                        Conditions : (NSArray *) conditons;
+{
+    NSManagedObjectContext *context = [((AppDelegate *) [[UIApplication sharedApplication] delegate]) managedObjectContext];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:kCoreDataClassCondition inManagedObjectContext:context];
+    
+    for (Condition *condition in conditons) {
+        CoreDataCondition *coreDataCondition = [[CoreDataCondition alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
+        coreDataCondition.isDeficient = [NSNumber numberWithBool:condition.deficient];
+        coreDataCondition.isApplicable = [NSNumber numberWithBool:condition.applicable];
+        coreDataCondition.notes = condition.notes;
+        coreDataCondition.optionSelectedIndex = [NSNumber numberWithInteger:condition.pickerSelection];
+        coreDataCondition.defectivePart = condition.deficientPart;
+        coreDataCondition.inspectedCrane = crane;
+    }
+    
+    [((AppDelegate *) [[UIApplication sharedApplication] delegate]) saveContext];
 }
 
 

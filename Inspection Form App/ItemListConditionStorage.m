@@ -30,6 +30,13 @@
 - (Condition *)getCondition:(int)input {
     return (Condition*)[myConditions objectAtIndex:input];
 }
+
+- (void) loadConditionsWithHoistSrl {
+    
+    
+    
+}
+
 - (void) setCondition :(int)input
             Condition : (Condition *) myCondition {
     [[myConditions objectAtIndex:input] setDeficient:myCondition.deficient];

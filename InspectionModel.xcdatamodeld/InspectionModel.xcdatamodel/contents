@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6751" systemVersion="14B25" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Condition" representedClassName="Condition" syncable="YES">
+        <attribute name="isApplicable" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="isDeficient" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="notes" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="optionSelectedIndex" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="defectivePart" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="InspectedPoint" syncable="YES"/>
+        <relationship name="inspectedCrane" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="InspectedCrane" inverseName="conditions" inverseEntity="InspectedCrane" syncable="YES"/>
+    </entity>
     <entity name="Customer" representedClassName="Customer" syncable="YES">
         <attribute name="address" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="contact" optional="YES" attributeType="String" syncable="YES"/>
@@ -17,6 +25,7 @@
         <attribute name="hoistSrl" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="mfg" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="conditions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Condition" inverseName="inspectedCrane" inverseEntity="Condition" syncable="YES"/>
         <relationship name="customer" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Customer" inverseName="inspectedCrane" inverseEntity="Customer" syncable="YES"/>
     </entity>
     <entity name="InspectedOption" syncable="YES">
@@ -52,13 +61,14 @@
         <relationship name="inspectionPoint" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="InspectionPoint" inverseName="prompts" inverseEntity="InspectionPoint" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Customer" positionX="72" positionY="126" width="128" height="120"/>
-        <element name="InspectedCrane" positionX="36" positionY="54" width="128" height="195"/>
+        <element name="Customer" positionX="72" positionY="126" width="128" height="118"/>
+        <element name="InspectedCrane" positionX="36" positionY="54" width="128" height="208"/>
         <element name="InspectedOption" positionX="72" positionY="81" width="128" height="73"/>
         <element name="InspectedPoint" positionX="54" positionY="63" width="128" height="88"/>
         <element name="InspectionCrane" positionX="0" positionY="0" width="128" height="88"/>
         <element name="InspectionOption" positionX="0" positionY="0" width="128" height="88"/>
         <element name="InspectionPoint" positionX="0" positionY="0" width="128" height="118"/>
         <element name="Prompt" positionX="36" positionY="108" width="128" height="103"/>
+        <element name="Condition" positionX="36" positionY="108" width="128" height="133"/>
     </elements>
 </model>

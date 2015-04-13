@@ -65,6 +65,7 @@
 		F49DDEB11ACCDA5C00A02162 /* IACraneInspectionDetailsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F49DDEB01ACCDA5C00A02162 /* IACraneInspectionDetailsManager.m */; };
 		F49DDED91ACCED1600A02162 /* InspectionCrane.m in Sources */ = {isa = PBXBuildFile; fileRef = F49DDED81ACCED1600A02162 /* InspectionCrane.m */; };
 		F49DDEE51ACF33F100A02162 /* InspectionOption.m in Sources */ = {isa = PBXBuildFile; fileRef = F49DDEE41ACF33F100A02162 /* InspectionOption.m */; };
+		F4B29E641ADC1E740025A091 /* CoreDataCondition.m in Sources */ = {isa = PBXBuildFile; fileRef = F4B29E631ADC1E740025A091 /* CoreDataCondition.m */; };
 		F4FBDADC1AD765420090DA72 /* InspectionPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = F4FBDADB1AD765420090DA72 /* InspectionPoint.m */; };
 		F4FBDADE1AD78B530090DA72 /* PromptView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4FBDADD1AD78B530090DA72 /* PromptView.xib */; };
 		F4FBDAE11AD804200090DA72 /* Prompt.m in Sources */ = {isa = PBXBuildFile; fileRef = F4FBDAE01AD804200090DA72 /* Prompt.m */; };
@@ -177,6 +178,8 @@
 		F49DDED81ACCED1600A02162 /* InspectionCrane.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InspectionCrane.m; sourceTree = "<group>"; };
 		F49DDEE31ACF33F100A02162 /* InspectionOption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectionOption.h; sourceTree = "<group>"; };
 		F49DDEE41ACF33F100A02162 /* InspectionOption.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InspectionOption.m; sourceTree = "<group>"; };
+		F4B29E621ADC1E740025A091 /* CoreDataCondition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataCondition.h; sourceTree = "<group>"; };
+		F4B29E631ADC1E740025A091 /* CoreDataCondition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataCondition.m; sourceTree = "<group>"; };
 		F4FBDADA1AD765420090DA72 /* InspectionPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectionPoint.h; sourceTree = "<group>"; };
 		F4FBDADB1AD765420090DA72 /* InspectionPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InspectionPoint.m; sourceTree = "<group>"; };
 		F4FBDADD1AD78B530090DA72 /* PromptView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PromptView.xib; sourceTree = "<group>"; };
@@ -244,6 +247,8 @@
 		8BC58443150ABD87000AC695 = {
 			isa = PBXGroup;
 			children = (
+				F4B29E621ADC1E740025A091 /* CoreDataCondition.h */,
+				F4B29E631ADC1E740025A091 /* CoreDataCondition.m */,
 				F49DDEB51ACCDC4800A02162 /* Core Data */,
 				F49DDEAB1ACCCB2700A02162 /* IAConstants.h */,
 				F49DDEAC1ACCCB2700A02162 /* IAConstants.m */,
@@ -775,6 +780,7 @@
 				F453A3AF1AD3354700319D7A /* InspectedCrane.m in Sources */,
 				F49DDEA71ACCC60C00A02162 /* SyncManager.m in Sources */,
 				8BECD3BF150E934900616735 /* OptionList.m in Sources */,
+				F4B29E641ADC1E740025A091 /* CoreDataCondition.m in Sources */,
 				8B544612150F0C3E007E1CA9 /* GradientView.m in Sources */,
 				F453A3B51AD43FB200319D7A /* Customer.m in Sources */,
 				8B0787C415113448006857A8 /* TableViewController.m in Sources */,

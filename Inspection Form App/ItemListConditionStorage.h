@@ -18,4 +18,6 @@
 - (NSMutableArray *)getCondition:(int)input;
 - (void) setCondition : (int) input
             Condition : (Condition *) myCondition;
+- (void) loadConditionsWithHoistSrl;
+
 @end
