@@ -58,7 +58,14 @@
 
     [self fillCriteriaObjects];
     [self getPreviouslyFinishedCranes];
-    [[IACraneInspectionDetailsManager sharedManager] saveAllWaterDistrictCranes];
+    // Only run this the first time the application opens
+    NSString *firstTime = [[NSUserDefaults standardUserDefaults] objectForKey:@"firstTime"];
+    if (!firstTime)
+    {
+        [[IACraneInspectionDetailsManager sharedManager] saveAllWaterDistrictCranes];
+        [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"firstTime"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
 
     
     return YES;

@@ -110,7 +110,6 @@
     [_deficiencySwitch setOn:myCondition.deficient];
     [_applicableSwitch setOn:myCondition.applicable];
     
-    
     if ([point.prompts count] > 0) {
 
         [self displayPromptViewWithPrompts:[point.prompts array]];
@@ -278,9 +277,14 @@
 //On the deficiency information pages, when you press the submit button
 - (IBAction)submitPressed:(id)sender {
 
+    NSUInteger selectedRow = [_deficiencyPicker selectedRowInComponent:0];
+    InspectionOption *option = [_pickerData objectAtIndex:selectedRow];
+    NSString *myDeficientPart = option.name;
+    [self saveInfo:_txtNotes.text :_deficiencySwitch.on:[_deficiencyPicker selectedRowInComponent:0]:myDeficientPart:_applicableSwitch.on];
 
     [[IACraneInspectionDetailsManager sharedManager] saveAllConditionsForCrane:inspection.inspectedCrane
                                                                     Conditions:_itemListStore.myConditions];
+    
     
     
     //If all the information is correctly inputed on the page, then we simply save the information.  Otherwise we go back so that the user can change whatever is necessary.

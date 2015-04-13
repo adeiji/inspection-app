@@ -97,7 +97,6 @@
     InspectedCrane *crane = [notification.userInfo objectForKey:kSelectedInspectedCrane];
     
     _txtCap.text = crane.capacity;
-    #warning - need to set the picker view to the crane type
     _txtCraneSrl.text = crane.craneSrl;
     _txtEquipNum.text = crane.equipmentNumber;
     _txtHoistMdl.text = crane.hoistMdl;

@@ -19,5 +19,6 @@
 @dynamic optionLocation;
 @dynamic optionSelected;
 @dynamic inspectedCrane;
+@dynamic hoistSrl;
 
 @end

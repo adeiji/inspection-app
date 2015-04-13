@@ -18,7 +18,8 @@
 @property (nonatomic, retain) NSString * notes;
 @property (nonatomic, retain) NSNumber * optionSelectedIndex;
 @property (nonatomic, retain) NSString * optionSelected;
-@property (strong, nonatomic) NSNumber * optionLocation;
+@property (nonatomic, retain) NSNumber * optionLocation;
+@property (nonatomic, retain) NSString * hoistSrl;
 @property (nonatomic, retain) InspectedCrane *inspectedCrane;
 
 @end

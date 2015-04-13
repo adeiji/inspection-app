@@ -26,11 +26,3 @@
 @property (nonatomic, retain) NSOrderedSet *conditions;
 @end
 
-@interface InspectedCrane (CoreDataGeneratedAccessors)
-
-- (void)addConditionsObject:(Condition *)value;
-- (void)removeConditionsObject:(Condition *)value;
-- (void)addConditions:(NSOrderedSet *)values;
-- (void)removeConditions:(NSOrderedSet *)values;
-
-@end

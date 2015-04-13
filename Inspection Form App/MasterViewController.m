@@ -154,7 +154,7 @@ static NSString *const OPTIONS = @"options";
     
     UINavigationController *navigationController = [self.splitViewController.viewControllers objectAtIndex:1] ;
     ViewController *viewController = [navigationController.viewControllers objectAtIndex:0];
-    [viewController.inspectionViewController.itemListStore loadConditionsForCrane:crane] ;
+    [viewController.inspectionViewController.itemListStore loadConditionsForCrane:crane];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -167,8 +167,8 @@ static NSString *const OPTIONS = @"options";
     {
         InspectedCrane *crane = (InspectedCrane *) obj;
         label.text = [NSString stringWithFormat:@"%ld. %@", (long)indexPath.row + 1, crane.hoistSrl];
-        
-        if ([crane.conditions count] > 0)
+        NSArray *conditions = [[IACraneInspectionDetailsManager sharedManager] getAllConditionsForCrane:crane];
+        if ([conditions count] > 0)
         {
             UIButton *loadButton = [[UIButton alloc] init];
             [loadButton setFrame:CGRectMake(cell.frame.size.width - 100, 12, 75, 30)];

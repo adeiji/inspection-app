@@ -34,13 +34,15 @@
 
 - (void) loadConditionsForCrane : (InspectedCrane *) crane {
     
-    if ([crane.conditions count] > 0)
+    NSArray *conditionsArray = [[IACraneInspectionDetailsManager sharedManager] getAllConditionsForCrane:crane];
+    if ([conditionsArray count] > 0)
     {
-        NSOrderedSet *conditions = crane.conditions;
+        NSOrderedSet *conditions = [NSOrderedSet orderedSetWithArray:conditionsArray];
         NSSortDescriptor *sorter = [NSSortDescriptor sortDescriptorWithKey:@"optionLocation" ascending:YES];
         NSArray *sortDescriptors = [NSArray arrayWithObject:sorter];
         NSArray *sortedConditions = [conditions sortedArrayUsingDescriptors:sortDescriptors];
         myConditions = [NSMutableArray new];
+        
         for (CoreDataCondition *coreDataCondition in sortedConditions) {
             Condition *myCondition = [[Condition alloc] init];
             myCondition.notes = coreDataCondition.notes;

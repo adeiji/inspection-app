@@ -23,6 +23,6 @@
 @dynamic mfg;
 @dynamic type;
 @dynamic customer;
-@dynamic conditions;
+
 
 @end

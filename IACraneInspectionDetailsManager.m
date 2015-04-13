@@ -388,7 +388,9 @@
 }
 
 - (void) removeAllConditionsForCrane : (InspectedCrane *) crane {
-    for (CoreDataCondition *condition in crane.conditions) {
+    
+    NSArray *conditions = [self getAllConditionsForCrane:crane];
+    for (CoreDataCondition *condition in conditions) {
         [_context deleteObject:condition];
     }
     
@@ -409,8 +411,8 @@
         coreDataCondition.notes = condition.notes;
         coreDataCondition.optionSelectedIndex = [NSNumber numberWithInteger:condition.pickerSelection];
         coreDataCondition.optionSelected = condition.deficientPart;
-        coreDataCondition.inspectedCrane = crane;
         coreDataCondition.optionLocation = [NSNumber numberWithInteger:condition.optionLocation];
+        coreDataCondition.hoistSrl = crane.hoistSrl;
     }
     
     [((AppDelegate *) [[UIApplication sharedApplication] delegate]) saveContext];
@@ -422,7 +424,7 @@
     NSEntityDescription *entity = [NSEntityDescription entityForName:kCoreDataClassCondition inManagedObjectContext:_context];
     [fetchRequest setEntity:entity];
     // Specify criteria for filtering which objects to fetch
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"inspectedCrane == %@", crane];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"hoistSrl == %@", crane.hoistSrl];
     [fetchRequest setPredicate:predicate];
     NSError *error = nil;
     NSArray *fetchedObjects = [_context executeFetchRequest:fetchRequest error:&error];
