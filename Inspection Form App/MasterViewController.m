@@ -50,6 +50,10 @@ static NSString *const OPTIONS = @"options";
 {
     [super viewDidLoad];
     [self setObservers];
+}
+
+- (void) viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
     
     if (!level) // If this is the crane list
     {

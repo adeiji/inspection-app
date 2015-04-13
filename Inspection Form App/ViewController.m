@@ -601,39 +601,28 @@
     CGRect aRect = self.view.frame;
     CGSize keyboardSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
     
+    UIInterfaceOrientation currentOrientation = [UIApplication sharedApplication].statusBarOrientation;
+    
     if ((currentOrientation==UIInterfaceOrientationLandscapeLeft) ||
         (currentOrientation==UIInterfaceOrientationLandscapeRight))
     {
         //Adjust the bottom content inset of your scroll view by the keyboard height
-        UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, keyboardSize.width, 0.0);
-        
-        _scrollView.contentInset = contentInsets;
-        _scrollView.scrollIndicatorInsets = contentInsets;
-        
-        aRect.size.height -=keyboardSize.width;
-        if (!CGRectContainsPoint(aRect, activeField.superview.frame.origin)) {
-            CGPoint scrollPoint = CGPointMake(0.0, keyboardSize.width + activeField.superview.frame.size.height);
-            [_scrollView setContentOffset:scrollPoint animated:YES];
-        }
-    }
-    else if ((currentOrientation==UIInterfaceOrientationPortrait) ||
-             (currentOrientation==UIInterfaceOrientationPortraitUpsideDown))
-    {
         UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, keyboardSize.height, 0.0);
+        
         _scrollView.contentInset = contentInsets;
         _scrollView.scrollIndicatorInsets = contentInsets;
         
         aRect.size.height -=keyboardSize.height;
         if (!CGRectContainsPoint(aRect, activeField.superview.frame.origin)) {
-            CGPoint scrollPoint = CGPointMake(0.0, keyboardSize.height);
+            CGPoint scrollPoint = CGPointMake(0.0, keyboardSize.width + activeField.superview.frame.size.height);
             [_scrollView setContentOffset:scrollPoint animated:YES];
         }
     }
 }
 - (void) keyboardWillBeHidden:(NSNotification *) notification {
     UIEdgeInsets contentInsets = UIEdgeInsetsZero;
-//    _CustomerInfoScrollView.contentInset = contentInsets;
-//    _CustomerInfoScrollView.scrollIndicatorInsets = contentInsets;
+    _scrollView.contentInset = contentInsets;
+    _scrollView.scrollIndicatorInsets = contentInsets;
 }
 
 - (void) viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {

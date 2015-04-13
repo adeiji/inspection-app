@@ -57,7 +57,6 @@
     bool changeLayoutNeeded;
     NSString* iosVersion;
     Inspection *inspection;
-    int currentOrientation;
 }
 
 //Dropbox Objects

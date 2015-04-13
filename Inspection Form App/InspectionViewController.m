@@ -141,19 +141,27 @@
     }];
 }
 - (IBAction)promptOkPressed:(id)sender {
-    _txtNotes.text = [NSString stringWithFormat:@"%@ %@ - %@\n", _txtNotes.text, promptView.lblPromptText.text ,promptView.txtPromptResult.text];
     
-    if (promptView.promptLocation < [promptView.prompts count] - 1) {
-        promptView.promptLocation ++;
-        Prompt *prompt = promptView.prompts[promptView.promptLocation];
-        promptView.lblPromptText.text = prompt.title;
-        [self.view setUserInteractionEnabled:NO];
+    if (![promptView.txtPromptResult.text isEqualToString:@""])
+    {
+        _txtNotes.text = [NSString stringWithFormat:@"%@ %@ - %@\n", _txtNotes.text, promptView.lblPromptText.text ,promptView.txtPromptResult.text];
+        
+        if (promptView.promptLocation < [promptView.prompts count] - 1) {
+            promptView.promptLocation ++;
+            Prompt *prompt = promptView.prompts[promptView.promptLocation];
+            promptView.lblPromptText.text = prompt.title;
+            [self.view setUserInteractionEnabled:NO];
+        }
+        else {
+            [promptView removeFromSuperview];
+            promptView = nil;
+            [self.view setUserInteractionEnabled:YES];
+            [[NSNotificationCenter defaultCenter] postNotificationName:UI_PROMPT_HIDDEN object:nil];
+        }
     }
-    else {
-        [promptView removeFromSuperview];
-        promptView = nil;
-        [self.view setUserInteractionEnabled:YES];
-        [[NSNotificationCenter defaultCenter] postNotificationName:UI_PROMPT_HIDDEN object:nil];
+    else
+    {
+        promptView.txtPromptResult.placeholder = @"Please enter a value, or click cancel";
     }
 }
 
