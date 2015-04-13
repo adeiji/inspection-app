@@ -43,6 +43,7 @@
 @property (strong, nonatomic) IBOutlet NSArray *pickerData;
 @property (strong, nonatomic) NSString *craneType;
 @property (strong, nonatomic) NSArray *partsArray;
+@property (strong, nonatomic) NSString *hoistSrlToLoad;
 @property BOOL validated;
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *createCertificateButton;

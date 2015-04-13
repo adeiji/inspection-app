@@ -54,14 +54,19 @@
     [self.view addGestureRecognizer:gestureRecognizerLeft];
     
     inspection = [InspectionManager sharedManager].inspection;
-    
-    //[self.view setTranslatesAutoresizingMaskIntoConstraints:NO];
 }
 
 
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self initiateParts];
+    
+    InspectionCrane *selectedCrane = [[IACraneInspectionDetailsManager sharedManager] crane];
+    _partsArray = [selectedCrane.inspectionPoints array];                                    /*Get the actual array itself from the parts object*/
+    [self fillOptionArrays:_partsArray[_optionLocation]];                                    /*Get the options that are unique to this particular part.*/
+    [self changeLayout:_optionLocation PartsArray:_partsArray ItemListStore:itemListStore];
+    [self changePickerArray:_deficiencyPickerArray];    //Send the array that contains the particular deficiencies unique to this part
+    inspectionComplete = NO;
+
 }
 
 //Checks to see which way the user swiped
@@ -240,10 +245,10 @@
 {
     //We need to get the parts that are unique to this particular crane.
     InspectionCrane *selectedCrane = [[IACraneInspectionDetailsManager sharedManager] crane];
-    _partsArray = [selectedCrane.inspectionPoints array];    //Get the actual array itself from the parts object
-    [self fillOptionArrays:_partsArray[_optionLocation]];     //Get the options that are unique to this particular part.
-    itemListStore = [[ItemListConditionStorage alloc] init:[_partsArray mutableCopy]];       /*Create the itemListStore which will
-                                                                                  store all the conditions as they are set.*/
+    _partsArray = [selectedCrane.inspectionPoints array];                                    /*Get the actual array itself from the parts object*/
+    [self fillOptionArrays:_partsArray[_optionLocation]];                                    /*Get the options that are unique to this particular part.*/
+    itemListStore = [[ItemListConditionStorage alloc] init:[_partsArray mutableCopy]];       /*Create the itemListStore which will 
+                                                                                              store all the conditions as they are set.*/
     [self changeLayout:_optionLocation PartsArray:_partsArray ItemListStore:itemListStore];
     [self changePickerArray:_deficiencyPickerArray];    //Send the array that contains the particular deficiencies unique to this part
     inspectionComplete = NO;

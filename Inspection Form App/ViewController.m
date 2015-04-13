@@ -65,6 +65,15 @@
     _optionLocation=0;
     [self resetVariables];
     _txtTechnicianName.text = [owner uppercaseString];
+    [self initiatePartsForSelectedCrane];
+}
+
+- (void) initiatePartsForSelectedCrane {
+    NSInteger selectedRow = [_craneDescriptionPickerView selectedRowInComponent:0];
+    _inspectionViewController.optionLocation = 0;
+    InspectionCrane *crane = [_craneDescriptionsArray objectAtIndex:selectedRow];
+    [[IACraneInspectionDetailsManager sharedManager] setCrane:crane];
+    [_inspectionViewController initiateParts];
 }
 
 - (void) addObservers {
@@ -476,10 +485,10 @@
 }
 
 
+
 - (IBAction)partsListButtonClicked:(id)sender{
-    _optionLocation = 0;
     NSInteger selectedRow = [_craneDescriptionPickerView selectedRowInComponent:0];
-    NSNumber *selectedRowObject = [NSNumber numberWithInteger:selectedRow];
+
     if ([self validateSubmission:NO] == PASSED)
     {
         _inspectionViewController.validated = YES;
@@ -508,7 +517,6 @@
     [[InspectionManager sharedManager] setInspection:inspection];
     [[IACraneInspectionDetailsManager sharedManager] setCrane:selectedCrane];
     
-    _inspectionViewController.optionLocation = 0;
     [self.navigationController pushViewController:_inspectionViewController animated:YES];
     
     /* Send out a notification that the InspectionViewController is pushed onto the stack.
@@ -638,6 +646,14 @@
 }
 
 #pragma mark Picker Data Source Methods
+
+- (void) pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+    // Reset the inspection details
+    _inspectionViewController.optionLocation = 0;
+    InspectionCrane *crane = [_craneDescriptionsArray objectAtIndex:row];
+    [[IACraneInspectionDetailsManager sharedManager] setCrane:crane];
+    [_inspectionViewController initiateParts];
+}
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *) pickerView {
     return 1;

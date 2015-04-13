@@ -12,7 +12,7 @@
 @implementation ItemListConditionStorage
 @synthesize myConditions;
 
-- (id) init:(NSArray *) input {
+- (id) init:(NSMutableArray *) input {
     if (self = [super init]) {
         myConditions = [[NSMutableArray alloc] init];
         [self fillConditions:input];
