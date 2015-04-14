@@ -466,8 +466,6 @@ static NSString* USERNAME = @"username";
                 [[NSUserDefaults standardUserDefaults] setObject:owner forKey:USERNAME];
                 [[NSUserDefaults standardUserDefaults] synchronize];
             }
-        
-            
         }
     }
 }

@@ -476,23 +476,13 @@
             
                     }
     }//if the cancel button is pressed and we are in the midst of asking the questions for the certificate
-    else if (buttonIndex ==0 && testLoad == NO)
+    else if (buttonIndex ==0 && testLoad == YES)
     {
         [PDFGenerator writeReport:inspection.itemList Inspection:inspection OverallRating:overallRating PartsArray:_partsArray];
         UIDocumentInteractionController *pdfViewController = [PDFGenerator DisplayPDFWithOverallRating:inspection];
         pdfViewController.delegate = self;
         [pdfViewController presentPreviewAnimated:NO];
         // Save everything that has been created
-    }
-    else
-    {
-        testLoad = NO;
-        [PDFGenerator writeReport:inspection.itemList Inspection:inspection OverallRating:overallRating PartsArray:_partsArray];
-        UIDocumentInteractionController *pdfViewController = [PDFGenerator DisplayPDFWithOverallRating:inspection];
-        pdfViewController.delegate = self;
-        [pdfViewController presentPreviewAnimated:NO];
-        // Save everything that has been created
-
     }
 }
 
