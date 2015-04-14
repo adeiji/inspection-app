@@ -293,21 +293,19 @@
     if (!crane)
     {
         crane = [[InspectedCrane alloc] initWithEntity:entity insertIntoManagedObjectContext:_context];
-
-        crane.hoistSrl          = hoistSrl;
-        crane.type              = craneType;
-        crane.equipmentNumber   = equipmentNumber;
-        crane.mfg               = craneMfg;
-        crane.hoistMfg          = hoistMfg;
-        crane.craneSrl          = craneSrl;
-        crane.capacity          = capacity;
-        crane.hoistMdl          = hoistMdl;
-        
-        NSLog(@"Crane object created - com.inspectionapp.coredata");
-        
-        return crane;
     }
-
+    
+    crane.hoistSrl          = hoistSrl;
+    crane.type              = craneType;
+    crane.equipmentNumber   = equipmentNumber;
+    crane.mfg               = craneMfg;
+    crane.hoistMfg          = hoistMfg;
+    crane.craneSrl          = craneSrl;
+    crane.capacity          = capacity;
+    crane.hoistMdl          = hoistMdl;
+    
+    NSLog(@"Crane object created - com.inspectionapp.coredata");
+    
     return crane;
 }
 
