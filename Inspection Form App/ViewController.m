@@ -60,6 +60,7 @@ static NSString* USERNAME = @"username";
         alert.delegate = self;
         alert.tag = ALERT_NAME;
         [alert show];
+        [alert becomeFirstResponder];
     }
     
     [self setupTxtDate];
@@ -458,6 +459,7 @@ static NSString* USERNAME = @"username";
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Enter Name Alert" message:@"Enter your name" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
                 [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
                 [alert show];
+                [alert becomeFirstResponder];
                 alert.delegate = self;
             }
             else
