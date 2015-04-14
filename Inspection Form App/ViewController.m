@@ -36,6 +36,9 @@
 #define kMinimumGestureLength   25
 #define kMaximumVariance        100
 
+static const int ALERT_NAME = 5;
+static NSString* USERNAME = @"username";
+
 - (void)viewDidLoad {
     
     [super viewDidLoad];
@@ -47,14 +50,15 @@
     iosVersion = [[UIDevice currentDevice] systemVersion];
     [self addObservers];
     _craneDescriptionsArray = [[IACraneInspectionDetailsManager sharedManager] cranes];
-    owner = @"";
     
-    [self LoadOwner];
+    [self loadOwner];
     
-    if ([owner isEqual:@""])
+    if (!owner)
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Enter Name Alert" message:@"Enter your name" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
         [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
+        alert.delegate = self;
+        alert.tag = ALERT_NAME;
         [alert show];
     }
     
@@ -204,9 +208,10 @@
     activeField = nil;
 }
 
-- (void) LoadOwner
+- (void) loadOwner
 {
-    owner = [DataLayer LoadOwner:databasePath contactDb:contactDB];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    owner = [defaults objectForKey:USERNAME];
 }
 #pragma mark Database Methods
 
@@ -444,27 +449,25 @@
 {
     if (buttonIndex==0)
     {
-        if ([owner isEqual:@""])
+        if (alertView.tag == ALERT_NAME)
         {
-            for (UIView* view in alertView.subviews)
+            UITextField *textField = [alertView textFieldAtIndex:0];
+            if ([textField.text isEqual:@""])
             {
-                if ([view isKindOfClass:[UITextField class]])
-                {
-                    UITextField *textField = (UITextField *) view;
-                    if ([textField.text isEqual:@""])
-                    {
-                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Enter Name Alert" message:@"Enter your name" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
-                        [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
-                        [alert show];
-                    }
-                    else
-                    {
-                        owner = textField.text;
-                        _txtTechnicianName.text = [owner uppercaseString];
-                        [self InsertOwnerIntoTable:owner];
-                    }
-                }
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Enter Name Alert" message:@"Enter your name" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+                [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
+                [alert show];
+                alert.delegate = self;
             }
+            else
+            {
+                owner = textField.text;
+                _txtTechnicianName.text = [owner uppercaseString];
+                [[NSUserDefaults standardUserDefaults] setObject:owner forKey:USERNAME];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+            }
+        
+            
         }
     }
 }
