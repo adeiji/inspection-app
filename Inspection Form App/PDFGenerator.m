@@ -417,8 +417,7 @@
         {
             if (myCondition.deficient == YES){
                 [*partDeficiency appendString:@"Failed\n"];
-                [*partNotes appendString:[NSString stringWithFormat:@"%d.  %@: %@\
-                                          n",optionNumber + 1, myCondition.deficientPart, myCondition.notes]];
+                [*partNotes appendString:[NSString stringWithFormat:@"%d.  %@: %@\n",optionNumber + 1, myCondition.deficientPart, myCondition.notes]];
             }
             else if (myCondition.deficient==NO) {
                 if (![myCondition.notes isEqualToString:@""])

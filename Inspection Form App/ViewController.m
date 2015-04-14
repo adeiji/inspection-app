@@ -201,7 +201,7 @@ static NSString* USERNAME = @"username";
 //so that it is known where the screen needs to scroll to, to show the text box when it is being edited also so that we can set the text to all capitalized.
 - (IBAction) textFieldDidBeginEditing:(UITextField *)textField
 {
-    textField.text = [textField.text capitalizedString];
+    activeField = textField;
 }
 //memmory management
 - (IBAction) textFieldDidEndEditing:(UITextField *)textField {

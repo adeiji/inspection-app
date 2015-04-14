@@ -306,6 +306,7 @@
                               otherButtonTitles:@"ok", nil];
         [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
         [alert show];
+        [alert becomeFirstResponder];
         
         pageSubmitAlertView = YES;
         
@@ -342,6 +343,7 @@
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Length, size, fittings" message:@"Enter the Length:" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Ok", nil];
             [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
             [alert show];
+            [alert becomeFirstResponder];
             pageSubmitAlertView = NO;
         }
         else if ([_lblPart.text isEqualToString:@"Hoist Load Brake"])
@@ -349,6 +351,7 @@
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Type" message:@"What is the type?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Ok", nil];
             [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
             [alert show];
+            [alert becomeFirstResponder];
             pageSubmitAlertView = NO;
         }
     }
@@ -366,6 +369,7 @@
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Incorrect Input" message:@"You must enter a number between 1 and 5" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
         [alert show];
+        [alert becomeFirstResponder];
         overallRating = @"";
     }
     //if this is the overall rating box and its a number between 1 and 5
@@ -377,6 +381,7 @@
         {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Test Loads?" message:@"Is This a Test Load?" delegate:self cancelButtonTitle:@"NO" otherButtonTitles:@"YES", nil];
             [alert show];
+            [alert becomeFirstResponder];
             testLoad = YES;
             _createCertificateButton.enabled = TRUE;
         }
@@ -399,6 +404,7 @@
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Proof Load Description" message:@"Description of Proof Load" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
         [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
         [alert show];
+        [alert becomeFirstResponder];
         loadRatings = YES;
         proofLoad = NO;
         testLoad = textField.text;
@@ -410,6 +416,7 @@
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Load Ratings" message:@"Basis for assigned load ratings" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
         [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
         [alert show];
+        [alert becomeFirstResponder];
         remarksLimitations = YES;
         loadRatings = NO;
         inspection.proofLoad = textField.text;
@@ -421,6 +428,7 @@
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Remarks Limitations" message:@"Remarks and/or Limitations Imposed" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
         [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
         [alert show];
+        [alert becomeFirstResponder];
         remarksLimitations = NO;
         finished = YES;
         inspection.loadRatings = textField.text;
@@ -459,6 +467,7 @@
                 else {//if the overall rating was inputed as greater then 5 or less than 1, or if it was not an integer
                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Incorrect Input" message:@"You must enter a number between 1 and 5" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
                     [alert show];
+                    [alert becomeFirstResponder];
                     overallRating = @"";
                 }
             }
@@ -466,6 +475,7 @@
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Applied Test Loads" message:@"Test Loads Applied" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
                 [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
                 [alert show];
+                [alert becomeFirstResponder];
                 proofLoad = YES;
                 testLoad = NO;
             }
