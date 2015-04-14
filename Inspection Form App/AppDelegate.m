@@ -58,14 +58,14 @@
 
     [self fillCriteriaObjects];
     [self getPreviouslyFinishedCranes];
-    // Only run this the first time the application opens
-    NSString *firstTime = [[NSUserDefaults standardUserDefaults] objectForKey:@"firstTime"];
-    if (!firstTime)
-    {
-        [[IACraneInspectionDetailsManager sharedManager] saveAllWaterDistrictCranes];
-        [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"firstTime"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-    }
+//    // Only run this the first time the application opens
+//    NSString *firstTime = [[NSUserDefaults standardUserDefaults] objectForKey:@"firstTime"];
+//    if (!firstTime)
+//    {
+//        [[IACraneInspectionDetailsManager sharedManager] saveAllWaterDistrictCranes];
+//        [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"firstTime"];
+//        [[NSUserDefaults standardUserDefaults] synchronize];
+//    }
 
     
     return YES;

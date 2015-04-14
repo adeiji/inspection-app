@@ -219,6 +219,7 @@ static NSString* USERNAME = @"username";
 //gets customer information and crane information from the JOBS table with the specified equip # and then displays this information on the home page
 
 - (IBAction)syncCraneInspectionDetails:(id)sender {
+    _btnSync.enabled = NO;
     [SyncManager getAllInspectionDetails];
 }
 

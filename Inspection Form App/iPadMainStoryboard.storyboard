@@ -689,6 +689,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="8Sj-I6-8wL"/>
                     <connections>
+                        <outlet property="btnSync" destination="8SS-9q-4My" id="nvm-Nr-Y6w"/>
                         <outlet property="craneDescriptionPickerView" destination="HId-Gi-hnJ" id="4qC-6Q-uTs"/>
                         <outlet property="craneView" destination="pCW-pD-YBJ" id="2sS-hm-N2j"/>
                         <outlet property="scrollView" destination="JQL-yV-qmM" id="FyP-oD-4hK"/>

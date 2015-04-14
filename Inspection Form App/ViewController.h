@@ -88,6 +88,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *txtTechnicianName;
 @property (strong, nonatomic) IBOutlet UIPickerView *craneDescriptionPickerView;
 @property (strong, nonatomic) NSArray *craneDescriptionsArray;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *btnSync;
 
 typedef enum {
     INVALID_CHARACTER,

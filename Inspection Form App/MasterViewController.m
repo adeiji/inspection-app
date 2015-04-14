@@ -62,12 +62,25 @@ static NSString *const OPTIONS = @"options";
     }
 }
 
+- (void) reloadCranes {
+    if (!level)
+    {
+        _tableData = [[IACraneInspectionDetailsManager sharedManager] getAllInspectedCranes];
+        [self.tableView reloadData];
+    }
+    
+    UINavigationController *navigationController = [self.splitViewController.viewControllers objectAtIndex:1] ;
+    ViewController *viewController = [navigationController.viewControllers objectAtIndex:0];
+    viewController.btnSync.enabled = YES;
+}
+
 - (void) setObservers {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changePart:) name:@"SwipeDetected" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayParts:) name:kInspectionViewControllerPushed object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gotoRootViewController) name:NOTIFICATION_GOTO_CUSTOMER_INFO_PRESSED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(promptShown) name:UI_PROMPT_SHOWN object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(promptHidden) name:UI_PROMPT_HIDDEN object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadCranes) name:WATER_DISTRICT_CRANES_SAVED object:nil];
 }
 
 - (void) promptShown {

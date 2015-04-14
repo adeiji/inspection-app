@@ -36,3 +36,4 @@ NSString *const USER_INFO_SELECTED_CRANE_INSPECTION_POINTS = @"com.inspection.ap
 NSString *const USER_INFO_SELECTED_INSPECTION_POINT = @"com.inspection.app.selected.inspection.point";
 NSString *const UI_PROMPT_SHOWN = @"com.inspection.app.prompt.shown";
 NSString *const UI_PROMPT_HIDDEN = @"com.inspection.app.prompt.hidden";
+NSString *const WATER_DISTRICT_CRANES_SAVED = @"com.inspection.app.water.district.cranes.saved";

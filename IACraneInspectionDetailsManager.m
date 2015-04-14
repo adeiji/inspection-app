@@ -133,17 +133,17 @@
                 });
             }
             [craneObject setInspectionPoints:[NSOrderedSet orderedSetWithArray:inspectionPoints]];
-            
             [cranesArray addObject:craneObject];
 
         }
 
-        [self saveAllWaterDistrictCranes];
+        [self saveAllWaterDistrictCranesWithContext : context];
         
         if ([context save:&error])
         {
-            
+            NSLog(@"com.inspectionapp.coredata - Error saving water district cranes");
         }
+        
         [self loadAllInspectionDetails];
         [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CRANE_DETAILS_FINISHED_SAVING object:nil];
         NSLog(@"%@ sent", NOTIFICATION_CRANE_DETAILS_FINISHED_SAVING);
@@ -153,23 +153,23 @@
     });
 }
 
-- (void) saveAllWaterDistrictCranes {
-    [self deleteAllWaterDistrictCranes];
+- (void) saveAllWaterDistrictCranesWithContext : (NSManagedObjectContext *) context {
+    [self deleteAllWaterDistrictCranesWithContext : context];
     NSString *plistFilePath = [[NSBundle mainBundle] pathForResource:@"lvwwdcranes" ofType:@"plist"];
     NSArray *lvwwdCranes = [[NSArray alloc] initWithContentsOfFile:plistFilePath];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:kCoreDataClassInspectedCrane inManagedObjectContext:_context];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:kCoreDataClassInspectedCrane inManagedObjectContext:context];
     
-    NSEntityDescription *customerEntity = [NSEntityDescription entityForName:kCoreDataClassCustomer inManagedObjectContext:_context];
+    NSEntityDescription *customerEntity = [NSEntityDescription entityForName:kCoreDataClassCustomer inManagedObjectContext:context];
     
     for (id dictionary in lvwwdCranes) {
         
-        Customer *customer = [[Customer alloc] initWithEntity:customerEntity insertIntoManagedObjectContext:_context];
+        Customer *customer = [[Customer alloc] initWithEntity:customerEntity insertIntoManagedObjectContext:context];
         customer.name = @"LVWWD";
         customer.contact = @"DAVID BARNES";
         customer.address = @"2545 WATER DISTRICT AVE";
         customer.email = @"EMAIL@EMAIL.COM";
         
-        InspectedCrane *inspectedCrane = [[InspectedCrane alloc] initWithEntity:entity insertIntoManagedObjectContext:_context];
+        InspectedCrane *inspectedCrane = [[InspectedCrane alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
         inspectedCrane.type = dictionary[@"TYPE"];
         inspectedCrane.capacity = dictionary[@"CAPACITY"];
         inspectedCrane.hoistMdl = dictionary[@"MDL:HOIST"];
@@ -178,15 +178,22 @@
         inspectedCrane.customer = customer;
     }
     
-    [((AppDelegate *) [[UIApplication sharedApplication] delegate]) saveContext];
+    NSError *error;
+    if ([context save:&error])
+    {
+        NSLog(@"com.inspectionapp.coredata - Error saving water district cranes: \n%@", [error description]);
+    }
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:WATER_DISTRICT_CRANES_SAVED object:nil];
+
 }
 
-- (void) deleteAllWaterDistrictCranes {
+- (void) deleteAllWaterDistrictCranesWithContext : (NSManagedObjectContext *) context {
     NSString *plistFilePath = [[NSBundle mainBundle] pathForResource:@"lvwwdcranes" ofType:@"plist"];
     NSArray *lvwwdCranes = [[NSArray alloc] initWithContentsOfFile:plistFilePath];
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:kCoreDataClassInspectedCrane inManagedObjectContext:_context];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:kCoreDataClassInspectedCrane inManagedObjectContext:context];
     [fetchRequest setEntity:entity];
     
     for (id dictionary in lvwwdCranes) {
@@ -195,30 +202,35 @@
         [fetchRequest setPredicate:predicate];
         
         NSError *error = nil;
-        NSArray *fetchedObjects = [_context executeFetchRequest:fetchRequest error:&error];
+        NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
         for (id object in fetchedObjects) {
-            [_context deleteObject:object];
+            [context deleteObject:object];
         }
     }
     
-    [self deleteAllWaterDistrictCustomers];
+    [self deleteAllWaterDistrictCustomersWithContext:context];
     
-    [((AppDelegate *) [[UIApplication sharedApplication] delegate]) saveContext];
+    NSError *error;
+    if ([context save:&error])
+    {
+        NSLog(@"com.inspectionapp.coredata - Error saving water district cranes: \n%@", [error description]);
+    }
+
 }
 
-- (void) deleteAllWaterDistrictCustomers {
+- (void) deleteAllWaterDistrictCustomersWithContext : (NSManagedObjectContext *) context {
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:kCoreDataClassCustomer inManagedObjectContext:_context];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:kCoreDataClassCustomer inManagedObjectContext:context];
     [fetchRequest setEntity:entity];
     // Specify criteria for filtering which objects to fetch
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name == %@", @"LVWWD"];
     [fetchRequest setPredicate:predicate];
     
     NSError *error = nil;
-    NSArray *fetchedObjects = [_context executeFetchRequest:fetchRequest error:&error];
+    NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
     if (fetchedObjects == nil) {
         for (id object in fetchedObjects) {
-            [_context deleteObject:object];
+            [context deleteObject:object];
         }
     }
 }
