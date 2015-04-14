@@ -644,6 +644,12 @@
     _scrollView.scrollIndicatorInsets = contentInsets;
 }
 
+- (void) resetInspectionWithCrane : (InspectionCrane *) crane  {
+    _inspectionViewController.optionLocation = 0;
+    [[IACraneInspectionDetailsManager sharedManager] setCrane:crane];
+    [_inspectionViewController initiateParts];
+}
+
 - (void) viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
 
 }
@@ -660,10 +666,8 @@
 
 - (void) pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     // Reset the inspection details
-    _inspectionViewController.optionLocation = 0;
     InspectionCrane *crane = [_craneDescriptionsArray objectAtIndex:row];
-    [[IACraneInspectionDetailsManager sharedManager] setCrane:crane];
-    [_inspectionViewController initiateParts];
+    [self resetInspectionWithCrane:crane];
 }
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *) pickerView {

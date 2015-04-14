@@ -155,6 +155,7 @@ static NSString *const OPTIONS = @"options";
     UINavigationController *navigationController = [self.splitViewController.viewControllers objectAtIndex:1] ;
     ViewController *viewController = [navigationController.viewControllers objectAtIndex:0];
     [viewController.inspectionViewController.itemListStore loadConditionsForCrane:crane];
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_HOISTSRL_SELECTED object:nil userInfo:@{ kSelectedInspectedCrane : crane }];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -188,7 +189,6 @@ static NSString *const OPTIONS = @"options";
     }
     
     [cell addSubview:label];
-    // Configure the cell...
     
     return cell;
 }
@@ -202,6 +202,9 @@ static NSString *const OPTIONS = @"options";
         MasterViewController *mvc = [[MasterViewController alloc] initWithStyle:nil Level:PART_NAME SearchValue:[inspectionCrane.inspectionPoints array]];
         [self.navigationController pushViewController:mvc animated:YES];
         [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_HOISTSRL_SELECTED object:nil userInfo:@{ kSelectedInspectedCrane : crane }];
+        UINavigationController *navigationController = [self.splitViewController.viewControllers objectAtIndex:1] ;
+        ViewController *vc = [navigationController.viewControllers objectAtIndex:0];
+        [vc resetInspectionWithCrane:inspectionCrane];
     }
 }
 
@@ -227,12 +230,10 @@ static NSString *const OPTIONS = @"options";
     
     //Create the Master View controller that we will push onto the view controller stack.
     MasterViewController *mvc = [[MasterViewController alloc] initWithStyle:nil Level:OPTIONS SearchValue:[inspectionPoint.inspectionOptions array]];
-    
     //Get a reference to the current displayed view controller.
     UINavigationController *navigationController = [self.splitViewController.viewControllers objectAtIndex:1] ;
     ViewController *mainPageViewController = [navigationController.viewControllers objectAtIndex:0];
     //Push the InspectionViewController ontop of the stack.
-    
     if (![mainPageViewController.navigationController.viewControllers containsObject:mainPageViewController.inspectionViewController])
     {
         [mainPageViewController storeInformationAndDisplayInspectionViewWithCrane:inspectionPoint.inspectionCrane SelectedRow:nil];
@@ -242,6 +243,7 @@ static NSString *const OPTIONS = @"options";
     __delegate = mainPageViewController.inspectionViewController;
     
     [self.navigationController pushViewController:mvc animated:YES];
+    
     if (__delegate)
     {
         mainPageViewController.inspectionViewController.craneType = inspectionPoint.inspectionCrane.name;
@@ -266,5 +268,35 @@ static NSString *const OPTIONS = @"options";
     }
 }
 
+#pragma mark - Search Bar Delegate
+
+- (void) searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+    _tableDataCopy = [_tableData copy];
+}
+
+- (void) searchBarTextDidEndEditing:(UISearchBar *)searchBar {
+    _tableData = _tableDataCopy;
+    [self.tableView reloadData];
+}
+
+- (void) searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    NSMutableArray *searchedObjects = [NSMutableArray new];
+    if (![searchText isEqualToString:@""])
+    {
+        for (InspectedCrane *crane in _tableDataCopy) {
+            if ([[crane.hoistSrl lowercaseString] containsString:[searchText lowercaseString]])
+            {
+                [searchedObjects addObject:crane];
+            }
+        }
+        
+        _tableData = searchedObjects;
+        [self.tableView reloadData];
+    }
+    else {
+        _tableData = _tableDataCopy;
+        [self.tableView reloadData];
+    }
+}
 
 @end

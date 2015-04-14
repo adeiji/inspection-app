@@ -993,6 +993,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="308" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" id="QuG-wi-krm">
+                            <rect key="frame" x="0.0" y="0.0" width="308" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <outlet property="delegate" destination="idw-ZA-hiy" id="THT-s7-JPl"/>
+                            </connections>
+                        </searchBar>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" id="WNV-X0-qlT">
                                 <rect key="frame" x="0.0" y="86" width="320" height="44"/>
@@ -1009,6 +1017,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Hoist Serial Numbers" id="xWu-KR-Ibj"/>
+                    <connections>
+                        <outlet property="searchBar" destination="QuG-wi-krm" id="rbU-Lm-RTi"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Wv-Nw-JfO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

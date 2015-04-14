@@ -103,10 +103,9 @@ typedef enum {
 - (BOOL) textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string;
 - (void) storeInformationAndDisplayInspectionViewWithCrane : (InspectionCrane *) selectedCrane
                                                SelectedRow : (NSInteger) selectedRow;
+- (void) resetInspectionWithCrane : (InspectionCrane *) crane;
 
 
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
-
-
 
 @end

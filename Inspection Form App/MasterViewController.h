@@ -10,7 +10,7 @@
 #import "PartSelectionDelegate.h"
 #import "IAConstants.h"
 
-@interface MasterViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate>
+@interface MasterViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 {
     NSString *level;
     NSDictionary *inspectionCriteria;
@@ -19,7 +19,9 @@
 }
 
 @property (nonatomic, assign) id<PartSelectionDelegate> delegate;
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (strong, nonatomic) NSArray *tableData;
+@property (strong, nonatomic) NSArray *tableDataCopy;
 
 - (id)initWithStyle : (UITableViewStyle)style
               Level : (NSString *) currentLevel
