@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14B25" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="dnc-EI-M4a">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -38,10 +39,10 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JQL-yV-qmM">
                                 <rect key="frame" x="0.0" y="44" width="768" height="936"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mRy-6B-fIo">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mRy-6B-fIo">
                                         <rect key="frame" x="0.0" y="-33" width="768" height="969"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1O8-ki-oXR" customClass="GradientView">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1O8-ki-oXR" customClass="GradientView">
                                                 <rect key="frame" x="21" y="802" width="728" height="147"/>
                                                 <subviews>
                                                     <textField opaque="NO" clipsSubviews="YES" tag="9" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fei-Od-P6t" customClass="TextField">
@@ -76,8 +77,8 @@
                                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <textField opaque="NO" clipsSubviews="YES" tag="13" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KlB-pp-5ZH" customClass="TextField">
-                                                        <rect key="frame" x="560" y="101" width="137" height="30"/>
+                                                    <textField opaque="NO" clipsSubviews="YES" tag="13" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KlB-pp-5ZH" customClass="TextField">
+                                                        <rect key="frame" x="560" y="100" width="137" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="137" id="3NB-Tn-Cjj"/>
                                                         </constraints>
@@ -98,8 +99,8 @@
                                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <textField opaque="NO" clipsSubviews="YES" tag="12" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iVX-4f-sYw" customClass="TextField">
-                                                        <rect key="frame" x="559" y="62" width="69" height="30"/>
+                                                    <textField opaque="NO" clipsSubviews="YES" tag="12" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iVX-4f-sYw" customClass="TextField">
+                                                        <rect key="frame" x="559" y="61" width="69" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="69" id="VSg-3R-XPe"/>
                                                         </constraints>
@@ -193,8 +194,8 @@
                                                     <constraint firstItem="KlB-pp-5ZH" firstAttribute="centerY" secondItem="sbG-Ru-Sg2" secondAttribute="centerY" id="zZc-Rr-ikc"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p0M-CD-s7V" customClass="GradientView">
-                                                <rect key="frame" x="21" y="239" width="728" height="61"/>
+                                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="p0M-CD-s7V" customClass="GradientView">
+                                                <rect key="frame" x="21" y="238" width="728" height="61"/>
                                                 <subviews>
                                                     <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2Jd-DJ-MFX" customClass="TextField">
                                                         <rect key="frame" x="400" y="15" width="244" height="30"/>
@@ -228,8 +229,8 @@
                                                     <constraint firstAttribute="trailing" secondItem="2Jd-DJ-MFX" secondAttribute="trailing" constant="84" id="sF4-33-H3u"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rrO-cq-DcR" customClass="GradientView">
-                                                <rect key="frame" x="21" y="361" width="728" height="61"/>
+                                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rrO-cq-DcR" customClass="GradientView">
+                                                <rect key="frame" x="21" y="360" width="728" height="61"/>
                                                 <subviews>
                                                     <textField opaque="NO" clipsSubviews="YES" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jsB-Ap-g2E" customClass="TextField">
                                                         <rect key="frame" x="400" y="15" width="244" height="30"/>
@@ -273,8 +274,8 @@
                                                     <constraint firstItem="jsB-Ap-g2E" firstAttribute="centerY" secondItem="rrO-cq-DcR" secondAttribute="centerY" id="vfw-Ou-ezy"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EuI-10-e7d" customClass="GradientView">
-                                                <rect key="frame" x="21" y="300" width="728" height="61"/>
+                                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EuI-10-e7d" customClass="GradientView">
+                                                <rect key="frame" x="21" y="299" width="728" height="61"/>
                                                 <subviews>
                                                     <textField opaque="NO" clipsSubviews="YES" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gWB-T3-X6t" customClass="TextField">
                                                         <rect key="frame" x="400" y="15" width="244" height="30"/>
@@ -308,8 +309,8 @@
                                                     <constraint firstItem="gWB-T3-X6t" firstAttribute="centerY" secondItem="EuI-10-e7d" secondAttribute="centerY" id="tuL-a5-vfY"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H9b-6B-8yQ" customClass="GradientView">
-                                                <rect key="frame" x="21" y="483" width="728" height="61"/>
+                                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="H9b-6B-8yQ" customClass="GradientView">
+                                                <rect key="frame" x="21" y="482" width="728" height="61"/>
                                                 <subviews>
                                                     <textField opaque="NO" clipsSubviews="YES" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RTi-sd-Sx1" customClass="TextField">
                                                         <rect key="frame" x="400" y="12" width="311" height="30"/>
@@ -344,8 +345,8 @@
                                                     <constraint firstAttribute="bottom" secondItem="RTi-sd-Sx1" secondAttribute="bottom" constant="19" id="wYL-sG-ZuX"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q5h-Bk-U1A" customClass="GradientView">
-                                                <rect key="frame" x="21" y="422" width="728" height="61"/>
+                                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Q5h-Bk-U1A" customClass="GradientView">
+                                                <rect key="frame" x="21" y="421" width="728" height="61"/>
                                                 <subviews>
                                                     <textField opaque="NO" clipsSubviews="YES" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="csk-TU-ped" userLabel="txtDate" customClass="TextField">
                                                         <rect key="frame" x="400" y="15" width="94" height="30"/>
@@ -395,8 +396,8 @@
                                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EG2-vj-vP9" customClass="GradientView">
-                                                <rect key="frame" x="21" y="544" width="728" height="61"/>
+                                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EG2-vj-vP9" customClass="GradientView">
+                                                <rect key="frame" x="21" y="543" width="728" height="61"/>
                                                 <subviews>
                                                     <textField opaque="NO" clipsSubviews="YES" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7Gh-Lo-jiG" userLabel="txtDate" customClass="TextField">
                                                         <rect key="frame" x="400" y="15" width="152" height="30"/>
@@ -431,8 +432,8 @@
                                                     <constraint firstItem="7Gh-Lo-jiG" firstAttribute="top" secondItem="EG2-vj-vP9" secondAttribute="top" constant="15" id="hjC-kh-GYb"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hXK-sA-RnT" customClass="GradientView">
-                                                <rect key="frame" x="21" y="178" width="728" height="61"/>
+                                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hXK-sA-RnT" customClass="GradientView">
+                                                <rect key="frame" x="21" y="177" width="728" height="61"/>
                                                 <subviews>
                                                     <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bdb-xb-gc8" userLabel="txtDate" customClass="TextField">
                                                         <rect key="frame" x="400" y="15" width="242" height="30"/>
@@ -468,8 +469,8 @@
                                                     <constraint firstAttribute="trailing" secondItem="bdb-xb-gc8" secondAttribute="trailing" constant="86" id="qkO-hD-mdh"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L1x-mO-DcG" customClass="GradientView">
-                                                <rect key="frame" x="21" y="117" width="728" height="61"/>
+                                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="L1x-mO-DcG" customClass="GradientView">
+                                                <rect key="frame" x="21" y="116" width="728" height="61"/>
                                                 <subviews>
                                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Hoist Srl:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="Ebk-t6-Vup">
                                                         <rect key="frame" x="121" y="15" width="71" height="34"/>
@@ -514,13 +515,13 @@
                                                     <constraint firstItem="MA1-xc-auU" firstAttribute="top" secondItem="L1x-mO-DcG" secondAttribute="top" constant="16" id="pVF-SF-A0s"/>
                                                 </constraints>
                                             </view>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" misplaced="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="Vn2-1F-VYH">
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="Vn2-1F-VYH">
                                                 <rect key="frame" x="21" y="684" width="727" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pCW-pD-YBJ" customClass="GradientView">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pCW-pD-YBJ" customClass="GradientView">
                                                 <rect key="frame" x="21" y="650" width="728" height="151"/>
                                                 <subviews>
                                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Crane Type:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="hEg-gW-AEl">
@@ -542,25 +543,42 @@
                                                             <outlet property="delegate" destination="sgx-pA-png" id="WYU-yd-bLS"/>
                                                         </connections>
                                                     </pickerView>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bQj-qe-X8E">
+                                                        <rect key="frame" x="161" y="61" width="112" height="30"/>
+                                                        <color key="backgroundColor" red="0.25882352939999997" green="0.73725490199999999" blue="0.38431372549999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="112" id="U2L-6F-IG0"/>
+                                                        </constraints>
+                                                        <state key="normal" title="Select Crane">
+                                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="setCrane:" destination="sgx-pA-png" eventType="touchUpInside" id="bcj-2d-srR"/>
+                                                        </connections>
+                                                    </button>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstItem="hEg-gW-AEl" firstAttribute="top" secondItem="pCW-pD-YBJ" secondAttribute="top" constant="49" id="9TJ-AE-oNF"/>
+                                                    <constraint firstItem="bQj-qe-X8E" firstAttribute="centerY" secondItem="HId-Gi-hnJ" secondAttribute="centerY" id="Add-hP-fyQ"/>
+                                                    <constraint firstItem="HId-Gi-hnJ" firstAttribute="leading" secondItem="bQj-qe-X8E" secondAttribute="trailing" constant="89" id="FG6-uo-5ny"/>
                                                     <constraint firstItem="HId-Gi-hnJ" firstAttribute="top" secondItem="pCW-pD-YBJ" secondAttribute="top" constant="-32" id="LpW-XA-B9V"/>
                                                     <constraint firstItem="hEg-gW-AEl" firstAttribute="centerY" secondItem="pCW-pD-YBJ" secondAttribute="centerY" id="Oy2-nh-EmV"/>
                                                     <constraint firstAttribute="bottom" secondItem="HId-Gi-hnJ" secondAttribute="bottom" constant="-33" id="QU9-v6-8rG"/>
+                                                    <constraint firstItem="bQj-qe-X8E" firstAttribute="leading" secondItem="hEg-gW-AEl" secondAttribute="trailing" constant="24" id="dks-S8-C2X"/>
                                                     <constraint firstAttribute="trailing" secondItem="HId-Gi-hnJ" secondAttribute="trailing" id="ghV-Ny-VfW"/>
                                                     <constraint firstItem="hEg-gW-AEl" firstAttribute="leading" secondItem="pCW-pD-YBJ" secondAttribute="leading" constant="39" id="vyl-Ti-Mpq"/>
                                                 </constraints>
                                             </view>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Crane Description" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="6xB-70-nWt">
-                                                <rect key="frame" x="21" y="607" width="152" height="23"/>
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" misplaced="YES" text="Crane Description" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="6xB-70-nWt">
+                                                <rect key="frame" x="21" y="606" width="152" height="23"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Information about the crane" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="lhc-5n-7XR">
-                                                <rect key="frame" x="21" y="634" width="143" height="14"/>
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" misplaced="YES" text="Information about the crane" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="lhc-5n-7XR">
+                                                <rect key="frame" x="21" y="633" width="143" height="14"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
@@ -911,10 +929,10 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R4W-rr-wGf">
-                                        <rect key="frame" x="344" y="46" width="364" height="98"/>
+                                        <rect key="frame" x="344" y="46" width="364" height="67"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="364" id="6RU-ur-ASO"/>
-                                            <constraint firstAttribute="height" constant="98" id="q8f-K0-55X"/>
+                                            <constraint firstAttribute="height" constant="67" id="q8f-K0-55X"/>
                                         </constraints>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -928,7 +946,7 @@
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="100" id="LSs-SP-G95"/>
                                     <constraint firstAttribute="trailing" secondItem="R4W-rr-wGf" secondAttribute="trailing" constant="20" id="ZQm-LP-YGa"/>
                                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="R4W-rr-wGf" secondAttribute="bottom" constant="5" id="csa-jM-Bb5"/>
-                                    <constraint firstAttribute="centerY" secondItem="R4W-rr-wGf" secondAttribute="centerY" constant="1" id="hXB-o7-wan"/>
+                                    <constraint firstAttribute="centerY" secondItem="R4W-rr-wGf" secondAttribute="centerY" constant="16.5" id="hXB-o7-wan"/>
                                     <constraint firstItem="R4W-rr-wGf" firstAttribute="top" relation="greaterThanOrEqual" secondItem="gPt-UM-OBt" secondAttribute="top" constant="5" id="mdw-0T-ikd"/>
                                     <constraint firstAttribute="height" priority="750" constant="192" id="q2K-DB-GRW"/>
                                 </constraints>

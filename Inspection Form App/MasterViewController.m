@@ -297,9 +297,17 @@ static NSString *const OPTIONS = @"options";
     if (![searchText isEqualToString:@""])
     {
         for (InspectedCrane *crane in _tableDataCopy) {
-            if ([[crane.hoistSrl lowercaseString] containsString:[searchText lowercaseString]])
+            if (IS_OS_8_OR_LATER)
             {
-                [searchedObjects addObject:crane];
+                if ([[crane.hoistSrl lowercaseString] containsString:[searchText lowercaseString]])
+                {
+                    [searchedObjects addObject:crane];
+                }
+            }
+            else {
+                if ([[crane.hoistSrl lowercaseString] rangeOfString:searchText].location != NSNotFound) {
+                    [searchedObjects addObject:crane];
+                }
             }
         }
         

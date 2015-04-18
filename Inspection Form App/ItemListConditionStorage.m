@@ -35,6 +35,7 @@
 - (void) loadConditionsForCrane : (InspectedCrane *) crane {
     
     NSArray *conditionsArray = [[IACraneInspectionDetailsManager sharedManager] getAllConditionsForCrane:crane];
+    
     if ([conditionsArray count] > 0)
     {
         NSOrderedSet *conditions = [NSOrderedSet orderedSetWithArray:conditionsArray];
@@ -44,6 +45,7 @@
         myConditions = [NSMutableArray new];
         
         for (CoreDataCondition *coreDataCondition in sortedConditions) {
+
             Condition *myCondition = [[Condition alloc] init];
             myCondition.notes = coreDataCondition.notes;
             myCondition.pickerSelection = [coreDataCondition.optionSelectedIndex intValue];

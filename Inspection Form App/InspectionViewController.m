@@ -52,14 +52,13 @@
     
     [self.view addGestureRecognizer:gestureRecognizerRight];
     [self.view addGestureRecognizer:gestureRecognizerLeft];
-    
-    inspection = [InspectionManager sharedManager].inspection;
 }
 
 
 - (void) viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
     
+    [super viewWillAppear:animated];
+    inspection = [InspectionManager sharedManager].inspection;
     InspectionCrane *selectedCrane = [[IACraneInspectionDetailsManager sharedManager] crane];
     _partsArray = [selectedCrane.inspectionPoints array];                                    /*Get the actual array itself from the parts object*/
     [self fillOptionArrays:_partsArray[_optionLocation]];                                    /*Get the options that are unique to this particular part.*/
@@ -97,7 +96,12 @@
 {
     
     Condition *myCondition = [[Condition alloc] init ];
-    myCondition = [myItemListStore.myConditions objectAtIndex:myOptionLocation];
+    if (myOptionLocation < [myItemListStore.myConditions count]) {
+        myCondition = [myItemListStore.myConditions objectAtIndex:myOptionLocation];
+    }
+    else {
+        [myItemListStore.myConditions addObject:myCondition];
+    }
     
     _txtNotes.text = myCondition.notes;
     
@@ -109,7 +113,7 @@
     [_deficiencyPicker selectRow:myCondition.pickerSelection inComponent:0 animated:YES];
     [_deficiencySwitch setOn:myCondition.deficient];
     [_applicableSwitch setOn:myCondition.applicable];
-    
+    [self promptCancelPressed:nil];
     if ([point.prompts count] > 0) {
 
         [self displayPromptViewWithPrompts:[point.prompts array]];
@@ -134,8 +138,9 @@
         UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
         if (orientation == UIInterfaceOrientationLandscapeRight || orientation == UIInterfaceOrientationLandscapeLeft)
         {
-            make.centerX.equalTo([[[UIApplication sharedApplication] delegate] window]).with.offset(75);
-            make.centerY.equalTo([[[UIApplication sharedApplication] delegate] window]).with.offset(-120);
+            make.centerX.equalTo([[[UIApplication sharedApplication] delegate] window]).with.offset(100);
+            make.centerY.equalTo([[[UIApplication sharedApplication] delegate] window]).with.offset(0);
+            promptView.transform = CGAffineTransformMakeRotation(M_PI/2);
         }
         else {
             make.center.equalTo([[[UIApplication sharedApplication] delegate] window]);
@@ -143,7 +148,11 @@
         make.width.equalTo(@385);
         make.height.equalTo(@249);
     }];
+    
+    [promptView.txtPromptResult becomeFirstResponder];
 }
+
+
 - (IBAction)promptOkPressed:(id)sender {
     
     if (![promptView.txtPromptResult.text isEqualToString:@""])
@@ -453,7 +462,11 @@
 {
     if ((buttonIndex!=0 || loadRatings == YES || remarksLimitations == YES || finished == YES || proofLoad == YES) || (buttonIndex == 1 && testLoad == YES))
     {
-        UITextField *textField = [alertView textFieldAtIndex:0];
+        UITextField *textField;
+        if (alertView.alertViewStyle == UIAlertViewStylePlainTextInput)
+        {
+            textField = [alertView textFieldAtIndex:0];
+        }
         //if this is the alertbox for when you submit the form
         if (pageSubmitAlertView == YES) {
             //first we check to see if we are at the testLoad box
@@ -504,6 +517,12 @@
     [[((AppDelegate *) [[UIApplication sharedApplication] delegate]) managedObjectContext] rollback];
     // Notify the app that the user is going back to the customer info page
     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_GOTO_CUSTOMER_INFO_PRESSED object:nil];
+    
+    NSUInteger selectedRow = [_deficiencyPicker selectedRowInComponent:0];
+    InspectionOption *option = [_pickerData objectAtIndex:selectedRow];
+    
+    NSString *myDeficientPart = option.name;
+    [self saveInfo:_txtNotes.text :_deficiencySwitch.on:[_deficiencyPicker selectedRowInComponent:0]:myDeficientPart:_applicableSwitch.on];
 }
 
 

@@ -37,6 +37,7 @@
 #define kMaximumVariance        100
 
 static const int ALERT_NAME = 5;
+static const int RESET_EVERYTHING = 6;
 static NSString* USERNAME = @"username";
 
 - (void)viewDidLoad {
@@ -510,8 +511,10 @@ static NSString* USERNAME = @"username";
     }
     if ([_craneDescriptionsArray count] > 0)
     {
+
         InspectionCrane *selectedCrane = [_craneDescriptionsArray objectAtIndex:selectedRow];
         [self storeInformationAndDisplayInspectionViewWithCrane:selectedCrane SelectedRow:selectedRow];
+        
     }
     else {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"No Crane" message:@"Sorry, but there's no cranes to select.  Click Sync Crane Details"  delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
@@ -522,23 +525,30 @@ static NSString* USERNAME = @"username";
 - (void) storeInformationAndDisplayInspectionViewWithCrane : (InspectionCrane *) selectedCrane
                                                SelectedRow : (NSInteger) selectedRow
 {
-    Parts *craneParts = [[Parts alloc] init: selectedCrane];
-    _myPartsArray = [craneParts myParts];
-    _inspectionViewController.craneType = selectedCrane.name;
-    _inspectionViewController.partsArray = _myPartsArray;
-    
-    [self storeInspectionJobInformationWithCraneType:selectedCrane.name SelectedRow:selectedRow];
-    inspection = [self createInspectionObjectWithSelectedCrane:selectedCrane];
-    [[InspectionManager sharedManager] setInspection:inspection];
-    [[IACraneInspectionDetailsManager sharedManager] setCrane:selectedCrane];
-    
-    [self.navigationController pushViewController:_inspectionViewController animated:YES];
-    
-    /* Send out a notification that the InspectionViewController is pushed onto the stack.
-    Send the crane type that is being pushed. */
-    [[NSNotificationCenter defaultCenter] postNotificationName:kInspectionViewControllerPushed
-                                                        object:self
-                                                      userInfo:@{ USER_INFO_SELECTED_CRANE_INSPECTION_POINTS : selectedCrane.inspectionPoints }];
+    if (isCraneSet)
+    {
+        Parts *craneParts = [[Parts alloc] init: selectedCrane];
+        _myPartsArray = [craneParts myParts];
+        _inspectionViewController.craneType = selectedCrane.name;
+        _inspectionViewController.partsArray = _myPartsArray;
+        
+        [self storeInspectionJobInformationWithCraneType:selectedCrane.name SelectedRow:selectedRow];
+        inspection = [self createInspectionObjectWithSelectedCrane:selectedCrane];
+        [[InspectionManager sharedManager] setInspection:inspection];
+        [[IACraneInspectionDetailsManager sharedManager] setCrane:selectedCrane];
+        
+        [self.navigationController pushViewController:_inspectionViewController animated:YES];
+        
+        /* Send out a notification that the InspectionViewController is pushed onto the stack.
+        Send the crane type that is being pushed. */
+        [[NSNotificationCenter defaultCenter] postNotificationName:kInspectionViewControllerPushed
+                                                            object:self
+                                                          userInfo:@{ USER_INFO_SELECTED_CRANE_INSPECTION_POINTS : selectedCrane.inspectionPoints }];
+    }
+    else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Select crane type" message:@"Please Select the Crane Type" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+        [alert show];
+    }
 }
 
 /*
@@ -626,22 +636,22 @@ static NSString* USERNAME = @"username";
     
     UIInterfaceOrientation currentOrientation = [UIApplication sharedApplication].statusBarOrientation;
     
-    if ((currentOrientation==UIInterfaceOrientationLandscapeLeft) ||
-        (currentOrientation==UIInterfaceOrientationLandscapeRight))
-    {
-        //Adjust the bottom content inset of your scroll view by the keyboard height
-        UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, keyboardSize.width, 0.0);
-        
-        _scrollView.contentInset = contentInsets;
-        _scrollView.scrollIndicatorInsets = contentInsets;
-        
-        aRect.size.height -=keyboardSize.height;
-        if (!CGRectContainsPoint(aRect, activeField.superview.frame.origin)) {
-            CGPoint scrollPoint = CGPointMake(0.0, keyboardSize.width + activeField.superview.frame.size.height);
-            [_scrollView setContentOffset:scrollPoint animated:YES];
-        }
-    }
-    else {
+//    if ((currentOrientation==UIInterfaceOrientationLandscapeLeft) ||
+//        (currentOrientation==UIInterfaceOrientationLandscapeRight))
+//    {
+//        //Adjust the bottom content inset of your scroll view by the keyboard height
+//        UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, keyboardSize.width, 0.0);
+//        
+//        _scrollView.contentInset = contentInsets;
+//        _scrollView.scrollIndicatorInsets = contentInsets;
+//        
+//        aRect.size.height -=keyboardSize.height;
+//        if (!CGRectContainsPoint(aRect, activeField.superview.frame.origin)) {
+//            CGPoint scrollPoint = CGPointMake(0.0, keyboardSize.width + activeField.superview.frame.size.height);
+//            [_scrollView setContentOffset:scrollPoint animated:YES];
+//        }
+//    }
+//    else {
         //Adjust the bottom content inset of your scroll view by the keyboard height
         UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, keyboardSize.height, 0.0);
         
@@ -653,7 +663,7 @@ static NSString* USERNAME = @"username";
             CGPoint scrollPoint = CGPointMake(0.0, keyboardSize.width + activeField.superview.frame.size.width);
             [_scrollView setContentOffset:scrollPoint animated:YES];
         }
-    }
+//    }
 }
 - (void) keyboardWillBeHidden:(NSNotification *) notification {
     UIEdgeInsets contentInsets = UIEdgeInsetsZero;
@@ -665,6 +675,39 @@ static NSString* USERNAME = @"username";
     _inspectionViewController.optionLocation = 0;
     [[IACraneInspectionDetailsManager sharedManager] setCrane:crane];
     [_inspectionViewController initiateParts];
+}
+
+- (IBAction)resetInspectionPressed:(id)sender {
+    
+    NSInteger selectedRow = [_craneDescriptionPickerView selectedRowInComponent:0];
+    
+    InspectionCrane *selectedCrane = [_craneDescriptionsArray objectAtIndex:selectedRow];
+    
+    [self resetInspectionWithCrane:selectedCrane];
+    
+}
+
+- (IBAction)setCrane:(id)sender {
+    
+    _craneDescriptionPickerView.userInteractionEnabled = NO;
+    [_craneDescriptionPickerView setAlpha:.5f];
+    UIButton *button = (UIButton *) sender;
+    [button setTitle:@"Change Crane" forState:UIControlStateNormal];
+    [button removeTarget:self action:@selector(setCrane:) forControlEvents:UIControlEventTouchUpInside];
+    [button addTarget:self action:@selector(changeCraneType:) forControlEvents:UIControlEventTouchUpInside];
+    
+    isCraneSet = YES;
+}
+
+- (void) changeCraneType:(id) sender {
+    _craneDescriptionPickerView.userInteractionEnabled = YES;
+    [_craneDescriptionPickerView setAlpha:1.0f];
+    UIButton *button = (UIButton *) sender;
+    [button setTitle:@"Select Crane" forState:UIControlStateNormal];
+    [button removeTarget:self action:@selector(changeCraneType:) forControlEvents:UIControlEventTouchUpInside];
+    [button addTarget:self action:@selector(setCrane:) forControlEvents:UIControlEventTouchUpInside];
+    
+    isCraneSet = NO;
 }
 
 - (void) viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {

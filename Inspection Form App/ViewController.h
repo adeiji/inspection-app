@@ -57,6 +57,7 @@
     bool changeLayoutNeeded;
     NSString* iosVersion;
     Inspection *inspection;
+    BOOL isCraneSet;
 }
 
 //Dropbox Objects
@@ -105,6 +106,8 @@ typedef enum {
 - (void) storeInformationAndDisplayInspectionViewWithCrane : (InspectionCrane *) selectedCrane
                                                SelectedRow : (NSInteger) selectedRow;
 - (void) resetInspectionWithCrane : (InspectionCrane *) crane;
+- (IBAction)resetInspectionPressed:(id)sender;
+- (IBAction)setCrane:(id)sender;
 
 
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;

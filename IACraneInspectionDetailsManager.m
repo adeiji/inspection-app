@@ -164,10 +164,9 @@
     for (id dictionary in lvwwdCranes) {
         
         Customer *customer = [[Customer alloc] initWithEntity:customerEntity insertIntoManagedObjectContext:context];
-        customer.name = @"LVWWD";
-        customer.contact = @"DAVID BARNES";
-        customer.address = @"2545 WATER DISTRICT AVE";
-        customer.email = @"EMAIL@EMAIL.COM";
+        customer.name = @"LVVWD";
+        customer.contact = @"ANDY ANDERSON";
+        customer.email = @"ANDY.ANDERSON@LVVWD.COM";
         
         InspectedCrane *inspectedCrane = [[InspectedCrane alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
         inspectedCrane.type = dictionary[@"TYPE"];

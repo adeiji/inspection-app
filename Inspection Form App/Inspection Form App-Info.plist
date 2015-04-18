@@ -13,7 +13,7 @@
 		<string>ipadAppLogo.jpg</string>
 	</array>
 	<key>CFBundleIdentifier</key>
-	<string>Silverstate.${PRODUCT_NAME:rfc1034identifier}</string>
+	<string>net.sswr.$(PRODUCT_NAME:rfc1034identifier)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
