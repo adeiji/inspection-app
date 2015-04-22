@@ -135,16 +135,9 @@
     [self.view setUserInteractionEnabled:NO];
     [[[[UIApplication sharedApplication] delegate] window] addSubview:promptView];
     [promptView mas_makeConstraints:^(MASConstraintMaker *make) {
-        UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
-        if (orientation == UIInterfaceOrientationLandscapeRight || orientation == UIInterfaceOrientationLandscapeLeft)
-        {
-            make.centerX.equalTo([[[UIApplication sharedApplication] delegate] window]).with.offset(100);
-            make.centerY.equalTo([[[UIApplication sharedApplication] delegate] window]).with.offset(0);
-            promptView.transform = CGAffineTransformMakeRotation(M_PI/2);
-        }
-        else {
-            make.center.equalTo([[[UIApplication sharedApplication] delegate] window]);
-        }
+        make.centerX.equalTo([[[UIApplication sharedApplication] delegate] window]);
+        make.centerY.equalTo([[[UIApplication sharedApplication] delegate] window]).with.offset(-200);
+
         make.width.equalTo(@385);
         make.height.equalTo(@249);
     }];
@@ -434,7 +427,15 @@
     else if (remarksLimitations == YES)
     {
         loadRatings = textField.text;
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Remarks Limitations" message:@"Remarks and/or Limitations Imposed" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+        UIAlertView *alert;
+        if (![_craneType isEqualToString:ELECTRIC_HOIST])
+        {
+            alert = [[UIAlertView alloc] initWithTitle:@"Remarks Limitations" message:@"Remarks and/or Limitations Imposed" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+        }
+        else {
+            alert = [[UIAlertView alloc] initWithTitle:@"Slip Test" message:@"What did Hoist Slip At?" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+        }
+        
         [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
         [alert show];
         [alert becomeFirstResponder];

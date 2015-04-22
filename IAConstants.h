@@ -36,6 +36,7 @@ FOUNDATION_EXPORT NSString *const USER_INFO_SELECTED_INSPECTION_POINT;
 FOUNDATION_EXPORT NSString *const UI_PROMPT_SHOWN;
 FOUNDATION_EXPORT NSString *const UI_PROMPT_HIDDEN;
 FOUNDATION_EXPORT NSString *const WATER_DISTRICT_CRANES_SAVED;
+FOUNDATION_EXPORT NSString *const ELECTRIC_HOIST;
 
 #define IS_IPHONE5 (([[UIScreen mainScreen] bounds].size.height-568)?NO:YES)
 #define IS_OS_5_OR_LATER    ([[[UIDevice currentDevice] systemVersion] floatValue] >= 5.0)

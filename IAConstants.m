@@ -26,7 +26,7 @@ NSString *const kSelectedInspectedCrane = @"selectedInspectedCrane";
 NSString *const kCoreDataClassCustomer = @"Customer";
 NSString *const kCoreDataClassPrompt = @"Prompt";
 NSString *const kCoreDataClassCondition = @"Condition";
-
+NSString *const ELECTRIC_HOIST = @"Electric Hoist";
 
 // Notification Center
 NSString *const NOTIFICATION_CRANE_DETAILS_FINISHED_SAVING = @"com.inspection.app.crane.details.finished.downloading";

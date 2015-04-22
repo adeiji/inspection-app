@@ -23,17 +23,18 @@
 #define SERIAL_NUMBER @"Serial No."
 #define HOIST_MANUFACTURER @"Hoist Manufacturer"
 #define MODEL @"Model"
-#define OWNER_ID @"Owner's Identification (if any)"
+#define OWNER_ID @"Owner's Identification (if any)\t%@"
 #define TEST_LOADS_APPLIED @"Test loads applied (only if examination conducted)\t\t%@"
 #define DESCRIPTION_OF_PROOF_LOAD @"Description of proof load:\t%@"
 #define BASIS_FOR_ASSIGNED_LOAD_RATINGS @"Basis for assigned load ratings:\t%@"
 #define REMARKS_LIMITATIONS_IMPOSED @"Remarks and/or limitations imposed:\t%@"
+#define SLIP_WEIGHT @"Weight hoist slipped at:\t%@"
 #define FOOTER @"I certify that on the %@th day of %@ %@ the above described device was tested X examined X by the undersigned; that said test and/or examination met with the requirements of the Division of Occupational Safety and Health Administration and ANSI B30 series orANSI/SIA A92.2 as applicable."
 #define AUTHORIZED_CERTIFICATION_AGENT_ADDRESS @"Name and address of authorized certificating agent:"
 #define SSWR_ADDRESS @"SILVER STATE WIRE ROPE AND RIGGING\n8740 S. JONES BLVD.\nLAS VEGAS, NV 89139"
 #define EXPIRATION_DATE @"Expiration Date:\t%@"
 #define TITLE @"Title: Crane Surveyor"
-#define CERTIFICATE @"Certificate #LVVWD-%@"
+#define CERTIFICATE @"Certificate #SSWR - %@"
 #define SIGNATURE @"Signature:"
 #define NAME @"Name:\t%@"
 #define DATE @"Date:\t%@"
@@ -206,7 +207,7 @@
     [self MoveToPoint:CGPointMake(470, 325) AndDrawString:inspection.inspectedCrane.hoistSrl InRect:CGRectMake(470, 310, 230, 20) WithContext:pdfContext AddToPoint:CGPointMake(550, 325) FontSize:8.0f ParagraphyStyle:paragraphStyle];
     
     // Owner Id
-    [self MoveToPoint:CGPointMake(230, 355) AndDrawString:OWNER_ID InRect:CGRectMake(50, 340, 500, 20) WithContext:pdfContext AddToPoint:CGPointMake(550, 355) FontSize:12.0f ParagraphyStyle:paragraphStyle];
+    [self MoveToPoint:CGPointMake(230, 355) AndDrawString:[NSString stringWithFormat:OWNER_ID, inspection.inspectedCrane.equipmentNumber] InRect:CGRectMake(50, 340, 500, 20) WithContext:pdfContext AddToPoint:CGPointMake(550, 355) FontSize:12.0f ParagraphyStyle:paragraphStyle];
     
     // Test Loads String
     [self MoveToPoint:CGPointMake(340, 385) AndDrawString:[NSString stringWithFormat:TEST_LOADS_APPLIED, inspection.testLoad] InRect:CGRectMake(50, 370, 500, 20) WithContext:pdfContext AddToPoint:CGPointMake(550, 385) FontSize:12.0f ParagraphyStyle:paragraphStyle];
@@ -217,8 +218,15 @@
     //  Load RatingsString
     [self MoveToPoint:CGPointMake(240, 445) AndDrawString:[NSString stringWithFormat:BASIS_FOR_ASSIGNED_LOAD_RATINGS, inspection.loadRatings] InRect:CGRectMake(50, 430, 500, 20) WithContext:pdfContext AddToPoint:CGPointMake(550, 445) FontSize:12.0f ParagraphyStyle:paragraphStyle];
     
-    //  Remarks Limitations String
-    [self MoveToPoint:CGPointMake(270, 475) AndDrawString:[NSString stringWithFormat:REMARKS_LIMITATIONS_IMPOSED, inspection.remarksLimitations] InRect:CGRectMake(50, 460, 500, 20) WithContext:pdfContext AddToPoint:CGPointMake(550, 475) FontSize:12.0f ParagraphyStyle:paragraphStyle];
+    if (![inspection.inspectedCrane.type isEqualToString:ELECTRIC_HOIST])
+    {
+        //  Remarks Limitations String
+        [self MoveToPoint:CGPointMake(270, 475) AndDrawString:[NSString stringWithFormat:REMARKS_LIMITATIONS_IMPOSED, inspection.remarksLimitations] InRect:CGRectMake(50, 460, 500, 20) WithContext:pdfContext AddToPoint:CGPointMake(550, 475) FontSize:12.0f ParagraphyStyle:paragraphStyle];
+    }
+    else {
+        //  Remarks Limitations String
+        [self MoveToPoint:CGPointMake(190, 475) AndDrawString:[NSString stringWithFormat:SLIP_WEIGHT, inspection.remarksLimitations] InRect:CGRectMake(50, 460, 500, 20) WithContext:pdfContext AddToPoint:CGPointMake(550, 475) FontSize:12.0f ParagraphyStyle:paragraphStyle];
+    }
     
     // Footer
     
