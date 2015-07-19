@@ -175,7 +175,7 @@
 }
 
 - (IBAction)promptCancelPressed:(id)sender {
-    if (promptView.promptLocation < [promptView.prompts count] - 1) {
+    if ((promptView.promptLocation < [promptView.prompts count] - 1) && promptView != nil) {
         promptView.promptLocation ++;
         Prompt *prompt = promptView.prompts[promptView.promptLocation];
         promptView.lblPromptText.text = prompt.title;
