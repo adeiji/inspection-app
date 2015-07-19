@@ -17,6 +17,7 @@
 #import "InspectionManager.h"
 #import "InspectionBussiness.h"
 #import "MasterViewController.h"
+#import <Masonry/Masonry.h>
 
 @interface InspectionViewController ()
 
@@ -53,7 +54,6 @@
     [self.view addGestureRecognizer:gestureRecognizerRight];
     [self.view addGestureRecognizer:gestureRecognizerLeft];
 }
-
 
 - (void) viewWillAppear:(BOOL)animated {
     
@@ -143,6 +143,7 @@
     }];
     
     [promptView.txtPromptResult becomeFirstResponder];
+    promptView.txtPromptResult.placeholder = @"Please enter a value, or click cancel";
 }
 
 
@@ -169,13 +170,25 @@
     {
         promptView.txtPromptResult.placeholder = @"Please enter a value, or click cancel";
     }
+    
+    promptView.txtPromptResult.text = @"";
 }
 
 - (IBAction)promptCancelPressed:(id)sender {
-    [promptView removeFromSuperview];
-    promptView = nil;
-    [self.view setUserInteractionEnabled:YES];
-    [[NSNotificationCenter defaultCenter] postNotificationName:UI_PROMPT_HIDDEN object:nil];
+    if (promptView.promptLocation < [promptView.prompts count] - 1) {
+        promptView.promptLocation ++;
+        Prompt *prompt = promptView.prompts[promptView.promptLocation];
+        promptView.lblPromptText.text = prompt.title;
+        [self.view setUserInteractionEnabled:NO];
+    }
+    else {
+        [promptView removeFromSuperview];
+        promptView = nil;
+        [self.view setUserInteractionEnabled:YES];
+        [[NSNotificationCenter defaultCenter] postNotificationName:UI_PROMPT_HIDDEN object:nil];
+    }
+    
+    promptView.txtPromptResult.text = @"";
 }
 
 - (void) setDeficiencyViews {

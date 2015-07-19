@@ -1,5 +1,10 @@
 PODS:
-  - Bolts (1.1.4)
+  - Bolts (1.2.0):
+    - Bolts/AppLinks
+    - Bolts/Tasks
+  - Bolts/AppLinks (1.2.0):
+    - Bolts/Tasks
+  - Bolts/Tasks (1.2.0)
   - Masonry (0.6.1)
   - Parse (1.7.1):
     - Bolts (~> 1.1)
@@ -7,12 +12,12 @@ PODS:
     - Parse (~> 1.7.1)
 
 DEPENDENCIES:
-  - Masonry
+  - Masonry (~> 0.6)
   - Parse (~> 1.7)
   - ParseCrashReporting (~> 1.6)
 
 SPEC CHECKSUMS:
-  Bolts: f8e2f94edbf9fec7bb8de5ecaaa3aa6b7de6f64e
+  Bolts: d176cb1e0012175589e389a9db49b85e27787576
   Masonry: 4972309f2f134de9dd312f4dc4a21359b50e6caa
   Parse: fa8ec29de6d82035635986c11946299fb1b38316
   ParseCrashReporting: 9aeff8680d500e5e833564fca5b60333f7bb7403

@@ -634,15 +634,14 @@ static NSString* USERNAME = @"username";
     CGRect aRect = self.view.frame;
     CGSize keyboardSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
     
-    UIInterfaceOrientation currentOrientation = [UIApplication sharedApplication].statusBarOrientation;
-    
     //Adjust the bottom content inset of your scroll view by the keyboard height
     UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, keyboardSize.height, 0.0);
     
     _scrollView.contentInset = contentInsets;
     _scrollView.scrollIndicatorInsets = contentInsets;
     
-    aRect.size.height -=keyboardSize.width;
+    aRect.size.width -=keyboardSize.height;
+
     if (!CGRectContainsPoint(aRect, activeField.superview.frame.origin)) {
         CGPoint scrollPoint = CGPointMake(0.0, keyboardSize.width + activeField.superview.frame.size.width);
         [_scrollView setContentOffset:scrollPoint animated:YES];

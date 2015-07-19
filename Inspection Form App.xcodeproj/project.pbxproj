@@ -667,7 +667,7 @@
 				LastUpgradeCheck = 0430;
 				TargetAttributes = {
 					8BC5844D150ABD87000AC695 = {
-						DevelopmentTeam = 58P227HU77;
+						DevelopmentTeam = HJPTQ3N75W;
 					};
 				};
 			};
@@ -901,8 +901,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD)";
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Adebayo Ijidakinro (33H4GK73YQ)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Adebayo Ijidakinro (33H4GK73YQ)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\\\\\\\"$(SRCROOT)/Inspection\\\\\\ Form\\\\\\ App/dropbox-ios-sdk-1.2.1\\\\\\\"",
@@ -931,7 +931,7 @@
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "44183b2a-07ca-41bd-9566-e9d347ae2d20";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 2;
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
@@ -944,8 +944,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD)";
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Adebayo Ijidakinro (33H4GK73YQ)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Adebayo Ijidakinro (33H4GK73YQ)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\\\\\\\"$(SRCROOT)/Inspection\\\\\\ Form\\\\\\ App/dropbox-ios-sdk-1.2.1\\\\\\\"",
@@ -966,7 +966,7 @@
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "44183b2a-07ca-41bd-9566-e9d347ae2d20";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 2;
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;

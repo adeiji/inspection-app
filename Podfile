@@ -9,7 +9,7 @@ target 'Inspection Form App' do
 
 pod 'Parse', '~> 1.7'
 pod 'ParseCrashReporting', '~> 1.6'
-pod 'Masonry'
+pod 'Masonry', '~> 0.6'
 
 end
 

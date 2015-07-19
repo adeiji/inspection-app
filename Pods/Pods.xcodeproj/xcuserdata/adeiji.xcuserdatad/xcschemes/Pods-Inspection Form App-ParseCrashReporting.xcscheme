@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "6395ED2A5E210FF8324AE10C"
+               BlueprintIdentifier = "3958D9DCCEDECD48922B6107"
                BuildableName = "libPods-Inspection Form App-ParseCrashReporting.a"
                BlueprintName = "Pods-Inspection Form App-ParseCrashReporting"
                ReferencedContainer = "container:Pods.xcodeproj">
