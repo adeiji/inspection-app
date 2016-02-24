@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "731A4CE87E6F85F4E98D13BE17ECFB0178D4AD49",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "731A4CE87E6F85F4E98D13BE17ECFB0178D4AD49" : 0,
+    "37E1DD4F88874B9763C9AB992517625F7B6F0D7B" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "AD7CF889-60F3-4B90-AB5A-A3B7D05F5E5F",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "731A4CE87E6F85F4E98D13BE17ECFB0178D4AD49" : "inspection-app",
+    "37E1DD4F88874B9763C9AB992517625F7B6F0D7B" : ""
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Inspection Form App",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Inspection Form App.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/adeiji\/dephyned.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "37E1DD4F88874B9763C9AB992517625F7B6F0D7B"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/adeiji\/inspection-app.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "731A4CE87E6F85F4E98D13BE17ECFB0178D4AD49"
+    }
+  ]
+}

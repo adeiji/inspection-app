@@ -57,6 +57,10 @@
 		CEFD6D2D1839575E001764E9 /* CraneView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEFD6D2C1839575E001764E9 /* CraneView.xib */; };
 		CEFD6D70183A8705001764E9 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFD6D6F183A8705001764E9 /* Default-568h@2x.png */; };
 		CEFD6D72183A87D8001764E9 /* JobInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEFD6D71183A87D8001764E9 /* JobInfoView.xib */; };
+		F423A8C91C7BA24C00899B6E /* LoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F423A8C81C7BA24C00899B6E /* LoginView.xib */; };
+		F423A8CD1C7BA62800899B6E /* DEUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = F423A8CC1C7BA62800899B6E /* DEUser.swift */; };
+		F423A8D31C7BA80B00899B6E /* DELoginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F423A8D21C7BA80B00899B6E /* DELoginManager.m */; };
+		F423A8D61C7BA90900899B6E /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F423A8D51C7BA90900899B6E /* LoginViewController.m */; };
 		F453A3B21AD43E3B00319D7A /* InspectionModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F453A3B01AD43E3B00319D7A /* InspectionModel.xcdatamodeld */; };
 		F453A3B51AD43FB200319D7A /* Customer.m in Sources */ = {isa = PBXBuildFile; fileRef = F453A3B41AD43FB200319D7A /* Customer.m */; };
 		F49DDEA71ACCC60C00A02162 /* SyncManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F49DDEA61ACCC60C00A02162 /* SyncManager.m */; };
@@ -164,6 +168,13 @@
 		CEFD6D6F183A8705001764E9 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		CEFD6D71183A87D8001764E9 /* JobInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JobInfoView.xib; sourceTree = "<group>"; };
 		E1A4C2449B6DA9D1ED2E1AE3 /* Pods-Inspection Form App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Inspection Form App.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Inspection Form App/Pods-Inspection Form App.debug.xcconfig"; sourceTree = "<group>"; };
+		F423A8C81C7BA24C00899B6E /* LoginView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginView.xib; sourceTree = "<group>"; };
+		F423A8CB1C7BA62700899B6E /* Inspection Form App-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Inspection Form App-Bridging-Header.h"; sourceTree = "<group>"; };
+		F423A8CC1C7BA62800899B6E /* DEUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DEUser.swift; sourceTree = "<group>"; };
+		F423A8D11C7BA80B00899B6E /* DELoginManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DELoginManager.h; sourceTree = "<group>"; };
+		F423A8D21C7BA80B00899B6E /* DELoginManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DELoginManager.m; sourceTree = "<group>"; };
+		F423A8D41C7BA90900899B6E /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		F423A8D51C7BA90900899B6E /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		F453A3B11AD43E3B00319D7A /* InspectionModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = InspectionModel.xcdatamodel; sourceTree = "<group>"; };
 		F453A3B31AD43FB200319D7A /* Customer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Customer.h; sourceTree = "<group>"; };
 		F453A3B41AD43FB200319D7A /* Customer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Customer.m; sourceTree = "<group>"; };
@@ -249,6 +260,7 @@
 		8BC58443150ABD87000AC695 = {
 			isa = PBXGroup;
 			children = (
+				F423A8CA1C7BA51B00899B6E /* Dephyned */,
 				F49DDEB51ACCDC4800A02162 /* Core Data */,
 				F49DDEAB1ACCCB2700A02162 /* IAConstants.h */,
 				F49DDEAC1ACCCB2700A02162 /* IAConstants.m */,
@@ -298,6 +310,7 @@
 		8BC58458150ABD87000AC695 /* Inspection Form App */ = {
 			isa = PBXGroup;
 			children = (
+				F423A8CE1C7BA71700899B6E /* Login Manager */,
 				F4FBDAE21AD80A430090DA72 /* Views */,
 				CE38513D18107296003629DA /* View Controllers */,
 				CE798DB4180F35E400C2E5A0 /* Business Layer */,
@@ -527,6 +540,7 @@
 				CEFD6D2C1839575E001764E9 /* CraneView.xib */,
 				CE3992741805FD08003AE30B /* iPadMainStoryboard.storyboard */,
 				CEFD6D71183A87D8001764E9 /* JobInfoView.xib */,
+				F423A8C81C7BA24C00899B6E /* LoginView.xib */,
 			);
 			name = "UI Files";
 			sourceTree = "<group>";
@@ -556,6 +570,26 @@
 				CE798DB6180F369600C2E5A0 /* InspectionBussiness.m */,
 			);
 			name = "Business Layer";
+			sourceTree = "<group>";
+		};
+		F423A8CA1C7BA51B00899B6E /* Dephyned */ = {
+			isa = PBXGroup;
+			children = (
+				F423A8CC1C7BA62800899B6E /* DEUser.swift */,
+				F423A8CB1C7BA62700899B6E /* Inspection Form App-Bridging-Header.h */,
+			);
+			name = Dephyned;
+			sourceTree = "<group>";
+		};
+		F423A8CE1C7BA71700899B6E /* Login Manager */ = {
+			isa = PBXGroup;
+			children = (
+				F423A8D11C7BA80B00899B6E /* DELoginManager.h */,
+				F423A8D21C7BA80B00899B6E /* DELoginManager.m */,
+				F423A8D41C7BA90900899B6E /* LoginViewController.h */,
+				F423A8D51C7BA90900899B6E /* LoginViewController.m */,
+			);
+			name = "Login Manager";
 			sourceTree = "<group>";
 		};
 		F49DDEA01ACCC5CE00A02162 /* Managers */ = {
@@ -664,6 +698,7 @@
 		8BC58445150ABD87000AC695 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0710;
 				LastUpgradeCheck = 0430;
 				TargetAttributes = {
 					8BC5844D150ABD87000AC695 = {
@@ -704,6 +739,7 @@
 				8B6BA1841708BF1B00E08D9D /* t1_logo.png in Resources */,
 				CE9A27381716A63200FE3D32 /* ipadAppLogo.jpg in Resources */,
 				F4FBDADE1AD78B530090DA72 /* PromptView.xib in Resources */,
+				F423A8C91C7BA24C00899B6E /* LoginView.xib in Resources */,
 				CE9A273C1716A70E00FE3D32 /* titlePageLogo.jpg in Resources */,
 				CEFD6D2D1839575E001764E9 /* CraneView.xib in Resources */,
 				CE9775D91718C2660037967E /* logo.jpg in Resources */,
@@ -775,6 +811,7 @@
 				F4FBDAE11AD804200090DA72 /* Prompt.m in Sources */,
 				8BC5845F150ABD87000AC695 /* main.m in Sources */,
 				F453A3B21AD43E3B00319D7A /* InspectionModel.xcdatamodeld in Sources */,
+				F423A8D61C7BA90900899B6E /* LoginViewController.m in Sources */,
 				8BC58463150ABD87000AC695 /* AppDelegate.m in Sources */,
 				CE40D39A180894300080E9BD /* PDFGenerator.m in Sources */,
 				8BC58466150ABD87000AC695 /* ViewController.m in Sources */,
@@ -793,6 +830,7 @@
 				F4B29E671ADC281B0025A091 /* InspectedCrane.m in Sources */,
 				CE486AE6180F1E4200B1B953 /* InspectionViewController.m in Sources */,
 				CE798DB7180F369600C2E5A0 /* InspectionBussiness.m in Sources */,
+				F423A8D31C7BA80B00899B6E /* DELoginManager.m in Sources */,
 				CE486ACB180C83E900B1B953 /* Inspection.m in Sources */,
 				8BE881F81513F82400360C63 /* ItemListConditionStorage.m in Sources */,
 				8BE881FC1513FA4200360C63 /* Condition.m in Sources */,
@@ -802,6 +840,7 @@
 				F49DDEB11ACCDA5C00A02162 /* IACraneInspectionDetailsManager.m in Sources */,
 				CE486AE2180F17DC00B1B953 /* MasterViewController.m in Sources */,
 				8BE9DE801616355800906B98 /* OrdinalNumberFormatter.m in Sources */,
+				F423A8CD1C7BA62800899B6E /* DEUser.swift in Sources */,
 				F49DDEAD1ACCCB2700A02162 /* IAConstants.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -901,8 +940,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD)";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Adebayo Ijidakinro (33H4GK73YQ)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Adebayo Ijidakinro (33H4GK73YQ)";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Adebayo Ijidakinro (36756F4Y54)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Adebayo Ijidakinro (36756F4Y54)";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\\\\\\\"$(SRCROOT)/Inspection\\\\\\ Form\\\\\\ App/dropbox-ios-sdk-1.2.1\\\\\\\"",
@@ -917,7 +958,8 @@
 				GCC_PREFIX_HEADER = "Inspection Form App/Inspection Form App-Prefix.pch";
 				"HEADER_SEARCH_PATHS[sdk=*]" = "\"${SRCROOT}/relative/path/to/RESTClient/Source\"";
 				INFOPLIST_FILE = "Inspection Form App/Inspection Form App-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/T1Autograph\"",
@@ -930,8 +972,11 @@
 					"\"$(SRCROOT)\"",
 				);
 				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sswr.inspectionapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "2f8cc671-0d33-4bc1-b906-5d279299ea67";
+				SWIFT_OBJC_BRIDGING_HEADER = "Inspection Form App-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = 2;
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
@@ -944,8 +989,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD)";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Adebayo Ijidakinro (33H4GK73YQ)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Adebayo Ijidakinro (33H4GK73YQ)";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Adebayo Ijidakinro (36756F4Y54)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Adebayo Ijidakinro (36756F4Y54)";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\\\\\\\"$(SRCROOT)/Inspection\\\\\\ Form\\\\\\ App/dropbox-ios-sdk-1.2.1\\\\\\\"",
@@ -959,14 +1006,17 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Inspection Form App/Inspection Form App-Prefix.pch";
 				INFOPLIST_FILE = "Inspection Form App/Inspection Form App-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/T1Autograph\"",
 				);
 				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sswr.inspectionapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "2f8cc671-0d33-4bc1-b906-5d279299ea67";
+				SWIFT_OBJC_BRIDGING_HEADER = "Inspection Form App-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 2;
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;

@@ -15,6 +15,7 @@
 #import <Parse/Parse.h>
 #import <ParseCrashReporting/ParseCrashReporting.h>
 #import "SyncManager.h"
+#import "LoginViewController.h"
 
 @interface AppDelegate ()
 
@@ -48,8 +49,13 @@
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
         UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
         UINavigationController *navigationController = [splitViewController.viewControllers lastObject];
-        
-        splitViewController.delegate = (id)navigationController.topViewController;                
+        if ([PFUser currentUser] != nil ) {
+            splitViewController.delegate = (id)navigationController.topViewController;
+        }
+        else {
+            LoginViewController *loginViewController = [[LoginViewController alloc] initWithNibName:@"LoginView" bundle:nil];
+            [navigationController pushViewController:loginViewController animated:true];
+        }
     }
     else if ([[UIDevice currentDevice] userInterfaceIdiom] ==UIUserInterfaceIdiomPhone)
     {

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginViewController">
+            <connections>
+                <outlet property="borderView" destination="3by-Hr-z70" id="KMM-Nt-dFi"/>
+                <outlet property="txtUsername" destination="nLt-5y-VNX" id="suy-4Z-l6r"/>
+                <outlet property="view" destination="iN0-l3-epB" id="VsI-ad-Gps"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3by-Hr-z70">
+                    <rect key="frame" x="123" y="173" width="355" height="255"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z4K-bm-ZxO">
+                            <rect key="frame" x="81" y="91" width="192" height="42"/>
+                            <color key="backgroundColor" red="0.25882352939999997" green="0.73725490199999999" blue="0.38431372549999998" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="42" id="dfz-zn-B49"/>
+                            </constraints>
+                            <state key="normal" title="Login">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="loginUser:" destination="-1" eventType="touchUpInside" id="G3I-4D-bwh"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zQD-Ox-szO">
+                            <rect key="frame" x="81" y="170" width="192" height="42"/>
+                            <color key="backgroundColor" red="0.0" green="0.67450980390000004" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <state key="normal" title="Create Account">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="createAccount:" destination="-1" eventType="touchUpInside" id="Wmm-Ab-tO4"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="or" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="se4-x7-FBB">
+                            <rect key="frame" x="169" y="141" width="16" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Your Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nLt-5y-VNX">
+                            <rect key="frame" x="81" y="42" width="192" height="30"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="7PT-30-xCX">
+                            <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="200" id="HCJ-xB-xtu"/>
+                                <constraint firstAttribute="height" constant="200" id="zPV-6P-peL"/>
+                            </constraints>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="HCJ-xB-xtu"/>
+                                    <exclude reference="zPV-6P-peL"/>
+                                </mask>
+                            </variation>
+                            <variation key="heightClass=regular-widthClass=regular">
+                                <mask key="constraints">
+                                    <include reference="HCJ-xB-xtu"/>
+                                    <include reference="zPV-6P-peL"/>
+                                </mask>
+                            </variation>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="7PT-30-xCX" firstAttribute="centerX" secondItem="3by-Hr-z70" secondAttribute="centerX" id="12F-MY-tLx"/>
+                        <constraint firstItem="z4K-bm-ZxO" firstAttribute="leading" secondItem="3by-Hr-z70" secondAttribute="leading" constant="81" id="7bE-Xq-A7S"/>
+                        <constraint firstItem="se4-x7-FBB" firstAttribute="top" secondItem="z4K-bm-ZxO" secondAttribute="bottom" constant="8" id="Ha9-Ot-SEt"/>
+                        <constraint firstItem="zQD-Ox-szO" firstAttribute="top" secondItem="z4K-bm-ZxO" secondAttribute="bottom" constant="37" id="L0Z-nZ-L9X"/>
+                        <constraint firstItem="zQD-Ox-szO" firstAttribute="centerX" secondItem="z4K-bm-ZxO" secondAttribute="centerX" id="RJs-TB-ash"/>
+                        <constraint firstItem="z4K-bm-ZxO" firstAttribute="top" secondItem="nLt-5y-VNX" secondAttribute="bottom" constant="19" id="Rgl-Rk-V0I"/>
+                        <constraint firstAttribute="trailing" secondItem="z4K-bm-ZxO" secondAttribute="trailing" constant="82" id="SDL-MS-wF3"/>
+                        <constraint firstItem="z4K-bm-ZxO" firstAttribute="centerX" secondItem="3by-Hr-z70" secondAttribute="centerX" id="TNh-ux-vf2"/>
+                        <constraint firstItem="z4K-bm-ZxO" firstAttribute="centerY" secondItem="3by-Hr-z70" secondAttribute="centerY" constant="-15" id="Uwb-zE-oDc">
+                            <variation key="heightClass=regular-widthClass=regular" constant="60.5"/>
+                        </constraint>
+                        <constraint firstItem="zQD-Ox-szO" firstAttribute="height" secondItem="z4K-bm-ZxO" secondAttribute="height" id="a6i-Fh-TlD"/>
+                        <constraint firstItem="zQD-Ox-szO" firstAttribute="width" secondItem="z4K-bm-ZxO" secondAttribute="width" id="dtp-uV-Ymf"/>
+                        <constraint firstItem="se4-x7-FBB" firstAttribute="centerX" secondItem="z4K-bm-ZxO" secondAttribute="centerX" id="juU-Yl-eed"/>
+                        <constraint firstItem="nLt-5y-VNX" firstAttribute="width" secondItem="z4K-bm-ZxO" secondAttribute="width" id="kx6-v5-0AU"/>
+                        <constraint firstItem="nLt-5y-VNX" firstAttribute="centerX" secondItem="z4K-bm-ZxO" secondAttribute="centerX" id="yHz-2v-78g"/>
+                        <constraint firstItem="7PT-30-xCX" firstAttribute="top" secondItem="3by-Hr-z70" secondAttribute="top" constant="9" id="yXU-dI-meT"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="subviews">
+                            <exclude reference="7PT-30-xCX"/>
+                        </mask>
+                        <mask key="constraints">
+                            <exclude reference="12F-MY-tLx"/>
+                            <exclude reference="yXU-dI-meT"/>
+                        </mask>
+                    </variation>
+                    <variation key="heightClass=regular-widthClass=regular">
+                        <mask key="subviews">
+                            <include reference="7PT-30-xCX"/>
+                        </mask>
+                        <mask key="constraints">
+                            <include reference="12F-MY-tLx"/>
+                            <include reference="yXU-dI-meT"/>
+                        </mask>
+                    </variation>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="3by-Hr-z70" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="123" id="1hK-4P-Ysh"/>
+                <constraint firstItem="3by-Hr-z70" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="173" id="IUm-bS-llI"/>
+                <constraint firstAttribute="bottom" secondItem="3by-Hr-z70" secondAttribute="bottom" constant="172" id="LSN-1e-5K1"/>
+                <constraint firstAttribute="trailing" secondItem="3by-Hr-z70" secondAttribute="trailing" constant="122" id="lr1-w6-OU6"/>
+            </constraints>
+        </view>
+    </objects>
+    <resources>
+        <image name="logo.jpg" width="2264" height="2258"/>
+    </resources>
+</document>

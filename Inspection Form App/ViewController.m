@@ -613,7 +613,10 @@ static NSString* USERNAME = @"username";
     inspection.jobNumber = _txtJobNumber.text;
     inspection.date = _txtDate.text;
     inspection.technicianName = _txtTechnicianName.text;
-    
+    inspection.loadRatings = @"";
+    inspection.testLoad = @"";
+    inspection.remarksLimitations = @"";
+    inspection.proofLoad = @"";
     _inspectionViewController.craneType = inspection.inspectedCrane.type;
     _inspectionViewController.partsArray = _myPartsArray;
     
