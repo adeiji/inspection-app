@@ -64,6 +64,8 @@
 
     [self fillCriteriaObjects];
     [self getPreviouslyFinishedCranes];
+    
+    
 //    // Only run this the first time the application opens
 //    NSString *firstTime = [[NSUserDefaults standardUserDefaults] objectForKey:@"firstTime"];
 //    if (!firstTime)
@@ -162,8 +164,8 @@
     // Allow the parse local data store
     [ParseCrashReporting enable];
     // Parse Keys - Livead
-    [Parse setApplicationId:@"pXYoDYstnZ7wvICh2nNtxmAwegOpjhsdRpFjNoVE"
-                  clientKey:@"QiK7CN2M6Yh86Kn9FMLk8OBO0uHV9Icg0ryxrc11"];
+//    [Parse setApplicationId:@"pXYoDYstnZ7wvICh2nNtxmAwegOpjhsdRpFjNoVE"
+//                  clientKey:@"QiK7CN2M6Yh86Kn9FMLk8OBO0uHV9Icg0ryxrc11"];
 
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
 }
