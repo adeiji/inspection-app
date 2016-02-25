@@ -61,6 +61,9 @@
 		F423A8CD1C7BA62800899B6E /* DEUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = F423A8CC1C7BA62800899B6E /* DEUser.swift */; };
 		F423A8D31C7BA80B00899B6E /* DELoginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F423A8D21C7BA80B00899B6E /* DELoginManager.m */; };
 		F423A8D61C7BA90900899B6E /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F423A8D51C7BA90900899B6E /* LoginViewController.m */; };
+		F43E74851C7E80E60045E5F1 /* OptionsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F43E74831C7E80E60045E5F1 /* OptionsTableViewController.m */; };
+		F43E74861C7E80E60045E5F1 /* OptionsTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F43E74841C7E80E60045E5F1 /* OptionsTableViewController.xib */; };
+		F43E74891C7E874D0045E5F1 /* InspectionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F43E74881C7E874D0045E5F1 /* InspectionsViewController.m */; };
 		F453A3B21AD43E3B00319D7A /* InspectionModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F453A3B01AD43E3B00319D7A /* InspectionModel.xcdatamodeld */; };
 		F453A3B51AD43FB200319D7A /* Customer.m in Sources */ = {isa = PBXBuildFile; fileRef = F453A3B41AD43FB200319D7A /* Customer.m */; };
 		F49DDEA71ACCC60C00A02162 /* SyncManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F49DDEA61ACCC60C00A02162 /* SyncManager.m */; };
@@ -175,6 +178,11 @@
 		F423A8D21C7BA80B00899B6E /* DELoginManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DELoginManager.m; sourceTree = "<group>"; };
 		F423A8D41C7BA90900899B6E /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		F423A8D51C7BA90900899B6E /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		F43E74821C7E80E60045E5F1 /* OptionsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionsTableViewController.h; sourceTree = "<group>"; };
+		F43E74831C7E80E60045E5F1 /* OptionsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionsTableViewController.m; sourceTree = "<group>"; };
+		F43E74841C7E80E60045E5F1 /* OptionsTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionsTableViewController.xib; sourceTree = "<group>"; };
+		F43E74871C7E874D0045E5F1 /* InspectionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectionsViewController.h; sourceTree = "<group>"; };
+		F43E74881C7E874D0045E5F1 /* InspectionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InspectionsViewController.m; sourceTree = "<group>"; };
 		F453A3B11AD43E3B00319D7A /* InspectionModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = InspectionModel.xcdatamodel; sourceTree = "<group>"; };
 		F453A3B31AD43FB200319D7A /* Customer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Customer.h; sourceTree = "<group>"; };
 		F453A3B41AD43FB200319D7A /* Customer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Customer.m; sourceTree = "<group>"; };
@@ -493,6 +501,7 @@
 		CE486AD5180CB17C00B1B953 /* View Controller */ = {
 			isa = PBXGroup;
 			children = (
+				F43E74811C7E80C60045E5F1 /* Options View Controller */,
 				8BC58465150ABD87000AC695 /* ViewController.m */,
 				8BC58464150ABD87000AC695 /* ViewController.h */,
 			);
@@ -592,6 +601,18 @@
 			name = "Login Manager";
 			sourceTree = "<group>";
 		};
+		F43E74811C7E80C60045E5F1 /* Options View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				F43E74821C7E80E60045E5F1 /* OptionsTableViewController.h */,
+				F43E74831C7E80E60045E5F1 /* OptionsTableViewController.m */,
+				F43E74841C7E80E60045E5F1 /* OptionsTableViewController.xib */,
+				F43E74871C7E874D0045E5F1 /* InspectionsViewController.h */,
+				F43E74881C7E874D0045E5F1 /* InspectionsViewController.m */,
+			);
+			name = "Options View Controller";
+			sourceTree = "<group>";
+		};
 		F49DDEA01ACCC5CE00A02162 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
@@ -663,6 +684,7 @@
 				8BC5844B150ABD87000AC695 /* Frameworks */,
 				8BC5844C150ABD87000AC695 /* Resources */,
 				A0995222D9DDBB7A6B3F0375 /* Copy Pods Resources */,
+				1117BEE18FBCD399E4E29F96 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -731,6 +753,7 @@
 			files = (
 				8BC5845D150ABD87000AC695 /* InfoPlist.strings in Resources */,
 				CEFD6D70183A8705001764E9 /* Default-568h@2x.png in Resources */,
+				F43E74861C7E80E60045E5F1 /* OptionsTableViewController.xib in Resources */,
 				CEFD6D72183A87D8001764E9 /* JobInfoView.xib in Resources */,
 				CE8028AD1837337C00B40DCB /* iPhoneStoryboard.storyboard in Resources */,
 				CE3992751805FD08003AE30B /* iPadMainStoryboard.storyboard in Resources */,
@@ -757,6 +780,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		1117BEE18FBCD399E4E29F96 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Inspection Form App/Pods-Inspection Form App-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		12D7C41C3A7D475C14C223B7 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -829,10 +867,12 @@
 				8B0787C715113796006857A8 /* Parts.m in Sources */,
 				F4B29E671ADC281B0025A091 /* InspectedCrane.m in Sources */,
 				CE486AE6180F1E4200B1B953 /* InspectionViewController.m in Sources */,
+				F43E74891C7E874D0045E5F1 /* InspectionsViewController.m in Sources */,
 				CE798DB7180F369600C2E5A0 /* InspectionBussiness.m in Sources */,
 				F423A8D31C7BA80B00899B6E /* DELoginManager.m in Sources */,
 				CE486ACB180C83E900B1B953 /* Inspection.m in Sources */,
 				8BE881F81513F82400360C63 /* ItemListConditionStorage.m in Sources */,
+				F43E74851C7E80E60045E5F1 /* OptionsTableViewController.m in Sources */,
 				8BE881FC1513FA4200360C63 /* Condition.m in Sources */,
 				8BF10A9C152FB93D00DC5F05 /* TextField.m in Sources */,
 				F4FBDAE51AD80A520090DA72 /* PromptView.m in Sources */,

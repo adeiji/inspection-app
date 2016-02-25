@@ -5,6 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -675,12 +676,20 @@
                                 </textAttributes>
                                 <items>
                                     <navigationItem title="Customer and Job Information" id="HDl-LN-ANL">
-                                        <barButtonItem key="leftBarButtonItem" title="Submit" id="Uqq-fb-DUm">
-                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <connections>
-                                                <action selector="CustomerSubmitPressed:" destination="sgx-pA-png" id="tgK-gV-U2o"/>
-                                            </connections>
-                                        </barButtonItem>
+                                        <leftBarButtonItems>
+                                            <barButtonItem title="Submit" id="Uqq-fb-DUm">
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <connections>
+                                                    <action selector="CustomerSubmitPressed:" destination="sgx-pA-png" id="tgK-gV-U2o"/>
+                                                </connections>
+                                            </barButtonItem>
+                                            <barButtonItem title="Options" id="4eT-mY-NMM">
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <connections>
+                                                    <action selector="showOptionsMenu:" destination="sgx-pA-png" id="Od3-em-igr"/>
+                                                </connections>
+                                            </barButtonItem>
+                                        </leftBarButtonItems>
                                         <barButtonItem key="rightBarButtonItem" title="Parts List" id="6cv-YP-nhB">
                                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <connections>

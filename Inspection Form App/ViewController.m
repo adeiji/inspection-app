@@ -26,6 +26,7 @@
 #import "InspectionBussiness.h"
 #import "AppDelegate.h"
 #import "InspectionManager.h"
+#import "OptionsTableViewController.h"
 
 @interface ViewController ()
 @end
@@ -72,6 +73,13 @@ static NSString* USERNAME = @"username";
     _txtTechnicianName.text = [owner uppercaseString];
     [self initiatePartsForSelectedCrane];
 }
+
+
+- (IBAction)showOptionsMenu:(id)sender {
+    OptionsTableViewController *optionsTableViewController = [[OptionsTableViewController alloc] init];
+    [self.navigationController presentViewController:optionsTableViewController animated:true completion:nil];
+}
+
 
 - (void) initiatePartsForSelectedCrane {
     if ([_craneDescriptionsArray count] > 0)

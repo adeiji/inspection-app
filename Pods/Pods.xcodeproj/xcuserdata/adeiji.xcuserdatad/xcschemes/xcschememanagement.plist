@@ -4,22 +4,22 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Pods-Inspection Form App-Bolts.xcscheme</key>
+		<key>Bolts.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-Inspection Form App-Masonry.xcscheme</key>
+		<key>Masonry.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-Inspection Form App-Parse.xcscheme</key>
+		<key>Parse.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-Inspection Form App-ParseCrashReporting.xcscheme</key>
+		<key>ParseCrashReporting.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -32,52 +32,27 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>07FA17D56113C7CD1C0A8D2B</key>
+		<key>4645808A1347D45C8E401FFF9B274AC4</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>2A2C12A1ED1FE41C21266BC0</key>
+		<key>4CD92797A96766670A60AE5197C5FB82</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>3727F855DB35810728504000</key>
+		<key>53480ED0BE09FF49E34B1702D485CAAB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>3958D9DCCEDECD48922B6107</key>
+		<key>960A6BC377BC3426655C94898BD5BCAA</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>5495369279D71878C418D48F</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>6395ED2A5E210FF8324AE10C</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>AF557FE4BAA56889BFF8C4D3</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>B5C8C6BA78FBF3E1D3E4C61E</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>B712E6F4108D109480E9B3FB</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>CD0E2D15D19E4E4494C8FDED</key>
+		<key>9B916844F33E8D3CF7BC18CE424E9721</key>
 		<dict>
 			<key>primary</key>
 			<true/>

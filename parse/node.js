@@ -3,7 +3,7 @@ var ParseServer = require('parse-server').ParseServer;
 
 var app = express();
 var api = new ParseServer({
-	databaseURI: 'mongodb://localhost/inspection_app',
+	databaseURI: 'mongodb://dephyned:6Ab7boy!!@ds011168.mongolab.com:11168/inspection_app',
 	cloud: './cloud/main.js',
 	appId: 'pXYoDYstnZ7wvICh2nNtxmAwegOpjhsdRpFjNoVE',
 	masterKey: '8And2LPBtbDL4beX8a9scdIikf0aLTEjCs1pxjcl',
