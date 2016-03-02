@@ -7,7 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <Parse/Parse.h>
+
 
 @interface DELoginManager : NSObject
+
+- (NSArray *) getAllUsers;
 
 @end

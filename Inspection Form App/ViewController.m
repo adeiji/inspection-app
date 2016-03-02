@@ -75,9 +75,12 @@ static NSString* USERNAME = @"username";
 }
 
 
+
+
 - (IBAction)showOptionsMenu:(id)sender {
     OptionsTableViewController *optionsTableViewController = [[OptionsTableViewController alloc] init];
-    [self.navigationController presentViewController:optionsTableViewController animated:true completion:nil];
+    optionsTableViewController.options = [NSArray arrayWithObjects:@"Send Inspection", @"View Inspections Shared With You", nil];
+    [self.navigationController pushViewController:optionsTableViewController animated:true];
 }
 
 
@@ -485,6 +488,7 @@ static NSString* USERNAME = @"username";
 -(void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:true];
 }
 
 

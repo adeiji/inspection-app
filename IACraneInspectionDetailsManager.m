@@ -427,6 +427,29 @@
     [((AppDelegate *) [[UIApplication sharedApplication] delegate]) saveContext];
 }
 
+- (NSMutableArray *) getAllCranesWithInspections {
+    
+    NSArray *cranes = [self getAllInspectedCranes];
+    NSMutableArray *inspectedCranes = [NSMutableArray new];
+    
+    for (InspectedCrane *crane in cranes) {
+        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+        NSEntityDescription *entity = [NSEntityDescription entityForName:kCoreDataClassCondition inManagedObjectContext:_context];
+        [fetchRequest setEntity:entity];
+        // Specify criteria for filtering which objects to fetch
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"hoistSrl == %@", crane.hoistSrl];
+        [fetchRequest setPredicate:predicate];
+        NSError *error;
+        NSUInteger count = [_context countForFetchRequest:fetchRequest error:&error];
+        
+        if (count > 0) {
+            [inspectedCranes addObject:crane];
+        }
+    }
+    
+    return inspectedCranes;
+}
+
 - (NSArray *) getAllConditionsForCrane : (InspectedCrane *) crane {
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
@@ -446,5 +469,61 @@
 
 }
 
+/*
+ 
+ Delete previous occurences of this inspection that were already sent to this user
+ 
+ */
+- (void) deleteEarlierInspectionOfCraneFromServer : (InspectedCrane *) crane
+                                          ForUser : (PFUser *) user{
+    
+    PFQuery *query = [PFInspectionDetails query];
+    [query whereKey:@"hoistSrl" equalTo:crane.hoistSrl];
+    [query whereKey:@"sendToUser" equalTo:user];
+    
+    [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        if ([objects count] > 0) {
+            for (PFInspectionDetails *object in objects) {
+                [object deleteInBackground];
+            }
+        }
+    }];
+}
+
+/*
+ 
+ Push the inspection to the server
+ 
+ */
+- (void) shareCraneDetails : (InspectedCrane *) crane
+                  WithUser : (PFUser *) user {
+    NSArray *inspectionDetails = [[IACraneInspectionDetailsManager sharedManager] getAllConditionsForCrane:crane];
+    NSMutableArray *pfInspectionDetailsObjects = [NSMutableArray new];
+    
+    [self deleteEarlierInspectionOfCraneFromServer:crane ForUser:user];
+    
+    for (CoreDataCondition *condition in inspectionDetails) {
+        PFInspectionDetails *inspectionDetails = [PFInspectionDetails object];
+        inspectionDetails.isDeficient = condition.isDeficient;
+        inspectionDetails.isApplicable = condition.isApplicable;
+        inspectionDetails.notes = condition.notes;
+        inspectionDetails.optionSelectedIndex = condition.optionSelectedIndex;
+        inspectionDetails.optionSelected = condition.optionSelected;
+        inspectionDetails.hoistSrl = condition.hoistSrl;
+        if ([PFUser currentUser] != nil) {
+            inspectionDetails.sentToUser = user;
+        }
+        [pfInspectionDetailsObjects addObject:inspectionDetails];
+    }
+    
+    [PFObject saveAllInBackground:pfInspectionDetailsObjects block:^(BOOL succeeded, NSError * _Nullable error) {
+        if (succeeded && !error) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Successful" message:@"Inspection Was Sent Successfully" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [alert show];
+        }
+        else if (error) {
+        }
+    }];
+}
 
 @end

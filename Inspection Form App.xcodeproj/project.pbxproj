@@ -64,6 +64,7 @@
 		F43E74851C7E80E60045E5F1 /* OptionsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F43E74831C7E80E60045E5F1 /* OptionsTableViewController.m */; };
 		F43E74861C7E80E60045E5F1 /* OptionsTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F43E74841C7E80E60045E5F1 /* OptionsTableViewController.xib */; };
 		F43E74891C7E874D0045E5F1 /* InspectionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F43E74881C7E874D0045E5F1 /* InspectionsViewController.m */; };
+		F43E748F1C8745810045E5F1 /* PFInspectionDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = F43E748E1C8745810045E5F1 /* PFInspectionDetails.m */; };
 		F453A3B21AD43E3B00319D7A /* InspectionModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F453A3B01AD43E3B00319D7A /* InspectionModel.xcdatamodeld */; };
 		F453A3B51AD43FB200319D7A /* Customer.m in Sources */ = {isa = PBXBuildFile; fileRef = F453A3B41AD43FB200319D7A /* Customer.m */; };
 		F49DDEA71ACCC60C00A02162 /* SyncManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F49DDEA61ACCC60C00A02162 /* SyncManager.m */; };
@@ -183,6 +184,8 @@
 		F43E74841C7E80E60045E5F1 /* OptionsTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionsTableViewController.xib; sourceTree = "<group>"; };
 		F43E74871C7E874D0045E5F1 /* InspectionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectionsViewController.h; sourceTree = "<group>"; };
 		F43E74881C7E874D0045E5F1 /* InspectionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InspectionsViewController.m; sourceTree = "<group>"; };
+		F43E748D1C8745810045E5F1 /* PFInspectionDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFInspectionDetails.h; sourceTree = "<group>"; };
+		F43E748E1C8745810045E5F1 /* PFInspectionDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFInspectionDetails.m; sourceTree = "<group>"; };
 		F453A3B11AD43E3B00319D7A /* InspectionModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = InspectionModel.xcdatamodel; sourceTree = "<group>"; };
 		F453A3B31AD43FB200319D7A /* Customer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Customer.h; sourceTree = "<group>"; };
 		F453A3B41AD43FB200319D7A /* Customer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Customer.m; sourceTree = "<group>"; };
@@ -318,6 +321,7 @@
 		8BC58458150ABD87000AC695 /* Inspection Form App */ = {
 			isa = PBXGroup;
 			children = (
+				F43E748C1C87455D0045E5F1 /* Parse Objects */,
 				F423A8CE1C7BA71700899B6E /* Login Manager */,
 				F4FBDAE21AD80A430090DA72 /* Views */,
 				CE38513D18107296003629DA /* View Controllers */,
@@ -613,6 +617,15 @@
 			name = "Options View Controller";
 			sourceTree = "<group>";
 		};
+		F43E748C1C87455D0045E5F1 /* Parse Objects */ = {
+			isa = PBXGroup;
+			children = (
+				F43E748D1C8745810045E5F1 /* PFInspectionDetails.h */,
+				F43E748E1C8745810045E5F1 /* PFInspectionDetails.m */,
+			);
+			name = "Parse Objects";
+			sourceTree = "<group>";
+		};
 		F49DDEA01ACCC5CE00A02162 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
@@ -853,6 +866,7 @@
 				8BC58463150ABD87000AC695 /* AppDelegate.m in Sources */,
 				CE40D39A180894300080E9BD /* PDFGenerator.m in Sources */,
 				8BC58466150ABD87000AC695 /* ViewController.m in Sources */,
+				F43E748F1C8745810045E5F1 /* PFInspectionDetails.m in Sources */,
 				F49DDED91ACCED1600A02162 /* InspectionCrane.m in Sources */,
 				8BECD3BC150E920500616735 /* Options.m in Sources */,
 				F49DDEE51ACF33F100A02162 /* InspectionOption.m in Sources */,

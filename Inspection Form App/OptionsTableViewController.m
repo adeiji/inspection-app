@@ -8,11 +8,12 @@
 
 #import "OptionsTableViewController.h"
 
+
 @interface OptionsTableViewController ()
 
 @end
 
-NSNumber *const SEND_INSPECTIONS_INDEX = 0;
+NSNumber *const SEND_INSPECTIONS_INDEX = 0, VIEW_INSPECTIONS_INDEX = 1;
 
 @implementation OptionsTableViewController
 
@@ -20,8 +21,8 @@ NSNumber *const SEND_INSPECTIONS_INDEX = 0;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _options = [NSArray arrayWithObjects:@"Send Inspection", nil];
     [self.navigationItem setTitle:@"Options"];
+    [self.navigationController setNavigationBarHidden:false];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -36,13 +37,38 @@ NSNumber *const SEND_INSPECTIONS_INDEX = 0;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if (_inspections != nil) {
+        return [_inspections count];
+    }
+    else if (_users != nil) {
+        return [_users count];
+    }
+    
     return [_options count];
 }
 
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [UITableViewCell new];
-    cell.textLabel.text = [_options objectAtIndex:indexPath.row];
+    NSArray *dataToShow;
+    
+    if (_inspections != nil) {
+        InspectedCrane *crane = [_inspections objectAtIndex:indexPath.row];
+        cell.textLabel.text = crane.hoistSrl;
+        return cell;
+    }
+    else if (_users != nil) {
+        PFUser *user = [_users objectAtIndex:indexPath.row];
+        cell.textLabel.text = user.username;
+        return cell;
+    }
+    
+    else if (_options != nil) {
+        dataToShow = _options;
+    }
+    
+    cell.textLabel.text = [dataToShow objectAtIndex:indexPath.row];
     [cell.textLabel setFont:[UIFont systemFontOfSize:20.0f]];
+    
     return cell;
 }
 
@@ -51,9 +77,33 @@ NSNumber *const SEND_INSPECTIONS_INDEX = 0;
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == SEND_INSPECTIONS_INDEX.intValue) {
-        OptionsTableViewController *optionsTableViewController = [[OptionsTableViewController alloc] init];
-        [self.navigationController presentViewController:optionsTableViewController animated:true completion:nil];
+    OptionsTableViewController *optionsTableViewController = [[OptionsTableViewController alloc] init];
+    
+    if (_options != nil) {
+        if (indexPath.row == SEND_INSPECTIONS_INDEX.intValue) {
+            optionsTableViewController.inspections = [[IACraneInspectionDetailsManager sharedManager] getAllCranesWithInspections];
+
+            //If there are no cranes that have been inspected on this device than inform the user otherwise show the inspected cranes
+            if (optionsTableViewController.inspections != nil) {
+                [self.navigationController pushViewController:optionsTableViewController animated:true];
+            }
+            else {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No Inspections" message:@"You have not made any inspections to share" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+                [alert show];
+            }
+        }
+        else if (indexPath.row == VIEW_INSPECTIONS_INDEX.intValue) {
+            
+        }
+    }
+    else if (_inspections != nil) {
+        optionsTableViewController.selectedCrane = [_inspections objectAtIndex:indexPath.row];
+        optionsTableViewController.users = [[[DELoginManager alloc] init] getAllUsers];
+        [self.navigationController pushViewController:optionsTableViewController animated:true];
+    }
+    else if (_users != nil) {
+        PFUser *user = [_users objectAtIndex:indexPath.row];
+        [[IACraneInspectionDetailsManager sharedManager] shareCraneDetails:_selectedCrane WithUser:user];
     }
 }
 

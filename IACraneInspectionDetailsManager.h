@@ -14,6 +14,7 @@
 #import <Parse/Parse.h>
 #import "Prompt.h"
 #import "CoreDataCondition.h"
+#import "PFInspectionDetails.h"
 
 @interface IACraneInspectionDetailsManager : NSObject
 
@@ -79,4 +80,12 @@
                         Conditions : (NSArray *) conditions;
 
 - (void) saveAllWaterDistrictCranes;
+- (NSMutableArray *) getAllCranesWithInspections;
+/*
+ 
+ Push the details for the selected crane to the server
+ 
+ */
+- (void) shareCraneDetails : (InspectedCrane *) crane
+                  WithUser : (PFUser *) user;
 @end

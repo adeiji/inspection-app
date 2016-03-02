@@ -7,50 +7,19 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OptionsTableViewController">
             <connections>
-                <outlet property="view" destination="ebi-cY-Iw8" id="TBL-0a-OGF"/>
+                <outlet property="view" destination="P8Z-eV-1ol" id="R8M-X7-JyE"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="ebi-cY-Iw8">
+        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="P8Z-eV-1ol">
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <subviews>
-                <tableView opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" bouncesZoom="NO" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="i5M-Pr-FkT">
-                    <rect key="frame" x="0.0" y="66" width="600" height="534"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <connections>
-                        <outlet property="dataSource" destination="-1" id="g49-Jw-LOf"/>
-                        <outlet property="delegate" destination="-1" id="4Pv-hy-6id"/>
-                    </connections>
-                </tableView>
-                <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Drv-Tp-n08">
-                    <rect key="frame" x="0.0" y="22" width="600" height="44"/>
-                    <color key="barTintColor" red="0.0" green="0.67450980390000004" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
-                    <textAttributes key="titleTextAttributes">
-                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </textAttributes>
-                    <items>
-                        <navigationItem title="Options" id="FkF-GQ-aMY">
-                            <barButtonItem key="rightBarButtonItem" title="Done" id="cY5-bL-QLx">
-                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <connections>
-                                    <action selector="doneButtonPressed:" destination="-1" id="bPh-tr-gIs"/>
-                                </connections>
-                            </barButtonItem>
-                        </navigationItem>
-                    </items>
-                </navigationBar>
-            </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-            <constraints>
-                <constraint firstAttribute="trailing" secondItem="i5M-Pr-FkT" secondAttribute="trailing" id="4Jm-I3-sFJ"/>
-                <constraint firstAttribute="bottom" secondItem="i5M-Pr-FkT" secondAttribute="bottom" id="Eee-9b-gxN"/>
-                <constraint firstAttribute="trailing" secondItem="Drv-Tp-n08" secondAttribute="trailing" id="cvl-Xo-4bm"/>
-                <constraint firstItem="Drv-Tp-n08" firstAttribute="top" secondItem="ebi-cY-Iw8" secondAttribute="top" constant="22" id="dIe-GM-fya"/>
-                <constraint firstItem="Drv-Tp-n08" firstAttribute="centerX" secondItem="ebi-cY-Iw8" secondAttribute="centerX" id="fu5-ld-dRk"/>
-                <constraint firstItem="i5M-Pr-FkT" firstAttribute="top" secondItem="ebi-cY-Iw8" secondAttribute="top" constant="66" id="lms-SV-MIF"/>
-                <constraint firstItem="i5M-Pr-FkT" firstAttribute="leading" secondItem="ebi-cY-Iw8" secondAttribute="leading" id="yae-Pw-aSb"/>
-            </constraints>
-        </view>
+            <connections>
+                <outlet property="dataSource" destination="-1" id="nWZ-VG-yXM"/>
+                <outlet property="delegate" destination="-1" id="IKM-B4-LIR"/>
+            </connections>
+            <point key="canvasLocation" x="418" y="432"/>
+        </tableView>
     </objects>
 </document>
