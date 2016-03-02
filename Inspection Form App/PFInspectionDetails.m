@@ -19,6 +19,7 @@
 @dynamic optionLocation;
 @dynamic hoistSrl;
 @dynamic sentToUser;
+@dynamic craneId;
 
 + (NSString *) parseClassName {
     return @"InspectionDetails";

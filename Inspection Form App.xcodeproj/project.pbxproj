@@ -65,6 +65,8 @@
 		F43E74861C7E80E60045E5F1 /* OptionsTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F43E74841C7E80E60045E5F1 /* OptionsTableViewController.xib */; };
 		F43E74891C7E874D0045E5F1 /* InspectionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F43E74881C7E874D0045E5F1 /* InspectionsViewController.m */; };
 		F43E748F1C8745810045E5F1 /* PFInspectionDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = F43E748E1C8745810045E5F1 /* PFInspectionDetails.m */; };
+		F43E74921C877E180045E5F1 /* PFCrane.m in Sources */ = {isa = PBXBuildFile; fileRef = F43E74911C877E180045E5F1 /* PFCrane.m */; };
+		F43E74951C877F3A0045E5F1 /* PFCustomer.m in Sources */ = {isa = PBXBuildFile; fileRef = F43E74941C877F3A0045E5F1 /* PFCustomer.m */; };
 		F453A3B21AD43E3B00319D7A /* InspectionModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F453A3B01AD43E3B00319D7A /* InspectionModel.xcdatamodeld */; };
 		F453A3B51AD43FB200319D7A /* Customer.m in Sources */ = {isa = PBXBuildFile; fileRef = F453A3B41AD43FB200319D7A /* Customer.m */; };
 		F49DDEA71ACCC60C00A02162 /* SyncManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F49DDEA61ACCC60C00A02162 /* SyncManager.m */; };
@@ -186,6 +188,10 @@
 		F43E74881C7E874D0045E5F1 /* InspectionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InspectionsViewController.m; sourceTree = "<group>"; };
 		F43E748D1C8745810045E5F1 /* PFInspectionDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFInspectionDetails.h; sourceTree = "<group>"; };
 		F43E748E1C8745810045E5F1 /* PFInspectionDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFInspectionDetails.m; sourceTree = "<group>"; };
+		F43E74901C877E180045E5F1 /* PFCrane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFCrane.h; sourceTree = "<group>"; };
+		F43E74911C877E180045E5F1 /* PFCrane.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFCrane.m; sourceTree = "<group>"; };
+		F43E74931C877F3A0045E5F1 /* PFCustomer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFCustomer.h; sourceTree = "<group>"; };
+		F43E74941C877F3A0045E5F1 /* PFCustomer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFCustomer.m; sourceTree = "<group>"; };
 		F453A3B11AD43E3B00319D7A /* InspectionModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = InspectionModel.xcdatamodel; sourceTree = "<group>"; };
 		F453A3B31AD43FB200319D7A /* Customer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Customer.h; sourceTree = "<group>"; };
 		F453A3B41AD43FB200319D7A /* Customer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Customer.m; sourceTree = "<group>"; };
@@ -622,6 +628,10 @@
 			children = (
 				F43E748D1C8745810045E5F1 /* PFInspectionDetails.h */,
 				F43E748E1C8745810045E5F1 /* PFInspectionDetails.m */,
+				F43E74901C877E180045E5F1 /* PFCrane.h */,
+				F43E74911C877E180045E5F1 /* PFCrane.m */,
+				F43E74931C877F3A0045E5F1 /* PFCustomer.h */,
+				F43E74941C877F3A0045E5F1 /* PFCustomer.m */,
 			);
 			name = "Parse Objects";
 			sourceTree = "<group>";
@@ -862,6 +872,7 @@
 				F4FBDAE11AD804200090DA72 /* Prompt.m in Sources */,
 				8BC5845F150ABD87000AC695 /* main.m in Sources */,
 				F453A3B21AD43E3B00319D7A /* InspectionModel.xcdatamodeld in Sources */,
+				F43E74921C877E180045E5F1 /* PFCrane.m in Sources */,
 				F423A8D61C7BA90900899B6E /* LoginViewController.m in Sources */,
 				8BC58463150ABD87000AC695 /* AppDelegate.m in Sources */,
 				CE40D39A180894300080E9BD /* PDFGenerator.m in Sources */,
@@ -872,6 +883,7 @@
 				F49DDEE51ACF33F100A02162 /* InspectionOption.m in Sources */,
 				F49DDEA71ACCC60C00A02162 /* SyncManager.m in Sources */,
 				8BECD3BF150E934900616735 /* OptionList.m in Sources */,
+				F43E74951C877F3A0045E5F1 /* PFCustomer.m in Sources */,
 				F4B29E641ADC1E740025A091 /* CoreDataCondition.m in Sources */,
 				8B544612150F0C3E007E1CA9 /* GradientView.m in Sources */,
 				F453A3B51AD43FB200319D7A /* Customer.m in Sources */,

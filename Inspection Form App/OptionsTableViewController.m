@@ -13,7 +13,8 @@
 
 @end
 
-NSNumber *const SEND_INSPECTIONS_INDEX = 0, VIEW_INSPECTIONS_INDEX = 1;
+int const SEND_INSPECTIONS_INDEX = 0;
+int const VIEW_INSPECTIONS_INDEX = 1;
 
 @implementation OptionsTableViewController
 
@@ -80,7 +81,7 @@ NSNumber *const SEND_INSPECTIONS_INDEX = 0, VIEW_INSPECTIONS_INDEX = 1;
     OptionsTableViewController *optionsTableViewController = [[OptionsTableViewController alloc] init];
     
     if (_options != nil) {
-        if (indexPath.row == SEND_INSPECTIONS_INDEX.intValue) {
+        if (indexPath.row == SEND_INSPECTIONS_INDEX) {
             optionsTableViewController.inspections = [[IACraneInspectionDetailsManager sharedManager] getAllCranesWithInspections];
 
             //If there are no cranes that have been inspected on this device than inform the user otherwise show the inspected cranes
@@ -92,7 +93,7 @@ NSNumber *const SEND_INSPECTIONS_INDEX = 0, VIEW_INSPECTIONS_INDEX = 1;
                 [alert show];
             }
         }
-        else if (indexPath.row == VIEW_INSPECTIONS_INDEX.intValue) {
+        else if (indexPath.row == VIEW_INSPECTIONS_INDEX) {
             
         }
     }

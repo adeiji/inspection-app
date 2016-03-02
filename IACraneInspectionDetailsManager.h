@@ -15,6 +15,7 @@
 #import "Prompt.h"
 #import "CoreDataCondition.h"
 #import "PFInspectionDetails.h"
+#import "PFCrane.h"
 
 @interface IACraneInspectionDetailsManager : NSObject
 
@@ -88,4 +89,9 @@
  */
 - (void) shareCraneDetails : (InspectedCrane *) crane
                   WithUser : (PFUser *) user;
+
+
+- (void) getAllCranesForCurrentUserFromServer;
+
+- (void) saveCraneToServer : (InspectedCrane *) crane;
 @end

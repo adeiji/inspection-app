@@ -8,6 +8,10 @@
 
 #import "IACraneInspectionDetailsManager.h"
 
+NSString *const SHARED_INSPECTIONS_TABLE = @"SharedInspections";
+NSString *const HOIST_SRL = @"hoistSrl";
+NSString *const TO_USER = @"toUser";
+
 @implementation IACraneInspectionDetailsManager
 
 + (id)sharedManager {
@@ -501,8 +505,10 @@
     NSMutableArray *pfInspectionDetailsObjects = [NSMutableArray new];
     
     [self deleteEarlierInspectionOfCraneFromServer:crane ForUser:user];
+    [self saveCraneToServer:crane];
     
     for (CoreDataCondition *condition in inspectionDetails) {
+        
         PFInspectionDetails *inspectionDetails = [PFInspectionDetails object];
         inspectionDetails.isDeficient = condition.isDeficient;
         inspectionDetails.isApplicable = condition.isApplicable;
@@ -510,9 +516,11 @@
         inspectionDetails.optionSelectedIndex = condition.optionSelectedIndex;
         inspectionDetails.optionSelected = condition.optionSelected;
         inspectionDetails.hoistSrl = condition.hoistSrl;
+        
         if ([PFUser currentUser] != nil) {
             inspectionDetails.sentToUser = user;
         }
+        
         [pfInspectionDetailsObjects addObject:inspectionDetails];
     }
     
@@ -524,6 +532,32 @@
         else if (error) {
         }
     }];
+    
+    PFObject *object = [PFObject objectWithClassName:SHARED_INSPECTIONS_TABLE];
+    [object setObject:crane.hoistSrl forKey:HOIST_SRL];
+    [object setObject:user forKey:TO_USER];
+    [object saveInBackground];
+}
+
+- (void) saveCraneToServer:(InspectedCrane *)crane {
+    PFCrane *craneObject = [PFCrane object];
+    craneObject.capacity = crane.capacity;
+    craneObject.craneDescription = crane.craneDescription;
+    craneObject.craneSrl = crane.craneSrl;
+    craneObject.equipmentNumber = crane.equipmentNumber;
+    craneObject.hoistMdl = crane.hoistMdl;
+    craneObject.hoistSrl = crane.hoistSrl;
+    craneObject.hoistMfg = crane.hoistMfg;
+    craneObject.type = crane.type;
+    
+    PFCustomer *customer = [PFCustomer object];
+    customer.name = crane.customer.name;
+    customer.contact = crane.customer.contact;
+    customer.address = crane.customer.address;
+    customer.email = crane.customer.email;
+    
+    craneObject.customer = customer;
+    [craneObject saveInBackground];
 }
 
 @end
