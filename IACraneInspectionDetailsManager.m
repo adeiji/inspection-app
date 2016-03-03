@@ -494,8 +494,8 @@ NSString *const TO_USER = @"toUser";
  
  */
 - (void) deleteEarlierInspectionOfCraneFromServer : (InspectedCrane *) crane
-                                          ForUser : (PFUser *) user{
-    
+                                          ForUser : (PFUser *) user
+{
     PFQuery *query = [PFInspectionDetails query];
     [query whereKey:HOIST_SRL equalTo:crane.hoistSrl];
     [query whereKey:TO_USER equalTo:user];

@@ -74,8 +74,9 @@ static NSString* USERNAME = @"username";
     [self initiatePartsForSelectedCrane];
 }
 
-
-
+- (void) setIsCraneSet : (BOOL) value {
+    isCraneSet = value;
+}
 
 - (IBAction)showOptionsMenu:(id)sender {
     OptionsTableViewController *optionsTableViewController = [[OptionsTableViewController alloc] init];

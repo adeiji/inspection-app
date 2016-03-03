@@ -120,8 +120,31 @@ int const VIEW_INSPECTIONS_INDEX = 1;
         ViewController *viewController = [navigationController.viewControllers objectAtIndex:0];
         PFCrane *craneObject = [_inspectionsSentToCurrentUser objectAtIndex:indexPath.row];
         InspectedCrane *inspectedCrane = [craneObject getCoreDataObject];
+        [self showInspectionScreen:inspectedCrane];
         [viewController.inspectionViewController.itemListStore loadConditionsForCrane:inspectedCrane];
+        [[IACraneInspectionDetailsManager sharedManager] deleteEarlierInspectionOfCraneFromServer:inspectedCrane ForUser:[PFUser currentUser]];
+    }
+}
+
+- (void) showInspectionScreen : (InspectedCrane *) inspectedCrane {
+    NSArray *inspectionCranes = [[IACraneInspectionDetailsManager sharedManager] getInspectionCraneOfType:inspectedCrane.type];
+    if ([inspectionCranes count] != 0)
+    {
+        UINavigationController *navigationController = [self.splitViewController.viewControllers objectAtIndex:0] ;
+        InspectionCrane *inspectionCrane = inspectionCranes[0];
+        MasterViewController *mvc = [[MasterViewController alloc] initWithStyle:nil Level:@"options" SearchValue:[inspectionCrane.inspectionPoints array]];
+        [navigationController pushViewController:mvc animated:YES];
         [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_HOISTSRL_SELECTED object:nil userInfo:@{ kSelectedInspectedCrane : inspectedCrane }];
+        
+        ViewController *mainPageViewController = [self.navigationController.viewControllers objectAtIndex:0];
+        [mainPageViewController resetInspectionWithCrane:inspectionCrane];
+        mvc.delegate = mainPageViewController.inspectionViewController;
+        //Push the InspectionViewController ontop of the stack.
+        if (![mainPageViewController.navigationController.viewControllers containsObject:mainPageViewController.inspectionViewController])
+        {
+            [mainPageViewController setIsCraneSet:true];
+            [mainPageViewController storeInformationAndDisplayInspectionViewWithCrane:inspectionCrane SelectedRow:nil];
+        }
     }
 }
 

@@ -108,7 +108,7 @@ typedef enum {
 - (void) resetInspectionWithCrane : (InspectionCrane *) crane;
 - (IBAction)resetInspectionPressed:(id)sender;
 - (IBAction)setCrane:(id)sender;
-
+- (void) setIsCraneSet : (BOOL) value;
 
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 

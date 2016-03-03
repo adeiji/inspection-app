@@ -12,6 +12,7 @@
 #import "InspectedCrane.h"
 #import "DELoginManager.h"
 #import "PFInspectionDetails.h"
+#import "MasterViewController.h"
 
 @interface OptionsTableViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
@@ -20,6 +21,6 @@
 @property (strong, nonatomic) NSArray *inspections;
 @property (strong, nonatomic) NSArray *inspectionsSentToCurrentUser;
 @property (strong, nonatomic) InspectedCrane *selectedCrane;
-
+@property (nonatomic, assign) id<PartSelectionDelegate> delegate;
 
 @end

@@ -108,4 +108,7 @@
 
  */
 - (Customer *) getNewCustomerObject;
+
+- (void) deleteEarlierInspectionOfCraneFromServer : (InspectedCrane *) crane
+                                          ForUser : (PFUser *) user;
 @end
