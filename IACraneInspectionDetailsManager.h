@@ -111,4 +111,6 @@
 
 - (void) deleteEarlierInspectionOfCraneFromServer : (InspectedCrane *) crane
                                           ForUser : (PFUser *) user;
+
+- (void) saveContext;
 @end

@@ -193,6 +193,12 @@ static NSString *const OPTIONS = @"options";
             [loadButton setShowsTouchWhenHighlighted:YES];
             [cell addSubview:loadButton];
         }
+        
+        if ([crane.shared isEqualToNumber:[NSNumber numberWithBool:true]]) {
+            [cell setBackgroundColor:[UIColor colorWithRed:236.0f/255.0f green:240.0f/255.0f blue:241.0f/255.0f alpha:1.0]];
+            cell.textLabel.textColor = [UIColor whiteColor];
+        }
+        NSLog(@"Crane Shared %@", crane.shared.stringValue);
     }
     else {
         id obj = [_tableData objectAtIndex:indexPath.row];
@@ -200,6 +206,7 @@ static NSString *const OPTIONS = @"options";
             label.text = [NSString stringWithFormat:@"%ld. %@", (long)indexPath.row + 1, [obj name]];
         }
     }
+
     
     [cell addSubview:label];
     

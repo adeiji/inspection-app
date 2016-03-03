@@ -507,6 +507,18 @@ NSString *const TO_USER = @"toUser";
             }
         }
     }];
+    
+    query = [PFCrane query];
+    [query whereKey:HOIST_SRL equalTo:crane.hoistSrl];
+    [query whereKey:TO_USER equalTo:user];
+    
+    [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        if ([objects count] > 0) {
+            for (PFInspectionDetails *object in objects) {
+                [object deleteInBackground];
+            }
+        }
+    }];
 }
 
 /*
@@ -594,6 +606,14 @@ NSString *const TO_USER = @"toUser";
     
     craneObject.customer = customer;
     [craneObject saveInBackground];
+}
+
+- (void) saveContext {
+    NSError *error;
+    
+    if ([_context save:&error] == NO) {
+        NSLog(@"Error saving context %@", error.description);
+    }
 }
 
 @end

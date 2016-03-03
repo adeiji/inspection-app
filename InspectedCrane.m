@@ -24,5 +24,6 @@
 @dynamic type;
 @dynamic customer;
 @dynamic conditions;
+@dynamic shared;
 
 @end

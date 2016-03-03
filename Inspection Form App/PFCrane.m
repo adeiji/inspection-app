@@ -52,7 +52,9 @@
     customer.email = self.customer.email;
     customer.inspectedCrane = inspectedCrane;
     inspectedCrane.customer = customer;
-    
+    // Since we know that whenever we need to get an InspectedCrane Object from a PFCrane Object this inspection has been downloaded from the server, we set the shared property to true of the InspectedCrane Object
+    inspectedCrane.shared = [NSNumber numberWithBool:true];
+    [[IACraneInspectionDetailsManager sharedManager] saveContext];
     return inspectedCrane;
 }
 

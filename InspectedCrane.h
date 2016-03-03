@@ -24,6 +24,7 @@
 @property (nonatomic, retain) NSString * type;
 @property (nonatomic, retain) Customer *customer;
 @property (nonatomic, retain) NSOrderedSet *conditions;
+@property (nonatomic, retain) NSNumber *shared;
 
 @end
 
