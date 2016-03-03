@@ -19,7 +19,7 @@
 @property (retain) NSString *optionSelected;
 @property int *optionLocation;
 @property (retain) NSString *hoistSrl;
-@property (retain) PFUser *sentToUser;
+@property (retain) PFUser *toUser;
 @property (retain) NSString *craneId;
 
 @end

@@ -44,6 +44,9 @@ int const VIEW_INSPECTIONS_INDEX = 1;
     else if (_users != nil) {
         return [_users count];
     }
+    else if (_inspectionsSentToCurrentUser != nil) {
+        return [_inspectionsSentToCurrentUser count];
+    }
     
     return [_options count];
 }
@@ -62,9 +65,14 @@ int const VIEW_INSPECTIONS_INDEX = 1;
         cell.textLabel.text = user.username;
         return cell;
     }
-    
     else if (_options != nil) {
         dataToShow = _options;
+    }
+    else if (_inspectionsSentToCurrentUser != nil) {
+        InspectedCrane *inspectedCrane = [_inspectionsSentToCurrentUser objectAtIndex:indexPath.row];
+        cell.textLabel.text = inspectedCrane.hoistSrl;
+        
+        return cell;
     }
     
     cell.textLabel.text = [dataToShow objectAtIndex:indexPath.row];
@@ -80,10 +88,10 @@ int const VIEW_INSPECTIONS_INDEX = 1;
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     OptionsTableViewController *optionsTableViewController = [[OptionsTableViewController alloc] init];
     
+    // Is the user currently looking at the available options
     if (_options != nil) {
         if (indexPath.row == SEND_INSPECTIONS_INDEX) {
             optionsTableViewController.inspections = [[IACraneInspectionDetailsManager sharedManager] getAllCranesWithInspections];
-
             //If there are no cranes that have been inspected on this device than inform the user otherwise show the inspected cranes
             if (optionsTableViewController.inspections != nil) {
                 [self.navigationController pushViewController:optionsTableViewController animated:true];
@@ -94,17 +102,26 @@ int const VIEW_INSPECTIONS_INDEX = 1;
             }
         }
         else if (indexPath.row == VIEW_INSPECTIONS_INDEX) {
-            
+            optionsTableViewController.inspectionsSentToCurrentUser = [[IACraneInspectionDetailsManager sharedManager] getAllCranesForCurrentUserFromServer];
+            [self.navigationController pushViewController:optionsTableViewController animated:true];
         }
     }
-    else if (_inspections != nil) {
+    else if (_inspections != nil) { // Is the user currently looking at inspections that the current user has done
         optionsTableViewController.selectedCrane = [_inspections objectAtIndex:indexPath.row];
         optionsTableViewController.users = [[[DELoginManager alloc] init] getAllUsers];
         [self.navigationController pushViewController:optionsTableViewController animated:true];
     }
-    else if (_users != nil) {
+    else if (_users != nil) { // Is the user currently looking at all the users on the server
         PFUser *user = [_users objectAtIndex:indexPath.row];
         [[IACraneInspectionDetailsManager sharedManager] shareCraneDetails:_selectedCrane WithUser:user];
+    }
+    else if (_inspectionsSentToCurrentUser != nil) {
+        UINavigationController *navigationController = [self.splitViewController.viewControllers objectAtIndex:1] ;
+        ViewController *viewController = [navigationController.viewControllers objectAtIndex:0];
+        PFCrane *craneObject = [_inspectionsSentToCurrentUser objectAtIndex:indexPath.row];
+        InspectedCrane *inspectedCrane = [craneObject getCoreDataObject];
+        [viewController.inspectionViewController.itemListStore loadConditionsForCrane:inspectedCrane];
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_HOISTSRL_SELECTED object:nil userInfo:@{ kSelectedInspectedCrane : inspectedCrane }];
     }
 }
 

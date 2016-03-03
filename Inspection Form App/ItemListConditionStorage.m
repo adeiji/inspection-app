@@ -32,6 +32,10 @@
     return (Condition*)[myConditions objectAtIndex:input];
 }
 
+- (void) loadConditionsForCraneFromServer : (PFObject *) crane {
+    
+}
+
 - (void) loadConditionsForCrane : (InspectedCrane *) crane {
     
     NSArray *conditionsArray = [[IACraneInspectionDetailsManager sharedManager] getAllConditionsForCrane:crane];

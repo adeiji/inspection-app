@@ -8,6 +8,9 @@
 
 #import <Parse/Parse.h>
 #import "PFCustomer.h"
+#import "InspectedCrane.h"
+#import "Customer.h"
+#import "IACraneInspectionDetailsManager.h"
 
 @interface PFCrane : PFObject <PFSubclassing>
 
@@ -23,6 +26,9 @@
 @property (retain) NSString *mfg;
 @property (retain) NSString *type;
 @property (retain) PFCustomer *customer;
+@property (retain) PFUser *toUser;
+
+- (InspectedCrane *) getCoreDataObject;
 
 @end
 

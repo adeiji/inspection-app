@@ -91,7 +91,21 @@
                   WithUser : (PFUser *) user;
 
 
-- (void) getAllCranesForCurrentUserFromServer;
+- (NSArray *) getAllCranesForCurrentUserFromServer;
 
 - (void) saveCraneToServer : (InspectedCrane *) crane;
+
+/*
+ 
+ Return a new inspected Crane Object
+ 
+ */
+- (InspectedCrane *) getNewInspectedCraneObject;
+
+/*
+ 
+ Return a new customer object
+
+ */
+- (Customer *) getNewCustomerObject;
 @end

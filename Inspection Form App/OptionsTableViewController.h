@@ -18,6 +18,7 @@
 @property (strong, nonatomic) NSArray *options;
 @property (strong, nonatomic) NSArray *users;
 @property (strong, nonatomic) NSArray *inspections;
+@property (strong, nonatomic) NSArray *inspectionsSentToCurrentUser;
 @property (strong, nonatomic) InspectedCrane *selectedCrane;
 
 

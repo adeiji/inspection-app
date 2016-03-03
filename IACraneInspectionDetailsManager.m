@@ -157,6 +157,21 @@ NSString *const TO_USER = @"toUser";
     });
 }
 
+- (InspectedCrane *) getNewInspectedCraneObject {
+    NSEntityDescription *entity = [NSEntityDescription entityForName:kCoreDataClassInspectedCrane inManagedObjectContext:_context];
+    InspectedCrane *inspectedCrane = [[InspectedCrane alloc] initWithEntity:entity insertIntoManagedObjectContext:_context];
+    
+    return inspectedCrane;
+}
+
+- (Customer *) getNewCustomerObject {
+    NSEntityDescription *entity = [NSEntityDescription entityForName:kCoreDataClassCustomer inManagedObjectContext:_context];
+    Customer *customer = [[Customer alloc] initWithEntity:entity insertIntoManagedObjectContext:_context];
+    
+    return customer;
+}
+
+
 - (void) saveAllWaterDistrictCranesWithContext : (NSManagedObjectContext *) context {
     [self deleteAllWaterDistrictCranesWithContext : context];
     NSString *plistFilePath = [[NSBundle mainBundle] pathForResource:@"lvwwdcranes" ofType:@"plist"];
@@ -482,8 +497,8 @@ NSString *const TO_USER = @"toUser";
                                           ForUser : (PFUser *) user{
     
     PFQuery *query = [PFInspectionDetails query];
-    [query whereKey:@"hoistSrl" equalTo:crane.hoistSrl];
-    [query whereKey:@"sendToUser" equalTo:user];
+    [query whereKey:HOIST_SRL equalTo:crane.hoistSrl];
+    [query whereKey:TO_USER equalTo:user];
     
     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         if ([objects count] > 0) {
@@ -492,6 +507,29 @@ NSString *const TO_USER = @"toUser";
             }
         }
     }];
+}
+
+/*
+ 
+ Get all the cranes for the current user from the server
+ 
+ */
+- (NSArray *) getAllCranesForCurrentUserFromServer {
+    PFQuery *query = [PFCrane query];
+    NSError *error;
+    [query whereKey:@"toUser" equalTo:[PFUser currentUser]];
+    NSArray *cranes = [query findObjects:&error];
+    return cranes;
+}
+
+- (NSArray *) getAllConditionsFromServerForCrane : (PFCrane *) crane {
+    PFQuery *query = [PFInspectionDetails query];
+    [query whereKey:HOIST_SRL equalTo:crane.hoistSrl];
+    [query whereKey:TO_USER equalTo:[PFUser currentUser]];
+    
+    NSError *error;
+    NSArray * conditions = [query findObjects:&error];
+    return conditions;
 }
 
 /*
@@ -505,7 +543,7 @@ NSString *const TO_USER = @"toUser";
     NSMutableArray *pfInspectionDetailsObjects = [NSMutableArray new];
     
     [self deleteEarlierInspectionOfCraneFromServer:crane ForUser:user];
-    [self saveCraneToServer:crane];
+    [self saveCraneToServer:crane WithUser: user];
     
     for (CoreDataCondition *condition in inspectionDetails) {
         
@@ -518,7 +556,7 @@ NSString *const TO_USER = @"toUser";
         inspectionDetails.hoistSrl = condition.hoistSrl;
         
         if ([PFUser currentUser] != nil) {
-            inspectionDetails.sentToUser = user;
+            inspectionDetails.toUser = user;
         }
         
         [pfInspectionDetailsObjects addObject:inspectionDetails];
@@ -532,14 +570,11 @@ NSString *const TO_USER = @"toUser";
         else if (error) {
         }
     }];
-    
-    PFObject *object = [PFObject objectWithClassName:SHARED_INSPECTIONS_TABLE];
-    [object setObject:crane.hoistSrl forKey:HOIST_SRL];
-    [object setObject:user forKey:TO_USER];
-    [object saveInBackground];
 }
 
-- (void) saveCraneToServer:(InspectedCrane *)crane {
+- (void) saveCraneToServer  : (InspectedCrane *)crane
+                   WithUser : (PFUser *) user {
+    
     PFCrane *craneObject = [PFCrane object];
     craneObject.capacity = crane.capacity;
     craneObject.craneDescription = crane.craneDescription;
@@ -549,6 +584,7 @@ NSString *const TO_USER = @"toUser";
     craneObject.hoistSrl = crane.hoistSrl;
     craneObject.hoistMfg = crane.hoistMfg;
     craneObject.type = crane.type;
+    craneObject.toUser = user;
     
     PFCustomer *customer = [PFCustomer object];
     customer.name = crane.customer.name;
