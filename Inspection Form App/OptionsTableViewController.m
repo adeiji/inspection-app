@@ -105,8 +105,12 @@ int const SEND_INSPECTIONS_INDEX = 0, VIEW_INSPECTIONS_INDEX = 1, ACCOUNT_INDEX 
             [self handleSendInspectionsSelectedWithTableViewController:optionsTableViewController];
         }
         else if (indexPath.row == VIEW_INSPECTIONS_INDEX) {
-            optionsTableViewController.inspectionsSentToCurrentUser = [[IACraneInspectionDetailsManager sharedManager] getAllCranesForCurrentUserFromServer];
-            [self.navigationController pushViewController:optionsTableViewController animated:true];
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                optionsTableViewController.inspectionsSentToCurrentUser = [[IACraneInspectionDetailsManager sharedManager] getAllCranesForCurrentUserFromServer];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.navigationController pushViewController:optionsTableViewController animated:true];
+                });
+            });
         }
         else if (indexPath.row == ACCOUNT_INDEX) {
             AccountTableViewController *accountTableViewController = [AccountTableViewController new];
@@ -115,8 +119,13 @@ int const SEND_INSPECTIONS_INDEX = 0, VIEW_INSPECTIONS_INDEX = 1, ACCOUNT_INDEX 
     }
     else if (_inspections != nil) { // Is the user currently looking at inspections that the current user has done
         optionsTableViewController.selectedCrane = [_inspections objectAtIndex:indexPath.row];
-        optionsTableViewController.users = [[[DELoginManager alloc] init] getAllUsers];
-        [self.navigationController pushViewController:optionsTableViewController animated:true];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            optionsTableViewController.users = [[[DELoginManager alloc] init] getAllUsers];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+               [self.navigationController pushViewController:optionsTableViewController animated:true];     
+            });
+        });
     }
     else if (_users != nil) { // Is the user currently looking at all the users on the server
         PFUser *user = [_users objectAtIndex:indexPath.row];
