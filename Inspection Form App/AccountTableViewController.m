@@ -90,17 +90,22 @@ NSString *const LOGIN = @"Login", *LOGOUT = @"Logout", *EDIT_USERNAME = @"Edit U
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Username" message:@"Enter the New Username" preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *editUserNameAction = [UIAlertAction actionWithTitle:@"Edit Username" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             UITextField *usernameTextField = alertController.textFields[0];
+            if ([usernameTextField.text stringByReplacingOccurrencesOfString:@" " withString:@""].length != 0) {
             [[PFUser currentUser] setUsername:usernameTextField.text];
-            [[PFUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-                if (succeeded && !error) {
-                    NSLog(@"Username updated succesfully");
-                } else {
-                    NSLog(@"Error updating username %@", error.userInfo[@"error"]);
-                }
-            }];
+                [[PFUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+                    if (succeeded && !error) {
+                        NSLog(@"Username updated succesfully");
+                    } else {
+                        NSLog(@"Error updating username %@", error.userInfo[@"error"]);
+                    }
+                }];
+            }
         }];
+            
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
         
         [alertController addAction:editUserNameAction];
+        [alertController addAction:cancelAction];
         [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
             textField.placeholder = @"Edit Username";
         }];

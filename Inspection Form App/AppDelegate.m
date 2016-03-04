@@ -169,7 +169,7 @@
     [Parse initializeWithConfiguration:[ParseClientConfiguration configurationWithBlock:^(id<ParseMutableClientConfiguration>  _Nonnull configuration) {
         [configuration setApplicationId:@"pXYoDYstnZ7wvICh2nNtxmAwegOpjhsdRpFjNoVE"];
         [configuration setClientKey:@"QiK7CN2M6Yh86Kn9FMLk8OBO0uHV9Icg0ryxrc11"];
-        [configuration setServer:@"http://localhost:1337/parse"];
+        [configuration setServer:@"https://sswr-inspection-app.herokuapp.com/parse"];
     }]];
      
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
