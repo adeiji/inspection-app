@@ -77,7 +77,7 @@ NSString *const PASSWORD = @"sswr";
 }
 
 - (void) userSignedIn {
-    [self.navigationController popViewControllerAnimated:true];
+    [self.navigationController popToRootViewControllerAnimated:true];
 }
 
 

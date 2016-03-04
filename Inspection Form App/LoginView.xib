@@ -54,29 +54,9 @@
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="7PT-30-xCX">
-                            <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="200" id="HCJ-xB-xtu"/>
-                                <constraint firstAttribute="height" constant="200" id="zPV-6P-peL"/>
-                            </constraints>
-                            <variation key="default">
-                                <mask key="constraints">
-                                    <exclude reference="HCJ-xB-xtu"/>
-                                    <exclude reference="zPV-6P-peL"/>
-                                </mask>
-                            </variation>
-                            <variation key="heightClass=regular-widthClass=regular">
-                                <mask key="constraints">
-                                    <include reference="HCJ-xB-xtu"/>
-                                    <include reference="zPV-6P-peL"/>
-                                </mask>
-                            </variation>
-                        </imageView>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstItem="7PT-30-xCX" firstAttribute="centerX" secondItem="3by-Hr-z70" secondAttribute="centerX" id="12F-MY-tLx"/>
                         <constraint firstItem="z4K-bm-ZxO" firstAttribute="leading" secondItem="3by-Hr-z70" secondAttribute="leading" constant="81" id="7bE-Xq-A7S"/>
                         <constraint firstItem="se4-x7-FBB" firstAttribute="top" secondItem="z4K-bm-ZxO" secondAttribute="bottom" constant="8" id="Ha9-Ot-SEt"/>
                         <constraint firstItem="zQD-Ox-szO" firstAttribute="top" secondItem="z4K-bm-ZxO" secondAttribute="bottom" constant="37" id="L0Z-nZ-L9X"/>
@@ -85,33 +65,14 @@
                         <constraint firstAttribute="trailing" secondItem="z4K-bm-ZxO" secondAttribute="trailing" constant="82" id="SDL-MS-wF3"/>
                         <constraint firstItem="z4K-bm-ZxO" firstAttribute="centerX" secondItem="3by-Hr-z70" secondAttribute="centerX" id="TNh-ux-vf2"/>
                         <constraint firstItem="z4K-bm-ZxO" firstAttribute="centerY" secondItem="3by-Hr-z70" secondAttribute="centerY" constant="-15" id="Uwb-zE-oDc">
-                            <variation key="heightClass=regular-widthClass=regular" constant="60.5"/>
+                            <variation key="heightClass=regular-widthClass=regular" constant="-9.5"/>
                         </constraint>
                         <constraint firstItem="zQD-Ox-szO" firstAttribute="height" secondItem="z4K-bm-ZxO" secondAttribute="height" id="a6i-Fh-TlD"/>
                         <constraint firstItem="zQD-Ox-szO" firstAttribute="width" secondItem="z4K-bm-ZxO" secondAttribute="width" id="dtp-uV-Ymf"/>
                         <constraint firstItem="se4-x7-FBB" firstAttribute="centerX" secondItem="z4K-bm-ZxO" secondAttribute="centerX" id="juU-Yl-eed"/>
                         <constraint firstItem="nLt-5y-VNX" firstAttribute="width" secondItem="z4K-bm-ZxO" secondAttribute="width" id="kx6-v5-0AU"/>
                         <constraint firstItem="nLt-5y-VNX" firstAttribute="centerX" secondItem="z4K-bm-ZxO" secondAttribute="centerX" id="yHz-2v-78g"/>
-                        <constraint firstItem="7PT-30-xCX" firstAttribute="top" secondItem="3by-Hr-z70" secondAttribute="top" constant="9" id="yXU-dI-meT"/>
                     </constraints>
-                    <variation key="default">
-                        <mask key="subviews">
-                            <exclude reference="7PT-30-xCX"/>
-                        </mask>
-                        <mask key="constraints">
-                            <exclude reference="12F-MY-tLx"/>
-                            <exclude reference="yXU-dI-meT"/>
-                        </mask>
-                    </variation>
-                    <variation key="heightClass=regular-widthClass=regular">
-                        <mask key="subviews">
-                            <include reference="7PT-30-xCX"/>
-                        </mask>
-                        <mask key="constraints">
-                            <include reference="12F-MY-tLx"/>
-                            <include reference="yXU-dI-meT"/>
-                        </mask>
-                    </variation>
                 </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -123,7 +84,4 @@
             </constraints>
         </view>
     </objects>
-    <resources>
-        <image name="logo.jpg" width="2264" height="2258"/>
-    </resources>
 </document>

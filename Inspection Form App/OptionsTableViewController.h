@@ -13,6 +13,7 @@
 #import "DELoginManager.h"
 #import "PFInspectionDetails.h"
 #import "MasterViewController.h"
+#import "AccountTableViewController.h"
 
 @interface OptionsTableViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
