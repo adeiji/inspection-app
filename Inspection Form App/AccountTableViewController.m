@@ -86,5 +86,25 @@ NSString *const LOGIN = @"Login", *LOGOUT = @"Logout", *EDIT_USERNAME = @"Edit U
         [alertController addAction:cancelAction];
         [self presentViewController:alertController animated:true completion:nil];
     }
+    else if ([[_options objectAtIndex:indexPath.row] isEqualToString:EDIT_USERNAME]) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Username" message:@"Enter the New Username" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *editUserNameAction = [UIAlertAction actionWithTitle:@"Edit Username" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            UITextField *usernameTextField = alertController.textFields[0];
+            [[PFUser currentUser] setUsername:usernameTextField.text];
+            [[PFUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+                if (succeeded && !error) {
+                    NSLog(@"Username updated succesfully");
+                } else {
+                    NSLog(@"Error updating username %@", error.userInfo[@"error"]);
+                }
+            }];
+        }];
+        
+        [alertController addAction:editUserNameAction];
+        [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+            textField.placeholder = @"Edit Username";
+        }];
+        [self presentViewController:alertController animated:true completion:nil];
+    }
 }
 @end
