@@ -91,8 +91,9 @@ int const SEND_INSPECTIONS_INDEX = 0, VIEW_INSPECTIONS_INDEX = 1, ACCOUNT_INDEX 
         [self.navigationController pushViewController:optionsTableViewController animated:true];
     }
     else {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No Inspections" message:@"You have not made any inspections to share" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
-        [alert show];
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"No Inspections" message:@"You have not made any inspections to share" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *okayAction = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:nil];
+        [alertController addAction:okayAction];
     }
 }
 
