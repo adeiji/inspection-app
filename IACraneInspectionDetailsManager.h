@@ -113,4 +113,9 @@
                                           ForUser : (PFUser *) user;
 
 - (void) saveContext;
+
+- (Customer*) createCustomer : (NSString*) customerName
+             CustomerContact : (NSString*) customerContact
+             CustomerAddress : (NSString*) customerAddress
+               CustomerEmail : (NSString*) customerEmail;
 @end

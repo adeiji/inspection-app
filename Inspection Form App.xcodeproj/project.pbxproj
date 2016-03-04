@@ -37,10 +37,8 @@
 		CE147B661835C2EA005CC483 /* Part.m in Sources */ = {isa = PBXBuildFile; fileRef = CE147B651835C2EA005CC483 /* Part.m */; };
 		CE147B691836844C005CC483 /* InspectionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CE147B681836844C005CC483 /* InspectionManager.m */; };
 		CE27C2161821BB0000EDDFC1 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE27C2151821BB0000EDDFC1 /* CoreData.framework */; };
-		CE27C22A1823537B00EDDFC1 /* Dropbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE40D38D18087F290080E9BD /* Dropbox.framework */; };
 		CE27C22B1823605500EDDFC1 /* Dropbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE40D38D18087F290080E9BD /* Dropbox.framework */; };
 		CE3992751805FD08003AE30B /* iPadMainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE3992741805FD08003AE30B /* iPadMainStoryboard.storyboard */; };
-		CE40D38B18087BC20080E9BD /* DataLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = CE40D38A18087BC20080E9BD /* DataLayer.m */; };
 		CE40D39018087F670080E9BD /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE40D38F18087F670080E9BD /* CFNetwork.framework */; };
 		CE40D39218087F810080E9BD /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE40D39118087F810080E9BD /* SystemConfiguration.framework */; };
 		CE40D39418087F970080E9BD /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE40D39318087F970080E9BD /* libc++.dylib */; };
@@ -49,8 +47,6 @@
 		CE486AE2180F17DC00B1B953 /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE486AE1180F17DC00B1B953 /* MasterViewController.m */; };
 		CE486AE6180F1E4200B1B953 /* InspectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE486AE5180F1E4200B1B953 /* InspectionViewController.m */; };
 		CE6F9359182416EA008E1DDC /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE27C21F18234FC100EDDFC1 /* XCTest.framework */; };
-		CE798DB7180F369600C2E5A0 /* InspectionBussiness.m in Sources */ = {isa = PBXBuildFile; fileRef = CE798DB6180F369600C2E5A0 /* InspectionBussiness.m */; };
-		CE8028AD1837337C00B40DCB /* iPhoneStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE8028AC1837337C00B40DCB /* iPhoneStoryboard.storyboard */; };
 		CE9775D91718C2660037967E /* logo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE9775D81718C2660037967E /* logo.jpg */; };
 		CE9A27381716A63200FE3D32 /* ipadAppLogo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE9A27371716A63200FE3D32 /* ipadAppLogo.jpg */; };
 		CE9A273C1716A70E00FE3D32 /* titlePageLogo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE9A273B1716A70E00FE3D32 /* titlePageLogo.jpg */; };
@@ -150,8 +146,6 @@
 		CE27C2151821BB0000EDDFC1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		CE27C21F18234FC100EDDFC1 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		CE3992741805FD08003AE30B /* iPadMainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = iPadMainStoryboard.storyboard; sourceTree = "<group>"; };
-		CE40D38918087BC20080E9BD /* DataLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataLayer.h; sourceTree = "<group>"; };
-		CE40D38A18087BC20080E9BD /* DataLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataLayer.m; sourceTree = "<group>"; };
 		CE40D38D18087F290080E9BD /* Dropbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Dropbox.framework; sourceTree = "<group>"; };
 		CE40D38F18087F670080E9BD /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		CE40D39118087F810080E9BD /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -165,9 +159,6 @@
 		CE486AE4180F1E4200B1B953 /* InspectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectionViewController.h; sourceTree = "<group>"; };
 		CE486AE5180F1E4200B1B953 /* InspectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InspectionViewController.m; sourceTree = "<group>"; };
 		CE6F935A18241825008E1DDC /* Inspection_Form_AppTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Inspection_Form_AppTests.h; sourceTree = "<group>"; };
-		CE798DB5180F369600C2E5A0 /* InspectionBussiness.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectionBussiness.h; sourceTree = "<group>"; };
-		CE798DB6180F369600C2E5A0 /* InspectionBussiness.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InspectionBussiness.m; sourceTree = "<group>"; };
-		CE8028AC1837337C00B40DCB /* iPhoneStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = iPhoneStoryboard.storyboard; path = ../iPhoneStoryboard.storyboard; sourceTree = "<group>"; };
 		CE9775D81718C2660037967E /* logo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = logo.jpg; sourceTree = "<group>"; };
 		CE9A27371716A63200FE3D32 /* ipadAppLogo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ipadAppLogo.jpg; sourceTree = "<group>"; };
 		CE9A273B1716A70E00FE3D32 /* titlePageLogo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = titlePageLogo.jpg; sourceTree = "<group>"; };
@@ -227,7 +218,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE27C22A1823537B00EDDFC1 /* Dropbox.framework in Frameworks */,
 				CE27C2161821BB0000EDDFC1 /* CoreData.framework in Frameworks */,
 				CE40D39418087F970080E9BD /* libc++.dylib in Frameworks */,
 				CE40D39218087F810080E9BD /* SystemConfiguration.framework in Frameworks */,
@@ -334,7 +324,6 @@
 				F423A8CE1C7BA71700899B6E /* Login Manager */,
 				F4FBDAE21AD80A430090DA72 /* Views */,
 				CE38513D18107296003629DA /* View Controllers */,
-				CE798DB4180F35E400C2E5A0 /* Business Layer */,
 				CE486ADC180F179A00B1B953 /* Master View Controller */,
 				CE9A273B1716A70E00FE3D32 /* titlePageLogo.jpg */,
 				CE9775D81718C2660037967E /* logo.jpg */,
@@ -346,7 +335,6 @@
 				CE40D39B180894380080E9BD /* PDF Generator */,
 				CE486AD9180CB1C200B1B953 /* Table View Controller */,
 				CE486ADA180CB1DE00B1B953 /* UI Files */,
-				CE40D38C18087BCA0080E9BD /* Data Layer */,
 				CE486AD5180CB17C00B1B953 /* View Controller */,
 				CE486AD4180CB16900B1B953 /* OrdinalNumberFormatter */,
 				CE9A27371716A63200FE3D32 /* ipadAppLogo.jpg */,
@@ -355,7 +343,6 @@
 				CE486ACD180CB13100B1B953 /* Inspection */,
 				CE486ACC180CB12B00B1B953 /* Condition */,
 				CE486AD0180CB14A00B1B953 /* Gradient View */,
-				CE486AD1180CB15200B1B953 /* Customer */,
 				CE486AD2180CB15800B1B953 /* Options */,
 				CE486AD3180CB15E00B1B953 /* OptionList */,
 				8BC58459150ABD87000AC695 /* Supporting Files */,
@@ -412,15 +399,6 @@
 			name = "View Controllers";
 			sourceTree = "<group>";
 		};
-		CE40D38C18087BCA0080E9BD /* Data Layer */ = {
-			isa = PBXGroup;
-			children = (
-				CE40D38918087BC20080E9BD /* DataLayer.h */,
-				CE40D38A18087BC20080E9BD /* DataLayer.m */,
-			);
-			name = "Data Layer";
-			sourceTree = "<group>";
-		};
 		CE40D39B180894380080E9BD /* PDF Generator */ = {
 			isa = PBXGroup;
 			children = (
@@ -475,13 +453,6 @@
 				8B544611150F0C3E007E1CA9 /* GradientView.m */,
 			);
 			name = "Gradient View";
-			sourceTree = "<group>";
-		};
-		CE486AD1180CB15200B1B953 /* Customer */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Customer;
 			sourceTree = "<group>";
 		};
 		CE486AD2180CB15800B1B953 /* Options */ = {
@@ -559,7 +530,6 @@
 		CE486ADA180CB1DE00B1B953 /* UI Files */ = {
 			isa = PBXGroup;
 			children = (
-				CE8028AC1837337C00B40DCB /* iPhoneStoryboard.storyboard */,
 				CEFD6D2C1839575E001764E9 /* CraneView.xib */,
 				CE3992741805FD08003AE30B /* iPadMainStoryboard.storyboard */,
 				CEFD6D71183A87D8001764E9 /* JobInfoView.xib */,
@@ -584,15 +554,6 @@
 				CE486AE5180F1E4200B1B953 /* InspectionViewController.m */,
 			);
 			name = "Inspection View Controller";
-			sourceTree = "<group>";
-		};
-		CE798DB4180F35E400C2E5A0 /* Business Layer */ = {
-			isa = PBXGroup;
-			children = (
-				CE798DB5180F369600C2E5A0 /* InspectionBussiness.h */,
-				CE798DB6180F369600C2E5A0 /* InspectionBussiness.m */,
-			);
-			name = "Business Layer";
 			sourceTree = "<group>";
 		};
 		F423A8CA1C7BA51B00899B6E /* Dephyned */ = {
@@ -757,7 +718,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0710;
-				LastUpgradeCheck = 0430;
+				LastUpgradeCheck = 0710;
 				TargetAttributes = {
 					8BC5844D150ABD87000AC695 = {
 						DevelopmentTeam = HJPTQ3N75W;
@@ -791,7 +752,6 @@
 				CEFD6D70183A8705001764E9 /* Default-568h@2x.png in Resources */,
 				F43E74861C7E80E60045E5F1 /* OptionsTableViewController.xib in Resources */,
 				CEFD6D72183A87D8001764E9 /* JobInfoView.xib in Resources */,
-				CE8028AD1837337C00B40DCB /* iPhoneStoryboard.storyboard in Resources */,
 				CE3992751805FD08003AE30B /* iPadMainStoryboard.storyboard in Resources */,
 				F4B29E6D1ADC6A620025A091 /* lvwwdcranes.plist in Resources */,
 				8B6BA1831708BF1B00E08D9D /* autograph_x.png in Resources */,
@@ -908,7 +868,6 @@
 				F4B29E671ADC281B0025A091 /* InspectedCrane.m in Sources */,
 				CE486AE6180F1E4200B1B953 /* InspectionViewController.m in Sources */,
 				F43E74891C7E874D0045E5F1 /* InspectionsViewController.m in Sources */,
-				CE798DB7180F369600C2E5A0 /* InspectionBussiness.m in Sources */,
 				F423A8D31C7BA80B00899B6E /* DELoginManager.m in Sources */,
 				CE486ACB180C83E900B1B953 /* Inspection.m in Sources */,
 				8BE881F81513F82400360C63 /* ItemListConditionStorage.m in Sources */,
@@ -916,7 +875,6 @@
 				8BE881FC1513FA4200360C63 /* Condition.m in Sources */,
 				8BF10A9C152FB93D00DC5F05 /* TextField.m in Sources */,
 				F4FBDAE51AD80A520090DA72 /* PromptView.m in Sources */,
-				CE40D38B18087BC20080E9BD /* DataLayer.m in Sources */,
 				F49DDEB11ACCDA5C00A02162 /* IACraneInspectionDetailsManager.m in Sources */,
 				CE486AE2180F17DC00B1B953 /* MasterViewController.m in Sources */,
 				8BE9DE801616355800906B98 /* OrdinalNumberFormatter.m in Sources */,
@@ -967,13 +925,22 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -981,10 +948,14 @@
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
@@ -995,15 +966,26 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
@@ -1019,7 +1001,6 @@
 			baseConfigurationReference = E1A4C2449B6DA9D1ED2E1AE3 /* Pods-Inspection Form App.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Adebayo Ijidakinro (36756F4Y54)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Adebayo Ijidakinro (36756F4Y54)";
@@ -1027,7 +1008,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\\\\\\\"$(SRCROOT)/Inspection\\\\\\ Form\\\\\\ App/dropbox-ios-sdk-1.2.1\\\\\\\"",
-					"\\\\\\\"$(SRCROOT)/../../Downloads/dropbox-ios-sdk-1.2.1\\\\\\\"",
 					"\\\\\\\"$(SRCROOT)/../dropbox-ios-sdk-1.2.2\\\\\\\"",
 					"$(SRCROOT)",
 					"/Users/user/Documents/XCode\\ Projects/Inspection\\ Form\\ App",
@@ -1068,7 +1048,6 @@
 			baseConfigurationReference = 3D84AFA8E9F5B30D7C62C404 /* Pods-Inspection Form App.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Adebayo Ijidakinro (36756F4Y54)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Adebayo Ijidakinro (36756F4Y54)";
@@ -1076,7 +1055,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\\\\\\\"$(SRCROOT)/Inspection\\\\\\ Form\\\\\\ App/dropbox-ios-sdk-1.2.1\\\\\\\"",
-					"\\\\\\\"$(SRCROOT)/../../Downloads/dropbox-ios-sdk-1.2.1\\\\\\\"",
 					"\\\\\\\"$(SRCROOT)/../dropbox-ios-sdk-1.2.2\\\\\\\"",
 					"$(SRCROOT)",
 					"/Users/user/Documents/XCode\\ Projects/Inspection\\ Form\\ App",
@@ -1116,6 +1094,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Inspection Form App/Inspection Form App-Prefix.pch";
 				INFOPLIST_FILE = "Inspection Form AppTests/Inspection Form AppTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "Silverstate.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;
@@ -1135,6 +1114,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Inspection Form App/Inspection Form App-Prefix.pch";
 				INFOPLIST_FILE = "Inspection Form AppTests/Inspection Form AppTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "Silverstate.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;

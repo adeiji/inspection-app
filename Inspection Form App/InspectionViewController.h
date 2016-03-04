@@ -10,7 +10,6 @@
 #import "Condition.h"
 #import "ItemListConditionStorage.h"
 #import "PartSelectionDelegate.h"
-#import "InspectionBussiness.h"
 #import "PromptView.h"
 
 @class ItemListConditionStorage, Inspection;

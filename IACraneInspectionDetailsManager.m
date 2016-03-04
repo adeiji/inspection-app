@@ -67,7 +67,7 @@ NSString *const TO_USER = @"toUser";
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 //        NSManagedObjectContext *context =  ((AppDelegate *)[ [UIApplication sharedApplication] delegate]).managedObjectContext;
-        NSManagedObjectContext *context = [[NSManagedObjectContext alloc] init];
+        NSManagedObjectContext *context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
         [context setPersistentStoreCoordinator:(((AppDelegate *)[ [UIApplication sharedApplication] delegate]).managedObjectContext).persistentStoreCoordinator];
         NSMutableArray *cranesArray = [NSMutableArray new];
         NSEntityDescription *entity = [NSEntityDescription entityForName:kCoreDataClassCrane inManagedObjectContext:context];
@@ -560,10 +560,10 @@ NSString *const TO_USER = @"toUser";
     for (CoreDataCondition *condition in inspectionDetails) {
         
         PFInspectionDetails *inspectionDetails = [PFInspectionDetails object];
-        inspectionDetails.isDeficient = condition.isDeficient;
-        inspectionDetails.isApplicable = condition.isApplicable;
+        inspectionDetails.isDeficient = condition.isDeficient.boolValue;
+        inspectionDetails.isApplicable = condition.isApplicable.boolValue;
         inspectionDetails.notes = condition.notes;
-        inspectionDetails.optionSelectedIndex = condition.optionSelectedIndex;
+        inspectionDetails.optionSelectedIndex = condition.optionSelectedIndex.intValue;
         inspectionDetails.optionSelected = condition.optionSelected;
         inspectionDetails.hoistSrl = condition.hoistSrl;
         
@@ -615,5 +615,27 @@ NSString *const TO_USER = @"toUser";
         NSLog(@"Error saving context %@", error.description);
     }
 }
+
+//Inserts a customer into the dropbox datastore jobs table
++ (void) InsertCustomerIntoTable : (Customer*) customer
+{
+    
+}
+
+- (Customer*) createCustomer : (NSString*) customerName
+             CustomerContact : (NSString*) customerContact
+             CustomerAddress : (NSString*) customerAddress
+               CustomerEmail : (NSString*) customerEmail
+{
+    NSEntityDescription *entity = [NSEntityDescription entityForName:kCoreDataClassCustomer inManagedObjectContext:_context];
+    Customer *customer = [[Customer alloc] initWithEntity:entity insertIntoManagedObjectContext:_context];
+    customer.name       = customerName;
+    customer.contact    = customerContact;
+    customer.address    = customerAddress;
+    customer.email      = customerEmail;
+    
+    return customer;
+}
+
 
 @end

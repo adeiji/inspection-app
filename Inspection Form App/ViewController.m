@@ -18,12 +18,9 @@
 #import "TableViewController.h"
 #import "QuartzCore/QuartzCore.h"
 #import "UIKit/UIkit.h"
-#import <Dropbox/Dropbox.h>
 #import "OrdinalNumberFormatter.h"
 #import "Foundation/NSDateFormatter.h"
-#import "DataLayer.h"
 #import "InspectionViewController.h"
-#import "InspectionBussiness.h"
 #import "AppDelegate.h"
 #import "InspectionManager.h"
 #import "OptionsTableViewController.h"
@@ -188,22 +185,6 @@ static NSString* USERNAME = @"username";
     _inspectionViewController.optionLocation = 0;
 }
 
-#pragma mark - Dropbox Datastore Methods
-
-//If there is not a Dropbox Datastore Table already created, we create it, as well as the data store.
-- (void) createDatastoreTable
-{
-    
-    _account = [[DBAccountManager sharedManager] linkedAccount];
-    _dataStore = [DBDatastore openDefaultStoreForAccount:_account error:nil];
-    _table = [_dataStore getTable:@"inspections"];
-    
-    //Set the account and datastore objects for the singleton object
-    [[InspectionManager sharedManager] setDropboxAccount:_account];
-    [[InspectionManager sharedManager] setDataStore:_dataStore];
-    [[InspectionManager sharedManager] setTable:_table];
-}
-
 - (void)viewDidUnload
 {
     [super viewDidUnload];
@@ -241,19 +222,6 @@ static NSString* USERNAME = @"username";
 {
     [self EmptyTextFields];
 }
-
-
-//Grab the crane information from the WATERDISTRICTCRANES table with the HoistSrl as the identifier and then insert the results onto the home page
-//Automatically insert the customerName, customerContact, Address and Email
-- (IBAction) LoadHoistSrlPressed : (id) sender
-{
-    NSDictionary *query = [[NSDictionary alloc] initWithObjectsAndKeys:@"hoistsrl", _txtHoistSrl.text, nil];
-    
-    inspection.itemList.myConditions = [[NSMutableArray alloc] initWithArray:[InspectionBussiness getRecords:query DBAccount:_account DBDatastore:_dataStore DBTable:_table]];
-    
-    [self OpenOrderFromField:_txtHoistSrl];
-}
-
 
 //this method will need to open the order by getting both the hoist srl number or equip number and the job number so that they can get any hoist srl at any time
 - (void) OpenOrderFromField: (UITextField *) input;
@@ -497,7 +465,7 @@ static NSString* USERNAME = @"username";
                                         SelectedRow : (NSInteger) selectedRow
 {
     //Here we create all the necessary objects to store the customer and the crane information so that this can be saved to a singleton object and accessed from anywhere.
-    Customer *customer = [InspectionBussiness createCustomer:_txtCustomerName.text CustomerContact:_txtCustomerContact.text CustomerAddress:_txtAddress.text CustomerEmail:_txtEmail.text];
+    Customer *customer = [[IACraneInspectionDetailsManager sharedManager] createCustomer:_txtCustomerName.text CustomerContact:_txtCustomerContact.text CustomerAddress:_txtAddress.text CustomerEmail:_txtEmail.text];
     
     InspectedCrane *crane = [[IACraneInspectionDetailsManager sharedManager] createCrane:_txtHoistSrl.text CraneType:craneType EquipmentNumber:_txtEquipNum.text CraneMfg:_txtCraneMfg.text hoistMfg:_txtHoistMfg.text CraneSrl:_txtCraneSrl.text Capacity:_txtCap.text HoistMdl:_txtHoistMdl.text];
     [crane setCustomer:customer];
@@ -603,22 +571,8 @@ static NSString* USERNAME = @"username";
     NSLog(@"Memory warning received, but ignored due to fact that this program does not consume that much memory.");
 }
 
-- (IBAction)buttonPressed:(id)sender {
-}
-//Create a dictionary that will store the customer information that will then be stored in our Dropbox datastore.
-- (NSDictionary *) createCustomerDictionary
-{
-    NSDictionary *dictionary = [[NSDictionary alloc] initWithObjectsAndKeys:_txtCustomerName.text, @"customerName",
-                                _txtAddress.text, @"address",
-                                _txtCustomerContact.text, @"customercontact",
-                                _txtCustomerName.text, @"customername",
-                                _txtEmail.text, @"email", nil];
-    
-    return dictionary;
-}
-
 - (Inspection *) createInspectionObjectWithSelectedCrane : (InspectionCrane *) selectedCrane {
-    Customer *customer = [InspectionBussiness createCustomer:_txtCustomerName.text CustomerContact:_txtCustomerContact.text CustomerAddress:_txtAddress.text CustomerEmail:_txtEmail.text];
+    Customer *customer = [[IACraneInspectionDetailsManager sharedManager] createCustomer:_txtCustomerName.text CustomerContact:_txtCustomerContact.text CustomerAddress:_txtAddress.text CustomerEmail:_txtEmail.text];
     InspectedCrane *crane = [[IACraneInspectionDetailsManager sharedManager] createCrane:_txtHoistSrl.text CraneType:selectedCrane.name EquipmentNumber:_txtEquipNum.text CraneMfg:_txtCraneMfg.text hoistMfg:_txtHoistMfg.text CraneSrl:_txtCraneSrl.text Capacity:_txtCap.text HoistMdl:_txtHoistMdl.text];
     inspection.inspectedCrane = crane;
     inspection.customer = customer;

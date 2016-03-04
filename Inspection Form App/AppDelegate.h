@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "ViewController.h"
-#import <Dropbox/Dropbox.h>
 
 @class SwitchViewController;
 

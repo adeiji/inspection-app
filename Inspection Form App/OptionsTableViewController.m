@@ -94,6 +94,7 @@ int const SEND_INSPECTIONS_INDEX = 0, VIEW_INSPECTIONS_INDEX = 1, ACCOUNT_INDEX 
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"No Inspections" message:@"You have not made any inspections to share" preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *okayAction = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:nil];
         [alertController addAction:okayAction];
+        [self presentViewController:alertController animated:true completion:nil];
     }
 }
 

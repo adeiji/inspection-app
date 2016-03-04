@@ -8,10 +8,8 @@
 
 #import "AppDelegate.h"
 #import "ViewController.h"
-#import <Dropbox/Dropbox.h>
 #import "MasterViewController.h"
 #import "InspectionManager.h"
-#import "InspectionBussiness.h"
 #import <Parse/Parse.h>
 #import <ParseCrashReporting/ParseCrashReporting.h>
 #import "SyncManager.h"
@@ -41,8 +39,6 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [self setUpParseWithLaunchOptions:launchOptions];
-    DBAccountManager* accountMgr =[[DBAccountManager alloc] initWithAppKey:@"878n3v7pfduyrrr" secret:@"0745q3julqjk9mb"];
-    [DBAccountManager setSharedManager:accountMgr];
     [IACraneInspectionDetailsManager sharedManager];
     [[IACraneInspectionDetailsManager sharedManager] loadAllInspectionDetails];
     
@@ -63,7 +59,6 @@
     }
 
     [self fillCriteriaObjects];
-    [self getPreviouslyFinishedCranes];
     
     
 //    // Only run this the first time the application opens
@@ -90,7 +85,7 @@
     NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
     if (coordinator != nil)
     {
-        _managedObjectContext = [[NSManagedObjectContext alloc] init];
+        _managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
         [_managedObjectContext setPersistentStoreCoordinator:coordinator];
     }
     
@@ -175,21 +170,6 @@
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
 }
 
-- (void) getPreviouslyFinishedCranes
-{
-    DBAccount * account = [[DBAccountManager sharedManager] linkedAccount];
-    
-    if (account)
-    {
-        DBDatastore *dataStore = [DBDatastore openDefaultStoreForAccount:account error:nil];
-        DBTable *table = [dataStore getTable:@"crane"];
-    
-        [dataStore sync:nil];
-    
-        __pastCranes = [InspectionBussiness getRecords:nil DBAccount:account DBDatastore:dataStore DBTable:table];
-    }
-}
-
 //Fill the two dictionaries partsDictionary and searchDictionary so that we can easily pull these values from the array later
 - (void) fillCriteriaObjects
 {
@@ -222,23 +202,6 @@
     }
 }
 
-- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url
-  sourceApplication:(NSString *)source annotation:(id)annotation {
-    DBAccount *account = [[DBAccountManager sharedManager] handleOpenURL:url];
-    if (account) {
-        NSLog(@"App linked successfully!");
-        
-        DBDatastore *dataStore = [DBDatastore openDefaultStoreForAccount:account error:nil];
-        DBTable *table = [dataStore getTable:@"crane"];
-        
-        [dataStore sync:nil];
-        
-        __pastCranes = [InspectionBussiness getRecords:nil DBAccount:account DBDatastore:dataStore DBTable:table];
-        
-        return YES;
-    }
-    return NO;
-}
 
 - (void) saveContext {
     NSError *error;

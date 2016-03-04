@@ -11,7 +11,6 @@
 #import <MessageUI/MessageUI.h>
 #import <MessageUI/MFMailComposeViewController.h>
 #import "TextField.h"
-#import <Dropbox/Dropbox.h>
 #import "GradientView.h"
 #import "InspectionViewController.h"
 #import "IACraneInspectionDetailsManager.h"
@@ -59,11 +58,6 @@
     Inspection *inspection;
     BOOL isCraneSet;
 }
-
-//Dropbox Objects
-@property (strong, nonatomic) DBAccount *account;
-@property (strong, nonatomic) DBDatastore *dataStore;
-@property (strong, nonatomic) DBTable *table;
 
 @property (weak, nonatomic) IBOutlet UITextField *txtDate;
 @property (strong, nonatomic) UIDatePicker *datePicker;

@@ -14,9 +14,6 @@
 @synthesize crane;
 @synthesize customer;
 @synthesize inspection;
-@synthesize dropboxAccount;
-@synthesize dataStore;
-@synthesize table;
 
 + (InspectionManager *) sharedManager {
     static InspectionManager *sharedMyManager = nil;
@@ -37,7 +34,7 @@
     return self;
 }
 
-- (void) setCrane:(InspectionCrane *) myCrane {
+- (void) setCrane:(InspectedCrane *) myCrane {
     crane = myCrane;
 }
 
@@ -49,22 +46,6 @@
 - (void) setInspection:(Inspection *) myInspection
 {
     inspection = myInspection;
-}
-
-- (void) setDropboxAccount:(DBAccount *)myDropboxAccount
-{
-    dropboxAccount = myDropboxAccount;
-}
-
-- (void) setDataStore:(DBDatastore *)myDataStore
-{
-    dataStore = myDataStore;
-}
-
-
-- (void) setTable:(DBTable *) myTable
-{
-    table = myTable;
 }
 
 @end
