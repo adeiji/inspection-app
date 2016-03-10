@@ -24,7 +24,7 @@
 }
 - (Condition *) initWithParameters : (NSString *) myNotes
                        Defficiency : (BOOL) myDeficient
-                   PickerSelection : (NSUInteger *) myPickerSelection
+                   PickerSelection : (NSUInteger) myPickerSelection
                      DeficientPart : (NSString *) myDeficientPart
                         Applicable : (BOOL) myApplicable
 {

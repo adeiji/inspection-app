@@ -34,8 +34,6 @@
 #define kMinimumGestureLength   25
 #define kMaximumVariance        100
 
-static const int ALERT_NAME = 5;
-static const int RESET_EVERYTHING = 6;
 static NSString* USERNAME = @"username";
 
 - (void)viewDidLoad {
@@ -326,15 +324,11 @@ static NSString* USERNAME = @"username";
     //First we check to see if any of the fields in the customerInfo page and if there are any empty fields then the user is not allowed to submit the information and a UIAlertView pops up telling you that there are fields where nothing was inserted into the fields
     if (results == EMPTY_FIELD)
     {
-        UIAlertView *error = [[UIAlertView alloc] initWithTitle:@"Customer Error" message:@"All values on the main screen must be entered!" 
-                                                       delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [error show];
+        [self showSimpleAlertControllerWithTitle:@"Customer Error" Message:@"All values on the main screen must be entered"];
     } //checks to see if there are any quotation marks inside of any of the fields, and if there are any then the user is not allowed to enter the customer, and a UIAlertView pops up telling you this
     else if (results == INVALID_CHARACTER)
     {
-        UIAlertView *error = [[UIAlertView alloc] initWithTitle:@"Customer Error" message:@"Can not enter character 'quotation mark' ' \" ' into any field!" 
-                                                       delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [error show];
+        [self showSimpleAlertControllerWithTitle:@"Customer Error" Message:@"Can not enter character 'quotation mark' ' \" ' into any field!"];
     }
 }
 
@@ -415,34 +409,6 @@ static NSString* USERNAME = @"username";
     }
 }
 
-#pragma mark - Alert View Methods
-//this method handles all alert view finishes
-- (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if (buttonIndex==0)
-    {
-        if (alertView.tag == ALERT_NAME)
-        {
-            UITextField *textField = [alertView textFieldAtIndex:0];
-            if ([textField.text isEqual:@""])
-            {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Enter Name Alert" message:@"Enter your name" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
-                [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
-                [alert show];
-                [alert becomeFirstResponder];
-                alert.delegate = self;
-            }
-            else
-            {
-                owner = textField.text;
-                _txtTechnicianName.text = [owner uppercaseString];
-                [[NSUserDefaults standardUserDefaults] setObject:owner forKey:USERNAME];
-                [[NSUserDefaults standardUserDefaults] synchronize];
-            }
-        }
-    }
-}
-
 -(void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -487,11 +453,7 @@ static NSString* USERNAME = @"username";
         
     }
     else {
-        
-        
-        
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"No Crane" message:@"Sorry, but there's no cranes to select.  Click Sync Crane Details"  delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-        [alertView show];
+        [self showSimpleAlertControllerWithTitle:@"No Crane" Message:@"Sorry, but there's no cranes to select.  Click Sync Crane Details"];
     }
 }
 
@@ -519,9 +481,18 @@ static NSString* USERNAME = @"username";
                                                           userInfo:@{ USER_INFO_SELECTED_CRANE_INSPECTION_POINTS : selectedCrane.inspectionPoints }];
     }
     else {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Select crane type" message:@"Please Select the Crane Type" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-        [alert show];
+        [self showSimpleAlertControllerWithTitle:@"Crane Type" Message:@"Please Select the Crane Type"];
     }
+}
+
+- (void) showSimpleAlertControllerWithTitle : (NSString *) title
+                                    Message : (NSString *) message
+{
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *okayAction = [UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleDefault handler:nil];
+    [alertController addAction:okayAction];
+    [self presentViewController:alertController animated:true completion:nil];
 }
 
 /*
@@ -545,15 +516,12 @@ static NSString* USERNAME = @"username";
             _inspectionViewController.validated = YES;
         }
         else {
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"No Crane" message:@"Sorry, but there's no cranes to select.  Click Sync Crane Details"  delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-            [alertView show];
+            [self showSimpleAlertControllerWithTitle:@"No Crane Selected" Message:@"Sorry, but there's no cranes to select. Click Sync Crane Details"];
         }
     }
     else
     {
-        // Display that the user needs to change some information on the Customer Submit page in order to submit this page.
-        UIAlertView *view = [[UIAlertView alloc] initWithTitle:@"Errors on Page" message:@"There is an error on the customer page.  Can not submit." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [view show];
+        [self showSimpleAlertControllerWithTitle:@"Errors On Page" Message:@"There is an error on the customer page.  Can not submit"];
     }
     
 }

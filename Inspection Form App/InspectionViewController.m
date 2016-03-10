@@ -18,7 +18,10 @@
 #import "MasterViewController.h"
 #import <Masonry/Masonry.h>
 
-@interface InspectionViewController ()
+@interface InspectionViewController () {
+    UISwipeGestureRecognizer *gestureRecognizerLeft;
+    UISwipeGestureRecognizer *gestureRecognizerRight;
+}
 
 @end
 
@@ -41,13 +44,12 @@
     _deficiencyPicker.delegate = self;
     _deficiencyPicker.dataSource = self;
     
-    [_deficiencySwitch addTarget:self action:@selector(switchChanged:) forControlEvents:UIControlEventTouchUpInside];
     [_applicableSwitch addTarget:self action:@selector(applicableSwitchChanged:) forControlEvents:UIControlEventTouchUpInside];
     
-    UISwipeGestureRecognizer *gestureRecognizerLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
+    gestureRecognizerLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
     gestureRecognizerLeft.direction = UISwipeGestureRecognizerDirectionLeft;
     
-    UISwipeGestureRecognizer *gestureRecognizerRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
+    gestureRecognizerRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
     gestureRecognizerRight.direction = UISwipeGestureRecognizerDirectionRight;
     
     [self.view addGestureRecognizer:gestureRecognizerRight];
@@ -124,18 +126,29 @@
     [self setDeficiencyViews];
 }
 
+- (void) disableSwiping {
+    gestureRecognizerLeft.enabled = false;
+    gestureRecognizerRight.enabled = false;
+}
+
+- (void) enableSwiping {
+    gestureRecognizerLeft.enabled = true;
+    gestureRecognizerRight.enabled = true;
+}
+
 - (void) displayPromptViewWithPrompts : (NSArray *) prompts {
     promptView = [[[NSBundle mainBundle] loadNibNamed:@"PromptView" owner:self options:nil] firstObject];
-    [[promptView layer] setCornerRadius:25.0f];
-    [[promptView layer] setBorderWidth:2.0f];
+    [[promptView layer] setCornerRadius:10.0f];
+    [[promptView layer] setBorderWidth:1.0f];
     [[promptView layer] setBorderColor:[UIColor colorWithRed:0.0f green:172.0f/255.0f blue:238.0f/255.0f alpha:1.0].CGColor];
     promptView.prompts = prompts;
     [[NSNotificationCenter defaultCenter] postNotificationName:UI_PROMPT_SHOWN object:nil];
-    [self.view setUserInteractionEnabled:NO];
-    [[[[UIApplication sharedApplication] delegate] window] addSubview:promptView];
+    [self disableSwiping];
+    
+    [self.view addSubview:promptView];
     [promptView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo([[[UIApplication sharedApplication] delegate] window]);
-        make.centerY.equalTo([[[UIApplication sharedApplication] delegate] window]).with.offset(-200);
+        make.centerX.equalTo(self.view);
+        make.centerY.equalTo(self.view).with.offset(-200);
 
         make.width.equalTo(@385);
         make.height.equalTo(@249);
@@ -156,13 +169,12 @@
             promptView.promptLocation ++;
             Prompt *prompt = promptView.prompts[promptView.promptLocation];
             promptView.lblPromptText.text = prompt.title;
-            [self.view setUserInteractionEnabled:NO];
         }
         else {
             [promptView removeFromSuperview];
             promptView = nil;
-            [self.view setUserInteractionEnabled:YES];
             [[NSNotificationCenter defaultCenter] postNotificationName:UI_PROMPT_HIDDEN object:nil];
+            [self enableSwiping];
         }
     }
     else
@@ -178,13 +190,12 @@
         promptView.promptLocation ++;
         Prompt *prompt = promptView.prompts[promptView.promptLocation];
         promptView.lblPromptText.text = prompt.title;
-        [self.view setUserInteractionEnabled:NO];
     }
     else {
         [promptView removeFromSuperview];
         promptView = nil;
-        [self.view setUserInteractionEnabled:YES];
         [[NSNotificationCenter defaultCenter] postNotificationName:UI_PROMPT_HIDDEN object:nil];
+        [self enableSwiping];
     }
     
     promptView.txtPromptResult.text = @"";
@@ -342,42 +353,6 @@
 
         [((AppDelegate *) [[UIApplication sharedApplication] delegate]) saveContext];
     }
-}
-
-- (void) switchChanged : (id) sender {
-    
-    UISwitch *mySwitch = (UISwitch *)sender;
-    BOOL setting = mySwitch.isOn;
-    
-    if (setting == TRUE) {
-        _deficiencyPicker.alpha = 1;
-        _deficiencyPicker.showsSelectionIndicator = YES;
-        _deficiencyPicker.userInteractionEnabled = YES;
-        
-        if ([_lblPart.text isEqualToString:@"Wire Rope, Load Chain, Fittings"])
-        {
-            timesShown=0;
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Length, size, fittings" message:@"Enter the Length:" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Ok", nil];
-            [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
-            [alert show];
-            [alert becomeFirstResponder];
-            pageSubmitAlertView = NO;
-        }
-        else if ([_lblPart.text isEqualToString:@"Hoist Load Brake"])
-        {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Type" message:@"What is the type?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Ok", nil];
-            [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
-            [alert show];
-            [alert becomeFirstResponder];
-            pageSubmitAlertView = NO;
-        }
-    }
-    else {
-        _deficiencyPicker.alpha = .5;
-        _deficiencyPicker.showsSelectionIndicator = NO;
-        _deficiencyPicker.userInteractionEnabled = NO;
-    }
-    
 }
 
 - (void) getOverallRatingAndShowPDFWithTextField : (UITextField *) textField {

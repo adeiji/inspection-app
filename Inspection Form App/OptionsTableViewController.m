@@ -156,7 +156,7 @@ int const SEND_INSPECTIONS_INDEX = 0, VIEW_INSPECTIONS_INDEX = 1, ACCOUNT_INDEX 
         UINavigationController *navigationController = [self.splitViewController.viewControllers objectAtIndex:0] ;
         InspectionCrane *inspectionCrane = inspectionCranes[0];
         
-        MasterViewController *mvc = [[MasterViewController alloc] initWithStyle:nil Level:@"partName" SearchValue:[inspectionCrane.inspectionPoints array]];
+        MasterViewController *mvc = [[MasterViewController alloc] initWithStyle:UITableViewStylePlain Level:@"partName" SearchValue:[inspectionCrane.inspectionPoints array]];
         [navigationController pushViewController:mvc animated:YES];
         [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_HOISTSRL_SELECTED object:nil userInfo:@{ kSelectedInspectedCrane : inspectedCrane }];
         
@@ -169,7 +169,7 @@ int const SEND_INSPECTIONS_INDEX = 0, VIEW_INSPECTIONS_INDEX = 1, ACCOUNT_INDEX 
         {
             [mainPageViewController setIsCraneSet:true];
             [mainPageViewController.navigationController popToRootViewControllerAnimated:false];
-            [mainPageViewController storeInformationAndDisplayInspectionViewWithCrane:inspectionCrane SelectedRow:nil];
+            [mainPageViewController storeInformationAndDisplayInspectionViewWithCrane:inspectionCrane SelectedRow:0];
         }
     }
 }

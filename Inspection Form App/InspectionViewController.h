@@ -26,8 +26,7 @@
     BOOL proofLoad;
     BOOL testLoad;
     BOOL proofLoadDescription;
-    Inspection *inspection;
-    
+    Inspection *inspection;    
     NSString *overallRating;
     NSArray *_deficiencyPickerArray;
     PromptView *promptView;
