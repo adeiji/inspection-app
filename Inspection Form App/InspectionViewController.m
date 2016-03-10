@@ -312,6 +312,9 @@
                                      pickerView:_deficiencyPicker
                                      titleForRow:selectedRow
                                      forComponent:0]).name;
+        
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Overall Rating" message:@"What is the overall condition rating?" preferredStyle:UIAlertControllerStyleAlert];
+        
         UIAlertView *alert = [[UIAlertView alloc]
                               initWithTitle:@"Overall Rating"
                               message:@"What is the overall condition rating?"

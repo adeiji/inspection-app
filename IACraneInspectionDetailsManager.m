@@ -357,6 +357,7 @@ NSString *const TO_USER = @"toUser";
     
     return fetchedObjects[0];
 }
+
 /*
  
  Get all the cranes that have already been inspected
@@ -375,6 +376,7 @@ NSString *const TO_USER = @"toUser";
     
     return fetchedObjects;
 }
+
 /*
  
  Get the specified crane from the InspectionCrane class
@@ -439,7 +441,7 @@ NSString *const TO_USER = @"toUser";
         coreDataCondition.notes = condition.notes;
         coreDataCondition.optionSelectedIndex = [NSNumber numberWithInteger:condition.pickerSelection];
         coreDataCondition.optionSelected = condition.deficientPart;
-        coreDataCondition.optionLocation = [NSNumber numberWithInteger:condition.optionLocation];
+        coreDataCondition.optionLocation = [NSNumber numberWithInteger:*(condition.optionLocation)];
         coreDataCondition.hoistSrl = crane.hoistSrl;
     }
     

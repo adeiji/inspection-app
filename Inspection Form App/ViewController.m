@@ -51,23 +51,12 @@ static NSString* USERNAME = @"username";
     _craneDescriptionsArray = [[IACraneInspectionDetailsManager sharedManager] cranes];
     
     [self loadOwner];
-    
-    if (!owner)
-    {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Enter Name Alert" message:@"Enter your name" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
-        [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
-        alert.delegate = self;
-        alert.tag = ALERT_NAME;
-        [alert show];
-        [alert becomeFirstResponder];
-    }
-    
     [self setupTxtDate];
     [self dateSelectionChanged:_datePicker];
     
     _optionLocation=0;
     [self resetVariables];
-    _txtTechnicianName.text = [owner uppercaseString];
+    _txtTechnicianName.text = [[[PFUser currentUser] username] uppercaseString];
     [self initiatePartsForSelectedCrane];
 }
 
@@ -498,6 +487,9 @@ static NSString* USERNAME = @"username";
         
     }
     else {
+        
+        
+        
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"No Crane" message:@"Sorry, but there's no cranes to select.  Click Sync Crane Details"  delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
         [alertView show];
     }

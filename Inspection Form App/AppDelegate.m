@@ -45,6 +45,7 @@
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
         UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
         UINavigationController *navigationController = [splitViewController.viewControllers lastObject];
+        
         if ([PFUser currentUser] != nil ) {
             splitViewController.delegate = (id)navigationController.topViewController;
         }
@@ -59,17 +60,6 @@
     }
 
     [self fillCriteriaObjects];
-    
-    
-//    // Only run this the first time the application opens
-//    NSString *firstTime = [[NSUserDefaults standardUserDefaults] objectForKey:@"firstTime"];
-//    if (!firstTime)
-//    {
-//        [[IACraneInspectionDetailsManager sharedManager] saveAllWaterDistrictCranes];
-//        [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"firstTime"];
-//        [[NSUserDefaults standardUserDefaults] synchronize];
-//    }
-
     
     return YES;
 }
@@ -158,9 +148,8 @@
     // Connect our app to Parse
     // Allow the parse local data store
     [ParseCrashReporting enable];
-    // Parse Keys - Livead
-//    [Parse setApplicationId:@"pXYoDYstnZ7wvICh2nNtxmAwegOpjhsdRpFjNoVE"
-//                  clientKey:@"QiK7CN2M6Yh86Kn9FMLk8OBO0uHV9Icg0ryxrc11"];
+    
+    // Parse Keys - Live
     [Parse initializeWithConfiguration:[ParseClientConfiguration configurationWithBlock:^(id<ParseMutableClientConfiguration>  _Nonnull configuration) {
         [configuration setApplicationId:@"pXYoDYstnZ7wvICh2nNtxmAwegOpjhsdRpFjNoVE"];
         [configuration setClientKey:@"QiK7CN2M6Yh86Kn9FMLk8OBO0uHV9Icg0ryxrc11"];
