@@ -441,7 +441,7 @@ NSString *const TO_USER = @"toUser";
         coreDataCondition.notes = condition.notes;
         coreDataCondition.optionSelectedIndex = [NSNumber numberWithInteger:condition.pickerSelection];
         coreDataCondition.optionSelected = condition.deficientPart;
-        coreDataCondition.optionLocation = [NSNumber numberWithInteger:*(condition.optionLocation)];
+        coreDataCondition.optionLocation = [NSNumber numberWithInteger:condition.optionLocation];
         coreDataCondition.hoistSrl = crane.hoistSrl;
     }
     

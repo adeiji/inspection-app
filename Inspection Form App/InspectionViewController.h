@@ -20,11 +20,11 @@
     int timesShown;
     BOOL pageSubmitAlertView;
     BOOL inspectionComplete;
-    BOOL loadRatings;
-    BOOL remarksLimitations;
+    NSString* loadRatings;
+    NSString* remarksLimitations;
     BOOL finished;
-    BOOL proofLoad;
-    BOOL testLoad;
+    NSString* proofLoad;
+    NSString* testLoad;
     BOOL proofLoadDescription;
     Inspection *inspection;    
     NSString *overallRating;

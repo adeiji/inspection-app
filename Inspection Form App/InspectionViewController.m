@@ -25,6 +25,8 @@
 
 @end
 
+NSString *const LOAD_RATINGS = @"loadRatings", *REMARKS_LIMITATIONS = @"remarksLimitations", *PROOF_LOAD = @"proofLoad", *TEST_LOAD = @"testLoad";
+
 @implementation InspectionViewController
 
 
@@ -324,17 +326,7 @@
                                      titleForRow:selectedRow
                                      forComponent:0]).name;
         
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Overall Rating" message:@"What is the overall condition rating?" preferredStyle:UIAlertControllerStyleAlert];
-        
-        UIAlertView *alert = [[UIAlertView alloc]
-                              initWithTitle:@"Overall Rating"
-                              message:@"What is the overall condition rating?"
-                              delegate:self
-                              cancelButtonTitle:@"Cancel"
-                              otherButtonTitles:@"ok", nil];
-        [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
-        [alert show];
-        [alert becomeFirstResponder];
+        [self showGetOverallRatingController];
         
         pageSubmitAlertView = YES;
         
@@ -355,150 +347,112 @@
     }
 }
 
-- (void) getOverallRatingAndShowPDFWithTextField : (UITextField *) textField {
+// prompt the user to get the overall rating of the inspected crane
+- (void) showGetOverallRatingController {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Overall Rating" message:@"What is the overall condition rating?" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *setOverallRatingAction = [UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        UITextField *overallRatingTextField = alertController.textFields[0];
+        overallRating = overallRatingTextField.text;
+        
+        if ([overallRatingTextField.text intValue] < 3) {
+            [self showTestLoadsPrompt];
+        }
+    }];
     
-    if (([textField.text intValue]<0 || [textField.text intValue]>5) && (loadRatings == NO && testLoad == NO && remarksLimitations == NO && finished == NO && proofLoad == NO))
-    {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Incorrect Input" message:@"You must enter a number between 1 and 5" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
-        [alert show];
-        [alert becomeFirstResponder];
-        overallRating = @"";
-    }
-    //if this is the overall rating box and its a number between 1 and 5
-    else {
-        overallRating = textField.text;
-        
-        //convert overall rating to int and then if it's less then 3 then we ask three more questions
-        if ([overallRating intValue] < 3)
-        {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Test Loads?" message:@"Is This a Test Load?" delegate:self cancelButtonTitle:@"NO" otherButtonTitles:@"YES", nil];
-            [alert show];
-            [alert becomeFirstResponder];
-            testLoad = YES;
-            _createCertificateButton.enabled = TRUE;
-        }
-        else {
-            _createCertificateButton.enabled = FALSE;
-            [PDFGenerator writeReport:inspection.itemList Inspection:inspection OverallRating:overallRating PartsArray:_partsArray];
-            UIDocumentInteractionController *pdfViewController = [PDFGenerator DisplayPDFWithOverallRating:inspection];
-            pdfViewController.delegate = self;
-            [pdfViewController presentPreviewAnimated:NO];
-            // Save everything that has been created
-        }
-    }
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+    
+    [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        textField.placeholder = @"Overall Rating";
+        [[NSNotificationCenter defaultCenter] addObserverForName:UITextFieldTextDidChangeNotification object:textField queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
+            if ([textField.text intValue] > 0 && [textField.text intValue] < 5) {
+                setOverallRatingAction.enabled = true;
+                NSLog(@"Text Field Update Detected");
+            } else if ([textField.text intValue] < 0 || [textField.text intValue] > 5) {
+                setOverallRatingAction.enabled = false;
+            }
+        }];
+    }];
+    
+    setOverallRatingAction.enabled = false;
+    [alertController addAction:setOverallRatingAction];
+    [alertController addAction:cancel];
+    [self presentViewController:alertController animated:true completion:nil];
 }
 
-
-- (void) getFinalNecessaryAttributesWithTextField : (UITextField *) textField {
-    if (proofLoad == YES)
-    {
-//        testLoad = textField.text;
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Proof Load Description" message:@"Description of Proof Load" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
-        [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
-        [alert show];
-        [alert becomeFirstResponder];
-        loadRatings = YES;
-        proofLoad = NO;
-        testLoad = textField.text;
-        inspection.testLoad = textField.text;
-    }
-    else if (loadRatings == YES)
-    {
-        proofLoadDescription = textField.text;
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Load Ratings" message:@"Basis for assigned load ratings" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
-        [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
-        [alert show];
-        [alert becomeFirstResponder];
-        remarksLimitations = YES;
-        loadRatings = NO;
-        inspection.proofLoad = textField.text;
-
-    }
-    else if (remarksLimitations == YES)
-    {
-        loadRatings = textField.text;
-        UIAlertView *alert;
-        if (![_craneType isEqualToString:ELECTRIC_HOIST])
-        {
-            alert = [[UIAlertView alloc] initWithTitle:@"Remarks Limitations" message:@"Remarks and/or Limitations Imposed" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
-        }
-        else {
-            alert = [[UIAlertView alloc] initWithTitle:@"Slip Test" message:@"What did Hoist Slip At?" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
-        }
-        
-        [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
-        [alert show];
-        [alert becomeFirstResponder];
-        remarksLimitations = NO;
-        finished = YES;
-        inspection.loadRatings = textField.text;
-    }
-    else if (finished == YES)
-    {
-        remarksLimitations = textField.text;
-        inspection.remarksLimitations = textField.text;
-        finished = NO;
-        [PDFGenerator writeReport:inspection.itemList Inspection:inspection OverallRating:overallRating PartsArray:_partsArray];
-        UIDocumentInteractionController *pdfViewController = [PDFGenerator DisplayPDFWithOverallRating:inspection];
-        pdfViewController.delegate = self;
-        [pdfViewController presentPreviewAnimated:NO];
-        // Save everything that has been created
-        
-        _createCertificateButton.enabled = TRUE;
-    }
+// Prompt the user if this specific inspection is a test loads
+- (void) showTestLoadsPrompt {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Test Loads?" message:@"Is This a Test Load?" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *yesAction = [UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self getTestLoads];
+    }];
+    UIAlertAction *noAction = [UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self displayInspectionResultsPDFWithShouldEnableCertificateButton:true];
+    }];
+    
+    [alertController addAction:yesAction];
+    [alertController addAction:noAction];
+    [self presentViewController:alertController animated:true completion:nil];
 }
 
-#pragma mark - Alert View Methods
-- (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+// Prompt the user to enter the test loads
+- (void) getTestLoads {
+    [self promptForTestLoadInformationWithTitle:@"Test Loads Applied" Message:@"Enter the test loads applied" Placeholder:@"Enter Test Loads Applied" LoadSection:TEST_LOAD];
+}
+
+// Prompt the user to enter the proof loads
+- (void) promptForTestLoadInformationWithTitle : (NSString *) title
+                                       Message : (NSString *) message
+                                   Placeholder : (NSString *) placeholder
+                                   LoadSection : (NSString *) loadSection
 {
-    if ((buttonIndex!=0 || loadRatings == YES || remarksLimitations == YES || finished == YES || proofLoad == YES) || (buttonIndex == 1 && testLoad == YES))
-    {
-        UITextField *textField;
-        if (alertView.alertViewStyle == UIAlertViewStylePlainTextInput)
-        {
-            textField = [alertView textFieldAtIndex:0];
-        }
-        //if this is the alertbox for when you submit the form
-        if (pageSubmitAlertView == YES) {
-            //first we check to see if we are at the testLoad box
-            if (loadRatings == NO && testLoad == NO && remarksLimitations == NO && finished == NO && proofLoad == NO)
-            {
-                //check to see if this is a number
-                if ([[NSScanner scannerWithString:textField.text] scanFloat:NULL])
-                {
-                    [self getOverallRatingAndShowPDFWithTextField:textField];
-                }
-                else {//if the overall rating was inputed as greater then 5 or less than 1, or if it was not an integer
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Incorrect Input" message:@"You must enter a number between 1 and 5" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
-                    [alert show];
-                    [alert becomeFirstResponder];
-                    overallRating = @"";
-                }
-            }
-            else if (pageSubmitAlertView==YES && testLoad == YES) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Applied Test Loads" message:@"Test Loads Applied" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
-                [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
-                [alert show];
-                [alert becomeFirstResponder];
-                proofLoad = YES;
-                testLoad = NO;
-            }
-
-            else {//here is where we start displaying the Alert Boxes which will ask questions about for the Certficate
-                [self getFinalNecessaryAttributesWithTextField:textField];
-            }
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        textField.placeholder = placeholder;
+    }];
+    
+    UIAlertAction *okayAction = [UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        UITextField *proofLoadTextField = alertController.textFields[0];
+        if ([loadSection isEqual:PROOF_LOAD]) {
+            proofLoad = proofLoadTextField.text;
+            inspection.proofLoad = proofLoadTextField.text;
+            [self promptForTestLoadInformationWithTitle:@"Load Ratings" Message:@"Basis for assigned load ratings" Placeholder:@"Enter Basis for assigned load ratings" LoadSection:LOAD_RATINGS];
             
-                    }
-    }//if the cancel button is pressed and we are in the midst of asking the questions for the certificate
-    else if (buttonIndex ==0 && testLoad == YES)
-    {
-        [PDFGenerator writeReport:inspection.itemList Inspection:inspection OverallRating:overallRating PartsArray:_partsArray];
-        UIDocumentInteractionController *pdfViewController = [PDFGenerator DisplayPDFWithOverallRating:inspection];
-        pdfViewController.delegate = self;
-        [pdfViewController presentPreviewAnimated:NO];
-        // Save everything that has been created
-    }
+        } else if ([loadSection isEqual:TEST_LOAD]) {
+            testLoad = proofLoadTextField.text;
+            inspection.testLoad = proofLoadTextField.text;
+            [self promptForTestLoadInformationWithTitle:@"Proof Load" Message:@"Proof Load Description" Placeholder:@"Enter Proof Load Description" LoadSection:PROOF_LOAD];
+        } else if ([loadSection isEqual:LOAD_RATINGS]) {
+            loadRatings = proofLoadTextField.text;
+            inspection.loadRatings = proofLoadTextField.text;
+            if (![_craneType isEqualToString:ELECTRIC_HOIST])
+            {
+                [self promptForTestLoadInformationWithTitle:@"Remarks Limitations" Message:@"Remarks and/or Limitations Imposed" Placeholder:@"Enter limitations imposed" LoadSection:REMARKS_LIMITATIONS];
+            }
+            else {
+                [self promptForTestLoadInformationWithTitle:@"Slip Test" Message:@"What did hoist Slip At?" Placeholder:@"Hoist slipped at?" LoadSection:REMARKS_LIMITATIONS];
+            }
+        } else if ([loadSection isEqual:REMARKS_LIMITATIONS]) {
+            remarksLimitations = proofLoadTextField.text;
+            inspection.remarksLimitations = proofLoadTextField.text;
+            [self displayInspectionResultsPDFWithShouldEnableCertificateButton:true];
+        }
+        
+    }];
+    
+    [alertController addAction:okayAction];
+    [self presentViewController:alertController animated:true completion:nil];
 }
+
+- (void) displayInspectionResultsPDFWithShouldEnableCertificateButton : (BOOL) enabled {
+    _createCertificateButton.enabled = enabled;
+    [PDFGenerator writeReport:inspection.itemList Inspection:inspection OverallRating:overallRating PartsArray:_partsArray];
+    UIDocumentInteractionController *pdfViewController = [PDFGenerator DisplayPDFWithOverallRating:inspection];
+    pdfViewController.delegate = self;
+    [pdfViewController presentPreviewAnimated:NO];
+    // Save everything that has been created
+}
+
 
 #pragma mark - Outlet methods
 

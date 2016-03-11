@@ -223,14 +223,16 @@ static NSString *const OPTIONS = @"options";
         [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_HOISTSRL_SELECTED object:nil userInfo:@{ kSelectedInspectedCrane : crane }];
         UINavigationController *navigationController = [self.splitViewController.viewControllers objectAtIndex:1] ;
         
-        ViewController *vc = [navigationController.viewControllers objectAtIndex:1];
-        [vc resetInspectionWithCrane:inspectionCrane];
+        if ([navigationController.viewControllers count] > 1) {
+            ViewController *vc = [navigationController.viewControllers objectAtIndex:1];
+            [vc resetInspectionWithCrane:inspectionCrane];
+        }
     }
 }
 
 - (void) handleOptionSelectedAtIndexPath : (NSIndexPath *) indexPath {
     UINavigationController *navigationController = [self.splitViewController.viewControllers objectAtIndex:1] ;
-    ViewController *vc = [navigationController.viewControllers objectAtIndex:0];
+    ViewController *vc = [navigationController.viewControllers objectAtIndex:1];
     
     //Push the InspectionViewController ontop of the stack.
     if (![vc.navigationController.viewControllers containsObject:vc.inspectionViewController])
