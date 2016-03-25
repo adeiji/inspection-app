@@ -46,6 +46,11 @@
         UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
         UINavigationController *navigationController = [splitViewController.viewControllers lastObject];
         
+        if ([[[IACraneInspectionDetailsManager sharedManager] cranes] count] == 0 ) {
+            FirstTimeOpeningViewController *viewController = [[FirstTimeOpeningViewController alloc] initWithNibName:@"FirstTimeOpeningViewController" bundle:nil];
+            [navigationController pushViewController:viewController animated:true];
+        }
+        
         if ([PFUser currentUser] != nil ) {
             splitViewController.delegate = (id)navigationController.topViewController;
         }

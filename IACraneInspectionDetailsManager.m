@@ -578,6 +578,11 @@ NSString *const TO_USER = @"toUser";
     
     [PFObject saveAllInBackground:pfInspectionDetailsObjects block:^(BOOL succeeded, NSError * _Nullable error) {
         if (succeeded && !error) {
+//            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Successful" message:@"Inspection Was Sent Successfully" preferredStyle:UIAlertControllerStyleAlert];
+//            UIAlertAction *okayAction = [UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleDefault handler:nil];
+//            
+//            [alertController addAction:okayAction];
+            
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Successful" message:@"Inspection Was Sent Successfully" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [alert show];
         }

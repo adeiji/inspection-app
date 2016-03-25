@@ -71,7 +71,9 @@ static NSString *const OPTIONS = @"options";
     
     UINavigationController *navigationController = [self.splitViewController.viewControllers objectAtIndex:1] ;
     ViewController *viewController = [navigationController.viewControllers objectAtIndex:0];
-    viewController.btnSync.enabled = YES;
+    if (viewController.btnSync) {
+        viewController.btnSync.enabled = YES;
+    }
 }
 
 - (void) setObservers {
@@ -104,7 +106,10 @@ static NSString *const OPTIONS = @"options";
     if (!level)
     {
         UINavigationController *navigationController = [self.splitViewController.viewControllers objectAtIndex:1] ;
-        [navigationController popToRootViewControllerAnimated:YES];
+        if ([navigationController.viewControllers count] > 1) {
+            UIViewController *viewController = [navigationController.viewControllers objectAtIndex:1];
+            [navigationController popToViewController:viewController animated:true];
+        }
     }
 }
 

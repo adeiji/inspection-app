@@ -65,6 +65,8 @@
 		F43E74951C877F3A0045E5F1 /* PFCustomer.m in Sources */ = {isa = PBXBuildFile; fileRef = F43E74941C877F3A0045E5F1 /* PFCustomer.m */; };
 		F43E74991C8A071B0045E5F1 /* AccountTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F43E74981C8A071B0045E5F1 /* AccountTableViewController.m */; };
 		F43E749E1C90E9560045E5F1 /* MainPageTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F43E749D1C90E9560045E5F1 /* MainPageTableViewController.m */; };
+		F43E74A41CA5C0940045E5F1 /* FirstTimeOpeningViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F43E74A21CA5C0940045E5F1 /* FirstTimeOpeningViewController.m */; };
+		F43E74A51CA5C0940045E5F1 /* FirstTimeOpeningViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F43E74A31CA5C0940045E5F1 /* FirstTimeOpeningViewController.xib */; };
 		F453A3B21AD43E3B00319D7A /* InspectionModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F453A3B01AD43E3B00319D7A /* InspectionModel.xcdatamodeld */; };
 		F453A3B51AD43FB200319D7A /* Customer.m in Sources */ = {isa = PBXBuildFile; fileRef = F453A3B41AD43FB200319D7A /* Customer.m */; };
 		F49DDEA71ACCC60C00A02162 /* SyncManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F49DDEA61ACCC60C00A02162 /* SyncManager.m */; };
@@ -189,6 +191,9 @@
 		F43E74981C8A071B0045E5F1 /* AccountTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountTableViewController.m; sourceTree = "<group>"; };
 		F43E749C1C90E9560045E5F1 /* MainPageTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainPageTableViewController.h; sourceTree = "<group>"; };
 		F43E749D1C90E9560045E5F1 /* MainPageTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainPageTableViewController.m; sourceTree = "<group>"; };
+		F43E74A11CA5C0940045E5F1 /* FirstTimeOpeningViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstTimeOpeningViewController.h; sourceTree = "<group>"; };
+		F43E74A21CA5C0940045E5F1 /* FirstTimeOpeningViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstTimeOpeningViewController.m; sourceTree = "<group>"; };
+		F43E74A31CA5C0940045E5F1 /* FirstTimeOpeningViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FirstTimeOpeningViewController.xib; sourceTree = "<group>"; };
 		F453A3B11AD43E3B00319D7A /* InspectionModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = InspectionModel.xcdatamodel; sourceTree = "<group>"; };
 		F453A3B31AD43FB200319D7A /* Customer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Customer.h; sourceTree = "<group>"; };
 		F453A3B41AD43FB200319D7A /* Customer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Customer.m; sourceTree = "<group>"; };
@@ -399,6 +404,9 @@
 			children = (
 				F43E749B1C90E92D0045E5F1 /* Main Page Table View Controller */,
 				CE486AE3180F1E2F00B1B953 /* Inspection View Controller */,
+				F43E74A11CA5C0940045E5F1 /* FirstTimeOpeningViewController.h */,
+				F43E74A21CA5C0940045E5F1 /* FirstTimeOpeningViewController.m */,
+				F43E74A31CA5C0940045E5F1 /* FirstTimeOpeningViewController.xib */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -771,6 +779,7 @@
 				8B6BA1841708BF1B00E08D9D /* t1_logo.png in Resources */,
 				CE9A27381716A63200FE3D32 /* ipadAppLogo.jpg in Resources */,
 				F4FBDADE1AD78B530090DA72 /* PromptView.xib in Resources */,
+				F43E74A51CA5C0940045E5F1 /* FirstTimeOpeningViewController.xib in Resources */,
 				F423A8C91C7BA24C00899B6E /* LoginView.xib in Resources */,
 				CE9A273C1716A70E00FE3D32 /* titlePageLogo.jpg in Resources */,
 				CEFD6D2D1839575E001764E9 /* CraneView.xib in Resources */,
@@ -862,6 +871,7 @@
 				F423A8D61C7BA90900899B6E /* LoginViewController.m in Sources */,
 				8BC58463150ABD87000AC695 /* AppDelegate.m in Sources */,
 				CE40D39A180894300080E9BD /* PDFGenerator.m in Sources */,
+				F43E74A41CA5C0940045E5F1 /* FirstTimeOpeningViewController.m in Sources */,
 				8BC58466150ABD87000AC695 /* ViewController.m in Sources */,
 				F43E748F1C8745810045E5F1 /* PFInspectionDetails.m in Sources */,
 				F49DDED91ACCED1600A02162 /* InspectionCrane.m in Sources */,
