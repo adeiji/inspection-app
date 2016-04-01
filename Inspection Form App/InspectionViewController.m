@@ -27,6 +27,7 @@
 
 NSString *const LOAD_RATINGS = @"loadRatings", *REMARKS_LIMITATIONS = @"remarksLimitations", *PROOF_LOAD = @"proofLoad", *TEST_LOAD = @"testLoad";
 
+
 @implementation InspectionViewController
 
 
@@ -117,13 +118,17 @@ NSString *const LOAD_RATINGS = @"loadRatings", *REMARKS_LIMITATIONS = @"remarksL
     [_deficiencySwitch setOn:myCondition.deficient];
     [_applicableSwitch setOn:myCondition.applicable];
     [self promptCancelPressed:nil];
-    if ([point.prompts count] > 0) {
+    
+    if (self.navigationController.topViewController == self) {
+        if ([point.prompts count] > 0) {
 
-        [self displayPromptViewWithPrompts:[point.prompts array]];
-        promptView.promptLocation = 0;
-        Prompt *prompt = promptView.prompts[promptView.promptLocation];
-        promptView.lblPromptText.text = prompt.title;
+            [self displayPromptViewWithPrompts:[point.prompts array]];
+            promptView.promptLocation = 0;
+            Prompt *prompt = promptView.prompts[promptView.promptLocation];
+            promptView.lblPromptText.text = prompt.title;
+        }
     }
+    
     
     [self setDeficiencyViews];
 }
@@ -147,7 +152,9 @@ NSString *const LOAD_RATINGS = @"loadRatings", *REMARKS_LIMITATIONS = @"remarksL
     [[NSNotificationCenter defaultCenter] postNotificationName:UI_PROMPT_SHOWN object:nil];
     [self disableSwiping];
     
-    [self.view addSubview:promptView];
+    if (promptView.superview == nil) {
+        [self.view addSubview:promptView];
+    }
     [promptView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.view);
         make.centerY.equalTo(self.view).with.offset(-200);

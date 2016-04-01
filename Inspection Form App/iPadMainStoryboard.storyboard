@@ -45,10 +45,27 @@
                                     <outlet property="delegate" destination="Xka-tb-UFw" id="r3e-hd-GYt"/>
                                 </connections>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8zg-hu-er0">
+                                <rect key="frame" x="277" y="116" width="215" height="46"/>
+                                <color key="backgroundColor" red="0.0" green="0.67450980390000004" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="46" id="3k7-NA-eZP"/>
+                                    <constraint firstAttribute="width" constant="215" id="Les-wP-j9A"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                <state key="normal" title="Download Inspection Details">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="downloadInspectionDetailsButtonPressed:" destination="Xka-tb-UFw" eventType="touchUpInside" id="6iX-hQ-SwJ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="SWd-yx-HAx" firstAttribute="leading" secondItem="2ir-ZG-aeV" secondAttribute="leadingMargin" constant="-20" id="AjD-R3-8wq"/>
+                            <constraint firstItem="SWd-yx-HAx" firstAttribute="top" secondItem="8zg-hu-er0" secondAttribute="bottom" constant="23" id="HNX-yS-ATC"/>
+                            <constraint firstItem="8zg-hu-er0" firstAttribute="centerX" secondItem="2ir-ZG-aeV" secondAttribute="centerX" id="TSD-OJ-RJo"/>
                             <constraint firstAttribute="trailingMargin" secondItem="SWd-yx-HAx" secondAttribute="trailing" constant="-20" id="Wab-oM-Dve"/>
                             <constraint firstItem="14F-cg-rFy" firstAttribute="top" secondItem="SWd-yx-HAx" secondAttribute="bottom" id="XDm-5v-ZHm"/>
                             <constraint firstItem="SWd-yx-HAx" firstAttribute="top" secondItem="rdR-zB-A30" secondAttribute="bottom" constant="165" id="l8n-Iz-4da"/>
@@ -786,7 +803,7 @@
                         <viewControllerLayoutGuide type="top" id="qi5-KT-Q3O"/>
                         <viewControllerLayoutGuide type="bottom" id="Udz-Xl-Khk"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="FK9-Lc-U88">
+                    <view key="view" tag="25" contentMode="scaleToFill" id="FK9-Lc-U88">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
                         <subviews>

@@ -18,6 +18,11 @@
     [super viewDidLoad];
     _cranes = [[IACraneInspectionDetailsManager sharedManager] cranes];
     [_tableView setSeparatorColor:[UIColor clearColor]];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshTableView) name:NOTIFICATION_CRANE_DETAILS_FINISHED_SAVING object:nil];
+}
+
+- (void) refreshTableView {
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -69,4 +74,7 @@
     [self.navigationController pushViewController:viewController animated:true];
 }
 
+- (IBAction)downloadInspectionDetailsButtonPressed:(id)sender {
+    [SyncManager getAllInspectionDetails];
+}
 @end

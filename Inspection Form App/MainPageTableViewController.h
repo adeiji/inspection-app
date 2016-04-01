@@ -8,10 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "IACraneInspectionDetailsManager.h"
+#import "SyncManager.h"
+#import "IAConstants.h"
 
 @interface MainPageTableViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 @property (strong, nonatomic) NSArray *cranes;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+
+- (IBAction)downloadInspectionDetailsButtonPressed:(id)sender;
 
 @end

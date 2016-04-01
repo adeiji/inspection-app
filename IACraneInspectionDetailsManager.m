@@ -228,9 +228,11 @@ NSString *const TO_USER = @"toUser";
         }
         
         [self loadAllInspectionDetails];
-        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CRANE_DETAILS_FINISHED_SAVING object:nil];
-        NSLog(@"%@ sent", NOTIFICATION_CRANE_DETAILS_FINISHED_SAVING);
         dispatch_async(dispatch_get_main_queue(), ^{
+            // Notify app that the data is finished being downloaded
+            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CRANE_DETAILS_FINISHED_SAVING object:nil];
+            NSLog(@"%@ sent", NOTIFICATION_CRANE_DETAILS_FINISHED_SAVING);
+
             [[progressIndicatorView superview] removeFromSuperview];
         });
     });
