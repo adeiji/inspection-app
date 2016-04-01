@@ -29,9 +29,22 @@ NSString *const TO_USER = @"toUser";
     {
         _cranes = [NSMutableArray new];
         _context = ((AppDelegate *) [[UIApplication sharedApplication] delegate]).managedObjectContext;
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(managedObjectContextChanged:) name:NSManagedObjectContextObjectsDidChangeNotification object:_context];
     }
     
     return self;
+}
+
+- (void) managedObjectContextChanged:(NSNotification *) note {
+    NSSet *updatedObjects = [[note userInfo] objectForKey:NSUpdatedObjectsKey];
+    NSSet *deletedObjects = [[note userInfo] objectForKey:NSDeletedObjectsKey];
+    NSSet *insertedObjects = [[note userInfo] objectForKey:NSInsertedObjectsKey];
+    
+
+    NSLog(@"%@ Updated Objects", updatedObjects);
+    NSLog(@"%@ Deleted Objects", deletedObjects);
+    NSLog(@"%@ Inserted Objects", insertedObjects);
+    
 }
 
 - (UIView *) showDownloadProgressBar {
@@ -48,12 +61,29 @@ NSString *const TO_USER = @"toUser";
     return view;
 }
 
-/*
- 
- Store all the cranes, and their inspection details to the database
- 
- */
-- (void) saveInspectionDetailsWithCranes : (NSArray *) cranes {
+- (InspectionPoint *) saveInspectionPoint : (NSManagedObjectContext *) context
+            InspectionPoints : (NSMutableArray *) inspectionPoints
+             InspectionPoint : (id) inspectionPoint
+{
+    NSError *error;
+    PFObject *inspectionPointParseObject = (PFObject *) inspectionPoint;
+    [inspectionPointParseObject fetch:&error];
+    // Create Core Data objects for all the inspcetion points
+    NSEntityDescription *entity = [NSEntityDescription entityForName:kCoreDataClassInspectionPoint inManagedObjectContext:context];
+    InspectionPoint *inspectionPointObject = [[InspectionPoint alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
+    inspectionPointObject.name = [inspectionPointParseObject objectForKey:kObjectName];
+    [inspectionPoints addObject:inspectionPointObject];
+    
+    if (![context save:&error]) {
+        NSLog(@"com.inspectionapp.coredata - Error saving the inspection point");
+    } else {
+        NSLog(@"com.inspectionapp.coredata - Successfully saved the inspection point");
+    }
+    
+    return inspectionPointObject;
+}
+
+- (UIProgressView *) displayProgressBar {
     UIView *progressContainerView = [self showDownloadProgressBar];
     UIProgressView *progressIndicatorView;
     for (UIView *subview in [progressContainerView subviews]) {
@@ -63,87 +93,136 @@ NSString *const TO_USER = @"toUser";
         }
     }
     
+    return progressIndicatorView;
+}
+
+- (NSMutableArray *) saveOptionsForInspectionPoint : (id) inspectionPoint
+                NSManagedObjectContext : (NSManagedObjectContext *) context
+                 InspectionPointObject : (InspectionPoint *) inspectionPointObject
+{
+    NSMutableArray *options = [NSMutableArray new];
+    
+    NSMutableSet *set = [NSMutableSet new];
+    PFObject *inspectionPointParseObject = (PFObject *) inspectionPoint;
+    NSArray *optionsArray = [inspectionPointParseObject objectForKey:kOptions];
+    [set addObjectsFromArray:optionsArray];
+    
+    for (id option in inspectionPoint[kOptions]) {
+        PFObject *optionParseObject = (PFObject *) option;
+        [optionParseObject fetchIfNeeded];
+        NSEntityDescription *entity = [NSEntityDescription entityForName:kCoreDataClassInspectionOption inManagedObjectContext:context];
+        InspectionOption *inspectionOptionObject = [[InspectionOption alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
+        inspectionOptionObject.name = [optionParseObject objectForKey:kObjectName];
+        [options addObject:inspectionOptionObject];
+        [inspectionOptionObject setInspectionPoint:inspectionPointObject];
+    }
+    
+    inspectionPointObject.inspectionOptions = [NSOrderedSet orderedSetWithArray:options];
+
+    NSError *error;
+    if (![context save:&error]) {
+        NSLog(@"com.inspectionapp.coredata - Error saving the context for options");
+    } else {
+        NSLog(@"com.inspectionapp.coredata - Successfully saved the option");
+    }
+    
+    return options;
+}
+
+- (NSMutableArray *) savePromptsForInspectionPoint : (id) inspectionPoint
+                NSManagedObjectContext : (NSManagedObjectContext *) context
+                 InspectionPointObject : (InspectionPoint *) inspectionPointObject
+{
+    NSMutableArray *prompts = [NSMutableArray new];
+    
+    for (id promptObject in inspectionPoint[kPrompts])
+    {
+        NSEntityDescription *entity = [NSEntityDescription entityForName:kCoreDataClassPrompt inManagedObjectContext:context];
+        Prompt *prompt = [[Prompt alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
+        
+        // In the previous version of this application, Prompt Objects had a name attribute, now they're stored as simply strings.  So we need to check if it contains one or not
+        if ([promptObject respondsToSelector:@selector(objectForKey:)] ) {
+            prompt.title = promptObject[kObjectName];
+            
+            if (promptObject[kRequiresDeficiency])
+            {
+                prompt.requiresDeficiency = [NSNumber numberWithBool:YES];
+            }
+            else {
+                prompt.requiresDeficiency = [NSNumber numberWithBool:NO];
+            }
+        }
+        else {
+            prompt.title = promptObject;
+            prompt.requiresDeficiency = [NSNumber numberWithBool:NO];
+        }
+        
+        prompt.inspectionPoint = inspectionPointObject;
+        [prompts addObject:prompt];
+    }
+    
+    if ([prompts count] > 0)
+    {
+        [inspectionPointObject setPrompts:[NSOrderedSet orderedSetWithArray:prompts]];
+    }
+    
+    NSError *error;
+    if (![context save:&error]) {
+        NSLog(@"com.inspectionapp.coredata - Error saving the prompts");
+    }
+    
+    return prompts;
+}
+
+/*
+ 
+ Store all the cranes, and their inspection details to the database
+ 
+ */
+- (void) saveInspectionDetailsWithCranes : (NSArray *) cranes {
+
+    UIProgressView *progressIndicatorView = [self displayProgressBar];
     [self resetInspectionDetailsDatabase];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-//        NSManagedObjectContext *context =  ((AppDelegate *)[ [UIApplication sharedApplication] delegate]).managedObjectContext;
-        NSManagedObjectContext *context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
+        NSManagedObjectContext *context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
         [context setPersistentStoreCoordinator:(((AppDelegate *)[ [UIApplication sharedApplication] delegate]).managedObjectContext).persistentStoreCoordinator];
         NSMutableArray *cranesArray = [NSMutableArray new];
         NSEntityDescription *entity = [NSEntityDescription entityForName:kCoreDataClassCrane inManagedObjectContext:context];
         NSError *error;
         /* Get every crane that we just received from the server and grab all it's subdocuments and store them into coredata */
         for (id crane in cranes) {
+            
             InspectionCrane *craneObject = [[InspectionCrane alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
             craneObject.name = [crane objectForKey:kObjectName];
             // Convert the Parse Crane Object into a Core Data Object
-            NSSet *set = [[NSSet alloc] init];
-            [set setByAddingObjectsFromArray:[crane objectForKey:kInspectionPoints]];
+            NSSet *inspectionPointsSet = [[NSSet alloc] init];
+            [inspectionPointsSet setByAddingObjectsFromArray:[crane objectForKey:kInspectionPoints]];
             NSMutableArray *inspectionPoints = [NSMutableArray new];
             
             for (id inspectionPoint in crane[kInspectionPoints]) {
-                PFObject *inspectionPointParseObject = (PFObject *) inspectionPoint;
-                [inspectionPointParseObject fetch:&error];
-                // Create Core Data objects for all the inspcetion points
-                NSEntityDescription *entity = [NSEntityDescription entityForName:kCoreDataClassInspectionPoint inManagedObjectContext:context];
-                InspectionPoint *inspectionPointObject = [[InspectionPoint alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
-                inspectionPointObject.name = [inspectionPointParseObject objectForKey:kObjectName];
-                [set setByAddingObjectsFromArray:[inspectionPointParseObject objectForKey:kOptions]];
-                inspectionPointObject.inspectionOptions = [NSOrderedSet orderedSetWithSet:set];
-                [inspectionPoints addObject:inspectionPointObject];
+                InspectionPoint *inspectionPointObject = [self saveInspectionPoint:context InspectionPoints:inspectionPoints InspectionPoint:inspectionPoint];
                 
-                NSMutableArray *options = [NSMutableArray new];
-                
-                for (id option in inspectionPoint[kOptions]) {
-                    PFObject *optionParseObject = (PFObject *) option;
-                    [optionParseObject fetchIfNeeded];
-                    NSEntityDescription *entity = [NSEntityDescription entityForName:kCoreDataClassInspectionOption inManagedObjectContext:context];
-                    InspectionOption *inspectionOptionObject = [[InspectionOption alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
-                    inspectionOptionObject.name = [optionParseObject objectForKey:kObjectName];
-                    [options addObject:inspectionOptionObject];
-                    [inspectionOptionObject setInspectionPoint:inspectionPointObject];
-                }
-                
-                NSMutableArray *prompts = [NSMutableArray new];
-                
-                for (id promptObject in inspectionPoint[kPrompts])
-                {
-                    NSEntityDescription *entity = [NSEntityDescription entityForName:kCoreDataClassPrompt inManagedObjectContext:context];
-                    Prompt *prompt = [[Prompt alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
-                    prompt.title = promptObject[kObjectName];
-                    prompt.inspectionPoint = inspectionPointObject;
-                    
-                    if (promptObject[kRequiresDeficiency])
-                    {
-                        prompt.requiresDeficiency = [NSNumber numberWithBool:YES];
-                    }
-                    else {
-                        prompt.requiresDeficiency = [NSNumber numberWithBool:NO];
-                    }
-                    
-                    [prompts addObject:prompt];
-                }
-                
-                if ([prompts count] > 0)
-                {
-                    [inspectionPointObject setPrompts:[NSOrderedSet orderedSetWithArray:prompts]];
-                }
-                
+                NSMutableArray *options = [self saveOptionsForInspectionPoint:inspectionPoint NSManagedObjectContext:context InspectionPointObject:inspectionPointObject];
+                [self savePromptsForInspectionPoint:inspectionPoint NSManagedObjectContext:context InspectionPointObject:inspectionPointObject];
                 [inspectionPointObject setInspectionOptions:[NSOrderedSet orderedSetWithArray:options]];
                 [inspectionPointObject setInspectionCrane:craneObject];
+                
                 double progressToChange = (1.0f/cranes.count);
                 dispatch_async(dispatch_get_main_queue(), ^{
                     progressIndicatorView.progress += progressToChange / [crane[kInspectionPoints] count];
                 });
+                
             }
+            
             [craneObject setInspectionPoints:[NSOrderedSet orderedSetWithArray:inspectionPoints]];
             [cranesArray addObject:craneObject];
-
+            
         }
 
         [self saveAllWaterDistrictCranesWithContext : context];
         
-        if ([context save:&error])
+        if (![context save:&error])
         {
             NSLog(@"com.inspectionapp.coredata - Error saving water district cranes");
         }
@@ -152,7 +231,7 @@ NSString *const TO_USER = @"toUser";
         [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CRANE_DETAILS_FINISHED_SAVING object:nil];
         NSLog(@"%@ sent", NOTIFICATION_CRANE_DETAILS_FINISHED_SAVING);
         dispatch_async(dispatch_get_main_queue(), ^{
-            [progressContainerView removeFromSuperview];
+            [[progressIndicatorView superview] removeFromSuperview];
         });
     });
 }
@@ -197,7 +276,7 @@ NSString *const TO_USER = @"toUser";
     }
     
     NSError *error;
-    if ([context save:&error])
+    if (![context save:&error])
     {
         NSLog(@"com.inspectionapp.coredata - Error saving water district cranes: \n%@", [error description]);
     }
@@ -229,6 +308,7 @@ NSString *const TO_USER = @"toUser";
     [self deleteAllWaterDistrictCustomersWithContext:context];
     
     NSError *error;
+    
     if ([context save:&error])
     {
         NSLog(@"com.inspectionapp.coredata - Error saving water district cranes: \n%@", [error description]);

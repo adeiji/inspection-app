@@ -71,9 +71,10 @@ static NSString *const OPTIONS = @"options";
     
     UINavigationController *navigationController = [self.splitViewController.viewControllers objectAtIndex:1] ;
     ViewController *viewController = [navigationController.viewControllers objectAtIndex:0];
-    if (viewController.btnSync) {
-        viewController.btnSync.enabled = YES;
-    }
+
+//    if (viewController.btnSync) {
+//        viewController.btnSync.enabled = YES;
+//    }
 }
 
 - (void) setObservers {
