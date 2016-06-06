@@ -238,15 +238,10 @@ static NSString *const OPTIONS = @"options";
 
 - (void) handleOptionSelectedAtIndexPath : (NSIndexPath *) indexPath {
     UINavigationController *navigationController = [self.splitViewController.viewControllers objectAtIndex:1] ;
-    ViewController *vc = [navigationController.viewControllers objectAtIndex:1];
+    InspectionViewController *inspectionViewController = [navigationController.viewControllers objectAtIndex:1];
     
-    //Push the InspectionViewController ontop of the stack.
-    if (![vc.navigationController.viewControllers containsObject:vc.inspectionViewController])
-    {
-        [vc.navigationController pushViewController:vc.inspectionViewController animated:YES];
-    }
     //Set the delegate to the InspectionViewController so that all changes are read by the inspection view controlller.
-    __delegate = vc.inspectionViewController;
+    __delegate = inspectionViewController;
     if (__delegate)
     {
         [__delegate selectedOption:[_tableData objectAtIndex:indexPath.row]];
@@ -260,7 +255,7 @@ static NSString *const OPTIONS = @"options";
     MasterViewController *mvc = [[MasterViewController alloc] initWithStyle:UITableViewStylePlain Level:OPTIONS SearchValue:[inspectionPoint.inspectionOptions array]];
     //Get a reference to the current displayed view controller.
     UINavigationController *navigationController = [self.splitViewController.viewControllers objectAtIndex:1] ;
-    ViewController *mainPageViewController = [navigationController.viewControllers objectAtIndex:1];
+    ViewController *mainPageViewController = [navigationController.viewControllers objectAtIndex:0];
     //Push the InspectionViewController ontop of the stack.
     if (![mainPageViewController.navigationController.viewControllers containsObject:mainPageViewController.inspectionViewController])
     {

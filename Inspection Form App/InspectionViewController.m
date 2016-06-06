@@ -209,6 +209,9 @@ NSString *const LOAD_RATINGS = @"loadRatings", *REMARKS_LIMITATIONS = @"remarksL
     
     promptView.txtPromptResult.text = @"";
 }
+- (IBAction)defficiencySwitchChanged:(id)sender {
+    [self setDeficiencyViews];
+}
 
 - (void) setDeficiencyViews {
     if (_deficiencySwitch.isOn==YES) {
