@@ -110,17 +110,24 @@ NSString *const TO_USER = @"toUser";
                 {
                     NSEntityDescription *entity = [NSEntityDescription entityForName:kCoreDataClassPrompt inManagedObjectContext:context];
                     Prompt *prompt = [[Prompt alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
-                    prompt.title = promptObject[kObjectName];
-                    prompt.inspectionPoint = inspectionPointObject;
                     
-                    if (promptObject[kRequiresDeficiency])
-                    {
-                        prompt.requiresDeficiency = [NSNumber numberWithBool:YES];
+                    
+                    if ([promptObject isKindOfClass:[NSString class]]) {
+                        prompt.title = promptObject;
                     }
                     else {
-                        prompt.requiresDeficiency = [NSNumber numberWithBool:NO];
+                        prompt.title = promptObject[kObjectName];
+                        if (promptObject[kRequiresDeficiency])
+                        {
+                            prompt.requiresDeficiency = [NSNumber numberWithBool:YES];
+                        }
+                        else {
+                            prompt.requiresDeficiency = [NSNumber numberWithBool:NO];
+                        }
+                        
+
                     }
-                    
+                    prompt.inspectionPoint = inspectionPointObject;
                     [prompts addObject:prompt];
                 }
                 

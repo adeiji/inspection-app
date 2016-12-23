@@ -15,7 +15,7 @@
 
 @class ItemListConditionStorage, Inspection;
 
-@interface InspectionViewController : UIViewController <UIPickerViewDelegate, UIPickerViewDataSource, PartSelectionDelegate, UIDocumentInteractionControllerDelegate>
+@interface InspectionViewController : UIViewController <UIPickerViewDelegate, UIPickerViewDataSource, PartSelectionDelegate, UIDocumentInteractionControllerDelegate, UITextFieldDelegate>
 {
 
     int timesShown;

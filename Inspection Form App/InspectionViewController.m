@@ -146,8 +146,19 @@
     promptView.txtPromptResult.placeholder = @"Please enter a value, or click cancel";
 }
 
+- (BOOL) textFieldShouldReturn:(UITextField *)textField {
+    if (textField==promptView.txtPromptResult) {
+        [self promptOkPressed];
+        return NO;
+    }
+    else {
+        return YES;
+    }
+}
 
-- (IBAction)promptOkPressed:(id)sender {
+
+// User clicks the okay button whenever a prompt is showing
+- (IBAction)promptOkPressed {
     
     if (![promptView.txtPromptResult.text isEqualToString:@""])
     {
