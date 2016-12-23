@@ -12,10 +12,11 @@
 #import "PartSelectionDelegate.h"
 #import "InspectionBussiness.h"
 #import "PromptView.h"
+#import "InspectionView.h"
 
 @class ItemListConditionStorage, Inspection;
 
-@interface InspectionViewController : UIViewController <UIPickerViewDelegate, UIPickerViewDataSource, PartSelectionDelegate, UIDocumentInteractionControllerDelegate, UITextFieldDelegate>
+@interface InspectionViewController : UIViewController <UIPickerViewDelegate, UIPickerViewDataSource, PartSelectionDelegate, UIDocumentInteractionControllerDelegate, UITextFieldDelegate, UIKeyInput, InspectionDelegate, UITextViewDelegate>
 {
 
     int timesShown;
@@ -32,7 +33,6 @@
     NSString *overallRating;
     NSArray *_deficiencyPickerArray;
     PromptView *promptView;
-    
 }
 
 @property (strong, nonatomic) IBOutlet UILabel *lblPartNumber;

@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="14F27" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="dnc-EI-M4a">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15F34" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="dnc-EI-M4a">
+    <device id="ipad9_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -14,6 +18,7 @@
                 <navigationController definesPresentationContext="YES" navigationBarHidden="YES" id="i0E-EF-fHZ" sceneMemberID="viewController">
                     <nil key="simulatedTopBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="7T7-bb-mOj">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -161,7 +166,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstItem="d7n-DM-xfy" firstAttribute="leading" secondItem="1O8-ki-oXR" secondAttribute="leading" constant="71" id="0j8-I7-brg"/>
                                                     <constraint firstItem="GmN-ei-gGk" firstAttribute="top" secondItem="fei-Od-P6t" secondAttribute="bottom" constant="14" id="1KB-Vd-dMi"/>
@@ -221,7 +226,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstItem="2Jd-DJ-MFX" firstAttribute="top" secondItem="p0M-CD-s7V" secondAttribute="top" constant="15" id="1NX-15-mwB"/>
                                                     <constraint firstItem="2Jd-DJ-MFX" firstAttribute="centerY" secondItem="p0M-CD-s7V" secondAttribute="centerY" id="P1E-5X-hyS"/>
@@ -256,15 +261,15 @@
                                                         <rect key="frame" x="686" y="16" width="22" height="22"/>
                                                         <fontDescription key="fontDescription" type="boldSystem" size="button"/>
                                                         <state key="normal">
-                                                            <color key="titleColor" red="0.1960784314" green="0.30980392159999998" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
-                                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <color key="titleColor" red="0.1960784314" green="0.30980392159999998" blue="0.52156862749999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
                                                         <state key="highlighted">
-                                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
                                                     </button>
                                                 </subviews>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstItem="ty6-6c-2RU" firstAttribute="top" secondItem="rrO-cq-DcR" secondAttribute="top" constant="16" id="97S-l6-S0i"/>
                                                     <constraint firstItem="Y7r-9j-H9Z" firstAttribute="centerY" secondItem="jsB-Ap-g2E" secondAttribute="centerY" id="Nem-W4-fYH"/>
@@ -301,7 +306,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstItem="gWB-T3-X6t" firstAttribute="top" secondItem="EuI-10-e7d" secondAttribute="top" constant="15" id="Af2-zA-sb8"/>
                                                     <constraint firstItem="zzB-cr-Nej" firstAttribute="centerY" secondItem="gWB-T3-X6t" secondAttribute="centerY" id="LSB-F7-1lf"/>
@@ -336,7 +341,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstItem="RTi-sd-Sx1" firstAttribute="top" secondItem="H9b-6B-8yQ" secondAttribute="top" constant="12" id="1CZ-cq-5Nb"/>
                                                     <constraint firstAttribute="trailing" secondItem="RTi-sd-Sx1" secondAttribute="trailing" constant="17" id="7Vs-n7-XS5"/>
@@ -370,7 +375,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstItem="csk-TU-ped" firstAttribute="centerY" secondItem="Q5h-Bk-U1A" secondAttribute="centerY" id="aOl-Aa-nyf"/>
                                                     <constraint firstAttribute="trailing" secondItem="csk-TU-ped" secondAttribute="trailing" constant="234" id="gOp-xM-wQ5"/>
@@ -394,7 +399,7 @@
                                                     <constraint firstAttribute="width" constant="120" id="qqV-6A-g5N"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                <color key="textColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EG2-vj-vP9" customClass="GradientView">
@@ -424,7 +429,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstItem="7Gh-Lo-jiG" firstAttribute="centerY" secondItem="EG2-vj-vP9" secondAttribute="centerY" id="CEH-NV-8Ds"/>
                                                     <constraint firstAttribute="trailing" secondItem="7Gh-Lo-jiG" secondAttribute="trailing" constant="176" id="FlN-fy-vak"/>
@@ -460,7 +465,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="bottom" secondItem="gic-xD-FWT" secondAttribute="bottom" constant="12" id="Ssq-F3-b97"/>
                                                     <constraint firstItem="gic-xD-FWT" firstAttribute="leading" secondItem="hXK-sA-RnT" secondAttribute="leading" constant="57" id="VIf-Y9-hmo"/>
@@ -496,15 +501,15 @@
                                                         <rect key="frame" x="686" y="16" width="22" height="22"/>
                                                         <fontDescription key="fontDescription" type="boldSystem" size="button"/>
                                                         <state key="normal">
-                                                            <color key="titleColor" red="0.1960784314" green="0.30980392159999998" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
-                                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <color key="titleColor" red="0.1960784314" green="0.30980392159999998" blue="0.52156862749999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
                                                         <state key="highlighted">
-                                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
                                                     </button>
                                                 </subviews>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstItem="Gof-Kp-BT6" firstAttribute="leading" secondItem="MA1-xc-auU" secondAttribute="trailing" constant="43" id="5wm-k0-vPS"/>
                                                     <constraint firstAttribute="bottom" secondItem="Ebk-t6-Vup" secondAttribute="bottom" constant="12" id="7ym-g4-gye"/>
@@ -546,20 +551,20 @@
                                                     </pickerView>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bQj-qe-X8E">
                                                         <rect key="frame" x="161" y="61" width="112" height="30"/>
-                                                        <color key="backgroundColor" red="0.25882352939999997" green="0.73725490199999999" blue="0.38431372549999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="backgroundColor" red="0.25882352939999997" green="0.73725490199999999" blue="0.38431372549999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="112" id="U2L-6F-IG0"/>
                                                         </constraints>
                                                         <state key="normal" title="Select Crane">
-                                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
                                                         <connections>
                                                             <action selector="setCrane:" destination="sgx-pA-png" eventType="touchUpInside" id="bcj-2d-srR"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstItem="hEg-gW-AEl" firstAttribute="top" secondItem="pCW-pD-YBJ" secondAttribute="top" constant="49" id="9TJ-AE-oNF"/>
                                                     <constraint firstItem="bQj-qe-X8E" firstAttribute="centerY" secondItem="HId-Gi-hnJ" secondAttribute="centerY" id="Add-hP-fyQ"/>
@@ -581,11 +586,11 @@
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" misplaced="YES" text="Information about the crane" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="lhc-5n-7XR">
                                                 <rect key="frame" x="21" y="634" width="143" height="14"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                <color key="textColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstItem="pCW-pD-YBJ" firstAttribute="trailing" secondItem="EG2-vj-vP9" secondAttribute="trailing" id="161-Zw-oRD"/>
@@ -656,7 +661,7 @@
                                             <rect key="frame" x="211" y="7" width="233" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <state key="normal" title="Sync Crane Inspection Details">
-                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </state>
                                             <connections>
                                                 <action selector="syncCraneInspectionDetails:" destination="sgx-pA-png" eventType="touchUpInside" id="X8b-a4-aAP"/>
@@ -664,34 +669,34 @@
                                         </button>
                                     </barButtonItem>
                                 </items>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="barTintColor" red="0.0" green="0.67450980390000004" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="barTintColor" red="0.0" green="0.67450980390000004" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </toolbar>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u1W-jj-YwG">
                                 <rect key="frame" x="0.0" y="20" width="768" height="44"/>
                                 <inset key="insetFor6xAndEarlier" minX="0.0" minY="-20" maxX="0.0" maxY="20"/>
-                                <color key="barTintColor" red="0.0" green="0.67450980390000004" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="barTintColor" red="0.0" green="0.67450980390000004" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <textAttributes key="titleTextAttributes">
-                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </textAttributes>
                                 <items>
                                     <navigationItem title="Customer and Job Information" id="HDl-LN-ANL">
                                         <leftBarButtonItems>
                                             <barButtonItem title="Submit" id="Uqq-fb-DUm">
-                                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <connections>
                                                     <action selector="CustomerSubmitPressed:" destination="sgx-pA-png" id="tgK-gV-U2o"/>
                                                 </connections>
                                             </barButtonItem>
                                             <barButtonItem title="Options" id="4eT-mY-NMM">
-                                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <connections>
                                                     <action selector="showOptionsMenu:" destination="sgx-pA-png" id="Od3-em-igr"/>
                                                 </connections>
                                             </barButtonItem>
                                         </leftBarButtonItems>
                                         <barButtonItem key="rightBarButtonItem" title="Parts List" id="6cv-YP-nhB">
-                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <connections>
                                                 <action selector="partsListButtonClicked:" destination="sgx-pA-png" id="Klg-xb-kKO"/>
                                             </connections>
@@ -700,7 +705,7 @@
                                 </items>
                             </navigationBar>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="joP-Ux-8DR" firstAttribute="leading" secondItem="JQL-yV-qmM" secondAttribute="leading" id="7af-qw-vwY"/>
                             <constraint firstItem="JQL-yV-qmM" firstAttribute="trailing" secondItem="u1W-jj-YwG" secondAttribute="trailing" id="7oV-Gx-G5B"/>
@@ -748,7 +753,7 @@
                         <viewControllerLayoutGuide type="top" id="qi5-KT-Q3O"/>
                         <viewControllerLayoutGuide type="bottom" id="Udz-Xl-Khk"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="FK9-Lc-U88">
+                    <view key="view" contentMode="scaleToFill" id="FK9-Lc-U88" customClass="InspectionView">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
                         <subviews>
@@ -767,13 +772,13 @@
                                     </label>
                                     <pickerView userInteractionEnabled="NO" alpha="0.5" contentMode="scaleToFill" showsSelectionIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G5j-uv-CDt">
                                         <rect key="frame" x="344" y="18" width="364" height="216"/>
-                                        <color key="backgroundColor" red="0.64132838849999996" green="0.73710078310000005" blue="0.96034307070000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.64132838849999996" green="0.73710078310000005" blue="0.96034307070000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="G5j-uv-CDt" secondAttribute="height" multiplier="91:54" id="n2N-dA-s8r"/>
                                         </constraints>
                                     </pickerView>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="N9M-S1-5xO" secondAttribute="trailing" constant="438" id="38t-Ax-PM4"/>
                                     <constraint firstAttribute="centerY" secondItem="N9M-S1-5xO" secondAttribute="centerY" constant="-2" id="7b0-CG-0Be"/>
@@ -800,7 +805,7 @@
                                     <constraint firstAttribute="height" constant="27" id="Hl2-KC-lrM"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="textColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tQH-1p-wVd" customClass="GradientView">
@@ -822,7 +827,7 @@
                                         <rect key="frame" x="659" y="7" width="51" height="31"/>
                                     </switch>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="AcW-hP-35V" firstAttribute="leading" secondItem="tQH-1p-wVd" secondAttribute="leading" constant="20" id="3RB-Tg-A30"/>
                                     <constraint firstItem="rC6-KN-ZLK" firstAttribute="top" secondItem="tQH-1p-wVd" secondAttribute="top" constant="-466" id="Aj9-Il-scO"/>
@@ -857,11 +862,11 @@
                             </label>
                             <navigationBar clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="blackTranslucent" translatesAutoresizingMaskIntoConstraints="NO" id="IgU-F9-DOD">
                                 <rect key="frame" x="0.0" y="25" width="768" height="44"/>
-                                <color key="barTintColor" red="0.0" green="0.67450980390000004" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="barTintColor" red="0.0" green="0.67450980390000004" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <items>
                                     <navigationItem title="Inspection Points" id="9G3-Eu-saT">
                                         <barButtonItem key="leftBarButtonItem" title="Customer Information" id="c3C-xH-oi7">
-                                            <color key="tintColor" red="0.98038903060000004" green="0.98038903060000004" blue="0.98038903060000004" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="tintColor" red="0.98038903060000004" green="0.98038903060000004" blue="0.98038903060000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <connections>
                                                 <action selector="gotoCustomerInformation:" destination="ohd-4L-yxA" id="MlQ-oP-nF6"/>
                                             </connections>
@@ -876,20 +881,20 @@
                                 </constraints>
                                 <items>
                                     <barButtonItem title="Submit" id="2YM-vd-SmA">
-                                        <color key="tintColor" red="0.98038903060000004" green="0.98038903060000004" blue="0.98038903060000004" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="tintColor" red="0.98038903060000004" green="0.98038903060000004" blue="0.98038903060000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
                                             <action selector="submitPressed:" destination="ohd-4L-yxA" id="iEo-Ff-Mp9"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem enabled="NO" title="Create Certificate" id="0hp-Iu-e5a">
-                                        <color key="tintColor" red="0.98038903060000004" green="0.98038903060000004" blue="0.98038903060000004" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="tintColor" red="0.98038903060000004" green="0.98038903060000004" blue="0.98038903060000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
                                             <action selector="createCertificateButtonPressed:" destination="ohd-4L-yxA" id="daG-3H-M5i"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
-                                <color key="tintColor" red="0.0" green="0.67450980390000004" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="barTintColor" red="0.0" green="0.67450980390000004" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" red="0.0" green="0.67450980390000004" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="barTintColor" red="0.0" green="0.67450980390000004" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </toolbar>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="anc-cl-5wC" customClass="GradientView">
                                 <rect key="frame" x="20" y="271" width="728" height="50"/>
@@ -913,7 +918,7 @@
                                         <rect key="frame" x="659" y="11" width="51" height="31"/>
                                     </switch>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="Hnr-66-w9N" firstAttribute="leading" secondItem="anc-cl-5wC" secondAttribute="leadingMargin" id="CBi-4L-8eK"/>
                                     <constraint firstAttribute="centerY" secondItem="hpt-8d-vYa" secondAttribute="centerY" constant="-1.5" id="E0H-dP-VKK"/>
@@ -946,9 +951,12 @@
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="ohd-4L-yxA" id="uiv-4l-Ev0"/>
+                                        </connections>
                                     </textView>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="OLt-3R-n3X" firstAttribute="leading" secondItem="gPt-UM-OBt" secondAttribute="leading" constant="55" id="C3d-JV-RDZ"/>
                                     <constraint firstAttribute="centerY" secondItem="OLt-3R-n3X" secondAttribute="centerY" id="Gtu-kD-t6Q"/>
@@ -961,7 +969,7 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="Hr4-fr-2XV" firstAttribute="top" secondItem="qi5-KT-Q3O" secondAttribute="bottom" constant="48" id="19x-1G-5vh"/>
@@ -1020,9 +1028,9 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="54" sectionHeaderHeight="22" sectionFooterHeight="22" id="mNY-Eo-vds">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <searchBar key="tableHeaderView" contentMode="redraw" id="QuG-wi-krm">
-                            <rect key="frame" x="0.0" y="64" width="320" height="44"/>
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <textInputTraits key="textInputTraits"/>
                             <connections>
@@ -1031,10 +1039,10 @@
                         </searchBar>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" id="WNV-X0-qlT">
-                                <rect key="frame" x="0.0" y="130" width="320" height="54"/>
+                                <rect key="frame" x="0.0" y="66" width="320" height="54"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WNV-X0-qlT" id="8EV-kK-und">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="53"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="54"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -1058,6 +1066,7 @@
             <objects>
                 <navigationController id="n5h-he-orY" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="lzv-Ah-Bgf">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -1083,4 +1092,9 @@
             <point key="canvasLocation" x="-269" y="39"/>
         </scene>
     </scenes>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination"/>
+    </simulatedMetricsContainer>
 </document>

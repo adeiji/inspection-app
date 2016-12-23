@@ -70,6 +70,7 @@
 		F43E74991C8A071B0045E5F1 /* AccountTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F43E74981C8A071B0045E5F1 /* AccountTableViewController.m */; };
 		F453A3B21AD43E3B00319D7A /* InspectionModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F453A3B01AD43E3B00319D7A /* InspectionModel.xcdatamodeld */; };
 		F453A3B51AD43FB200319D7A /* Customer.m in Sources */ = {isa = PBXBuildFile; fileRef = F453A3B41AD43FB200319D7A /* Customer.m */; };
+		F49674401E0DDA9F00DE78A6 /* InspectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = F496743F1E0DDA9F00DE78A6 /* InspectionView.m */; };
 		F49DDEA71ACCC60C00A02162 /* SyncManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F49DDEA61ACCC60C00A02162 /* SyncManager.m */; };
 		F49DDEAD1ACCCB2700A02162 /* IAConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = F49DDEAC1ACCCB2700A02162 /* IAConstants.m */; };
 		F49DDEB11ACCDA5C00A02162 /* IACraneInspectionDetailsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F49DDEB01ACCDA5C00A02162 /* IACraneInspectionDetailsManager.m */; };
@@ -198,6 +199,8 @@
 		F453A3B11AD43E3B00319D7A /* InspectionModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = InspectionModel.xcdatamodel; sourceTree = "<group>"; };
 		F453A3B31AD43FB200319D7A /* Customer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Customer.h; sourceTree = "<group>"; };
 		F453A3B41AD43FB200319D7A /* Customer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Customer.m; sourceTree = "<group>"; };
+		F496743E1E0DDA9F00DE78A6 /* InspectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectionView.h; sourceTree = "<group>"; };
+		F496743F1E0DDA9F00DE78A6 /* InspectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InspectionView.m; sourceTree = "<group>"; };
 		F49DDEA51ACCC60C00A02162 /* SyncManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncManager.h; sourceTree = "<group>"; };
 		F49DDEA61ACCC60C00A02162 /* SyncManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncManager.m; sourceTree = "<group>"; };
 		F49DDEAB1ACCCB2700A02162 /* IAConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAConstants.h; sourceTree = "<group>"; };
@@ -582,6 +585,8 @@
 			children = (
 				CE486AE4180F1E4200B1B953 /* InspectionViewController.h */,
 				CE486AE5180F1E4200B1B953 /* InspectionViewController.m */,
+				F496743E1E0DDA9F00DE78A6 /* InspectionView.h */,
+				F496743F1E0DDA9F00DE78A6 /* InspectionView.m */,
 			);
 			name = "Inspection View Controller";
 			sourceTree = "<group>";
@@ -898,6 +903,7 @@
 				F49DDEA71ACCC60C00A02162 /* SyncManager.m in Sources */,
 				8BECD3BF150E934900616735 /* OptionList.m in Sources */,
 				F43E74951C877F3A0045E5F1 /* PFCustomer.m in Sources */,
+				F49674401E0DDA9F00DE78A6 /* InspectionView.m in Sources */,
 				F43E74991C8A071B0045E5F1 /* AccountTableViewController.m in Sources */,
 				F4B29E641ADC1E740025A091 /* CoreDataCondition.m in Sources */,
 				8B544612150F0C3E007E1CA9 /* GradientView.m in Sources */,

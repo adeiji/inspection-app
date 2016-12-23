@@ -35,10 +35,12 @@
     return self;
 }
 
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	
+
     _deficiencyPicker.delegate = self;
     _deficiencyPicker.dataSource = self;
     
@@ -53,6 +55,7 @@
     
     [self.view addGestureRecognizer:gestureRecognizerRight];
     [self.view addGestureRecognizer:gestureRecognizerLeft];
+    
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -65,7 +68,23 @@
     [self changeLayout:_optionLocation PartsArray:_partsArray ItemListStore:_itemListStore];
     [self changePickerArray:_deficiencyPickerArray];    //Send the array that contains the particular deficiencies unique to this part
     inspectionComplete = NO;
+    ((InspectionView *) self.view).delegate = self;
+    [self.view becomeFirstResponder];
 
+}
+
+- (BOOL) textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    if ([text isEqualToString:@"\\"]) {
+        [self nextPressed];
+        return NO;
+    }
+    else if ([text isEqualToString:@"]"]) {
+        [self previousPressed];
+        return NO;
+    }
+    else {
+        return YES;
+    }
 }
 
 //Checks to see which way the user swiped
@@ -82,6 +101,14 @@
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"SwipeDetected" object:self userInfo:@{  USER_INFO_SELECTED_INSPECTION_POINT : _partsArray[_optionLocation] }];
 
+}
+
+- (void) didPressRightArrowKey {
+    [self nextPressed];
+}
+
+- (void) didPressLeftArrowKey {
+    [self previousPressed];
 }
 
 - (void)didReceiveMemoryWarning
