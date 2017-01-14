@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 FOUNDATION_EXPORT NSString *const kParseClassCrane;
+FOUNDATION_EXPORT NSString *const kParseInspectionDetailsHoistSrl;
 FOUNDATION_EXPORT NSString *const kObjectName;
 FOUNDATION_EXPORT NSString *const kInspectionPoints;
 FOUNDATION_EXPORT NSString *const kCoreDataClassCrane;

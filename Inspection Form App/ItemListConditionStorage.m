@@ -24,7 +24,7 @@
     //Add a default condition for every single part that there is.
     for (int i=0; i<input.count; i++) {
         Condition *myCondition = [[Condition alloc] init];
-        [myCondition setOptionLocation:i];
+        [myCondition setOptionLocation: &i];
         [myConditions addObject:myCondition];
     }
 }
@@ -32,8 +32,17 @@
     return (Condition*)[myConditions objectAtIndex:input];
 }
 
+// This method will grab all the conditions from the server for the crane that has been shared with the current user
 - (void) loadConditionsForCraneFromServer : (PFObject *) crane {
+    PFInspectionDetails *inspectionDetail = [PFInspectionDetails object];
+    PFQuery *query = [PFInspectionDetails query];
     
+    [query whereKey:kParseInspectionDetailsHoistSrl equalTo:crane[kParseInspectionDetailsHoistSrl]];
+    
+    [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        
+        [[IACraneInspectionDetailsManager sharedManager] convertParseConditionsToConditionObjects:objects];
+    }];
 }
 
 - (void) loadConditionsForCrane : (InspectedCrane *) crane {

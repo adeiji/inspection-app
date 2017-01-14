@@ -566,19 +566,19 @@ NSString *const TO_USER = @"toUser";
     
     for (CoreDataCondition *condition in inspectionDetails) {
         
-        PFInspectionDetails *inspectionDetails = [PFInspectionDetails object];
-        inspectionDetails.isDeficient = condition.isDeficient;
-        inspectionDetails.isApplicable = condition.isApplicable;
-        inspectionDetails.notes = condition.notes;
-        inspectionDetails.optionSelectedIndex = condition.optionSelectedIndex;
-        inspectionDetails.optionSelected = condition.optionSelected;
-        inspectionDetails.hoistSrl = condition.hoistSrl;
+        PFInspectionDetails *inspectionDetail = [PFInspectionDetails object];
+        inspectionDetail.isDeficient = [condition.isDeficient boolValue];
+        inspectionDetail.isApplicable = [condition.isApplicable boolValue];
+        inspectionDetail.notes = condition.notes;
+        inspectionDetail.optionSelectedIndex = [condition.optionSelectedIndex intValue];
+        inspectionDetail.optionSelected = condition.optionSelected;
+        inspectionDetail.hoistSrl = condition.hoistSrl;
         
         if ([PFUser currentUser] != nil) {
-            inspectionDetails.toUser = user;
+            inspectionDetail.toUser = user;
         }
         
-        [pfInspectionDetailsObjects addObject:inspectionDetails];
+        [pfInspectionDetailsObjects addObject:inspectionDetail];
     }
     
     [PFObject saveAllInBackground:pfInspectionDetailsObjects block:^(BOOL succeeded, NSError * _Nullable error) {
@@ -587,8 +587,29 @@ NSString *const TO_USER = @"toUser";
             [alert show];
         }
         else if (error) {
+            NSLog(@"%@", error.description);
         }
     }];
+}
+
+- (NSArray *) convertParseConditionsToConditionObjects : (NSArray *) objects {
+
+    NSMutableArray *conditions = [NSMutableArray new];
+    
+    for (PFInspectionDetails *details in objects) {
+        Condition *condition = [Condition new];
+        condition.applicable = details.isApplicable;
+        condition.deficient = details.isDeficient;
+        condition.notes = details.notes;
+        condition.optionLocation = details.optionLocation;
+        condition.pickerSelection = details.optionSelectedIndex;
+        condition.deficientPart = details.optionSelected;
+        
+        [conditions addObject:condition];
+    }
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"optionLocation" ascending:YES];
+    
+    return [conditions sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
 }
 
 - (void) saveCraneToServer  : (InspectedCrane *)crane

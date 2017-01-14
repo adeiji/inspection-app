@@ -145,6 +145,8 @@ int const SEND_INSPECTIONS_INDEX = 0, VIEW_INSPECTIONS_INDEX = 1, ACCOUNT_INDEX 
     InspectedCrane *inspectedCrane = [craneObject getCoreDataObject];
     [self showInspectionScreen:inspectedCrane];
     [viewController.inspectionViewController.itemListStore loadConditionsForCrane:inspectedCrane];
+    
+    [viewController.inspectionViewController.itemListStore loadConditionsForCraneFromServer:craneObject];
     [[IACraneInspectionDetailsManager sharedManager] deleteEarlierInspectionOfCraneFromServer:inspectedCrane ForUser:[PFUser currentUser]];
 }
 

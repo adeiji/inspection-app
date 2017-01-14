@@ -9,6 +9,7 @@
 #import "IAConstants.h"
 
 NSString *const kParseClassCrane = @"Crane";
+NSString *const kParseInspectionDetailsHoistSrl = @"hoistSrl";
 NSString *const kObjectName = @"name";
 NSString *const kInspectionPoints = @"inspectionPoints";
 NSString *const kOptions = @"options";

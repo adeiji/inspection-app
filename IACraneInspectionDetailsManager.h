@@ -93,6 +93,13 @@
 
 - (NSArray *) getAllCranesForCurrentUserFromServer;
 
+/*
+ 
+ Gets an array of Parse Inspection Detail Objects and converts them to the Local Condition objects
+ 
+ */
+- (NSArray *) convertParseConditionsToConditionObjects : (NSArray *) objects;
+
 - (void) saveCraneToServer : (InspectedCrane *) crane;
 
 /*

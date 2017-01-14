@@ -10,6 +10,7 @@
 #import "Condition.h"
 #import "IACraneInspectionDetailsManager.h"
 #import "InspectedCrane.h"
+#import <Parse/Parse.h>
 
 @interface ItemListConditionStorage : NSObject
 
@@ -21,5 +22,6 @@
 - (void) setCondition : (int) input
             Condition : (Condition *) myCondition;
 - (void) loadConditionsForCrane : (InspectedCrane *) crane;
+- (void) loadConditionsForCraneFromServer : (PFObject *) crane;
 
 @end
