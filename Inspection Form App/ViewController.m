@@ -530,8 +530,11 @@ static NSString* USERNAME = @"username";
         
     }
     else {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"No Crane" message:@"Sorry, but there's no cranes to select.  Click Sync Crane Details"  delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-        [alertView show];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"No Cranes" message:@"Sorry, but there's no cranes to select.  Click Sync Crane Details" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+        [alert addAction:okAction];
+        
+        [self presentViewController:alert animated:YES completion:nil];
     }
 }
 
@@ -559,8 +562,11 @@ static NSString* USERNAME = @"username";
                                                           userInfo:@{ USER_INFO_SELECTED_CRANE_INSPECTION_POINTS : selectedCrane.inspectionPoints }];
     }
     else {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Select crane type" message:@"Please Select the Crane Type" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-        [alert show];
+        
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Select Crane Type" message:@"Please Select the Crane Type" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+        [alert addAction:okAction];
+        [self presentViewController:alert animated:YES completion:nil];
     }
 }
 

@@ -41,9 +41,11 @@ NSString *const PASSWORD = @"sswr";
     }
 }
 
-- (void) showAlertViewWithMessage : (NSString *) message {
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Invalid Login Credentials" message:message delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [alertView show];
+- (void) showAlertViewWithMessage : (NSString *) message {    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Invalid Login Credentials" message:message preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+    [alert addAction:okAction];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 - (BOOL) canProceed {

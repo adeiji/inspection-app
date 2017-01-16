@@ -67,7 +67,7 @@ NSString *const TO_USER = @"toUser";
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 //        NSManagedObjectContext *context =  ((AppDelegate *)[ [UIApplication sharedApplication] delegate]).managedObjectContext;
-        NSManagedObjectContext *context = [[NSManagedObjectContext alloc] init];
+        NSManagedObjectContext *context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
         [context setPersistentStoreCoordinator:(((AppDelegate *)[ [UIApplication sharedApplication] delegate]).managedObjectContext).persistentStoreCoordinator];
         NSMutableArray *cranesArray = [NSMutableArray new];
         NSEntityDescription *entity = [NSEntityDescription entityForName:kCoreDataClassCrane inManagedObjectContext:context];
@@ -557,7 +557,10 @@ NSString *const TO_USER = @"toUser";
  
  */
 - (void) shareCraneDetails : (InspectedCrane *) crane
-                  WithUser : (PFUser *) user {
+                  WithUser : (PFUser *) user
+    WithViewControllerToDisplayAlert : (UIViewController *) viewController
+{
+        
     NSArray *inspectionDetails = [[IACraneInspectionDetailsManager sharedManager] getAllConditionsForCrane:crane];
     NSMutableArray *pfInspectionDetailsObjects = [NSMutableArray new];
     
@@ -573,6 +576,7 @@ NSString *const TO_USER = @"toUser";
         inspectionDetail.optionSelectedIndex = [condition.optionSelectedIndex intValue];
         inspectionDetail.optionSelected = condition.optionSelected;
         inspectionDetail.hoistSrl = condition.hoistSrl;
+        inspectionDetail.optionLocation = [condition.optionLocation intValue];
         
         if ([PFUser currentUser] != nil) {
             inspectionDetail.toUser = user;
@@ -583,8 +587,11 @@ NSString *const TO_USER = @"toUser";
     
     [PFObject saveAllInBackground:pfInspectionDetailsObjects block:^(BOOL succeeded, NSError * _Nullable error) {
         if (succeeded && !error) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Successful" message:@"Inspection Was Sent Successfully" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-            [alert show];
+            
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Success" message:@"Inspection Sent Successfully" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+            [alert addAction:okAction];
+            [viewController presentViewController:alert animated:YES completion:nil];
         }
         else if (error) {
             NSLog(@"%@", error.description);
@@ -607,9 +614,17 @@ NSString *const TO_USER = @"toUser";
         
         [conditions addObject:condition];
     }
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"optionLocation" ascending:YES];
     
-    return [conditions sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+    NSArray *sortedArray;
+    sortedArray = [conditions sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+        NSInteger locationOfObj1 = ((Condition *) obj1).optionLocation;
+        NSInteger locationOfObj2 = ((Condition *) obj2).optionLocation;
+        
+        return locationOfObj1 > locationOfObj2;
+    }];
+    
+    
+    return sortedArray;
 }
 
 - (void) saveCraneToServer  : (InspectedCrane *)crane

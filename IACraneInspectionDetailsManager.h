@@ -77,10 +77,17 @@
  
  */
 - (NSArray *) getAllConditionsForCrane : (InspectedCrane *) crane;
+
+/*
+ 
+ All the conditions that already exist for the crane on this device are deleted
+ 
+ */
+- (void) removeAllConditionsForCrane : (InspectedCrane *) crane;
+
 - (void) saveAllConditionsForCrane : (InspectedCrane *) crane
                         Conditions : (NSArray *) conditions;
 
-- (void) saveAllWaterDistrictCranes;
 - (NSMutableArray *) getAllCranesWithInspections;
 /*
  
@@ -88,7 +95,8 @@
  
  */
 - (void) shareCraneDetails : (InspectedCrane *) crane
-                  WithUser : (PFUser *) user;
+                  WithUser : (PFUser *) user
+WithViewControllerToDisplayAlert : (UIViewController *) viewController;
 
 
 - (NSArray *) getAllCranesForCurrentUserFromServer;
@@ -99,8 +107,6 @@
  
  */
 - (NSArray *) convertParseConditionsToConditionObjects : (NSArray *) objects;
-
-- (void) saveCraneToServer : (InspectedCrane *) crane;
 
 /*
  

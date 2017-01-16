@@ -17,7 +17,7 @@
 @property (retain) NSString *notes;
 @property int optionSelectedIndex;
 @property (retain) NSString *optionSelected;
-@property int *optionLocation;
+@property int optionLocation;
 @property (retain) NSString *hoistSrl;
 @property (retain) PFUser *toUser;
 @property (retain) NSString *craneId;

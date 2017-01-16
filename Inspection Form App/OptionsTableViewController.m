@@ -122,7 +122,6 @@ int const SEND_INSPECTIONS_INDEX = 0, VIEW_INSPECTIONS_INDEX = 1, ACCOUNT_INDEX 
         optionsTableViewController.selectedCrane = [_inspections objectAtIndex:indexPath.row];
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             optionsTableViewController.users = [[[DELoginManager alloc] init] getAllUsers];
-            
             dispatch_async(dispatch_get_main_queue(), ^{
                [self.navigationController pushViewController:optionsTableViewController animated:true];     
             });
@@ -130,7 +129,7 @@ int const SEND_INSPECTIONS_INDEX = 0, VIEW_INSPECTIONS_INDEX = 1, ACCOUNT_INDEX 
     }
     else if (_users != nil) { // Is the user currently looking at all the users on the server
         PFUser *user = [_users objectAtIndex:indexPath.row];
-        [[IACraneInspectionDetailsManager sharedManager] shareCraneDetails:_selectedCrane WithUser:user];
+        [[IACraneInspectionDetailsManager sharedManager] shareCraneDetails:_selectedCrane WithUser:user WithViewControllerToDisplayAlert:self];
     }
     else if (_inspectionsSentToCurrentUser != nil) {
         PFCrane *craneObject = [_inspectionsSentToCurrentUser objectAtIndex:indexPath.row];
@@ -141,13 +140,13 @@ int const SEND_INSPECTIONS_INDEX = 0, VIEW_INSPECTIONS_INDEX = 1, ACCOUNT_INDEX 
 - (void) handleDownloadedCraneWithCraneObject : (PFCrane *) craneObject {
     UINavigationController *navigationController = [self.splitViewController.viewControllers objectAtIndex:1] ;
     ViewController *viewController = [navigationController.viewControllers objectAtIndex:0];
-
     InspectedCrane *inspectedCrane = [craneObject getCoreDataObject];
+    
     [self showInspectionScreen:inspectedCrane];
     [viewController.inspectionViewController.itemListStore loadConditionsForCrane:inspectedCrane];
-    
-    [viewController.inspectionViewController.itemListStore loadConditionsForCraneFromServer:craneObject];
+    [viewController.inspectionViewController.itemListStore loadConditionsForCraneFromServer:craneObject WithInspectedCrane:inspectedCrane];
     [[IACraneInspectionDetailsManager sharedManager] deleteEarlierInspectionOfCraneFromServer:inspectedCrane ForUser:[PFUser currentUser]];
+    [[IACraneInspectionDetailsManager sharedManager] removeAllConditionsForCrane:inspectedCrane];
 }
 
 - (void) showInspectionScreen : (InspectedCrane *) inspectedCrane {
@@ -157,7 +156,7 @@ int const SEND_INSPECTIONS_INDEX = 0, VIEW_INSPECTIONS_INDEX = 1, ACCOUNT_INDEX 
         UINavigationController *navigationController = [self.splitViewController.viewControllers objectAtIndex:0] ;
         InspectionCrane *inspectionCrane = inspectionCranes[0];
         
-        MasterViewController *mvc = [[MasterViewController alloc] initWithStyle:nil Level:@"partName" SearchValue:[inspectionCrane.inspectionPoints array]];
+        MasterViewController *mvc = [[MasterViewController alloc] initWithStyle:UITableViewStylePlain Level:@"partName" SearchValue:[inspectionCrane.inspectionPoints array]];
         [navigationController pushViewController:mvc animated:YES];
         [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_HOISTSRL_SELECTED object:nil userInfo:@{ kSelectedInspectedCrane : inspectedCrane }];
         
@@ -170,7 +169,7 @@ int const SEND_INSPECTIONS_INDEX = 0, VIEW_INSPECTIONS_INDEX = 1, ACCOUNT_INDEX 
         {
             [mainPageViewController setIsCraneSet:true];
             [mainPageViewController.navigationController popToRootViewControllerAnimated:false];
-            [mainPageViewController storeInformationAndDisplayInspectionViewWithCrane:inspectionCrane SelectedRow:nil];
+            [mainPageViewController storeInformationAndDisplayInspectionViewWithCrane:inspectionCrane SelectedRow:0];
         }
     }
 }

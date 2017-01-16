@@ -13,10 +13,10 @@
 
 @property (strong, nonatomic) NSString *notes;
 @property BOOL deficient;
-@property NSUInteger pickerSelection;
+@property NSInteger *pickerSelection;
 @property (strong, nonatomic) NSString *deficientPart;
 @property BOOL applicable;
-@property NSInteger *optionLocation;
+@property NSInteger optionLocation;
 
 - (Condition *) initWithParameters : (NSString *) myNotes
                        Defficiency : (BOOL) myDeficient

@@ -22,6 +22,7 @@
 - (void) setCondition : (int) input
             Condition : (Condition *) myCondition;
 - (void) loadConditionsForCrane : (InspectedCrane *) crane;
-- (void) loadConditionsForCraneFromServer : (PFObject *) crane;
+- (void) loadConditionsForCraneFromServer : (PFObject *) crane
+                       WithInspectedCrane : (InspectedCrane *) inspectedCrane;
 
 @end

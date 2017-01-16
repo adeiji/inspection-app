@@ -121,7 +121,7 @@ static NSString *const OPTIONS = @"options";
     
     if (level == nil && [self.navigationController.topViewController isEqual:self])
     {
-        MasterViewController *mvc = [[MasterViewController alloc] initWithStyle:nil Level:PART_NAME SearchValue:inspectionPoints];
+        MasterViewController *mvc = [[MasterViewController alloc] initWithStyle:UITableViewStylePlain Level:PART_NAME SearchValue:inspectionPoints];
         [self.navigationController pushViewController:mvc animated:YES];
     }
 }
@@ -219,7 +219,7 @@ static NSString *const OPTIONS = @"options";
     if ([inspectionCranes count] != 0)
     {
         InspectionCrane *inspectionCrane = inspectionCranes[0];
-        MasterViewController *mvc = [[MasterViewController alloc] initWithStyle:nil Level:PART_NAME SearchValue:[inspectionCrane.inspectionPoints array]];
+        MasterViewController *mvc = [[MasterViewController alloc] initWithStyle:UITableViewStylePlain Level:PART_NAME SearchValue:[inspectionCrane.inspectionPoints array]];
         [self.navigationController pushViewController:mvc animated:YES];
         [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_HOISTSRL_SELECTED object:nil userInfo:@{ kSelectedInspectedCrane : crane }];
         UINavigationController *navigationController = [self.splitViewController.viewControllers objectAtIndex:1] ;
@@ -249,14 +249,14 @@ static NSString *const OPTIONS = @"options";
     InspectionPoint *inspectionPoint = [_tableData objectAtIndex:indexPath.row];
     
     //Create the Master View controller that we will push onto the view controller stack.
-    MasterViewController *mvc = [[MasterViewController alloc] initWithStyle:nil Level:OPTIONS SearchValue:[inspectionPoint.inspectionOptions array]];
+    MasterViewController *mvc = [[MasterViewController alloc] initWithStyle:UITableViewStylePlain   Level:OPTIONS SearchValue:[inspectionPoint.inspectionOptions array]];
     //Get a reference to the current displayed view controller.
     UINavigationController *navigationController = [self.splitViewController.viewControllers objectAtIndex:1] ;
     ViewController *mainPageViewController = [navigationController.viewControllers objectAtIndex:0];
     //Push the InspectionViewController ontop of the stack.
     if (![mainPageViewController.navigationController.viewControllers containsObject:mainPageViewController.inspectionViewController])
     {
-        [mainPageViewController storeInformationAndDisplayInspectionViewWithCrane:inspectionPoint.inspectionCrane SelectedRow:nil];
+        [mainPageViewController storeInformationAndDisplayInspectionViewWithCrane:inspectionPoint.inspectionCrane SelectedRow:0];
     }
     
     //Set the delegate to the InspectionViewController so that all changes are read by the inspection view controlller.

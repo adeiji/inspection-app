@@ -541,21 +541,41 @@
     // Drawing commands
     //[printString drawAtPoint:CGPointMake(100, 100) withFont:[UIFont boldSystemFontOfSize:12.0f]];
     [myImage drawInRect:CGRectMake(50, 150, 500, 500) blendMode:kCGBlendModeLighten alpha:.15f];
-    [header drawInRect:CGRectMake(20, 20, 200, 200) withFont:[UIFont systemFontOfSize:10.0f] lineBreakMode:UILineBreakModeWordWrap alignment:UITextAlignmentLeft];
-    [printString drawInRect:CGRectMake(225, 20, 120 , 120) withFont:[UIFont systemFontOfSize:10.0f] lineBreakMode:UILineBreakModeCharacterWrap alignment:UITextAlignmentLeft];
-    [customerInfoResultsColumn drawInRect:CGRectMake(325, 20, 400, 120) withFont:[UIFont systemFontOfSize:10.0f]];
-    [craneDescription drawInRect:CGRectMake(20, 120, 500, 160) withFont:[UIFont systemFontOfSize:10.0f]];
-    [craneDescriptionLeftColumn drawInRect:CGRectMake(20, 145, 120, 160) withFont:[UIFont systemFontOfSize:10.0f]];
-    [craneDescriptionResultsColumn drawInRect:CGRectMake(140, 120, 150, 120) withFont:[UIFont systemFontOfSize:10.0f]];
-    [craneDescriptionRightColumn drawInRect:CGRectMake(300, 120, 120, 120) withFont:[UIFont systemFontOfSize:10.0f]];
-    [craneDescriptionRightResultsColumn drawInRect:CGRectMake(410, 120, 120, 120) withFont:[UIFont systemFontOfSize:10.0f]];
-    [partTitle drawInRect:CGRectMake(20, 220, 300, 700) withFont:[UIFont systemFontOfSize:8.0f]];
-    [partDeficiency drawInRect:CGRectMake(235, 220, 120, 700) withFont:[UIFont systemFontOfSize:8.0f]];
-    [partNotes drawInRect:CGRectMake(310, 220, 220, 700) withFont:[UIFont systemFontOfSize:8.0f]];
-    [deficientPartString drawInRect:CGRectMake(500, 220, 300, 700) withFont:[UIFont systemFontOfSize:8.0f]];
-    [conditionRatingString drawInRect:CGRectMake(20, 700, 600, 70) withFont:[UIFont systemFontOfSize:8.0f]];
-    [footerLeft drawInRect:CGRectMake(300, 700, 600, 70) withFont:[UIFont systemFontOfSize:8.0f]];
-    [footerRight drawInRect:CGRectMake(450, 700, 600, 70) withFont:[UIFont systemFontOfSize:8.0f]];
+    NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
+    paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
+    paragraphStyle.alignment =  NSTextAlignmentLeft;
+    
+    [header drawInRect:CGRectMake(20, 20, 200, 200) withAttributes:@{ NSFontAttributeName : [UIFont systemFontOfSize:10.0f], NSParagraphStyleAttributeName : paragraphStyle }];
+//    [header drawInRect:CGRectMake(20, 20, 200, 200) withFont:[UIFont systemFontOfSize:10.0f] lineBreakMode:UILineBreakModeWordWrap alignment:UITextAlignmentLeft];
+    
+    [printString drawInRect:CGRectMake(225, 20, 120 , 120)  withAttributes:@{ NSFontAttributeName : [UIFont systemFontOfSize:10.0f], NSParagraphStyleAttributeName : paragraphStyle }];
+//                   withFont:[UIFont systemFontOfSize:10.0f] lineBreakMode:UILineBreakModeCharacterWrap alignment:UITextAlignmentLeft];
+    [customerInfoResultsColumn drawInRect:CGRectMake(325, 20, 400, 120) withAttributes: @{ NSFontAttributeName : [UIFont systemFontOfSize:10.0f] }];
+//    [customerInfoResultsColumn drawInRect:CGRectMake(325, 20, 400, 120) withFont:[UIFont systemFontOfSize:10.0f]];
+    [craneDescription drawInRect:CGRectMake(20, 120, 500, 160) withAttributes:@{NSFontAttributeName : [UIFont systemFontOfSize:10.0f] }];
+//    [craneDescription drawInRect:CGRectMake(20, 120, 500, 160) withFont:[UIFont systemFontOfSize:10.0f]];
+    [craneDescriptionLeftColumn drawInRect:CGRectMake(20, 145, 120, 160) withAttributes:@{NSFontAttributeName : [UIFont systemFontOfSize:10.0f] }];
+//    [craneDescriptionLeftColumn drawInRect:CGRectMake(20, 145, 120, 160) withFont:[UIFont systemFontOfSize:10.0f]];
+    [craneDescriptionResultsColumn drawInRect:CGRectMake(140, 120, 150, 120) withAttributes:@{NSFontAttributeName : [UIFont systemFontOfSize:10.0f]}];
+//    [craneDescriptionResultsColumn drawInRect:CGRectMake(140, 120, 150, 120) withFont:[UIFont systemFontOfSize:10.0f]];
+    [craneDescriptionRightColumn drawInRect:CGRectMake(300, 120, 120, 120) withAttributes:@{NSFontAttributeName : [UIFont systemFontOfSize:10.0f]}];
+//    [craneDescriptionRightColumn drawInRect:CGRectMake(300, 120, 120, 120) withFont:[UIFont systemFontOfSize:10.0f]];
+    [craneDescriptionRightResultsColumn drawInRect:CGRectMake(410, 120, 120, 120) withAttributes:@{NSFontAttributeName : [UIFont systemFontOfSize:10.0f]}];
+//    [craneDescriptionRightResultsColumn drawInRect:CGRectMake(410, 120, 120, 120) withFont:[UIFont systemFontOfSize:10.0f]];
+    [partTitle drawInRect:CGRectMake(20, 220, 300, 700) withAttributes:@{NSFontAttributeName : [UIFont systemFontOfSize:8.0f]}];
+//    [partTitle drawInRect:CGRectMake(20, 220, 300, 700) withFont:[UIFont systemFontOfSize:8.0f]];
+    [partDeficiency drawInRect:CGRectMake(235, 220, 120, 700) withAttributes:@{NSFontAttributeName : [UIFont systemFontOfSize:8.0f]}];
+//    [partDeficiency drawInRect:CGRectMake(235, 220, 120, 700) withFont:[UIFont systemFontOfSize:8.0f]];
+    [partNotes drawInRect:CGRectMake(310, 220, 220, 700) withAttributes:@{NSFontAttributeName : [UIFont systemFontOfSize:8.0f]}];
+//    [partNotes drawInRect:CGRectMake(310, 220, 220, 700) withFont:[UIFont systemFontOfSize:8.0f]];
+    [deficientPartString drawInRect:CGRectMake(500, 220, 300, 700) withAttributes:@{NSFontAttributeName : [UIFont systemFontOfSize:8.0f]}];
+//    [deficientPartString drawInRect:CGRectMake(500, 220, 300, 700) withFont:[UIFont systemFontOfSize:8.0f]];
+    [conditionRatingString drawInRect:CGRectMake(20, 700, 600, 70) withAttributes:@{NSFontAttributeName : [UIFont systemFontOfSize:8.0f]}];
+//    [conditionRatingString drawInRect:CGRectMake(20, 700, 600, 70) withFont:[UIFont systemFontOfSize:8.0f]];
+    [footerLeft drawInRect:CGRectMake(300, 700, 600, 70) withAttributes:@{NSFontAttributeName : [UIFont systemFontOfSize:8.0f]}];
+//    [footerLeft drawInRect:CGRectMake(300, 700, 600, 70) withFont:[UIFont systemFontOfSize:8.0f]];
+    [footerRight drawInRect:CGRectMake(450, 700, 600, 70) withAttributes:@{NSFontAttributeName : [UIFont systemFontOfSize:10.0f]}];
+//    [footerRight drawInRect:CGRectMake(450, 700, 600, 70) withFont:[UIFont systemFontOfSize:8.0f]];
     // Clean up
     UIGraphicsPopContext();
     CGPDFContextEndPage(pdfContext);
