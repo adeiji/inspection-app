@@ -164,9 +164,14 @@ NSString *const TO_USER = @"toUser";
     });
 }
 
-- (InspectedCrane *) getNewInspectedCraneObject {
+- (InspectedCrane *) getNewInspectedCraneObjectWithHoistSrl : (NSString *) hoistSrl {
     NSEntityDescription *entity = [NSEntityDescription entityForName:kCoreDataClassInspectedCrane inManagedObjectContext:_context];
     InspectedCrane *inspectedCrane = [[InspectedCrane alloc] initWithEntity:entity insertIntoManagedObjectContext:_context];
+    
+    InspectedCrane *existingCrane = [self getCraneFromDatabaseWithHoistSrl:hoistSrl];
+    if (existingCrane != nil) {
+        [_context deleteObject:existingCrane];
+    }
     
     return inspectedCrane;
 }
@@ -451,6 +456,16 @@ NSString *const TO_USER = @"toUser";
     }
     
     [((AppDelegate *) [[UIApplication sharedApplication] delegate]) saveContext];
+}
+
+
+- (void) deleteCraneFromDevice : (InspectedCrane *) crane {
+    InspectedCrane *craneObject = [self getCraneFromDatabaseWithHoistSrl:crane.hoistSrl];
+    
+    if (craneObject != nil) {
+        [_context deleteObject:craneObject];
+    }
+    
 }
 
 - (NSMutableArray *) getAllCranesWithInspections {

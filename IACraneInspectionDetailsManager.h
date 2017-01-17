@@ -85,6 +85,13 @@
  */
 - (void) removeAllConditionsForCrane : (InspectedCrane *) crane;
 
+/*
+ 
+ Remove crane from the device
+ 
+ */
+- (void) deleteCraneFromDevice : (InspectedCrane *) crane;
+
 - (void) saveAllConditionsForCrane : (InspectedCrane *) crane
                         Conditions : (NSArray *) conditions;
 
@@ -113,7 +120,7 @@ WithViewControllerToDisplayAlert : (UIViewController *) viewController;
  Return a new inspected Crane Object
  
  */
-- (InspectedCrane *) getNewInspectedCraneObject;
+- (InspectedCrane *) getNewInspectedCraneObjectWithHoistSrl : (NSString *) hoistSrl;
 
 /*
  

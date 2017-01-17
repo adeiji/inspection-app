@@ -765,7 +765,7 @@
 				LastUpgradeCheck = 0820;
 				TargetAttributes = {
 					8BC5844D150ABD87000AC695 = {
-						DevelopmentTeam = HJPTQ3N75W;
+						DevelopmentTeam = 58P227HU77;
 						LastSwiftMigration = 0820;
 					};
 				};
@@ -1058,6 +1058,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 58P227HU77;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1087,7 +1088,7 @@
 					"\"$(SRCROOT)\"",
 				);
 				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.sswr.inspectionapp;
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sswr.Inspection-Form-App";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Inspection Form App-Bridging-Header.h";
@@ -1107,6 +1108,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 58P227HU77;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1128,7 +1130,7 @@
 					"\"$(SRCROOT)/T1Autograph\"",
 				);
 				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.sswr.inspectionapp;
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sswr.Inspection-Form-App";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Inspection Form App-Bridging-Header.h";

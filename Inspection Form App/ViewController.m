@@ -52,19 +52,6 @@ static NSString* USERNAME = @"username";
     iosVersion = [[UIDevice currentDevice] systemVersion];
     [self addObservers];
     _craneDescriptionsArray = [[IACraneInspectionDetailsManager sharedManager] cranes];
-    
-    [self loadOwner];
-    
-    if (!owner)
-    {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Enter Name Alert" message:@"Enter your name" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
-        [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
-        alert.delegate = self;
-        alert.tag = ALERT_NAME;
-        [alert show];
-        [alert becomeFirstResponder];
-    }
-    
     [self setupTxtDate];
     [self dateSelectionChanged:_datePicker];
     
@@ -222,11 +209,6 @@ static NSString* USERNAME = @"username";
     activeField = nil;
 }
 
-- (void) loadOwner
-{
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    owner = [defaults objectForKey:USERNAME];
-}
 #pragma mark Database Methods
 
 
@@ -369,15 +351,17 @@ static NSString* USERNAME = @"username";
     //First we check to see if any of the fields in the customerInfo page and if there are any empty fields then the user is not allowed to submit the information and a UIAlertView pops up telling you that there are fields where nothing was inserted into the fields
     if (results == EMPTY_FIELD)
     {
-        UIAlertView *error = [[UIAlertView alloc] initWithTitle:@"Customer Error" message:@"All values on the main screen must be entered!" 
-                                                       delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [error show];
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Customer Error" message:@"All Values On the Customer Screen Must Be Entered" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+        [alertController addAction:action];
+        [self presentViewController:alertController animated:YES completion:nil];
     } //checks to see if there are any quotation marks inside of any of the fields, and if there are any then the user is not allowed to enter the customer, and a UIAlertView pops up telling you this
     else if (results == INVALID_CHARACTER)
     {
-        UIAlertView *error = [[UIAlertView alloc] initWithTitle:@"Customer Error" message:@"Can not enter character 'quotation mark' ' \" ' into any field!" 
-                                                       delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [error show];
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Customer Error" message:@"Can Not Enter Characters 'quotation mark' ' \" ' Into Any Field!" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+        [alertController addAction:action];
+        [self presentViewController:alertController animated:YES completion:nil];
     }
 }
 
@@ -454,34 +438,6 @@ static NSString* USERNAME = @"username";
         if (sqlite3_step(statement) != SQLITE_DONE)
         {
             NSAssert(0, @"Error updating table: IPADOWNER");
-        }
-    }
-}
-
-#pragma mark - Alert View Methods
-//this method handles all alert view finishes
-- (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if (buttonIndex==0)
-    {
-        if (alertView.tag == ALERT_NAME)
-        {
-            UITextField *textField = [alertView textFieldAtIndex:0];
-            if ([textField.text isEqual:@""])
-            {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Enter Name Alert" message:@"Enter your name" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
-                [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
-                [alert show];
-                [alert becomeFirstResponder];
-                alert.delegate = self;
-            }
-            else
-            {
-                owner = textField.text;
-                _txtTechnicianName.text = [owner uppercaseString];
-                [[NSUserDefaults standardUserDefaults] setObject:owner forKey:USERNAME];
-                [[NSUserDefaults standardUserDefaults] synchronize];
-            }
         }
     }
 }

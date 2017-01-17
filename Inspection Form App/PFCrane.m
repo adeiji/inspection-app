@@ -33,7 +33,7 @@
 - (InspectedCrane *) getCoreDataObject {
     
     
-    InspectedCrane *inspectedCrane = [[IACraneInspectionDetailsManager sharedManager] getNewInspectedCraneObject];
+    InspectedCrane *inspectedCrane = [[IACraneInspectionDetailsManager sharedManager] getNewInspectedCraneObjectWithHoistSrl:self.hoistSrl];
     
     inspectedCrane.capacity = self.capacity;
     inspectedCrane.craneDescription = self.craneDescription;

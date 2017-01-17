@@ -357,9 +357,15 @@
                               delegate:self
                               cancelButtonTitle:@"Cancel"
                               otherButtonTitles:@"ok", nil];
+        
         [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
         [alert show];
         [alert becomeFirstResponder];
+        
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Overall Rating" message:@"What Is the Overall Condition Rating?" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+        }];
         
         pageSubmitAlertView = YES;
         

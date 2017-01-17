@@ -140,6 +140,7 @@ int const SEND_INSPECTIONS_INDEX = 0, VIEW_INSPECTIONS_INDEX = 1, ACCOUNT_INDEX 
 - (void) handleDownloadedCraneWithCraneObject : (PFCrane *) craneObject {
     UINavigationController *navigationController = [self.splitViewController.viewControllers objectAtIndex:1] ;
     ViewController *viewController = [navigationController.viewControllers objectAtIndex:0];
+    
     InspectedCrane *inspectedCrane = [craneObject getCoreDataObject];
     
     [self showInspectionScreen:inspectedCrane];
@@ -147,6 +148,7 @@ int const SEND_INSPECTIONS_INDEX = 0, VIEW_INSPECTIONS_INDEX = 1, ACCOUNT_INDEX 
     [viewController.inspectionViewController.itemListStore loadConditionsForCraneFromServer:craneObject WithInspectedCrane:inspectedCrane];
     [[IACraneInspectionDetailsManager sharedManager] deleteEarlierInspectionOfCraneFromServer:inspectedCrane ForUser:[PFUser currentUser]];
     [[IACraneInspectionDetailsManager sharedManager] removeAllConditionsForCrane:inspectedCrane];
+    
 }
 
 - (void) showInspectionScreen : (InspectedCrane *) inspectedCrane {

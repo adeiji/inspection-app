@@ -198,7 +198,6 @@ static NSString *const OPTIONS = @"options";
             [cell setBackgroundColor:[UIColor colorWithRed:236.0f/255.0f green:240.0f/255.0f blue:241.0f/255.0f alpha:1.0]];
             cell.textLabel.textColor = [UIColor whiteColor];
         }
-        NSLog(@"Crane Shared %@", crane.shared.stringValue);
     }
     else {
         id obj = [_tableData objectAtIndex:indexPath.row];
