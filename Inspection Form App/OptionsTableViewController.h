@@ -14,6 +14,8 @@
 #import "PFInspectionDetails.h"
 #import "MasterViewController.h"
 #import "AccountTableViewController.h"
+#import "IAAddSignatureViewController.h"
+#import "IAAddSignatureView.h"
 
 @interface OptionsTableViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 

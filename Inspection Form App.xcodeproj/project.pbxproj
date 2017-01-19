@@ -57,6 +57,8 @@
 		CEFD6D2D1839575E001764E9 /* CraneView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEFD6D2C1839575E001764E9 /* CraneView.xib */; };
 		CEFD6D70183A8705001764E9 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFD6D6F183A8705001764E9 /* Default-568h@2x.png */; };
 		CEFD6D72183A87D8001764E9 /* JobInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEFD6D71183A87D8001764E9 /* JobInfoView.xib */; };
+		F4235EE01E2EE67600AE9569 /* IAAddSignatureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4235EDF1E2EE67600AE9569 /* IAAddSignatureViewController.m */; };
+		F4235EE31E2EE6D000AE9569 /* IAAddSignatureView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4235EE21E2EE6D000AE9569 /* IAAddSignatureView.m */; };
 		F423A8C91C7BA24C00899B6E /* LoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F423A8C81C7BA24C00899B6E /* LoginView.xib */; };
 		F423A8CD1C7BA62800899B6E /* DEUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = F423A8CC1C7BA62800899B6E /* DEUser.swift */; };
 		F423A8D31C7BA80B00899B6E /* DELoginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F423A8D21C7BA80B00899B6E /* DELoginManager.m */; };
@@ -176,6 +178,10 @@
 		CEFD6D6F183A8705001764E9 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		CEFD6D71183A87D8001764E9 /* JobInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JobInfoView.xib; sourceTree = "<group>"; };
 		E1A4C2449B6DA9D1ED2E1AE3 /* Pods-Inspection Form App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Inspection Form App.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Inspection Form App/Pods-Inspection Form App.debug.xcconfig"; sourceTree = "<group>"; };
+		F4235EDE1E2EE67600AE9569 /* IAAddSignatureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAAddSignatureViewController.h; sourceTree = "<group>"; };
+		F4235EDF1E2EE67600AE9569 /* IAAddSignatureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAAddSignatureViewController.m; sourceTree = "<group>"; };
+		F4235EE11E2EE6D000AE9569 /* IAAddSignatureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAAddSignatureView.h; sourceTree = "<group>"; };
+		F4235EE21E2EE6D000AE9569 /* IAAddSignatureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAAddSignatureView.m; sourceTree = "<group>"; };
 		F423A8C81C7BA24C00899B6E /* LoginView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginView.xib; sourceTree = "<group>"; };
 		F423A8CB1C7BA62700899B6E /* Inspection Form App-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Inspection Form App-Bridging-Header.h"; sourceTree = "<group>"; };
 		F423A8CC1C7BA62800899B6E /* DEUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DEUser.swift; sourceTree = "<group>"; };
@@ -410,6 +416,7 @@
 		CE38513D18107296003629DA /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				F4235EDD1E2EE64000AE9569 /* Add Signature View Controller */,
 				CE486AE3180F1E2F00B1B953 /* Inspection View Controller */,
 			);
 			name = "View Controllers";
@@ -598,6 +605,17 @@
 				CE798DB6180F369600C2E5A0 /* InspectionBussiness.m */,
 			);
 			name = "Business Layer";
+			sourceTree = "<group>";
+		};
+		F4235EDD1E2EE64000AE9569 /* Add Signature View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				F4235EDE1E2EE67600AE9569 /* IAAddSignatureViewController.h */,
+				F4235EDF1E2EE67600AE9569 /* IAAddSignatureViewController.m */,
+				F4235EE11E2EE6D000AE9569 /* IAAddSignatureView.h */,
+				F4235EE21E2EE6D000AE9569 /* IAAddSignatureView.m */,
+			);
+			name = "Add Signature View Controller";
 			sourceTree = "<group>";
 		};
 		F423A8CA1C7BA51B00899B6E /* Dephyned */ = {
@@ -904,6 +922,7 @@
 				8BECD3BF150E934900616735 /* OptionList.m in Sources */,
 				F43E74951C877F3A0045E5F1 /* PFCustomer.m in Sources */,
 				F49674401E0DDA9F00DE78A6 /* InspectionView.m in Sources */,
+				F4235EE01E2EE67600AE9569 /* IAAddSignatureViewController.m in Sources */,
 				F43E74991C8A071B0045E5F1 /* AccountTableViewController.m in Sources */,
 				F4B29E641ADC1E740025A091 /* CoreDataCondition.m in Sources */,
 				8B544612150F0C3E007E1CA9 /* GradientView.m in Sources */,
@@ -925,6 +944,7 @@
 				F4FBDAE51AD80A520090DA72 /* PromptView.m in Sources */,
 				CE40D38B18087BC20080E9BD /* DataLayer.m in Sources */,
 				F49DDEB11ACCDA5C00A02162 /* IACraneInspectionDetailsManager.m in Sources */,
+				F4235EE31E2EE6D000AE9569 /* IAAddSignatureView.m in Sources */,
 				CE486AE2180F17DC00B1B953 /* MasterViewController.m in Sources */,
 				8BE9DE801616355800906B98 /* OrdinalNumberFormatter.m in Sources */,
 				F423A8CD1C7BA62800899B6E /* DEUser.swift in Sources */,

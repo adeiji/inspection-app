@@ -13,7 +13,7 @@
 
 @end
 
-int const SEND_INSPECTIONS_INDEX = 0, VIEW_INSPECTIONS_INDEX = 1, ACCOUNT_INDEX = 2;
+int const SEND_INSPECTIONS_INDEX = 0, VIEW_INSPECTIONS_INDEX = 1, ACCOUNT_INDEX = 2, ADD_SIGNATURE_INDEX = 3;
 
 @implementation OptionsTableViewController
 
@@ -116,6 +116,13 @@ int const SEND_INSPECTIONS_INDEX = 0, VIEW_INSPECTIONS_INDEX = 1, ACCOUNT_INDEX 
         else if (indexPath.row == ACCOUNT_INDEX) {
             AccountTableViewController *accountTableViewController = [AccountTableViewController new];
             [self.navigationController pushViewController:accountTableViewController animated:true];
+        }
+        else if (indexPath.row == ADD_SIGNATURE_INDEX) {
+            IAAddSignatureViewController *signatureViewController = [[IAAddSignatureViewController alloc] init];
+            IAAddSignatureView *signatureView = [[IAAddSignatureView alloc] initWithFrame:signatureViewController.view.frame];
+            [self.navigationController pushViewController:signatureViewController animated:true];
+            [signatureViewController.view addSubview:signatureView];
+            signatureView.backgroundColor = [UIColor whiteColor];
         }
     }
     else if (_inspections != nil) { // Is the user currently looking at inspections that the current user has done
