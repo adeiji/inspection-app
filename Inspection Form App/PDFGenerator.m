@@ -395,14 +395,11 @@
     NSMutableString *craneDescriptionRightResultsColumn = [NSMutableString stringWithString:@""];
     
     //creane description results
-    //-Crane-Capacity
-    [craneDescriptionRightResultsColumn appendString:[NSMutableString stringWithFormat:@"\n\n%@\n", inspection.inspectedCrane.capacity]];
-    //Crane Srl
-    [craneDescriptionRightResultsColumn appendString:[NSString stringWithFormat:@"%@\n", inspection.inspectedCrane.craneSrl]];
-    //Hoist Srl
-    [craneDescriptionRightResultsColumn appendString:[NSString stringWithFormat:@"%@\n", inspection.inspectedCrane.hoistSrl]];
-    //Equipment Number
-    [craneDescriptionRightResultsColumn appendString:[NSString stringWithFormat:@"%@\n", inspection.inspectedCrane.equipmentNumber]];
+    
+    [craneDescriptionRightResultsColumn appendString:[NSMutableString stringWithFormat:@"\n\n%@\n", inspection.inspectedCrane.capacity]];      //-Crane-Capacity
+    [craneDescriptionRightResultsColumn appendString:[NSString stringWithFormat:@"%@\n", inspection.inspectedCrane.craneSrl]];  // Crane Srl
+    [craneDescriptionRightResultsColumn appendString:[NSString stringWithFormat:@"%@\n", inspection.inspectedCrane.hoistSrl]];   // Hoist Srl
+    [craneDescriptionRightResultsColumn appendString:[NSString stringWithFormat:@"%@\n", inspection.inspectedCrane.equipmentNumber]];  //Equipment Number
     
     return craneDescriptionRightResultsColumn;
 }
@@ -576,7 +573,14 @@
 //    [footerLeft drawInRect:CGRectMake(300, 700, 600, 70) withFont:[UIFont systemFontOfSize:8.0f]];
     [footerRight drawInRect:CGRectMake(450, 700, 600, 70) withAttributes:@{NSFontAttributeName : [UIFont systemFontOfSize:10.0f]}];
 //    [footerRight drawInRect:CGRectMake(450, 700, 600, 70) withFont:[UIFont systemFontOfSize:8.0f]];
+    
+    SignatureManager *manager = [SignatureManager new];
+    UIImage *image = [manager getSignature];
+    [image drawInRect:CGRectMake(300, 400, 300, 175)];
     // Clean up
+    
+    
+    
     UIGraphicsPopContext();
     CGPDFContextEndPage(pdfContext);
     CGPDFContextClose(pdfContext);

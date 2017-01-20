@@ -17,11 +17,36 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+}
+
+- (void) viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self.signatureView.saveButton addTarget:self action:@selector(saveSignature) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void) saveSignature {
+    SignatureManager *signatureManager = [SignatureManager new];
+    
+    if (self.signatureView.mainImage.image != nil)
+    {
+        [signatureManager saveSignatureFromImage:self.signatureView.mainImage.image];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Signature Saved" message:@"The Signature Was Saved Successfully!" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *okayAction = [UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleDefault handler:nil];
+        [alert addAction:okayAction];
+        [self presentViewController:alert animated:YES completion:nil];
+    }
+    else {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"No Signature" message:@"Please Write Your Signature" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *okayAction = [UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleDefault handler:nil];
+        [alert addAction:okayAction];
+        [self presentViewController:alert animated:YES completion:nil];
+    }
 }
 
 /*

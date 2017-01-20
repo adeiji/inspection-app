@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "Inspection.h"
 #import "InspectionPoint.h"
+#import "SignatureManager.h"
 
 @interface PDFGenerator : NSObject <UIDocumentInteractionControllerDelegate>
 

@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SignatureManager.h"
+#import "IAAddSignatureView.h"
 
 @interface IAAddSignatureViewController : UIViewController
+
+@property (strong, nonatomic) IAAddSignatureView *signatureView;
 
 @end

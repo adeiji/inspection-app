@@ -72,6 +72,7 @@
 		F43E74991C8A071B0045E5F1 /* AccountTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F43E74981C8A071B0045E5F1 /* AccountTableViewController.m */; };
 		F453A3B21AD43E3B00319D7A /* InspectionModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F453A3B01AD43E3B00319D7A /* InspectionModel.xcdatamodeld */; };
 		F453A3B51AD43FB200319D7A /* Customer.m in Sources */ = {isa = PBXBuildFile; fileRef = F453A3B41AD43FB200319D7A /* Customer.m */; };
+		F480551A1E3288B600330D95 /* SignatureManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F48055191E3288B600330D95 /* SignatureManager.m */; };
 		F49674401E0DDA9F00DE78A6 /* InspectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = F496743F1E0DDA9F00DE78A6 /* InspectionView.m */; };
 		F49DDEA71ACCC60C00A02162 /* SyncManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F49DDEA61ACCC60C00A02162 /* SyncManager.m */; };
 		F49DDEAD1ACCCB2700A02162 /* IAConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = F49DDEAC1ACCCB2700A02162 /* IAConstants.m */; };
@@ -205,6 +206,8 @@
 		F453A3B11AD43E3B00319D7A /* InspectionModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = InspectionModel.xcdatamodel; sourceTree = "<group>"; };
 		F453A3B31AD43FB200319D7A /* Customer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Customer.h; sourceTree = "<group>"; };
 		F453A3B41AD43FB200319D7A /* Customer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Customer.m; sourceTree = "<group>"; };
+		F48055181E3288B600330D95 /* SignatureManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignatureManager.h; sourceTree = "<group>"; };
+		F48055191E3288B600330D95 /* SignatureManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignatureManager.m; sourceTree = "<group>"; };
 		F496743E1E0DDA9F00DE78A6 /* InspectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectionView.h; sourceTree = "<group>"; };
 		F496743F1E0DDA9F00DE78A6 /* InspectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InspectionView.m; sourceTree = "<group>"; };
 		F49DDEA51ACCC60C00A02162 /* SyncManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncManager.h; sourceTree = "<group>"; };
@@ -672,9 +675,19 @@
 			name = "Account View Controller";
 			sourceTree = "<group>";
 		};
+		F48055171E3288A000330D95 /* Signature Manager */ = {
+			isa = PBXGroup;
+			children = (
+				F48055181E3288B600330D95 /* SignatureManager.h */,
+				F48055191E3288B600330D95 /* SignatureManager.m */,
+			);
+			name = "Signature Manager";
+			sourceTree = "<group>";
+		};
 		F49DDEA01ACCC5CE00A02162 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				F48055171E3288A000330D95 /* Signature Manager */,
 				F49DDEAE1ACCDA4600A02162 /* Crane Inspection Manager */,
 				F49DDEA11ACCC5D200A02162 /* Sync Manager */,
 			);
@@ -947,6 +960,7 @@
 				F4235EE31E2EE6D000AE9569 /* IAAddSignatureView.m in Sources */,
 				CE486AE2180F17DC00B1B953 /* MasterViewController.m in Sources */,
 				8BE9DE801616355800906B98 /* OrdinalNumberFormatter.m in Sources */,
+				F480551A1E3288B600330D95 /* SignatureManager.m in Sources */,
 				F423A8CD1C7BA62800899B6E /* DEUser.swift in Sources */,
 				F49DDEAD1ACCCB2700A02162 /* IAConstants.m in Sources */,
 			);
