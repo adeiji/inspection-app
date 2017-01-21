@@ -40,5 +40,7 @@ NSString *const UI_PROMPT_HIDDEN = @"com.inspection.app.prompt.hidden";
 NSString *const WATER_DISTRICT_CRANES_SAVED = @"com.inspection.app.water.district.cranes.saved";
 
 // Signature
-NSString *const SIGNATURE_IMAGE_FILENAME = @"signature";
+NSString *const SIGNATURE_IMAGE_FILENAME = @"signature.png";
 NSString *const SIGNATURE_USER_DEFAULTS_KEY = @"com.signature.key";
+
+NSString *const DOCUMENTS_FOLDER = @"myDocuments";

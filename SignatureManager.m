@@ -14,7 +14,7 @@
     NSData *imageData = UIImagePNGRepresentation(image);
     NSString *imagePath = [self documentsPathForFileName:SIGNATURE_IMAGE_FILENAME];
     [imageData writeToFile:imagePath atomically:YES];
-    [[NSUserDefaults standardUserDefaults] setObject:imagePath forKey:SIGNATURE_USER_DEFAULTS_KEY];
+    [[NSUserDefaults standardUserDefaults] setObject:SIGNATURE_IMAGE_FILENAME forKey:SIGNATURE_USER_DEFAULTS_KEY];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
 }
@@ -31,7 +31,8 @@
     
     NSString *imagePath = [[NSUserDefaults standardUserDefaults] objectForKey:SIGNATURE_USER_DEFAULTS_KEY];
     if (imagePath) {
-        return [UIImage imageWithData:[NSData dataWithContentsOfFile:imagePath]];
+        NSString *fullImagePath = [self documentsPathForFileName:SIGNATURE_IMAGE_FILENAME];
+        return [UIImage imageWithData:[NSData dataWithContentsOfFile:fullImagePath]];
     }
     
     return nil;

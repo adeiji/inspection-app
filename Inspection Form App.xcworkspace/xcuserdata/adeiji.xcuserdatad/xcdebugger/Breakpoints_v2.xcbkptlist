@@ -46,7 +46,7 @@
                   moduleName = "Inspection Form App"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/adeiji/Documents/Dephyned/inspection-app/Pods/Bolts/Bolts/Common/BFTask.m"
-                  timestampString = "506647231.216648"
+                  timestampString = "506651380.167295"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "18"
@@ -54,6 +54,22 @@
                   offsetFromSymbolStart = "14">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Inspection Form App/AppDelegate.m"
+            timestampString = "506648543.481765"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "277"
+            endingLineNumber = "277"
+            landmarkName = "-applicationWillTerminate:"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
