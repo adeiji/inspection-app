@@ -141,13 +141,18 @@
     [_deficiencySwitch setOn:myCondition.deficient];
     [_applicableSwitch setOn:myCondition.applicable];
     [self promptCancelPressed:nil];
-    if ([point.prompts count] > 0) {
+    // Check to make sure that this view controller is currently being viewed.  If not than we don't want to show the prompts
+    if ([self.navigationController.viewControllers lastObject] == self) {
+        if ([point.prompts count] > 0) {
 
-        [self displayPromptViewWithPrompts:[point.prompts array]];
-        promptView.promptLocation = 0;
-        Prompt *prompt = promptView.prompts[promptView.promptLocation];
-        promptView.lblPromptText.text = prompt.title;
+            [self displayPromptViewWithPrompts:[point.prompts array]];
+            promptView.promptLocation = 0;
+            Prompt *prompt = promptView.prompts[promptView.promptLocation];
+            promptView.lblPromptText.text = prompt.title;
+        }
     }
+    
+    
     
     [self setDeficiencyViews];
 }
@@ -175,7 +180,7 @@
 
 - (BOOL) textFieldShouldReturn:(UITextField *)textField {
     if (textField==promptView.txtPromptResult) {
-        [self promptOkPressed];
+        [self promptOkPressed:nil];
         return NO;
     }
     else {
@@ -185,7 +190,7 @@
 
 
 // User clicks the okay button whenever a prompt is showing
-- (IBAction)promptOkPressed {
+- (IBAction) promptOkPressed:(id) sender {
     
     if (![promptView.txtPromptResult.text isEqualToString:@""])
     {

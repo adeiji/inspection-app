@@ -63,5 +63,4 @@ typedef enum {
 
 //Action Outlets
 - (IBAction)gotoCustomerInformation:(id)sender;
-
 @end
