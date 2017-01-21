@@ -12,8 +12,6 @@
 
 @interface DataLayer : NSObject
 
-+ (void) createTable : (NSString*) databasePath
-           contactDb : (sqlite3*) contactDB;
 
 + (NSString*) LoadOwner : (NSString*) databasePath
          contactDb : (sqlite3*) contactDB;

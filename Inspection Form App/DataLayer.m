@@ -37,7 +37,7 @@
                         DBTable : (DBTable *) table
 {
     //Creates a record with all the information from the current condition and then adds this information to the Datastore
-    DBRecord *conditionRecord = [table insert: dictionaryToStore];
+    
 }
 
 //Syncs the record to the DataStore API

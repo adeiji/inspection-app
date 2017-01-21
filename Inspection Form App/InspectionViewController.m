@@ -544,24 +544,6 @@
         _deficiencyPicker.alpha = 1;
         _deficiencyPicker.showsSelectionIndicator = YES;
         _deficiencyPicker.userInteractionEnabled = YES;
-        
-        if ([_lblPart.text isEqualToString:@"Wire Rope, Load Chain, Fittings"])
-        {
-            timesShown=0;
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Length, size, fittings" message:@"Enter the Length:" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Ok", nil];
-            [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
-            [alert show];
-            [alert becomeFirstResponder];
-            pageSubmitAlertView = NO;
-        }
-        else if ([_lblPart.text isEqualToString:@"Hoist Load Brake"])
-        {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Type" message:@"What is the type?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Ok", nil];
-            [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
-            [alert show];
-            [alert becomeFirstResponder];
-            pageSubmitAlertView = NO;
-        }
     }
     else {
         _deficiencyPicker.alpha = .5;

@@ -37,8 +37,6 @@
 #define kMinimumGestureLength   25
 #define kMaximumVariance        100
 
-static const int ALERT_NAME = 5;
-static const int RESET_EVERYTHING = 6;
 static NSString* USERNAME = @"username";
 
 - (void)viewDidLoad {
@@ -547,15 +545,18 @@ static NSString* USERNAME = @"username";
             _inspectionViewController.validated = YES;
         }
         else {
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"No Crane" message:@"Sorry, but there's no cranes to select.  Click Sync Crane Details"  delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-            [alertView show];
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"No Crane" message:@"Sorry, but there's no cranes to select." preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *action = [UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleDefault handler:nil];
+            [alertController addAction:action];
+            [self presentViewController:alertController animated:YES completion:nil];
         }
     }
     else
     {
-        // Display that the user needs to change some information on the Customer Submit page in order to submit this page.
-        UIAlertView *view = [[UIAlertView alloc] initWithTitle:@"Errors on Page" message:@"There is an error on the customer page.  Can not submit." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [view show];
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Errors on Page" message:@"There is an error on the customer page. Can not submit" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *action = [UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleDefault handler:nil];
+        [alertController addAction:action];
+        [self presentViewController:alertController animated:YES completion:nil];
     }
     
 }
