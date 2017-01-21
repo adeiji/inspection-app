@@ -285,6 +285,9 @@
     
     // Signature
     [self MoveToPoint:CGPointMake(390, 645) AndDrawString:SIGNATURE InRect:CGRectMake(330, 630, 500, 120) WithContext:pdfContext AddToPoint:CGPointMake(550, 645) FontSize:12.0f ParagraphyStyle:paragraphStyle];
+    SignatureManager *signatureManager = [SignatureManager new];
+    UIImage *signatureImage = [signatureManager getSignature];
+    [signatureImage drawInRect:CGRectMake(430, 595, 50, 60)];
     
     // Title
     [self MoveToPoint:CGPointMake(80, 685) AndDrawString:TITLE InRect:CGRectMake(50, 670, 500, 120) WithContext:pdfContext AddToPoint:CGPointMake(170, 685) FontSize:12.0f ParagraphyStyle:paragraphStyle];
@@ -327,16 +330,12 @@
     NSMutableString *customerInfoResultsColumn = [NSMutableString stringWithString:@""];
     
     //the customer information results
-    //Customer - Name
-    [customerInfoResultsColumn appendString:[NSMutableString stringWithFormat:@"\n\n%@\n", inspection.customer.name]];
-    //-Contact
-    [customerInfoResultsColumn appendString:[NSString stringWithFormat:@"%@\n", inspection.customer.contact]];
-    //-Job Number
-    [customerInfoResultsColumn appendString:[NSString stringWithFormat:@"%@\n", inspection.jobNumber]];
-    //-Email
-    [customerInfoResultsColumn appendString:[NSString stringWithFormat:@"%@\n", inspection.customer.email]];
-    //-Address
-    [customerInfoResultsColumn appendString:[NSString stringWithFormat:@"%@\n\n", inspection.customer.address]];
+    
+    [customerInfoResultsColumn appendString:[NSMutableString stringWithFormat:@"\n\n%@\n", inspection.customer.name]];  //Customer - Name
+    [customerInfoResultsColumn appendString:[NSString stringWithFormat:@"%@\n", inspection.customer.contact]];          //-Contact
+    [customerInfoResultsColumn appendString:[NSString stringWithFormat:@"%@\n", inspection.jobNumber]];                 //-Job Number
+    [customerInfoResultsColumn appendString:[NSString stringWithFormat:@"%@\n", inspection.customer.email]];            //-Email
+    [customerInfoResultsColumn appendString:[NSString stringWithFormat:@"%@\n\n", inspection.customer.address]];        //-Address
     
     return customerInfoResultsColumn;
 }
