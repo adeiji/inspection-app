@@ -73,6 +73,7 @@
 		F453A3B21AD43E3B00319D7A /* InspectionModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F453A3B01AD43E3B00319D7A /* InspectionModel.xcdatamodeld */; };
 		F453A3B51AD43FB200319D7A /* Customer.m in Sources */ = {isa = PBXBuildFile; fileRef = F453A3B41AD43FB200319D7A /* Customer.m */; };
 		F480551A1E3288B600330D95 /* SignatureManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F48055191E3288B600330D95 /* SignatureManager.m */; };
+		F4809A651E3A48FB00BE0EFB /* PFBackupCraneObject.m in Sources */ = {isa = PBXBuildFile; fileRef = F4809A641E3A48FB00BE0EFB /* PFBackupCraneObject.m */; };
 		F49674401E0DDA9F00DE78A6 /* InspectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = F496743F1E0DDA9F00DE78A6 /* InspectionView.m */; };
 		F49DDEA71ACCC60C00A02162 /* SyncManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F49DDEA61ACCC60C00A02162 /* SyncManager.m */; };
 		F49DDEAD1ACCCB2700A02162 /* IAConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = F49DDEAC1ACCCB2700A02162 /* IAConstants.m */; };
@@ -208,6 +209,8 @@
 		F453A3B41AD43FB200319D7A /* Customer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Customer.m; sourceTree = "<group>"; };
 		F48055181E3288B600330D95 /* SignatureManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignatureManager.h; sourceTree = "<group>"; };
 		F48055191E3288B600330D95 /* SignatureManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignatureManager.m; sourceTree = "<group>"; };
+		F4809A631E3A48FB00BE0EFB /* PFBackupCraneObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFBackupCraneObject.h; sourceTree = "<group>"; };
+		F4809A641E3A48FB00BE0EFB /* PFBackupCraneObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFBackupCraneObject.m; sourceTree = "<group>"; };
 		F496743E1E0DDA9F00DE78A6 /* InspectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectionView.h; sourceTree = "<group>"; };
 		F496743F1E0DDA9F00DE78A6 /* InspectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InspectionView.m; sourceTree = "<group>"; };
 		F49DDEA51ACCC60C00A02162 /* SyncManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncManager.h; sourceTree = "<group>"; };
@@ -662,6 +665,8 @@
 				F43E74911C877E180045E5F1 /* PFCrane.m */,
 				F43E74931C877F3A0045E5F1 /* PFCustomer.h */,
 				F43E74941C877F3A0045E5F1 /* PFCustomer.m */,
+				F4809A631E3A48FB00BE0EFB /* PFBackupCraneObject.h */,
+				F4809A641E3A48FB00BE0EFB /* PFBackupCraneObject.m */,
 			);
 			name = "Parse Objects";
 			sourceTree = "<group>";
@@ -926,6 +931,7 @@
 				F423A8D61C7BA90900899B6E /* LoginViewController.m in Sources */,
 				8BC58463150ABD87000AC695 /* AppDelegate.m in Sources */,
 				CE40D39A180894300080E9BD /* PDFGenerator.m in Sources */,
+				F4809A651E3A48FB00BE0EFB /* PFBackupCraneObject.m in Sources */,
 				8BC58466150ABD87000AC695 /* ViewController.m in Sources */,
 				F43E748F1C8745810045E5F1 /* PFInspectionDetails.m in Sources */,
 				F49DDED91ACCED1600A02162 /* InspectionCrane.m in Sources */,

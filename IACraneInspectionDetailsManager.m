@@ -655,6 +655,8 @@ NSString *const TO_USER = @"toUser";
     craneObject.hoistMfg = crane.hoistMfg;
     craneObject.type = crane.type;
     craneObject.toUser = user;
+    craneObject.mfg = crane.mfg;
+    
     
     PFCustomer *customer = [PFCustomer object];
     customer.name = crane.customer.name;

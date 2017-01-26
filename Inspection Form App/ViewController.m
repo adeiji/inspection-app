@@ -57,6 +57,10 @@ static NSString* USERNAME = @"username";
     [self resetVariables];
     _txtTechnicianName.text = [owner uppercaseString];
     [self initiatePartsForSelectedCrane];
+    
+    if ([PFUser currentUser] != nil) {
+        self.txtTechnicianName.text = [[[PFUser currentUser] username] uppercaseString];
+    }
 }
 
 - (void) setIsCraneSet : (BOOL) value {

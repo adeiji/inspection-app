@@ -72,7 +72,11 @@ NSString *const PASSWORD = @"sswr";
                 [self showAlertViewWithMessage:error.userInfo[@"error"]];
             }
         }];
-        [user signUpInBackgroundWithTarget:self selector:@selector(userSignedIn)];
+        [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+            if (succeeded && !error) {
+                [self userSignedIn];
+            }
+        }];
     } else {
         [self showAlertViewWithMessage:@"Please Enter a Valid Name"];
     }
