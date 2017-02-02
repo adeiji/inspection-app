@@ -119,6 +119,10 @@ int const SEND_INSPECTIONS_INDEX = 0, VIEW_INSPECTIONS_INDEX = 1, ACCOUNT_INDEX 
             [self.navigationController pushViewController:accountTableViewController animated:true];
         }
         else if (indexPath.row == ADD_SIGNATURE_INDEX) {
+            // Change the device orientation to portrait
+            NSNumber *value = [NSNumber numberWithInt:UIInterfaceOrientationPortrait];
+            [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
+            
             IAAddSignatureViewController *signatureViewController = [[IAAddSignatureViewController alloc] init];
             signatureViewController.signatureView = [[IAAddSignatureView alloc] initWithFrame:signatureViewController.view.frame];
             [self.navigationController pushViewController:signatureViewController animated:true];
@@ -130,6 +134,10 @@ int const SEND_INSPECTIONS_INDEX = 0, VIEW_INSPECTIONS_INDEX = 1, ACCOUNT_INDEX 
         }
         else if (indexPath.row == LOAD_WATER_DISTRICT_CRANES) {
             [[IACraneInspectionDetailsManager sharedManager]  saveAllWaterDistrictCranes];
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Loading Finished" message:@"Finished Loading LVWWD Cranes" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *okayAction = [UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleDefault handler:nil];
+            [alertController addAction:okayAction];
+            [self.navigationController presentViewController:alertController animated:YES completion:nil];
         }
     }
     else if (_inspections != nil) { // Is the user currently looking at inspections that the current user has done
@@ -160,8 +168,9 @@ int const SEND_INSPECTIONS_INDEX = 0, VIEW_INSPECTIONS_INDEX = 1, ACCOUNT_INDEX 
     [self showInspectionScreen:inspectedCrane];
     [viewController.inspectionViewController.itemListStore loadConditionsForCrane:inspectedCrane];
     [viewController.inspectionViewController.itemListStore loadConditionsForCraneFromServer:craneObject WithInspectedCrane:inspectedCrane];
+    
     // If we send a NIL object from FromUser it's because this object was shared by another device, and the owner of that device does not need to be known.  Only information that was backed up from a device will contain data for FromUser key
-    [[IACraneInspectionDetailsManager sharedManager] deleteEarlierInspectionOfCraneFromServer:inspectedCrane ForUser:[PFUser currentUser] FromUser:nil];
+    [[IACraneInspectionDetailsManager sharedManager] deleteEarlierInspectionOfCraneFromServer:inspectedCrane ForUser:[PFUser currentUser] ];
     [[IACraneInspectionDetailsManager sharedManager] removeAllConditionsForCrane:inspectedCrane];
     
 }

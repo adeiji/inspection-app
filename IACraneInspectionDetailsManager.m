@@ -168,14 +168,22 @@ NSString *const TO_USER = @"toUser";
     [query whereKeyDoesNotExist:kParseToUser];
     [query whereKey:kParseFromUser equalTo:[PFUser currentUser]];
     [query whereKey:kParseHoistSrl equalTo:hoistSrl];
-
+    NSMutableArray *allInspectionDetails = [NSMutableArray new];
+    int counter=0;
     [query setLimit:1000];
     
-    NSArray *inspectionDetails = [query findObjects:&error];
-    if (error) {
-        NSLog(@"Error getting inspection details from server - %@", error.description);
+    while ([allInspectionDetails count] < [query countObjects]) {
+        counter++;
+        NSArray *inspectionDetails = [query findObjects:&error];
+        if (error) {
+            NSLog(@"Error getting inspection details from server - %@", error.description);
+        }
+        else {
+            [allInspectionDetails addObjectsFromArray:inspectionDetails];
+        }
+        [query setSkip:1000 * counter];
     }
-    return inspectionDetails;
+    return allInspectionDetails;
 }
 
 - (NSArray *) getAllCranesFromServerForCurrentUser {
@@ -184,14 +192,23 @@ NSString *const TO_USER = @"toUser";
     [query whereKey:kParseFromUser equalTo:[PFUser currentUser]];
     [query whereKeyDoesNotExist:kParseToUser];
     [query setLimit:1000];
-    NSError *error;
-    NSArray *cranes = [query findObjects:&error];
+    NSMutableArray *allCranes = [NSMutableArray new];
+    int counter = 0;
     
-    if (error) {
-        NSLog(@"Error getting cranes from server - %@", error.description);
+    while ([allCranes count] < [query countObjects]) {
+        NSError *error;
+        NSArray *cranes = [query findObjects:&error];
+        [allCranes addObjectsFromArray:cranes];
+        
+        if (error) {
+            NSLog(@"Error getting cranes from server - %@", error.description);
+        }
+        
+        counter ++;
+        [query setSkip:counter * 1000];
     }
     
-    return cranes;
+    return allCranes;
 }
 
 - (void) getAllCurrentUsersInspectionsFromServerUsingManagedObjectContext : (NSManagedObjectContext *) context {
@@ -516,7 +533,7 @@ NSString *const TO_USER = @"toUser";
         coreDataCondition.optionSelected = condition.deficientPart;
         coreDataCondition.optionLocation = [NSNumber numberWithInteger:condition.optionLocation];
         coreDataCondition.hoistSrl = crane.hoistSrl;
-    }	    
+    }
     
     [self saveContext:context];
 }
@@ -596,64 +613,19 @@ NSString *const TO_USER = @"toUser";
  
  */
 - (void) deleteEarlierInspectionOfCraneFromServer : (InspectedCrane *) crane
-                                          ForUser : (PFUser *) user
-                                          FromUser: (PFUser *) fromUser
+                                          ForUser : (PFUser *) user                                          
 {
-    PFQuery *query = [PFInspectionDetails query];
-    [query whereKey:HOIST_SRL equalTo:crane.hoistSrl];
-    [query whereKey:TO_USER equalTo:user];
-    [query setLimit:1000];
-
-    if (!fromUser && user) {
-        [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
-            if ([objects count] > 0) {
-                for (PFInspectionDetails *object in objects) {
-                    [object deleteInBackground];
-                }
-            }
-        }];
-    }
-    
-    query = [PFCrane query];
-    [query whereKey:HOIST_SRL equalTo:crane.hoistSrl];
-    [query whereKey:TO_USER equalTo:user];
-    [query setLimit:1000];
-    if (!fromUser && user) {
-        [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
-            if ([objects count] > 0) {
-                for (PFInspectionDetails *object in objects) {
-                    [object deleteInBackground];
-                }
-            }
-        }];
-    }
-    else if (fromUser && !user) {
-        
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         PFQuery *query = [PFInspectionDetails query];
-        [query whereKey:HOIST_SRL equalTo:crane.hoistSrl];
-        [query whereKey:kParseFromUser equalTo:fromUser];
-        [query setLimit:1000];
-        [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
-            if ([objects count] > 0) {
-                for (PFInspectionDetails *object in objects) {
-                    [object delete];
-                }
-            }
-        }];
-        
-        query = [PFCrane query];
         [query whereKey:HOIST_SRL equalTo:crane.hoistSrl];
         [query whereKey:TO_USER equalTo:user];
         [query setLimit:1000];
-        [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
-            if ([objects count] > 0) {
-                for (PFInspectionDetails *object in objects) {
-                    [object delete];
-                }
-            }
-        }];
         
-    }
+        while ([query countObjects] > 0) {
+            NSArray *inspectionDetails = [query findObjects];
+            [PFObject deleteAll:inspectionDetails];
+        }
+    });
 }
 
 /*
@@ -662,22 +634,47 @@ NSString *const TO_USER = @"toUser";
  
  */
 - (NSArray *) getAllCranesForCurrentUserFromServer {
+    NSMutableArray *allCranes = [NSMutableArray new];
+    
     PFQuery *query = [PFCrane query];
     NSError *error;
-    [query whereKey:@"toUser" equalTo:[PFUser currentUser]];
+    [query whereKey:kParseToUser equalTo:[PFUser currentUser]];
     [query setLimit:1000];
-    NSArray *cranes = [query findObjects:&error];
-    return cranes;
+    int counter=0;
+    while ([allCranes count] < [query countObjects]) {
+        NSArray *cranes = [query findObjects:&error];
+        [allCranes addObject:cranes];
+        if (error) {
+            NSLog(@"Error retrieving cranes from server - com.inspectionapp.errorretrievingcranes - %@", error.description);
+        }
+        
+        counter++;
+        [query setSkip:1000 * counter];
+    }
+    return allCranes;
 }
 
 - (NSArray *) getAllConditionsFromServerForCrane : (PFCrane *) crane {
+    NSMutableArray *allConditions = [NSMutableArray new];
     PFQuery *query = [PFInspectionDetails query];
     [query whereKey:HOIST_SRL equalTo:crane.hoistSrl];
     [query whereKey:TO_USER equalTo:[PFUser currentUser]];
     [query setLimit:1000];
-    NSError *error;
-    NSArray * conditions = [query findObjects:&error];
-    return conditions;
+    int counter = 0;
+    
+    while ([allConditions count] < [query countObjects]) {
+        counter++;
+        NSError *error;
+        NSArray * conditions = [query findObjects:&error];
+        [allConditions addObject:conditions];
+        
+        if (error) {
+            NSLog(@"Error retrieving cranes from server - com.inspectionapp.errorretrievingconditions - %@", error.description);
+        }
+        [query setSkip:1000*counter];
+    }
+    
+    return allConditions;
 }
 
 - (void) deleteCustomersFromServerWithFromCurrentUser {
@@ -685,27 +682,35 @@ NSString *const TO_USER = @"toUser";
     [query whereKey:kParseFromUser equalTo:[PFUser currentUser]];
     [query whereKeyDoesNotExist:kParseToUser];
     [query setLimit:1000];
-    NSArray *objects = [query findObjects];
-    NSError *error;
     
-    [PFObject deleteAll:objects error:&error];
-    if (error) {
-        NSLog(@"Error on deleting all cranes - %@", error.description);
+    while ([query countObjects] > 0) {
+        NSArray *customers = [query findObjects];
+        NSError *error;
+        [PFObject deleteAll:customers error:&error];
+        if (error) {
+            NSLog(@"Error on deleting all cranes - %@", error.description);
+        }
     }
 }
 
 - (void) deleteCranesFromServerWithFromCurrentUser {
+    
     PFQuery *query = [PFCrane query];
     [query whereKey:kParseFromUser equalTo:[PFUser currentUser]];
     [query whereKeyDoesNotExist:kParseToUser];
     [query setLimit:1000];
-    NSArray *objects = [query findObjects];
-    NSError *error;
     
-    [PFObject deleteAll:objects error:&error];
-    if (error) {
-        NSLog(@"Error on deleting all cranes - %@", error.description);
+    while ([query countObjects] > 0) {
+        NSArray *objects = [query findObjects];
+        NSError *error;
+        
+        [PFObject deleteAll:objects error:&error];
+        if (error) {
+            NSLog(@"Error on deleting all cranes - %@", error.description);
+        }
     }
+    
+    
 }
 
 
@@ -722,7 +727,7 @@ NSString *const TO_USER = @"toUser";
     NSArray *inspectionDetails = [[IACraneInspectionDetailsManager sharedManager] getAllConditionsForCrane:crane WithContextOrNil:nil];
     NSMutableArray *pfInspectionDetailsObjects = [NSMutableArray new];
     
-    [self deleteEarlierInspectionOfCraneFromServer:crane ForUser:user FromUser:nil];
+    [self deleteEarlierInspectionOfCraneFromServer:crane ForUser:user];
     [self saveCraneToServer:crane WithToUser: user WithFromUser:[PFUser currentUser]];
     
     for (CoreDataCondition *condition in inspectionDetails) {
@@ -870,13 +875,17 @@ NSString *const TO_USER = @"toUser";
     
     dispatch_async(parseBackgroundQueue, ^{
         // Delete the cranes from the server but we want to complete the deletion before a save is performed so we use a background thread and than use the findObjects method which blocks the thread until completed
-#warning - Make sure we uncomment code
+        progressIndicatorView.progress = .15;
         [self deleteCranesFromServerWithFromCurrentUser];
+        progressIndicatorView.progress = .25;
         [self deleteInspectionDetailsFromServerWithFromCurrentUser];
+        progressIndicatorView.progress = .35;
+        [self deleteCustomersFromServerWithFromCurrentUser];
+        progressIndicatorView.progress = .45;
     });
     
     for (InspectedCrane *crane in cranes) {
-        NSArray *inspectionDetails = [self getAllConditionsForCrane:crane WithContextOrNil:nil];
+        NSArray *inspectionDetails = [self getAllConditionsForCrane:crane WithContextOrNil:nil];  // Grabs from local database
         for (CoreDataCondition *condition in inspectionDetails) {
             PFInspectionDetails *inspectionDetail = [PFInspectionDetails object];
             inspectionDetail.isDeficient = [condition.isDeficient boolValue];
@@ -889,18 +898,22 @@ NSString *const TO_USER = @"toUser";
             inspectionDetail.fromUser = [PFUser currentUser];
             [pfInspectionDetailsObjects addObject:inspectionDetail];
         }
-        
+        progressIndicatorView.progress = .75;
         dispatch_async(parseBackgroundQueue, ^{
             // Delete the cranes from the server but we want to complete the deletion before a save is performed so we use a background thread and than use the findObjects method which blocks the thread until completed
             [self saveCraneToServer:crane WithToUser:nil WithFromUser:[PFUser currentUser]];
+            progressIndicatorView.progress = .85;
         });
     }
     
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    dispatch_async(parseBackgroundQueue, ^{
         [self saveAllPFObjectsInArray:pfInspectionDetailsObjects];
+        progressIndicatorView.progress = 1.0;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [progressContainerView removeFromSuperview];
+            
+        });
     });
-    
-    [progressContainerView removeFromSuperview];
 }
 
 - (void) incrementIndicatorViewProgress : (UIProgressView *) progressIndicatorView
@@ -917,13 +930,16 @@ NSString *const TO_USER = @"toUser";
     PFQuery *query = [PFInspectionDetails query];
     [query setLimit:1000];
     [query whereKey:kParseFromUser equalTo:[PFUser currentUser]];
-    NSArray *inspectionDetailsFromServer = [query findObjects];
-    NSError *error;
-
-    [PFObject deleteAll:inspectionDetailsFromServer error:&error];
     
-    if (error) {
-        NSLog(@"Error deleting inspection details from the server on backup - %@", error.description);
+    while ([query countObjects] > 0) {
+        NSArray *inspectionDetailsFromServer = [query findObjects];
+        NSError *error;
+        
+        [PFObject deleteAll:inspectionDetailsFromServer error:&error];
+        
+        if (error) {
+            NSLog(@"Error deleting inspection details from the server on backup - %@", error.description);
+        }
     }
     
 }

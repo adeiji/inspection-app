@@ -144,8 +144,7 @@ WithViewControllerOrNilToDisplayAlert : (UIViewController *) viewController;
 - (Customer *) getNewCustomerObjectWithContext : (NSManagedObjectContext *) context;
 
 - (void) deleteEarlierInspectionOfCraneFromServer : (InspectedCrane *) crane
-                                          ForUser : (PFUser *) user
-                                          FromUser: (PFUser *) fromUser;
+                                          ForUser : (PFUser *) user;
 
 - (void) saveContext : (NSManagedObjectContext *) myContext ;
 

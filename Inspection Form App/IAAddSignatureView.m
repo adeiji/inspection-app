@@ -64,7 +64,6 @@
     self.mainImage.image = UIGraphicsGetImageFromCurrentImageContext();
     self.tempDrawImage.image = nil;
     UIGraphicsEndImageContext();
-    
 }
 
 - (void) createClearButton {
@@ -91,9 +90,12 @@
 }
 
 - (void)drawRect:(CGRect)rect {
+    
     [super drawRect:rect];
+    
     self.mainImage = [[UIImageView alloc] initWithFrame:CGRectMake(50, 100, self.frame.size.width - 100, (self.frame.size.height / 2) - 100)];
     self.tempDrawImage = [[UIImageView alloc] initWithFrame:CGRectMake(50, 100, self.frame.size.width - 100, (self.frame.size.height / 2) - 100)];
+    
     [self.mainImage setBackgroundColor:[UIColor clearColor]];
     [self.tempDrawImage setBackgroundColor:[UIColor clearColor]];
     
@@ -108,14 +110,12 @@
     [instructionLabel setTextColor:[UIColor blackColor]];
     
     [self addSubview:instructionLabel];
-    
     [self createSaveButton];
     [self createClearButton];
     [self addSubview:self.clearButton];
     [self addSubview:self.saveButton];
     
     CGContextRef context = UIGraphicsGetCurrentContext();
-    
     CGContextSetStrokeColorWithColor(context, [UIColor blackColor].CGColor);
     CGContextSetLineWidth(context, 2.0);
     CGContextMoveToPoint(context, 50, self.center.y);
