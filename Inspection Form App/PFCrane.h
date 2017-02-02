@@ -22,13 +22,19 @@
 @property (retain) NSString *equipmentNumber;
 @property (retain) NSString *hoistMdl;
 @property (retain) NSString *hoistMfg;
-@property (retain) NSString *hoistSrl;
+@property (retain) NSString *hoistSrl;  //unique
 @property (retain) NSString *mfg;
 @property (retain) NSString *type;
 @property (retain) PFCustomer *customer;
 @property (retain) PFUser *toUser;
+@property (retain) PFUser *fromUser;
 
-- (InspectedCrane *) getCoreDataObject;
+/*
+ 
+ Turns the PFObject into a Core Data object.  If the Context is set to nil, than we use the default global NSManagedObjectContext
+ 
+ */
+- (InspectedCrane *) getCoreDataObjectWithContextOrNil : (NSManagedObjectContext *) context;
 
 @end
 

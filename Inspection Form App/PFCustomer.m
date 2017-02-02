@@ -14,6 +14,7 @@
 @dynamic contact;
 @dynamic address;
 @dynamic email;
+@dynamic fromUser;
 
 + (void) load {
     [self registerSubclass];

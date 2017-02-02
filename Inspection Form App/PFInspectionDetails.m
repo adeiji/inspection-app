@@ -19,6 +19,7 @@
 @dynamic optionLocation;
 @dynamic hoistSrl;
 @dynamic toUser;
+@dynamic fromUser;
 @dynamic craneId;
 
 + (NSString *) parseClassName {

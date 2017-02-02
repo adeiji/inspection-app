@@ -16,5 +16,6 @@
 @property (retain) NSString *contact;
 @property (retain) NSString *address;
 @property (retain) NSString *email;
+@property (retain) PFUser *fromUser;
 
 @end

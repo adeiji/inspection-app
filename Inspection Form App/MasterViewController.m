@@ -181,7 +181,7 @@ static NSString *const OPTIONS = @"options";
     {
         InspectedCrane *crane = (InspectedCrane *) obj;
         label.text = [NSString stringWithFormat:@"%ld. %@", (long)indexPath.row + 1, crane.hoistSrl];
-        NSArray *conditions = [[IACraneInspectionDetailsManager sharedManager] getAllConditionsForCrane:crane];
+        NSArray *conditions = [[IACraneInspectionDetailsManager sharedManager] getAllConditionsForCrane:crane WithContextOrNil:nil];
         if ([conditions count] > 0)
         {
             UIButton *loadButton = [[UIButton alloc] init];

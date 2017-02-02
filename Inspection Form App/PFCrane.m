@@ -16,11 +16,12 @@
 @dynamic equipmentNumber;
 @dynamic hoistMdl;
 @dynamic hoistMfg;
-@dynamic hoistSrl;
+@dynamic hoistSrl;  //unique
 @dynamic mfg;
 @dynamic type;
 @dynamic customer;
 @dynamic toUser;
+@dynamic fromUser;
 
 + (void) load {
     [self registerSubclass];
@@ -30,10 +31,12 @@
     return @"InspectedCrane";
 }
 
-- (InspectedCrane *) getCoreDataObject {
+- (InspectedCrane *) getCoreDataObjectWithContextOrNil : (NSManagedObjectContext *) context {
     
-    
-    InspectedCrane *inspectedCrane = [[IACraneInspectionDetailsManager sharedManager] getNewInspectedCraneObjectWithHoistSrl:self.hoistSrl];
+    if (!context) {
+        context = ((AppDelegate *) [[UIApplication sharedApplication] delegate]).managedObjectContext;
+    }
+    InspectedCrane *inspectedCrane = [[IACraneInspectionDetailsManager sharedManager] getNewInspectedCraneObjectWithHoistSrl:self.hoistSrl WithContextOrNil:context];
     
     inspectedCrane.capacity = self.capacity;
     inspectedCrane.craneDescription = self.craneDescription;
@@ -45,7 +48,7 @@
     inspectedCrane.mfg = self.mfg;
     inspectedCrane.type = self.type;
     
-    Customer *customer = [[IACraneInspectionDetailsManager sharedManager] getNewCustomerObject];
+    Customer *customer = [[IACraneInspectionDetailsManager sharedManager] getNewCustomerObjectWithContext:context];
     [self.customer fetchIfNeeded];
     customer.name = self.customer.name;
     customer.address = self.customer.address;
@@ -54,7 +57,7 @@
     inspectedCrane.customer = customer;
     // Since we know that whenever we need to get an InspectedCrane Object from a PFCrane Object this inspection has been downloaded from the server, we set the shared property to true of the InspectedCrane Object
     inspectedCrane.shared = [NSNumber numberWithBool:true];
-    [[IACraneInspectionDetailsManager sharedManager] saveContext];
+    [[IACraneInspectionDetailsManager sharedManager] saveContext:context];
     return inspectedCrane;
 }
 

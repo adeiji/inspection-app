@@ -8,13 +8,20 @@
 
 #import "IAConstants.h"
 
+// Parse
+
 NSString *const kParseClassCrane = @"Crane";
-NSString *const kParseInspectionDetailsHoistSrl = @"hoistSrl";
+NSString *const kParseHoistSrl = @"hoistSrl";
+NSString *const kParseCustomer = @"Customer";
 NSString *const kObjectName = @"name";
 NSString *const kInspectionPoints = @"inspectionPoints";
 NSString *const kOptions = @"options";
 NSString *const kPrompts = @"prompts";
 NSString *const kRequiresDeficiency = @"requiresDeficiency";
+NSString *const kParseToUser = @"toUser";
+NSString *const kParseFromUser = @"fromUser";
+NSString *const parseInspectionDetailsClassName = @"InspectionDetails";
+NSString *const parseInspectedCranesClassName = @"InspectedCrane";
 
 // Core Data
 NSString *const kCoreDataClassCrane = @"InspectionCrane";

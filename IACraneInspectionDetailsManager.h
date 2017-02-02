@@ -76,7 +76,7 @@
  Get all the condtions specific to the hoist srl
  
  */
-- (NSArray *) getAllConditionsForCrane : (InspectedCrane *) crane;
+- (NSArray *) getAllConditionsForCrane : (InspectedCrane *) crane WithContextOrNil : (NSManagedObjectContext *) context;
 
 /*
  
@@ -92,8 +92,21 @@
  */
 - (void) deleteCraneFromDevice : (InspectedCrane *) crane;
 
+/*
+ 
+ If context is set to nil than we use the default global context from App Delegate
+ 
+ */
 - (void) saveAllConditionsForCrane : (InspectedCrane *) crane
-                        Conditions : (NSArray *) conditions;
+                        Conditions : (NSArray *) conditions
+    UsingManagedObjectContextOrNil : (NSManagedObjectContext *) context;
+
+/*
+ 
+ Store all the cranes that are on this device on the cloud
+ 
+ */
+- (void) backupCranesOnDevice;
 
 - (NSMutableArray *) getAllCranesWithInspections;
 /*
@@ -103,7 +116,7 @@
  */
 - (void) shareCraneDetails : (InspectedCrane *) crane
                   WithUser : (PFUser *) user
-WithViewControllerToDisplayAlert : (UIViewController *) viewController;
+WithViewControllerOrNilToDisplayAlert : (UIViewController *) viewController;
 
 
 - (NSArray *) getAllCranesForCurrentUserFromServer;
@@ -120,17 +133,26 @@ WithViewControllerToDisplayAlert : (UIViewController *) viewController;
  Return a new inspected Crane Object
  
  */
-- (InspectedCrane *) getNewInspectedCraneObjectWithHoistSrl : (NSString *) hoistSrl;
+- (InspectedCrane *) getNewInspectedCraneObjectWithHoistSrl : (NSString *) hoistSrl
+                                           WithContextOrNil : (NSManagedObjectContext *) context;
 
 /*
  
  Return a new customer object
 
  */
-- (Customer *) getNewCustomerObject;
+- (Customer *) getNewCustomerObjectWithContext : (NSManagedObjectContext *) context;
 
 - (void) deleteEarlierInspectionOfCraneFromServer : (InspectedCrane *) crane
-                                          ForUser : (PFUser *) user;
+                                          ForUser : (PFUser *) user
+                                          FromUser: (PFUser *) fromUser;
 
-- (void) saveContext;
+- (void) saveContext : (NSManagedObjectContext *) myContext ;
+
+/*
+ 
+ Grab all the water district cranes from the lvwwdcranes.plist file and store in the database
+ 
+ */
+- (void) saveAllWaterDistrictCranes;
 @end

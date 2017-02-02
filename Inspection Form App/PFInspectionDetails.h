@@ -20,6 +20,7 @@
 @property int optionLocation;
 @property (retain) NSString *hoistSrl;
 @property (retain) PFUser *toUser;
+@property (retain) PFUser *fromUser;
 @property (retain) NSString *craneId;
 
 @end

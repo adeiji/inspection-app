@@ -9,9 +9,9 @@
 #import <Parse/Parse.h>
 #import "PFCrane.h"
 
-@interface PFBackupCraneObject : PFObject
+@interface PFBackupCraneObject : PFObject <PFSubclassing>
 
-@property (retain) PFUser *toUser;
+@property (retain) PFUser *user;
 @property (retain) PFCrane *crane;
 
 @end

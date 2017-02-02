@@ -10,6 +10,9 @@
 
 @implementation PFBackupCraneObject
 
+@dynamic user;
+@dynamic crane;
+
 + (void) load {
     [self registerSubclass];
 }

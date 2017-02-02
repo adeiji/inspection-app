@@ -8,8 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
+// Parse
 FOUNDATION_EXPORT NSString *const kParseClassCrane;
-FOUNDATION_EXPORT NSString *const kParseInspectionDetailsHoistSrl;
+FOUNDATION_EXPORT NSString *const kParseHoistSrl;
+FOUNDATION_EXPORT NSString *const kParseCustomer;
 FOUNDATION_EXPORT NSString *const kObjectName;
 FOUNDATION_EXPORT NSString *const kInspectionPoints;
 FOUNDATION_EXPORT NSString *const kCoreDataClassCrane;
@@ -22,9 +24,17 @@ FOUNDATION_EXPORT NSString *const kCoreDataClassAttributeHoistSrl;
 FOUNDATION_EXPORT NSString *const kSelectedInspectedCrane;
 FOUNDATION_EXPORT NSString *const kCoreDataClassCustomer;
 FOUNDATION_EXPORT NSString *const kPrompts;
+
+
+FOUNDATION_EXPORT NSString *const parseInspectionDetailsClassName;
+FOUNDATION_EXPORT NSString *const parseInspectedCranesClassName;
+
 FOUNDATION_EXPORT NSString *const kCoreDataClassPrompt;
 FOUNDATION_EXPORT NSString *const kRequiresDeficiency;
 FOUNDATION_EXPORT NSString *const kCoreDataClassCondition;
+
+FOUNDATION_EXPORT NSString *const kParseToUser;
+FOUNDATION_EXPORT NSString *const kParseFromUser;
 
 
 // Notification Center

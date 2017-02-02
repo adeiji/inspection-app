@@ -69,7 +69,7 @@ static NSString* USERNAME = @"username";
 
 - (IBAction)showOptionsMenu:(id)sender {
     OptionsTableViewController *optionsTableViewController = [[OptionsTableViewController alloc] init];
-    optionsTableViewController.options = [NSArray arrayWithObjects:@"Send Inspection", @"View Inspections Shared With You", @"Account", @"Add/Edit Signature", nil];
+    optionsTableViewController.options = [NSArray arrayWithObjects:@"Send Inspection", @"View Inspections Shared With You", @"Account", @"Add/Edit Signature", @"Backup Data to Cloud", @"Load Water District Cranes", nil];
     [self.navigationController pushViewController:optionsTableViewController animated:true];
 }
 

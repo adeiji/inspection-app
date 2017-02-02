@@ -38,6 +38,7 @@
 @synthesize craneTypes = __craneTypes;
 @synthesize pastCranes = __pastCranes;
 
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [self setUpParseWithLaunchOptions:launchOptions];
@@ -65,20 +66,8 @@
     [self fillCriteriaObjects];
     [self getPreviouslyFinishedCranes];
     
-    
-//    // Only run this the first time the application opens
-//    NSString *firstTime = [[NSUserDefaults standardUserDefaults] objectForKey:@"firstTime"];
-//    if (!firstTime)
-//    {
-//        [[IACraneInspectionDetailsManager sharedManager] saveAllWaterDistrictCranes];
-//        [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"firstTime"];
-//        [[NSUserDefaults standardUserDefaults] synchronize];
-//    }
-
-    
     return YES;
 }
-
 
 - (NSManagedObjectContext *) managedObjectContext {
     
@@ -164,13 +153,22 @@
     // Allow the parse local data store
     [ParseCrashReporting enable];
     // Parse Keys - Livead
-//    [Parse setApplicationId:@"pXYoDYstnZ7wvICh2nNtxmAwegOpjhsdRpFjNoVE"
-//                  clientKey:@"QiK7CN2M6Yh86Kn9FMLk8OBO0uHV9Icg0ryxrc11"];
+    
+    
+#ifdef DEBUG
+    [Parse initializeWithConfiguration:[ParseClientConfiguration configurationWithBlock:^(id<ParseMutableClientConfiguration>  _Nonnull configuration) {
+        [configuration setApplicationId:@"com.sswradmindev"];
+        [configuration setClientKey:@"QiK7CN2M6Yh86Kn9FMLk8OBO0uHV9Icg0ryxrc11"];
+        [configuration setServer:@"https://sswr-admin-dev.herokuapp.com/parse"];
+    }]];
+#else
     [Parse initializeWithConfiguration:[ParseClientConfiguration configurationWithBlock:^(id<ParseMutableClientConfiguration>  _Nonnull configuration) {
         [configuration setApplicationId:@"pXYoDYstnZ7wvICh2nNtxmAwegOpjhsdRpFjNoVE"];
         [configuration setClientKey:@"QiK7CN2M6Yh86Kn9FMLk8OBO0uHV9Icg0ryxrc11"];
         [configuration setServer:@"https://sswr-inspection-app.herokuapp.com/parse"];
     }]];
+#endif
+    
      
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
 }

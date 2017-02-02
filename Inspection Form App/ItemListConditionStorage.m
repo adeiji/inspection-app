@@ -37,18 +37,18 @@
                        WithInspectedCrane : (InspectedCrane *) inspectedCrane {
     PFQuery *query = [PFInspectionDetails query];
     
-    [query whereKey:kParseInspectionDetailsHoistSrl equalTo:crane[kParseInspectionDetailsHoistSrl]];
+    [query whereKey:kParseHoistSrl equalTo:crane[kParseHoistSrl]];
     
     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         
         myConditions = [NSMutableArray arrayWithArray: [[IACraneInspectionDetailsManager sharedManager] convertParseConditionsToConditionObjects:objects]];
-        [[IACraneInspectionDetailsManager sharedManager] saveAllConditionsForCrane:inspectedCrane Conditions:myConditions];
+        [[IACraneInspectionDetailsManager sharedManager] saveAllConditionsForCrane:inspectedCrane Conditions:myConditions UsingManagedObjectContextOrNil:nil];
     }];
 }
 
 - (void) loadConditionsForCrane : (InspectedCrane *) crane {
     
-    NSArray *conditionsArray = [[IACraneInspectionDetailsManager sharedManager] getAllConditionsForCrane:crane];
+    NSArray *conditionsArray = [[IACraneInspectionDetailsManager sharedManager] getAllConditionsForCrane:crane WithContextOrNil:nil];
     
     if ([conditionsArray count] > 0)
     {

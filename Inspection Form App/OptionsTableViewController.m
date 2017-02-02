@@ -13,7 +13,8 @@
 
 @end
 
-int const SEND_INSPECTIONS_INDEX = 0, VIEW_INSPECTIONS_INDEX = 1, ACCOUNT_INDEX = 2, ADD_SIGNATURE_INDEX = 3;
+// These are the indexes of Strings stored in the options array which stores the options that are viewed on the table view controller, you can update the actual strings themselves in the ViewController.m file in the method showOptionsMenu
+int const SEND_INSPECTIONS_INDEX = 0, VIEW_INSPECTIONS_INDEX = 1, ACCOUNT_INDEX = 2, ADD_SIGNATURE_INDEX = 3, BACKUP_TO_CLOUD = 4, LOAD_WATER_DISTRICT_CRANES = 5;
 
 @implementation OptionsTableViewController
 
@@ -124,6 +125,12 @@ int const SEND_INSPECTIONS_INDEX = 0, VIEW_INSPECTIONS_INDEX = 1, ACCOUNT_INDEX 
             [signatureViewController.view addSubview:signatureViewController.signatureView];
             signatureViewController.signatureView.backgroundColor = [UIColor whiteColor];
         }
+        else if (indexPath.row == BACKUP_TO_CLOUD) {
+            [[IACraneInspectionDetailsManager sharedManager] backupCranesOnDevice];
+        }
+        else if (indexPath.row == LOAD_WATER_DISTRICT_CRANES) {
+            [[IACraneInspectionDetailsManager sharedManager]  saveAllWaterDistrictCranes];
+        }
     }
     else if (_inspections != nil) { // Is the user currently looking at inspections that the current user has done
         optionsTableViewController.selectedCrane = [_inspections objectAtIndex:indexPath.row];
@@ -136,7 +143,7 @@ int const SEND_INSPECTIONS_INDEX = 0, VIEW_INSPECTIONS_INDEX = 1, ACCOUNT_INDEX 
     }
     else if (_users != nil) { // Is the user currently looking at all the users on the server
         PFUser *user = [_users objectAtIndex:indexPath.row];
-        [[IACraneInspectionDetailsManager sharedManager] shareCraneDetails:_selectedCrane WithUser:user WithViewControllerToDisplayAlert:self];
+        [[IACraneInspectionDetailsManager sharedManager] shareCraneDetails:_selectedCrane WithUser:user WithViewControllerOrNilToDisplayAlert:self] ;
     }
     else if (_inspectionsSentToCurrentUser != nil) {
         PFCrane *craneObject = [_inspectionsSentToCurrentUser objectAtIndex:indexPath.row];
@@ -148,12 +155,13 @@ int const SEND_INSPECTIONS_INDEX = 0, VIEW_INSPECTIONS_INDEX = 1, ACCOUNT_INDEX 
     UINavigationController *navigationController = [self.splitViewController.viewControllers objectAtIndex:1] ;
     ViewController *viewController = [navigationController.viewControllers objectAtIndex:0];
     
-    InspectedCrane *inspectedCrane = [craneObject getCoreDataObject];
+    InspectedCrane *inspectedCrane = [craneObject getCoreDataObjectWithContextOrNil:nil];
     
     [self showInspectionScreen:inspectedCrane];
     [viewController.inspectionViewController.itemListStore loadConditionsForCrane:inspectedCrane];
     [viewController.inspectionViewController.itemListStore loadConditionsForCraneFromServer:craneObject WithInspectedCrane:inspectedCrane];
-    [[IACraneInspectionDetailsManager sharedManager] deleteEarlierInspectionOfCraneFromServer:inspectedCrane ForUser:[PFUser currentUser]];
+    // If we send a NIL object from FromUser it's because this object was shared by another device, and the owner of that device does not need to be known.  Only information that was backed up from a device will contain data for FromUser key
+    [[IACraneInspectionDetailsManager sharedManager] deleteEarlierInspectionOfCraneFromServer:inspectedCrane ForUser:[PFUser currentUser] FromUser:nil];
     [[IACraneInspectionDetailsManager sharedManager] removeAllConditionsForCrane:inspectedCrane];
     
 }

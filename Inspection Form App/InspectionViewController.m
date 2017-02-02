@@ -342,8 +342,7 @@
 
     if (inspection.inspectedCrane.hoistSrl)
     {
-        [[IACraneInspectionDetailsManager sharedManager] saveAllConditionsForCrane:inspection.inspectedCrane
-                                                                    Conditions:_itemListStore.myConditions];
+        [[IACraneInspectionDetailsManager sharedManager] saveAllConditionsForCrane:inspection.inspectedCrane Conditions:_itemListStore.myConditions UsingManagedObjectContextOrNil:nil];
     }
     //If all the information is correctly inputed on the page, then we simply save the information.  Otherwise we go back so that the user can change whatever is necessary.
     if ([self validate]) {
