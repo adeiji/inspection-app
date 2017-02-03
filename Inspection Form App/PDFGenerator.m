@@ -575,7 +575,7 @@
     
     SignatureManager *manager = [SignatureManager new];
     UIImage *image = [manager getSignature];
-    [image drawInRect:CGRectMake(300, 400, 300, 175)];
+    [image drawInRect:CGRectMake(20, 635, 80, 46.4)];
     
     UIGraphicsPopContext();
     CGPDFContextEndPage(pdfContext);
