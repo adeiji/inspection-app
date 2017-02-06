@@ -219,6 +219,15 @@ static NSString* USERNAME = @"username";
 - (IBAction)syncCraneInspectionDetails:(id)sender {
     _btnSync.enabled = NO;
     [SyncManager getAllInspectionDetails];
+    
+}
+
+- (void) updateUserDefaultsToSynced {
+
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:[NSNumber numberWithBool:YES] forKey:kSyncedFromDatabase];
+    [userDefaults synchronize];
+    
 }
 
 - (void) LoadEquipNumPressed:(id)sender

@@ -643,7 +643,7 @@ NSString *const TO_USER = @"toUser";
     int counter=0;
     while ([allCranes count] < [query countObjects]) {
         NSArray *cranes = [query findObjects:&error];
-        [allCranes addObject:cranes];
+        [allCranes addObjectsFromArray:cranes];
         if (error) {
             NSLog(@"Error retrieving cranes from server - com.inspectionapp.errorretrievingcranes - %@", error.description);
         }
@@ -666,7 +666,7 @@ NSString *const TO_USER = @"toUser";
         counter++;
         NSError *error;
         NSArray * conditions = [query findObjects:&error];
-        [allConditions addObject:conditions];
+        [allConditions addObjectsFromArray:conditions];
         
         if (error) {
             NSLog(@"Error retrieving cranes from server - com.inspectionapp.errorretrievingconditions - %@", error.description);

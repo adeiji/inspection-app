@@ -46,12 +46,12 @@
                   moduleName = "Inspection Form App"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/adeiji/Documents/Dephyned/inspection-app/Pods/Bolts/Bolts/Common/BFTask.m"
-                  timestampString = "507772682.834196"
+                  timestampString = "508094266.508357"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "18"
                   endingLineNumber = "18"
-                  offsetFromSymbolStart = "14">
+                  offsetFromSymbolStart = "18">
                </Location>
             </Locations>
          </BreakpointContent>

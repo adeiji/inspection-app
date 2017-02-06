@@ -83,7 +83,8 @@
  All the conditions that already exist for the crane on this device are deleted
  
  */
-- (void) removeAllConditionsForCrane : (InspectedCrane *) crane;
+- (void) removeAllConditionsForCrane : (InspectedCrane *) crane
+           UsingManagedObjectContext : (NSManagedObjectContext *) context;
 
 /*
  

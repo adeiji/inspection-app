@@ -130,7 +130,16 @@ int const SEND_INSPECTIONS_INDEX = 0, VIEW_INSPECTIONS_INDEX = 1, ACCOUNT_INDEX 
             signatureViewController.signatureView.backgroundColor = [UIColor whiteColor];
         }
         else if (indexPath.row == BACKUP_TO_CLOUD) {
-            [[IACraneInspectionDetailsManager sharedManager] backupCranesOnDevice];
+            NSArray *inspectedCranes = [[IACraneInspectionDetailsManager sharedManager] getAllInspectedCranes];
+            if ([inspectedCranes count] != 0) {
+                [[IACraneInspectionDetailsManager sharedManager] backupCranesOnDevice];
+            }
+            else {
+                UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"No Data To Backup" message:@"You have nothing to backup.  Please inspect some cranes first." preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction *okayAction = [UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleDefault handler:nil];
+                [alertController addAction:okayAction];
+                [self.navigationController presentViewController:alertController animated:YES completion:nil];
+            }
         }
         else if (indexPath.row == LOAD_WATER_DISTRICT_CRANES) {
             [[IACraneInspectionDetailsManager sharedManager]  saveAllWaterDistrictCranes];
@@ -171,7 +180,7 @@ int const SEND_INSPECTIONS_INDEX = 0, VIEW_INSPECTIONS_INDEX = 1, ACCOUNT_INDEX 
     
     // If we send a NIL object from FromUser it's because this object was shared by another device, and the owner of that device does not need to be known.  Only information that was backed up from a device will contain data for FromUser key
     [[IACraneInspectionDetailsManager sharedManager] deleteEarlierInspectionOfCraneFromServer:inspectedCrane ForUser:[PFUser currentUser] ];
-    [[IACraneInspectionDetailsManager sharedManager] removeAllConditionsForCrane:inspectedCrane];
+    [[IACraneInspectionDetailsManager sharedManager] removeAllConditionsForCrane:inspectedCrane UsingManagedObjectContext:nil];
     
 }
 

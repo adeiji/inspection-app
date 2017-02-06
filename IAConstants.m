@@ -50,4 +50,5 @@ NSString *const WATER_DISTRICT_CRANES_SAVED = @"com.inspection.app.water.distric
 NSString *const SIGNATURE_IMAGE_FILENAME = @"signature.png";
 NSString *const SIGNATURE_USER_DEFAULTS_KEY = @"com.signature.key";
 
+NSString *const kSyncedFromDatabase = @"com.inspectionapp.synced";
 NSString *const DOCUMENTS_FOLDER = @"myDocuments";
