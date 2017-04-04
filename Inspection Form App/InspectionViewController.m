@@ -390,9 +390,11 @@
             [incorrectInputAlert addAction:okayAction];
         }
         else if ([textField.text intValue] < 3) {
+            overallRating = textField.text;
             [self checkIfTestLoads];
         }
         else {
+            overallRating = textField.text;
             self.createCertificateButton.enabled = FALSE;
             [PDFGenerator writeReport:inspection.itemList Inspection:inspection OverallRating:overallRating PartsArray:_partsArray];
             UIDocumentInteractionController *pdfViewController = [PDFGenerator DisplayPDFWithOverallRating:inspection];
