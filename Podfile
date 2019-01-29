@@ -7,9 +7,9 @@ platform:ios, :deployment_target => '8.0'
 
 target 'Inspection Form App' do
 
-pod 'Parse', '~> 1.7'
-pod 'ParseCrashReporting', '~> 1.6'
-pod 'Masonry', '~> 0.6'
+pod 'Parse'
+pod 'Masonry'
+pod 'Bugsee'
 
 end
 

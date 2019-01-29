@@ -709,8 +709,6 @@ NSString *const TO_USER = @"toUser";
             NSLog(@"Error on deleting all cranes - %@", error.description);
         }
     }
-    
-    
 }
 
 

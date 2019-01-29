@@ -1,0 +1,451 @@
+2019-01-28 21:14:32 +0000  Initial pipeline context: <IDEDistributionProcessingPipelineContext: 0x7ff90d329b50; archive(resolved)='<IDEArchive: 0x7ff90880ee10>', distributionTask(resolved)='2', distributionDestination(resolved)='1', distributionMethod(resolved)='<IDEDistributionMethodiOSEnterprise: 0x7ff9098f8ba0>', team(resolved)='<IDEProvisioningDisambiguatableBasicTeam: 0x7ff906922e20; teamID='58P227HU77', teamName='SILVER STATE WIRE ROPE AND RIGGING, INC', teamType='Enterprise', username='adeiji@yahoo.com', isFreeProvisioningTeam='0'>'>
+	Chain (12, self inclusive):
+	<IDEDistributionProcessingPipelineContext: 0x7ff90d329b50; archive = '<IDEArchive: 0x7ff90880ee10>', distributionMethod='<IDEDistributionMethodiOSEnterprise: 0x7ff9098f8ba0>', team='<IDEProvisioningDisambiguatableBasicTeam: 0x7ff906922e20; teamID='58P227HU77', teamName='SILVER STATE WIRE ROPE AND RIGGING, INC', teamType='Enterprise', username='adeiji@yahoo.com', isFreeProvisioningTeam='0'>'>
+	<IDEDistributionProcessingPipelineContext: 0x7ff90c395790; archive = '<IDEArchive: 0x7ff90880ee10>', distributionMethod='<IDEDistributionMethodiOSEnterprise: 0x7ff9098f8ba0>', team='<IDEProvisioningDisambiguatableBasicTeam: 0x7ff906922e20; teamID='58P227HU77', teamName='SILVER STATE WIRE ROPE AND RIGGING, INC', teamType='Enterprise', username='adeiji@yahoo.com', isFreeProvisioningTeam='0'>'>
+	<IDEDistributionContext: 0x7ff90e1d9f90; archive = '<IDEArchive: 0x7ff90880ee10>', distributionMethod='<IDEDistributionMethodiOSEnterprise: 0x7ff9098f8ba0>', team='<IDEProvisioningDisambiguatableBasicTeam: 0x7ff906922e20; teamID='58P227HU77', teamName='SILVER STATE WIRE ROPE AND RIGGING, INC', teamType='Enterprise', username='adeiji@yahoo.com', isFreeProvisioningTeam='0'>'>
+	<IDEDistributionContext: 0x7ff90e15d370; archive = '<IDEArchive: 0x7ff90880ee10>', distributionMethod='<IDEDistributionMethodiOSEnterprise: 0x7ff9098f8ba0>', team='<IDEProvisioningDisambiguatableBasicTeam: 0x7ff906922e20; teamID='58P227HU77', teamName='SILVER STATE WIRE ROPE AND RIGGING, INC', teamType='Enterprise', username='adeiji@yahoo.com', isFreeProvisioningTeam='0'>'>
+	<IDEDistributionContext: 0x7ff90c61e560; archive = '<IDEArchive: 0x7ff90880ee10>', distributionMethod='<IDEDistributionMethodiOSEnterprise: 0x7ff9098f8ba0>', team='<IDEProvisioningDisambiguatableBasicTeam: 0x7ff906922e20; teamID='58P227HU77', teamName='SILVER STATE WIRE ROPE AND RIGGING, INC', teamType='Enterprise', username='adeiji@yahoo.com', isFreeProvisioningTeam='0'>'>
+	<IDEDistributionContext: 0x7ff90c6ebe20; archive = '<IDEArchive: 0x7ff90880ee10>', distributionMethod='<IDEDistributionMethodiOSEnterprise: 0x7ff9098f8ba0>', team='<IDEProvisioningDisambiguatableBasicTeam: 0x7ff906922e20; teamID='58P227HU77', teamName='SILVER STATE WIRE ROPE AND RIGGING, INC', teamType='Enterprise', username='adeiji@yahoo.com', isFreeProvisioningTeam='0'>'>
+	<IDEDistributionContext: 0x7ff90c3784b0; archive = '<IDEArchive: 0x7ff90880ee10>', distributionMethod='<IDEDistributionMethodiOSEnterprise: 0x7ff9098f8ba0>', team='<IDEProvisioningDisambiguatableBasicTeam: 0x7ff906922e20; teamID='58P227HU77', teamName='SILVER STATE WIRE ROPE AND RIGGING, INC', teamType='Enterprise', username='adeiji@yahoo.com', isFreeProvisioningTeam='0'>'>
+	<IDEDistributionContext: 0x7ff90d36fc90; archive = '<IDEArchive: 0x7ff90880ee10>', distributionMethod='<IDEDistributionMethodiOSEnterprise: 0x7ff9098f8ba0>', team='<IDEProvisioningDisambiguatableBasicTeam: 0x7ff906922e20; teamID='58P227HU77', teamName='SILVER STATE WIRE ROPE AND RIGGING, INC', teamType='Enterprise', username='adeiji@yahoo.com', isFreeProvisioningTeam='0'>'>
+	<IDEDistributionContext: 0x7ff90d19f620; archive = '<IDEArchive: 0x7ff90880ee10>', distributionMethod='<IDEDistributionMethodiOSEnterprise: 0x7ff9098f8ba0>', team='<IDEProvisioningDisambiguatableBasicTeam: 0x7ff906922e20; teamID='58P227HU77', teamName='SILVER STATE WIRE ROPE AND RIGGING, INC', teamType='Enterprise', username='adeiji@yahoo.com', isFreeProvisioningTeam='0'>'>
+	<IDEDistributionContext: 0x7ff90c3972a0; archive = '<IDEArchive: 0x7ff90880ee10>', distributionMethod='<IDEDistributionMethodiOSEnterprise: 0x7ff9098f8ba0>', team='(null)'>
+	<IDEDistributionContext: 0x7ff90bea51e0; archive = '<IDEArchive: 0x7ff90880ee10>', distributionMethod='<IDEDistributionMethodiOSEnterprise: 0x7ff9098f8ba0>', team='(null)'>
+	<IDEDistributionContext: 0x7ff909f942f0; archive = '<IDEArchive: 0x7ff90880ee10>', distributionMethod='(null)', team='(null)'>
+</IDEDistributionProcessingPipelineContext: 0x7ff90d329b50>
+2019-01-28 21:14:32 +0000  Processing step: IDEDistributionCreateDestRootStep
+2019-01-28 21:14:32 +0000  Processing step: IDEDistributionCopyItemStep
+2019-01-28 21:14:32 +0000  Running /usr/bin/ditto '-V' '/Users/adeiji/Library/Developer/Xcode/Archives/2019-01-28/Inspection Form App 1-28-19, 12.17 PM.xcarchive/Products/Applications/Inspection Form App.app' '/var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/Root/Payload/Inspection Form App.app'
+2019-01-28 21:14:32 +0000  >>> Copying /Users/adeiji/Library/Developer/Xcode/Archives/2019-01-28/Inspection Form App 1-28-19, 12.17 PM.xcarchive/Products/Applications/Inspection Form App.app 
+2019-01-28 21:14:32 +0000  copying file ./_CodeSignature/CodeResources ... 
+2019-01-28 21:14:32 +0000  15903 bytes for ./_CodeSignature/CodeResources
+2019-01-28 21:14:32 +0000  copying file ./lvwwdcranes.plist ... 
+2019-01-28 21:14:32 +0000  11730 bytes for ./lvwwdcranes.plist
+copying file ./LoginView.nib ... 
+2019-01-28 21:14:32 +0000  5406 bytes for ./LoginView.nib
+2019-01-28 21:14:32 +0000  copying file ./en.lproj/InfoPlist.strings ... 
+2019-01-28 21:14:32 +0000  42 bytes for ./en.lproj/InfoPlist.strings
+copying file ./en.lproj/Parse.strings ... 
+2019-01-28 21:14:32 +0000  122 bytes for ./en.lproj/Parse.strings
+2019-01-28 21:14:32 +0000  copying file ./iPadMainStoryboard.storyboardc/ohd-4L-yxA-view-FK9-Lc-U88.nib ... 
+2019-01-28 21:14:32 +0000  12641 bytes for ./iPadMainStoryboard.storyboardc/ohd-4L-yxA-view-FK9-Lc-U88.nib
+copying file ./iPadMainStoryboard.storyboardc/UISplitViewController-dnc-EI-M4a.nib ... 
+2019-01-28 21:14:32 +0000  2713 bytes for ./iPadMainStoryboard.storyboardc/UISplitViewController-dnc-EI-M4a.nib
+copying file ./iPadMainStoryboard.storyboardc/idw-ZA-hiy-view-mNY-Eo-vds.nib ... 
+2019-01-28 21:14:32 +0000  3362 bytes for ./iPadMainStoryboard.storyboardc/idw-ZA-hiy-view-mNY-Eo-vds.nib
+copying file ./iPadMainStoryboard.storyboardc/inspectionViewController.nib ... 
+2019-01-28 21:14:32 +0000  1141 bytes for ./iPadMainStoryboard.storyboardc/inspectionViewController.nib
+copying file ./iPadMainStoryboard.storyboardc/Info.plist ... 
+2019-01-28 21:14:32 +0000  342 bytes for ./iPadMainStoryboard.storyboardc/Info.plist
+2019-01-28 21:14:32 +0000  copying file ./iPadMainStoryboard.storyboardc/sgx-pA-png-view-nR6-am-Ia3.nib ... 
+2019-01-28 21:14:32 +0000  24566 bytes for ./iPadMainStoryboard.storyboardc/sgx-pA-png-view-nR6-am-Ia3.nib
+2019-01-28 21:14:32 +0000  copying file ./t1_logo.png ... 
+2019-01-28 21:14:32 +0000  6103 bytes for ./t1_logo.png
+copying file ./PromptView.nib ... 
+2019-01-28 21:14:32 +0000  3486 bytes for ./PromptView.nib
+2019-01-28 21:14:32 +0000  copying file ./InspectionModel.momd/VersionInfo.plist ... 
+2019-01-28 21:14:32 +0000  610 bytes for ./InspectionModel.momd/VersionInfo.plist
+copying file ./InspectionModel.momd/InspectionModel.mom ... 
+2019-01-28 21:14:32 +0000  7790 bytes for ./InspectionModel.momd/InspectionModel.mom
+2019-01-28 21:14:32 +0000  copying file ./CraneView.nib ... 
+2019-01-28 21:14:32 +0000  1350 bytes for ./CraneView.nib
+2019-01-28 21:14:32 +0000  copying file ./iPhoneStoryboard.storyboardc/a9G-FB-caT-view-6cW-EN-hjQ.nib ... 
+2019-01-28 21:14:32 +0000  8141 bytes for ./iPhoneStoryboard.storyboardc/a9G-FB-caT-view-6cW-EN-hjQ.nib
+2019-01-28 21:14:32 +0000  copying file ./iPhoneStoryboard.storyboardc/UITableViewController-Krf-Zb-aPn.nib ... 
+2019-01-28 21:14:32 +0000  1036 bytes for ./iPhoneStoryboard.storyboardc/UITableViewController-Krf-Zb-aPn.nib
+copying file ./iPhoneStoryboard.storyboardc/inspectionViewController.nib ... 
+2019-01-28 21:14:32 +0000  1141 bytes for ./iPhoneStoryboard.storyboardc/inspectionViewController.nib
+copying file ./iPhoneStoryboard.storyboardc/Krf-Zb-aPn-view-MPj-jb-Tjo.nib ... 
+2019-01-28 21:14:32 +0000  1412 bytes for ./iPhoneStoryboard.storyboardc/Krf-Zb-aPn-view-MPj-jb-Tjo.nib
+copying file ./iPhoneStoryboard.storyboardc/rky-KE-TeH-view-7Mp-4t-2om.nib ... 
+2019-01-28 21:14:32 +0000  21414 bytes for ./iPhoneStoryboard.storyboardc/rky-KE-TeH-view-7Mp-4t-2om.nib
+2019-01-28 21:14:32 +0000  copying file ./iPhoneStoryboard.storyboardc/UINavigationController-cPh-J7-Bos.nib ... 
+2019-01-28 21:14:32 +0000  2331 bytes for ./iPhoneStoryboard.storyboardc/UINavigationController-cPh-J7-Bos.nib
+copying file ./iPhoneStoryboard.storyboardc/Info.plist ... 
+2019-01-28 21:14:32 +0000  421 bytes for ./iPhoneStoryboard.storyboardc/Info.plist
+2019-01-28 21:14:32 +0000  copying file ./Default-568h@2x.png ... 
+2019-01-28 21:14:32 +0000  134267 bytes for ./Default-568h@2x.png
+2019-01-28 21:14:32 +0000  copying file ./logo.jpg ... 
+2019-01-28 21:14:32 +0000  1261630 bytes for ./logo.jpg
+2019-01-28 21:14:32 +0000  copying file ./ipadAppLogo.jpg ... 
+2019-01-28 21:14:32 +0000  57953 bytes for ./ipadAppLogo.jpg
+2019-01-28 21:14:32 +0000  copying file ./JobInfoView.nib ... 
+2019-01-28 21:14:32 +0000  9172 bytes for ./JobInfoView.nib
+2019-01-28 21:14:32 +0000  copying file ./titlePageLogo.jpg ... 
+2019-01-28 21:14:32 +0000  57953 bytes for ./titlePageLogo.jpg
+2019-01-28 21:14:32 +0000  copying file ./Frameworks/libswiftCoreImage.dylib ... 
+2019-01-28 21:14:32 +0000  332512 bytes for ./Frameworks/libswiftCoreImage.dylib
+2019-01-28 21:14:32 +0000  copying file ./Frameworks/libswiftObjectiveC.dylib ... 
+2019-01-28 21:14:32 +0000  397152 bytes for ./Frameworks/libswiftObjectiveC.dylib
+2019-01-28 21:14:32 +0000  copying file ./Frameworks/libswiftCore.dylib ... 
+2019-01-28 21:14:32 +0000  23112512 bytes for ./Frameworks/libswiftCore.dylib
+2019-01-28 21:14:32 +0000  copying file ./Frameworks/libswiftCoreGraphics.dylib ... 
+863168 bytes for ./Frameworks/libswiftCoreGraphics.dylib
+copying file ./Frameworks/libswiftUIKit.dylib ... 
+2019-01-28 21:14:32 +0000  721840 bytes for ./Frameworks/libswiftUIKit.dylib
+2019-01-28 21:14:32 +0000  copying file ./Frameworks/libswiftMetal.dylib ... 
+2019-01-28 21:14:32 +0000  393328 bytes for ./Frameworks/libswiftMetal.dylib
+2019-01-28 21:14:32 +0000  copying file ./Frameworks/libswiftDispatch.dylib ... 
+2019-01-28 21:14:32 +0000  1417840 bytes for ./Frameworks/libswiftDispatch.dylib
+2019-01-28 21:14:32 +0000  copying file ./Frameworks/libswiftos.dylib ... 
+2019-01-28 21:14:32 +0000  397504 bytes for ./Frameworks/libswiftos.dylib
+copying file ./Frameworks/libswiftCoreFoundation.dylib ... 
+2019-01-28 21:14:32 +0000  332256 bytes for ./Frameworks/libswiftCoreFoundation.dylib
+2019-01-28 21:14:32 +0000  copying file ./Frameworks/libswiftDarwin.dylib ... 
+2019-01-28 21:14:32 +0000  532960 bytes for ./Frameworks/libswiftDarwin.dylib
+2019-01-28 21:14:32 +0000  copying file ./Frameworks/libswiftQuartzCore.dylib ... 
+2019-01-28 21:14:32 +0000  336512 bytes for ./Frameworks/libswiftQuartzCore.dylib
+2019-01-28 21:14:32 +0000  copying file ./Frameworks/libswiftFoundation.dylib ... 
+2019-01-28 21:14:32 +0000  11341184 bytes for ./Frameworks/libswiftFoundation.dylib
+2019-01-28 21:14:32 +0000  copying file ./autograph_x.png ... 
+912 bytes for ./autograph_x.png
+copying file ./embedded.mobileprovision ... 
+7990 bytes for ./embedded.mobileprovision
+copying file ./OptionsTableViewController.nib ... 
+1476 bytes for ./OptionsTableViewController.nib
+copying file ./Info.plist ... 
+1464 bytes for ./Info.plist
+copying file ./Inspection Form App ... 
+2019-01-28 21:14:32 +0000  6647536 bytes for ./Inspection Form App
+copying file ./PkgInfo ... 
+2019-01-28 21:14:32 +0000  /usr/bin/ditto exited with 0
+2019-01-28 21:14:32 +0000  8 bytes for ./PkgInfo
+2019-01-28 21:14:32 +0000  Processing step: IDEDistributionEmbedProfileStep
+2019-01-28 21:14:32 +0000  Skipping profile for item: <IDEDistributionItem: 0x7ff90d17e7d0 'com.apple.dt.runtime.swiftCore' '<DVTFilePath:0x7ff90b4b3050:'/Users/adeiji/Library/Developer/Xcode/Archives/2019-01-28/Inspection Form App 1-28-19, 12.17 PM.xcarchive/Products/Applications/Inspection Form App.app/Frameworks/libswiftCore.dylib'>'>
+2019-01-28 21:14:32 +0000  Skipping profile for item: <IDEDistributionItem: 0x7ff90e143410 'com.apple.dt.runtime.swiftCoreFoundation' '<DVTFilePath:0x7ff9068d1e30:'/Users/adeiji/Library/Developer/Xcode/Archives/2019-01-28/Inspection Form App 1-28-19, 12.17 PM.xcarchive/Products/Applications/Inspection Form App.app/Frameworks/libswiftCoreFoundation.dylib'>'>
+2019-01-28 21:14:32 +0000  Skipping profile for item: <IDEDistributionItem: 0x7ff90b567da0 'com.apple.dt.runtime.swiftCoreGraphics' '<DVTFilePath:0x7ff909e4f5a0:'/Users/adeiji/Library/Developer/Xcode/Archives/2019-01-28/Inspection Form App 1-28-19, 12.17 PM.xcarchive/Products/Applications/Inspection Form App.app/Frameworks/libswiftCoreGraphics.dylib'>'>
+2019-01-28 21:14:32 +0000  Skipping profile for item: <IDEDistributionItem: 0x7ff90d185860 'com.apple.dt.runtime.swiftCoreImage' '<DVTFilePath:0x7ff90b4b60a0:'/Users/adeiji/Library/Developer/Xcode/Archives/2019-01-28/Inspection Form App 1-28-19, 12.17 PM.xcarchive/Products/Applications/Inspection Form App.app/Frameworks/libswiftCoreImage.dylib'>'>
+2019-01-28 21:14:32 +0000  Skipping profile for item: <IDEDistributionItem: 0x7ff90b47caf0 'com.apple.dt.runtime.swiftDarwin' '<DVTFilePath:0x7ff90b5ad830:'/Users/adeiji/Library/Developer/Xcode/Archives/2019-01-28/Inspection Form App 1-28-19, 12.17 PM.xcarchive/Products/Applications/Inspection Form App.app/Frameworks/libswiftDarwin.dylib'>'>
+2019-01-28 21:14:32 +0000  Skipping profile for item: <IDEDistributionItem: 0x7ff90c782f00 'com.apple.dt.runtime.swiftDispatch' '<DVTFilePath:0x7ff90b5f9370:'/Users/adeiji/Library/Developer/Xcode/Archives/2019-01-28/Inspection Form App 1-28-19, 12.17 PM.xcarchive/Products/Applications/Inspection Form App.app/Frameworks/libswiftDispatch.dylib'>'>
+2019-01-28 21:14:32 +0000  Skipping profile for item: <IDEDistributionItem: 0x7ff90bbbac30 'com.apple.dt.runtime.swiftFoundation' '<DVTFilePath:0x7ff90b552fb0:'/Users/adeiji/Library/Developer/Xcode/Archives/2019-01-28/Inspection Form App 1-28-19, 12.17 PM.xcarchive/Products/Applications/Inspection Form App.app/Frameworks/libswiftFoundation.dylib'>'>
+2019-01-28 21:14:32 +0000  Skipping profile for item: <IDEDistributionItem: 0x7ff90d608bb0 'com.apple.dt.runtime.swiftMetal' '<DVTFilePath:0x7ff90b597cd0:'/Users/adeiji/Library/Developer/Xcode/Archives/2019-01-28/Inspection Form App 1-28-19, 12.17 PM.xcarchive/Products/Applications/Inspection Form App.app/Frameworks/libswiftMetal.dylib'>'>
+2019-01-28 21:14:32 +0000  Skipping profile for item: <IDEDistributionItem: 0x7ff90d622360 'com.apple.dt.runtime.swiftObjectiveC' '<DVTFilePath:0x7ff90b4b5820:'/Users/adeiji/Library/Developer/Xcode/Archives/2019-01-28/Inspection Form App 1-28-19, 12.17 PM.xcarchive/Products/Applications/Inspection Form App.app/Frameworks/libswiftObjectiveC.dylib'>'>
+2019-01-28 21:14:32 +0000  Skipping profile for item: <IDEDistributionItem: 0x7ff90c36c2f0 'com.apple.dt.runtime.swiftQuartzCore' '<DVTFilePath:0x7ff90b5b2200:'/Users/adeiji/Library/Developer/Xcode/Archives/2019-01-28/Inspection Form App 1-28-19, 12.17 PM.xcarchive/Products/Applications/Inspection Form App.app/Frameworks/libswiftQuartzCore.dylib'>'>
+2019-01-28 21:14:32 +0000  Skipping profile for item: <IDEDistributionItem: 0x7ff90c2889d0 'com.apple.dt.runtime.swiftUIKit' '<DVTFilePath:0x7ff90b4b2e40:'/Users/adeiji/Library/Developer/Xcode/Archives/2019-01-28/Inspection Form App 1-28-19, 12.17 PM.xcarchive/Products/Applications/Inspection Form App.app/Frameworks/libswiftUIKit.dylib'>'>
+2019-01-28 21:14:32 +0000  Skipping profile for item: <IDEDistributionItem: 0x7ff90d69d7c0 'com.apple.dt.runtime.swiftos' '<DVTFilePath:0x7ff90b4b01c0:'/Users/adeiji/Library/Developer/Xcode/Archives/2019-01-28/Inspection Form App 1-28-19, 12.17 PM.xcarchive/Products/Applications/Inspection Form App.app/Frameworks/libswiftos.dylib'>'>
+2019-01-28 21:14:32 +0000  Processing step: IDEDistributionAppThinningPlistStep
+2019-01-28 21:14:32 +0000  Skipping step: IDEDistributionAppThinningPlistStep because it said so
+2019-01-28 21:14:32 +0000  Processing step: IDEDistributionCompileBitcodeStep
+2019-01-28 21:14:32 +0000  Skipping step: IDEDistributionCompileBitcodeStep because it said so
+2019-01-28 21:14:32 +0000  Processing step: IDEDistributionCodeSlimmingStep
+2019-01-28 21:14:32 +0000  Processing step: IDEDistributionCopyBCSymbolMapsStep
+2019-01-28 21:14:32 +0000  Skipping step: IDEDistributionCopyBCSymbolMapsStep because it said so
+2019-01-28 21:14:32 +0000  Skipping step: IDEDistributionCopyBCSymbolMapsStep because it said so
+2019-01-28 21:14:32 +0000  Skipping step: IDEDistributionCopyBCSymbolMapsStep because it said so
+2019-01-28 21:14:32 +0000  Skipping step: IDEDistributionCopyBCSymbolMapsStep because it said so
+2019-01-28 21:14:32 +0000  Skipping step: IDEDistributionCopyBCSymbolMapsStep because it said so
+2019-01-28 21:14:32 +0000  Skipping step: IDEDistributionCopyBCSymbolMapsStep because it said so
+2019-01-28 21:14:32 +0000  Skipping step: IDEDistributionCopyBCSymbolMapsStep because it said so
+2019-01-28 21:14:32 +0000  Skipping step: IDEDistributionCopyBCSymbolMapsStep because it said so
+2019-01-28 21:14:32 +0000  Skipping step: IDEDistributionCopyBCSymbolMapsStep because it said so
+2019-01-28 21:14:32 +0000  Skipping step: IDEDistributionCopyBCSymbolMapsStep because it said so
+2019-01-28 21:14:32 +0000  Skipping step: IDEDistributionCopyBCSymbolMapsStep because it said so
+2019-01-28 21:14:32 +0000  Skipping step: IDEDistributionCopyBCSymbolMapsStep because it said so
+2019-01-28 21:14:32 +0000  Skipping step: IDEDistributionCopyBCSymbolMapsStep because it said so
+2019-01-28 21:14:32 +0000  Processing step: IDEDistributionSymbolsStep
+2019-01-28 21:14:32 +0000  Skipping step: IDEDistributionSymbolsStep because it said so
+2019-01-28 21:14:32 +0000  Skipping step: IDEDistributionSymbolsStep because it said so
+2019-01-28 21:14:32 +0000  Skipping step: IDEDistributionSymbolsStep because it said so
+2019-01-28 21:14:32 +0000  Skipping step: IDEDistributionSymbolsStep because it said so
+2019-01-28 21:14:32 +0000  Skipping step: IDEDistributionSymbolsStep because it said so
+2019-01-28 21:14:32 +0000  Skipping step: IDEDistributionSymbolsStep because it said so
+2019-01-28 21:14:32 +0000  Skipping step: IDEDistributionSymbolsStep because it said so
+2019-01-28 21:14:32 +0000  Skipping step: IDEDistributionSymbolsStep because it said so
+2019-01-28 21:14:32 +0000  Skipping step: IDEDistributionSymbolsStep because it said so
+2019-01-28 21:14:32 +0000  Skipping step: IDEDistributionSymbolsStep because it said so
+2019-01-28 21:14:32 +0000  Skipping step: IDEDistributionSymbolsStep because it said so
+2019-01-28 21:14:32 +0000  Skipping step: IDEDistributionSymbolsStep because it said so
+2019-01-28 21:14:32 +0000  Skipping step: IDEDistributionSymbolsStep because it said so
+2019-01-28 21:14:32 +0000  Processing step: IDEDistributionAppThinningStep
+2019-01-28 21:14:32 +0000  Skipping step: IDEDistributionAppThinningStep because it said so
+2019-01-28 21:14:32 +0000  Processing step: IDEDistributionArchThinningStep
+2019-01-28 21:14:32 +0000  Running /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/Root/Payload/Inspection Form App.app/Frameworks/libswiftCore.dylib' '-verify_arch' 'arm64e'
+2019-01-28 21:14:32 +0000  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 0
+2019-01-28 21:14:32 +0000  Running /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/Root/Payload/Inspection Form App.app/Frameworks/libswiftCore.dylib' '-remove' 'arm64e' '-output' '/var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/Root/Payload/Inspection Form App.app/Frameworks/libswiftCore.dylib'
+2019-01-28 21:14:32 +0000  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 0
+2019-01-28 21:14:32 +0000  Successfully thinned item "libswiftCore.dylib", arch "arm64e"
+2019-01-28 21:14:32 +0000  Running /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/Root/Payload/Inspection Form App.app/Frameworks/libswiftCoreFoundation.dylib' '-verify_arch' 'arm64e'
+2019-01-28 21:14:32 +0000  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 0
+2019-01-28 21:14:32 +0000  Running /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/Root/Payload/Inspection Form App.app/Frameworks/libswiftCoreFoundation.dylib' '-remove' 'arm64e' '-output' '/var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/Root/Payload/Inspection Form App.app/Frameworks/libswiftCoreFoundation.dylib'
+2019-01-28 21:14:32 +0000  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 0
+2019-01-28 21:14:32 +0000  Successfully thinned item "libswiftCoreFoundation.dylib", arch "arm64e"
+2019-01-28 21:14:32 +0000  Running /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/Root/Payload/Inspection Form App.app/Frameworks/libswiftCoreGraphics.dylib' '-verify_arch' 'arm64e'
+2019-01-28 21:14:32 +0000  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 0
+2019-01-28 21:14:32 +0000  Running /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/Root/Payload/Inspection Form App.app/Frameworks/libswiftCoreGraphics.dylib' '-remove' 'arm64e' '-output' '/var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/Root/Payload/Inspection Form App.app/Frameworks/libswiftCoreGraphics.dylib'
+2019-01-28 21:14:32 +0000  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 0
+2019-01-28 21:14:32 +0000  Successfully thinned item "libswiftCoreGraphics.dylib", arch "arm64e"
+2019-01-28 21:14:32 +0000  Running /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/Root/Payload/Inspection Form App.app/Frameworks/libswiftCoreImage.dylib' '-verify_arch' 'arm64e'
+2019-01-28 21:14:32 +0000  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 0
+2019-01-28 21:14:32 +0000  Running /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/Root/Payload/Inspection Form App.app/Frameworks/libswiftCoreImage.dylib' '-remove' 'arm64e' '-output' '/var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/Root/Payload/Inspection Form App.app/Frameworks/libswiftCoreImage.dylib'
+2019-01-28 21:14:32 +0000  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 0
+2019-01-28 21:14:32 +0000  Successfully thinned item "libswiftCoreImage.dylib", arch "arm64e"
+2019-01-28 21:14:32 +0000  Running /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/Root/Payload/Inspection Form App.app/Frameworks/libswiftDarwin.dylib' '-verify_arch' 'arm64e'
+2019-01-28 21:14:32 +0000  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 0
+2019-01-28 21:14:32 +0000  Running /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/Root/Payload/Inspection Form App.app/Frameworks/libswiftDarwin.dylib' '-remove' 'arm64e' '-output' '/var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/Root/Payload/Inspection Form App.app/Frameworks/libswiftDarwin.dylib'
+2019-01-28 21:14:32 +0000  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 0
+2019-01-28 21:14:32 +0000  Successfully thinned item "libswiftDarwin.dylib", arch "arm64e"
+2019-01-28 21:14:32 +0000  Running /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/Root/Payload/Inspection Form App.app/Frameworks/libswiftDispatch.dylib' '-verify_arch' 'arm64e'
+2019-01-28 21:14:32 +0000  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 0
+2019-01-28 21:14:32 +0000  Running /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/Root/Payload/Inspection Form App.app/Frameworks/libswiftDispatch.dylib' '-remove' 'arm64e' '-output' '/var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/Root/Payload/Inspection Form App.app/Frameworks/libswiftDispatch.dylib'
+2019-01-28 21:14:32 +0000  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 0
+2019-01-28 21:14:32 +0000  Successfully thinned item "libswiftDispatch.dylib", arch "arm64e"
+2019-01-28 21:14:32 +0000  Running /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/Root/Payload/Inspection Form App.app/Frameworks/libswiftFoundation.dylib' '-verify_arch' 'arm64e'
+2019-01-28 21:14:32 +0000  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 0
+2019-01-28 21:14:32 +0000  Running /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/Root/Payload/Inspection Form App.app/Frameworks/libswiftFoundation.dylib' '-remove' 'arm64e' '-output' '/var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/Root/Payload/Inspection Form App.app/Frameworks/libswiftFoundation.dylib'
+2019-01-28 21:14:32 +0000  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 0
+2019-01-28 21:14:32 +0000  Successfully thinned item "libswiftFoundation.dylib", arch "arm64e"
+2019-01-28 21:14:32 +0000  Running /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/Root/Payload/Inspection Form App.app/Frameworks/libswiftMetal.dylib' '-verify_arch' 'arm64e'
+2019-01-28 21:14:32 +0000  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 0
+2019-01-28 21:14:32 +0000  Running /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/Root/Payload/Inspection Form App.app/Frameworks/libswiftMetal.dylib' '-remove' 'arm64e' '-output' '/var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/Root/Payload/Inspection Form App.app/Frameworks/libswiftMetal.dylib'
+2019-01-28 21:14:32 +0000  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 0
+2019-01-28 21:14:32 +0000  Successfully thinned item "libswiftMetal.dylib", arch "arm64e"
+2019-01-28 21:14:32 +0000  Running /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/Root/Payload/Inspection Form App.app/Frameworks/libswiftObjectiveC.dylib' '-verify_arch' 'arm64e'
+2019-01-28 21:14:32 +0000  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 0
+2019-01-28 21:14:32 +0000  Running /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/Root/Payload/Inspection Form App.app/Frameworks/libswiftObjectiveC.dylib' '-remove' 'arm64e' '-output' '/var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/Root/Payload/Inspection Form App.app/Frameworks/libswiftObjectiveC.dylib'
+2019-01-28 21:14:32 +0000  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 0
+2019-01-28 21:14:32 +0000  Successfully thinned item "libswiftObjectiveC.dylib", arch "arm64e"
+2019-01-28 21:14:32 +0000  Running /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/Root/Payload/Inspection Form App.app/Frameworks/libswiftQuartzCore.dylib' '-verify_arch' 'arm64e'
+2019-01-28 21:14:32 +0000  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 0
+2019-01-28 21:14:32 +0000  Running /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/Root/Payload/Inspection Form App.app/Frameworks/libswiftQuartzCore.dylib' '-remove' 'arm64e' '-output' '/var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/Root/Payload/Inspection Form App.app/Frameworks/libswiftQuartzCore.dylib'
+2019-01-28 21:14:32 +0000  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 0
+2019-01-28 21:14:32 +0000  Successfully thinned item "libswiftQuartzCore.dylib", arch "arm64e"
+2019-01-28 21:14:32 +0000  Running /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/Root/Payload/Inspection Form App.app/Frameworks/libswiftUIKit.dylib' '-verify_arch' 'arm64e'
+2019-01-28 21:14:32 +0000  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 0
+2019-01-28 21:14:32 +0000  Running /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/Root/Payload/Inspection Form App.app/Frameworks/libswiftUIKit.dylib' '-remove' 'arm64e' '-output' '/var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/Root/Payload/Inspection Form App.app/Frameworks/libswiftUIKit.dylib'
+2019-01-28 21:14:32 +0000  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 0
+2019-01-28 21:14:32 +0000  Successfully thinned item "libswiftUIKit.dylib", arch "arm64e"
+2019-01-28 21:14:32 +0000  Running /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/Root/Payload/Inspection Form App.app/Frameworks/libswiftos.dylib' '-verify_arch' 'arm64e'
+2019-01-28 21:14:32 +0000  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 0
+2019-01-28 21:14:32 +0000  Running /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/Root/Payload/Inspection Form App.app/Frameworks/libswiftos.dylib' '-remove' 'arm64e' '-output' '/var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/Root/Payload/Inspection Form App.app/Frameworks/libswiftos.dylib'
+2019-01-28 21:14:32 +0000  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 0
+2019-01-28 21:14:32 +0000  Successfully thinned item "libswiftos.dylib", arch "arm64e"
+2019-01-28 21:14:32 +0000  Running /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/Root/Payload/Inspection Form App.app/Inspection Form App' '-verify_arch' 'arm64e'
+2019-01-28 21:14:32 +0000  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 1
+2019-01-28 21:14:32 +0000  Skipping architecture thinning for item "Inspection Form App" because arch "arm64e" wasn't found
+2019-01-28 21:14:32 +0000  Processing step: IDEDistributionODRStep
+2019-01-28 21:14:32 +0000  Processing step: IDEDistributionStripXattrsStep
+2019-01-28 21:14:32 +0000  Skipping stripping extended attributes of item: <IDEDistributionItem: 0x7ff90d17e7d0 'com.apple.dt.runtime.swiftCore' '<DVTFilePath:0x7ff90b4b3050:'/Users/adeiji/Library/Developer/Xcode/Archives/2019-01-28/Inspection Form App 1-28-19, 12.17 PM.xcarchive/Products/Applications/Inspection Form App.app/Frameworks/libswiftCore.dylib'>'>
+2019-01-28 21:14:32 +0000  Skipping stripping extended attributes of item: <IDEDistributionItem: 0x7ff90e143410 'com.apple.dt.runtime.swiftCoreFoundation' '<DVTFilePath:0x7ff9068d1e30:'/Users/adeiji/Library/Developer/Xcode/Archives/2019-01-28/Inspection Form App 1-28-19, 12.17 PM.xcarchive/Products/Applications/Inspection Form App.app/Frameworks/libswiftCoreFoundation.dylib'>'>
+2019-01-28 21:14:32 +0000  Skipping stripping extended attributes of item: <IDEDistributionItem: 0x7ff90b567da0 'com.apple.dt.runtime.swiftCoreGraphics' '<DVTFilePath:0x7ff909e4f5a0:'/Users/adeiji/Library/Developer/Xcode/Archives/2019-01-28/Inspection Form App 1-28-19, 12.17 PM.xcarchive/Products/Applications/Inspection Form App.app/Frameworks/libswiftCoreGraphics.dylib'>'>
+2019-01-28 21:14:32 +0000  Skipping stripping extended attributes of item: <IDEDistributionItem: 0x7ff90d185860 'com.apple.dt.runtime.swiftCoreImage' '<DVTFilePath:0x7ff90b4b60a0:'/Users/adeiji/Library/Developer/Xcode/Archives/2019-01-28/Inspection Form App 1-28-19, 12.17 PM.xcarchive/Products/Applications/Inspection Form App.app/Frameworks/libswiftCoreImage.dylib'>'>
+2019-01-28 21:14:32 +0000  Skipping stripping extended attributes of item: <IDEDistributionItem: 0x7ff90b47caf0 'com.apple.dt.runtime.swiftDarwin' '<DVTFilePath:0x7ff90b5ad830:'/Users/adeiji/Library/Developer/Xcode/Archives/2019-01-28/Inspection Form App 1-28-19, 12.17 PM.xcarchive/Products/Applications/Inspection Form App.app/Frameworks/libswiftDarwin.dylib'>'>
+2019-01-28 21:14:32 +0000  Skipping stripping extended attributes of item: <IDEDistributionItem: 0x7ff90c782f00 'com.apple.dt.runtime.swiftDispatch' '<DVTFilePath:0x7ff90b5f9370:'/Users/adeiji/Library/Developer/Xcode/Archives/2019-01-28/Inspection Form App 1-28-19, 12.17 PM.xcarchive/Products/Applications/Inspection Form App.app/Frameworks/libswiftDispatch.dylib'>'>
+2019-01-28 21:14:32 +0000  Skipping stripping extended attributes of item: <IDEDistributionItem: 0x7ff90bbbac30 'com.apple.dt.runtime.swiftFoundation' '<DVTFilePath:0x7ff90b552fb0:'/Users/adeiji/Library/Developer/Xcode/Archives/2019-01-28/Inspection Form App 1-28-19, 12.17 PM.xcarchive/Products/Applications/Inspection Form App.app/Frameworks/libswiftFoundation.dylib'>'>
+2019-01-28 21:14:32 +0000  Skipping stripping extended attributes of item: <IDEDistributionItem: 0x7ff90d608bb0 'com.apple.dt.runtime.swiftMetal' '<DVTFilePath:0x7ff90b597cd0:'/Users/adeiji/Library/Developer/Xcode/Archives/2019-01-28/Inspection Form App 1-28-19, 12.17 PM.xcarchive/Products/Applications/Inspection Form App.app/Frameworks/libswiftMetal.dylib'>'>
+2019-01-28 21:14:32 +0000  Skipping stripping extended attributes of item: <IDEDistributionItem: 0x7ff90d622360 'com.apple.dt.runtime.swiftObjectiveC' '<DVTFilePath:0x7ff90b4b5820:'/Users/adeiji/Library/Developer/Xcode/Archives/2019-01-28/Inspection Form App 1-28-19, 12.17 PM.xcarchive/Products/Applications/Inspection Form App.app/Frameworks/libswiftObjectiveC.dylib'>'>
+2019-01-28 21:14:32 +0000  Skipping stripping extended attributes of item: <IDEDistributionItem: 0x7ff90c36c2f0 'com.apple.dt.runtime.swiftQuartzCore' '<DVTFilePath:0x7ff90b5b2200:'/Users/adeiji/Library/Developer/Xcode/Archives/2019-01-28/Inspection Form App 1-28-19, 12.17 PM.xcarchive/Products/Applications/Inspection Form App.app/Frameworks/libswiftQuartzCore.dylib'>'>
+2019-01-28 21:14:32 +0000  Skipping stripping extended attributes of item: <IDEDistributionItem: 0x7ff90c2889d0 'com.apple.dt.runtime.swiftUIKit' '<DVTFilePath:0x7ff90b4b2e40:'/Users/adeiji/Library/Developer/Xcode/Archives/2019-01-28/Inspection Form App 1-28-19, 12.17 PM.xcarchive/Products/Applications/Inspection Form App.app/Frameworks/libswiftUIKit.dylib'>'>
+2019-01-28 21:14:32 +0000  Skipping stripping extended attributes of item: <IDEDistributionItem: 0x7ff90d69d7c0 'com.apple.dt.runtime.swiftos' '<DVTFilePath:0x7ff90b4b01c0:'/Users/adeiji/Library/Developer/Xcode/Archives/2019-01-28/Inspection Form App 1-28-19, 12.17 PM.xcarchive/Products/Applications/Inspection Form App.app/Frameworks/libswiftos.dylib'>'>
+2019-01-28 21:14:32 +0000  Running /usr/bin/xattr '-crs' '/var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/Root/Payload/Inspection Form App.app'
+2019-01-28 21:14:32 +0000  /usr/bin/xattr exited with 0
+2019-01-28 21:14:32 +0000  Processing step: IDEDistributionCodesignStep
+2019-01-28 21:14:32 +0000  Entitlements for <IDEDistributionItem: 0x7ff90d17e7d0 'com.apple.dt.runtime.swiftCore' '<DVTFilePath:0x7ff90b4b3050:'/Users/adeiji/Library/Developer/Xcode/Archives/2019-01-28/Inspection Form App 1-28-19, 12.17 PM.xcarchive/Products/Applications/Inspection Form App.app/Frameworks/libswiftCore.dylib'>'>: {
+}
+2019-01-28 21:14:32 +0000  Writing entitlements for <IDEDistributionItem: 0x7ff90d17e7d0 'com.apple.dt.runtime.swiftCore' '<DVTFilePath:0x7ff90b4b3050:'/Users/adeiji/Library/Developer/Xcode/Archives/2019-01-28/Inspection Form App 1-28-19, 12.17 PM.xcarchive/Products/Applications/Inspection Form App.app/Frameworks/libswiftCore.dylib'>'> to: /var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/entitlementsnrYqWf
+2019-01-28 21:14:32 +0000  Running /usr/bin/codesign '-vvv' '--force' '--sign' '87A30702AA66DFD6BC5BDD80542DEC02789542E7' '--entitlements' '/var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/entitlementsnrYqWf' '--preserve-metadata=identifier,flags,runtime' '/var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/Root/Payload/Inspection Form App.app/Frameworks/libswiftCore.dylib'
+2019-01-28 21:14:33 +0000  /var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/Root/Payload/Inspection Form App.app/Frameworks/libswiftCore.dylib: replacing existing signature
+2019-01-28 21:14:33 +0000  /var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/Root/Payload/Inspection Form App.app/Frameworks/libswiftCore.dylib: signed Mach-O universal (armv7 armv7s arm64) [com.apple.dt.runtime.swiftCore]
+2019-01-28 21:14:33 +0000  /usr/bin/codesign exited with 0
+2019-01-28 21:14:33 +0000  Entitlements for <IDEDistributionItem: 0x7ff90e143410 'com.apple.dt.runtime.swiftCoreFoundation' '<DVTFilePath:0x7ff9068d1e30:'/Users/adeiji/Library/Developer/Xcode/Archives/2019-01-28/Inspection Form App 1-28-19, 12.17 PM.xcarchive/Products/Applications/Inspection Form App.app/Frameworks/libswiftCoreFoundation.dylib'>'>: {
+}
+2019-01-28 21:14:33 +0000  Writing entitlements for <IDEDistributionItem: 0x7ff90e143410 'com.apple.dt.runtime.swiftCoreFoundation' '<DVTFilePath:0x7ff9068d1e30:'/Users/adeiji/Library/Developer/Xcode/Archives/2019-01-28/Inspection Form App 1-28-19, 12.17 PM.xcarchive/Products/Applications/Inspection Form App.app/Frameworks/libswiftCoreFoundation.dylib'>'> to: /var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/entitlementsHbWMbl
+2019-01-28 21:14:33 +0000  Running /usr/bin/codesign '-vvv' '--force' '--sign' '87A30702AA66DFD6BC5BDD80542DEC02789542E7' '--entitlements' '/var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/entitlementsHbWMbl' '--preserve-metadata=identifier,flags,runtime' '/var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/Root/Payload/Inspection Form App.app/Frameworks/libswiftCoreFoundation.dylib'
+2019-01-28 21:14:33 +0000  /var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/Root/Payload/Inspection Form App.app/Frameworks/libswiftCoreFoundation.dylib: replacing existing signature
+2019-01-28 21:14:33 +0000  /var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/Root/Payload/Inspection Form App.app/Frameworks/libswiftCoreFoundation.dylib: signed Mach-O universal (armv7 armv7s arm64) [com.apple.dt.runtime.swiftCoreFoundation]
+2019-01-28 21:14:33 +0000  /usr/bin/codesign exited with 0
+2019-01-28 21:14:33 +0000  Entitlements for <IDEDistributionItem: 0x7ff90b567da0 'com.apple.dt.runtime.swiftCoreGraphics' '<DVTFilePath:0x7ff909e4f5a0:'/Users/adeiji/Library/Developer/Xcode/Archives/2019-01-28/Inspection Form App 1-28-19, 12.17 PM.xcarchive/Products/Applications/Inspection Form App.app/Frameworks/libswiftCoreGraphics.dylib'>'>: {
+}
+2019-01-28 21:14:33 +0000  Writing entitlements for <IDEDistributionItem: 0x7ff90b567da0 'com.apple.dt.runtime.swiftCoreGraphics' '<DVTFilePath:0x7ff909e4f5a0:'/Users/adeiji/Library/Developer/Xcode/Archives/2019-01-28/Inspection Form App 1-28-19, 12.17 PM.xcarchive/Products/Applications/Inspection Form App.app/Frameworks/libswiftCoreGraphics.dylib'>'> to: /var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/entitlementsppGuMg
+2019-01-28 21:14:33 +0000  Running /usr/bin/codesign '-vvv' '--force' '--sign' '87A30702AA66DFD6BC5BDD80542DEC02789542E7' '--entitlements' '/var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/entitlementsppGuMg' '--preserve-metadata=identifier,flags,runtime' '/var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/Root/Payload/Inspection Form App.app/Frameworks/libswiftCoreGraphics.dylib'
+2019-01-28 21:14:33 +0000  /var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/Root/Payload/Inspection Form App.app/Frameworks/libswiftCoreGraphics.dylib: replacing existing signature
+2019-01-28 21:14:33 +0000  /var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/Root/Payload/Inspection Form App.app/Frameworks/libswiftCoreGraphics.dylib: signed Mach-O universal (armv7 armv7s arm64) [com.apple.dt.runtime.swiftCoreGraphics]
+2019-01-28 21:14:33 +0000  /usr/bin/codesign exited with 0
+2019-01-28 21:14:33 +0000  Entitlements for <IDEDistributionItem: 0x7ff90d185860 'com.apple.dt.runtime.swiftCoreImage' '<DVTFilePath:0x7ff90b4b60a0:'/Users/adeiji/Library/Developer/Xcode/Archives/2019-01-28/Inspection Form App 1-28-19, 12.17 PM.xcarchive/Products/Applications/Inspection Form App.app/Frameworks/libswiftCoreImage.dylib'>'>: {
+}
+2019-01-28 21:14:33 +0000  Writing entitlements for <IDEDistributionItem: 0x7ff90d185860 'com.apple.dt.runtime.swiftCoreImage' '<DVTFilePath:0x7ff90b4b60a0:'/Users/adeiji/Library/Developer/Xcode/Archives/2019-01-28/Inspection Form App 1-28-19, 12.17 PM.xcarchive/Products/Applications/Inspection Form App.app/Frameworks/libswiftCoreImage.dylib'>'> to: /var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/entitlementsmmTDEe
+2019-01-28 21:14:33 +0000  Running /usr/bin/codesign '-vvv' '--force' '--sign' '87A30702AA66DFD6BC5BDD80542DEC02789542E7' '--entitlements' '/var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/entitlementsmmTDEe' '--preserve-metadata=identifier,flags,runtime' '/var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/Root/Payload/Inspection Form App.app/Frameworks/libswiftCoreImage.dylib'
+2019-01-28 21:14:33 +0000  /var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/Root/Payload/Inspection Form App.app/Frameworks/libswiftCoreImage.dylib: replacing existing signature
+2019-01-28 21:14:33 +0000  /var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/Root/Payload/Inspection Form App.app/Frameworks/libswiftCoreImage.dylib: signed Mach-O universal (armv7 armv7s arm64) [com.apple.dt.runtime.swiftCoreImage]
+2019-01-28 21:14:33 +0000  /usr/bin/codesign exited with 0
+2019-01-28 21:14:33 +0000  Entitlements for <IDEDistributionItem: 0x7ff90b47caf0 'com.apple.dt.runtime.swiftDarwin' '<DVTFilePath:0x7ff90b5ad830:'/Users/adeiji/Library/Developer/Xcode/Archives/2019-01-28/Inspection Form App 1-28-19, 12.17 PM.xcarchive/Products/Applications/Inspection Form App.app/Frameworks/libswiftDarwin.dylib'>'>: {
+}
+2019-01-28 21:14:33 +0000  Writing entitlements for <IDEDistributionItem: 0x7ff90b47caf0 'com.apple.dt.runtime.swiftDarwin' '<DVTFilePath:0x7ff90b5ad830:'/Users/adeiji/Library/Developer/Xcode/Archives/2019-01-28/Inspection Form App 1-28-19, 12.17 PM.xcarchive/Products/Applications/Inspection Form App.app/Frameworks/libswiftDarwin.dylib'>'> to: /var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/entitlementsI4I5qY
+2019-01-28 21:14:33 +0000  Running /usr/bin/codesign '-vvv' '--force' '--sign' '87A30702AA66DFD6BC5BDD80542DEC02789542E7' '--entitlements' '/var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/entitlementsI4I5qY' '--preserve-metadata=identifier,flags,runtime' '/var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/Root/Payload/Inspection Form App.app/Frameworks/libswiftDarwin.dylib'
+2019-01-28 21:14:33 +0000  /var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/Root/Payload/Inspection Form App.app/Frameworks/libswiftDarwin.dylib: replacing existing signature
+2019-01-28 21:14:33 +0000  /var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/Root/Payload/Inspection Form App.app/Frameworks/libswiftDarwin.dylib: signed Mach-O universal (armv7 armv7s arm64) [com.apple.dt.runtime.swiftDarwin]
+2019-01-28 21:14:33 +0000  /usr/bin/codesign exited with 0
+2019-01-28 21:14:33 +0000  Entitlements for <IDEDistributionItem: 0x7ff90c782f00 'com.apple.dt.runtime.swiftDispatch' '<DVTFilePath:0x7ff90b5f9370:'/Users/adeiji/Library/Developer/Xcode/Archives/2019-01-28/Inspection Form App 1-28-19, 12.17 PM.xcarchive/Products/Applications/Inspection Form App.app/Frameworks/libswiftDispatch.dylib'>'>: {
+}
+2019-01-28 21:14:33 +0000  Writing entitlements for <IDEDistributionItem: 0x7ff90c782f00 'com.apple.dt.runtime.swiftDispatch' '<DVTFilePath:0x7ff90b5f9370:'/Users/adeiji/Library/Developer/Xcode/Archives/2019-01-28/Inspection Form App 1-28-19, 12.17 PM.xcarchive/Products/Applications/Inspection Form App.app/Frameworks/libswiftDispatch.dylib'>'> to: /var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/entitlementsuSJcgY
+2019-01-28 21:14:33 +0000  Running /usr/bin/codesign '-vvv' '--force' '--sign' '87A30702AA66DFD6BC5BDD80542DEC02789542E7' '--entitlements' '/var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/entitlementsuSJcgY' '--preserve-metadata=identifier,flags,runtime' '/var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/Root/Payload/Inspection Form App.app/Frameworks/libswiftDispatch.dylib'
+2019-01-28 21:14:33 +0000  /var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/Root/Payload/Inspection Form App.app/Frameworks/libswiftDispatch.dylib: replacing existing signature
+2019-01-28 21:14:33 +0000  /var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/Root/Payload/Inspection Form App.app/Frameworks/libswiftDispatch.dylib: signed Mach-O universal (armv7 armv7s arm64) [com.apple.dt.runtime.swiftDispatch]
+2019-01-28 21:14:33 +0000  /usr/bin/codesign exited with 0
+2019-01-28 21:14:33 +0000  Entitlements for <IDEDistributionItem: 0x7ff90bbbac30 'com.apple.dt.runtime.swiftFoundation' '<DVTFilePath:0x7ff90b552fb0:'/Users/adeiji/Library/Developer/Xcode/Archives/2019-01-28/Inspection Form App 1-28-19, 12.17 PM.xcarchive/Products/Applications/Inspection Form App.app/Frameworks/libswiftFoundation.dylib'>'>: {
+}
+2019-01-28 21:14:33 +0000  Writing entitlements for <IDEDistributionItem: 0x7ff90bbbac30 'com.apple.dt.runtime.swiftFoundation' '<DVTFilePath:0x7ff90b552fb0:'/Users/adeiji/Library/Developer/Xcode/Archives/2019-01-28/Inspection Form App 1-28-19, 12.17 PM.xcarchive/Products/Applications/Inspection Form App.app/Frameworks/libswiftFoundation.dylib'>'> to: /var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/entitlementsTUvNjE
+2019-01-28 21:14:33 +0000  Running /usr/bin/codesign '-vvv' '--force' '--sign' '87A30702AA66DFD6BC5BDD80542DEC02789542E7' '--entitlements' '/var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/entitlementsTUvNjE' '--preserve-metadata=identifier,flags,runtime' '/var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/Root/Payload/Inspection Form App.app/Frameworks/libswiftFoundation.dylib'
+2019-01-28 21:14:33 +0000  /var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/Root/Payload/Inspection Form App.app/Frameworks/libswiftFoundation.dylib: replacing existing signature
+2019-01-28 21:14:34 +0000  /var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/Root/Payload/Inspection Form App.app/Frameworks/libswiftFoundation.dylib: signed Mach-O universal (armv7 armv7s arm64) [com.apple.dt.runtime.swiftFoundation]
+2019-01-28 21:14:34 +0000  /usr/bin/codesign exited with 0
+2019-01-28 21:14:34 +0000  Entitlements for <IDEDistributionItem: 0x7ff90d608bb0 'com.apple.dt.runtime.swiftMetal' '<DVTFilePath:0x7ff90b597cd0:'/Users/adeiji/Library/Developer/Xcode/Archives/2019-01-28/Inspection Form App 1-28-19, 12.17 PM.xcarchive/Products/Applications/Inspection Form App.app/Frameworks/libswiftMetal.dylib'>'>: {
+}
+2019-01-28 21:14:34 +0000  Writing entitlements for <IDEDistributionItem: 0x7ff90d608bb0 'com.apple.dt.runtime.swiftMetal' '<DVTFilePath:0x7ff90b597cd0:'/Users/adeiji/Library/Developer/Xcode/Archives/2019-01-28/Inspection Form App 1-28-19, 12.17 PM.xcarchive/Products/Applications/Inspection Form App.app/Frameworks/libswiftMetal.dylib'>'> to: /var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/entitlementsFIMY9V
+2019-01-28 21:14:34 +0000  Running /usr/bin/codesign '-vvv' '--force' '--sign' '87A30702AA66DFD6BC5BDD80542DEC02789542E7' '--entitlements' '/var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/entitlementsFIMY9V' '--preserve-metadata=identifier,flags,runtime' '/var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/Root/Payload/Inspection Form App.app/Frameworks/libswiftMetal.dylib'
+2019-01-28 21:14:34 +0000  /var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/Root/Payload/Inspection Form App.app/Frameworks/libswiftMetal.dylib: replacing existing signature
+2019-01-28 21:14:34 +0000  /var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/Root/Payload/Inspection Form App.app/Frameworks/libswiftMetal.dylib: signed Mach-O universal (armv7 armv7s arm64) [com.apple.dt.runtime.swiftMetal]
+2019-01-28 21:14:34 +0000  /usr/bin/codesign exited with 0
+2019-01-28 21:14:34 +0000  Entitlements for <IDEDistributionItem: 0x7ff90d622360 'com.apple.dt.runtime.swiftObjectiveC' '<DVTFilePath:0x7ff90b4b5820:'/Users/adeiji/Library/Developer/Xcode/Archives/2019-01-28/Inspection Form App 1-28-19, 12.17 PM.xcarchive/Products/Applications/Inspection Form App.app/Frameworks/libswiftObjectiveC.dylib'>'>: {
+}
+2019-01-28 21:14:34 +0000  Writing entitlements for <IDEDistributionItem: 0x7ff90d622360 'com.apple.dt.runtime.swiftObjectiveC' '<DVTFilePath:0x7ff90b4b5820:'/Users/adeiji/Library/Developer/Xcode/Archives/2019-01-28/Inspection Form App 1-28-19, 12.17 PM.xcarchive/Products/Applications/Inspection Form App.app/Frameworks/libswiftObjectiveC.dylib'>'> to: /var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/entitlementsRysZnz
+2019-01-28 21:14:34 +0000  Running /usr/bin/codesign '-vvv' '--force' '--sign' '87A30702AA66DFD6BC5BDD80542DEC02789542E7' '--entitlements' '/var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/entitlementsRysZnz' '--preserve-metadata=identifier,flags,runtime' '/var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/Root/Payload/Inspection Form App.app/Frameworks/libswiftObjectiveC.dylib'
+2019-01-28 21:14:34 +0000  /var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/Root/Payload/Inspection Form App.app/Frameworks/libswiftObjectiveC.dylib: replacing existing signature
+2019-01-28 21:14:34 +0000  /var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/Root/Payload/Inspection Form App.app/Frameworks/libswiftObjectiveC.dylib: signed Mach-O universal (armv7 armv7s arm64) [com.apple.dt.runtime.swiftObjectiveC]
+2019-01-28 21:14:34 +0000  /usr/bin/codesign exited with 0
+2019-01-28 21:14:34 +0000  Entitlements for <IDEDistributionItem: 0x7ff90c36c2f0 'com.apple.dt.runtime.swiftQuartzCore' '<DVTFilePath:0x7ff90b5b2200:'/Users/adeiji/Library/Developer/Xcode/Archives/2019-01-28/Inspection Form App 1-28-19, 12.17 PM.xcarchive/Products/Applications/Inspection Form App.app/Frameworks/libswiftQuartzCore.dylib'>'>: {
+}
+2019-01-28 21:14:34 +0000  Writing entitlements for <IDEDistributionItem: 0x7ff90c36c2f0 'com.apple.dt.runtime.swiftQuartzCore' '<DVTFilePath:0x7ff90b5b2200:'/Users/adeiji/Library/Developer/Xcode/Archives/2019-01-28/Inspection Form App 1-28-19, 12.17 PM.xcarchive/Products/Applications/Inspection Form App.app/Frameworks/libswiftQuartzCore.dylib'>'> to: /var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/entitlementsQQWpQj
+2019-01-28 21:14:34 +0000  Running /usr/bin/codesign '-vvv' '--force' '--sign' '87A30702AA66DFD6BC5BDD80542DEC02789542E7' '--entitlements' '/var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/entitlementsQQWpQj' '--preserve-metadata=identifier,flags,runtime' '/var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/Root/Payload/Inspection Form App.app/Frameworks/libswiftQuartzCore.dylib'
+2019-01-28 21:14:34 +0000  /var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/Root/Payload/Inspection Form App.app/Frameworks/libswiftQuartzCore.dylib: replacing existing signature
+2019-01-28 21:14:34 +0000  /var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/Root/Payload/Inspection Form App.app/Frameworks/libswiftQuartzCore.dylib: signed Mach-O universal (armv7 armv7s arm64) [com.apple.dt.runtime.swiftQuartzCore]
+2019-01-28 21:14:34 +0000  /usr/bin/codesign exited with 0
+2019-01-28 21:14:34 +0000  Entitlements for <IDEDistributionItem: 0x7ff90c2889d0 'com.apple.dt.runtime.swiftUIKit' '<DVTFilePath:0x7ff90b4b2e40:'/Users/adeiji/Library/Developer/Xcode/Archives/2019-01-28/Inspection Form App 1-28-19, 12.17 PM.xcarchive/Products/Applications/Inspection Form App.app/Frameworks/libswiftUIKit.dylib'>'>: {
+}
+2019-01-28 21:14:34 +0000  Writing entitlements for <IDEDistributionItem: 0x7ff90c2889d0 'com.apple.dt.runtime.swiftUIKit' '<DVTFilePath:0x7ff90b4b2e40:'/Users/adeiji/Library/Developer/Xcode/Archives/2019-01-28/Inspection Form App 1-28-19, 12.17 PM.xcarchive/Products/Applications/Inspection Form App.app/Frameworks/libswiftUIKit.dylib'>'> to: /var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/entitlementsLxGTDe
+2019-01-28 21:14:34 +0000  Running /usr/bin/codesign '-vvv' '--force' '--sign' '87A30702AA66DFD6BC5BDD80542DEC02789542E7' '--entitlements' '/var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/entitlementsLxGTDe' '--preserve-metadata=identifier,flags,runtime' '/var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/Root/Payload/Inspection Form App.app/Frameworks/libswiftUIKit.dylib'
+2019-01-28 21:14:34 +0000  /var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/Root/Payload/Inspection Form App.app/Frameworks/libswiftUIKit.dylib: replacing existing signature
+2019-01-28 21:14:34 +0000  /var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/Root/Payload/Inspection Form App.app/Frameworks/libswiftUIKit.dylib: signed Mach-O universal (armv7 armv7s arm64) [com.apple.dt.runtime.swiftUIKit]
+2019-01-28 21:14:34 +0000  /usr/bin/codesign exited with 0
+2019-01-28 21:14:34 +0000  Entitlements for <IDEDistributionItem: 0x7ff90d69d7c0 'com.apple.dt.runtime.swiftos' '<DVTFilePath:0x7ff90b4b01c0:'/Users/adeiji/Library/Developer/Xcode/Archives/2019-01-28/Inspection Form App 1-28-19, 12.17 PM.xcarchive/Products/Applications/Inspection Form App.app/Frameworks/libswiftos.dylib'>'>: {
+}
+2019-01-28 21:14:34 +0000  Writing entitlements for <IDEDistributionItem: 0x7ff90d69d7c0 'com.apple.dt.runtime.swiftos' '<DVTFilePath:0x7ff90b4b01c0:'/Users/adeiji/Library/Developer/Xcode/Archives/2019-01-28/Inspection Form App 1-28-19, 12.17 PM.xcarchive/Products/Applications/Inspection Form App.app/Frameworks/libswiftos.dylib'>'> to: /var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/entitlementsj0eI3f
+2019-01-28 21:14:34 +0000  Running /usr/bin/codesign '-vvv' '--force' '--sign' '87A30702AA66DFD6BC5BDD80542DEC02789542E7' '--entitlements' '/var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/entitlementsj0eI3f' '--preserve-metadata=identifier,flags,runtime' '/var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/Root/Payload/Inspection Form App.app/Frameworks/libswiftos.dylib'
+2019-01-28 21:14:34 +0000  /var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/Root/Payload/Inspection Form App.app/Frameworks/libswiftos.dylib: replacing existing signature
+2019-01-28 21:14:34 +0000  /var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/Root/Payload/Inspection Form App.app/Frameworks/libswiftos.dylib: signed Mach-O universal (armv7 armv7s arm64) [com.apple.dt.runtime.swiftos]
+2019-01-28 21:14:34 +0000  /usr/bin/codesign exited with 0
+2019-01-28 21:14:34 +0000  Entitlements for <IDEDistributionItem: 0x7ff90d1c2830 'net.sswr.Inspection-Form-App' '<DVTFilePath:0x7ff9098f20a0:'/Users/adeiji/Library/Developer/Xcode/Archives/2019-01-28/Inspection Form App 1-28-19, 12.17 PM.xcarchive/Products/Applications/Inspection Form App.app'>'>: {
+    "application-identifier" = "58P227HU77.net.sswr.Inspection-Form-App";
+    "com.apple.developer.team-identifier" = 58P227HU77;
+    "get-task-allow" = 0;
+    "keychain-access-groups" =     (
+        "58P227HU77.net.sswr.Inspection-Form-App"
+    );
+}
+2019-01-28 21:14:34 +0000  Writing entitlements for <IDEDistributionItem: 0x7ff90d1c2830 'net.sswr.Inspection-Form-App' '<DVTFilePath:0x7ff9098f20a0:'/Users/adeiji/Library/Developer/Xcode/Archives/2019-01-28/Inspection Form App 1-28-19, 12.17 PM.xcarchive/Products/Applications/Inspection Form App.app'>'> to: /var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/entitlementsOSpuCq
+2019-01-28 21:14:34 +0000  Running /usr/bin/codesign '-vvv' '--force' '--sign' '87A30702AA66DFD6BC5BDD80542DEC02789542E7' '--entitlements' '/var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/entitlementsOSpuCq' '--preserve-metadata=identifier,flags,runtime' '/var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/Root/Payload/Inspection Form App.app'
+2019-01-28 21:14:34 +0000  /var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/Root/Payload/Inspection Form App.app: replacing existing signature
+2019-01-28 21:14:35 +0000  /var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/Root/Payload/Inspection Form App.app: signed app bundle with Mach-O universal (armv7 arm64) [net.sswr.Inspection-Form-App]
+2019-01-28 21:14:35 +0000  /usr/bin/codesign exited with 0
+2019-01-28 21:14:35 +0000  Processing step: IDEDistributionZipODRItemStep
+2019-01-28 21:14:35 +0000  Skipping step: IDEDistributionZipODRItemStep because it said so
+2019-01-28 21:14:35 +0000  Skipping step: IDEDistributionZipODRItemStep because it said so
+2019-01-28 21:14:35 +0000  Skipping step: IDEDistributionZipODRItemStep because it said so
+2019-01-28 21:14:35 +0000  Skipping step: IDEDistributionZipODRItemStep because it said so
+2019-01-28 21:14:35 +0000  Skipping step: IDEDistributionZipODRItemStep because it said so
+2019-01-28 21:14:35 +0000  Skipping step: IDEDistributionZipODRItemStep because it said so
+2019-01-28 21:14:35 +0000  Skipping step: IDEDistributionZipODRItemStep because it said so
+2019-01-28 21:14:35 +0000  Skipping step: IDEDistributionZipODRItemStep because it said so
+2019-01-28 21:14:35 +0000  Skipping step: IDEDistributionZipODRItemStep because it said so
+2019-01-28 21:14:35 +0000  Skipping step: IDEDistributionZipODRItemStep because it said so
+2019-01-28 21:14:35 +0000  Skipping step: IDEDistributionZipODRItemStep because it said so
+2019-01-28 21:14:35 +0000  Skipping step: IDEDistributionZipODRItemStep because it said so
+2019-01-28 21:14:35 +0000  Skipping step: IDEDistributionZipODRItemStep because it said so
+2019-01-28 21:14:35 +0000  Processing step: IDEDistributionCreateIPAStep
+2019-01-28 21:14:35 +0000  Running /usr/bin/ditto '-V' '-c' '-k' '--norsrc' '/var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/Root' '/var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/Packages/Inspection Form App.ipa'
+2019-01-28 21:14:35 +0000  >>> Copying /var/folders/c9/g76wm9mx1236nn_969q9cj5w0000gn/T/XcodeDistPipeline.ye8/Root 
+2019-01-28 21:14:35 +0000  copying file ./Payload/Inspection Form App.app/_CodeSignature/CodeResources ... 
+2019-01-28 21:14:35 +0000  15903 bytes for ./Payload/Inspection Form App.app/_CodeSignature/CodeResources
+2019-01-28 21:14:35 +0000  copying file ./Payload/Inspection Form App.app/lvwwdcranes.plist ... 
+2019-01-28 21:14:35 +0000  11730 bytes for ./Payload/Inspection Form App.app/lvwwdcranes.plist
+2019-01-28 21:14:35 +0000  copying file ./Payload/Inspection Form App.app/LoginView.nib ... 
+2019-01-28 21:14:35 +0000  5406 bytes for ./Payload/Inspection Form App.app/LoginView.nib
+2019-01-28 21:14:35 +0000  copying file ./Payload/Inspection Form App.app/en.lproj/InfoPlist.strings ... 
+2019-01-28 21:14:35 +0000  42 bytes for ./Payload/Inspection Form App.app/en.lproj/InfoPlist.strings
+copying file ./Payload/Inspection Form App.app/en.lproj/Parse.strings ... 
+2019-01-28 21:14:35 +0000  122 bytes for ./Payload/Inspection Form App.app/en.lproj/Parse.strings
+2019-01-28 21:14:35 +0000  copying file ./Payload/Inspection Form App.app/iPadMainStoryboard.storyboardc/ohd-4L-yxA-view-FK9-Lc-U88.nib ... 
+2019-01-28 21:14:35 +0000  12641 bytes for ./Payload/Inspection Form App.app/iPadMainStoryboard.storyboardc/ohd-4L-yxA-view-FK9-Lc-U88.nib
+2019-01-28 21:14:35 +0000  copying file ./Payload/Inspection Form App.app/iPadMainStoryboard.storyboardc/UISplitViewController-dnc-EI-M4a.nib ... 
+2019-01-28 21:14:35 +0000  2713 bytes for ./Payload/Inspection Form App.app/iPadMainStoryboard.storyboardc/UISplitViewController-dnc-EI-M4a.nib
+2019-01-28 21:14:35 +0000  copying file ./Payload/Inspection Form App.app/iPadMainStoryboard.storyboardc/idw-ZA-hiy-view-mNY-Eo-vds.nib ... 
+2019-01-28 21:14:35 +0000  3362 bytes for ./Payload/Inspection Form App.app/iPadMainStoryboard.storyboardc/idw-ZA-hiy-view-mNY-Eo-vds.nib
+copying file ./Payload/Inspection Form App.app/iPadMainStoryboard.storyboardc/inspectionViewController.nib ... 
+2019-01-28 21:14:35 +0000  1141 bytes for ./Payload/Inspection Form App.app/iPadMainStoryboard.storyboardc/inspectionViewController.nib
+2019-01-28 21:14:35 +0000  copying file ./Payload/Inspection Form App.app/iPadMainStoryboard.storyboardc/Info.plist ... 
+2019-01-28 21:14:35 +0000  342 bytes for ./Payload/Inspection Form App.app/iPadMainStoryboard.storyboardc/Info.plist
+copying file ./Payload/Inspection Form App.app/iPadMainStoryboard.storyboardc/sgx-pA-png-view-nR6-am-Ia3.nib ... 
+2019-01-28 21:14:35 +0000  24566 bytes for ./Payload/Inspection Form App.app/iPadMainStoryboard.storyboardc/sgx-pA-png-view-nR6-am-Ia3.nib
+2019-01-28 21:14:35 +0000  copying file ./Payload/Inspection Form App.app/t1_logo.png ... 
+2019-01-28 21:14:35 +0000  6103 bytes for ./Payload/Inspection Form App.app/t1_logo.png
+2019-01-28 21:14:35 +0000  copying file ./Payload/Inspection Form App.app/PromptView.nib ... 
+2019-01-28 21:14:35 +0000  3486 bytes for ./Payload/Inspection Form App.app/PromptView.nib
+2019-01-28 21:14:35 +0000  copying file ./Payload/Inspection Form App.app/InspectionModel.momd/VersionInfo.plist ... 
+2019-01-28 21:14:35 +0000  610 bytes for ./Payload/Inspection Form App.app/InspectionModel.momd/VersionInfo.plist
+2019-01-28 21:14:35 +0000  copying file ./Payload/Inspection Form App.app/InspectionModel.momd/InspectionModel.mom ... 
+2019-01-28 21:14:35 +0000  7790 bytes for ./Payload/Inspection Form App.app/InspectionModel.momd/InspectionModel.mom
+2019-01-28 21:14:35 +0000  copying file ./Payload/Inspection Form App.app/CraneView.nib ... 
+2019-01-28 21:14:35 +0000  1350 bytes for ./Payload/Inspection Form App.app/CraneView.nib
+2019-01-28 21:14:35 +0000  copying file ./Payload/Inspection Form App.app/iPhoneStoryboard.storyboardc/a9G-FB-caT-view-6cW-EN-hjQ.nib ... 
+2019-01-28 21:14:35 +0000  8141 bytes for ./Payload/Inspection Form App.app/iPhoneStoryboard.storyboardc/a9G-FB-caT-view-6cW-EN-hjQ.nib
+2019-01-28 21:14:35 +0000  copying file ./Payload/Inspection Form App.app/iPhoneStoryboard.storyboardc/UITableViewController-Krf-Zb-aPn.nib ... 
+2019-01-28 21:14:35 +0000  1036 bytes for ./Payload/Inspection Form App.app/iPhoneStoryboard.storyboardc/UITableViewController-Krf-Zb-aPn.nib
+copying file ./Payload/Inspection Form App.app/iPhoneStoryboard.storyboardc/inspectionViewController.nib ... 
+2019-01-28 21:14:35 +0000  1141 bytes for ./Payload/Inspection Form App.app/iPhoneStoryboard.storyboardc/inspectionViewController.nib
+2019-01-28 21:14:35 +0000  copying file ./Payload/Inspection Form App.app/iPhoneStoryboard.storyboardc/Krf-Zb-aPn-view-MPj-jb-Tjo.nib ... 
+2019-01-28 21:14:35 +0000  1412 bytes for ./Payload/Inspection Form App.app/iPhoneStoryboard.storyboardc/Krf-Zb-aPn-view-MPj-jb-Tjo.nib
+copying file ./Payload/Inspection Form App.app/iPhoneStoryboard.storyboardc/rky-KE-TeH-view-7Mp-4t-2om.nib ... 
+2019-01-28 21:14:35 +0000  21414 bytes for ./Payload/Inspection Form App.app/iPhoneStoryboard.storyboardc/rky-KE-TeH-view-7Mp-4t-2om.nib
+copying file ./Payload/Inspection Form App.app/iPhoneStoryboard.storyboardc/UINavigationController-cPh-J7-Bos.nib ... 
+2019-01-28 21:14:35 +0000  2331 bytes for ./Payload/Inspection Form App.app/iPhoneStoryboard.storyboardc/UINavigationController-cPh-J7-Bos.nib
+2019-01-28 21:14:35 +0000  copying file ./Payload/Inspection Form App.app/iPhoneStoryboard.storyboardc/Info.plist ... 
+2019-01-28 21:14:35 +0000  421 bytes for ./Payload/Inspection Form App.app/iPhoneStoryboard.storyboardc/Info.plist
+copying file ./Payload/Inspection Form App.app/Default-568h@2x.png ... 
+2019-01-28 21:14:35 +0000  134267 bytes for ./Payload/Inspection Form App.app/Default-568h@2x.png
+2019-01-28 21:14:35 +0000  copying file ./Payload/Inspection Form App.app/logo.jpg ... 
+2019-01-28 21:14:35 +0000  1261630 bytes for ./Payload/Inspection Form App.app/logo.jpg
+2019-01-28 21:14:35 +0000  copying file ./Payload/Inspection Form App.app/ipadAppLogo.jpg ... 
+2019-01-28 21:14:35 +0000  57953 bytes for ./Payload/Inspection Form App.app/ipadAppLogo.jpg
+2019-01-28 21:14:35 +0000  copying file ./Payload/Inspection Form App.app/JobInfoView.nib ... 
+2019-01-28 21:14:35 +0000  9172 bytes for ./Payload/Inspection Form App.app/JobInfoView.nib
+2019-01-28 21:14:35 +0000  copying file ./Payload/Inspection Form App.app/titlePageLogo.jpg ... 
+2019-01-28 21:14:35 +0000  57953 bytes for ./Payload/Inspection Form App.app/titlePageLogo.jpg
+2019-01-28 21:14:35 +0000  copying file ./Payload/Inspection Form App.app/Frameworks/libswiftCoreImage.dylib ... 
+2019-01-28 21:14:35 +0000  251072 bytes for ./Payload/Inspection Form App.app/Frameworks/libswiftCoreImage.dylib
+2019-01-28 21:14:35 +0000  copying file ./Payload/Inspection Form App.app/Frameworks/libswiftObjectiveC.dylib ... 
+2019-01-28 21:14:35 +0000  299616 bytes for ./Payload/Inspection Form App.app/Frameworks/libswiftObjectiveC.dylib
+2019-01-28 21:14:35 +0000  copying file ./Payload/Inspection Form App.app/Frameworks/libswiftCore.dylib ... 
+2019-01-28 21:14:35 +0000  16705936 bytes for ./Payload/Inspection Form App.app/Frameworks/libswiftCore.dylib
+2019-01-28 21:14:35 +0000  copying file ./Payload/Inspection Form App.app/Frameworks/libswiftCoreGraphics.dylib ... 
+2019-01-28 21:14:35 +0000  651808 bytes for ./Payload/Inspection Form App.app/Frameworks/libswiftCoreGraphics.dylib
+2019-01-28 21:14:35 +0000  copying file ./Payload/Inspection Form App.app/Frameworks/libswiftUIKit.dylib ... 
+2019-01-28 21:14:35 +0000  527104 bytes for ./Payload/Inspection Form App.app/Frameworks/libswiftUIKit.dylib
+2019-01-28 21:14:35 +0000  copying file ./Payload/Inspection Form App.app/Frameworks/libswiftMetal.dylib ... 
+2019-01-28 21:14:35 +0000  295712 bytes for ./Payload/Inspection Form App.app/Frameworks/libswiftMetal.dylib
+2019-01-28 21:14:35 +0000  copying file ./Payload/Inspection Form App.app/Frameworks/libswiftDispatch.dylib ... 
+2019-01-28 21:14:35 +0000  1059216 bytes for ./Payload/Inspection Form App.app/Frameworks/libswiftDispatch.dylib
+2019-01-28 21:14:35 +0000  copying file ./Payload/Inspection Form App.app/Frameworks/libswiftos.dylib ... 
+2019-01-28 21:14:35 +0000  299952 bytes for ./Payload/Inspection Form App.app/Frameworks/libswiftos.dylib
+2019-01-28 21:14:35 +0000  copying file ./Payload/Inspection Form App.app/Frameworks/libswiftCoreFoundation.dylib ... 
+2019-01-28 21:14:35 +0000  250768 bytes for ./Payload/Inspection Form App.app/Frameworks/libswiftCoreFoundation.dylib
+2019-01-28 21:14:35 +0000  copying file ./Payload/Inspection Form App.app/Frameworks/libswiftDarwin.dylib ... 
+2019-01-28 21:14:35 +0000  402992 bytes for ./Payload/Inspection Form App.app/Frameworks/libswiftDarwin.dylib
+2019-01-28 21:14:35 +0000  copying file ./Payload/Inspection Form App.app/Frameworks/libswiftQuartzCore.dylib ... 
+2019-01-28 21:14:35 +0000  255120 bytes for ./Payload/Inspection Form App.app/Frameworks/libswiftQuartzCore.dylib
+2019-01-28 21:14:35 +0000  copying file ./Payload/Inspection Form App.app/Frameworks/libswiftFoundation.dylib ... 
+2019-01-28 21:14:36 +0000  8352720 bytes for ./Payload/Inspection Form App.app/Frameworks/libswiftFoundation.dylib
+2019-01-28 21:14:36 +0000  copying file ./Payload/Inspection Form App.app/autograph_x.png ... 
+2019-01-28 21:14:36 +0000  912 bytes for ./Payload/Inspection Form App.app/autograph_x.png
+copying file ./Payload/Inspection Form App.app/embedded.mobileprovision ... 
+2019-01-28 21:14:36 +0000  9599 bytes for ./Payload/Inspection Form App.app/embedded.mobileprovision
+2019-01-28 21:14:36 +0000  copying file ./Payload/Inspection Form App.app/OptionsTableViewController.nib ... 
+2019-01-28 21:14:36 +0000  1476 bytes for ./Payload/Inspection Form App.app/OptionsTableViewController.nib
+2019-01-28 21:14:36 +0000  copying file ./Payload/Inspection Form App.app/Info.plist ... 
+2019-01-28 21:14:36 +0000  1464 bytes for ./Payload/Inspection Form App.app/Info.plist
+copying file ./Payload/Inspection Form App.app/Inspection Form App ... 
+2019-01-28 21:14:36 +0000  6647552 bytes for ./Payload/Inspection Form App.app/Inspection Form App
+2019-01-28 21:14:36 +0000  copying file ./Payload/Inspection Form App.app/PkgInfo ... 
+8 bytes for ./Payload/Inspection Form App.app/PkgInfo
+2019-01-28 21:14:36 +0000  /usr/bin/ditto exited with 0
+2019-01-28 21:14:36 +0000  Processing step: IDEDistributionAppStoreInformationStep
+2019-01-28 21:14:36 +0000  Skipping step: IDEDistributionAppStoreInformationStep because it said so
+2019-01-28 21:14:36 +0000  Processing step: IDEDistributionCreateManifestStep

@@ -13,9 +13,9 @@
 #import "InspectionManager.h"
 #import "InspectionBussiness.h"
 #import <Parse/Parse.h>
-#import <ParseCrashReporting/ParseCrashReporting.h>
 #import "SyncManager.h"
 #import "LoginViewController.h"
+@import Bugsee;
 
 @interface AppDelegate ()
 
@@ -42,6 +42,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [self setUpParseWithLaunchOptions:launchOptions];
+    [Bugsee launchWithToken:@"a028b6a0-71dc-41a4-9eb3-d03b3c2a4d61"];
+
     DBAccountManager* accountMgr =[[DBAccountManager alloc] initWithAppKey:@"878n3v7pfduyrrr" secret:@"0745q3julqjk9mb"];
     [DBAccountManager setSharedManager:accountMgr];
     [IACraneInspectionDetailsManager sharedManager];
@@ -151,7 +153,7 @@
 - (void) setUpParseWithLaunchOptions : (NSDictionary *) launchOptions {
     // Connect our app to Parse
     // Allow the parse local data store
-    [ParseCrashReporting enable];
+//    [ParseCrashReporting enable];
     // Parse Keys - Livead
     
     
