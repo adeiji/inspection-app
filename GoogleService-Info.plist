@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AD_UNIT_ID_FOR_BANNER_TEST</key>
+	<string>ca-app-pub-3940256099942544/2934735716</string>
+	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
+	<string>ca-app-pub-3940256099942544/4411468910</string>
+	<key>CLIENT_ID</key>
+	<string>1007448543066-m0cl6sklj4e253uv7kqo96adetde0ip1.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.1007448543066-m0cl6sklj4e253uv7kqo96adetde0ip1</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBE0GL-9v-lF1ukHpY6imz5R3bf5nICYYQ</string>
+	<key>GCM_SENDER_ID</key>
+	<string>1007448543066</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>net.sswr.Inspection-Form-App</string>
+	<key>PROJECT_ID</key>
+	<string>inspectionapp-f7619</string>
+	<key>STORAGE_BUCKET</key>
+	<string>inspectionapp-f7619.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<true></true>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<false></false>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:1007448543066:ios:38ed52f4dd89f8ce</string>
+	<key>DATABASE_URL</key>
+	<string>https://inspectionapp-f7619.firebaseio.com</string>
+</dict>
+</plist>

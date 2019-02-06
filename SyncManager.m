@@ -9,6 +9,7 @@
 #import "SyncManager.h"
 #import <Parse/Parse.h>
 #import "IAConstants.h"
+#import "Inspection_Form_App-Swift.h"
 
 @implementation SyncManager
 
@@ -20,6 +21,8 @@
         if (!error)
         {
             [[IACraneInspectionDetailsManager sharedManager] saveInspectionDetailsWithCranes:objects];
+            IAFirebaseCraneInspectionDetailsManager *manager = [IAFirebaseCraneInspectionDetailsManager new];
+            
             NSLog(@"com.inspectionapp - All Crane details downloaded from the server.");
         }
     }];

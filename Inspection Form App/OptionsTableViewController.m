@@ -160,7 +160,8 @@ int const SEND_INSPECTIONS_INDEX = 0, VIEW_INSPECTIONS_INDEX = 1, ACCOUNT_INDEX 
     }
     else if (_users != nil) { // Is the user currently looking at all the users on the server
         PFUser *user = [_users objectAtIndex:indexPath.row];
-        [[IACraneInspectionDetailsManager sharedManager] shareCraneDetails:_selectedCrane WithUser:user WithViewControllerOrNilToDisplayAlert:self] ;
+        
+        [[IACraneInspectionDetailsManager sharedManager] shareCraneDetails:_selectedCrane WithUser:user WithViewControllerOrNilToDisplayAlert:self] ;        
     }
     else if (_inspectionsSentToCurrentUser != nil) {
         PFCrane *craneObject = [_inspectionsSentToCurrentUser objectAtIndex:indexPath.row];

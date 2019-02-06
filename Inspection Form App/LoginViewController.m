@@ -8,6 +8,7 @@
 
 #import "LoginViewController.h"
 #import <Parse/Parse.h>
+#import "Inspection_Form_App-Swift.h"
 
 @implementation LoginViewController
 
@@ -64,6 +65,12 @@ NSString *const PASSWORD = @"sswr";
         username = [_txtUsername.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
         user.username = username;
         user.password = PASSWORD;
+        
+        // Save the user to Firebase
+        IAFirebaseCraneInspectionDetailsManager *manager = [IAFirebaseCraneInspectionDetailsManager new];
+        NSString *userId = [manager addUserWithName:username];
+        [UtilityFunctions saveUserWithName:username userId:userId];
+        
         [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
             if (succeeded && !error) {
                 [self userSignedIn];

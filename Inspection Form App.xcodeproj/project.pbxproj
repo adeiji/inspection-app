@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		849C03CA6F225937C6F51FF7 /* libPods-Inspection Form App.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 245CADD0A0FE29ED67D295DE /* libPods-Inspection Form App.a */; };
 		8B0787C415113448006857A8 /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B0787C315113448006857A8 /* TableViewController.m */; };
 		8B0787C715113796006857A8 /* Parts.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B0787C615113796006857A8 /* Parts.m */; };
 		8B544612150F0C3E007E1CA9 /* GradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B544611150F0C3E007E1CA9 /* GradientView.m */; };
@@ -34,7 +33,6 @@
 		8BF09E74153A53E200E1BCB3 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BF09E73153A53E200E1BCB3 /* Security.framework */; };
 		8BF10A9C152FB93D00DC5F05 /* TextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BF10A9B152FB93D00DC5F05 /* TextField.m */; };
 		8BF3877015239E1200C3F368 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BF3876F15239E1200C3F368 /* MessageUI.framework */; };
-		BE43A0B2AECAAF3BC5EF23EB /* libPods-Inspection Form AppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D4C0C227BDD10671984A105 /* libPods-Inspection Form AppTests.a */; };
 		CE147B661835C2EA005CC483 /* Part.m in Sources */ = {isa = PBXBuildFile; fileRef = CE147B651835C2EA005CC483 /* Part.m */; };
 		CE147B691836844C005CC483 /* InspectionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CE147B681836844C005CC483 /* InspectionManager.m */; };
 		CE27C2161821BB0000EDDFC1 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE27C2151821BB0000EDDFC1 /* CoreData.framework */; };
@@ -58,6 +56,8 @@
 		CEFD6D2D1839575E001764E9 /* CraneView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEFD6D2C1839575E001764E9 /* CraneView.xib */; };
 		CEFD6D70183A8705001764E9 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFD6D6F183A8705001764E9 /* Default-568h@2x.png */; };
 		CEFD6D72183A87D8001764E9 /* JobInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEFD6D71183A87D8001764E9 /* JobInfoView.xib */; };
+		EC101BE05453EFE5D93E6EEF /* Pods_Inspection_Form_AppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F656FCB2F9285CF5DF30DCA /* Pods_Inspection_Form_AppTests.framework */; };
+		ECF08807C4C85D7FFBB7DB46 /* Pods_Inspection_Form_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33B88F2EDE4090E2DD9C1F3B /* Pods_Inspection_Form_App.framework */; };
 		F4235EE01E2EE67600AE9569 /* IAAddSignatureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4235EDF1E2EE67600AE9569 /* IAAddSignatureViewController.m */; };
 		F4235EE31E2EE6D000AE9569 /* IAAddSignatureView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4235EE21E2EE6D000AE9569 /* IAAddSignatureView.m */; };
 		F423A8C91C7BA24C00899B6E /* LoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F423A8C81C7BA24C00899B6E /* LoginView.xib */; };
@@ -73,6 +73,7 @@
 		F43E74991C8A071B0045E5F1 /* AccountTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F43E74981C8A071B0045E5F1 /* AccountTableViewController.m */; };
 		F453A3B21AD43E3B00319D7A /* InspectionModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F453A3B01AD43E3B00319D7A /* InspectionModel.xcdatamodeld */; };
 		F453A3B51AD43FB200319D7A /* Customer.m in Sources */ = {isa = PBXBuildFile; fileRef = F453A3B41AD43FB200319D7A /* Customer.m */; };
+		F46FC63122048FBA005BE455 /* FirebasePersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46FC63022048FBA005BE455 /* FirebasePersistenceManager.swift */; };
 		F480551A1E3288B600330D95 /* SignatureManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F48055191E3288B600330D95 /* SignatureManager.m */; };
 		F4809A651E3A48FB00BE0EFB /* PFBackupCraneObject.m in Sources */ = {isa = PBXBuildFile; fileRef = F4809A641E3A48FB00BE0EFB /* PFBackupCraneObject.m */; };
 		F49674401E0DDA9F00DE78A6 /* InspectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = F496743F1E0DDA9F00DE78A6 /* InspectionView.m */; };
@@ -81,9 +82,15 @@
 		F49DDEB11ACCDA5C00A02162 /* IACraneInspectionDetailsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F49DDEB01ACCDA5C00A02162 /* IACraneInspectionDetailsManager.m */; };
 		F49DDED91ACCED1600A02162 /* InspectionCrane.m in Sources */ = {isa = PBXBuildFile; fileRef = F49DDED81ACCED1600A02162 /* InspectionCrane.m */; };
 		F49DDEE51ACF33F100A02162 /* InspectionOption.m in Sources */ = {isa = PBXBuildFile; fileRef = F49DDEE41ACF33F100A02162 /* InspectionOption.m */; };
+		F4A3AD78220A09E0000FE13C /* InspectionAppFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A3AD77220A09E0000FE13C /* InspectionAppFactory.swift */; };
 		F4B29E641ADC1E740025A091 /* CoreDataCondition.m in Sources */ = {isa = PBXBuildFile; fileRef = F4B29E631ADC1E740025A091 /* CoreDataCondition.m */; };
 		F4B29E671ADC281B0025A091 /* InspectedCrane.m in Sources */ = {isa = PBXBuildFile; fileRef = F4B29E661ADC281B0025A091 /* InspectedCrane.m */; };
 		F4B29E6D1ADC6A620025A091 /* lvwwdcranes.plist in Resources */ = {isa = PBXBuildFile; fileRef = F4B29E6C1ADC6A620025A091 /* lvwwdcranes.plist */; };
+		F4C5630122048E10009AE24E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F4C5630022048E10009AE24E /* GoogleService-Info.plist */; };
+		F4C88111220496810089DD61 /* UtilityFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C8810F220496810089DD61 /* UtilityFunctions.swift */; };
+		F4C88112220496810089DD61 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C88110220496810089DD61 /* Constants.swift */; };
+		F4C88114220497F10089DD61 /* GRUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C88113220497F10089DD61 /* GRUser.swift */; };
+		F4C8811622049C710089DD61 /* IAFirebaseCraneInspectionDetailsMananager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C8811522049C710089DD61 /* IAFirebaseCraneInspectionDetailsMananager.swift */; };
 		F4FBDADC1AD765420090DA72 /* InspectionPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = F4FBDADB1AD765420090DA72 /* InspectionPoint.m */; };
 		F4FBDADE1AD78B530090DA72 /* PromptView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4FBDADD1AD78B530090DA72 /* PromptView.xib */; };
 		F4FBDAE11AD804200090DA72 /* Prompt.m in Sources */ = {isa = PBXBuildFile; fileRef = F4FBDAE01AD804200090DA72 /* Prompt.m */; };
@@ -101,8 +108,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		245CADD0A0FE29ED67D295DE /* libPods-Inspection Form App.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Inspection Form App.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		4D4C0C227BDD10671984A105 /* libPods-Inspection Form AppTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Inspection Form AppTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		33B88F2EDE4090E2DD9C1F3B /* Pods_Inspection_Form_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Inspection_Form_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		566EEBA997791A7E7DE2DAF2 /* Pods-Inspection Form AppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Inspection Form AppTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Inspection Form AppTests/Pods-Inspection Form AppTests.debug.xcconfig"; sourceTree = "<group>"; };
 		6B39315125191CB323ADA4DE /* Pods-Inspection Form App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Inspection Form App.release.xcconfig"; path = "Pods/Target Support Files/Pods-Inspection Form App/Pods-Inspection Form App.release.xcconfig"; sourceTree = "<group>"; };
 		86D8FAA3560C708A7D88838A /* Pods-Inspection Form AppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Inspection Form AppTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Inspection Form AppTests/Pods-Inspection Form AppTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -152,6 +158,7 @@
 		8BF10A9A152FB93D00DC5F05 /* TextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextField.h; sourceTree = "<group>"; };
 		8BF10A9B152FB93D00DC5F05 /* TextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextField.m; sourceTree = "<group>"; };
 		8BF3876F15239E1200C3F368 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		9F656FCB2F9285CF5DF30DCA /* Pods_Inspection_Form_AppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Inspection_Form_AppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE147B631835C263005CC483 /* PartSelectionDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PartSelectionDelegate.h; sourceTree = "<group>"; };
 		CE147B641835C2EA005CC483 /* Part.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Part.h; sourceTree = "<group>"; };
 		CE147B651835C2EA005CC483 /* Part.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Part.m; sourceTree = "<group>"; };
@@ -211,6 +218,7 @@
 		F453A3B11AD43E3B00319D7A /* InspectionModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = InspectionModel.xcdatamodel; sourceTree = "<group>"; };
 		F453A3B31AD43FB200319D7A /* Customer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Customer.h; sourceTree = "<group>"; };
 		F453A3B41AD43FB200319D7A /* Customer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Customer.m; sourceTree = "<group>"; };
+		F46FC63022048FBA005BE455 /* FirebasePersistenceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebasePersistenceManager.swift; sourceTree = "<group>"; };
 		F48055181E3288B600330D95 /* SignatureManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignatureManager.h; sourceTree = "<group>"; };
 		F48055191E3288B600330D95 /* SignatureManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignatureManager.m; sourceTree = "<group>"; };
 		F4809A631E3A48FB00BE0EFB /* PFBackupCraneObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFBackupCraneObject.h; sourceTree = "<group>"; };
@@ -227,11 +235,17 @@
 		F49DDED81ACCED1600A02162 /* InspectionCrane.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InspectionCrane.m; sourceTree = "<group>"; };
 		F49DDEE31ACF33F100A02162 /* InspectionOption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectionOption.h; sourceTree = "<group>"; };
 		F49DDEE41ACF33F100A02162 /* InspectionOption.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InspectionOption.m; sourceTree = "<group>"; };
+		F4A3AD77220A09E0000FE13C /* InspectionAppFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspectionAppFactory.swift; sourceTree = "<group>"; };
 		F4B29E621ADC1E740025A091 /* CoreDataCondition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataCondition.h; sourceTree = "<group>"; };
 		F4B29E631ADC1E740025A091 /* CoreDataCondition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataCondition.m; sourceTree = "<group>"; };
 		F4B29E651ADC281B0025A091 /* InspectedCrane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectedCrane.h; sourceTree = "<group>"; };
 		F4B29E661ADC281B0025A091 /* InspectedCrane.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InspectedCrane.m; sourceTree = "<group>"; };
 		F4B29E6C1ADC6A620025A091 /* lvwwdcranes.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = lvwwdcranes.plist; sourceTree = "<group>"; };
+		F4C5630022048E10009AE24E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		F4C8810F220496810089DD61 /* UtilityFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilityFunctions.swift; sourceTree = "<group>"; };
+		F4C88110220496810089DD61 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		F4C88113220497F10089DD61 /* GRUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GRUser.swift; sourceTree = "<group>"; };
+		F4C8811522049C710089DD61 /* IAFirebaseCraneInspectionDetailsMananager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAFirebaseCraneInspectionDetailsMananager.swift; sourceTree = "<group>"; };
 		F4FBDADA1AD765420090DA72 /* InspectionPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectionPoint.h; sourceTree = "<group>"; };
 		F4FBDADB1AD765420090DA72 /* InspectionPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InspectionPoint.m; sourceTree = "<group>"; };
 		F4FBDADD1AD78B530090DA72 /* PromptView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PromptView.xib; sourceTree = "<group>"; };
@@ -258,7 +272,7 @@
 				8BC58453150ABD87000AC695 /* UIKit.framework in Frameworks */,
 				8BC58455150ABD87000AC695 /* Foundation.framework in Frameworks */,
 				8BC58457150ABD87000AC695 /* CoreGraphics.framework in Frameworks */,
-				849C03CA6F225937C6F51FF7 /* libPods-Inspection Form App.a in Frameworks */,
+				ECF08807C4C85D7FFBB7DB46 /* Pods_Inspection_Form_App.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,7 +284,7 @@
 				CE27C22B1823605500EDDFC1 /* Dropbox.framework in Frameworks */,
 				8BC58472150ABD88000AC695 /* UIKit.framework in Frameworks */,
 				8BC58473150ABD88000AC695 /* Foundation.framework in Frameworks */,
-				BE43A0B2AECAAF3BC5EF23EB /* libPods-Inspection Form AppTests.a in Frameworks */,
+				EC101BE05453EFE5D93E6EEF /* Pods_Inspection_Form_AppTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,6 +314,8 @@
 		8BC58443150ABD87000AC695 = {
 			isa = PBXGroup;
 			children = (
+				F4C8810C220495E90089DD61 /* Firebase */,
+				F4C5630022048E10009AE24E /* GoogleService-Info.plist */,
 				F423A8CA1C7BA51B00899B6E /* Dephyned */,
 				F49DDEB51ACCDC4800A02162 /* Core Data */,
 				F49DDEAB1ACCCB2700A02162 /* IAConstants.h */,
@@ -342,8 +358,8 @@
 				8BC58454150ABD87000AC695 /* Foundation.framework */,
 				8BC58456150ABD87000AC695 /* CoreGraphics.framework */,
 				8BC58470150ABD88000AC695 /* SenTestingKit.framework */,
-				245CADD0A0FE29ED67D295DE /* libPods-Inspection Form App.a */,
-				4D4C0C227BDD10671984A105 /* libPods-Inspection Form AppTests.a */,
+				33B88F2EDE4090E2DD9C1F3B /* Pods_Inspection_Form_App.framework */,
+				9F656FCB2F9285CF5DF30DCA /* Pods_Inspection_Form_AppTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -380,6 +396,7 @@
 				CE486AD2180CB15800B1B953 /* Options */,
 				CE486AD3180CB15E00B1B953 /* OptionList */,
 				8BC58459150ABD87000AC695 /* Supporting Files */,
+				F4A3AD77220A09E0000FE13C /* InspectionAppFactory.swift */,
 			);
 			path = "Inspection Form App";
 			sourceTree = "<group>";
@@ -721,6 +738,7 @@
 			children = (
 				F49DDEAF1ACCDA5C00A02162 /* IACraneInspectionDetailsManager.h */,
 				F49DDEB01ACCDA5C00A02162 /* IACraneInspectionDetailsManager.m */,
+				F4C8811522049C710089DD61 /* IAFirebaseCraneInspectionDetailsMananager.swift */,
 			);
 			name = "Crane Inspection Manager";
 			sourceTree = "<group>";
@@ -748,6 +766,17 @@
 			name = "Core Data";
 			sourceTree = "<group>";
 		};
+		F4C8810C220495E90089DD61 /* Firebase */ = {
+			isa = PBXGroup;
+			children = (
+				F4C88113220497F10089DD61 /* GRUser.swift */,
+				F4C88110220496810089DD61 /* Constants.swift */,
+				F4C8810F220496810089DD61 /* UtilityFunctions.swift */,
+				F46FC63022048FBA005BE455 /* FirebasePersistenceManager.swift */,
+			);
+			path = Firebase;
+			sourceTree = "<group>";
+		};
 		F4FBDAE21AD80A430090DA72 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -768,7 +797,7 @@
 				8BC5844A150ABD87000AC695 /* Sources */,
 				8BC5844B150ABD87000AC695 /* Frameworks */,
 				8BC5844C150ABD87000AC695 /* Resources */,
-				1A58BEBDDEB549CB4B70B60C /* [CP] Copy Pods Resources */,
+				577DB18A4C7214FFBCDA4531 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -852,6 +881,7 @@
 				CE9A273C1716A70E00FE3D32 /* titlePageLogo.jpg in Resources */,
 				CEFD6D2D1839575E001764E9 /* CraneView.xib in Resources */,
 				CE9775D91718C2660037967E /* logo.jpg in Resources */,
+				F4C5630122048E10009AE24E /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -866,22 +896,50 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1A58BEBDDEB549CB4B70B60C /* [CP] Copy Pods Resources */ = {
+		577DB18A4C7214FFBCDA4531 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Inspection Form App/Pods-Inspection Form App-resources.sh",
-				"${PODS_ROOT}/Parse/Parse/Resources/en.lproj",
+				"${SRCROOT}/Pods/Target Support Files/Pods-Inspection Form App/Pods-Inspection Form App-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
+				"${BUILT_PRODUCTS_DIR}/BoringSSL/openssl.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
+				"${BUILT_PRODUCTS_DIR}/Parse/Parse.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC/GRPCClient.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-C++/grpcpp.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-ProtoRPC/ProtoRPC.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-RxLibrary/RxLibrary.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
-			name = "[CP] Copy Pods Resources";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/en.lproj",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Parse.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GRPCClient.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpcpp.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ProtoRPC.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxLibrary.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Inspection Form App/Pods-Inspection Form App-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Inspection Form App/Pods-Inspection Form App-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		75B4DCF3B16E47D5CB54B25C /* [CP] Check Pods Manifest.lock */ = {
@@ -946,6 +1004,7 @@
 				F453A3B21AD43E3B00319D7A /* InspectionModel.xcdatamodeld in Sources */,
 				F43E74921C877E180045E5F1 /* PFCrane.m in Sources */,
 				F423A8D61C7BA90900899B6E /* LoginViewController.m in Sources */,
+				F4A3AD78220A09E0000FE13C /* InspectionAppFactory.swift in Sources */,
 				8BC58463150ABD87000AC695 /* AppDelegate.m in Sources */,
 				CE40D39A180894300080E9BD /* PDFGenerator.m in Sources */,
 				F4809A651E3A48FB00BE0EFB /* PFBackupCraneObject.m in Sources */,
@@ -957,6 +1016,7 @@
 				F49DDEA71ACCC60C00A02162 /* SyncManager.m in Sources */,
 				8BECD3BF150E934900616735 /* OptionList.m in Sources */,
 				F43E74951C877F3A0045E5F1 /* PFCustomer.m in Sources */,
+				F4C88114220497F10089DD61 /* GRUser.swift in Sources */,
 				F49674401E0DDA9F00DE78A6 /* InspectionView.m in Sources */,
 				F4235EE01E2EE67600AE9569 /* IAAddSignatureViewController.m in Sources */,
 				F43E74991C8A071B0045E5F1 /* AccountTableViewController.m in Sources */,
@@ -965,6 +1025,7 @@
 				F453A3B51AD43FB200319D7A /* Customer.m in Sources */,
 				8B0787C415113448006857A8 /* TableViewController.m in Sources */,
 				F4FBDADC1AD765420090DA72 /* InspectionPoint.m in Sources */,
+				F4C88112220496810089DD61 /* Constants.swift in Sources */,
 				CE147B691836844C005CC483 /* InspectionManager.m in Sources */,
 				8B0787C715113796006857A8 /* Parts.m in Sources */,
 				F4B29E671ADC281B0025A091 /* InspectedCrane.m in Sources */,
@@ -978,6 +1039,9 @@
 				8BE881FC1513FA4200360C63 /* Condition.m in Sources */,
 				8BF10A9C152FB93D00DC5F05 /* TextField.m in Sources */,
 				F4FBDAE51AD80A520090DA72 /* PromptView.m in Sources */,
+				F46FC63122048FBA005BE455 /* FirebasePersistenceManager.swift in Sources */,
+				F4C88111220496810089DD61 /* UtilityFunctions.swift in Sources */,
+				F4C8811622049C710089DD61 /* IAFirebaseCraneInspectionDetailsMananager.swift in Sources */,
 				CE40D38B18087BC20080E9BD /* DataLayer.m in Sources */,
 				F49DDEB11ACCDA5C00A02162 /* IACraneInspectionDetailsManager.m in Sources */,
 				F4235EE31E2EE6D000AE9569 /* IAAddSignatureView.m in Sources */,
@@ -1064,6 +1128,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
@@ -1099,6 +1164,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PRODUCT_NAME = "";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -1115,6 +1181,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 58P227HU77;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1165,6 +1232,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 58P227HU77;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (

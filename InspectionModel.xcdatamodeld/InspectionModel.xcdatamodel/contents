@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9057" systemVersion="14F27" minimumToolsVersion="Xcode 4.3">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14460.32" systemVersion="18B75" minimumToolsVersion="Xcode 4.3" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
     <entity name="Condition" representedClassName="CoreDataCondition" syncable="YES">
         <attribute name="hoistSrl" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="isApplicable" optional="YES" attributeType="Boolean" syncable="YES"/>
-        <attribute name="isDeficient" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="isApplicable" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="isDeficient" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="notes" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="optionLocation" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="optionLocation" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="optionSelected" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="optionSelectedIndex" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="optionSelectedIndex" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
     </entity>
     <entity name="Customer" representedClassName="Customer" syncable="YES">
         <attribute name="address" optional="YES" attributeType="String" syncable="YES"/>
@@ -25,7 +25,7 @@
         <attribute name="hoistMfg" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="hoistSrl" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="mfg" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="shared" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="shared" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="conditions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Condition" syncable="YES"/>
         <relationship name="customer" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Customer" inverseName="inspectedCrane" inverseEntity="Customer" syncable="YES"/>
@@ -58,12 +58,12 @@
     </entity>
     <entity name="Prompt" representedClassName="Prompt" syncable="YES">
         <attribute name="objectId" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="requiresDeficiency" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="requiresDeficiency" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="inspectionPoint" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="InspectionPoint" inverseName="prompts" inverseEntity="InspectionPoint" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Condition" positionX="36" positionY="108" width="128" height="148"/>
+        <element name="Condition" positionX="36" positionY="108" width="128" height="150"/>
         <element name="Customer" positionX="72" positionY="126" width="128" height="118"/>
         <element name="InspectedCrane" positionX="36" positionY="54" width="128" height="225"/>
         <element name="InspectedOption" positionX="72" positionY="81" width="128" height="73"/>

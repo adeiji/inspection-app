@@ -23,3 +23,4 @@
 @property (nonatomic, retain) InspectedCrane *inspectedCrane;
 
 @end
+

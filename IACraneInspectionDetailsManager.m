@@ -7,6 +7,7 @@
 //
 
 #import "IACraneInspectionDetailsManager.h"
+#import "Inspection_Form_App-Swift.h"
 
 NSString *const SHARED_INSPECTIONS_TABLE = @"SharedInspections";
 NSString *const HOIST_SRL = @"hoistSrl";
@@ -48,12 +49,24 @@ NSString *const TO_USER = @"toUser";
     return view;
 }
 
+- (void) transferParseToFirebase : (NSArray *) cranes {
+    
+    IAFirebaseCraneInspectionDetailsManager *manager = [IAFirebaseCraneInspectionDetailsManager new];
+    //Saves the cranes and the inspection details of the crane
+    [manager saveCranesWithCranes:cranes];
+    // Saves all the inspected cranes to firebase that are stored in the Parse DB
+    [self saveAllInspectedCranesToFirebase];
+}
+
 /*
  
  Store all the cranes, and their inspection details to the database
  
  */
+// Saving Done
+// Still need to do getting
 - (void) saveInspectionDetailsWithCranes : (NSArray *) cranes {
+    IAFirebaseCraneInspectionDetailsManager *manager = [IAFirebaseCraneInspectionDetailsManager new];
     UIView *progressContainerView = [self showDownloadProgressBar];
     UIProgressView *progressIndicatorView;
     for (UIView *subview in [progressContainerView subviews]) {
@@ -64,6 +77,7 @@ NSString *const TO_USER = @"toUser";
     }
     
     [self resetInspectionDetailsDatabase];
+
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSManagedObjectContext *context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
@@ -71,10 +85,12 @@ NSString *const TO_USER = @"toUser";
         NSMutableArray *cranesArray = [NSMutableArray new];
         NSEntityDescription *entity = [NSEntityDescription entityForName:kCoreDataClassCrane inManagedObjectContext:context];
         NSError *error;
+        
         /* Get every crane that we just received from the server and grab all it's subdocuments and store them into coredata */
         for (id crane in cranes) {
             InspectionCrane *craneObject = [[InspectionCrane alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
             craneObject.name = [crane objectForKey:kObjectName];
+            
             // Convert the Parse Crane Object into a Core Data Object
             NSSet *set = [[NSSet alloc] init];
             [set setByAddingObjectsFromArray:[crane objectForKey:kInspectionPoints]];
@@ -161,6 +177,7 @@ NSString *const TO_USER = @"toUser";
     });
 }
 
+// Done
 - (NSArray *) getAllInspectionDetailsFromServerForCurrentUserWithHoistSrl : (NSString *) hoistSrl {
     // Get all inspection details from server
     PFQuery *query = [PFInspectionDetails query];
@@ -186,6 +203,7 @@ NSString *const TO_USER = @"toUser";
     return allInspectionDetails;
 }
 
+// Done
 - (NSArray *) getAllCranesFromServerForCurrentUser {
     // Get all the cranes that are from the current user's device
     PFQuery *query = [PFCrane query];
@@ -612,6 +630,7 @@ NSString *const TO_USER = @"toUser";
  Delete previous occurences of this inspection that were already sent to this user
  
  */
+// Done, it's now gecome updateInspectino in IAFirebaseCraneInspectionDetailsManager
 - (void) deleteEarlierInspectionOfCraneFromServer : (InspectedCrane *) crane
                                           ForUser : (PFUser *) user                                          
 {
@@ -633,6 +652,7 @@ NSString *const TO_USER = @"toUser";
  Get all the cranes for the current user from the server
  
  */
+//DONE
 - (NSArray *) getAllCranesForCurrentUserFromServer {
     NSMutableArray *allCranes = [NSMutableArray new];
     
@@ -653,7 +673,7 @@ NSString *const TO_USER = @"toUser";
     }
     return allCranes;
 }
-
+// DONE
 - (NSArray *) getAllConditionsFromServerForCrane : (PFCrane *) crane {
     NSMutableArray *allConditions = [NSMutableArray new];
     PFQuery *query = [PFInspectionDetails query];
@@ -675,6 +695,17 @@ NSString *const TO_USER = @"toUser";
     }
     
     return allConditions;
+}
+
+- (void) saveAllInspectedCranesToFirebase {
+    
+    PFQuery *query = [PFCrane query];
+    [query setLimit:1000];
+    
+    while ([query countObjects] > 0) {
+        NSArray *cranes = [query findObjects];
+        [[IAFirebaseCraneInspectionDetailsManager new] saveInspectedCranesFromParseCraneObjectWithCranes:cranes];
+    }
 }
 
 - (void) deleteCustomersFromServerWithFromCurrentUser {
@@ -727,6 +758,10 @@ NSString *const TO_USER = @"toUser";
     
     [self deleteEarlierInspectionOfCraneFromServer:crane ForUser:user];
     [self saveCraneToServer:crane WithToUser: user WithFromUser:[PFUser currentUser]];
+    
+    NSString *userId = [UtilityFunctions getUserId];
+    IAFirebaseCraneInspectionDetailsManager *manager = [IAFirebaseCraneInspectionDetailsManager new];
+    [manager saveInspectionWithHoistSrl:crane.hoistSrl inspectionDetails:inspectionDetails userId:userId];
     
     for (CoreDataCondition *condition in inspectionDetails) {
         
@@ -794,6 +829,7 @@ NSString *const TO_USER = @"toUser";
     return sortedArray;
 }
 
+// Done
 - (void) saveCraneToServer  : (InspectedCrane *)crane
                  WithToUser : (PFUser *) user
                WithFromUser : (PFUser *) fromUser {
@@ -922,7 +958,7 @@ NSString *const TO_USER = @"toUser";
     });
 }
 
-
+// Done - deleteAllDataFromCollection
 - (void) deleteInspectionDetailsFromServerWithFromCurrentUser {
     // Get all the InspectionDetails from the current user
     PFQuery *query = [PFInspectionDetails query];

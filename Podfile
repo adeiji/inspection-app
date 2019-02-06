@@ -4,12 +4,18 @@
 source 'https://github.com/CocoaPods/Specs.git'
 
 platform:ios, :deployment_target => '8.0'
+use_frameworks!
 
 target 'Inspection Form App' do
 
 pod 'Parse'
 pod 'Masonry'
 pod 'Bugsee'
+pod 'Firebase/Core'
+pod 'FirebaseUI/Storage'
+pod 'Firebase/Functions'
+pod 'Firebase/Auth'
+pod 'Firebase/Firestore'
 
 end
 

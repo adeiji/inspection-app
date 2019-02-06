@@ -15,7 +15,9 @@
 #import <Parse/Parse.h>
 #import "SyncManager.h"
 #import "LoginViewController.h"
+
 @import Bugsee;
+@import Firebase;
 
 @interface AppDelegate ()
 
@@ -43,7 +45,9 @@
 {
     [self setUpParseWithLaunchOptions:launchOptions];
     [Bugsee launchWithToken:@"a028b6a0-71dc-41a4-9eb3-d03b3c2a4d61"];
-
+    
+    [FIRApp configure];
+    
     DBAccountManager* accountMgr =[[DBAccountManager alloc] initWithAppKey:@"878n3v7pfduyrrr" secret:@"0745q3julqjk9mb"];
     [DBAccountManager setSharedManager:accountMgr];
     [IACraneInspectionDetailsManager sharedManager];
