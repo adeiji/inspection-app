@@ -14,7 +14,7 @@
 @end
 
 // These are the indexes of Strings stored in the options array which stores the options that are viewed on the table view controller, you can update the actual strings themselves in the ViewController.m file in the method showOptionsMenu
-int const SEND_INSPECTIONS_INDEX = 0, VIEW_INSPECTIONS_INDEX = 1, ACCOUNT_INDEX = 2, ADD_SIGNATURE_INDEX = 3, BACKUP_TO_CLOUD = 4, LOAD_WATER_DISTRICT_CRANES = 5;
+int const SEND_INSPECTIONS_INDEX = 0, VIEW_INSPECTIONS_INDEX = 1, ACCOUNT_INDEX = 2, ADD_SIGNATURE_INDEX = 3, BACKUP_TO_CLOUD = 4, LOAD_WATER_DISTRICT_CRANES = 5, PARSE_TO_FIREBASE = 6;
 
 @implementation OptionsTableViewController
 
@@ -148,6 +148,17 @@ int const SEND_INSPECTIONS_INDEX = 0, VIEW_INSPECTIONS_INDEX = 1, ACCOUNT_INDEX 
             [alertController addAction:okayAction];
             [self.navigationController presentViewController:alertController animated:YES completion:nil];
         }
+        else if (indexPath.row == PARSE_TO_FIREBASE) {
+            PFQuery *query = [PFQuery queryWithClassName:kParseClassCrane];
+            
+            [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+                if (!error)
+                {
+                    [[IACraneInspectionDetailsManager sharedManager] transferParseToFirebase:objects];                    
+                }
+            }];
+        }
+        
     }
     else if (_inspections != nil) { // Is the user currently looking at inspections that the current user has done
         optionsTableViewController.selectedCrane = [_inspections objectAtIndex:indexPath.row];

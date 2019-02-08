@@ -15,7 +15,7 @@ NSString *const TO_USER = @"toUser";
 
 @implementation IACraneInspectionDetailsManager
 
-+ (id)sharedManager {
++ (IACraneInspectionDetailsManager *)sharedManager {
     static IACraneInspectionDetailsManager *sharedMyManager = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -50,12 +50,13 @@ NSString *const TO_USER = @"toUser";
 }
 
 - (void) transferParseToFirebase : (NSArray *) cranes {
-    
-    IAFirebaseCraneInspectionDetailsManager *manager = [IAFirebaseCraneInspectionDetailsManager new];
-    //Saves the cranes and the inspection details of the crane
-    [manager saveCranesWithCranes:cranes];
-    // Saves all the inspected cranes to firebase that are stored in the Parse DB
-    [self saveAllInspectedCranesToFirebase];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        IAFirebaseCraneInspectionDetailsManager *manager = [IAFirebaseCraneInspectionDetailsManager new];
+        //Saves the cranes and the inspection details of the crane
+        [manager saveCranesWithCranes:cranes];
+        // Saves all the inspected cranes to firebase that are stored in the Parse DB
+        [self saveAllInspectedCranesToFirebase];
+    });
 }
 
 /*
@@ -139,8 +140,6 @@ NSString *const TO_USER = @"toUser";
                         else {
                             prompt.requiresDeficiency = [NSNumber numberWithBool:NO];
                         }
-                        
-
                     }
                     prompt.inspectionPoint = inspectionPointObject;
                     [prompts addObject:prompt];
@@ -674,11 +673,12 @@ NSString *const TO_USER = @"toUser";
     return allCranes;
 }
 // DONE
-- (NSArray *) getAllConditionsFromServerForCrane : (PFCrane *) crane {
+- (NSArray *) getAllConditionsFromServerForCrane : (PFObject *) crane {
     NSMutableArray *allConditions = [NSMutableArray new];
     PFQuery *query = [PFInspectionDetails query];
-    [query whereKey:HOIST_SRL equalTo:crane.hoistSrl];
-    [query whereKey:TO_USER equalTo:[PFUser currentUser]];
+    
+    [query whereKey:HOIST_SRL equalTo: ((PFCrane *) crane).hoistSrl];
+    [query whereKey:kParseFromUser equalTo:[PFUser currentUser]];
     [query setLimit:1000];
     int counter = 0;
     
@@ -702,9 +702,12 @@ NSString *const TO_USER = @"toUser";
     PFQuery *query = [PFCrane query];
     [query setLimit:1000];
     
+    int counter = 0;
     while ([query countObjects] > 0) {
         NSArray *cranes = [query findObjects];
         [[IAFirebaseCraneInspectionDetailsManager new] saveInspectedCranesFromParseCraneObjectWithCranes:cranes];
+        counter = counter + 1;
+        [query setSkip:1000 * counter];
     }
 }
 

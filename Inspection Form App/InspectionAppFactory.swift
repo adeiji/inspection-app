@@ -79,11 +79,12 @@ import Foundation
     }
     
     
+    
     /// Converts a PFCrane object to a Dictionary
     ///
     /// - Parameter crane: The crane to convert
     /// - Returns: The converted crane to dictionary object
-    static func getFirebaseQueryDocumentFromInspectedCrane (crane: PFCrane) -> [String:Any] {
+    static func getFirebaseQueryDocumentFromInspectedCrane (crane: PFCrane, conditions: [PFObject]?) -> [String:Any] {
         
         var craneObject = [String:Any]()
         
@@ -98,14 +99,46 @@ import Foundation
         craneObject[FirebaseInspectionConstants.CraneType] = crane.type
         craneObject[FirebaseInspectionConstants.Id] = crane.objectId
         
+        var listOfConditions = [[String:Any]]()
+        
+        if let conditions = conditions as? [PFInspectionDetails] {
+            conditions.forEach { (condition) in
+                var conditionObject = [String:Any]()
+                conditionObject[FirebaseInspectionConstants.IsDeficient] = condition.isDeficient
+                conditionObject[FirebaseInspectionConstants.IsApplicable] = condition.isApplicable
+                conditionObject[FirebaseInspectionConstants.Notes] = condition.notes
+                conditionObject[FirebaseInspectionConstants.OptionSelectedIndex] = condition.optionSelectedIndex
+                conditionObject[FirebaseInspectionConstants.OptionLocation] = condition.optionLocation
+                conditionObject[FirebaseInspectionConstants.HoistSrl] = condition.hoistSrl
+                
+                if condition.toUser != nil {
+                    conditionObject[FirebaseInspectionConstants.ToUser] = condition.toUser.objectId
+                }
+                
+                if condition.fromUser != nil {
+                    conditionObject[FirebaseInspectionConstants.User] = condition.fromUser.objectId
+                }
+                
+                listOfConditions.append(conditionObject)
+            }
+        }
+        
+        craneObject[FirebaseInspectionConstants.Conditions] = listOfConditions
+        
         do {
-            try crane.customer.fetchIfNeeded()
-            try crane.fromUser.fetchIfNeeded()
-            try crane.toUser.fetchIfNeeded()
+            if (crane.customer != nil) {
+                try crane.customer.fetchIfNeeded()
+                craneObject[FirebaseInspectionConstants.CustomerId] = crane.customer.objectId
+            }
+            if crane.fromUser != nil {
+                try crane.fromUser.fetchIfNeeded()
+                craneObject[FirebaseInspectionConstants.User] = crane.fromUser.objectId
+            }
+            if crane.toUser != nil {
+                try crane.toUser.fetchIfNeeded()
+                craneObject[FirebaseInspectionConstants.ToUser] = crane.toUser.objectId
+            }
             
-            craneObject[FirebaseInspectionConstants.CustomerId] = crane.customer.objectId
-            craneObject[FirebaseInspectionConstants.User] = crane.fromUser.objectId
-            craneObject[FirebaseInspectionConstants.ToUser] = crane.toUser.objectId
         } catch {
             print("InspectionAppFactory.getFirebaseQueryDocumentFromInspectedCrane Trying to fetch object but object does not exist");
         }
@@ -128,19 +161,96 @@ import Foundation
         
         var customerObject = [String:Any]()
         
-        customerObject[FirebaseInspectionConstants.CustomerName] = customer.name
-        customerObject[FirebaseInspectionConstants.Contact] = customer.contact
-        customerObject[FirebaseInspectionConstants.Address] = customer.address
-        customerObject[FirebaseInspectionConstants.Email] = customer.email
-        customerObject[FirebaseInspectionConstants.Id] = customer.objectId
-        
         do {
-            try customer.fromUser.fetchIfNeeded()
+            try customer.fetch()
+            
+            if let name = customer["name"], let contact = customer["contact"], let address = customer["address"], let email = customer["email"], let id = customer.objectId {
+                customerObject[FirebaseInspectionConstants.CustomerName] = name
+                customerObject[FirebaseInspectionConstants.Contact] = contact
+                customerObject[FirebaseInspectionConstants.Address] = address
+                customerObject[FirebaseInspectionConstants.Email] = email
+                customerObject[FirebaseInspectionConstants.Id] = id
+                
+                try customer.fromUser.fetchIfNeeded()
+                if let userId = customer.fromUser.objectId {
+                    customerObject[FirebaseInspectionConstants.User] = userId
+                }
+            }
         } catch {
-            customerObject[FirebaseInspectionConstants.User] = customer.fromUser.objectId
+            
         }
         
         return customerObject
     }
     
+    static func getInspectionPointCoreDataObjects (object: [String:Any], context: NSManagedObjectContext, crane: InspectionCrane) -> [InspectionPoint]? {
+        
+        guard let entity = NSEntityDescription.entity(forEntityName: kCoreDataClassInspectionPoint, in: context) else {
+            return nil
+        }
+        var inspectionPoints = [InspectionPoint]()
+        
+        object.keys.forEach { (key) in
+            let inspectionPoint = InspectionPoint(entity: entity, insertInto: context)
+            if key != "name" {
+                inspectionPoint.name = key
+                let inspectionPointFirebaseObject = object[key] as? [String:Any];
+                
+                if let options = inspectionPointFirebaseObject?[FirebaseInspectionConstants.Options] as? [String] {
+                    inspectionPoint.inspectionOptions = getOptionCoreDataObjects(options: options, context: context)
+                }
+                
+                if let prompts = inspectionPointFirebaseObject?[kPrompts] as? [Any] {
+                    inspectionPoint.prompts = getPromptCoreDataObjects(prompts: prompts, context: context, inspectionPoint: inspectionPoint)
+                }
+                inspectionPoint.inspectionCrane = crane
+                inspectionPoints.append(inspectionPoint)
+            }
+        }
+
+        return inspectionPoints
+    }
+    
+    static func getPromptCoreDataObjects (prompts: [Any], context: NSManagedObjectContext, inspectionPoint: InspectionPoint) -> NSOrderedSet? {
+        
+        var promptObjects = [Prompt]()
+        
+        prompts.forEach { (prompt) in
+            
+            guard let entity = NSEntityDescription.entity(forEntityName: kCoreDataClassPrompt, in: context) else {
+                return
+            }
+            
+            let promptCoreDataObject = Prompt.init(entity: entity, insertInto: context)
+            if let title = prompt as? String {
+                promptCoreDataObject.title = title
+            } else if let promptObject = prompt as? [String:Any] {
+                promptCoreDataObject.title = promptObject[kObjectName] as? String
+                promptCoreDataObject.requiresDeficiency = promptObject[kRequiresDeficiency] == nil ? NSNumber(value: false) : NSNumber(value: true)
+                promptCoreDataObject.inspectionPoint = inspectionPoint
+            }
+            
+            promptObjects.append(promptCoreDataObject)
+        }
+        
+        return NSOrderedSet(array: promptObjects)
+        
+    }
+    
+    static func getOptionCoreDataObjects (options: [String], context: NSManagedObjectContext) -> NSOrderedSet? {
+        
+        var inspectionOptions = [InspectionOption]()
+        
+        options.forEach { (option) in
+            guard let entity = NSEntityDescription.entity(forEntityName: kCoreDataClassInspectionOption, in: context) else {
+                return
+            }
+            
+            let inspectionOptionObject = InspectionOption(entity: entity, insertInto: context)
+            inspectionOptionObject.name = option
+            inspectionOptions.append(inspectionOptionObject)
+        }
+        
+        return NSOrderedSet(array: inspectionOptions)
+    }
 }

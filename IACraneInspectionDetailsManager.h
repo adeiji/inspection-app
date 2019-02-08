@@ -24,13 +24,23 @@
 @property (strong, nonatomic) NSMutableArray *parts;
 @property (strong, nonatomic) NSManagedObjectContext *context;
 
-+ (id) sharedManager;
++ (IACraneInspectionDetailsManager *) sharedManager;
 /*
  
  Get all the inspection details from the Database
  
  */
 - (NSArray *) getInspectionDetails;
+
+- (NSArray *) getAllConditionsFromServerForCrane : (PFObject *) crane;
+
+/**
+ Get all the data from parse and save in into Firebase
+
+ @param cranes The cranes we get from Parse
+ */
+- (void) transferParseToFirebase : (NSArray *) cranes;
+
 /*
  
  Store all the cranes, and their inspection details to the database

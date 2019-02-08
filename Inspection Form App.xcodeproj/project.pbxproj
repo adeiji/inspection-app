@@ -83,6 +83,7 @@
 		F49DDED91ACCED1600A02162 /* InspectionCrane.m in Sources */ = {isa = PBXBuildFile; fileRef = F49DDED81ACCED1600A02162 /* InspectionCrane.m */; };
 		F49DDEE51ACF33F100A02162 /* InspectionOption.m in Sources */ = {isa = PBXBuildFile; fileRef = F49DDEE41ACF33F100A02162 /* InspectionOption.m */; };
 		F4A3AD78220A09E0000FE13C /* InspectionAppFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A3AD77220A09E0000FE13C /* InspectionAppFactory.swift */; };
+		F4A3AD7B220CCFF8000FE13C /* IACraneInspectionDetailsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A3AD7A220CCFF8000FE13C /* IACraneInspectionDetailsManager.swift */; };
 		F4B29E641ADC1E740025A091 /* CoreDataCondition.m in Sources */ = {isa = PBXBuildFile; fileRef = F4B29E631ADC1E740025A091 /* CoreDataCondition.m */; };
 		F4B29E671ADC281B0025A091 /* InspectedCrane.m in Sources */ = {isa = PBXBuildFile; fileRef = F4B29E661ADC281B0025A091 /* InspectedCrane.m */; };
 		F4B29E6D1ADC6A620025A091 /* lvwwdcranes.plist in Resources */ = {isa = PBXBuildFile; fileRef = F4B29E6C1ADC6A620025A091 /* lvwwdcranes.plist */; };
@@ -236,6 +237,7 @@
 		F49DDEE31ACF33F100A02162 /* InspectionOption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectionOption.h; sourceTree = "<group>"; };
 		F49DDEE41ACF33F100A02162 /* InspectionOption.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InspectionOption.m; sourceTree = "<group>"; };
 		F4A3AD77220A09E0000FE13C /* InspectionAppFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspectionAppFactory.swift; sourceTree = "<group>"; };
+		F4A3AD7A220CCFF8000FE13C /* IACraneInspectionDetailsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IACraneInspectionDetailsManager.swift; sourceTree = "<group>"; };
 		F4B29E621ADC1E740025A091 /* CoreDataCondition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataCondition.h; sourceTree = "<group>"; };
 		F4B29E631ADC1E740025A091 /* CoreDataCondition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataCondition.m; sourceTree = "<group>"; };
 		F4B29E651ADC281B0025A091 /* InspectedCrane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectedCrane.h; sourceTree = "<group>"; };
@@ -720,6 +722,7 @@
 				F48055171E3288A000330D95 /* Signature Manager */,
 				F49DDEAE1ACCDA4600A02162 /* Crane Inspection Manager */,
 				F49DDEA11ACCC5D200A02162 /* Sync Manager */,
+				F4A3AD7A220CCFF8000FE13C /* IACraneInspectionDetailsManager.swift */,
 			);
 			name = Managers;
 			sourceTree = "<group>";
@@ -1012,6 +1015,7 @@
 				F43E748F1C8745810045E5F1 /* PFInspectionDetails.m in Sources */,
 				F49DDED91ACCED1600A02162 /* InspectionCrane.m in Sources */,
 				8BECD3BC150E920500616735 /* Options.m in Sources */,
+				F4A3AD7B220CCFF8000FE13C /* IACraneInspectionDetailsManager.swift in Sources */,
 				F49DDEE51ACF33F100A02162 /* InspectionOption.m in Sources */,
 				F49DDEA71ACCC60C00A02162 /* SyncManager.m in Sources */,
 				8BECD3BF150E934900616735 /* OptionList.m in Sources */,
