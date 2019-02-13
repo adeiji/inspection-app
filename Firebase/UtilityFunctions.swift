@@ -132,5 +132,19 @@ import MapKit
         
         return userId;
     }
+    
+    @objc class func getUsername () -> String? {
+        let defaults = UserDefaults.standard;
+        let username = defaults.string(forKey: kUsername)
+        
+        return username;
+    }
+    
+    @objc class func removeUser () {
+        let defaults = UserDefaults.standard;
+        defaults.set(nil, forKey: kUserId)
+        defaults.set(nil, forKey: kUsername)
+        defaults.synchronize()
+    }
 }
 

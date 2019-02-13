@@ -603,7 +603,6 @@ class FirebasePersistenceManager: NSObject {
                 } else {
                     var documents = [FirebaseDocument]()
                     for doc in querySnapshot!.documents {
-                        print("\(doc.documentID) => \(doc.data())")
                         documents.append(FirebaseDocument(documentId: doc.documentID, data: doc.data()))
                     }
                     completion(nil, documents)
@@ -639,8 +638,7 @@ class FirebasePersistenceManager: NSObject {
                 completion(err, nil)
             } else {
                 var documents = [FirebaseDocument]()
-                for doc in querySnapshot!.documents {
-                    print("\(doc.documentID) => \(doc.data())")
+                for doc in querySnapshot!.documents {                    
                     documents.append(FirebaseDocument(documentId: doc.documentID, data: doc.data()))
                 }
                 completion(nil, documents)

@@ -36,11 +36,13 @@ import Parse
         return optionObjects;
     }
     
-    private func getPrompts (inspectionPoint: PFObject) -> [String:Any]? {
-        guard let prompts = inspectionPoint[kPrompts] as? [String:Any] else {
+    private func getPrompts (inspectionPoint: PFObject) -> [[String:Any]]? {
+        guard let prompts = inspectionPoint[kPrompts] as? [[String:Any]] else {
             return nil;
         }
 
+        print(prompts);
+        
         return prompts;
     }
     
@@ -51,7 +53,7 @@ import Parse
     @objc func saveCranes (cranes: [PFObject]) {
         cranes.forEach { (crane) in
             // Make sure this is an NSOrderedSet so that we keep the order of the inspection points
-            let inspectionPoints = crane["inspectionPoints"] as? NSOrderedSet;
+            let inspectionPoints = crane["inspectionPoints"] as? [Any];
             var craneObject = [String:Any]();
             craneObject["name"] = crane["name"];
             var position = 0
@@ -82,12 +84,16 @@ import Parse
                         return;
                     }
                     
-                    inspectionPointObject[kPrompts] = self.getPrompts(inspectionPoint: inspectionPoint)
+                    if let prompts = self.getPrompts(inspectionPoint: inspectionPoint) {
+                        inspectionPointObject[kPrompts] = prompts
+                    }
+                    
                     craneObject[inspectionPointName] = inspectionPointObject;
                 }
             })
             
             let craneId = UUID().uuidString;
+            
             // Save to Firebase
             FirebasePersistenceManager.addDocumentIfNotDuplicate(withCollection: "cranes", key:"name", value:crane["name"], document: craneObject, withId: craneId, completion: { (error, document) in
                 if (error != nil) {
@@ -95,6 +101,22 @@ import Parse
                 }
             })
         }
+    }
+    
+    @objc func checkIfUsernameExists (username: String, completion: @escaping(String?) -> Void) {
+        
+        FirebasePersistenceManager.getDocuments(withCollection: FirebaseInspectionConstants.UserCollectionName, key: FirebaseInspectionConstants.Username, value: username.lowercased()) { (error, documents) in
+            if let documents = documents {
+                if documents.count > 0 {
+                    completion(nil)
+                } else {
+                    completion("Sucess")
+                }
+            }
+            
+            completion(nil);
+        }
+        
     }
     
     @objc func saveInspectedCranesFromParseCraneObject (cranes: [PFCrane]) {
@@ -172,7 +194,7 @@ import Parse
     /// - Parameters:
     ///   - hoistSrl: The hoist serial number of the crane
     ///   - completion: The completion block when done getting data
-    @objc func getAllConditions(withHoistSrl hoistSrl: String, completion: @escaping (Error?, [CoreDataCondition]?) -> Void) {
+    @objc func getAllConditions(withHoistSrl hoistSrl: String, context:NSManagedObjectContext, completion: @escaping (Error?, [CoreDataCondition]?) -> Void) {
         var query = [String:Any]();
         
         query["toUser"] = nil;
@@ -182,7 +204,7 @@ import Parse
         FirebasePersistenceManager.getDocuments(withCollection: INSPECTIONS_COLLECTION, queryDocument: query) { (error, documents) in
             
             if let documents = documents {
-                let conditions = InspectionAppFactory.getConditionsFromFirebaseDocuments(documents: documents);
+                let conditions = InspectionAppFactory.getConditionsFromFirebaseDocuments(documents: documents, context: context);
                 completion(error, conditions);
             } else {
                 completion(error, nil);
@@ -193,7 +215,7 @@ import Parse
     
     @objc func getAllCranes (completion: @escaping (Error?, [[String:Any]]?) -> Void) {
         
-        FirebasePersistenceManager.getDocuments(withCollection: FirebaseInspectionConstants.Cranes) { (error, documents) in
+        FirebasePersistenceManager.getAllDocuments(collection: FirebaseInspectionConstants.CraneCollectionName) { (error, documents) in
             var documentDataList = [[String:Any]]()
             if let documents = documents {
                 documents.forEach({ (document) in
@@ -207,15 +229,32 @@ import Parse
         }
     }
     
-    @objc func getAllInspectedCranes(forUser userId: String, completion: @escaping (Error?, [InspectedCrane]?) -> Void) {
+    @objc func getAllInspectedCranes(forUser userId: String, context:NSManagedObjectContext, completion: @escaping (Error?, [InspectedCrane]?) -> Void) {
         
         FirebasePersistenceManager.getDocuments(withCollection: FirebaseInspectionConstants.InspectedCranes, key: FirebaseInspectionConstants.User, value: userId) { (error, documents) in
-            if let documents = documents {
-                let cranes =  InspectionAppFactory.getCranesFromFirebaseDocuments(documents: documents)
-                completion(error, cranes);
-            }
-            else {
-                completion(error, nil);
+            DispatchQueue.main.async {
+                if let documents = documents {                    
+                    let cranes =  InspectionAppFactory.getCranesFromFirebaseDocuments(documents: documents, context: context)
+                    completion(error, cranes);
+                }
+                else {
+                    completion(error, nil);
+                }
+            }            
+        }
+    }
+    
+    @objc func getUser (username: String, completion: @escaping([String:Any]?) -> Void) {
+        FirebasePersistenceManager.getDocuments(withCollection: FirebaseInspectionConstants.UserCollectionName, key: FirebaseInspectionConstants.Username, value: username) { (error, users) in
+            if let users = users {
+                let userObjects = InspectionAppFactory.getDictionaryFromFirebaseDocuments(documents: users)
+                if userObjects.count > 0 {
+                    completion(userObjects.first)
+                } else {
+                    completion(nil)
+                }
+            } else {
+                completion(nil)
             }
         }
     }
@@ -277,6 +316,7 @@ public class FirebaseInspectionConstants {
     static let Conditions = "conditions"
     static let Position = "position"
     static let Options = "options"
+    static let Prompts = "prompts"
     
     static let Capacity = "capacity"
     static let CraneDescription = "craneDescription"

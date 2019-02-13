@@ -29,12 +29,12 @@ NSString *const PASSWORD = @"sswr";
 }
 - (IBAction)loginUser:(id)sender {
     if ([self canProceed]) {
-        [PFUser logInWithUsernameInBackground:_txtUsername.text password:PASSWORD block:^(PFUser * _Nullable user, NSError * _Nullable error) {
-            if (user != nil && !error) {
+        [[IAFirebaseCraneInspectionDetailsManager new] getUserWithUsername:_txtUsername.text completion:^(NSDictionary<NSString *,id> * _Nullable user) {
+            if (!user) {
+                [self showAlertViewWithMessage:@"There is no user with this name.  Please try again, or click create account"];
+            } else {
                 [self userSignedIn];
-            }
-            else {
-                [self showAlertViewWithMessage:error.userInfo[@"error"]];
+                [UtilityFunctions saveUserWithName:user[@"username"] userId:user[@"id"]];
             }
         }];
     } else {
@@ -60,28 +60,13 @@ NSString *const PASSWORD = @"sswr";
 
 - (IBAction)createAccount:(id)sender {
     if ([self canProceed]) {
-        PFUser *user = [PFUser new];
-        NSString *username = [_txtUsername.text lowercaseString];
-        username = [_txtUsername.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-        user.username = username;
-        user.password = PASSWORD;
-        
-        // Save the user to Firebase
-        IAFirebaseCraneInspectionDetailsManager *manager = [IAFirebaseCraneInspectionDetailsManager new];
-        NSString *userId = [manager addUserWithName:username];
-        [UtilityFunctions saveUserWithName:username userId:userId];
-        
-        [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-            if (succeeded && !error) {
+        [[IAFirebaseCraneInspectionDetailsManager new] checkIfUsernameExistsWithUsername:_txtUsername.text completion:^(NSString * _Nullable success) {
+            if (success) {
+                NSString *userId = [[IAFirebaseCraneInspectionDetailsManager new] addUserWithName:_txtUsername.text];
+                [UtilityFunctions saveUserWithName:_txtUsername.text.lowercaseString userId:userId];
                 [self userSignedIn];
-            }
-            else {
-                [self showAlertViewWithMessage:error.userInfo[@"error"]];
-            }
-        }];
-        [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-            if (succeeded && !error) {
-                [self userSignedIn];
+            } else {
+                [self showAlertViewWithMessage:@"Sorry, that name already exists.  Please login with that name or try a different name."];
             }
         }];
     } else {
@@ -92,6 +77,5 @@ NSString *const PASSWORD = @"sswr";
 - (void) userSignedIn {    
     [self.navigationController popToRootViewControllerAnimated:true];
 }
-
 
 @end

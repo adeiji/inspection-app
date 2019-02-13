@@ -142,3 +142,11 @@ public class GRActivityConstants
         case Follow = "follow"
     }
 }
+
+public enum UserError:Error {
+    case noUserLoggedIn
+}
+
+extension Notification.Name {
+    static let CraneDetailsFinishedSaving = NSNotification.Name("com.inspection.app.crane.details.finished.downloading")
+}

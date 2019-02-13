@@ -15,6 +15,7 @@
 #import <Parse/Parse.h>
 #import "SyncManager.h"
 #import "LoginViewController.h"
+#import "Inspection_Form_App-Swift.h"
 
 @import Bugsee;
 @import Firebase;
@@ -53,10 +54,16 @@
     [IACraneInspectionDetailsManager sharedManager];
     [[IACraneInspectionDetailsManager sharedManager] loadAllInspectionDetails];
     
+    NSManagedObjectContext *context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+    [context setPersistentStoreCoordinator:(((AppDelegate *)[ [UIApplication sharedApplication] delegate]).managedObjectContext).persistentStoreCoordinator];
+    
+    IACraneInspectionDetailsManagerSwift *manager = [IACraneInspectionDetailsManagerSwift new];
+    [manager backupCranesToFirebaseWithContext:context];
+    
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
         UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
         UINavigationController *navigationController = [splitViewController.viewControllers lastObject];
-        if ([PFUser currentUser] != nil ) {
+        if ([UtilityFunctions getUserId] != nil) {
             splitViewController.delegate = (id)navigationController.topViewController;
         }
         else {

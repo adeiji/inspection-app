@@ -32,21 +32,23 @@
  */
 - (NSArray *) getInspectionDetails;
 
-- (NSArray *) getAllConditionsFromServerForCrane : (PFObject *) crane;
+- (InspectedCrane *) getCraneFromDatabaseWithHoistSrl : (NSString *) hoistSrl WithContextOrNil : (NSManagedObjectContext *) context;
 
 /**
  Get all the data from parse and save in into Firebase
 
  @param cranes The cranes we get from Parse
  */
-- (void) transferParseToFirebase : (NSArray *) cranes;
+- (void) transferParseToFirebase;
 
 /*
  
- Store all the cranes, and their inspection details to the database
+ Reset the inspection details crane by deleting all the objects inside of it
  
  */
-- (void) saveInspectionDetailsWithCranes : (NSArray *) cranes;
+- (void) resetInspectionDetailsDatabase;
+
+
 /*
  
  Get all the inspection details from the server and store it in an array to be used through the application
@@ -112,32 +114,7 @@
                         Conditions : (NSArray *) conditions
     UsingManagedObjectContextOrNil : (NSManagedObjectContext *) context;
 
-/*
- 
- Store all the cranes that are on this device on the cloud
- 
- */
-- (void) backupCranesOnDevice;
-
 - (NSMutableArray *) getAllCranesWithInspections;
-/*
- 
- Push the details for the selected crane to the server
- 
- */
-- (void) shareCraneDetails : (InspectedCrane *) crane
-                  WithUser : (PFUser *) user
-WithViewControllerOrNilToDisplayAlert : (UIViewController *) viewController;
-
-
-- (NSArray *) getAllCranesForCurrentUserFromServer;
-
-/*
- 
- Gets an array of Parse Inspection Detail Objects and converts them to the Local Condition objects
- 
- */
-- (NSArray *) convertParseConditionsToConditionObjects : (NSArray *) objects;
 
 /*
  
@@ -154,15 +131,8 @@ WithViewControllerOrNilToDisplayAlert : (UIViewController *) viewController;
  */
 - (Customer *) getNewCustomerObjectWithContext : (NSManagedObjectContext *) context;
 
-- (void) deleteEarlierInspectionOfCraneFromServer : (InspectedCrane *) crane
-                                          ForUser : (PFUser *) user;
-
 - (void) saveContext : (NSManagedObjectContext *) myContext ;
 
-/*
- 
- Grab all the water district cranes from the lvwwdcranes.plist file and store in the database
- 
- */
-- (void) saveAllWaterDistrictCranes;
+- (NSArray *) getAllConditionsFromServerForCrane : (PFObject *) crane;
+
 @end

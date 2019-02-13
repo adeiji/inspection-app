@@ -169,6 +169,7 @@ static NSString *const OPTIONS = @"options";
     ViewController *viewController = [navigationController.viewControllers objectAtIndex:0];
     [viewController.inspectionViewController.itemListStore loadConditionsForCrane:crane];
     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_HOISTSRL_SELECTED object:nil userInfo:@{ kSelectedInspectedCrane : crane }];
+    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -223,6 +224,7 @@ static NSString *const OPTIONS = @"options";
         [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_HOISTSRL_SELECTED object:nil userInfo:@{ kSelectedInspectedCrane : crane }];
         UINavigationController *navigationController = [self.splitViewController.viewControllers objectAtIndex:1] ;
         ViewController *vc = [navigationController.viewControllers objectAtIndex:0];
+        
         [vc resetInspectionWithCrane:inspectionCrane];
     }
 }

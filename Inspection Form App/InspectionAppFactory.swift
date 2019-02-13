@@ -10,15 +10,26 @@ import Foundation
 @objc class InspectionAppFactory : NSObject {
     
     
+    
+    static func getDictionaryFromFirebaseDocuments (documents: [FirebaseDocument]) -> [[String:Any]] {
+        var documentObjects = [[String:Any]]()
+        
+        documents.forEach { (document) in
+            documentObjects.append(document.data)
+        }
+        
+        return documentObjects
+    }
+    
     /// Convert a list of Firebase dictionary documents to CoreDataCondition objects
     ///
     /// - Parameter documents: The Firebase dictionary documents
     /// - Returns: The CoreDataCondition objects
-    static func getConditionsFromFirebaseDocuments (documents:[FirebaseDocument]) -> [CoreDataCondition] {
+    static func getConditionsFromFirebaseDocuments (documents:[FirebaseDocument], context:NSManagedObjectContext) -> [CoreDataCondition] {
         
         var conditions = [CoreDataCondition]();
         documents.forEach { (document) in
-            conditions.append(getSingleConditionFromFirebaseDocument(document: document.data));
+            conditions.append(getSingleConditionFromFirebaseDocument(document: document.data, context: context));
         }
         
         return conditions;
@@ -29,12 +40,20 @@ import Foundation
     ///
     /// - Parameter document: The Firebase dictionary document
     /// - Returns: The CoreDataCondition object
-    @objc static func getSingleConditionFromFirebaseDocument (document:[String:Any]) -> CoreDataCondition {
+    @objc static func getSingleConditionFromFirebaseDocument (document:[String:Any], context:NSManagedObjectContext) -> CoreDataCondition {
         
-        let condition = CoreDataCondition();
+        let entity = NSEntityDescription.entity(forEntityName: kCoreDataClassCondition, in: context)
         
-        condition.isDeficient = document[FirebaseInspectionConstants.IsDeficient] as? NSNumber
-        condition.isApplicable = document[FirebaseInspectionConstants.IsApplicable] as? NSNumber
+        let condition = CoreDataCondition(entity: entity!, insertInto: context)
+        
+        if let isDeficient = document[FirebaseInspectionConstants.IsDeficient] as? Int {
+            condition.isDeficient = NSNumber(value: isDeficient)
+        }
+        
+        if let isApplicable = document[FirebaseInspectionConstants.IsApplicable] as? Int {
+            condition.isApplicable = NSNumber(value: isApplicable)
+        }
+        
         condition.notes = document[FirebaseInspectionConstants.Notes] as? String ?? ""
         condition.optionSelectedIndex = document[FirebaseInspectionConstants.OptionSelectedIndex] as? NSNumber
         condition.hoistSrl = document[FirebaseInspectionConstants.HoistSrl] as? String ?? ""
@@ -48,11 +67,11 @@ import Foundation
     ///
     /// - Parameter documents: The Firebase Document objects
     /// - Returns: The Inspected Crane objects converted from the Firebase Document objects
-    static func getCranesFromFirebaseDocuments (documents:[FirebaseDocument]) -> [InspectedCrane] {
+    static func getCranesFromFirebaseDocuments (documents:[FirebaseDocument], context:NSManagedObjectContext) -> [InspectedCrane] {
         var cranes = [InspectedCrane]()
         
         documents.forEach { (document) in
-            cranes.append(getCraneFromFirebaseDocument(document: document.data))
+            cranes.append(getCraneFromFirebaseDocument(document: document.data, context:context))
         }
         
         return cranes
@@ -62,20 +81,39 @@ import Foundation
     ///
     /// - Parameter document: The Firebase dictionary document
     /// - Returns: The CoreDataCondition object
-    @objc static func getCraneFromFirebaseDocument (document:[String:Any]) -> InspectedCrane {
+    @objc static func getCraneFromFirebaseDocument (document:[String:Any], context:NSManagedObjectContext) -> InspectedCrane {
+        // See if this crane has already been inspected on this device
+        var crane = IACraneInspectionDetailsManager.shared()?.getCraneFromDatabase(withHoistSrl: (document[FirebaseInspectionConstants.HoistSrl] as! String), withContextOrNil: context)
         
-        let crane = InspectedCrane();
+        // If this crane has not been inspected on this device, than create a new Inspected Crane object
+        if crane == nil {
+            crane = IACraneInspectionDetailsManager.shared()?.getNewInspectedCraneObject(withHoistSrl: document[FirebaseInspectionConstants.HoistSrl] as? String, withContextOrNil: context);
+        }
         
-        crane.capacity = document[FirebaseInspectionConstants.Capacity] as? String
-        crane.craneDescription = document[FirebaseInspectionConstants.CraneDescription] as? String
-        crane.craneSrl = document[FirebaseInspectionConstants.CraneSrl] as? String
-        crane.equipmentNumber = document[FirebaseInspectionConstants.EquipmentNumber] as? String
-        crane.hoistMdl = document[FirebaseInspectionConstants.HoistMdl] as? String
-        crane.hoistMfg = document[FirebaseInspectionConstants.HoistMfg] as? String
-        crane.mfg = document[FirebaseInspectionConstants.Mfg] as? String
-        crane.type = document[FirebaseInspectionConstants.CraneType] as? String
+        // Fill all the information in for the new crane from the crane information stored in the dictionary from Firebase
+        crane?.capacity = document[FirebaseInspectionConstants.Capacity] as? String
+        crane?.craneDescription = document[FirebaseInspectionConstants.CraneDescription] as? String
+        crane?.craneSrl = document[FirebaseInspectionConstants.CraneSrl] as? String
+        crane?.hoistSrl = document[FirebaseInspectionConstants.HoistSrl] as? String
+        crane?.equipmentNumber = document[FirebaseInspectionConstants.EquipmentNumber] as? String
+        crane?.hoistMdl = document[FirebaseInspectionConstants.HoistMdl] as? String
+        crane?.hoistMfg = document[FirebaseInspectionConstants.HoistMfg] as? String
+        crane?.mfg = document[FirebaseInspectionConstants.Mfg] as? String
+        crane?.type = document[FirebaseInspectionConstants.CraneType] as? String
         
-        return crane
+        let conditions = document[FirebaseInspectionConstants.Conditions] as? [[String:Any]]
+        IACraneInspectionDetailsManager.shared()?.removeAllConditions(for: crane!, using: context)
+        var conditionObjects = [CoreDataCondition]()
+        // Create the condition objects
+        if let conditions = conditions {
+            conditions.forEach { (condition) in
+                let conditionCoreDataObject = self.getSingleConditionFromFirebaseDocument(document: condition, context:context)
+                conditionObjects.append(conditionCoreDataObject)
+            }
+        }
+        
+        
+        return crane!
     }
     
     
@@ -190,7 +228,11 @@ import Foundation
         }
         var inspectionPoints = [InspectionPoint]()
         
-        object.keys.forEach { (key) in
+        let keys = object.keys.sorted { (key1, key2) -> Bool in
+            return key1 < key2
+        }
+        
+        keys.forEach { (key) in
             let inspectionPoint = InspectionPoint(entity: entity, insertInto: context)
             if key != "name" {
                 inspectionPoint.name = key
@@ -203,6 +245,7 @@ import Foundation
                 if let prompts = inspectionPointFirebaseObject?[kPrompts] as? [Any] {
                     inspectionPoint.prompts = getPromptCoreDataObjects(prompts: prompts, context: context, inspectionPoint: inspectionPoint)
                 }
+                
                 inspectionPoint.inspectionCrane = crane
                 inspectionPoints.append(inspectionPoint)
             }
@@ -252,5 +295,47 @@ import Foundation
         }
         
         return NSOrderedSet(array: inspectionOptions)
+    }
+    
+    static func getFirebaseQueryDocumentFromInspectedCrane (inspectedCrane: InspectedCrane, context:NSManagedObjectContext) -> [String:Any] {
+        
+        var craneObject = [String:Any]()
+        
+        craneObject[FirebaseInspectionConstants.Capacity] = inspectedCrane.capacity
+        craneObject[FirebaseInspectionConstants.CraneDescription] = inspectedCrane.craneDescription
+        craneObject[FirebaseInspectionConstants.CraneSrl] = inspectedCrane.craneSrl
+        craneObject[FirebaseInspectionConstants.EquipmentNumber] = inspectedCrane.equipmentNumber
+        craneObject[FirebaseInspectionConstants.HoistMdl] = inspectedCrane.hoistMdl
+        craneObject[FirebaseInspectionConstants.HoistMfg] = inspectedCrane.hoistMfg
+        craneObject[FirebaseInspectionConstants.HoistSrl] = inspectedCrane.hoistSrl
+        craneObject[FirebaseInspectionConstants.Mfg] = inspectedCrane.mfg
+        craneObject[FirebaseInspectionConstants.CraneType] = inspectedCrane.type
+        
+        var conditionObjects = [[String:Any]]()
+        var conditions = IACraneInspectionDetailsManager.shared()?.getAllConditions(for: inspectedCrane, withContextOrNil: context)
+        conditions?.forEach({ (condition) in
+            if let condition = condition as? CoreDataCondition {
+                conditionObjects.append(getFirebaseQueryDocumentFromCondition(condition: condition))
+            }            
+        })
+        
+        craneObject[FirebaseInspectionConstants.Conditions] = conditionObjects
+        
+        
+        return craneObject
+    }
+    
+    static func getFirebaseQueryDocumentFromCondition (condition: CoreDataCondition) -> [String:Any] {
+        
+        var conditionObject = [String:Any]()
+        
+        conditionObject[FirebaseInspectionConstants.IsDeficient] = condition.isDeficient == 1 ? true : false
+        conditionObject[FirebaseInspectionConstants.IsApplicable] = condition.isApplicable == 1 ? true : false
+        conditionObject[FirebaseInspectionConstants.Notes] = condition.notes
+        conditionObject[FirebaseInspectionConstants.OptionSelectedIndex] = condition.optionSelectedIndex
+        conditionObject[FirebaseInspectionConstants.OptionLocation] = condition.optionLocation
+        conditionObject[FirebaseInspectionConstants.HoistSrl] = condition.hoistSrl
+        
+        return conditionObject
     }
 }

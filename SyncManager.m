@@ -14,18 +14,8 @@
 @implementation SyncManager
 
 + (void) getAllInspectionDetails {
-
-    PFQuery *query = [PFQuery queryWithClassName:kParseClassCrane];
-
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        if (!error)
-        {
-            [[IACraneInspectionDetailsManager sharedManager] saveInspectionDetailsWithCranes:objects];
-            IAFirebaseCraneInspectionDetailsManager *manager = [IAFirebaseCraneInspectionDetailsManager new];
-            
-            NSLog(@"com.inspectionapp - All Crane details downloaded from the server.");
-        }
-    }];
+    IACraneInspectionDetailsManagerSwift *manager = [IACraneInspectionDetailsManagerSwift new];
+    [manager saveInspectionDetails];
 }
 
 @end
