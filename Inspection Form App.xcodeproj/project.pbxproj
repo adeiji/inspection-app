@@ -73,6 +73,7 @@
 		F43E74991C8A071B0045E5F1 /* AccountTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F43E74981C8A071B0045E5F1 /* AccountTableViewController.m */; };
 		F453A3B21AD43E3B00319D7A /* InspectionModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F453A3B01AD43E3B00319D7A /* InspectionModel.xcdatamodeld */; };
 		F453A3B51AD43FB200319D7A /* Customer.m in Sources */ = {isa = PBXBuildFile; fileRef = F453A3B41AD43FB200319D7A /* Customer.m */; };
+		F45D923123E83F3B004D2A48 /* Inspection_Form_App-Swift.h.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45D923023E83F3B004D2A48 /* Inspection_Form_App-Swift.h.swift */; };
 		F46FC63122048FBA005BE455 /* FirebasePersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46FC63022048FBA005BE455 /* FirebasePersistenceManager.swift */; };
 		F480551A1E3288B600330D95 /* SignatureManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F48055191E3288B600330D95 /* SignatureManager.m */; };
 		F4809A651E3A48FB00BE0EFB /* PFBackupCraneObject.m in Sources */ = {isa = PBXBuildFile; fileRef = F4809A641E3A48FB00BE0EFB /* PFBackupCraneObject.m */; };
@@ -219,6 +220,7 @@
 		F453A3B11AD43E3B00319D7A /* InspectionModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = InspectionModel.xcdatamodel; sourceTree = "<group>"; };
 		F453A3B31AD43FB200319D7A /* Customer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Customer.h; sourceTree = "<group>"; };
 		F453A3B41AD43FB200319D7A /* Customer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Customer.m; sourceTree = "<group>"; };
+		F45D923023E83F3B004D2A48 /* Inspection_Form_App-Swift.h.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Inspection_Form_App-Swift.h.swift"; sourceTree = "<group>"; };
 		F46FC63022048FBA005BE455 /* FirebasePersistenceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebasePersistenceManager.swift; sourceTree = "<group>"; };
 		F48055181E3288B600330D95 /* SignatureManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignatureManager.h; sourceTree = "<group>"; };
 		F48055191E3288B600330D95 /* SignatureManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignatureManager.m; sourceTree = "<group>"; };
@@ -316,6 +318,7 @@
 		8BC58443150ABD87000AC695 = {
 			isa = PBXGroup;
 			children = (
+				F45D923023E83F3B004D2A48 /* Inspection_Form_App-Swift.h.swift */,
 				F4C8810C220495E90089DD61 /* Firebase */,
 				F4C5630022048E10009AE24E /* GoogleService-Info.plist */,
 				F423A8CA1C7BA51B00899B6E /* Dephyned */,
@@ -1039,6 +1042,7 @@
 				CE798DB7180F369600C2E5A0 /* InspectionBussiness.m in Sources */,
 				F423A8D31C7BA80B00899B6E /* DELoginManager.m in Sources */,
 				CE486ACB180C83E900B1B953 /* Inspection.m in Sources */,
+				F45D923123E83F3B004D2A48 /* Inspection_Form_App-Swift.h.swift in Sources */,
 				8BE881F81513F82400360C63 /* ItemListConditionStorage.m in Sources */,
 				F43E74851C7E80E60045E5F1 /* OptionsTableViewController.m in Sources */,
 				8BE881FC1513FA4200360C63 /* Condition.m in Sources */,
