@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Bucket
+   uuid = "2673DA4F-5DDD-48D0-B217-2A74CC0DD5D4"
    type = "0"
    version = "2.0">
    <Breakpoints>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
+            uuid = "88C7D224-5C34-4DC9-9DAF-2743A182A94F"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -22,6 +24,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
          <BreakpointContent
+            uuid = "920C0BDF-609D-49DC-B308-11D0CCD2EE8F"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -32,21 +35,23 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.SymbolicBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            uuid = "A292D32B-22BD-4E63-B2D8-8BDDBBD8286A"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             symbolName = "warnBlockingOperationOnMainThread"
             moduleName = "">
             <Locations>
                <Location
-                  shouldBeEnabled = "Yes"
+                  uuid = "A292D32B-22BD-4E63-B2D8-8BDDBBD8286A - cc1b7df77a80d6e9"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "warnBlockingOperationOnMainThread"
                   moduleName = "Bolts"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/adeiji/Documents/Dephyned/inspection-app/Pods/Bolts/Bolts/Common/BFTask.m"
-                  timestampString = "571440301.89169"
+                  timestampString = "571191436.664979"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "18"
@@ -59,16 +64,17 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
+            uuid = "7D25F8BE-81B9-4300-BCD8-604B6D119B47"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Inspection Form App/OptionsTableViewController.m"
-            timestampString = "571440301.250482"
+            filePath = "Inspection Form App/InspectionViewController.m"
+            timestampString = "513013024.8689"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "184"
-            endingLineNumber = "184"
-            landmarkName = "-handleDownloadedCraneWithCraneObject:"
+            startingLineNumber = "421"
+            endingLineNumber = "421"
+            landmarkName = "-promptForRemarksOrLimitations"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

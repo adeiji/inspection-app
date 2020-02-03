@@ -113,7 +113,7 @@ int const SEND_INSPECTIONS_INDEX = 0, VIEW_INSPECTIONS_INDEX = 1, ACCOUNT_INDEX 
                 NSManagedObjectContext *context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
                 [context setPersistentStoreCoordinator:(((AppDelegate *)[ [UIApplication sharedApplication] delegate]).managedObjectContext).persistentStoreCoordinator];
                 
-                [[IACraneInspectionDetailsManagerSwift new] getAllCranesSentToCurrentUserWithContext:context  completion:^(NSError * _Nullable error, NSArray<InspectedCrane *> * _Nullable inspections) {
+                [[IACraneInspectionDetailsManagerSwift new] getAllCranesSentToCurrentUserWithContext: context  completion:^(NSError * _Nullable error, NSArray<InspectedCrane *> * _Nullable inspections) {
                     optionsTableViewController.inspectionsSentToCurrentUser = inspections;
                 }];
                 

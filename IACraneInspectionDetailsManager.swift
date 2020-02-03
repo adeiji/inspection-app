@@ -7,7 +7,7 @@
 
 import Foundation
 
-@objc class IACraneInspectionDetailsManagerSwift : NSObject {
+@objc public class IACraneInspectionDetailsManagerSwift : NSObject {
     
     @objc func saveInspectionDetails () {
         DispatchQueue.main.async {
@@ -103,7 +103,7 @@ import Foundation
     /// - Parameters:
     ///   - context: The context for Core Data
     ///   - completion: Returns either an error or the inspected crane objects
-    func getAllCranesSentToCurrentUser (context:NSManagedObjectContext, completion: @escaping(Error?, [InspectedCrane]?) -> Void) {
+    public func getAllCranesSentToCurrentUser (context:NSManagedObjectContext, completion: @escaping(Error?, [InspectedCrane]?) -> Void) {
         if let userId = UtilityFunctions.getUserId() {
             FirebasePersistenceManager.getDocuments(withCollection: FirebaseInspectionConstants.InspectedCranes, queryDocument: ["fromUser": userId], searchContainString: false) { (error, documents) in
                 if let documents = documents {
