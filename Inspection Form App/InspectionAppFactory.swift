@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Parse
 
 @objc class InspectionAppFactory : NSObject {
     

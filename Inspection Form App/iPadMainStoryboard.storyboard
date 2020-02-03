@@ -1,14 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15F34" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="dnc-EI-M4a">
-    <device id="ipad9_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="dnc-EI-M4a">
+    <device id="ipad9_7" orientation="portrait" layout="fullscreen" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
-        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -18,7 +13,6 @@
                 <navigationController definesPresentationContext="YES" navigationBarHidden="YES" id="i0E-EF-fHZ" sceneMemberID="viewController">
                     <nil key="simulatedTopBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="7T7-bb-mOj">
-                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -28,7 +22,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lvi-is-ssR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="713" y="745"/>
+            <point key="canvasLocation" x="557.03125" y="436.5234375"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="IPY-om-4zl">
@@ -43,16 +37,16 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JQL-yV-qmM">
-                                <rect key="frame" x="0.0" y="44" width="768" height="936"/>
+                                <rect key="frame" x="0.0" y="50" width="768" height="924"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mRy-6B-fIo">
-                                        <rect key="frame" x="0.0" y="-33" width="768" height="969"/>
+                                        <rect key="frame" x="0.0" y="-33" width="768" height="1006.5"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1O8-ki-oXR" customClass="GradientView">
-                                                <rect key="frame" x="21" y="802" width="728" height="147"/>
+                                                <rect key="frame" x="21" y="828" width="728" height="158.5"/>
                                                 <subviews>
                                                     <textField opaque="NO" clipsSubviews="YES" tag="9" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fei-Od-P6t" customClass="TextField">
-                                                        <rect key="frame" x="151" y="61" width="137" height="30"/>
+                                                        <rect key="frame" x="151" y="64.5" width="137" height="34"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                         <connections>
@@ -62,13 +56,13 @@
                                                         </connections>
                                                     </textField>
                                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Crane Mfg:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="0Na-8b-Wi1">
-                                                        <rect key="frame" x="50" y="66" width="85" height="21"/>
+                                                        <rect key="frame" x="50" y="71" width="85" height="21"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textField opaque="NO" clipsSubviews="YES" tag="10" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GmN-ei-gGk" customClass="TextField">
-                                                        <rect key="frame" x="151" y="105" width="137" height="30"/>
+                                                        <rect key="frame" x="151" y="112.5" width="137" height="34"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                         <connections>
@@ -78,13 +72,13 @@
                                                         </connections>
                                                     </textField>
                                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Hoist Mfg:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="iS6-e8-0jd">
-                                                        <rect key="frame" x="56" y="110" width="79" height="21"/>
+                                                        <rect key="frame" x="56" y="119" width="79" height="21"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textField opaque="NO" clipsSubviews="YES" tag="13" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KlB-pp-5ZH" customClass="TextField">
-                                                        <rect key="frame" x="560" y="101" width="137" height="30"/>
+                                                        <rect key="frame" x="560" y="106" width="137" height="34"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="137" id="3NB-Tn-Cjj"/>
                                                         </constraints>
@@ -97,7 +91,7 @@
                                                         </connections>
                                                     </textField>
                                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Hoist Mdl:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="sbG-Ru-Sg2">
-                                                        <rect key="frame" x="465" y="106" width="78" height="21"/>
+                                                        <rect key="frame" x="465" y="112.5" width="78" height="21"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="78" id="h2M-oe-aAz"/>
                                                         </constraints>
@@ -106,7 +100,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textField opaque="NO" clipsSubviews="YES" tag="12" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iVX-4f-sYw" customClass="TextField">
-                                                        <rect key="frame" x="559" y="62" width="69" height="30"/>
+                                                        <rect key="frame" x="559" y="63" width="69" height="34"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="69" id="VSg-3R-XPe"/>
                                                         </constraints>
@@ -125,7 +119,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textField opaque="NO" clipsSubviews="YES" tag="11" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Aq2-G9-LuI" customClass="TextField">
-                                                        <rect key="frame" x="559" y="18" width="148" height="30"/>
+                                                        <rect key="frame" x="559" y="18" width="148" height="34"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                         <connections>
@@ -135,7 +129,7 @@
                                                         </connections>
                                                     </textField>
                                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Crane Srl:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="e3r-rc-Afa">
-                                                        <rect key="frame" x="465" y="23" width="77" height="21"/>
+                                                        <rect key="frame" x="465" y="24.5" width="77" height="21"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="77" id="hI6-Ti-s4W"/>
                                                         </constraints>
@@ -144,7 +138,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textField opaque="NO" clipsSubviews="YES" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kOv-66-R3v" customClass="TextField">
-                                                        <rect key="frame" x="151" y="20" width="137" height="30"/>
+                                                        <rect key="frame" x="151" y="19.5" width="137" height="34"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="137" id="PlP-tz-sXX"/>
                                                         </constraints>
@@ -157,7 +151,7 @@
                                                         </connections>
                                                     </textField>
                                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Equip #:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="d7n-DM-xfy">
-                                                        <rect key="frame" x="71" y="25" width="63" height="21"/>
+                                                        <rect key="frame" x="71" y="26" width="63" height="21"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="63" id="f93-I8-qJX"/>
                                                         </constraints>
@@ -201,10 +195,10 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p0M-CD-s7V" customClass="GradientView">
-                                                <rect key="frame" x="21" y="239" width="728" height="61"/>
+                                                <rect key="frame" x="21" y="246" width="728" height="64"/>
                                                 <subviews>
                                                     <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2Jd-DJ-MFX" customClass="TextField">
-                                                        <rect key="frame" x="400" y="15" width="244" height="30"/>
+                                                        <rect key="frame" x="400" y="15" width="244" height="34"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="244" id="8Ue-Fj-CY2"/>
                                                         </constraints>
@@ -217,7 +211,7 @@
                                                         </connections>
                                                     </textField>
                                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Customer Name:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="bKQ-GJ-KWS">
-                                                        <rect key="frame" x="61" y="20" width="130" height="21"/>
+                                                        <rect key="frame" x="61" y="21.5" width="130" height="21"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="130" id="Pxa-vj-dy1"/>
                                                         </constraints>
@@ -236,10 +230,10 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rrO-cq-DcR" customClass="GradientView">
-                                                <rect key="frame" x="21" y="361" width="728" height="61"/>
+                                                <rect key="frame" x="21" y="374" width="728" height="64"/>
                                                 <subviews>
                                                     <textField opaque="NO" clipsSubviews="YES" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jsB-Ap-g2E" customClass="TextField">
-                                                        <rect key="frame" x="400" y="15" width="244" height="30"/>
+                                                        <rect key="frame" x="397" y="15" width="244" height="34"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="244" id="feu-GS-bsD"/>
                                                         </constraints>
@@ -252,13 +246,13 @@
                                                         </connections>
                                                     </textField>
                                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Job Number:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="Y7r-9j-H9Z">
-                                                        <rect key="frame" x="89" y="20" width="100" height="21"/>
+                                                        <rect key="frame" x="89" y="21.5" width="100" height="21"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="detailDisclosure" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ty6-6c-2RU">
-                                                        <rect key="frame" x="686" y="16" width="22" height="22"/>
+                                                        <rect key="frame" x="683" y="16" width="25" height="24"/>
                                                         <fontDescription key="fontDescription" type="boldSystem" size="button"/>
                                                         <state key="normal">
                                                             <color key="titleColor" red="0.1960784314" green="0.30980392159999998" blue="0.52156862749999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -281,10 +275,10 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EuI-10-e7d" customClass="GradientView">
-                                                <rect key="frame" x="21" y="300" width="728" height="61"/>
+                                                <rect key="frame" x="21" y="310" width="728" height="64"/>
                                                 <subviews>
                                                     <textField opaque="NO" clipsSubviews="YES" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gWB-T3-X6t" customClass="TextField">
-                                                        <rect key="frame" x="400" y="15" width="244" height="30"/>
+                                                        <rect key="frame" x="400" y="15" width="244" height="34"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="244" id="OWQ-0h-lpL"/>
                                                         </constraints>
@@ -297,7 +291,7 @@
                                                         </connections>
                                                     </textField>
                                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Customer Contact:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="zzB-cr-Nej">
-                                                        <rect key="frame" x="45" y="20" width="145" height="21"/>
+                                                        <rect key="frame" x="45" y="21.5" width="145" height="21"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="145" id="vlH-Ob-5eH"/>
                                                         </constraints>
@@ -316,10 +310,10 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H9b-6B-8yQ" customClass="GradientView">
-                                                <rect key="frame" x="21" y="483" width="728" height="61"/>
+                                                <rect key="frame" x="21" y="502" width="728" height="65"/>
                                                 <subviews>
                                                     <textField opaque="NO" clipsSubviews="YES" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RTi-sd-Sx1" customClass="TextField">
-                                                        <rect key="frame" x="400" y="12" width="311" height="30"/>
+                                                        <rect key="frame" x="400" y="12" width="311" height="34"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="311" id="Tgg-ue-Flm"/>
                                                         </constraints>
@@ -332,7 +326,7 @@
                                                         </connections>
                                                     </textField>
                                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Customer Address:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="MhA-ae-sPs">
-                                                        <rect key="frame" x="60" y="18" width="129" height="21"/>
+                                                        <rect key="frame" x="60" y="18" width="129" height="25"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="129" id="KGe-Nk-Q8f"/>
                                                         </constraints>
@@ -352,10 +346,10 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q5h-Bk-U1A" customClass="GradientView">
-                                                <rect key="frame" x="21" y="422" width="728" height="61"/>
+                                                <rect key="frame" x="21" y="438" width="728" height="64"/>
                                                 <subviews>
                                                     <textField opaque="NO" clipsSubviews="YES" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="csk-TU-ped" userLabel="txtDate" customClass="TextField">
-                                                        <rect key="frame" x="400" y="15" width="94" height="30"/>
+                                                        <rect key="frame" x="400" y="15" width="94" height="34"/>
                                                         <accessibility key="accessibilityConfiguration" label="txtDate"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="94" id="7RY-HF-lxA"/>
@@ -369,7 +363,7 @@
                                                         </connections>
                                                     </textField>
                                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Date:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="Q8A-HM-WBa">
-                                                        <rect key="frame" x="148" y="20" width="41" height="21"/>
+                                                        <rect key="frame" x="148" y="21.5" width="41" height="21"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                         <nil key="highlightedColor"/>
@@ -403,10 +397,10 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EG2-vj-vP9" customClass="GradientView">
-                                                <rect key="frame" x="21" y="544" width="728" height="61"/>
+                                                <rect key="frame" x="21" y="567" width="728" height="64"/>
                                                 <subviews>
                                                     <textField opaque="NO" clipsSubviews="YES" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7Gh-Lo-jiG" userLabel="txtDate" customClass="TextField">
-                                                        <rect key="frame" x="400" y="15" width="152" height="30"/>
+                                                        <rect key="frame" x="400" y="15" width="152" height="34"/>
                                                         <accessibility key="accessibilityConfiguration" label="txtDate"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="152" id="01n-i2-RJk"/>
@@ -420,7 +414,7 @@
                                                         </connections>
                                                     </textField>
                                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Email:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="s2m-nv-BSz">
-                                                        <rect key="frame" x="139" y="20" width="48" height="21"/>
+                                                        <rect key="frame" x="139" y="21.5" width="48" height="21"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="48" id="Xk4-wq-xeY"/>
                                                         </constraints>
@@ -439,10 +433,10 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hXK-sA-RnT" customClass="GradientView">
-                                                <rect key="frame" x="21" y="178" width="728" height="61"/>
+                                                <rect key="frame" x="21" y="182" width="728" height="64"/>
                                                 <subviews>
                                                     <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bdb-xb-gc8" userLabel="txtDate" customClass="TextField">
-                                                        <rect key="frame" x="400" y="15" width="242" height="30"/>
+                                                        <rect key="frame" x="400" y="15" width="242" height="34"/>
                                                         <accessibility key="accessibilityConfiguration" label="txtDate"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="242" id="wjv-zD-S4q"/>
@@ -456,7 +450,7 @@
                                                         </connections>
                                                     </textField>
                                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Technician Name:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="gic-xD-FWT">
-                                                        <rect key="frame" x="57" y="15" width="134" height="34"/>
+                                                        <rect key="frame" x="57" y="15" width="134" height="37"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="134" id="dt0-9T-rYj"/>
                                                         </constraints>
@@ -476,7 +470,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L1x-mO-DcG" customClass="GradientView">
-                                                <rect key="frame" x="21" y="117" width="728" height="61"/>
+                                                <rect key="frame" x="21" y="117" width="728" height="65"/>
                                                 <subviews>
                                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" misplaced="YES" text="Hoist Srl:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="Ebk-t6-Vup">
                                                         <rect key="frame" x="121" y="15" width="71" height="34"/>
@@ -485,7 +479,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MA1-xc-auU" customClass="TextField">
-                                                        <rect key="frame" x="400" y="16" width="243" height="30"/>
+                                                        <rect key="frame" x="397" y="16" width="243" height="34"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="243" id="vEB-XX-Ekx"/>
                                                         </constraints>
@@ -498,7 +492,7 @@
                                                         </connections>
                                                     </textField>
                                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="detailDisclosure" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gof-Kp-BT6">
-                                                        <rect key="frame" x="686" y="16" width="22" height="22"/>
+                                                        <rect key="frame" x="683" y="16" width="25" height="24"/>
                                                         <fontDescription key="fontDescription" type="boldSystem" size="button"/>
                                                         <state key="normal">
                                                             <color key="titleColor" red="0.1960784314" green="0.30980392159999998" blue="0.52156862749999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -522,13 +516,13 @@
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="Vn2-1F-VYH">
-                                                <rect key="frame" x="21" y="684" width="727" height="21"/>
+                                                <rect key="frame" x="21" y="710" width="726" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pCW-pD-YBJ" customClass="GradientView">
-                                                <rect key="frame" x="21" y="650" width="728" height="151"/>
+                                                <rect key="frame" x="21" y="676" width="728" height="151"/>
                                                 <subviews>
                                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Crane Type:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="hEg-gW-AEl">
                                                         <rect key="frame" x="39" y="49" width="98" height="53"/>
@@ -648,7 +642,7 @@
                                 </constraints>
                             </scrollView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="joP-Ux-8DR">
-                                <rect key="frame" x="0.0" y="980" width="768" height="44"/>
+                                <rect key="frame" x="0.0" y="974" width="768" height="50"/>
                                 <items>
                                     <barButtonItem title="New Customer" id="Pwy-UG-jgZ">
                                         <connections>
@@ -658,7 +652,7 @@
                                     <barButtonItem title="Update" id="wvV-2M-ldN"/>
                                     <barButtonItem style="plain" id="8SS-9q-4My">
                                         <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="MvB-S2-A4f">
-                                            <rect key="frame" x="211" y="7" width="233" height="30"/>
+                                            <rect key="frame" x="220.5" y="10" width="233" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <state key="normal" title="Sync Crane Inspection Details">
                                                 <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -673,7 +667,7 @@
                                 <color key="barTintColor" red="0.0" green="0.67450980390000004" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </toolbar>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u1W-jj-YwG">
-                                <rect key="frame" x="0.0" y="20" width="768" height="44"/>
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="50"/>
                                 <inset key="insetFor6xAndEarlier" minX="0.0" minY="-20" maxX="0.0" maxY="20"/>
                                 <color key="barTintColor" red="0.0" green="0.67450980390000004" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <textAttributes key="titleTextAttributes">
@@ -743,7 +737,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="83i-uq-tas" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1826" y="361"/>
+            <point key="canvasLocation" x="1426.5625" y="211.5234375"/>
         </scene>
         <!--Inspection View Controller-->
         <scene sceneID="cGm-1p-p0Q">
@@ -757,7 +751,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
                         <subviews>
-                            <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jWb-ru-g5i" customClass="GradientView">
+                            <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jWb-ru-g5i" customClass="GradientView">
                                 <rect key="frame" x="20" y="562" width="728" height="251"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Which part of this machine is defficient?" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="1" translatesAutoresizingMaskIntoConstraints="NO" id="N9M-S1-5xO">
@@ -770,7 +764,7 @@
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <pickerView userInteractionEnabled="NO" alpha="0.5" contentMode="scaleToFill" showsSelectionIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G5j-uv-CDt">
+                                    <pickerView userInteractionEnabled="NO" alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G5j-uv-CDt">
                                         <rect key="frame" x="344" y="18" width="364" height="216"/>
                                         <color key="backgroundColor" red="0.64132838849999996" green="0.73710078310000005" blue="0.96034307070000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
@@ -789,7 +783,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Part Condition:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="Hr4-fr-2XV">
-                                <rect key="frame" x="20" y="68" width="187" height="34"/>
+                                <rect key="frame" x="20" y="48" width="187" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="187" id="uRB-fP-mYx"/>
                                     <constraint firstAttribute="height" constant="34" id="yc5-oP-fpw"/>
@@ -799,7 +793,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Enter the condition of the part" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="kSn-d6-mCM">
-                                <rect key="frame" x="20" y="103" width="234" height="27"/>
+                                <rect key="frame" x="20" y="83" width="234" height="27"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="234" id="1S7-er-QWj"/>
                                     <constraint firstAttribute="height" constant="27" id="Hl2-KC-lrM"/>
@@ -808,7 +802,7 @@
                                 <color key="textColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tQH-1p-wVd" customClass="GradientView">
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tQH-1p-wVd" customClass="GradientView">
                                 <rect key="frame" x="20" y="320" width="728" height="50"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" misplaced="YES" text="Defficient:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="rC6-KN-ZLK">
@@ -838,7 +832,7 @@
                                     <constraint firstItem="rC6-KN-ZLK" firstAttribute="leading" secondItem="tQH-1p-wVd" secondAttribute="leadingMargin" id="k35-Xq-ESS"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" clipsSubviews="YES" contentMode="left" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="zPN-Ej-pJF">
+                            <label opaque="NO" clipsSubviews="YES" contentMode="left" ambiguous="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="zPN-Ej-pJF">
                                 <rect key="frame" x="20" y="202" width="711" height="63"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" none="YES"/>
@@ -850,7 +844,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="itg-3k-s3J">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" ambiguous="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="itg-3k-s3J">
                                 <rect key="frame" x="20" y="161" width="239" height="54"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="239" id="Ymf-Id-zQT"/>
@@ -861,7 +855,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <navigationBar clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="blackTranslucent" translatesAutoresizingMaskIntoConstraints="NO" id="IgU-F9-DOD">
-                                <rect key="frame" x="0.0" y="25" width="768" height="44"/>
+                                <rect key="frame" x="0.0" y="25" width="768" height="50"/>
                                 <color key="barTintColor" red="0.0" green="0.67450980390000004" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <items>
                                     <navigationItem title="Inspection Points" id="9G3-Eu-saT">
@@ -896,7 +890,7 @@
                                 <color key="tintColor" red="0.0" green="0.67450980390000004" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="barTintColor" red="0.0" green="0.67450980390000004" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </toolbar>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="anc-cl-5wC" customClass="GradientView">
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="anc-cl-5wC" customClass="GradientView">
                                 <rect key="frame" x="20" y="271" width="728" height="50"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" misplaced="YES" text="Defficient:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="Hnr-66-w9N">
@@ -929,10 +923,10 @@
                                     <constraint firstAttribute="trailing" secondItem="hpt-8d-vYa" secondAttribute="trailing" constant="20" id="t8Z-Fb-xR2"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gPt-UM-OBt" customClass="GradientView">
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gPt-UM-OBt" customClass="GradientView">
                                 <rect key="frame" x="20" y="371" width="728" height="192"/>
                                 <subviews>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Any notes that need to be made mention of:" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="OLt-3R-n3X">
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" ambiguous="YES" text="Any notes that need to be made mention of:" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="OLt-3R-n3X">
                                         <rect key="frame" x="55" y="46" width="228" height="100"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="228" id="Rws-V6-MPO"/>
@@ -942,7 +936,7 @@
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R4W-rr-wGf">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R4W-rr-wGf">
                                         <rect key="frame" x="344" y="46" width="364" height="67"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="364" id="6RU-ur-ASO"/>
@@ -1019,7 +1013,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Chs-UY-VsF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1826" y="1476"/>
+            <point key="canvasLocation" x="1426.5625" y="864.84375"/>
         </scene>
         <!--Hoist Serial Numbers-->
         <scene sceneID="LMG-Co-kAT">
@@ -1030,7 +1024,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <searchBar key="tableHeaderView" contentMode="redraw" id="QuG-wi-krm">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <textInputTraits key="textInputTraits"/>
                             <connections>
@@ -1039,7 +1033,7 @@
                         </searchBar>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" id="WNV-X0-qlT">
-                                <rect key="frame" x="0.0" y="66" width="320" height="54"/>
+                                <rect key="frame" x="0.0" y="72" width="320" height="54"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WNV-X0-qlT" id="8EV-kK-und">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="54"/>
@@ -1059,14 +1053,14 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Wv-Nw-JfO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1247" y="-430"/>
+            <point key="canvasLocation" x="974.21875" y="-251.95312499999997"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="yoE-TL-HBl">
             <objects>
                 <navigationController id="n5h-he-orY" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="lzv-Ah-Bgf">
-                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -1075,7 +1069,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gPM-GP-b6g" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="713" y="-430"/>
+            <point key="canvasLocation" x="557.03125" y="-251.95312499999997"/>
         </scene>
         <!--Split View Controller-->
         <scene sceneID="xML-Jv-ib7">
@@ -1089,12 +1083,7 @@
                 </splitViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hha-LU-5h8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-269" y="39"/>
+            <point key="canvasLocation" x="-210.15625" y="22.8515625"/>
         </scene>
     </scenes>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination"/>
-    </simulatedMetricsContainer>
 </document>

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		467B8B02C123CC3DF865D0E5 /* Pods_Inspection_Form_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43586BA37B75E0157DA2FBE2 /* Pods_Inspection_Form_App.framework */; };
+		8AC3F2DB9AFE9E1B8749754F /* Pods_Inspection_Form_AppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A08C0525CDFA03121FA812DA /* Pods_Inspection_Form_AppTests.framework */; };
 		8B0787C415113448006857A8 /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B0787C315113448006857A8 /* TableViewController.m */; };
 		8B0787C715113796006857A8 /* Parts.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B0787C615113796006857A8 /* Parts.m */; };
 		8B544612150F0C3E007E1CA9 /* GradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B544611150F0C3E007E1CA9 /* GradientView.m */; };
@@ -56,8 +58,6 @@
 		CEFD6D2D1839575E001764E9 /* CraneView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEFD6D2C1839575E001764E9 /* CraneView.xib */; };
 		CEFD6D70183A8705001764E9 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFD6D6F183A8705001764E9 /* Default-568h@2x.png */; };
 		CEFD6D72183A87D8001764E9 /* JobInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEFD6D71183A87D8001764E9 /* JobInfoView.xib */; };
-		EC101BE05453EFE5D93E6EEF /* Pods_Inspection_Form_AppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F656FCB2F9285CF5DF30DCA /* Pods_Inspection_Form_AppTests.framework */; };
-		ECF08807C4C85D7FFBB7DB46 /* Pods_Inspection_Form_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33B88F2EDE4090E2DD9C1F3B /* Pods_Inspection_Form_App.framework */; };
 		F4235EE01E2EE67600AE9569 /* IAAddSignatureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4235EDF1E2EE67600AE9569 /* IAAddSignatureViewController.m */; };
 		F4235EE31E2EE6D000AE9569 /* IAAddSignatureView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4235EE21E2EE6D000AE9569 /* IAAddSignatureView.m */; };
 		F423A8C91C7BA24C00899B6E /* LoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F423A8C81C7BA24C00899B6E /* LoginView.xib */; };
@@ -109,11 +109,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		33B88F2EDE4090E2DD9C1F3B /* Pods_Inspection_Form_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Inspection_Form_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		566EEBA997791A7E7DE2DAF2 /* Pods-Inspection Form AppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Inspection Form AppTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Inspection Form AppTests/Pods-Inspection Form AppTests.debug.xcconfig"; sourceTree = "<group>"; };
-		6B39315125191CB323ADA4DE /* Pods-Inspection Form App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Inspection Form App.release.xcconfig"; path = "Pods/Target Support Files/Pods-Inspection Form App/Pods-Inspection Form App.release.xcconfig"; sourceTree = "<group>"; };
-		86D8FAA3560C708A7D88838A /* Pods-Inspection Form AppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Inspection Form AppTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Inspection Form AppTests/Pods-Inspection Form AppTests.release.xcconfig"; sourceTree = "<group>"; };
-		8AE461BB952CBFD36A9B100A /* Pods-Inspection Form App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Inspection Form App.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Inspection Form App/Pods-Inspection Form App.debug.xcconfig"; sourceTree = "<group>"; };
+		082B13161B2975DE8C9EEB49 /* Pods-Inspection Form App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Inspection Form App.debug.xcconfig"; path = "Target Support Files/Pods-Inspection Form App/Pods-Inspection Form App.debug.xcconfig"; sourceTree = "<group>"; };
+		3D9F8618E0298E1B1E77649A /* Pods-Inspection Form AppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Inspection Form AppTests.release.xcconfig"; path = "Target Support Files/Pods-Inspection Form AppTests/Pods-Inspection Form AppTests.release.xcconfig"; sourceTree = "<group>"; };
+		43586BA37B75E0157DA2FBE2 /* Pods_Inspection_Form_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Inspection_Form_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8026D1DA70EF2F8B5B2D4F29 /* Pods-Inspection Form AppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Inspection Form AppTests.debug.xcconfig"; path = "Target Support Files/Pods-Inspection Form AppTests/Pods-Inspection Form AppTests.debug.xcconfig"; sourceTree = "<group>"; };
+		8826288FB37A10B3AA2054C5 /* Pods-Inspection Form App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Inspection Form App.release.xcconfig"; path = "Target Support Files/Pods-Inspection Form App/Pods-Inspection Form App.release.xcconfig"; sourceTree = "<group>"; };
 		8B0787C215113448006857A8 /* TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewController.h; sourceTree = "<group>"; };
 		8B0787C315113448006857A8 /* TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewController.m; sourceTree = "<group>"; };
 		8B0787C515113796006857A8 /* Parts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Parts.h; sourceTree = "<group>"; };
@@ -159,7 +159,7 @@
 		8BF10A9A152FB93D00DC5F05 /* TextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextField.h; sourceTree = "<group>"; };
 		8BF10A9B152FB93D00DC5F05 /* TextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextField.m; sourceTree = "<group>"; };
 		8BF3876F15239E1200C3F368 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
-		9F656FCB2F9285CF5DF30DCA /* Pods_Inspection_Form_AppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Inspection_Form_AppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A08C0525CDFA03121FA812DA /* Pods_Inspection_Form_AppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Inspection_Form_AppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE147B631835C263005CC483 /* PartSelectionDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PartSelectionDelegate.h; sourceTree = "<group>"; };
 		CE147B641835C2EA005CC483 /* Part.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Part.h; sourceTree = "<group>"; };
 		CE147B651835C2EA005CC483 /* Part.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Part.m; sourceTree = "<group>"; };
@@ -274,7 +274,7 @@
 				8BC58453150ABD87000AC695 /* UIKit.framework in Frameworks */,
 				8BC58455150ABD87000AC695 /* Foundation.framework in Frameworks */,
 				8BC58457150ABD87000AC695 /* CoreGraphics.framework in Frameworks */,
-				ECF08807C4C85D7FFBB7DB46 /* Pods_Inspection_Form_App.framework in Frameworks */,
+				467B8B02C123CC3DF865D0E5 /* Pods_Inspection_Form_App.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -286,13 +286,25 @@
 				CE27C22B1823605500EDDFC1 /* Dropbox.framework in Frameworks */,
 				8BC58472150ABD88000AC695 /* UIKit.framework in Frameworks */,
 				8BC58473150ABD88000AC695 /* Foundation.framework in Frameworks */,
-				EC101BE05453EFE5D93E6EEF /* Pods_Inspection_Form_AppTests.framework in Frameworks */,
+				8AC3F2DB9AFE9E1B8749754F /* Pods_Inspection_Form_AppTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6C26BEC9FBD2D4F5CB249BBB /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				082B13161B2975DE8C9EEB49 /* Pods-Inspection Form App.debug.xcconfig */,
+				8826288FB37A10B3AA2054C5 /* Pods-Inspection Form App.release.xcconfig */,
+				8026D1DA70EF2F8B5B2D4F29 /* Pods-Inspection Form AppTests.debug.xcconfig */,
+				3D9F8618E0298E1B1E77649A /* Pods-Inspection Form AppTests.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		8B6BA17C1708BF1B00E08D9D /* T1Autograph */ = {
 			isa = PBXGroup;
 			children = (
@@ -335,7 +347,7 @@
 				8BC58476150ABD88000AC695 /* Inspection Form AppTests */,
 				8BC58451150ABD87000AC695 /* Frameworks */,
 				8BC5844F150ABD87000AC695 /* Products */,
-				D4C7D22181A0744544A5E5B1 /* Pods */,
+				6C26BEC9FBD2D4F5CB249BBB /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -360,8 +372,8 @@
 				8BC58454150ABD87000AC695 /* Foundation.framework */,
 				8BC58456150ABD87000AC695 /* CoreGraphics.framework */,
 				8BC58470150ABD88000AC695 /* SenTestingKit.framework */,
-				33B88F2EDE4090E2DD9C1F3B /* Pods_Inspection_Form_App.framework */,
-				9F656FCB2F9285CF5DF30DCA /* Pods_Inspection_Form_AppTests.framework */,
+				43586BA37B75E0157DA2FBE2 /* Pods_Inspection_Form_App.framework */,
+				A08C0525CDFA03121FA812DA /* Pods_Inspection_Form_AppTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -629,17 +641,6 @@
 			name = "Business Layer";
 			sourceTree = "<group>";
 		};
-		D4C7D22181A0744544A5E5B1 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				8AE461BB952CBFD36A9B100A /* Pods-Inspection Form App.debug.xcconfig */,
-				6B39315125191CB323ADA4DE /* Pods-Inspection Form App.release.xcconfig */,
-				566EEBA997791A7E7DE2DAF2 /* Pods-Inspection Form AppTests.debug.xcconfig */,
-				86D8FAA3560C708A7D88838A /* Pods-Inspection Form AppTests.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		F4235EDD1E2EE64000AE9569 /* Add Signature View Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -796,11 +797,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8BC58481150ABD88000AC695 /* Build configuration list for PBXNativeTarget "Inspection Form App" */;
 			buildPhases = (
-				D12FA9B72F121CDAD9A6AAD9 /* [CP] Check Pods Manifest.lock */,
+				2BEE6E1AE8386E3116A51E02 /* [CP] Check Pods Manifest.lock */,
 				8BC5844A150ABD87000AC695 /* Sources */,
 				8BC5844B150ABD87000AC695 /* Frameworks */,
 				8BC5844C150ABD87000AC695 /* Resources */,
-				577DB18A4C7214FFBCDA4531 /* [CP] Embed Pods Frameworks */,
+				587183331CAA56C76349D050 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -815,7 +816,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8BC58484150ABD88000AC695 /* Build configuration list for PBXNativeTarget "Inspection Form AppTests" */;
 			buildPhases = (
-				75B4DCF3B16E47D5CB54B25C /* [CP] Check Pods Manifest.lock */,
+				B89245BCBF52D04EBF14840F /* [CP] Check Pods Manifest.lock */,
 				8BC5846A150ABD88000AC695 /* Sources */,
 				8BC5846B150ABD88000AC695 /* Frameworks */,
 				8BC5846C150ABD88000AC695 /* Resources */,
@@ -900,7 +901,29 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		577DB18A4C7214FFBCDA4531 /* [CP] Embed Pods Frameworks */ = {
+		2BEE6E1AE8386E3116A51E02 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Inspection Form App-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		587183331CAA56C76349D050 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -908,60 +931,38 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Inspection Form App/Pods-Inspection Form App-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
-				"${BUILT_PRODUCTS_DIR}/BoringSSL/openssl.framework",
+				"${BUILT_PRODUCTS_DIR}/BoringSSL-GRPC/openssl_grpc.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
 				"${BUILT_PRODUCTS_DIR}/Parse/Parse.framework",
-				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
-				"${BUILT_PRODUCTS_DIR}/gRPC/GRPCClient.framework",
+				"${BUILT_PRODUCTS_DIR}/abseil/absl.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-C++/grpcpp.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
-				"${BUILT_PRODUCTS_DIR}/gRPC-ProtoRPC/ProtoRPC.framework",
-				"${BUILT_PRODUCTS_DIR}/gRPC-RxLibrary/RxLibrary.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl_grpc.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Parse.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBLPromises.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GRPCClient.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/absl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpcpp.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ProtoRPC.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxLibrary.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Inspection Form App/Pods-Inspection Form App-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		75B4DCF3B16E47D5CB54B25C /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Inspection Form AppTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		8BC5846D150ABD88000AC695 /* ShellScript */ = {
@@ -977,18 +978,22 @@
 			shellPath = /bin/sh;
 			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
 		};
-		D12FA9B72F121CDAD9A6AAD9 /* [CP] Check Pods Manifest.lock */ = {
+		B89245BCBF52D04EBF14840F /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			inputFileListPaths = (
 			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Inspection Form App-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-Inspection Form AppTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1198,7 +1203,7 @@
 		};
 		8BC58482150ABD88000AC695 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8AE461BB952CBFD36A9B100A /* Pods-Inspection Form App.debug.xcconfig */;
+			baseConfigurationReference = 082B13161B2975DE8C9EEB49 /* Pods-Inspection Form App.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				CLANG_ENABLE_MODULES = YES;
@@ -1228,13 +1233,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/T1Autograph\"",
 				);
-				"LIBRARY_SEARCH_PATHS[arch=*]" = (
-					"$(inherited)",
-					"\"$(SRCROOT)/T1Autograph\"",
-					"$(inherited)",
-					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/SDKs/MacOSX10.7.sdk/usr/lib\"",
-					"\"$(SRCROOT)\"",
-				);
+				"LIBRARY_SEARCH_PATHS[arch=*]" = "$(inherited) \"$(SRCROOT)/T1Autograph\" $(inherited) \"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/SDKs/MacOSX10.7.sdk/usr/lib\" \"$(SRCROOT)\"";
 				MARKETING_VERSION = 3.85;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "net.sswr.Inspection-Form-App";
@@ -1251,7 +1250,7 @@
 		};
 		8BC58483150ABD88000AC695 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6B39315125191CB323ADA4DE /* Pods-Inspection Form App.release.xcconfig */;
+			baseConfigurationReference = 8826288FB37A10B3AA2054C5 /* Pods-Inspection Form App.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				CLANG_ENABLE_MODULES = YES;
@@ -1295,7 +1294,7 @@
 		};
 		8BC58485150ABD88000AC695 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 566EEBA997791A7E7DE2DAF2 /* Pods-Inspection Form AppTests.debug.xcconfig */;
+			baseConfigurationReference = 8026D1DA70EF2F8B5B2D4F29 /* Pods-Inspection Form AppTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Inspection Form App.app/Inspection Form App";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1316,7 +1315,7 @@
 		};
 		8BC58486150ABD88000AC695 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 86D8FAA3560C708A7D88838A /* Pods-Inspection Form AppTests.release.xcconfig */;
+			baseConfigurationReference = 3D9F8618E0298E1B1E77649A /* Pods-Inspection Form AppTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Inspection Form App.app/Inspection Form App";
 				FRAMEWORK_SEARCH_PATHS = (

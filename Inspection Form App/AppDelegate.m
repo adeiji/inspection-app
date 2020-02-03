@@ -17,7 +17,7 @@
 #import "LoginViewController.h"
 
 @import Bugsee;
-@import Firebase;
+@import FirebaseCore;
 
 @interface AppDelegate ()
 

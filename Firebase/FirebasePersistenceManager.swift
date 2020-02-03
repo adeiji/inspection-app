@@ -7,8 +7,9 @@
 //
 
 import Foundation
-import Firebase
-import FirebaseUI
+import UIKit
+import FirebaseAuth
+import FirebaseStorage
 import FirebaseFunctions
 import FirebaseFirestore
 
@@ -178,56 +179,6 @@ class FirebasePersistenceManager: NSObject {
                     self.addDocument(withCollection: collection, data: myData, completion: { (error, document) in
                         completion?(error, document)
                     })
-                }
-            })
-        }
-    }
-    
-    /// Loads an image from url and assigns it to an image view
-    ///
-    /// - Parameters:
-    ///   - imageView: UIImageView The imageview to load the image on
-    ///   - url: String The url of the image
-    ///   - placeholderImage: The image that you want as a placeholder while the image is downloaded from URL
-    class func loadImage (toImageView imageView: UIImageView, url: String, placeholderImage: UIImage!) {
-        
-        if url.range(of: "firebasestorage") == nil {
-            imageView.sd_setImage(with: URL(string: url), completed: { (image, error, cacheType, url) in
-                if let error = error {
-                    print("Error showing image \(error) - FirebasePersistenceManager.loadImage")
-                }
-            })
-        } else {
-            let storage = Storage.storage(url: "gs://\(kBucketName)")
-            let gsReference = storage.reference(forURL: url)
-            let downloadTask = imageView.sd_setImage(with: gsReference, placeholderImage: placeholderImage)
-            downloadTask?.observe(.failure, handler: { (snapshot) in
-                guard let errorCode = (snapshot.error as NSError?)?.code else {
-                    return
-                }
-                guard let error = StorageErrorCode(rawValue: errorCode) else {
-                    return
-                }
-                switch (error) {
-                case .objectNotFound:
-                    // File doesn't exist
-                    // Really need to make sure to finish this stuff
-                    break
-                case .unauthorized:
-                    // User doesn't have permission to access file
-                    break
-                case .cancelled:
-                    // User cancelled the download
-                    break
-                    
-                    /* ... */
-                    
-                case .unknown:
-                    // Unknown error occurred, inspect the server response
-                    break
-                default:
-                    // Another error occurred. This is a good place to retry the download.
-                    break
                 }
             })
         }
