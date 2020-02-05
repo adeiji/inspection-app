@@ -7,14 +7,14 @@
 //
 
 #import "OptionsTableViewController.h"
-
+#import "Inspection_Form_App-Swift.h"
 
 @interface OptionsTableViewController ()
 
 @end
 
 // These are the indexes of Strings stored in the options array which stores the options that are viewed on the table view controller, you can update the actual strings themselves in the ViewController.m file in the method showOptionsMenu
-int const SEND_INSPECTIONS_INDEX = 0, VIEW_INSPECTIONS_INDEX = 1, ACCOUNT_INDEX = 2, ADD_SIGNATURE_INDEX = 3, BACKUP_TO_CLOUD = 4, LOAD_WATER_DISTRICT_CRANES = 5, PARSE_TO_FIREBASE = 6;
+int const SEND_INSPECTIONS_INDEX = 0, VIEW_INSPECTIONS_INDEX = 1, ACCOUNT_INDEX = 2, ADD_SIGNATURE_INDEX = 3, BACKUP_TO_CLOUD = 4, PARSE_TO_FIREBASE = 6;
 
 @implementation OptionsTableViewController
 
@@ -108,7 +108,14 @@ int const SEND_INSPECTIONS_INDEX = 0, VIEW_INSPECTIONS_INDEX = 1, ACCOUNT_INDEX 
         }
         else if (indexPath.row == VIEW_INSPECTIONS_INDEX) {
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                optionsTableViewController.inspectionsSentToCurrentUser = [[IACraneInspectionDetailsManager sharedManager] getAllCranesForCurrentUserFromServer];
+                
+                NSManagedObjectContext *context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+                [context setPersistentStoreCoordinator:(((AppDelegate *)[ [UIApplication sharedApplication] delegate]).managedObjectContext).persistentStoreCoordinator];                                
+                
+                [[IACraneInspectionDetailsManagerSwift new] getAllCranesSentToCurrentUserWithContext: context  completion:^(NSError * _Nullable error, NSArray<InspectedCrane *> * _Nullable inspections) {
+                    optionsTableViewController.inspectionsSentToCurrentUser = inspections;
+                }];
+                
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self.navigationController pushViewController:optionsTableViewController animated:true];
                 });
@@ -132,7 +139,9 @@ int const SEND_INSPECTIONS_INDEX = 0, VIEW_INSPECTIONS_INDEX = 1, ACCOUNT_INDEX 
         else if (indexPath.row == BACKUP_TO_CLOUD) {
             NSArray *inspectedCranes = [[IACraneInspectionDetailsManager sharedManager] getAllInspectedCranes];
             if ([inspectedCranes count] != 0) {
-                [[IACraneInspectionDetailsManager sharedManager] backupCranesOnDevice];
+                NSManagedObjectContext *context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+                [context setPersistentStoreCoordinator:(((AppDelegate *)[ [UIApplication sharedApplication] delegate]).managedObjectContext).persistentStoreCoordinator];
+                [[IACraneInspectionDetailsManagerSwift new] backupCranesToFirebaseWithContext:context];
             }
             else {
                 UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"No Data To Backup" message:@"You have nothing to backup.  Please inspect some cranes first." preferredStyle:UIAlertControllerStyleAlert];
@@ -141,22 +150,8 @@ int const SEND_INSPECTIONS_INDEX = 0, VIEW_INSPECTIONS_INDEX = 1, ACCOUNT_INDEX 
                 [self.navigationController presentViewController:alertController animated:YES completion:nil];
             }
         }
-        else if (indexPath.row == LOAD_WATER_DISTRICT_CRANES) {
-            [[IACraneInspectionDetailsManager sharedManager]  saveAllWaterDistrictCranes];
-            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Loading Finished" message:@"Finished Loading LVWWD Cranes" preferredStyle:UIAlertControllerStyleAlert];
-            UIAlertAction *okayAction = [UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleDefault handler:nil];
-            [alertController addAction:okayAction];
-            [self.navigationController presentViewController:alertController animated:YES completion:nil];
-        }
         else if (indexPath.row == PARSE_TO_FIREBASE) {
-            PFQuery *query = [PFQuery queryWithClassName:kParseClassCrane];
-            
-            [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-                if (!error)
-                {
-                    [[IACraneInspectionDetailsManager sharedManager] transferParseToFirebase:objects];                    
-                }
-            }];
+            [[IACraneInspectionDetailsManager sharedManager] transferParseToFirebase];
         }
         
     }
@@ -170,28 +165,23 @@ int const SEND_INSPECTIONS_INDEX = 0, VIEW_INSPECTIONS_INDEX = 1, ACCOUNT_INDEX 
         });
     }
     else if (_users != nil) { // Is the user currently looking at all the users on the server
-        PFUser *user = [_users objectAtIndex:indexPath.row];
+        id user = [_users objectAtIndex:indexPath.row];
         
-        [[IACraneInspectionDetailsManager sharedManager] shareCraneDetails:_selectedCrane WithUser:user WithViewControllerOrNilToDisplayAlert:self] ;        
+        [[IACraneInspectionDetailsManagerSwift new] shareInspectionWithHoistSrl:_selectedCrane.hoistSrl userId:user[@"id"]];
     }
     else if (_inspectionsSentToCurrentUser != nil) {
-        PFCrane *craneObject = [_inspectionsSentToCurrentUser objectAtIndex:indexPath.row];
-        [self handleDownloadedCraneWithCraneObject:craneObject];
+        InspectedCrane *crane = [_inspectionsSentToCurrentUser objectAtIndex:indexPath.row];
+        [self handleDownloadedCraneWithCraneObject:crane];
     }
 }
 
-- (void) handleDownloadedCraneWithCraneObject : (PFCrane *) craneObject {
+- (void) handleDownloadedCraneWithCraneObject : (InspectedCrane *) inspectedCrane {
     UINavigationController *navigationController = [self.splitViewController.viewControllers objectAtIndex:1] ;
     ViewController *viewController = [navigationController.viewControllers objectAtIndex:0];
     
-    InspectedCrane *inspectedCrane = [craneObject getCoreDataObjectWithContextOrNil:nil];
-    
     [self showInspectionScreen:inspectedCrane];
     [viewController.inspectionViewController.itemListStore loadConditionsForCrane:inspectedCrane];
-    [viewController.inspectionViewController.itemListStore loadConditionsForCraneFromServer:craneObject WithInspectedCrane:inspectedCrane];
-    
-    // If we send a NIL object from FromUser it's because this object was shared by another device, and the owner of that device does not need to be known.  Only information that was backed up from a device will contain data for FromUser key
-    [[IACraneInspectionDetailsManager sharedManager] deleteEarlierInspectionOfCraneFromServer:inspectedCrane ForUser:[PFUser currentUser] ];
+    [[IACraneInspectionDetailsManager sharedManager] saveAllConditionsForCrane:inspectedCrane Conditions:inspectedCrane.conditions.array UsingManagedObjectContextOrNil:nil];
     [[IACraneInspectionDetailsManager sharedManager] removeAllConditionsForCrane:inspectedCrane UsingManagedObjectContext:nil];
     
 }

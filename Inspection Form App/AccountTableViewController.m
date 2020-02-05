@@ -7,26 +7,19 @@
 //
 
 #import "AccountTableViewController.h"
+#import "Inspection_Form_App-Swift.h"
 
 @interface AccountTableViewController ()
 
 @end
 
-NSString *const LOGIN = @"Login", *LOGOUT = @"Logout", *EDIT_USERNAME = @"Edit Username";
+NSString *const LOGIN = @"Login With Another Account", *LOGOUT = @"Logout", *EDIT_USERNAME = @"Edit Username";
 
 @implementation AccountTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    if ([PFUser currentUser] == nil) {
-        _options = [NSMutableArray arrayWithObject:@"Login"];
-    }
-    else {
-        _options = [NSMutableArray arrayWithObject:@"Logout"];
-    }
-    
-    [_options addObject:@"Edit Username"];
+    _options = [NSMutableArray arrayWithObject:LOGIN];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -76,7 +69,7 @@ NSString *const LOGIN = @"Login", *LOGOUT = @"Logout", *EDIT_USERNAME = @"Edit U
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Logout" message:@"Are You Sure You Want to Logout?" preferredStyle:UIAlertControllerStyleAlert];
         
         UIAlertAction *logoutAction = [UIAlertAction actionWithTitle:@"Logout" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-            [PFUser logOutInBackground];
+            [UtilityFunctions removeUser];
             LoginViewController *loginViewController = [[LoginViewController alloc] initWithNibName:@"LoginView" bundle:nil];
             [self.navigationController pushViewController:loginViewController animated:true];
         }];
@@ -84,31 +77,6 @@ NSString *const LOGIN = @"Login", *LOGOUT = @"Logout", *EDIT_USERNAME = @"Edit U
         UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
         [alertController addAction:logoutAction];
         [alertController addAction:cancelAction];
-        [self presentViewController:alertController animated:true completion:nil];
-    }
-    else if ([[_options objectAtIndex:indexPath.row] isEqualToString:EDIT_USERNAME]) {
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Username" message:@"Enter the New Username" preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *editUserNameAction = [UIAlertAction actionWithTitle:@"Edit Username" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            UITextField *usernameTextField = alertController.textFields[0];
-            if ([usernameTextField.text stringByReplacingOccurrencesOfString:@" " withString:@""].length != 0) {
-            [[PFUser currentUser] setUsername:usernameTextField.text];
-                [[PFUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-                    if (succeeded && !error) {
-                        NSLog(@"Username updated succesfully");
-                    } else {
-                        NSLog(@"Error updating username %@", error.userInfo[@"error"]);
-                    }
-                }];
-            }
-        }];
-            
-        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
-        
-        [alertController addAction:editUserNameAction];
-        [alertController addAction:cancelAction];
-        [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-            textField.placeholder = @"Edit Username";
-        }];
         [self presentViewController:alertController animated:true completion:nil];
     }
 }

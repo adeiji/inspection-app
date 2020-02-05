@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class Condition, Customer;
+@class CoreDataCondition, Customer;
 
 @interface InspectedCrane : NSManagedObject
 

@@ -27,6 +27,7 @@
 #import "AppDelegate.h"
 #import "InspectionManager.h"
 #import "OptionsTableViewController.h"
+#import "Inspection_Form_App-Swift.h"
 
 @interface ViewController ()
 @end
@@ -58,9 +59,13 @@ static NSString* USERNAME = @"username";
     _txtTechnicianName.text = [owner uppercaseString];
     [self initiatePartsForSelectedCrane];
     
-    if ([PFUser currentUser] != nil) {
-        self.txtTechnicianName.text = [[[PFUser currentUser] username] uppercaseString];
-    }
+    if ([UtilityFunctions getUserId]) {
+        NSString *username = [UtilityFunctions getUsername];
+        
+        if (username != nil) {
+            self.txtTechnicianName.text = [username uppercaseString];
+        }
+    }    
 }
 
 - (void) setIsCraneSet : (BOOL) value {
@@ -132,6 +137,7 @@ static NSString* USERNAME = @"username";
 
 - (void) resetCraneTypePickerView {
     _craneDescriptionsArray = [[IACraneInspectionDetailsManager sharedManager] cranes];
+    _btnSync.enabled = YES;
     [_craneDescriptionPickerView reloadAllComponents];
 }
 
@@ -491,10 +497,8 @@ static NSString* USERNAME = @"username";
     }
     if ([_craneDescriptionsArray count] > 0)
     {
-
         InspectionCrane *selectedCrane = [_craneDescriptionsArray objectAtIndex:selectedRow];
-        [self storeInformationAndDisplayInspectionViewWithCrane:selectedCrane SelectedRow:selectedRow];
-        
+        [self storeInformationAndDisplayInspectionViewWithCrane:selectedCrane SelectedRow:selectedRow];        
     }
     else {
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"No Cranes" message:@"Sorry, but there's no cranes to select.  Click Sync Crane Details" preferredStyle:UIAlertControllerStyleAlert];
