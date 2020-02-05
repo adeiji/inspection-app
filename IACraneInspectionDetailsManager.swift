@@ -7,7 +7,7 @@
 
 import Foundation
 
-@objc public class IACraneInspectionDetailsManagerSwift : NSObject {
+@objc class IACraneInspectionDetailsManagerSwift : NSObject {
     
     @objc func saveInspectionDetails () {
         DispatchQueue.main.async {
@@ -56,7 +56,7 @@ import Foundation
     ///
     /// - Parameter context: The context for Core Data
     /// - Throws: UserError.noUserLoggedIn
-    func getAllCurrentUsersInspectionsFromServerUsingManagedObjectContext (context: NSManagedObjectContext) throws {
+    @objc func getAllCurrentUsersInspectionsFromServerUsingManagedObjectContext (context: NSManagedObjectContext) throws {
         guard let userId = UtilityFunctions.getUserId() else {
             throw UserError.noUserLoggedIn
         }
@@ -81,12 +81,12 @@ import Foundation
     /// - Parameters:
     ///   - hoistSrl: The hoist serial number of the crane that you are sharing the inspection of
     ///   - userId: The user id of the user to share the crane with
-    func shareInspection (hoistSrl: String, userId: String) {
+    @objc func shareInspection (hoistSrl: String, userId: String) {
         IAFirebaseCraneInspectionDetailsManager().updateInspection(craneId: hoistSrl, userId: userId, values: ["toUser":userId])
     }
     
     /// Backup all the cranes that are store don the device to the database
-    func backupCranesToFirebase (context: NSManagedObjectContext) {
+    @objc func backupCranesToFirebase (context: NSManagedObjectContext) {
         if let inspectedCranes = IACraneInspectionDetailsManager.shared()?.getAllInspectedCranes() as? [InspectedCrane] {
             inspectedCranes.forEach { (inspectedCrane) in
                 var craneObject = InspectionAppFactory.getFirebaseQueryDocumentFromInspectedCrane(inspectedCrane: inspectedCrane, context: context)
@@ -103,7 +103,7 @@ import Foundation
     /// - Parameters:
     ///   - context: The context for Core Data
     ///   - completion: Returns either an error or the inspected crane objects
-    public func getAllCranesSentToCurrentUser (context:NSManagedObjectContext, completion: @escaping(Error?, [InspectedCrane]?) -> Void) {
+    @objc public func getAllCranesSentToCurrentUser (context:NSManagedObjectContext, completion: @escaping(Error?, [InspectedCrane]?) -> Void) {
         if let userId = UtilityFunctions.getUserId() {
             FirebasePersistenceManager.getDocuments(withCollection: FirebaseInspectionConstants.InspectedCranes, queryDocument: ["fromUser": userId], searchContainString: false) { (error, documents) in
                 if let documents = documents {
@@ -120,7 +120,7 @@ import Foundation
     /// Gets all the users from the server using this application
     ///
     /// - Parameter completion: The users as dictionary values
-    func getAllUsers (completion:@escaping (Error?, [[String:Any]]) -> Void) {
+    @objc func getAllUsers (completion:@escaping (Error?, [[String:Any]]) -> Void) {
         FirebasePersistenceManager.getDocuments(withCollection: FirebaseInspectionConstants.UserCollectionName) { (error, users) in
             if let users = users {
                 completion(error, InspectionAppFactory.getDictionaryFromFirebaseDocuments(documents: users))

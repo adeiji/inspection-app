@@ -9,7 +9,6 @@
 #import "OptionsTableViewController.h"
 #import "Inspection_Form_App-Swift.h"
 
-
 @interface OptionsTableViewController ()
 
 @end
@@ -111,7 +110,7 @@ int const SEND_INSPECTIONS_INDEX = 0, VIEW_INSPECTIONS_INDEX = 1, ACCOUNT_INDEX 
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                 
                 NSManagedObjectContext *context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
-                [context setPersistentStoreCoordinator:(((AppDelegate *)[ [UIApplication sharedApplication] delegate]).managedObjectContext).persistentStoreCoordinator];
+                [context setPersistentStoreCoordinator:(((AppDelegate *)[ [UIApplication sharedApplication] delegate]).managedObjectContext).persistentStoreCoordinator];                                
                 
                 [[IACraneInspectionDetailsManagerSwift new] getAllCranesSentToCurrentUserWithContext: context  completion:^(NSError * _Nullable error, NSArray<InspectedCrane *> * _Nullable inspections) {
                     optionsTableViewController.inspectionsSentToCurrentUser = inspections;
