@@ -40,7 +40,7 @@
                                 <rect key="frame" x="0.0" y="50" width="768" height="924"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mRy-6B-fIo">
-                                        <rect key="frame" x="0.0" y="-33" width="768" height="1006.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="768" height="1006.5"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1O8-ki-oXR" customClass="GradientView">
                                                 <rect key="frame" x="21" y="828" width="728" height="158.5"/>
@@ -634,7 +634,7 @@
                                     </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="mRy-6B-fIo" firstAttribute="top" secondItem="JQL-yV-qmM" secondAttribute="top" constant="-33" id="0P2-Nx-Mrp"/>
+                                    <constraint firstItem="mRy-6B-fIo" firstAttribute="top" secondItem="JQL-yV-qmM" secondAttribute="top" id="0P2-Nx-Mrp"/>
                                     <constraint firstItem="mRy-6B-fIo" firstAttribute="centerX" secondItem="JQL-yV-qmM" secondAttribute="centerX" id="GAE-yO-gbd"/>
                                     <constraint firstItem="mRy-6B-fIo" firstAttribute="leading" secondItem="JQL-yV-qmM" secondAttribute="leading" id="Ic4-Kj-5m6"/>
                                     <constraint firstAttribute="trailing" secondItem="mRy-6B-fIo" secondAttribute="trailing" id="QnD-I2-Hh8"/>
@@ -667,7 +667,7 @@
                                 <color key="barTintColor" red="0.0" green="0.67450980390000004" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </toolbar>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u1W-jj-YwG">
-                                <rect key="frame" x="0.0" y="0.0" width="768" height="50"/>
+                                <rect key="frame" x="0.0" y="-20" width="768" height="50"/>
                                 <inset key="insetFor6xAndEarlier" minX="0.0" minY="-20" maxX="0.0" maxY="20"/>
                                 <color key="barTintColor" red="0.0" green="0.67450980390000004" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <textAttributes key="titleTextAttributes">
@@ -703,7 +703,7 @@
                         <constraints>
                             <constraint firstItem="joP-Ux-8DR" firstAttribute="leading" secondItem="JQL-yV-qmM" secondAttribute="leading" id="7af-qw-vwY"/>
                             <constraint firstItem="JQL-yV-qmM" firstAttribute="trailing" secondItem="u1W-jj-YwG" secondAttribute="trailing" id="7oV-Gx-G5B"/>
-                            <constraint firstItem="u1W-jj-YwG" firstAttribute="top" secondItem="CK0-CR-VKq" secondAttribute="bottom" id="FJk-pA-f4G"/>
+                            <constraint firstItem="u1W-jj-YwG" firstAttribute="top" secondItem="CK0-CR-VKq" secondAttribute="bottom" constant="-20" id="FJk-pA-f4G"/>
                             <constraint firstItem="JQL-yV-qmM" firstAttribute="trailing" secondItem="joP-Ux-8DR" secondAttribute="trailing" id="PFs-qc-7Oz"/>
                             <constraint firstItem="JQL-yV-qmM" firstAttribute="centerY" secondItem="nR6-am-Ia3" secondAttribute="centerY" id="Wz3-au-xg1"/>
                             <constraint firstItem="u1W-jj-YwG" firstAttribute="leading" secondItem="nR6-am-Ia3" secondAttribute="leading" id="beZ-RX-3ta"/>
@@ -783,7 +783,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Part Condition:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="Hr4-fr-2XV">
-                                <rect key="frame" x="20" y="48" width="187" height="34"/>
+                                <rect key="frame" x="20" y="53" width="187" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="187" id="uRB-fP-mYx"/>
                                     <constraint firstAttribute="height" constant="34" id="yc5-oP-fpw"/>
@@ -793,7 +793,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Enter the condition of the part" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="kSn-d6-mCM">
-                                <rect key="frame" x="20" y="83" width="234" height="27"/>
+                                <rect key="frame" x="20" y="88" width="234" height="27"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="234" id="1S7-er-QWj"/>
                                     <constraint firstAttribute="height" constant="27" id="Hl2-KC-lrM"/>
@@ -855,7 +855,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <navigationBar clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="blackTranslucent" translatesAutoresizingMaskIntoConstraints="NO" id="IgU-F9-DOD">
-                                <rect key="frame" x="0.0" y="25" width="768" height="50"/>
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="50"/>
                                 <color key="barTintColor" red="0.0" green="0.67450980390000004" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <items>
                                     <navigationItem title="Inspection Points" id="9G3-Eu-saT">
@@ -926,7 +926,7 @@
                             <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gPt-UM-OBt" customClass="GradientView">
                                 <rect key="frame" x="20" y="371" width="728" height="192"/>
                                 <subviews>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" ambiguous="YES" text="Any notes that need to be made mention of:" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="OLt-3R-n3X">
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Any notes that need to be made mention of:" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="OLt-3R-n3X">
                                         <rect key="frame" x="55" y="46" width="228" height="100"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="228" id="Rws-V6-MPO"/>
@@ -936,7 +936,7 @@
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R4W-rr-wGf">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R4W-rr-wGf">
                                         <rect key="frame" x="344" y="46" width="364" height="67"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="364" id="6RU-ur-ASO"/>
@@ -956,6 +956,7 @@
                                     <constraint firstAttribute="centerY" secondItem="OLt-3R-n3X" secondAttribute="centerY" id="Gtu-kD-t6Q"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="100" id="LSs-SP-G95"/>
                                     <constraint firstAttribute="trailing" secondItem="R4W-rr-wGf" secondAttribute="trailing" constant="20" id="ZQm-LP-YGa"/>
+                                    <constraint firstItem="OLt-3R-n3X" firstAttribute="top" secondItem="gPt-UM-OBt" secondAttribute="top" constant="46" id="aCy-NV-Pdh"/>
                                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="R4W-rr-wGf" secondAttribute="bottom" constant="5" id="csa-jM-Bb5"/>
                                     <constraint firstAttribute="centerY" secondItem="R4W-rr-wGf" secondAttribute="centerY" constant="16.5" id="hXB-o7-wan"/>
                                     <constraint firstItem="R4W-rr-wGf" firstAttribute="top" relation="greaterThanOrEqual" secondItem="gPt-UM-OBt" secondAttribute="top" constant="5" id="mdw-0T-ikd"/>
@@ -966,7 +967,7 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="Hr4-fr-2XV" firstAttribute="top" secondItem="qi5-KT-Q3O" secondAttribute="bottom" constant="48" id="19x-1G-5vh"/>
+                            <constraint firstItem="Hr4-fr-2XV" firstAttribute="top" secondItem="qi5-KT-Q3O" secondAttribute="bottom" constant="53" id="19x-1G-5vh"/>
                             <constraint firstItem="jWb-ru-g5i" firstAttribute="leading" secondItem="FK9-Lc-U88" secondAttribute="leading" constant="20" id="1Zt-mT-6Uw"/>
                             <constraint firstItem="anc-cl-5wC" firstAttribute="width" secondItem="tQH-1p-wVd" secondAttribute="width" id="4vN-9B-1wx"/>
                             <constraint firstItem="Hr4-fr-2XV" firstAttribute="leading" secondItem="kSn-d6-mCM" secondAttribute="leading" id="7rB-ym-QOd"/>
@@ -978,7 +979,7 @@
                             <constraint firstItem="jWb-ru-g5i" firstAttribute="top" secondItem="gPt-UM-OBt" secondAttribute="bottom" constant="-1" id="Hcr-He-oj8"/>
                             <constraint firstItem="Hr4-fr-2XV" firstAttribute="leading" secondItem="FK9-Lc-U88" secondAttribute="leading" constant="20" id="Ih4-Xz-H31"/>
                             <constraint firstItem="anc-cl-5wC" firstAttribute="top" secondItem="zPN-Ej-pJF" secondAttribute="bottom" constant="6" id="Kgc-uU-u2C"/>
-                            <constraint firstItem="IgU-F9-DOD" firstAttribute="top" secondItem="FK9-Lc-U88" secondAttribute="top" constant="25" id="Nm4-I5-IjX"/>
+                            <constraint firstItem="IgU-F9-DOD" firstAttribute="top" secondItem="FK9-Lc-U88" secondAttribute="top" id="Nm4-I5-IjX"/>
                             <constraint firstItem="V0p-Zx-VDv" firstAttribute="leading" secondItem="FK9-Lc-U88" secondAttribute="leading" id="PsL-LX-QAf"/>
                             <constraint firstItem="tQH-1p-wVd" firstAttribute="top" secondItem="anc-cl-5wC" secondAttribute="bottom" constant="-1" id="TaT-V7-89n"/>
                             <constraint firstItem="itg-3k-s3J" firstAttribute="top" secondItem="kSn-d6-mCM" secondAttribute="bottom" priority="750" constant="31" id="UXc-uX-tMW"/>
@@ -1024,7 +1025,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <searchBar key="tableHeaderView" contentMode="redraw" id="QuG-wi-krm">
-                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="44"/>
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <textInputTraits key="textInputTraits"/>
                             <connections>
@@ -1053,7 +1054,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Wv-Nw-JfO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="974.21875" y="-251.95312499999997"/>
+            <point key="canvasLocation" x="1368" y="-472"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="yoE-TL-HBl">
