@@ -1200,6 +1200,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 3.9;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 58P227HU77;
 				ENABLE_BITCODE = NO;
@@ -1230,6 +1231,7 @@
 					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/SDKs/MacOSX10.7.sdk/usr/lib\"",
 					"\"$(SRCROOT)\"",
 				);
+				MARKETING_VERSION = 4.0;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "net.sswr.Inspection-Form-App";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1251,6 +1253,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 3.9;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 58P227HU77;
 				ENABLE_BITCODE = NO;
@@ -1273,6 +1276,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/T1Autograph\"",
 				);
+				MARKETING_VERSION = 4.0;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "net.sswr.Inspection-Form-App";
 				PRODUCT_NAME = "$(TARGET_NAME)";
