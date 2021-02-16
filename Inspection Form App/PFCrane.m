@@ -6,7 +6,7 @@
 //
 //
 
-#import "PFCrane.h"
+#import <Parse/Parse.h>
 
 @implementation PFCrane
 

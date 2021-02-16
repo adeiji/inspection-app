@@ -319,7 +319,7 @@ DEPENDENCIES:
   - Parse
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - abseil
     - Bolts
     - BoringSSL-GRPC
@@ -383,6 +383,6 @@ SPEC CHECKSUMS:
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
   SDWebImage: 4d5c027c935438f341ed33dbac53ff9f479922ca
 
-PODFILE CHECKSUM: 2897f5ac142ddaa143e1a786fd1b73c031544a0e
+PODFILE CHECKSUM: 0f500971cbfb330cfef6edcd130d6941549eef66
 
-COCOAPODS: 1.7.3
+COCOAPODS: 1.9.3
